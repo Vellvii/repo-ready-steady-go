@@ -118,20 +118,14 @@ const Home = () => {
           <ScrollReveal delay={1.0}>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
               <Link to="/products" className="w-full sm:w-auto">
-                <MagneticButton 
-                  as="div"
-                  className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-8 py-3 rounded-md text-lg font-semibold w-full sm:w-auto magnetic text-center cursor-pointer transition-colors duration-300"
-                >
+                <div className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-8 py-3 rounded-md text-lg font-semibold w-full sm:w-auto text-center cursor-pointer transition-all duration-300 hover:scale-105">
                   Explore Collection
-                </MagneticButton>
+                </div>
               </Link>
               <Link to="/about" className="w-full sm:w-auto">
-                <MagneticButton 
-                  as="div"
-                  className="border border-white/20 text-white hover:bg-white/10 px-8 py-3 rounded-md text-lg font-semibold w-full sm:w-auto magnetic text-center cursor-pointer transition-colors duration-300"
-                >
+                <div className="border border-white/20 text-white hover:bg-white/10 px-8 py-3 rounded-md text-lg font-semibold w-full sm:w-auto text-center cursor-pointer transition-all duration-300 hover:scale-105">
                   Learn More
-                </MagneticButton>
+                </div>
               </Link>
             </div>
           </ScrollReveal>
@@ -264,20 +258,14 @@ const Home = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <Link to="/about" className="w-full sm:w-auto">
-                    <MagneticButton 
-                      as="div"
-                      className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-6 py-3 rounded-md font-semibold w-full sm:w-auto text-center cursor-pointer transition-colors duration-300"
-                    >
+                    <div className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-6 py-3 rounded-md font-semibold w-full sm:w-auto text-center cursor-pointer transition-all duration-300 hover:scale-105">
                       Discover Our Story
-                    </MagneticButton>
+                    </div>
                   </Link>
                   <Link to="/products" className="w-full sm:w-auto">
-                    <MagneticButton 
-                      as="div"
-                      className="border border-white/20 text-white hover:bg-white/10 px-6 py-3 rounded-md font-semibold w-full sm:w-auto text-center cursor-pointer transition-colors duration-300"
-                    >
+                    <div className="border border-white/20 text-white hover:bg-white/10 px-6 py-3 rounded-md font-semibold w-full sm:w-auto text-center cursor-pointer transition-all duration-300 hover:scale-105">
                       View Collection
-                    </MagneticButton>
+                    </div>
                   </Link>
                 </div>
               </div>
