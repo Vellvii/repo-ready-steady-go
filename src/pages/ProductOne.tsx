@@ -1,0 +1,171 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { ArrowLeft, Heart, Zap, Droplets, Volume2 } from "lucide-react";
+
+const ProductOne = () => {
+  const [concierge, setConcierge] = useState<string | null>(null);
+
+  useEffect(() => {
+    const selectedConcierge = localStorage.getItem("selectedConcierge");
+    setConcierge(selectedConcierge);
+  }, []);
+
+  const getConciergeRecommendation = () => {
+    if (concierge === "luke") {
+      return "The Pulse represents the pinnacle of pressure wave technology. Its sophisticated engineering delivers precise, rhythmic stimulation that's both powerful and whisper-quiet. I recommend starting with intensity level 3 for optimal exploration.";
+    } else if (concierge === "vivian") {
+      return "The Pulse is such a gentle yet powerful companion! Its soft silicone feels wonderful, and the different rhythmic patterns let you discover exactly what brings you joy. Perfect for both beginners and those seeking new experiences.";
+    }
+    return "The Pulse offers advanced pressure wave technology for an exceptional intimate experience.";
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-dark">
+      {/* Navigation */}
+      <nav className="p-6">
+        <Link to="/home">
+          <Button variant="ghost" className="text-white">
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Collection
+          </Button>
+        </Link>
+      </nav>
+
+      {/* Product Hero */}
+      <section className="px-6 pb-16">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Product Image Placeholder */}
+            <div className="glass-luxury rounded-lg p-12 text-center">
+              <div className="w-48 h-48 mx-auto bg-gradient-primary rounded-full flex items-center justify-center mb-6">
+                <Heart className="w-24 h-24 text-white" />
+              </div>
+              <Badge variant="secondary" className="mb-4">Premium Collection</Badge>
+              <h1 className="text-4xl font-playfair font-bold text-white mb-4">
+                Vellvii Pulse
+              </h1>
+              <p className="text-white/80 text-lg">
+                Rhythmic Clitoral Stimulator
+              </p>
+            </div>
+
+            {/* Product Details */}
+            <div className="space-y-8">
+              <div>
+                <Badge variant="outline" className="mb-4">Rhythmic Excellence</Badge>
+                <h2 className="text-3xl font-playfair font-bold text-foreground mb-4">
+                  Sophisticated Pleasure Technology
+                </h2>
+                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                  Pulse delivers powerful rhythmic air pulses using advanced pressure wave technology. 
+                  Its refined contours and whisper-quiet motor offer a deeply personal, luxurious experience 
+                  that enhances pleasure through rhythmic pulse stimulation.
+                </p>
+              </div>
+
+              {/* Features */}
+              <div className="grid sm:grid-cols-2 gap-4">
+                <Card className="glass-dark p-4">
+                  <Zap className="w-8 h-8 text-primary mb-2" />
+                  <h3 className="font-semibold text-white mb-1">10 Intensities</h3>
+                  <p className="text-white/70 text-sm">Rhythmic patterns</p>
+                </Card>
+                
+                <Card className="glass-dark p-4">
+                  <Droplets className="w-8 h-8 text-secondary mb-2" />
+                  <h3 className="font-semibold text-white mb-1">IPX7 Waterproof</h3>
+                  <p className="text-white/70 text-sm">Fully submersible</p>
+                </Card>
+                
+                <Card className="glass-dark p-4">
+                  <Volume2 className="w-8 h-8 text-accent mb-2" />
+                  <h3 className="font-semibold text-white mb-1">Whisper Quiet</h3>
+                  <p className="text-white/70 text-sm">Ultra-silent motor</p>
+                </Card>
+                
+                <Card className="glass-dark p-4">
+                  <Heart className="w-8 h-8 text-primary mb-2" />
+                  <h3 className="font-semibold text-white mb-1">Body Safe</h3>
+                  <p className="text-white/70 text-sm">Premium silicone</p>
+                </Card>
+              </div>
+
+              <div className="flex gap-4">
+                <Button size="lg" variant="luxury" className="flex-1">
+                  Add to Collection
+                </Button>
+                <Button size="lg" variant="outline">
+                  Learn More
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Concierge Recommendation */}
+      {concierge && (
+        <section className="px-6 py-16 border-t border-white/10">
+          <div className="max-w-4xl mx-auto">
+            <Card className="glass-luxury p-8">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center flex-shrink-0">
+                  <span className="text-white font-semibold">
+                    {concierge === "luke" ? "L" : "V"}
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-playfair font-semibold text-white mb-2">
+                    {concierge === "luke" ? "Luke's" : "Vivian's"} Recommendation
+                  </h3>
+                  <p className="text-white/90 leading-relaxed">
+                    {getConciergeRecommendation()}
+                  </p>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </section>
+      )}
+
+      {/* Product Specifications */}
+      <section className="px-6 py-16 border-t border-white/10">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-playfair font-bold text-foreground text-center mb-12">
+            Technical Specifications
+          </h2>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            <Card className="glass-luxury p-6">
+              <h3 className="text-xl font-semibold text-white mb-4">Features</h3>
+              <ul className="space-y-3 text-white/80">
+                <li>• 10 rhythmic intensities</li>
+                <li>• Body-safe silicone construction</li>
+                <li>• Waterproof (IPX7 rating)</li>
+                <li>• Whisper-quiet operation</li>
+                <li>• USB-C charging</li>
+                <li>• Designed to fit perfectly in DOX</li>
+              </ul>
+            </Card>
+            
+            <Card className="glass-luxury p-6">
+              <h3 className="text-xl font-semibold text-white mb-4">What's Included</h3>
+              <ul className="space-y-3 text-white/80">
+                <li>• Vellvii Pulse device</li>
+                <li>• USB-C charging cable</li>
+                <li>• Premium storage pouch</li>
+                <li>• User manual and care guide</li>
+                <li>• 1-year luxury warranty</li>
+              </ul>
+            </Card>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default ProductOne;
