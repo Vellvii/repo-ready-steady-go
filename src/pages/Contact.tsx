@@ -3,18 +3,24 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Mail, Phone, MapPin, Store, Users, MessageCircle } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import UserMenu from "@/components/UserMenu";
+import ConciergeChat from "@/components/ConciergeChat";
 
 const Contact = () => {
+  const { user } = useAuth();
+
   return (
     <div className="min-h-screen bg-gradient-dark">
       {/* Navigation */}
-      <nav className="p-6">
+      <nav className="p-6 flex justify-between items-center">
         <Link to="/home">
           <Button variant="ghost" className="text-white">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
           </Button>
         </Link>
+        <UserMenu />
       </nav>
 
       {/* Hero Section */}
@@ -197,6 +203,9 @@ const Contact = () => {
           </div>
         </div>
       </section>
+
+      {/* Concierge Chat */}
+      <ConciergeChat />
     </div>
   );
 };

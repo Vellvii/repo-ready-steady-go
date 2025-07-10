@@ -11,7 +11,6 @@ import { useCart } from "@/hooks/useCart";
 
 const Home = () => {
   const [concierge, setConcierge] = useState<string | null>(null);
-  const [isChatOpen, setIsChatOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { items: cartItems } = useCart();
 
@@ -41,15 +40,6 @@ const Home = () => {
           <img src="/lovable-uploads/fd8fd5ce-f65c-4c0c-b093-af821cbd5a34.png" alt="Vellvii" className="h-8" />
         </div>
         <div className="flex items-center gap-4">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setIsChatOpen(true)}
-            className="text-white hover:bg-white/10"
-          >
-            <MessageSquare className="w-4 h-4 mr-2" />
-            Chat
-          </Button>
           <Button
             variant="ghost"
             size="sm"
@@ -333,23 +323,6 @@ const Home = () => {
         </div>
       </footer>
       
-      {/* Chat Modal */}
-      {isChatOpen && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="relative max-w-2xl w-full max-h-[80vh] bg-black/80 rounded-lg">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setIsChatOpen(false)}
-              className="absolute top-4 right-4 text-white hover:bg-white/10 z-10"
-            >
-              ✕
-            </Button>
-            <ConciergeChat />
-          </div>
-        </div>
-      )}
-
       {/* Cart Modal */}
       {isCartOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
@@ -366,6 +339,9 @@ const Home = () => {
           </div>
         </div>
       )}
+
+      {/* Concierge Chat */}
+      <ConciergeChat />
     </div>
   );
 };

@@ -125,7 +125,7 @@ const Landing = () => {
                   <span className="text-3xl font-playfair font-bold text-black">L</span>
                 </div>
                 <h3 className="text-2xl font-playfair font-semibold text-white">Luke</h3>
-                <p className="text-white/90 font-inter leading-relaxed">
+                <p className="text-white font-inter leading-relaxed">
                   Your sophisticated guide with extensive expertise in luxury intimacy. 
                   Luke provides detailed insights and refined recommendations.
                 </p>
