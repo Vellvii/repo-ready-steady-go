@@ -13,7 +13,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-gradient-dark">
       {/* Navigation */}
-      <nav className="p-6 flex justify-between items-center">
+      <nav className="p-4 sm:p-6 flex justify-between items-center min-h-[80px]">
         <Link to="/home">
           <Button variant="ghost" className="text-white">
             <ArrowLeft className="w-4 h-4 mr-2" />
@@ -24,43 +24,43 @@ const Contact = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="px-6 py-16">
+      <section className="px-4 sm:px-6 py-12 sm:py-16">
         <div className="max-w-4xl mx-auto text-center">
-          <Badge variant="secondary" className="mb-4">Get in Touch</Badge>
-          <h1 className="text-5xl font-playfair font-bold gradient-text mb-6">
+          <Badge variant="secondary" className="mb-6">Get in Touch</Badge>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-playfair font-bold gradient-text mb-6">
             Contact Us
           </h1>
-          <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto px-4">
             Whether you're a customer or potential partner, we're here to help
           </p>
         </div>
       </section>
 
       {/* Contact Options */}
-      <section className="px-6 py-16">
+      <section className="px-4 sm:px-6 py-12 sm:py-16">
         <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Customer Support */}
             <div>
               <div className="text-center mb-8">
-                <div className="w-16 h-16 mx-auto bg-gradient-primary rounded-full flex items-center justify-center mb-4">
-                  <Users className="w-8 h-8 text-white" />
+                <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto bg-gradient-primary rounded-full flex items-center justify-center mb-4">
+                  <Users className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
                 </div>
-                <h2 className="text-3xl font-playfair font-bold text-foreground mb-4">
+                <h2 className="text-2xl sm:text-3xl font-playfair font-bold text-foreground mb-4">
                   Customer Support
                 </h2>
-                <p className="text-lg text-muted-foreground">
+                <p className="text-base sm:text-lg text-muted-foreground px-4">
                   For product questions, orders, and general inquiries
                 </p>
               </div>
 
-              <div className="space-y-6">
-                <Card className="glass-luxury p-6 hover-glow">
-                  <div className="flex items-center gap-4 mb-4">
-                    <Mail className="w-8 h-8 text-primary" />
-                    <h3 className="text-xl font-semibold text-white">Email Support</h3>
+              <div className="space-y-4 sm:space-y-6">
+                <Card className="glass-luxury p-4 sm:p-6 hover-glow">
+                  <div className="flex items-center gap-3 sm:gap-4 mb-4">
+                    <Mail className="w-6 h-6 sm:w-8 sm:h-8 text-primary flex-shrink-0" />
+                    <h3 className="text-lg sm:text-xl font-semibold text-white">Email Support</h3>
                   </div>
-                  <p className="text-white/80 mb-4">
+                  <p className="text-white/80 mb-4 text-sm sm:text-base">
                     Get personalized assistance with your Vellvii experience
                   </p>
                   <a href="mailto:info@vellvii.com">
@@ -70,12 +70,12 @@ const Contact = () => {
                   </a>
                 </Card>
 
-                <Card className="glass-luxury p-6 hover-glow">
-                  <div className="flex items-center gap-4 mb-4">
-                    <Phone className="w-8 h-8 text-secondary" />
-                    <h3 className="text-xl font-semibold text-white">Phone Support</h3>
+                <Card className="glass-luxury p-4 sm:p-6 hover-glow">
+                  <div className="flex items-center gap-3 sm:gap-4 mb-4">
+                    <Phone className="w-6 h-6 sm:w-8 sm:h-8 text-secondary flex-shrink-0" />
+                    <h3 className="text-lg sm:text-xl font-semibold text-white">Phone Support</h3>
                   </div>
-                  <p className="text-white/80 mb-4">
+                  <p className="text-white/80 mb-4 text-sm sm:text-base">
                     Speak directly with our luxury specialists
                   </p>
                   <a href="tel:+15551234567">
@@ -85,12 +85,12 @@ const Contact = () => {
                   </a>
                 </Card>
 
-                <Card className="glass-luxury p-6 hover-glow">
-                  <div className="flex items-center gap-4 mb-4">
-                    <MessageCircle className="w-8 h-8 text-accent" />
-                    <h3 className="text-xl font-semibold text-white">Live Chat</h3>
+                <Card className="glass-luxury p-4 sm:p-6 hover-glow">
+                  <div className="flex items-center gap-3 sm:gap-4 mb-4">
+                    <MessageCircle className="w-6 h-6 sm:w-8 sm:h-8 text-accent flex-shrink-0" />
+                    <h3 className="text-lg sm:text-xl font-semibold text-white">Live Chat</h3>
                   </div>
-                  <p className="text-white/80 mb-4">
+                  <p className="text-white/80 mb-4 text-sm sm:text-base">
                     Chat with our AI concierges for instant assistance
                   </p>
                   <Button variant="outline" className="w-full">

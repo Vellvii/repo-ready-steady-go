@@ -10,7 +10,7 @@ const About = () => {
   return (
     <div className="min-h-screen bg-gradient-dark">
       {/* Navigation */}
-      <nav className="flex justify-between items-center p-6">
+      <nav className="flex justify-between items-center p-4 sm:p-6 min-h-[80px]">
         <Link to="/home">
           <Button variant="ghost" className="text-white">
             <ArrowLeft className="w-4 h-4 mr-2" />
@@ -21,57 +21,57 @@ const About = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="px-6 py-16">
+      <section className="px-4 sm:px-6 py-12 sm:py-16">
         <div className="max-w-4xl mx-auto text-center">
-          <Badge variant="secondary" className="mb-4">Our Story</Badge>
+          <Badge variant="secondary" className="mb-6">Our Story</Badge>
           <div className="mb-8">
-            <img src="/lovable-uploads/fd8fd5ce-f65c-4c0c-b093-af821cbd5a34.png" alt="Vellvii" className="h-28 md:h-36 mx-auto" />
+            <img src="/lovable-uploads/fd8fd5ce-f65c-4c0c-b093-af821cbd5a34.png" alt="Vellvii" className="h-24 sm:h-28 md:h-36 mx-auto" />
           </div>
-          <p className="text-xl text-secondary italic mb-8 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-secondary italic mb-8 max-w-3xl mx-auto px-4">
             The art of "O"
           </p>
         </div>
       </section>
 
       {/* Mission Section */}
-      <section className="px-6 py-16">
+      <section className="px-4 sm:px-6 py-12 sm:py-16">
         <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl font-playfair font-bold text-foreground mb-6">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="space-y-6">
+              <h2 className="text-3xl sm:text-4xl font-playfair font-bold text-foreground mb-6">
                 Our Mission
               </h2>
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
                 At Vellvii, we believe that intimacy deserves the finest craftsmanship. 
                 Our collection represents the perfect fusion of sophisticated design, 
                 cutting-edge technology, and uncompromising quality.
               </p>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
                 Every product is thoughtfully designed to enhance your most personal moments, 
                 bringing elegance and innovation to the art of intimate connection.
               </p>
             </div>
             
-            <div className="glass-luxury p-8 rounded-lg">
-              <h3 className="text-2xl font-playfair font-semibold text-white mb-6">
+            <div className="glass-luxury p-6 sm:p-8 rounded-lg mt-8 lg:mt-0">
+              <h3 className="text-xl sm:text-2xl font-playfair font-semibold text-white mb-6">
                 Our Values
               </h3>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <Heart className="w-6 h-6 text-primary" />
-                  <p className="text-white/90">Premium, body-safe materials</p>
+                  <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-primary flex-shrink-0" />
+                  <p className="text-white/90 text-sm sm:text-base">Premium, body-safe materials</p>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Star className="w-6 h-6 text-secondary" />
-                  <p className="text-white/90">Innovative technology integration</p>
+                  <Star className="w-5 h-5 sm:w-6 sm:h-6 text-secondary flex-shrink-0" />
+                  <p className="text-white/90 text-sm sm:text-base">Innovative technology integration</p>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Shield className="w-6 h-6 text-accent" />
-                  <p className="text-white/90">Discreet, elegant packaging</p>
+                  <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-accent flex-shrink-0" />
+                  <p className="text-white/90 text-sm sm:text-base">Discreet, elegant packaging</p>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Award className="w-6 h-6 text-primary" />
-                  <p className="text-white/90">Exceptional customer care</p>
+                  <Award className="w-5 h-5 sm:w-6 sm:h-6 text-primary flex-shrink-0" />
+                  <p className="text-white/90 text-sm sm:text-base">Exceptional customer care</p>
                 </div>
               </div>
             </div>
@@ -80,35 +80,35 @@ const About = () => {
       </section>
 
       {/* Team Section */}
-      <section className="px-6 py-16 border-t border-white/10">
+      <section className="px-4 sm:px-6 py-12 sm:py-16 border-t border-white/10">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-playfair font-bold text-foreground mb-4">
+            <h2 className="text-3xl sm:text-4xl font-playfair font-bold text-foreground mb-4">
               Meet Our Concierges
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
               Our AI concierges are designed to provide personalized guidance and recommendations
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card className="glass-luxury p-8 text-center">
-              <div className="w-20 h-20 mx-auto bg-gradient-primary rounded-full flex items-center justify-center mb-6">
-                <span className="text-2xl font-bold text-white">L</span>
+          <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
+            <Card className="glass-luxury p-6 sm:p-8 text-center">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto bg-gradient-primary rounded-full flex items-center justify-center mb-6">
+                <span className="text-xl sm:text-2xl font-bold text-white">L</span>
               </div>
-              <h3 className="text-2xl font-playfair font-semibold text-white mb-4">Luke</h3>
-              <p className="text-white/80 leading-relaxed">
+              <h3 className="text-xl sm:text-2xl font-playfair font-semibold text-white mb-4">Luke</h3>
+              <p className="text-white/80 leading-relaxed text-sm sm:text-base">
                 Luke offers sophisticated, technical guidance with expert knowledge of our products. 
                 He provides detailed specifications and professional recommendations for discerning customers.
               </p>
             </Card>
 
-            <Card className="glass-luxury p-8 text-center">
-              <div className="w-20 h-20 mx-auto rounded-full overflow-hidden mb-6">
+            <Card className="glass-luxury p-6 sm:p-8 text-center">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full overflow-hidden mb-6">
                 <img src="/lovable-uploads/0f6e82dd-0d32-4119-a2a1-e5a0386ffec4.png" alt="Vivian" className="w-full h-full object-cover" />
               </div>
-              <h3 className="text-2xl font-playfair font-semibold text-white mb-4">Vivian</h3>
-              <p className="text-white/80 leading-relaxed">
+              <h3 className="text-xl sm:text-2xl font-playfair font-semibold text-white mb-4">Vivian</h3>
+              <p className="text-white/80 leading-relaxed text-sm sm:text-base">
                 Vivian provides warm, intuitive guidance focused on comfort and personal experience. 
                 She helps customers feel confident and supported in their intimate journey.
               </p>
@@ -118,22 +118,22 @@ const About = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="px-6 py-16 border-t border-white/10">
+      <section className="px-4 sm:px-6 py-12 sm:py-16 border-t border-white/10">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-playfair font-bold text-foreground mb-6">
+          <h2 className="text-2xl sm:text-3xl font-playfair font-bold text-foreground mb-6">
             Ready to Explore?
           </h2>
-          <p className="text-lg text-muted-foreground mb-8">
+          <p className="text-base sm:text-lg text-muted-foreground mb-8 px-4">
             Discover our luxury collection and find your perfect match
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/products">
-              <Button size="lg" variant="luxury">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
+            <Link to="/products" className="w-full sm:w-auto">
+              <Button size="lg" variant="luxury" className="w-full sm:w-auto">
                 View Collection
               </Button>
             </Link>
-            <Link to="/contact">
-              <Button size="lg" variant="outline">
+            <Link to="/contact" className="w-full sm:w-auto">
+              <Button size="lg" variant="outline" className="w-full sm:w-auto">
                 Contact Us
               </Button>
             </Link>

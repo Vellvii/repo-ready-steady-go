@@ -46,54 +46,54 @@ const GVibe = () => {
   return (
     <div className="min-h-screen bg-gradient-dark">
       {/* Navigation */}
-      <nav className="flex justify-between items-center p-6">
+      <nav className="flex justify-between items-center p-4 sm:p-6 min-h-[80px]">
         <Link to="/home">
           <Button variant="ghost" className="text-white">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
           </Button>
         </Link>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
           <Button
             variant="ghost"
             size="sm"
             onClick={() => setIsCartOpen(true)}
-            className="text-white hover:bg-white/10"
+            className="text-white hover:bg-white/10 text-xs sm:text-sm"
           >
-            <ShoppingCart className="w-4 h-4 mr-2" />
-            Cart ({cartItems.length})
+            <ShoppingCart className="w-4 h-4 mr-1 sm:mr-2" />
+            <span className="hidden sm:inline">Cart </span>({cartItems.length})
           </Button>
           <UserMenu />
         </div>
       </nav>
 
       {/* Product Hero */}
-      <section className="px-6 pb-16">
+      <section className="px-4 sm:px-6 pb-12 sm:pb-16">
         <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Product Image Placeholder */}
-            <div className="glass-luxury rounded-lg p-12 text-center">
-              <div className="w-48 h-48 mx-auto bg-gradient-primary rounded-full flex items-center justify-center mb-6 relative">
-                <Shield className="w-24 h-24 text-white" />
+            <div className="glass-luxury rounded-lg p-8 sm:p-12 text-center">
+              <div className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 mx-auto bg-gradient-primary rounded-full flex items-center justify-center mb-6 relative">
+                <Shield className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 text-white" />
                 <div className="absolute inset-0 rounded-full bg-gradient-primary opacity-30 animate-pulse"></div>
               </div>
               <Badge variant="secondary" className="mb-4">Premium Collection</Badge>
-              <h1 className="text-4xl font-playfair font-bold text-white mb-4">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-playfair font-bold text-white mb-4">
                 Vellvii G-Vibe
               </h1>
-              <p className="text-white/80 text-lg">
+              <p className="text-white/80 text-base sm:text-lg">
                 G-Spot Vibrator
               </p>
             </div>
 
             {/* Product Details */}
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8 mt-8 lg:mt-0">
               <div>
                 <Badge variant="outline" className="mb-4">Precision Design</Badge>
-                <h2 className="text-3xl font-playfair font-bold text-foreground mb-4">
+                <h2 className="text-2xl sm:text-3xl font-playfair font-bold text-foreground mb-4">
                   Targeted G-Spot Excellence
                 </h2>
-                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-6">
                   A sleek, precisely angled tool designed to reach and stimulate the G-spot with 
                   subtle elegance. Lightweight and flexible with a smooth surface and LED feedback glow, 
                   the G-Vibe offers targeted stimulation for intimate exploration.
@@ -101,37 +101,37 @@ const GVibe = () => {
               </div>
 
               {/* Features */}
-              <div className="grid sm:grid-cols-2 gap-4">
-                <Card className="glass-dark p-4">
-                  <Zap className="w-8 h-8 text-primary mb-2" />
-                  <h3 className="font-semibold text-white mb-1">6 Patterns</h3>
-                  <p className="text-white/70 text-sm">Vibration modes</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <Card className="glass-dark p-3 sm:p-4">
+                  <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-primary mb-2" />
+                  <h3 className="font-semibold text-white mb-1 text-sm sm:text-base">6 Patterns</h3>
+                  <p className="text-white/70 text-xs sm:text-sm">Vibration modes</p>
                 </Card>
                 
-                <Card className="glass-dark p-4">
-                  <Target className="w-8 h-8 text-secondary mb-2" />
-                  <h3 className="font-semibold text-white mb-1">Angled Tip</h3>
-                  <p className="text-white/70 text-sm">G-spot precision</p>
+                <Card className="glass-dark p-3 sm:p-4">
+                  <Target className="w-6 h-6 sm:w-8 sm:h-8 text-secondary mb-2" />
+                  <h3 className="font-semibold text-white mb-1 text-sm sm:text-base">Angled Tip</h3>
+                  <p className="text-white/70 text-xs sm:text-sm">G-spot precision</p>
                 </Card>
                 
-                <Card className="glass-dark p-4">
-                  <Lightbulb className="w-8 h-8 text-accent mb-2" />
-                  <h3 className="font-semibold text-white mb-1">LED Glow</h3>
-                  <p className="text-white/70 text-sm">Intensity feedback</p>
+                <Card className="glass-dark p-3 sm:p-4">
+                  <Lightbulb className="w-6 h-6 sm:w-8 sm:h-8 text-accent mb-2" />
+                  <h3 className="font-semibold text-white mb-1 text-sm sm:text-base">LED Glow</h3>
+                  <p className="text-white/70 text-xs sm:text-sm">Intensity feedback</p>
                 </Card>
                 
-                <Card className="glass-dark p-4">
-                  <Shield className="w-8 h-8 text-primary mb-2" />
-                  <h3 className="font-semibold text-white mb-1">Flexible Neck</h3>
-                  <p className="text-white/70 text-sm">Comfortable positioning</p>
+                <Card className="glass-dark p-3 sm:p-4">
+                  <Shield className="w-6 h-6 sm:w-8 sm:h-8 text-primary mb-2" />
+                  <h3 className="font-semibold text-white mb-1 text-sm sm:text-base">Flexible Neck</h3>
+                  <p className="text-white/70 text-xs sm:text-sm">Comfortable positioning</p>
                 </Card>
               </div>
 
-              <div className="flex gap-4">
-                <Button size="lg" variant="luxury" className="flex-1" onClick={handleAddToCart}>
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
+                <Button size="lg" variant="luxury" className="flex-1 text-sm sm:text-base" onClick={handleAddToCart}>
                   Add to Collection - $349.99
                 </Button>
-                <Button size="lg" variant="outline">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto">
                   Learn More
                 </Button>
               </div>

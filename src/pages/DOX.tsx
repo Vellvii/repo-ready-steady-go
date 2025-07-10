@@ -46,53 +46,53 @@ const DOX = () => {
   return (
     <div className="min-h-screen bg-gradient-dark">
       {/* Navigation */}
-      <nav className="flex justify-between items-center p-6">
+      <nav className="flex justify-between items-center p-4 sm:p-6 min-h-[80px]">
         <Link to="/home">
           <Button variant="ghost" className="text-white">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
           </Button>
         </Link>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
           <Button
             variant="ghost"
             size="sm"
             onClick={() => setIsCartOpen(true)}
-            className="text-white hover:bg-white/10"
+            className="text-white hover:bg-white/10 text-xs sm:text-sm"
           >
-            <ShoppingCart className="w-4 h-4 mr-2" />
-            Cart ({cartItems.length})
+            <ShoppingCart className="w-4 h-4 mr-1 sm:mr-2" />
+            <span className="hidden sm:inline">Cart </span>({cartItems.length})
           </Button>
           <UserMenu />
         </div>
       </nav>
 
       {/* Product Hero */}
-      <section className="px-6 pb-16">
+      <section className="px-4 sm:px-6 pb-12 sm:pb-16">
         <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Product Image Placeholder */}
-            <div className="glass-luxury rounded-lg p-12 text-center">
-              <div className="w-48 h-48 mx-auto bg-gradient-secondary rounded-lg flex items-center justify-center mb-6">
-                <Package className="w-24 h-24 text-foreground" />
+            <div className="glass-luxury rounded-lg p-8 sm:p-12 text-center">
+              <div className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 mx-auto bg-gradient-secondary rounded-lg flex items-center justify-center mb-6">
+                <Package className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 text-foreground" />
               </div>
               <Badge variant="secondary" className="mb-4">Luxury Storage</Badge>
-              <h1 className="text-4xl font-playfair font-bold text-white mb-4">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-playfair font-bold text-white mb-4">
                 Vellvii DOX
               </h1>
-              <p className="text-white/80 text-lg">
+              <p className="text-white/80 text-base sm:text-lg">
                 Luxury Storage Box
               </p>
             </div>
 
             {/* Product Details */}
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8 mt-8 lg:mt-0">
               <div>
                 <Badge variant="outline" className="mb-4">Handcrafted Excellence</Badge>
-                <h2 className="text-3xl font-playfair font-bold text-foreground mb-4">
+                <h2 className="text-2xl sm:text-3xl font-playfair font-bold text-foreground mb-4">
                   Museum-Quality Storage
                 </h2>
-                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-6">
                   A beautifully handcrafted leather-wrapped storage box with a velvet interior, 
                   designed to discreetly hold Vellvii intimacy products. Built with native in-box 
                   charging compatibility and form-fitting saddles for each product.
@@ -100,37 +100,37 @@ const DOX = () => {
               </div>
 
               {/* Features */}
-              <div className="grid sm:grid-cols-2 gap-4">
-                <Card className="glass-dark p-4">
-                  <Package className="w-8 h-8 text-primary mb-2" />
-                  <h3 className="font-semibold text-white mb-1">Vegan Leather</h3>
-                  <p className="text-white/70 text-sm">Premium exterior</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <Card className="glass-dark p-3 sm:p-4">
+                  <Package className="w-6 h-6 sm:w-8 sm:h-8 text-primary mb-2" />
+                  <h3 className="font-semibold text-white mb-1 text-sm sm:text-base">Vegan Leather</h3>
+                  <p className="text-white/70 text-xs sm:text-sm">Premium exterior</p>
                 </Card>
                 
-                <Card className="glass-dark p-4">
-                  <Zap className="w-8 h-8 text-secondary mb-2" />
-                  <h3 className="font-semibold text-white mb-1">USB-C Charging</h3>
-                  <p className="text-white/70 text-sm">Embedded dock</p>
+                <Card className="glass-dark p-3 sm:p-4">
+                  <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-secondary mb-2" />
+                  <h3 className="font-semibold text-white mb-1 text-sm sm:text-base">USB-C Charging</h3>
+                  <p className="text-white/70 text-xs sm:text-sm">Embedded dock</p>
                 </Card>
                 
-                <Card className="glass-dark p-4">
-                  <Lock className="w-8 h-8 text-accent mb-2" />
-                  <h3 className="font-semibold text-white mb-1">Fingerprint Lock</h3>
-                  <p className="text-white/70 text-sm">Biometric security</p>
+                <Card className="glass-dark p-3 sm:p-4">
+                  <Lock className="w-6 h-6 sm:w-8 sm:h-8 text-accent mb-2" />
+                  <h3 className="font-semibold text-white mb-1 text-sm sm:text-base">Fingerprint Lock</h3>
+                  <p className="text-white/70 text-xs sm:text-sm">Biometric security</p>
                 </Card>
                 
-                <Card className="glass-dark p-4">
-                  <Shield className="w-8 h-8 text-primary mb-2" />
-                  <h3 className="font-semibold text-white mb-1">Travel Lock</h3>
-                  <p className="text-white/70 text-sm">Secure transport</p>
+                <Card className="glass-dark p-3 sm:p-4">
+                  <Shield className="w-6 h-6 sm:w-8 sm:h-8 text-primary mb-2" />
+                  <h3 className="font-semibold text-white mb-1 text-sm sm:text-base">Travel Lock</h3>
+                  <p className="text-white/70 text-xs sm:text-sm">Secure transport</p>
                 </Card>
               </div>
 
-              <div className="flex gap-4">
-                <Button size="lg" variant="luxury" className="flex-1" onClick={handleAddToCart}>
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
+                <Button size="lg" variant="luxury" className="flex-1 text-sm sm:text-base" onClick={handleAddToCart}>
                   Add to Collection - $99.99
                 </Button>
-                <Button size="lg" variant="outline">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto">
                   Learn More
                 </Button>
               </div>
