@@ -37,12 +37,12 @@ const Home = () => {
             Luxury Intimacy Collection
           </Badge>
           
-          <h1 className="text-5xl md:text-7xl font-playfair font-bold gradient-text mb-6">
+          <h1 className="text-5xl md:text-7xl font-['Dancing_Script',cursive] font-bold gradient-text mb-6">
             Vellvii
           </h1>
           
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            Where sophistication meets innovation in the art of intimate luxury
+          <p className="text-xl md:text-2xl text-secondary italic mb-8 max-w-3xl mx-auto">
+            The art of "O"
           </p>
 
           {concierge && (

@@ -28,11 +28,11 @@ const Landing = () => {
       <div className="relative z-10 text-center space-y-12 px-6 max-w-4xl mx-auto">
         {/* Logo */}
         <div className="fade-in-up">
-          <h1 className="text-6xl md:text-8xl font-playfair font-bold gradient-text mb-4">
+          <h1 className="text-6xl md:text-8xl font-['Dancing_Script',cursive] font-bold gradient-text mb-4">
             Vellvii
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground font-light tracking-wide">
-            Elevating Intimacy Through Luxury
+          <p className="text-xl md:text-2xl text-secondary font-light tracking-wide italic">
+            The art of "O"
           </p>
         </div>
 
@@ -79,8 +79,8 @@ const Landing = () => {
               onClick={() => handleConciergeSelection("vivian")}
             >
               <div className="text-center space-y-4">
-                <div className="w-24 h-24 mx-auto bg-gradient-secondary rounded-full flex items-center justify-center mb-6">
-                  <span className="text-3xl font-playfair font-bold text-foreground">V</span>
+                <div className="w-24 h-24 mx-auto rounded-full overflow-hidden mb-6">
+                  <img src="/lovable-uploads/0f6e82dd-0d32-4119-a2a1-e5a0386ffec4.png" alt="Vivian" className="w-full h-full object-cover" />
                 </div>
                 <h3 className="text-2xl font-playfair font-semibold text-white">Vivian</h3>
                 <p className="text-white/80 font-inter leading-relaxed">

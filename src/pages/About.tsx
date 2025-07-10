@@ -21,11 +21,11 @@ const About = () => {
       <section className="px-6 py-16">
         <div className="max-w-4xl mx-auto text-center">
           <Badge variant="secondary" className="mb-4">Our Story</Badge>
-          <h1 className="text-5xl font-playfair font-bold gradient-text mb-6">
+          <h1 className="text-5xl font-['Dancing_Script',cursive] font-bold gradient-text mb-6">
             About Vellvii
           </h1>
-          <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            Redefining intimate luxury through sophisticated design and innovation
+          <p className="text-xl text-secondary italic mb-8 max-w-3xl mx-auto">
+            The art of "O"
           </p>
         </div>
       </section>
@@ -101,8 +101,8 @@ const About = () => {
             </Card>
 
             <Card className="glass-luxury p-8 text-center">
-              <div className="w-20 h-20 mx-auto bg-gradient-secondary rounded-full flex items-center justify-center mb-6">
-                <span className="text-2xl font-bold text-foreground">V</span>
+              <div className="w-20 h-20 mx-auto rounded-full overflow-hidden mb-6">
+                <img src="/lovable-uploads/0f6e82dd-0d32-4119-a2a1-e5a0386ffec4.png" alt="Vivian" className="w-full h-full object-cover" />
               </div>
               <h3 className="text-2xl font-playfair font-semibold text-white mb-4">Vivian</h3>
               <p className="text-white/80 leading-relaxed">
