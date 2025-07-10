@@ -118,12 +118,18 @@ const Home = () => {
           <ScrollReveal delay={1.0}>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
               <Link to="/products" className="w-full sm:w-auto">
-                <MagneticButton className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-8 py-3 rounded-md text-lg font-semibold w-full sm:w-auto magnetic">
+                <MagneticButton 
+                  as="div"
+                  className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-8 py-3 rounded-md text-lg font-semibold w-full sm:w-auto magnetic text-center cursor-pointer transition-colors duration-300"
+                >
                   Explore Collection
                 </MagneticButton>
               </Link>
               <Link to="/about" className="w-full sm:w-auto">
-                <MagneticButton className="border border-white/20 text-white hover:bg-white/10 px-8 py-3 rounded-md text-lg font-semibold w-full sm:w-auto magnetic">
+                <MagneticButton 
+                  as="div"
+                  className="border border-white/20 text-white hover:bg-white/10 px-8 py-3 rounded-md text-lg font-semibold w-full sm:w-auto magnetic text-center cursor-pointer transition-colors duration-300"
+                >
                   Learn More
                 </MagneticButton>
               </Link>
@@ -258,12 +264,18 @@ const Home = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <Link to="/about" className="w-full sm:w-auto">
-                    <MagneticButton className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-6 py-3 rounded-md font-semibold w-full sm:w-auto">
+                    <MagneticButton 
+                      as="div"
+                      className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-6 py-3 rounded-md font-semibold w-full sm:w-auto text-center cursor-pointer transition-colors duration-300"
+                    >
                       Discover Our Story
                     </MagneticButton>
                   </Link>
                   <Link to="/products" className="w-full sm:w-auto">
-                    <MagneticButton className="border border-white/20 text-white hover:bg-white/10 px-6 py-3 rounded-md font-semibold w-full sm:w-auto">
+                    <MagneticButton 
+                      as="div"
+                      className="border border-white/20 text-white hover:bg-white/10 px-6 py-3 rounded-md font-semibold w-full sm:w-auto text-center cursor-pointer transition-colors duration-300"
+                    >
                       View Collection
                     </MagneticButton>
                   </Link>
@@ -399,7 +411,10 @@ const Home = () => {
           <ScrollReveal delay={0.9}>
             <div className="text-center mt-8">
               <Link to="/contact#partners">
-                <MagneticButton className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-8 py-3 rounded-md text-lg font-semibold">
+                <MagneticButton 
+                  as="div"
+                  className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-8 py-3 rounded-md text-lg font-semibold cursor-pointer transition-colors duration-300"
+                >
                   Become a Partner
                 </MagneticButton>
               </Link>
@@ -442,7 +457,10 @@ const Home = () => {
                   </h3>
                   <p className="text-white/80 mb-4">Speak with our luxury specialists</p>
                   <a href="tel:+15551234567">
-                    <MagneticButton className="border border-white/20 text-white hover:bg-white/10 px-4 py-2 rounded-md text-sm font-medium">
+                    <MagneticButton 
+                      as="div"
+                      className="border border-white/20 text-white hover:bg-white/10 px-4 py-2 rounded-md text-sm font-medium cursor-pointer transition-colors duration-300"
+                    >
                       +1 (555) 123-4567
                     </MagneticButton>
                   </a>
@@ -467,7 +485,10 @@ const Home = () => {
                   </h3>
                   <p className="text-white/80 mb-4">Get personalized recommendations</p>
                   <a href="mailto:info@vellvii.com">
-                    <MagneticButton className="border border-white/20 text-white hover:bg-white/10 px-4 py-2 rounded-md text-sm font-medium">
+                    <MagneticButton 
+                      as="div"
+                      className="border border-white/20 text-white hover:bg-white/10 px-4 py-2 rounded-md text-sm font-medium cursor-pointer transition-colors duration-300"
+                    >
                       info@vellvii.com
                     </MagneticButton>
                   </a>
@@ -491,7 +512,10 @@ const Home = () => {
                     Location
                   </h3>
                   <p className="text-white/80 mb-4">Delaware, USA</p>
-                  <MagneticButton className="border border-white/20 text-white hover:bg-white/10 px-4 py-2 rounded-md text-sm font-medium">
+                  <MagneticButton 
+                    as="div"
+                    className="border border-white/20 text-white hover:bg-white/10 px-4 py-2 rounded-md text-sm font-medium cursor-pointer transition-colors duration-300"
+                  >
                     View Details
                   </MagneticButton>
                 </Card>
