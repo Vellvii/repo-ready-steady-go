@@ -110,6 +110,23 @@ const Landing = () => {
           </p>
         </div>
       </div>
+
+      {/* Creative Credit Footer */}
+      <footer className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10">
+        <div className="text-center">
+          <p className="text-xs text-white/60 font-inter">
+            Crafted with ❤️ and precision by{" "}
+            <a 
+              href="https://www.lumarostudios.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-primary hover:text-secondary transition-colors duration-300 font-medium"
+            >
+              Lumaro Studios
+            </a>
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };

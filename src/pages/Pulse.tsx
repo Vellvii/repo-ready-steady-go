@@ -187,6 +187,23 @@ const Pulse = () => {
       {/* Similar Products */}
       <SimilarProducts currentProduct="pulse" />
       
+      {/* Creative Credit Footer */}
+      <footer className="py-8 px-6 border-t border-white/10">
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-sm text-white/60 font-inter">
+            Engineered with love and innovation by{" "}
+            <a 
+              href="https://www.lumarostudios.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-primary hover:text-secondary transition-colors duration-300 font-medium hover:underline"
+            >
+              Lumaro Studios
+            </a>
+          </p>
+        </div>
+      </footer>
+      
       <ConciergeChat />
     </div>
   );

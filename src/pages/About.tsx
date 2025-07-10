@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Heart, Shield, Star, Award } from "lucide-react";
+import ConciergeChat from "@/components/ConciergeChat";
 
 const About = () => {
   return (
@@ -21,8 +22,8 @@ const About = () => {
       <section className="px-6 py-16">
         <div className="max-w-4xl mx-auto text-center">
           <Badge variant="secondary" className="mb-4">Our Story</Badge>
-          <div className="mb-6">
-            <img src="/lovable-uploads/fd8fd5ce-f65c-4c0c-b093-af821cbd5a34.png" alt="Vellvii" className="h-16 md:h-20 mx-auto" />
+          <div className="mb-8">
+            <img src="/lovable-uploads/fd8fd5ce-f65c-4c0c-b093-af821cbd5a34.png" alt="Vellvii" className="h-28 md:h-36 mx-auto" />
           </div>
           <p className="text-xl text-secondary italic mb-8 max-w-3xl mx-auto">
             The art of "O"
@@ -137,6 +138,26 @@ const About = () => {
           </div>
         </div>
       </section>
+
+      {/* Creative Credit Footer */}
+      <footer className="py-8 px-6 border-t border-white/10">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="text-sm text-white/60 font-inter">
+            Thoughtfully created with 💎 and expertise by{" "}
+            <a 
+              href="https://www.lumarostudios.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-primary hover:text-secondary transition-colors duration-300 font-medium hover:underline"
+            >
+              Lumaro Studios
+            </a>
+            {" "}— crafting digital experiences that inspire
+          </p>
+        </div>
+      </footer>
+      
+      <ConciergeChat />
     </div>
   );
 };
