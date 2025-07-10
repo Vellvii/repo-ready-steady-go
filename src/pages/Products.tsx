@@ -3,18 +3,20 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Heart, Star, Shield, Package } from "lucide-react";
+import UserMenu from "@/components/UserMenu";
 
 const Products = () => {
   return (
     <div className="min-h-screen bg-gradient-dark">
       {/* Navigation */}
-      <nav className="p-6">
+      <nav className="flex justify-between items-center p-6">
         <Link to="/home">
           <Button variant="ghost" className="text-white">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
           </Button>
         </Link>
+        <UserMenu />
       </nav>
 
       {/* Hero Section */}
@@ -35,7 +37,7 @@ const Products = () => {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8">
             {/* Pulse */}
-            <Link to="/product-one">
+            <Link to="/pulse">
               <Card className="glass-luxury hover:scale-105 transition-all duration-500 hover-glow p-8 group">
                 <div className="flex items-center gap-6 mb-6">
                   <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center">
@@ -59,7 +61,7 @@ const Products = () => {
             </Link>
 
             {/* Vibe */}
-            <Link to="/product-two">
+            <Link to="/vibe">
               <Card className="glass-luxury hover:scale-105 transition-all duration-500 hover-glow p-8 group">
                 <div className="flex items-center gap-6 mb-6">
                   <div className="w-20 h-20 bg-gradient-secondary rounded-full flex items-center justify-center">
@@ -83,7 +85,7 @@ const Products = () => {
             </Link>
 
             {/* G-Vibe */}
-            <Link to="/product-three">
+            <Link to="/gvibe">
               <Card className="glass-luxury hover:scale-105 transition-all duration-500 hover-glow p-8 group">
                 <div className="flex items-center gap-6 mb-6">
                   <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center">
@@ -107,7 +109,7 @@ const Products = () => {
             </Link>
 
             {/* DOX */}
-            <Link to="/storage">
+            <Link to="/dox">
               <Card className="glass-luxury hover:scale-105 transition-all duration-500 hover-glow p-8 group">
                 <div className="flex items-center gap-6 mb-6">
                   <div className="w-20 h-20 bg-gradient-secondary rounded-full flex items-center justify-center">

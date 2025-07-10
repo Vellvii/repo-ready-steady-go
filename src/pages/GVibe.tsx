@@ -3,15 +3,17 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Shield, Target, Lightbulb, Zap } from "lucide-react";
+import { ArrowLeft, Shield, Target, Lightbulb, Zap, ShoppingCart } from "lucide-react";
 import SimilarProducts from "@/components/SimilarProducts";
 import ConciergeChat from "@/components/ConciergeChat";
+import UserMenu from "@/components/UserMenu";
 import { useCart } from "@/hooks/useCart";
 import { useToast } from "@/hooks/use-toast";
 
 const GVibe = () => {
   const [concierge, setConcierge] = useState<string | null>(null);
-  const { addToCart } = useCart();
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const { addToCart, items: cartItems } = useCart();
   const { toast } = useToast();
 
   useEffect(() => {
@@ -43,14 +45,26 @@ const GVibe = () => {
 
   return (
     <div className="min-h-screen bg-gradient-dark">
-      {/* Sticky Navigation */}
-      <nav className="fixed top-6 left-6 z-40">
+      {/* Navigation */}
+      <nav className="flex justify-between items-center p-6">
         <Link to="/home">
-          <Button variant="ghost" className="text-white bg-black/20 backdrop-blur-sm hover:bg-black/40">
+          <Button variant="ghost" className="text-white">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
           </Button>
         </Link>
+        <div className="flex items-center gap-4">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setIsCartOpen(true)}
+            className="text-white hover:bg-white/10"
+          >
+            <ShoppingCart className="w-4 h-4 mr-2" />
+            Cart ({cartItems.length})
+          </Button>
+          <UserMenu />
+        </div>
       </nav>
 
       {/* Product Hero */}

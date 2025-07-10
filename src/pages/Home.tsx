@@ -3,12 +3,17 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Heart, Star, Shield, Phone, Mail, MapPin, Store } from "lucide-react";
+import { Heart, Star, Shield, Phone, Mail, MapPin, Store, ShoppingCart, MessageSquare } from "lucide-react";
 import ConciergeChat from "@/components/ConciergeChat";
 import Cart from "@/components/Cart";
+import UserMenu from "@/components/UserMenu";
+import { useCart } from "@/hooks/useCart";
 
 const Home = () => {
   const [concierge, setConcierge] = useState<string | null>(null);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const { items: cartItems } = useCart();
 
   useEffect(() => {
     const selectedConcierge = localStorage.getItem("selectedConcierge");
@@ -30,6 +35,34 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-gradient-dark">
+      {/* Navigation */}
+      <nav className="flex justify-between items-center p-6">
+        <div className="flex items-center gap-2">
+          <img src="/lovable-uploads/fd8fd5ce-f65c-4c0c-b093-af821cbd5a34.png" alt="Vellvii" className="h-8" />
+        </div>
+        <div className="flex items-center gap-4">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setIsChatOpen(true)}
+            className="text-white hover:bg-white/10"
+          >
+            <MessageSquare className="w-4 h-4 mr-2" />
+            Chat
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setIsCartOpen(true)}
+            className="text-white hover:bg-white/10"
+          >
+            <ShoppingCart className="w-4 h-4 mr-2" />
+            Cart ({cartItems.length})
+          </Button>
+          <UserMenu />
+        </div>
+      </nav>
+
       {/* Hero Section */}
       <section className="relative py-24 px-6">
         <div className="absolute inset-0 bg-gradient-luxury opacity-10"></div>
@@ -62,7 +95,6 @@ const Home = () => {
                 Learn More
               </Button>
             </Link>
-            <Cart />
           </div>
         </div>
       </section>
@@ -101,7 +133,7 @@ const Home = () => {
               </Card>
             </Link>
 
-            <Link to="/g-vibe">
+            <Link to="/gvibe">
               <Card className="glass-luxury hover:scale-105 transition-all duration-500 hover-glow p-6 text-center group">
                 <div className="w-16 h-16 mx-auto bg-gradient-primary rounded-full flex items-center justify-center mb-4">
                   <Shield className="w-8 h-8 text-white" />
@@ -301,7 +333,39 @@ const Home = () => {
         </div>
       </footer>
       
-      <ConciergeChat />
+      {/* Chat Modal */}
+      {isChatOpen && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="relative max-w-2xl w-full max-h-[80vh] bg-black/80 rounded-lg">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsChatOpen(false)}
+              className="absolute top-4 right-4 text-white hover:bg-white/10 z-10"
+            >
+              ✕
+            </Button>
+            <ConciergeChat />
+          </div>
+        </div>
+      )}
+
+      {/* Cart Modal */}
+      {isCartOpen && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="relative max-w-md w-full max-h-[80vh] bg-black/80 rounded-lg">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsCartOpen(false)}
+              className="absolute top-4 right-4 text-white hover:bg-white/10 z-10"
+            >
+              ✕
+            </Button>
+            <Cart />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

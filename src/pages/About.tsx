@@ -4,18 +4,20 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Heart, Shield, Star, Award } from "lucide-react";
 import ConciergeChat from "@/components/ConciergeChat";
+import UserMenu from "@/components/UserMenu";
 
 const About = () => {
   return (
     <div className="min-h-screen bg-gradient-dark">
       {/* Navigation */}
-      <nav className="p-6">
+      <nav className="flex justify-between items-center p-6">
         <Link to="/home">
           <Button variant="ghost" className="text-white">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
           </Button>
         </Link>
+        <UserMenu />
       </nav>
 
       {/* Hero Section */}
