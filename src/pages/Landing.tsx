@@ -97,7 +97,7 @@ const Landing = () => {
           <img 
             src="/lovable-uploads/12536082-5a87-4e12-82c9-d705ecb8d3e5.png" 
             alt="Vellvii - The art of O" 
-            className="h-24 md:h-36 lg:h-40 w-auto shimmer-logo"
+            className="h-32 md:h-44 lg:h-48 w-auto shimmer-logo"
           />
         </div>
       </div>
