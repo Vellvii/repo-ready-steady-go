@@ -52,31 +52,31 @@ const Landing = () => {
   return (
     <div className="min-h-screen bg-[#1a1a1a] relative overflow-hidden">
       {/* Logo Section */}
-      <div className="flex flex-col items-center pt-12 md:pt-20">
-        {/* V Logo with shimmer */}
-        <div className="mb-8 shimmer-container">
+      <div className="flex flex-col items-center pt-8 md:pt-12">
+        {/* V Logo with shimmer - Made Bigger */}
+        <div className="mb-6 shimmer-container">
           <img 
             src="/lovable-uploads/c5420417-5d7d-43fb-83f7-096b095f26c6.png" 
             alt="V Logo" 
-            className="h-24 md:h-32 w-auto shimmer-logo"
+            className="h-32 md:h-48 lg:h-56 w-auto shimmer-logo"
           />
         </div>
 
-        {/* Vellvii Logo with shimmer */}
+        {/* Vellvii Logo with shimmer - Made Bigger */}
         <div className="shimmer-container">
           <img 
             src="/lovable-uploads/12536082-5a87-4e12-82c9-d705ecb8d3e5.png" 
             alt="Vellvii - The art of O" 
-            className="h-16 md:h-20 w-auto shimmer-logo"
+            className="h-20 md:h-28 lg:h-32 w-auto shimmer-logo"
           />
         </div>
       </div>
 
-      {/* Vivien Section - Desktop */}
-      <div className="hidden md:flex absolute right-8 lg:right-16 top-1/3 lg:top-1/4 items-start max-w-2xl">
-        {/* Vivien's Image - Circular */}
-        <div className="mr-8 flex-shrink-0">
-          <div className="w-48 h-48 lg:w-56 lg:h-56 rounded-full overflow-hidden shadow-2xl border-4 border-white/10">
+      {/* Vivien Section - Desktop - Repositioned lower to avoid logo overlap */}
+      <div className="hidden md:flex absolute right-8 lg:right-16 top-2/3 lg:top-1/2 items-start max-w-2xl">
+        {/* Vivien's Image - Smaller and Circular */}
+        <div className="mr-6 flex-shrink-0">
+          <div className="w-32 h-32 lg:w-36 lg:h-36 rounded-full overflow-hidden shadow-2xl border-2 border-white/10">
             <img 
               src={vivienImage} 
               alt="Vivien" 
@@ -86,24 +86,23 @@ const Landing = () => {
         </div>
 
         {/* Vivien's Message - No Box */}
-        <div className="text-white max-w-md mt-8">
-          <p className="font-playfair text-lg lg:text-xl leading-relaxed">
-            {displayedText}
+        <div className="text-white max-w-sm mt-4">
+          <p className="font-playfair text-base lg:text-lg leading-relaxed">{displayedText}
             {isTyping && <span className="blinking-cursor">|</span>}
           </p>
           
           {showButtons && (
-            <div className="mt-8 space-y-4 fade-in">
+            <div className="mt-6 space-y-3 fade-in">
               <Button
                 onClick={handleYes}
-                className="w-full bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-black font-medium py-3 rounded-lg transition-all duration-300 hover:scale-105"
+                className="w-full bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-black font-medium py-2 text-sm rounded-lg transition-all duration-300 hover:scale-105"
               >
                 Yes, I am older than 18
               </Button>
               <Button
                 onClick={handleNo}
                 variant="outline"
-                className="w-full border-white/30 text-white hover:bg-white/10 py-3 rounded-lg transition-all duration-300"
+                className="w-full border-white/30 text-white hover:bg-white/10 py-2 text-sm rounded-lg transition-all duration-300"
               >
                 No, I am not
               </Button>
@@ -114,9 +113,9 @@ const Landing = () => {
 
       {/* Mobile Layout */}
       <div className="md:hidden fixed bottom-8 left-4 right-4 z-10">
-        <div className="flex items-start space-x-6">
-          {/* Circular Vivien Image for Mobile */}
-          <div className="w-20 h-20 rounded-full overflow-hidden shadow-2xl border-2 border-white/10 flex-shrink-0">
+        <div className="flex items-start space-x-4">
+          {/* Smaller Circular Vivien Image for Mobile */}
+          <div className="w-16 h-16 rounded-full overflow-hidden shadow-2xl border-2 border-white/10 flex-shrink-0">
             <img 
               src={vivienImage} 
               alt="Vivien" 
