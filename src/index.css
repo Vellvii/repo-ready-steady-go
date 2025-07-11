@@ -266,6 +266,20 @@
       transform: translateY(0);
     }
   }
+
+  /* Blinking cursor animation */
+  .blinking-cursor {
+    animation: blink 1s infinite;
+  }
+
+  @keyframes blink {
+    0%, 50% {
+      opacity: 1;
+    }
+    51%, 100% {
+      opacity: 0;
+    }
+  }
 }
 
 @layer base {

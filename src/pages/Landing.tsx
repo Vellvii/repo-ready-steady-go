@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import vLogo from "@/assets/v-logo.png";
 import vellviiLogo from "@/assets/vellvii-logo.png";
-import vivienImage from "@/assets/vivien-assistant.jpg";
+import vivienImage from "/lovable-uploads/976c0d6d-a066-409a-8ad6-6353840958ac.png";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -72,68 +72,67 @@ const Landing = () => {
         </div>
       </div>
 
-      {/* Vivien Section */}
-      <div className="absolute right-8 md:right-16 top-1/3 md:top-1/4 flex flex-col md:flex-row items-center md:items-start max-w-2xl">
-        {/* Vivien's Image */}
-        <div className="mb-6 md:mb-0 md:mr-8 flex-shrink-0">
-          <img 
-            src={vivienImage} 
-            alt="Vivien" 
-            className="w-32 h-40 md:w-48 md:h-60 object-cover rounded-lg shadow-2xl"
-          />
+      {/* Vivien Section - Desktop */}
+      <div className="hidden md:flex absolute right-8 lg:right-16 top-1/3 lg:top-1/4 items-start max-w-2xl">
+        {/* Vivien's Image - Circular */}
+        <div className="mr-8 flex-shrink-0">
+          <div className="w-48 h-48 lg:w-56 lg:h-56 rounded-full overflow-hidden shadow-2xl border-4 border-white/10">
+            <img 
+              src={vivienImage} 
+              alt="Vivien" 
+              className="w-full h-full object-cover"
+            />
+          </div>
         </div>
 
-        {/* Vivien's Message */}
-        <div className="text-white max-w-md">
-          <div className="bg-black/20 backdrop-blur-sm rounded-lg p-6 border border-white/10">
-            <p className="font-playfair text-lg md:text-xl leading-relaxed">
-              {displayedText}
-              {isTyping && <span className="animate-pulse">|</span>}
-            </p>
-            
-            {showButtons && (
-              <div className="mt-6 space-y-3 fade-in">
-                <Button
-                  onClick={handleYes}
-                  className="w-full bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-black font-medium py-3 rounded-lg transition-all duration-300 hover:scale-105"
-                >
-                  Yes, I am older than 18
-                </Button>
-                <Button
-                  onClick={handleNo}
-                  variant="outline"
-                  className="w-full border-white/30 text-white hover:bg-white/10 py-3 rounded-lg transition-all duration-300"
-                >
-                  No, I am not
-                </Button>
-              </div>
-            )}
-          </div>
+        {/* Vivien's Message - No Box */}
+        <div className="text-white max-w-md mt-8">
+          <p className="font-playfair text-lg lg:text-xl leading-relaxed">
+            {displayedText}
+            {isTyping && <span className="blinking-cursor">|</span>}
+          </p>
+          
+          {showButtons && (
+            <div className="mt-8 space-y-4 fade-in">
+              <Button
+                onClick={handleYes}
+                className="w-full bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-black font-medium py-3 rounded-lg transition-all duration-300 hover:scale-105"
+              >
+                Yes, I am older than 18
+              </Button>
+              <Button
+                onClick={handleNo}
+                variant="outline"
+                className="w-full border-white/30 text-white hover:bg-white/10 py-3 rounded-lg transition-all duration-300"
+              >
+                No, I am not
+              </Button>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Mobile Layout - Hidden on desktop */}
+      {/* Mobile Layout */}
       <div className="md:hidden fixed bottom-8 left-4 right-4 z-10">
-        <div className="text-white">
-          <div className="bg-black/20 backdrop-blur-sm rounded-lg p-4 border border-white/10">
-            <div className="flex items-start space-x-4 mb-4">
-              <div className="w-16 h-20 flex-shrink-0">
-                <img 
-                  src={vivienImage} 
-                  alt="Vivien" 
-                  className="w-full h-full object-cover rounded-lg shadow-2xl"
-                />
-              </div>
-              <div className="flex-1">
-                <p className="font-playfair text-sm leading-relaxed">
-                  {displayedText}
-                  {isTyping && <span className="animate-pulse">|</span>}
-                </p>
-              </div>
-            </div>
+        <div className="flex items-start space-x-6">
+          {/* Circular Vivien Image for Mobile */}
+          <div className="w-20 h-20 rounded-full overflow-hidden shadow-2xl border-2 border-white/10 flex-shrink-0">
+            <img 
+              src={vivienImage} 
+              alt="Vivien" 
+              className="w-full h-full object-cover"
+            />
+          </div>
+          
+          {/* Message without box */}
+          <div className="flex-1 text-white">
+            <p className="font-playfair text-sm leading-relaxed">
+              {displayedText}
+              {isTyping && <span className="blinking-cursor">|</span>}
+            </p>
             
             {showButtons && (
-              <div className="space-y-2 fade-in">
+              <div className="mt-4 space-y-2 fade-in">
                 <Button
                   onClick={handleYes}
                   className="w-full bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-black font-medium py-2 text-sm rounded-lg transition-all duration-300"
