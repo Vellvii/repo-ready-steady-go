@@ -15,7 +15,7 @@ const Landing = () => {
   const message = "Hi, I'm Vivien. I can guide you through our website and you may ask me any questions at any time. To start, please confirm that you are older than 18.";
 
   useEffect(() => {
-    // Start typing animation after a brief delay
+    // Start typing animation after a 2-second delay
     const startTyping = setTimeout(() => {
       setIsTyping(true);
       let index = 0;
@@ -28,10 +28,10 @@ const Landing = () => {
           setIsTyping(false);
           setShowButtons(true);
         }
-      }, 50); // Typing speed
+      }, 80); // Slower typing speed (was 50ms, now 80ms)
 
       return () => clearInterval(typeInterval);
-    }, 2000);
+    }, 2000); // 2-second delay before typing starts
 
     return () => clearTimeout(startTyping);
   }, []);
@@ -62,12 +62,12 @@ const Landing = () => {
           />
         </div>
 
-        {/* Vellvii Logo with shimmer - Made Bigger */}
+        {/* Vellvii Logo with shimmer - Made Much Bigger */}
         <div className="shimmer-container">
           <img 
             src="/lovable-uploads/12536082-5a87-4e12-82c9-d705ecb8d3e5.png" 
             alt="Vellvii - The art of O" 
-            className="h-20 md:h-28 lg:h-32 w-auto shimmer-logo"
+            className="h-24 md:h-36 lg:h-40 w-auto shimmer-logo"
           />
         </div>
       </div>
