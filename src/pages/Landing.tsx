@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import vLogo from "@/assets/v-logo.png";
@@ -11,6 +11,7 @@ const Landing = () => {
   const [displayedText, setDisplayedText] = useState("");
   const [showButtons, setShowButtons] = useState(false);
   const [ageVerified, setAgeVerified] = useState(false);
+  const vLogoRef = useRef<HTMLDivElement>(null);
 
   const message = "Hi, I'm Vivien. I can guide you through our website and you may ask me any questions at any time. To start, please confirm that you are older than 18.";
 
@@ -36,6 +37,24 @@ const Landing = () => {
     return () => clearTimeout(startTyping);
   }, []);
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (vLogoRef.current) {
+      const rect = vLogoRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      // Calculate angle based on mouse position
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const angle = Math.atan2(y - centerY, x - centerX) * (180 / Math.PI);
+      
+      // Update CSS custom property for shimmer direction
+      vLogoRef.current.style.setProperty('--shimmer-angle', `${angle}deg`);
+      vLogoRef.current.style.setProperty('--shimmer-x', `${(x / rect.width) * 100}%`);
+      vLogoRef.current.style.setProperty('--shimmer-y', `${(y / rect.height) * 100}%`);
+    }
+  };
+
   const handleYes = () => {
     setAgeVerified(true);
     // Navigate to home or next page
@@ -53,12 +72,16 @@ const Landing = () => {
     <div className="min-h-screen bg-[#1a1a1a] relative overflow-hidden">
       {/* Logo Section */}
       <div className="flex flex-col items-center pt-8 md:pt-12">
-        {/* V Logo with shimmer - Made Bigger */}
-        <div className="mb-6 shimmer-container">
+        {/* V Logo with interactive shimmer */}
+        <div 
+          ref={vLogoRef}
+          className="mb-6 shimmer-container-interactive"
+          onMouseMove={handleMouseMove}
+        >
           <img 
             src="/lovable-uploads/c5420417-5d7d-43fb-83f7-096b095f26c6.png" 
             alt="V Logo" 
-            className="h-32 md:h-48 lg:h-56 w-auto shimmer-logo"
+            className="h-32 md:h-48 lg:h-56 w-auto shimmer-logo-interactive"
           />
         </div>
 

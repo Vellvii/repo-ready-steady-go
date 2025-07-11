@@ -280,6 +280,41 @@
       opacity: 0;
     }
   }
+
+  /* Interactive shimmer for V logo */
+  .shimmer-container-interactive {
+    position: relative;
+    overflow: hidden;
+    --shimmer-angle: 45deg;
+    --shimmer-x: 50%;
+    --shimmer-y: 50%;
+  }
+
+  .shimmer-logo-interactive {
+    position: relative;
+  }
+
+  .shimmer-logo-interactive::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+      circle at var(--shimmer-x) var(--shimmer-y),
+      rgba(255, 215, 0, 0.6) 0%,
+      rgba(255, 215, 0, 0.3) 30%,
+      transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .shimmer-container-interactive:hover .shimmer-logo-interactive::after {
+    opacity: 1;
+  }
 }
 
 @layer base {
