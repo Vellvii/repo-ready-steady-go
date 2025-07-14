@@ -70,7 +70,12 @@ const ConciergeChat = () => {
     return { name: "Vivian", color: "text-secondary", bg: "bg-secondary/10" };
   };
 
-  if (concierge !== "vivian") return null;
+  // Always show chat for Vivian (default)
+  if (!concierge) {
+    // Set Vivian as default if no concierge selected
+    localStorage.setItem("selectedConcierge", "vivian");
+    setConcierge("vivian");
+  }
 
   const conciergeInfo = getConciergeInfo();
 

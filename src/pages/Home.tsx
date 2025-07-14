@@ -23,7 +23,14 @@ const Home = () => {
   } = useCart();
   
   useEffect(() => {
-    const selectedConcierge = localStorage.getItem("selectedConcierge");
+    let selectedConcierge = localStorage.getItem("selectedConcierge");
+    
+    // Set Vivian as default if no concierge selected
+    if (!selectedConcierge) {
+      selectedConcierge = "vivian";
+      localStorage.setItem("selectedConcierge", "vivian");
+    }
+    
     setConcierge(selectedConcierge);
     
     if (selectedConcierge === "vivian") {
@@ -105,7 +112,7 @@ const Home = () => {
             </motion.div>
           </ScrollReveal>
 
-          {concierge === "vivian" && <ScrollReveal delay={0.6}>
+          {concierge && <ScrollReveal delay={0.6}>
               <motion.div className="glass-luxury p-4 sm:p-6 rounded-lg mb-6 sm:mb-8 max-w-2xl mx-auto apple-hover" whileHover={{
             scale: 1.02
           }} transition={{
