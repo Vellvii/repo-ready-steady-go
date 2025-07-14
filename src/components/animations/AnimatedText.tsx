@@ -56,7 +56,7 @@ export const AnimatedText = ({
     flexWrap: "wrap"
   }} variants={container} initial="hidden" animate={inView ? "visible" : "hidden"} className={className}>
       {text.split(" ").map((word, index) => <motion.span variants={child} style={{
-      marginRight: "0.25rem"
+      marginRight: "0.5rem"
     }} key={index} className="text-slate-50">
           {word}
         </motion.span>)}
