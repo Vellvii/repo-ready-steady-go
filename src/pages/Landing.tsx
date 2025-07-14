@@ -102,9 +102,9 @@ const Landing = () => {
         </div>
       </div>
 
-      {/* Vivien Section - Desktop - Repositioned lower to avoid logo overlap */}
+      {/* Vivien Section - Desktop - Static positioning */}
       <div className="hidden md:flex absolute right-8 lg:right-16 top-2/3 lg:top-1/2 items-start max-w-2xl">
-        {/* Vivien's Image - Smaller and Circular */}
+        {/* Vivien's Image - Static and Circular */}
         <div className="mr-6 flex-shrink-0">
           <div className="w-32 h-32 lg:w-36 lg:h-36 rounded-full overflow-hidden shadow-2xl border-2 border-white/10">
             <img 
@@ -122,7 +122,7 @@ const Landing = () => {
           </p>
           
           {showButtons && (
-            <div className="mt-6 space-y-3 fade-in">
+            <div className="mt-6 space-y-3">
               <button
                 ref={yesButtonRef}
                 onClick={handleYes}
