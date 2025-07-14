@@ -130,9 +130,11 @@ const Vibe = () => {
                 <Button size="lg" variant="luxury" className="flex-1 text-sm sm:text-base" onClick={handleAddToCart}>
                   Add to Collection - $199.99
                 </Button>
-                <Button size="lg" variant="outline" className="w-full sm:w-auto">
-                  Learn More
-                </Button>
+                <a href="#specifications" className="w-full sm:w-auto">
+                  <Button size="lg" variant="outline" className="w-full sm:w-auto">
+                    Learn More
+                  </Button>
+                </a>
               </div>
             </div>
           </div>
@@ -165,7 +167,7 @@ const Vibe = () => {
       )}
 
       {/* Product Specifications */}
-      <section className="px-6 py-16 border-t border-white/10">
+      <section id="specifications" className="px-6 py-16 border-t border-white/10">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-playfair font-bold text-foreground text-center mb-12">
             Technical Specifications
