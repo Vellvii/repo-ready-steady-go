@@ -294,7 +294,7 @@
     position: relative;
   }
 
-  .shimmer-logo-interactive::before {
+  .shimmer-container-interactive::before {
     content: '';
     position: absolute;
     top: 0;
@@ -316,7 +316,7 @@
     border-radius: inherit;
   }
 
-  .shimmer-container-interactive:hover .shimmer-logo-interactive::before {
+  .shimmer-container-interactive:hover::before {
     opacity: 1;
   }
 

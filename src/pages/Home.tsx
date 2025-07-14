@@ -74,7 +74,11 @@ const Home = () => {
         stiffness: 400,
         damping: 17
       }}>
-          <img src="/lovable-uploads/fd8fd5ce-f65c-4c0c-b093-af821cbd5a34.png" alt="Vellvii" className="h-8" />
+          <img
+            src="/lovable-uploads/12536082-5a87-4e12-82c9-d705ecb8d3e5.png"
+            alt="Vellvii"
+            className="h-12 md:h-16 w-auto"
+          />
         </motion.div>
         <div className="flex items-center gap-2 sm:gap-4">
           <MagneticButton onClick={() => setIsCartOpen(true)} className="text-white hover:bg-white/10 px-2 sm:px-3 py-2 rounded-md transition-all duration-300">
