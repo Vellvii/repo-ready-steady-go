@@ -93,7 +93,7 @@ const Home = () => {
             stiffness: 300,
             damping: 20
           }}>
-              <img alt="Vellvii" className="h-28 md:h-36 mx-auto" src="/lovable-uploads/e59f6ada-c5b2-400f-96a1-affd0aa70f18.png" />
+              <img alt="Vellvii" className="h-45 md:h-36 mx-auto" src="/lovable-uploads/e59f6ada-c5b2-400f-96a1-affd0aa70f18.png" />
             </motion.div>
           </ScrollReveal>
 
