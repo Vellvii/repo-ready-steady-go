@@ -18,7 +18,7 @@ const Auth = ({ onAuth, preselectedConcierge }: AuthProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [concierge, setConcierge] = useState(preselectedConcierge || "");
+  const [concierge, setConcierge] = useState(preselectedConcierge || "vivian");
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
@@ -119,7 +119,6 @@ const Auth = ({ onAuth, preselectedConcierge }: AuthProps) => {
                 <SelectValue placeholder="Select your preferred concierge" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="luke">Luke</SelectItem>
                 <SelectItem value="vivian">Vivian</SelectItem>
               </SelectContent>
             </Select>

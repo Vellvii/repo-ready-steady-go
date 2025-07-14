@@ -13,22 +13,30 @@ import { ParallaxContainer } from "@/components/animations/ParallaxContainer";
 import { MagneticButton } from "@/components/animations/MagneticButton";
 import { AnimatedText } from "@/components/animations/AnimatedText";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { N8nService } from "@/services/n8nService";
 const Home = () => {
   const [concierge, setConcierge] = useState<string | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [greeting, setGreeting] = useState("Welcome to Vellvii");
   const {
     items: cartItems
   } = useCart();
+  
   useEffect(() => {
     const selectedConcierge = localStorage.getItem("selectedConcierge");
     setConcierge(selectedConcierge);
+    
+    if (selectedConcierge === "vivian") {
+      N8nService.getGreeting(window.location.pathname).then(response => {
+        setGreeting(response);
+      }).catch(() => {
+        setGreeting("Hello! Vivian here, excited to help you discover your perfect match.");
+      });
+    }
   }, []);
-  const getGreeting = () => {
-    if (!concierge) return "Welcome to Vellvii";
-    return concierge === "luke" ? "Good day. Luke here, ready to assist you with our luxury collection." : "Hello! Vivian here, excited to help you discover your perfect match.";
-  };
+  
   const getConciergeStyle = () => {
-    return concierge === "luke" ? "text-primary font-semibold" : "text-secondary font-semibold";
+    return "text-secondary font-semibold";
   };
   const {
     scrollY
@@ -97,7 +105,7 @@ const Home = () => {
             </motion.div>
           </ScrollReveal>
 
-          {concierge && <ScrollReveal delay={0.6}>
+          {concierge === "vivian" && <ScrollReveal delay={0.6}>
               <motion.div className="glass-luxury p-4 sm:p-6 rounded-lg mb-6 sm:mb-8 max-w-2xl mx-auto apple-hover" whileHover={{
             scale: 1.02
           }} transition={{
@@ -105,7 +113,7 @@ const Home = () => {
             stiffness: 300,
             damping: 20
           }}>
-                <AnimatedText text={getGreeting()} className={`text-base sm:text-lg font-inter ${getConciergeStyle()}`} delay={0.8} />
+                <AnimatedText text={greeting} className={`text-base sm:text-lg font-inter ${getConciergeStyle()}`} delay={0.8} />
               </motion.div>
             </ScrollReveal>}
 

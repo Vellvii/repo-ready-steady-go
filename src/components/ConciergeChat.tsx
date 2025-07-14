@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { MessageCircle, Send, X, Minimize2 } from "lucide-react";
 import { useLocation } from "react-router-dom";
+import { N8nService } from "@/services/n8nService";
 
 const ConciergeChat = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,20 +19,19 @@ const ConciergeChat = () => {
     setConcierge(selectedConcierge);
     
     // Add welcome message when component mounts
-    if (selectedConcierge && messages.length === 0) {
-      const welcomeMessage = selectedConcierge === "luke" 
-        ? "Hello, Luke here. I'm ready to assist you with detailed product information and specifications."
-        : "Hi there! I'm Vivian, and I'm here to help you find the perfect match for your intimate journey.";
-      
-      setMessages([{
-        id: '1',
-        content: welcomeMessage,
-        role: 'assistant'
-      }]);
+    if (selectedConcierge === "vivian" && messages.length === 0) {
+      // Get welcome message from n8n service
+      N8nService.getGreeting(location.pathname).then(welcomeMessage => {
+        setMessages([{
+          id: '1',
+          content: welcomeMessage,
+          role: 'assistant'
+        }]);
+      });
     }
-  }, []);
+  }, [location.pathname]);
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
 
     const userMessage = {
@@ -41,38 +41,13 @@ const ConciergeChat = () => {
     };
 
     setMessages(prev => [...prev, userMessage]);
+    const currentInput = inputValue;
+    setInputValue("");
 
-    // Simulate AI response based on concierge and current page
-    setTimeout(() => {
-      const currentPage = location.pathname;
-      let response = "";
-
-      if (concierge === "luke") {
-        if (currentPage.includes("pulse")) {
-          response = "The Pulse features advanced pressure wave technology with 10 customizable intensities. Its medical-grade silicone construction ensures both safety and comfort.";
-        } else if (currentPage.includes("vibe")) {
-          response = "The Vibe's dual-stimulation design offers 8 distinct vibration patterns. Its ergonomic curve is precisely engineered for optimal comfort and effectiveness.";
-        } else if (currentPage.includes("g-vibe")) {
-          response = "The G-Vibe features a scientifically-angled tip for targeted stimulation. Its flexible silicone neck adapts to your unique anatomy.";
-        } else if (currentPage.includes("dox")) {
-          response = "The DOX storage solution features premium vegan leather, magnetic closure, and integrated USB-C charging for all Vellvii products.";
-        } else {
-          response = "I can provide detailed technical specifications for any of our luxury products. What would you like to know?";
-        }
-      } else {
-        if (currentPage.includes("pulse")) {
-          response = "The Pulse is perfect for those seeking gentle yet powerful stimulation. Its whisper-quiet design ensures your privacy and comfort.";
-        } else if (currentPage.includes("vibe")) {
-          response = "The Vibe is wonderfully versatile - perfect for both intimate moments and relaxing massage. Many find its memory function particularly convenient.";
-        } else if (currentPage.includes("g-vibe")) {
-          response = "The G-Vibe is designed with comfort in mind. Its soft, flexible design makes exploration feel natural and enjoyable.";
-        } else if (currentPage.includes("dox")) {
-          response = "The DOX keeps everything organized and discreet. I love how it charges your products automatically - no worries about battery life!";
-        } else {
-          response = "I'm here to help you feel comfortable and confident in your choices. What questions do you have about our collection?";
-        }
-      }
-
+    // Get response from n8n service
+    try {
+      const response = await N8nService.getChatResponse(currentInput, location.pathname);
+      
       const assistantMessage = {
         id: (Date.now() + 1).toString(),
         content: response,
@@ -80,18 +55,22 @@ const ConciergeChat = () => {
       };
 
       setMessages(prev => [...prev, assistantMessage]);
-    }, 1000);
-
-    setInputValue("");
+    } catch (error) {
+      console.error('Chat error:', error);
+      const errorMessage = {
+        id: (Date.now() + 1).toString(),
+        content: "I'm here to help you with any questions about our luxury collection. Please feel free to ask anything!",
+        role: 'assistant' as const
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    }
   };
 
   const getConciergeInfo = () => {
-    return concierge === "luke" 
-      ? { name: "Luke", color: "text-primary", bg: "bg-primary/10" }
-      : { name: "Vivian", color: "text-secondary", bg: "bg-secondary/10" };
+    return { name: "Vivian", color: "text-secondary", bg: "bg-secondary/10" };
   };
 
-  if (!concierge) return null;
+  if (concierge !== "vivian") return null;
 
   const conciergeInfo = getConciergeInfo();
 

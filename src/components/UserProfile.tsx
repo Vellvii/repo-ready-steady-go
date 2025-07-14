@@ -143,7 +143,7 @@ const UserProfile = ({ user, onClose }: UserProfileProps) => {
                 <SelectValue placeholder="Select a concierge" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="luke">Luke</SelectItem>
+                
                 <SelectItem value="vivian">Vivian</SelectItem>
               </SelectContent>
             </Select>

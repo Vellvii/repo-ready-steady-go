@@ -9,16 +9,26 @@ import ConciergeChat from "@/components/ConciergeChat";
 import UserMenu from "@/components/UserMenu";
 import { useCart } from "@/hooks/useCart";
 import { useToast } from "@/hooks/use-toast";
+import { N8nService } from "@/services/n8nService";
 
 const GVibe = () => {
   const [concierge, setConcierge] = useState<string | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [recommendation, setRecommendation] = useState("");
   const { addToCart, items: cartItems } = useCart();
   const { toast } = useToast();
 
   useEffect(() => {
     const selectedConcierge = localStorage.getItem("selectedConcierge");
     setConcierge(selectedConcierge);
+    
+    if (selectedConcierge === "vivian") {
+      N8nService.getProductRecommendation(window.location.pathname).then(response => {
+        setRecommendation(response);
+      }).catch(() => {
+        setRecommendation("The G-Vibe is such a thoughtful design! The gentle curve feels so natural, and I love how the soft LED glow lets you know exactly what intensity you're enjoying. It's lightweight and flexible, making exploration comfortable and stress-free.");
+      });
+    }
   }, []);
 
   const handleAddToCart = () => {
@@ -34,14 +44,6 @@ const GVibe = () => {
     });
   };
 
-  const getConciergeRecommendation = () => {
-    if (concierge === "luke") {
-      return "The G-Vibe demonstrates precision engineering at its finest. The precisely angled tip is designed for optimal G-spot contact, while the flexible silicone neck allows for comfortable positioning. The LED intensity glow provides elegant feedback for your experience.";
-    } else if (concierge === "vivian") {
-      return "The G-Vibe is such a thoughtful design! The gentle curve feels so natural, and I love how the soft LED glow lets you know exactly what intensity you're enjoying. It's lightweight and flexible, making exploration comfortable and stress-free.";
-    }
-    return "The G-Vibe offers precise G-spot stimulation with elegant design and LED feedback.";
-  };
 
   return (
     <div className="min-h-screen bg-gradient-dark">
@@ -141,22 +143,20 @@ const GVibe = () => {
       </section>
 
       {/* Concierge Recommendation */}
-      {concierge && (
+      {concierge === "vivian" && recommendation && (
         <section className="px-6 py-16 border-t border-white/10">
           <div className="max-w-4xl mx-auto">
             <Card className="glass-luxury p-8">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-white font-semibold">
-                    {concierge === "luke" ? "L" : "V"}
-                  </span>
+                  <span className="text-white font-semibold">V</span>
                 </div>
                 <div>
                   <h3 className="text-xl font-playfair font-semibold text-white mb-2">
-                    {concierge === "luke" ? "Luke's" : "Vivian's"} Recommendation
+                    Vivian's Recommendation
                   </h3>
                   <p className="text-white/90 leading-relaxed">
-                    {getConciergeRecommendation()}
+                    {recommendation}
                   </p>
                 </div>
               </div>

@@ -9,16 +9,26 @@ import ConciergeChat from "@/components/ConciergeChat";
 import UserMenu from "@/components/UserMenu";
 import { useCart } from "@/hooks/useCart";
 import { useToast } from "@/hooks/use-toast";
+import { N8nService } from "@/services/n8nService";
 
 const Pulse = () => {
   const [concierge, setConcierge] = useState<string | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [recommendation, setRecommendation] = useState("");
   const { addToCart, items: cartItems } = useCart();
   const { toast } = useToast();
 
   useEffect(() => {
     const selectedConcierge = localStorage.getItem("selectedConcierge");
     setConcierge(selectedConcierge);
+    
+    if (selectedConcierge === "vivian") {
+      N8nService.getProductRecommendation(window.location.pathname).then(response => {
+        setRecommendation(response);
+      }).catch(() => {
+        setRecommendation("The Pulse is such a gentle yet powerful companion! Its soft silicone feels wonderful, and the different rhythmic patterns let you discover exactly what brings you joy. Perfect for both beginners and those seeking new experiences.");
+      });
+    }
   }, []);
 
   const handleAddToCart = () => {
@@ -34,14 +44,6 @@ const Pulse = () => {
     });
   };
 
-  const getConciergeRecommendation = () => {
-    if (concierge === "luke") {
-      return "The Pulse represents the pinnacle of pressure wave technology. Its sophisticated engineering delivers precise, rhythmic stimulation that's both powerful and whisper-quiet. I recommend starting with intensity level 3 for optimal exploration.";
-    } else if (concierge === "vivian") {
-      return "The Pulse is such a gentle yet powerful companion! Its soft silicone feels wonderful, and the different rhythmic patterns let you discover exactly what brings you joy. Perfect for both beginners and those seeking new experiences.";
-    }
-    return "The Pulse offers advanced pressure wave technology for an exceptional intimate experience.";
-  };
 
   return (
     <div className="min-h-screen bg-gradient-dark">
@@ -142,22 +144,20 @@ const Pulse = () => {
       </section>
 
       {/* Concierge Recommendation */}
-      {concierge && (
+      {concierge === "vivian" && recommendation && (
         <section className="px-6 py-16 border-t border-white/10">
           <div className="max-w-4xl mx-auto">
             <Card className="glass-luxury p-8">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-white font-semibold">
-                    {concierge === "luke" ? "L" : "V"}
-                  </span>
+                  <span className="text-white font-semibold">V</span>
                 </div>
                 <div>
                   <h3 className="text-xl font-playfair font-semibold text-white mb-2">
-                    {concierge === "luke" ? "Luke's" : "Vivian's"} Recommendation
+                    Vivian's Recommendation
                   </h3>
                   <p className="text-white/90 leading-relaxed">
-                    {getConciergeRecommendation()}
+                    {recommendation}
                   </p>
                 </div>
               </div>
