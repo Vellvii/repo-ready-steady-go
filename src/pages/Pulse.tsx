@@ -78,7 +78,7 @@ const Pulse = () => {
             {/* Product Image Placeholder */}
             <div className="glass-luxury rounded-lg p-6 sm:p-8 md:p-12 text-center">
               <motion.img
-                src="/lovable-uploads/Pulse_-trans.png"
+                src="/uploads/Pulse_-trans.png"
                 alt="Pulse logo"
                 className="w-48 h-48 mx-auto mb-6"
                 whileHover={{ scale: 1.05 }}

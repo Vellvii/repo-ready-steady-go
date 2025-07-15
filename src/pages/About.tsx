@@ -25,7 +25,7 @@ const About = () => {
         <div className="max-w-4xl mx-auto text-center">
           <Badge variant="secondary" className="mb-6">Our Story</Badge>
           <div className="mb-8">
-            <img src="/lovable-uploads/fd8fd5ce-f65c-4c0c-b093-af821cbd5a34.png" alt="Vellvii" className="h-24 sm:h-28 md:h-36 mx-auto" />
+            <img src="/uploads/fd8fd5ce-f65c-4c0c-b093-af821cbd5a34.png" alt="Vellvii" className="h-24 sm:h-28 md:h-36 mx-auto" />
           </div>
           <p className="text-lg sm:text-xl text-secondary italic mb-8 max-w-3xl mx-auto px-4">
             The art of "O"
@@ -105,7 +105,7 @@ const About = () => {
 
             <Card className="glass-luxury p-6 sm:p-8 text-center">
               <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full overflow-hidden mb-6">
-                <img src="/lovable-uploads/0f6e82dd-0d32-4119-a2a1-e5a0386ffec4.png" alt="Vivian" className="w-full h-full object-cover" />
+                <img src="/uploads/0f6e82dd-0d32-4119-a2a1-e5a0386ffec4.png" alt="Vivian" className="w-full h-full object-cover" />
               </div>
               <h3 className="text-xl sm:text-2xl font-playfair font-semibold text-white mb-4">Vivian</h3>
               <p className="text-white/80 leading-relaxed text-sm sm:text-base">

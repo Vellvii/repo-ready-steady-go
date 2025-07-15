@@ -75,7 +75,7 @@ const Home = () => {
         damping: 17
       }}>
           <img
-            src="/lovable-uploads/12536082-5a87-4e12-82c9-d705ecb8d3e5.png"
+            src="/uploads/12536082-5a87-4e12-82c9-d705ecb8d3e5.png"
             alt="Vellvii"
             className="h-12 md:h-16 w-auto"
           />
@@ -112,7 +112,7 @@ const Home = () => {
             stiffness: 300,
             damping: 20
           }}>
-              <img alt="Vellvii" className="h-45 md:h-36 mx-auto" src="/lovable-uploads/e59f6ada-c5b2-400f-96a1-affd0aa70f18.png" />
+              <img alt="Vellvii" className="h-45 md:h-36 mx-auto" src="/uploads/e59f6ada-c5b2-400f-96a1-affd0aa70f18.png" />
             </motion.div>
           </ScrollReveal>
 
@@ -171,7 +171,7 @@ const Home = () => {
               }}>
                   <Card className="glass-luxury apple-hover p-4 sm:p-6 text-center group">
                     <motion.img
-                      src="/lovable-uploads/Pulse_-trans.png"
+                      src="/uploads/Pulse_-trans.png"
                       alt="Pulse logo"
                       className="w-16 h-16 mx-auto mb-4"
                       whileHover={{ scale: 1.1 }}
@@ -221,7 +221,7 @@ const Home = () => {
               }}>
                   <Card className="glass-luxury apple-hover p-6 text-center group">
                     <motion.img
-                      src="/lovable-uploads/G-Vibe%20transparent.png"
+                      src="/uploads/G-Vibe%20transparent.png"
                       alt="G-Vibe logo"
                       className="w-16 h-16 mx-auto mb-4"
                       whileHover={{ scale: 1.1 }}

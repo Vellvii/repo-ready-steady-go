@@ -77,7 +77,7 @@ const GVibe = () => {
             {/* Product Image Placeholder */}
             <div className="glass-luxury rounded-lg p-8 sm:p-12 text-center">
               <motion.img
-                src="/lovable-uploads/G-Vibe%20transparent.png"
+                src="/uploads/G-Vibe%20transparent.png"
                 alt="G-Vibe logo"
                 className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 mx-auto mb-6"
                 whileHover={{ scale: 1.05 }}

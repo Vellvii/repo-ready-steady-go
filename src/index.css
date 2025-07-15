@@ -213,43 +213,6 @@
     font-family: 'Inter', sans-serif;
   }
 
-  /* Shimmer Animation for Logos */
-  .shimmer-container {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .shimmer-logo {
-    position: relative;
-  }
-
-  .shimmer-logo::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 215, 0, 0.4),
-      transparent
-    );
-    animation: shimmer 6s infinite;
-  }
-
-  @keyframes shimmer {
-    0% {
-      left: -100%;
-    }
-    50% {
-      left: 100%;
-    }
-    100% {
-      left: 100%;
-    }
-  }
 
   /* Fade in animation */
   .fade-in {
@@ -281,64 +244,6 @@
     }
   }
 
-  /* Interactive shimmer for V logo */
-  .shimmer-container-interactive {
-    position: relative;
-    overflow: hidden;
-    --shimmer-angle: 45deg;
-    --shimmer-x: 50%;
-    --shimmer-y: 50%;
-  }
-
-  .shimmer-logo-interactive {
-    position: relative;
-  }
-
-  .shimmer-container-interactive::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-      circle at var(--shimmer-x, 50%) var(--shimmer-y, 50%),
-      rgba(255, 215, 0, 0.9) 0%,
-      rgba(255, 215, 0, 0.6) 20%,
-      rgba(255, 215, 0, 0.3) 40%,
-      rgba(255, 215, 0, 0.1) 60%,
-      transparent 80%
-    );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-    z-index: 1;
-    border-radius: inherit;
-  }
-
-  .shimmer-container-interactive:hover::before {
-    opacity: 1;
-  }
-
-  /* Magnetic button effects */
-  .magnetic-button {
-    position: relative;
-    transition: transform 0.2s ease;
-    --mouse-x: 50%;
-    --mouse-y: 50%;
-  }
-
-  .magnetic-button:hover {
-    transform: translate(
-      calc((var(--mouse-x) - 50%) * 0.15),
-      calc((var(--mouse-y) - 50%) * 0.15)
-    );
-  }
-
-  /* Canvas logo glow helper */
-  .logo-glow-canvas {
-    display: block;
-  }
 
   /* Vivien entrance */
   .vivien-container {

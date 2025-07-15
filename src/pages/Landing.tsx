@@ -1,65 +1,48 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import LogoGlowCanvas from "@/components/animations/LogoGlowCanvas";
-import vivienImage from "/lovable-uploads/976c0d6d-a066-409a-8ad6-6353840958ac.png";
+import vivienImage from "/uploads/976c0d6d-a066-409a-8ad6-6353840958ac.png";
 
 const Landing = () => {
   const navigate = useNavigate();
   const [isTyping, setIsTyping] = useState(false);
   const [displayedText, setDisplayedText] = useState("");
   const [showButtons, setShowButtons] = useState(false);
-  const [ageVerified, setAgeVerified] = useState(false);
   const [vivienEntered, setVivienEntered] = useState(false);
-  const yesButtonRef = useRef<HTMLButtonElement>(null);
-  const noButtonRef = useRef<HTMLButtonElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  const message = "Hi, I'm Vivien. I can guide you through our website and you may ask me any questions at any time. To start, please confirm that you are older than 18.";
-
-  const positionVivien = () => {
-    requestAnimationFrame(() => setVivienEntered(true));
-  };
-
-  const revealButtons = () => {
-    setShowButtons(true);
-  };
+  const message =
+    "Hi, I'm Vivien. I can guide you through our website and you may ask me any questions at any time. To start, please confirm that you are older than 18.";
 
   useEffect(() => {
-    positionVivien();
-    const startTyping = setTimeout(() => {
+    const playTimer = setTimeout(() => {
+      videoRef.current?.play();
+    }, 2000);
+
+    const handleEnded = () => {
+      requestAnimationFrame(() => setVivienEntered(true));
       setIsTyping(true);
       let index = 0;
-      const typeInterval = setInterval(() => {
+      const interval = setInterval(() => {
         if (index < message.length) {
           setDisplayedText(message.slice(0, index + 1));
           index++;
         } else {
-          clearInterval(typeInterval);
+          clearInterval(interval);
           setIsTyping(false);
-          revealButtons();
+          setShowButtons(true);
         }
       }, 80);
+    };
 
-      return () => clearInterval(typeInterval);
-    }, 2000);
-
-    return () => clearTimeout(startTyping);
+    const video = videoRef.current;
+    video?.addEventListener("ended", handleEnded);
+    return () => {
+      clearTimeout(playTimer);
+      video?.removeEventListener("ended", handleEnded);
+    };
   }, []);
 
-
-  const handleButtonMouseMove = (e: React.MouseEvent<HTMLButtonElement>, buttonRef: React.RefObject<HTMLButtonElement>) => {
-    if (buttonRef.current) {
-      const rect = buttonRef.current.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      buttonRef.current.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
-      buttonRef.current.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
-    }
-  };
-
   const handleYes = () => {
-    setAgeVerified(true);
-    // Navigate to home or next page
     setTimeout(() => {
       navigate("/home");
     }, 500);
@@ -67,33 +50,25 @@ const Landing = () => {
 
   const handleNo = () => {
     alert("You must be 18 or older to access this website.");
-    // Could redirect to age restriction page or close tab
   };
 
   return (
-    <div className="min-h-screen bg-[#1a1a1a] flex flex-col">
-      {/* Logo Section */}
-      <div className="flex flex-col items-center pt-8 md:pt-12 gap-8">
-        {/* V Logo with interactive shimmer */}
-        <LogoGlowCanvas
-          src="/lovable-uploads/c5420417-5d7d-43fb-83f7-096b095f26c6.png"
-          className="logo-glow-canvas"
-          style={{ width: "20vw", height: "20vw", maxWidth: "160px", maxHeight: "160px" }}
-          idleOffset={0}
-        />
-
-        <LogoGlowCanvas
-          src="/lovable-uploads/12536082-5a87-4e12-82c9-d705ecb8d3e5.png"
-          className="logo-glow-canvas"
-          style={{ width: "40vw", height: "40vw", maxWidth: "320px", maxHeight: "320px" }}
-          idleOffset={Math.PI}
-        />
-      </div>
+    <div className="min-h-screen bg-[#0d0802] flex flex-col items-center pt-8 md:pt-12 gap-8">
+      <img
+        src="/uploads/V-logo-Shimmer.jpeg"
+        alt="V Logo"
+        className="w-40 h-auto"
+      />
+      <video
+        ref={videoRef}
+        src="/uploads/Vellvii-lgo-shimmer.mp4"
+        className="w-3/4 sm:w-1/2"
+        muted
+        playsInline
+      />
 
       {/* Vivien Section */}
-      <div
-        className={`vivien-container ${vivienEntered ? "vivien-entered" : ""}`}
-      >
+      <div className={`vivien-container ${vivienEntered ? "vivien-entered" : ""}`}>
         <div className="w-16 h-16 md:w-32 md:h-32 rounded-full overflow-hidden shadow-2xl border-2 border-white/10 flex-shrink-0">
           <img src={vivienImage} alt="Vivien" className="w-full h-full object-cover" />
         </div>
@@ -107,18 +82,14 @@ const Landing = () => {
           {showButtons && (
             <div className="mt-4 md:mt-6 space-y-2 md:space-y-3">
               <button
-                ref={yesButtonRef}
                 onClick={handleYes}
-                onMouseMove={(e) => handleButtonMouseMove(e, yesButtonRef)}
-                className="bounce-fade-in magnetic-button w-full bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-black font-medium py-2 text-sm rounded-lg transition-all duration-300 hover:scale-105"
+                className="bounce-fade-in w-full bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-black font-medium py-2 text-sm rounded-lg transition-all duration-300"
               >
                 Yes, I am older than 18
               </button>
               <button
-                ref={noButtonRef}
                 onClick={handleNo}
-                onMouseMove={(e) => handleButtonMouseMove(e, noButtonRef)}
-                className="bounce-fade-in magnetic-button w-full border border-white/30 text-white hover:bg-white/10 py-2 text-sm rounded-lg transition-all duration-300 bg-transparent"
+                className="bounce-fade-in w-full border border-white/30 text-white hover:bg-white/10 py-2 text-sm rounded-lg transition-all duration-300 bg-transparent"
               >
                 No, I am not
               </button>
