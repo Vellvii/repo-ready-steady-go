@@ -8,7 +8,6 @@ const Landing = () => {
   const [isTyping, setIsTyping] = useState(false);
   const [displayedText, setDisplayedText] = useState("");
   const [showButtons, setShowButtons] = useState(false);
-  const [vivienEntered, setVivienEntered] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const message =
@@ -20,7 +19,6 @@ const Landing = () => {
     }, 2000);
 
     const handleEnded = () => {
-      requestAnimationFrame(() => setVivienEntered(true));
       setIsTyping(true);
       let index = 0;
       const interval = setInterval(() => {
@@ -54,7 +52,7 @@ const Landing = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0d0802] flex flex-col items-center pt-6 md:pt-8 pb-48 gap-6">
+    <div className="min-h-screen bg-[#0d0802] flex flex-col items-center pt-4 md:pt-6 pb-56 gap-3">
       <img
         src="/uploads/V-logo-Shimmer.jpeg"
         alt="V Logo"
@@ -69,7 +67,7 @@ const Landing = () => {
       />
 
       {/* Vivien Section */}
-      <div className={`vivien-container ${vivienEntered ? "vivien-entered" : ""}`}>
+      <div className="vivien-container">
         <div className="w-16 h-16 md:w-32 md:h-32 rounded-full overflow-hidden shadow-2xl border-2 border-white/10 flex-shrink-0">
           <img src={vivienImage} alt="Vivien" className="w-full h-full object-cover" />
         </div>
