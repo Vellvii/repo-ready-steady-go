@@ -43,6 +43,17 @@ const LogoGlowCanvas = ({ src, className, style, idleOffset = 0 }: LogoGlowCanva
         glowCanvas.height = height;
         maskCtx.clearRect(0, 0, width, height);
         maskCtx.drawImage(img, 0, 0, width, height);
+        const imgData = maskCtx.getImageData(0, 0, width, height);
+        const d = imgData.data;
+        for (let i = 0; i < d.length; i += 4) {
+          const r = d[i];
+          const g = d[i + 1];
+          const b = d[i + 2];
+          const a = d[i + 3];
+          const isGold = a > 0 && r > 180 && g > 150 && b < 170 && r >= g;
+          d[i + 3] = isGold ? 255 : 0;
+        }
+        maskCtx.putImageData(imgData, 0, 0);
       };
 
       updateDimensions();
@@ -133,8 +144,10 @@ const LogoGlowCanvas = ({ src, className, style, idleOffset = 0 }: LogoGlowCanva
         ctx.restore();
       };
 
+      const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+
       let lastTime = performance.now();
-      const animateGlow = () => {
+      function animateGlow() {
         const now = performance.now();
         const dt = (now - lastTime) / 1000;
         lastTime = now;
@@ -161,6 +174,8 @@ const LogoGlowCanvas = ({ src, className, style, idleOffset = 0 }: LogoGlowCanva
 
         let newX = particle.x + particle.vx;
         let newY = particle.y + particle.vy;
+        newX = lerp(particle.x, newX, 0.8);
+        newY = lerp(particle.y, newY, 0.8);
         if (isInside(newX, newY)) {
           particle.x = newX;
           particle.y = newY;
@@ -200,3 +215,4 @@ const LogoGlowCanvas = ({ src, className, style, idleOffset = 0 }: LogoGlowCanva
 };
 
 export default LogoGlowCanvas;
+

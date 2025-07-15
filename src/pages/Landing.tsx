@@ -1,10 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import vLogo from "@/assets/v-logo.png";
-import vellviiLogo from "@/assets/vellvii-logo.png";
-import vivienImage from "/lovable-uploads/976c0d6d-a066-409a-8ad6-6353840958ac.png";
 import LogoGlowCanvas from "@/components/animations/LogoGlowCanvas";
+import vivienImage from "/lovable-uploads/976c0d6d-a066-409a-8ad6-6353840958ac.png";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -12,13 +9,22 @@ const Landing = () => {
   const [displayedText, setDisplayedText] = useState("");
   const [showButtons, setShowButtons] = useState(false);
   const [ageVerified, setAgeVerified] = useState(false);
+  const [vivienEntered, setVivienEntered] = useState(false);
   const yesButtonRef = useRef<HTMLButtonElement>(null);
   const noButtonRef = useRef<HTMLButtonElement>(null);
 
   const message = "Hi, I'm Vivien. I can guide you through our website and you may ask me any questions at any time. To start, please confirm that you are older than 18.";
 
+  const positionVivien = () => {
+    requestAnimationFrame(() => setVivienEntered(true));
+  };
+
+  const revealButtons = () => {
+    setShowButtons(true);
+  };
+
   useEffect(() => {
-    // Start typing animation after a 2-second delay
+    positionVivien();
     const startTyping = setTimeout(() => {
       setIsTyping(true);
       let index = 0;
@@ -29,12 +35,12 @@ const Landing = () => {
         } else {
           clearInterval(typeInterval);
           setIsTyping(false);
-          setShowButtons(true);
+          revealButtons();
         }
-      }, 80); // Slower typing speed (was 50ms, now 80ms)
+      }, 80);
 
       return () => clearInterval(typeInterval);
-    }, 2000); // 2-second delay before typing starts
+    }, 2000);
 
     return () => clearTimeout(startTyping);
   }, []);
@@ -84,34 +90,27 @@ const Landing = () => {
         />
       </div>
 
-      {/* Vivien Section - Desktop - Static positioning */}
-      <div className="hidden md:flex justify-center items-start gap-6 mt-auto mb-12">
-        {/* Vivien's Image - Static and Circular */}
-        <div className="mr-6 flex-shrink-0">
-          <div className="w-32 h-32 lg:w-36 lg:h-36 rounded-full overflow-hidden shadow-2xl border-2 border-white/10">
-            <img 
-              src={vivienImage} 
-              alt="Vivien" 
-              className="w-full h-full object-cover"
-            />
-          </div>
+      {/* Vivien Section */}
+      <div
+        className={`vivien-container ${vivienEntered ? "vivien-entered" : ""}`}
+      >
+        <div className="w-16 h-16 md:w-32 md:h-32 rounded-full overflow-hidden shadow-2xl border-2 border-white/10 flex-shrink-0">
+          <img src={vivienImage} alt="Vivien" className="w-full h-full object-cover" />
         </div>
-
-        {/* Vivien's Message - No Box */}
-        <div className="text-white max-w-sm mt-4">
-          <div className="min-h-[96px] lg:min-h-[112px]">
-            <p className="font-playfair text-base lg:text-lg leading-relaxed">{displayedText}
+        <div className="text-white max-w-sm">
+          <div className="min-h-[96px] md:min-h-[112px]">
+            <p className="font-playfair text-sm md:text-base lg:text-lg leading-relaxed">
+              {displayedText}
               {isTyping && <span className="blinking-cursor">|</span>}
             </p>
           </div>
-          
           {showButtons && (
-            <div className="mt-6 space-y-3">
+            <div className="mt-4 md:mt-6 space-y-2 md:space-y-3">
               <button
                 ref={yesButtonRef}
                 onClick={handleYes}
                 onMouseMove={(e) => handleButtonMouseMove(e, yesButtonRef)}
-                className="magnetic-button w-full bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-black font-medium py-2 text-sm rounded-lg transition-all duration-300 hover:scale-105"
+                className="bounce-fade-in magnetic-button w-full bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-black font-medium py-2 text-sm rounded-lg transition-all duration-300 hover:scale-105"
               >
                 Yes, I am older than 18
               </button>
@@ -119,53 +118,12 @@ const Landing = () => {
                 ref={noButtonRef}
                 onClick={handleNo}
                 onMouseMove={(e) => handleButtonMouseMove(e, noButtonRef)}
-                className="magnetic-button w-full border border-white/30 text-white hover:bg-white/10 py-2 text-sm rounded-lg transition-all duration-300 bg-transparent"
+                className="bounce-fade-in magnetic-button w-full border border-white/30 text-white hover:bg-white/10 py-2 text-sm rounded-lg transition-all duration-300 bg-transparent"
               >
                 No, I am not
               </button>
             </div>
           )}
-        </div>
-      </div>
-
-      {/* Mobile Layout */}
-      <div className="md:hidden flex flex-col px-4 pb-8 mt-auto">
-        <div className="flex items-start space-x-4">
-          {/* Smaller Circular Vivien Image for Mobile */}
-          <div className="w-16 h-16 rounded-full overflow-hidden shadow-2xl border-2 border-white/10 flex-shrink-0">
-            <img 
-              src={vivienImage} 
-              alt="Vivien" 
-              className="w-full h-full object-cover"
-            />
-          </div>
-          
-          {/* Message without box */}
-          <div className="flex-1 text-white">
-            <div className="min-h-[96px]">
-              <p className="font-playfair text-sm leading-relaxed">
-                {displayedText}
-                {isTyping && <span className="blinking-cursor">|</span>}
-              </p>
-            </div>
-            
-            {showButtons && (
-              <div className="mt-4 space-y-2">
-                <button
-                  onClick={handleYes}
-                  className="magnetic-button w-full bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-black font-medium py-2 text-sm rounded-lg transition-all duration-300"
-                >
-                  Yes, I am older than 18
-                </button>
-                <button
-                  onClick={handleNo}
-                  className="magnetic-button w-full border border-white/30 text-white hover:bg-white/10 py-2 text-sm rounded-lg transition-all duration-300 bg-transparent"
-                >
-                  No, I am not
-                </button>
-              </div>
-            )}
-          </div>
         </div>
       </div>
     </div>
