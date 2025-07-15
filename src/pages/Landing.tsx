@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import vLogo from "@/assets/v-logo.png";
 import vellviiLogo from "@/assets/vellvii-logo.png";
 import vivienImage from "/lovable-uploads/976c0d6d-a066-409a-8ad6-6353840958ac.png";
+import LogoGlowCanvas from "@/components/animations/LogoGlowCanvas";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -11,7 +12,6 @@ const Landing = () => {
   const [displayedText, setDisplayedText] = useState("");
   const [showButtons, setShowButtons] = useState(false);
   const [ageVerified, setAgeVerified] = useState(false);
-  const vLogoRef = useRef<HTMLDivElement>(null);
   const yesButtonRef = useRef<HTMLButtonElement>(null);
   const noButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -39,17 +39,6 @@ const Landing = () => {
     return () => clearTimeout(startTyping);
   }, []);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (vLogoRef.current) {
-      const rect = vLogoRef.current.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      // Update CSS custom property for shimmer position
-      vLogoRef.current.style.setProperty('--shimmer-x', `${(x / rect.width) * 100}%`);
-      vLogoRef.current.style.setProperty('--shimmer-y', `${(y / rect.height) * 100}%`);
-    }
-  };
 
   const handleButtonMouseMove = (e: React.MouseEvent<HTMLButtonElement>, buttonRef: React.RefObject<HTMLButtonElement>) => {
     if (buttonRef.current) {
@@ -80,26 +69,19 @@ const Landing = () => {
       {/* Logo Section */}
       <div className="flex flex-col items-center pt-8 md:pt-12">
         {/* V Logo with interactive shimmer */}
-        <div 
-          ref={vLogoRef}
-          className="mb-6 shimmer-container-interactive"
-          onMouseMove={handleMouseMove}
-        >
-          <img 
-            src="/lovable-uploads/c5420417-5d7d-43fb-83f7-096b095f26c6.png" 
-            alt="V Logo" 
-            className="h-32 md:h-48 lg:h-56 w-auto shimmer-logo-interactive"
-          />
-        </div>
+        <LogoGlowCanvas
+          src="/lovable-uploads/c5420417-5d7d-43fb-83f7-096b095f26c6.png"
+          width={200}
+          height={200}
+          className="mb-6 logo-glow-canvas"
+        />
 
-        {/* Vellvii Logo with shimmer - Made Much Bigger */}
-        <div className="shimmer-container">
-          <img 
-            src="/lovable-uploads/12536082-5a87-4e12-82c9-d705ecb8d3e5.png" 
-            alt="Vellvii - The art of O" 
-            className="h-54 md:h-64 lg:h-98 w-auto shimmer-logo"
-          />
-        </div>
+        <LogoGlowCanvas
+          src="/lovable-uploads/12536082-5a87-4e12-82c9-d705ecb8d3e5.png"
+          width={240}
+          height={120}
+          className="logo-glow-canvas"
+        />
       </div>
 
       {/* Vivien Section - Desktop - Static positioning */}

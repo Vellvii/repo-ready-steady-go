@@ -334,4 +334,9 @@
       calc((var(--mouse-y) - 50%) * 0.15)
     );
   }
+
+  /* Canvas logo glow helper */
+  .logo-glow-canvas {
+    display: block;
+  }
 }
