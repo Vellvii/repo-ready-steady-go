@@ -67,20 +67,20 @@ const Landing = () => {
   return (
     <div className="min-h-screen bg-[#1a1a1a] flex flex-col">
       {/* Logo Section */}
-      <div className="flex flex-col items-center pt-8 md:pt-12">
+      <div className="flex flex-col items-center pt-8 md:pt-12 gap-8">
         {/* V Logo with interactive shimmer */}
         <LogoGlowCanvas
           src="/lovable-uploads/c5420417-5d7d-43fb-83f7-096b095f26c6.png"
-          width={200}
-          height={200}
-          className="mb-6 logo-glow-canvas"
+          className="logo-glow-canvas"
+          style={{ width: "20vw", height: "20vw", maxWidth: "160px", maxHeight: "160px" }}
+          idleOffset={0}
         />
 
         <LogoGlowCanvas
           src="/lovable-uploads/12536082-5a87-4e12-82c9-d705ecb8d3e5.png"
-          width={240}
-          height={240}
           className="logo-glow-canvas"
+          style={{ width: "40vw", height: "40vw", maxWidth: "320px", maxHeight: "320px" }}
+          idleOffset={Math.PI}
         />
       </div>
 
