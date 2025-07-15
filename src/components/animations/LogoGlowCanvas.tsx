@@ -64,20 +64,21 @@ const LogoGlowCanvas = ({ src, width, height, className }: LogoGlowCanvasProps) 
         const rect = canvas.getBoundingClientRect();
         const x = ((e.clientX - rect.left) / rect.width) * width;
         const y = ((e.clientY - rect.top) / rect.height) * height;
-        if (isInside(x, y)) {
-          target = { x, y };
-          pointerActive = true;
-          lastPointer = performance.now();
-        }
+        target = {
+          x: Math.min(width, Math.max(0, x)),
+          y: Math.min(height, Math.max(0, y)),
+        };
+        pointerActive = true;
+        lastPointer = performance.now();
       };
 
       const handleLeave = () => {
         pointerActive = false;
       };
 
-      canvas.addEventListener("pointermove", handleMove);
-      canvas.addEventListener("pointerdown", handleMove);
-      canvas.addEventListener("pointerleave", handleLeave);
+      window.addEventListener("pointermove", handleMove);
+      window.addEventListener("pointerdown", handleMove);
+      window.addEventListener("pointerleave", handleLeave);
 
       const drawGlow = () => {
         const intensity = config.intensity;
@@ -138,9 +139,9 @@ const LogoGlowCanvas = ({ src, width, height, className }: LogoGlowCanvasProps) 
 
       return () => {
         cancelAnimationFrame(frameId);
-        canvas.removeEventListener("pointermove", handleMove);
-        canvas.removeEventListener("pointerdown", handleMove);
-        canvas.removeEventListener("pointerleave", handleLeave);
+        window.removeEventListener("pointermove", handleMove);
+        window.removeEventListener("pointerdown", handleMove);
+        window.removeEventListener("pointerleave", handleLeave);
       };
     };
   }, [src, width, height]);

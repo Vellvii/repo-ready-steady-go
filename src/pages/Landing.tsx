@@ -79,7 +79,7 @@ const Landing = () => {
         <LogoGlowCanvas
           src="/lovable-uploads/12536082-5a87-4e12-82c9-d705ecb8d3e5.png"
           width={240}
-          height={120}
+          height={240}
           className="logo-glow-canvas"
         />
       </div>
