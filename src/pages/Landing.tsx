@@ -76,7 +76,7 @@ const Landing = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#1a1a1a] relative overflow-hidden">
+    <div className="min-h-screen bg-[#1a1a1a] flex flex-col">
       {/* Logo Section */}
       <div className="flex flex-col items-center pt-8 md:pt-12">
         {/* V Logo with interactive shimmer */}
@@ -103,7 +103,7 @@ const Landing = () => {
       </div>
 
       {/* Vivien Section - Desktop - Static positioning */}
-      <div className="hidden md:flex absolute right-8 lg:right-16 top-2/3 lg:top-1/2 items-start max-w-2xl">
+      <div className="hidden md:flex justify-center items-start gap-6 mt-auto mb-12">
         {/* Vivien's Image - Static and Circular */}
         <div className="mr-6 flex-shrink-0">
           <div className="w-32 h-32 lg:w-36 lg:h-36 rounded-full overflow-hidden shadow-2xl border-2 border-white/10">
@@ -117,9 +117,11 @@ const Landing = () => {
 
         {/* Vivien's Message - No Box */}
         <div className="text-white max-w-sm mt-4">
-          <p className="font-playfair text-base lg:text-lg leading-relaxed">{displayedText}
-            {isTyping && <span className="blinking-cursor">|</span>}
-          </p>
+          <div className="min-h-[96px] lg:min-h-[112px]">
+            <p className="font-playfair text-base lg:text-lg leading-relaxed">{displayedText}
+              {isTyping && <span className="blinking-cursor">|</span>}
+            </p>
+          </div>
           
           {showButtons && (
             <div className="mt-6 space-y-3">
@@ -145,7 +147,7 @@ const Landing = () => {
       </div>
 
       {/* Mobile Layout */}
-      <div className="md:hidden fixed bottom-8 left-4 right-4 z-10">
+      <div className="md:hidden flex flex-col px-4 pb-8 mt-auto">
         <div className="flex items-start space-x-4">
           {/* Smaller Circular Vivien Image for Mobile */}
           <div className="w-16 h-16 rounded-full overflow-hidden shadow-2xl border-2 border-white/10 flex-shrink-0">
@@ -158,13 +160,15 @@ const Landing = () => {
           
           {/* Message without box */}
           <div className="flex-1 text-white">
-            <p className="font-playfair text-sm leading-relaxed">
-              {displayedText}
-              {isTyping && <span className="blinking-cursor">|</span>}
-            </p>
+            <div className="min-h-[96px]">
+              <p className="font-playfair text-sm leading-relaxed">
+                {displayedText}
+                {isTyping && <span className="blinking-cursor">|</span>}
+              </p>
+            </div>
             
             {showButtons && (
-              <div className="mt-4 space-y-2 fade-in">
+              <div className="mt-4 space-y-2">
                 <button
                   onClick={handleYes}
                   className="magnetic-button w-full bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-black font-medium py-2 text-sm rounded-lg transition-all duration-300"
