@@ -64,24 +64,23 @@ const LogoGlowCanvas = ({ src, width, height, className }: LogoGlowCanvasProps) 
         const rect = canvas.getBoundingClientRect();
         const x = ((e.clientX - rect.left) / rect.width) * width;
         const y = ((e.clientY - rect.top) / rect.height) * height;
-        if (isInside(x, y)) {
-          target = { x, y };
-          pointerActive = true;
-          lastPointer = performance.now();
-        }
+        target = { x, y };
+        pointerActive = true;
+        lastPointer = performance.now();
       };
 
       const handleLeave = () => {
         pointerActive = false;
       };
 
-      canvas.addEventListener("pointermove", handleMove);
-      canvas.addEventListener("pointerdown", handleMove);
-      canvas.addEventListener("pointerleave", handleLeave);
+      window.addEventListener("pointermove", handleMove);
+      window.addEventListener("pointerdown", handleMove);
+      window.addEventListener("pointerleave", handleLeave);
 
       const drawGlow = () => {
         const intensity = config.intensity;
-        const speed = 0.05 * config.speed;
+        const baseSpeed = pointerActive ? 0.06 : 0.02;
+        const speed = baseSpeed * config.speed;
 
         if (!pointerActive && performance.now() - lastPointer > 2000) {
           if (Math.hypot(particle.x - autoTarget.x, particle.y - autoTarget.y) < 10) {
@@ -90,15 +89,24 @@ const LogoGlowCanvas = ({ src, width, height, className }: LogoGlowCanvasProps) 
           target = autoTarget;
         }
 
-        particle.x += (target.x - particle.x) * speed;
-        particle.y += (target.y - particle.y) * speed;
-
-        if (!isInside(particle.x, particle.y)) {
-          autoTarget = randomPoint();
-          target = autoTarget;
-          particle.x = target.x;
-          particle.y = target.y;
+        let nextX = particle.x + (target.x - particle.x) * speed;
+        let nextY = particle.y + (target.y - particle.y) * speed;
+        // pull back if the next position leaves the mask
+        if (!isInside(nextX, nextY)) {
+          let t = 0.5;
+          while (t > 0.01) {
+            const testX = particle.x + (nextX - particle.x) * t;
+            const testY = particle.y + (nextY - particle.y) * t;
+            if (isInside(testX, testY)) {
+              nextX = testX;
+              nextY = testY;
+              break;
+            }
+            t /= 2;
+          }
         }
+        particle.x = nextX;
+        particle.y = nextY;
 
         ctx.clearRect(0, 0, width, height);
         ctx.drawImage(img, 0, 0, width, height);
@@ -138,9 +146,9 @@ const LogoGlowCanvas = ({ src, width, height, className }: LogoGlowCanvasProps) 
 
       return () => {
         cancelAnimationFrame(frameId);
-        canvas.removeEventListener("pointermove", handleMove);
-        canvas.removeEventListener("pointerdown", handleMove);
-        canvas.removeEventListener("pointerleave", handleLeave);
+        window.removeEventListener("pointermove", handleMove);
+        window.removeEventListener("pointerdown", handleMove);
+        window.removeEventListener("pointerleave", handleLeave);
       };
     };
   }, [src, width, height]);
