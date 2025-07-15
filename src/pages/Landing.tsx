@@ -10,6 +10,15 @@ const Landing = () => {
   const [showButtons, setShowButtons] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  useEffect(() => {
+    if (document.getElementById('landing-lock')) {
+      document.body.classList.add('landing-active');
+    }
+    return () => {
+      document.body.classList.remove('landing-active');
+    };
+  }, []);
+
   const message =
     "Hi, I'm Vivien. I can guide you through our website and you may ask me any questions at any time. To start, please confirm that you are older than 18.";
 
@@ -52,7 +61,7 @@ const Landing = () => {
   };
 
   return (
-    <div className="fixed inset-0 h-full bg-black flex flex-col items-center pt-4 md:pt-6 pb-40 gap-3 overflow-hidden">
+    <div id="landing-lock" className="fixed inset-0 h-full bg-black flex flex-col items-center pt-4 md:pt-6 pb-40 gap-3 overflow-hidden">
       <img
         src="/uploads/V-logo-Shimmer.jpeg"
         alt="V Logo"

@@ -90,9 +90,12 @@
   body {
     @apply bg-background text-foreground font-inter;
     background-color: #000;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  body.landing-active {
     overflow: hidden;
     height: 100%;
-    font-feature-settings: "rlig" 1, "calt" 1;
   }
   
   h1, h2, h3, h4, h5, h6 {
