@@ -30,7 +30,7 @@ const Landing = () => {
           setIsTyping(false);
           setShowButtons(true);
         }
-      }, 80);
+      }, 30);
     };
 
     const video = videoRef.current;
@@ -52,7 +52,7 @@ const Landing = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0d0802] flex flex-col items-center pt-4 md:pt-6 pb-56 gap-3">
+    <div className="fixed inset-0 h-full bg-black flex flex-col items-center pt-4 md:pt-6 pb-40 gap-3 overflow-hidden">
       <img
         src="/uploads/V-logo-Shimmer.jpeg"
         alt="V Logo"
@@ -61,7 +61,7 @@ const Landing = () => {
       <video
         ref={videoRef}
         src="/uploads/Vellvii-lgo-shimmer.mp4"
-        className="w-11/12 sm:w-3/4 md:w-1/2 max-w-md"
+        className="w-[90vw] sm:w-3/4 md:w-1/2 max-w-md max-h-[40vh] h-auto"
         muted
         playsInline
       />

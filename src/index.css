@@ -6,7 +6,7 @@
 @layer base {
   :root {
     /* Black and gold luxury theme */
-    --background: 0 0% 8%;
+    --background: 0 0% 0%;
     --foreground: 0 0% 95%;
     
     /* Primary - Rich black */
@@ -78,7 +78,7 @@
   }
 
   .dark {
-    --background: 0 0% 12%;
+    --background: 0 0% 0%;
     --foreground: 0 0% 95%;
   }
   
@@ -86,8 +86,12 @@
     @apply border-border;
   }
   
+  html,
   body {
     @apply bg-background text-foreground font-inter;
+    background-color: #000;
+    overflow: hidden;
+    height: 100%;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
   
@@ -254,6 +258,13 @@
     display: flex;
     align-items: flex-end;
     gap: 1rem;
+  }
+
+  @media (max-width: 640px) {
+    .vivien-container {
+      bottom: 10px;
+      left: 10px;
+    }
   }
 
   @keyframes bounceFadeIn {
