@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Heart, Star, Shield, Phone, Mail, MapPin, Store, ShoppingCart, MessageSquare } from "lucide-react";
@@ -18,6 +19,7 @@ const Home = () => {
   const [concierge, setConcierge] = useState<string | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [greeting, setGreeting] = useState("Welcome to Vellvii");
+  const [doxColor, setDoxColor] = useState<"black" | "beige" | "red">("black");
   const {
     items: cartItems
   } = useCart();
@@ -168,43 +170,82 @@ const Home = () => {
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="glass-luxury apple-hover p-6 sm:p-8 md:p-10 rounded-lg w-full max-w-3xl text-center"
+                className="glass-luxury apple-hover p-6 sm:p-8 md:p-10 rounded-lg w-full lg:w-3/4 max-w-5xl text-center"
               >
                 <h3 className="text-2xl font-playfair font-semibold text-white mb-1">Vellvii Dox</h3>
                 <p className="text-muted-foreground mb-6">Our Flagship Solution</p>
                 <div className="w-full h-48 sm:h-56 bg-muted/20 rounded-lg flex items-center justify-center mb-6">
-                  <Shield className="w-12 h-12 text-secondary" />
+                  <Shield className={cn("w-12 h-12", {
+                    "text-black": doxColor === "black",
+                    "text-stone-300": doxColor === "beige",
+                    "text-red-600": doxColor === "red",
+                  })} />
                 </div>
                 <div className="flex justify-center gap-6 mb-6">
                   <button
                     tabIndex={0}
+                    onClick={() => setDoxColor("black")}
                     className="flex flex-col items-center focus:outline-none group"
                   >
-                    <span className="w-6 h-6 rounded-full bg-black border border-white/30 group-hover:ring-2 group-hover:ring-secondary focus:ring-2 focus:ring-secondary transition-all" />
+                    <span
+                      className={cn(
+                        "w-6 h-6 rounded-full bg-black border border-white/30 transition-all",
+                        doxColor === "black"
+                          ? "ring-2 ring-secondary"
+                          : "group-hover:ring-2 group-hover:ring-secondary focus:ring-2 focus:ring-secondary"
+                      )}
+                    />
                     <span className="text-xs text-muted-foreground mt-1">Black</span>
                   </button>
                   <button
                     tabIndex={0}
+                    onClick={() => setDoxColor("beige")}
                     className="flex flex-col items-center focus:outline-none group"
                   >
-                    <span className="w-6 h-6 rounded-full bg-stone-300 border border-white/30 group-hover:ring-2 group-hover:ring-secondary focus:ring-2 focus:ring-secondary transition-all" />
+                    <span
+                      className={cn(
+                        "w-6 h-6 rounded-full bg-stone-300 border border-white/30 transition-all",
+                        doxColor === "beige"
+                          ? "ring-2 ring-secondary"
+                          : "group-hover:ring-2 group-hover:ring-secondary focus:ring-2 focus:ring-secondary"
+                      )}
+                    />
                     <span className="text-xs text-muted-foreground mt-1">Beige</span>
                   </button>
                   <button
                     tabIndex={0}
+                    onClick={() => setDoxColor("red")}
                     className="flex flex-col items-center focus:outline-none group"
                   >
-                    <span className="w-6 h-6 rounded-full bg-red-600 border border-white/30 group-hover:ring-2 group-hover:ring-secondary focus:ring-2 focus:ring-secondary transition-all" />
+                    <span
+                      className={cn(
+                        "w-6 h-6 rounded-full bg-red-600 border border-white/30 transition-all",
+                        doxColor === "red"
+                          ? "ring-2 ring-secondary"
+                          : "group-hover:ring-2 group-hover:ring-secondary focus:ring-2 focus:ring-secondary"
+                      )}
+                    />
                     <span className="text-xs text-muted-foreground mt-1">Red</span>
                   </button>
                 </div>
                 <Link to="/dox">
-                  <Button variant="luxury">Explore the Dox</Button>
+                  <MagneticButton
+                    as="div"
+                    className={cn(buttonVariants({ variant: "luxury" }), "cursor-pointer")}
+                  >
+                    Explore the Dox
+                  </MagneticButton>
                 </Link>
               </motion.div>
             </ScrollReveal>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 w-full">
+            <ScrollReveal delay={0.3}>
+              <div className="text-center mt-4 mb-4">
+                <AnimatedText text="Our Pleasure Collection" className="text-4xl font-playfair font-bold text-foreground" />
+              </div>
+            </ScrollReveal>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 w-full">
               <ScrollReveal delay={0.4} direction="up">
                 <motion.div whileHover={{ scale: 1.05, y: -10 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
                   <Card className="glass-luxury apple-hover p-4 sm:p-6 text-center group">
@@ -217,7 +258,12 @@ const Home = () => {
                     />
                     <h3 className="text-lg font-playfair font-semibold text-white mb-2">Pulse</h3>
                     <Link to="/pulse">
-                      <Button size="sm" variant="secondary">Explore</Button>
+                      <MagneticButton
+                        as="div"
+                        className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "cursor-pointer")}
+                      >
+                        Explore
+                      </MagneticButton>
                     </Link>
                   </Card>
                 </motion.div>
@@ -235,7 +281,12 @@ const Home = () => {
                     </motion.div>
                     <h3 className="text-lg font-playfair font-semibold text-white mb-2">Vibe</h3>
                     <Link to="/vibe">
-                      <Button size="sm" variant="secondary">Explore</Button>
+                      <MagneticButton
+                        as="div"
+                        className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "cursor-pointer")}
+                      >
+                        Explore
+                      </MagneticButton>
                     </Link>
                   </Card>
                 </motion.div>
@@ -245,7 +296,7 @@ const Home = () => {
                 <motion.div whileHover={{ scale: 1.05, y: -10 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
                   <Card className="glass-luxury apple-hover p-4 sm:p-6 text-center group">
                     <motion.img
-                      src="/uploads/G-Vibe%20transparent.png"
+                      src="/uploads/G-Vibe-transparent.png"
                       alt="G-Vibe logo"
                       className="w-16 h-16 mx-auto mb-4"
                       whileHover={{ scale: 1.1 }}
@@ -253,7 +304,12 @@ const Home = () => {
                     />
                     <h3 className="text-lg font-playfair font-semibold text-white mb-2">G-Vibe</h3>
                     <Link to="/g-vibe">
-                      <Button size="sm" variant="secondary">Explore</Button>
+                      <MagneticButton
+                        as="div"
+                        className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "cursor-pointer")}
+                      >
+                        Explore
+                      </MagneticButton>
                     </Link>
                   </Card>
                 </motion.div>
