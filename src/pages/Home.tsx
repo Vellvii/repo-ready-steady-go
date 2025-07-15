@@ -158,17 +158,55 @@ const Home = () => {
             </div>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+          {/* Old grid layout replaced by new featured section */}
+          {/**
+           * <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8"> ... </div>
+           */}
+
+          <div className="flex flex-col gap-10 items-center">
             <ScrollReveal delay={0.2} direction="up">
-              <Link to="/pulse">
-                <motion.div whileHover={{
-                scale: 1.05,
-                y: -10
-              }} transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 20
-              }}>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="glass-luxury apple-hover p-6 sm:p-8 md:p-10 rounded-lg w-full max-w-3xl text-center"
+              >
+                <h3 className="text-2xl font-playfair font-semibold text-white mb-1">Vellvii Dox</h3>
+                <p className="text-muted-foreground mb-6">Our Flagship Solution</p>
+                <div className="w-full h-48 sm:h-56 bg-muted/20 rounded-lg flex items-center justify-center mb-6">
+                  <Shield className="w-12 h-12 text-secondary" />
+                </div>
+                <div className="flex justify-center gap-6 mb-6">
+                  <button
+                    tabIndex={0}
+                    className="flex flex-col items-center focus:outline-none group"
+                  >
+                    <span className="w-6 h-6 rounded-full bg-black border border-white/30 group-hover:ring-2 group-hover:ring-secondary focus:ring-2 focus:ring-secondary transition-all" />
+                    <span className="text-xs text-muted-foreground mt-1">Black</span>
+                  </button>
+                  <button
+                    tabIndex={0}
+                    className="flex flex-col items-center focus:outline-none group"
+                  >
+                    <span className="w-6 h-6 rounded-full bg-stone-300 border border-white/30 group-hover:ring-2 group-hover:ring-secondary focus:ring-2 focus:ring-secondary transition-all" />
+                    <span className="text-xs text-muted-foreground mt-1">Beige</span>
+                  </button>
+                  <button
+                    tabIndex={0}
+                    className="flex flex-col items-center focus:outline-none group"
+                  >
+                    <span className="w-6 h-6 rounded-full bg-red-600 border border-white/30 group-hover:ring-2 group-hover:ring-secondary focus:ring-2 focus:ring-secondary transition-all" />
+                    <span className="text-xs text-muted-foreground mt-1">Red</span>
+                  </button>
+                </div>
+                <Link to="/dox">
+                  <Button variant="luxury">Explore the Dox</Button>
+                </Link>
+              </motion.div>
+            </ScrollReveal>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 w-full">
+              <ScrollReveal delay={0.4} direction="up">
+                <motion.div whileHover={{ scale: 1.05, y: -10 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
                   <Card className="glass-luxury apple-hover p-4 sm:p-6 text-center group">
                     <motion.img
                       src="/uploads/Pulse_-trans.png"
@@ -177,49 +215,35 @@ const Home = () => {
                       whileHover={{ scale: 1.1 }}
                       transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     />
-                    <h3 className="text-lg sm:text-xl font-playfair font-semibold text-white mb-2">Pulse</h3>
-                    <p className="text-white/80 text-xs sm:text-sm">Rhythmic Excellence</p>
+                    <h3 className="text-lg font-playfair font-semibold text-white mb-2">Pulse</h3>
+                    <Link to="/pulse">
+                      <Button size="sm" variant="secondary">Explore</Button>
+                    </Link>
                   </Card>
                 </motion.div>
-              </Link>
-            </ScrollReveal>
+              </ScrollReveal>
 
-            <ScrollReveal delay={0.4} direction="up">
-              <Link to="/vibe">
-                <motion.div whileHover={{
-                scale: 1.05,
-                y: -10
-              }} transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 20
-              }}>
-                  <Card className="glass-luxury apple-hover p-6 text-center group">
-                    <motion.div className="w-16 h-16 mx-auto bg-gradient-secondary rounded-full flex items-center justify-center mb-4" whileHover={{
-                    rotate: 360
-                  }} transition={{
-                    duration: 0.6
-                  }}>
+              <ScrollReveal delay={0.6} direction="up">
+                <motion.div whileHover={{ scale: 1.05, y: -10 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
+                  <Card className="glass-luxury apple-hover p-4 sm:p-6 text-center group">
+                    <motion.div
+                      className="w-16 h-16 mx-auto bg-gradient-secondary rounded-full flex items-center justify-center mb-4"
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.6 }}
+                    >
                       <Star className="w-8 h-8 text-foreground" />
                     </motion.div>
-                    <h3 className="text-xl font-playfair font-semibold text-white mb-2">Vibe</h3>
-                    <p className="text-white/80 text-sm">Versatile Luxury</p>
+                    <h3 className="text-lg font-playfair font-semibold text-white mb-2">Vibe</h3>
+                    <Link to="/vibe">
+                      <Button size="sm" variant="secondary">Explore</Button>
+                    </Link>
                   </Card>
                 </motion.div>
-              </Link>
-            </ScrollReveal>
+              </ScrollReveal>
 
-            <ScrollReveal delay={0.6} direction="up">
-              <Link to="/g-vibe">
-                <motion.div whileHover={{
-                scale: 1.05,
-                y: -10
-              }} transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 20
-              }}>
-                  <Card className="glass-luxury apple-hover p-6 text-center group">
+              <ScrollReveal delay={0.8} direction="up">
+                <motion.div whileHover={{ scale: 1.05, y: -10 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
+                  <Card className="glass-luxury apple-hover p-4 sm:p-6 text-center group">
                     <motion.img
                       src="/uploads/G-Vibe%20transparent.png"
                       alt="G-Vibe logo"
@@ -227,37 +251,14 @@ const Home = () => {
                       whileHover={{ scale: 1.1 }}
                       transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     />
-                    <h3 className="text-xl font-playfair font-semibold text-white mb-2">G-Vibe</h3>
-                    <p className="text-white/80 text-sm">Precision Design</p>
+                    <h3 className="text-lg font-playfair font-semibold text-white mb-2">G-Vibe</h3>
+                    <Link to="/g-vibe">
+                      <Button size="sm" variant="secondary">Explore</Button>
+                    </Link>
                   </Card>
                 </motion.div>
-              </Link>
-            </ScrollReveal>
-
-            <ScrollReveal delay={0.8} direction="up">
-              <Link to="/dox">
-                <motion.div whileHover={{
-                scale: 1.05,
-                y: -10
-              }} transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 20
-              }}>
-                  <Card className="glass-luxury apple-hover p-6 text-center group">
-                    <motion.div className="w-16 h-16 mx-auto bg-gradient-secondary rounded-full flex items-center justify-center mb-4" whileHover={{
-                    rotate: 360
-                  }} transition={{
-                    duration: 0.6
-                  }}>
-                      <Shield className="w-8 h-8 text-foreground" />
-                    </motion.div>
-                    <h3 className="text-xl font-playfair font-semibold text-white mb-2">DOX</h3>
-                    <p className="text-white/80 text-sm">Luxury Storage</p>
-                  </Card>
-                </motion.div>
-              </Link>
-            </ScrollReveal>
+              </ScrollReveal>
+            </div>
           </div>
         </div>
       </section>
