@@ -6,14 +6,16 @@ interface MagneticButtonProps {
   className?: string;
   onClick?: () => void;
   strength?: number;
+  maxOffset?: number;
   as?: 'button' | 'div';
 }
 
-export const MagneticButton = ({ 
-  children, 
-  className = '', 
+export const MagneticButton = ({
+  children,
+  className = '',
   onClick,
   strength = 0.4,
+  maxOffset = 15,
   as = 'button'
 }: MagneticButtonProps) => {
   const divRef = useRef<HTMLDivElement>(null);
@@ -35,8 +37,11 @@ export const MagneticButton = ({
     const distanceX = e.clientX - centerX;
     const distanceY = e.clientY - centerY;
 
-    x.set(distanceX * strength);
-    y.set(distanceY * strength);
+    const offsetX = Math.max(Math.min(distanceX * strength, maxOffset), -maxOffset);
+    const offsetY = Math.max(Math.min(distanceY * strength, maxOffset), -maxOffset);
+
+    x.set(offsetX);
+    y.set(offsetY);
   };
 
   const handleMouseLeave = () => {
@@ -44,27 +49,12 @@ export const MagneticButton = ({
     y.set(0);
   };
 
-  if (as === 'div') {
-    return (
-      <motion.div
-        ref={divRef}
-        style={{ x: springX, y: springY }}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        onClick={onClick}
-        className={className}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        transition={{ type: "spring", stiffness: 400, damping: 17 }}
-      >
-        {children}
-      </motion.div>
-    );
-  }
+  const Component = as === 'div' ? motion.div : motion.button;
+  const ref = as === 'div' ? divRef : buttonRef;
 
   return (
-    <motion.button
-      ref={buttonRef}
+    <Component
+      ref={ref as any}
       style={{ x: springX, y: springY }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -75,6 +65,6 @@ export const MagneticButton = ({
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
       {children}
-    </motion.button>
+    </Component>
   );
 };

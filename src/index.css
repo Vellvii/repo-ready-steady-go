@@ -254,6 +254,7 @@
     display: flex;
     align-items: flex-end;
     gap: 1rem;
+    z-index: 10;
     transition: left 0.6s ease, transform 0.6s ease;
   }
 

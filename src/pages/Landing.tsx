@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { MagneticButton } from "@/components/animations/MagneticButton";
 import vivienImage from "/uploads/976c0d6d-a066-409a-8ad6-6353840958ac.png";
 
 const Landing = () => {
@@ -53,16 +54,16 @@ const Landing = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0d0802] flex flex-col items-center pt-8 md:pt-12 gap-8">
+    <div className="min-h-screen bg-[#0d0802] flex flex-col items-center pt-6 md:pt-8 pb-48 gap-6">
       <img
         src="/uploads/V-logo-Shimmer.jpeg"
         alt="V Logo"
-        className="w-40 h-auto"
+        className="w-32 sm:w-40 h-auto"
       />
       <video
         ref={videoRef}
         src="/uploads/Vellvii-lgo-shimmer.mp4"
-        className="w-3/4 sm:w-1/2"
+        className="w-11/12 sm:w-3/4 md:w-1/2 max-w-md"
         muted
         playsInline
       />
@@ -81,18 +82,18 @@ const Landing = () => {
           </div>
           {showButtons && (
             <div className="mt-4 md:mt-6 space-y-2 md:space-y-3">
-              <button
+              <MagneticButton
                 onClick={handleYes}
-                className="bounce-fade-in w-full bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-black font-medium py-2 text-sm rounded-lg transition-all duration-300"
+                className="bounce-fade-in w-full bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-black font-medium py-2 text-sm rounded-lg"
               >
                 Yes, I am older than 18
-              </button>
-              <button
+              </MagneticButton>
+              <MagneticButton
                 onClick={handleNo}
-                className="bounce-fade-in w-full border border-white/30 text-white hover:bg-white/10 py-2 text-sm rounded-lg transition-all duration-300 bg-transparent"
+                className="bounce-fade-in w-full border border-white/30 text-white hover:bg-white/10 py-2 text-sm rounded-lg bg-transparent"
               >
                 No, I am not
-              </button>
+              </MagneticButton>
             </div>
           )}
         </div>
