@@ -245,22 +245,15 @@
   }
 
 
-  /* Vivien entrance */
+  /* Vivien fixed position */
   .vivien-container {
     position: fixed;
-    bottom: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 20px;
+    left: 20px;
+    z-index: 10;
     display: flex;
     align-items: flex-end;
     gap: 1rem;
-    z-index: 10;
-    transition: left 0.6s ease, transform 0.6s ease;
-  }
-
-  .vivien-entered {
-    left: 1rem;
-    transform: translateX(0);
   }
 
   @keyframes bounceFadeIn {
