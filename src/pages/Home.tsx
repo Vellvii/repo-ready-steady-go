@@ -77,60 +77,6 @@ const Home = () => {
         </div>
       </motion.nav>
 
-      {/* Hero Section */}
-      <section className="relative py-12 sm:py-16 md:py-24 px-4 sm:px-6">
-        <ParallaxContainer offset={30} className="absolute inset-0 pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-hero opacity-20 pointer-events-none"></div>
-        </ParallaxContainer>
-        
-        <div className="relative z-10 max-w-6xl mx-auto text-center">
-          <ScrollReveal delay={0.2}>
-            <Badge variant="secondary" className="mb-4 px-6 py-2 text-sm apple-hover">
-              Luxury Intimacy Collection
-            </Badge>
-          </ScrollReveal>
-          
-          <ScrollReveal delay={0.4}>
-            <motion.div className="mb-8" whileHover={{
-            scale: 1.05,
-            rotate: 1
-          }} transition={{
-            type: "spring",
-            stiffness: 300,
-            damping: 20
-          }}>
-              <img alt="Vellvii" className="h-45 md:h-36 mx-auto" src="/uploads/e59f6ada-c5b2-400f-96a1-affd0aa70f18.png" />
-            </motion.div>
-          </ScrollReveal>
-
-          {concierge && <ScrollReveal delay={0.6}>
-              <motion.div className="glass-luxury p-4 sm:p-6 rounded-lg mb-6 sm:mb-8 max-w-2xl mx-auto apple-hover" whileHover={{
-            scale: 1.02
-          }} transition={{
-            type: "spring",
-            stiffness: 300,
-            damping: 20
-          }}>
-                <AnimatedText text={greeting} className={`text-base sm:text-lg font-inter ${getConciergeStyle()}`} delay={0.8} />
-              </motion.div>
-            </ScrollReveal>}
-
-          <ScrollReveal delay={1.0}>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
-              <Link to="/products" className="w-full sm:w-auto">
-                <div className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-8 py-3 rounded-md text-lg font-semibold w-full sm:w-auto text-center cursor-pointer transition-all duration-300 hover:scale-105">
-                  Explore Collection
-                </div>
-              </Link>
-              <Link to="/about" className="w-full sm:w-auto">
-                <div className="border border-white/20 text-white hover:bg-white/10 px-8 py-3 rounded-md text-lg font-semibold w-full sm:w-auto text-center cursor-pointer transition-all duration-300 hover:scale-105">
-                  Learn More
-                </div>
-              </Link>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
 
       {/* Products Preview */}
       <section className="py-8 sm:py-12 md:py-16 px-4 sm:px-6 relative">
@@ -138,12 +84,11 @@ const Home = () => {
           <ScrollReveal delay={0.2}>
             <div className="text-center mb-12">
               <AnimatedText
-                text="Our Luxury Collection"
-                className="section-title justify-center text-4xl font-playfair font-bold text-foreground mb-4"
+                text="Vellvii Dox"
+                className="section-title justify-center text-5xl font-playfair font-bold text-foreground mb-4"
               />
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Each piece in our collection is meticulously crafted to deliver 
-                unparalleled quality and sophisticated pleasure.
+                Our Flagship Solution
               </p>
             </div>
           </ScrollReveal>
@@ -160,8 +105,6 @@ const Home = () => {
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 className="glass-luxury apple-hover p-6 sm:p-8 md:p-10 rounded-lg text-center dox-card w-[80vw] max-w-none"
               >
-                <h3 className="text-2xl font-playfair font-semibold text-white mb-1">Vellvii Dox</h3>
-                <p className="text-muted-foreground mb-6">Our Flagship Solution</p>
                 <div className="w-full h-48 sm:h-56 bg-muted/20 rounded-lg flex items-center justify-center mb-6">
                   <Shield className={cn("w-12 h-12", {
                     "text-black": doxColor === "black",
