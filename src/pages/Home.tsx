@@ -173,7 +173,7 @@ const Home = () => {
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="glass-luxury apple-hover p-6 sm:p-8 md:p-10 rounded-lg text-center dox-card"
+                className="glass-luxury apple-hover p-6 sm:p-8 md:p-10 rounded-lg text-center dox-card w-4/5"
               >
                 <h3 className="text-2xl font-playfair font-semibold text-white mb-1">Vellvii Dox</h3>
                 <p className="text-muted-foreground mb-6">Our Flagship Solution</p>
