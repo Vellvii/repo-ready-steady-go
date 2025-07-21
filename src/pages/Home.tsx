@@ -4,13 +4,32 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Heart, Star, Shield, Phone, Mail, MapPin, Store } from "lucide-react";
+import {
+  Heart,
+  Star,
+  Shield,
+  Phone,
+  Mail,
+  MapPin,
+  Store,
+  Package,
+  Dock,
+  Armchair,
+} from "lucide-react";
 import ConciergeChat from "@/components/ConciergeChat";
 import UserMenu from "@/components/UserMenu";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { ParallaxContainer } from "@/components/animations/ParallaxContainer";
 import { MagneticButton } from "@/components/animations/MagneticButton";
 import { AnimatedText } from "@/components/animations/AnimatedText";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { N8nService } from "@/services/n8nService";
 const Home = () => {
@@ -159,25 +178,88 @@ const Home = () => {
                     <span className="text-xs text-muted-foreground mt-1">Red</span>
                   </button>
                 </div>
-                <Link to="/dox">
-                  <MagneticButton
-                    as="div"
-                    className={cn(buttonVariants({ variant: "luxury" }), "cursor-pointer")}
-                  >
-                    Explore the Dox
-                  </MagneticButton>
-                </Link>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <MagneticButton
+                      as="div"
+                      className={cn(buttonVariants({ variant: "luxury" }), "cursor-pointer")}
+                    >
+                      About the Dox
+                    </MagneticButton>
+                  </DialogTrigger>
+                  <DialogContent className="text-center">
+                    <DialogHeader>
+                      <DialogTitle>Vellvii Dox</DialogTitle>
+                      <DialogDescription>
+                        This is a summary of the Vellvii Dox — a refined blend of form and function. Full product details coming soon.
+                      </DialogDescription>
+                    </DialogHeader>
+                  </DialogContent>
+                </Dialog>
               </motion.div>
             </ScrollReveal>
 
             <ScrollReveal delay={0.3}>
-              <div className="text-center mt-4 mb-4">
+              <h2 className="text-center text-3xl sm:text-4xl font-playfair font-bold mt-6 mb-4">
+                One Form, Three Functions, All Pleasure
+              </h2>
+            </ScrollReveal>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 w-full">
+              <ScrollReveal delay={0.35} direction="up">
+                <motion.div whileHover={{ scale: 1.05, y: -10 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
+                  <Card className="glass-luxury apple-hover p-4 sm:p-6 text-center group">
+                    <div className="w-16 h-16 mx-auto bg-gradient-secondary rounded-full flex items-center justify-center mb-2">
+                      <Package className="w-8 h-8 text-foreground" />
+                    </div>
+                    <h3 className="text-lg font-playfair font-semibold text-white">Luxury Storage</h3>
+                    <p className="text-sm text-white/80 mb-2">Where elegance meets erotic intelligence</p>
+                    <Link to="/luxury-storage">
+                      <MagneticButton as="div" className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "cursor-pointer")}>Explore</MagneticButton>
+                    </Link>
+                  </Card>
+                </motion.div>
+              </ScrollReveal>
+
+              <ScrollReveal delay={0.45} direction="up">
+                <motion.div whileHover={{ scale: 1.05, y: -10 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
+                  <Card className="glass-luxury apple-hover p-4 sm:p-6 text-center group">
+                    <div className="w-16 h-16 mx-auto bg-gradient-secondary rounded-full flex items-center justify-center mb-2">
+                      <Dock className="w-8 h-8 text-foreground" />
+                    </div>
+                    <h3 className="text-lg font-playfair font-semibold text-white">The Docking Station</h3>
+                    <p className="text-sm text-white/80 mb-2">Mount. Rise. Release.</p>
+                    <Link to="/docking-station">
+                      <MagneticButton as="div" className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "cursor-pointer")}>Explore</MagneticButton>
+                    </Link>
+                  </Card>
+                </motion.div>
+              </ScrollReveal>
+
+              <ScrollReveal delay={0.55} direction="up">
+                <motion.div whileHover={{ scale: 1.05, y: -10 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
+                  <Card className="glass-luxury apple-hover p-4 sm:p-6 text-center group">
+                    <div className="w-16 h-16 mx-auto bg-gradient-secondary rounded-full flex items-center justify-center mb-2">
+                      <Armchair className="w-8 h-8 text-foreground" />
+                    </div>
+                    <h3 className="text-lg font-playfair font-semibold text-white">The Sex Saddle</h3>
+                    <p className="text-sm text-white/80 mb-2">Sculptured for the art of the "O"</p>
+                    <Link to="/sex-saddle">
+                      <MagneticButton as="div" className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "cursor-pointer")}>Explore</MagneticButton>
+                    </Link>
+                  </Card>
+                </motion.div>
+              </ScrollReveal>
+            </div>
+
+            <ScrollReveal delay={0.6}>
+              <div className="text-center mt-10 mb-4">
                 <AnimatedText text="Our Pleasure Collection" className="text-4xl font-playfair font-bold text-foreground" />
               </div>
             </ScrollReveal>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 w-full">
-              <ScrollReveal delay={0.4} direction="up">
+              <ScrollReveal delay={0.7} direction="up">
                 <motion.div whileHover={{ scale: 1.05, y: -10 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
                   <Card className="glass-luxury apple-hover p-4 sm:p-6 text-center group">
                     <motion.img
@@ -200,7 +282,7 @@ const Home = () => {
                 </motion.div>
               </ScrollReveal>
 
-              <ScrollReveal delay={0.6} direction="up">
+              <ScrollReveal delay={0.8} direction="up">
                 <motion.div whileHover={{ scale: 1.05, y: -10 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
                   <Card className="glass-luxury apple-hover p-4 sm:p-6 text-center group">
                     <motion.div
@@ -223,7 +305,7 @@ const Home = () => {
                 </motion.div>
               </ScrollReveal>
 
-              <ScrollReveal delay={0.8} direction="up">
+              <ScrollReveal delay={0.9} direction="up">
                 <motion.div whileHover={{ scale: 1.05, y: -10 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
                   <Card className="glass-luxury apple-hover p-4 sm:p-6 text-center group">
                     <motion.img

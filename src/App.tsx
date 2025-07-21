@@ -15,6 +15,9 @@ import Pulse from "./pages/Pulse";
 import Vibe from "./pages/Vibe";
 import GVibe from "./pages/GVibe";
 import DOX from "./pages/DOX";
+import LuxuryStorage from "./pages/LuxuryStorage";
+import DockingStation from "./pages/DockingStation";
+import SexSaddle from "./pages/SexSaddle";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -37,6 +40,9 @@ const App = () => (
               <Route path="/vibe" element={<Vibe />} />
               <Route path="/g-vibe" element={<GVibe />} />
               <Route path="/dox" element={<DOX />} />
+              <Route path="/luxury-storage" element={<LuxuryStorage />} />
+              <Route path="/docking-station" element={<DockingStation />} />
+              <Route path="/sex-saddle" element={<SexSaddle />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
