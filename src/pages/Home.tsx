@@ -187,13 +187,24 @@ const Home = () => {
                       About the Dox
                     </MagneticButton>
                   </DialogTrigger>
-                  <DialogContent className="text-center">
-                    <DialogHeader>
-                      <DialogTitle>Vellvii Dox</DialogTitle>
-                      <DialogDescription>
-                        This is a summary of the Vellvii Dox — a refined blend of form and function. Full product details coming soon.
-                      </DialogDescription>
+                  <DialogContent className="text-left max-h-[80vh] overflow-y-auto scrollbar-luxury">
+                    <DialogHeader className="text-center">
+                      <DialogTitle className="text-xl sm:text-2xl font-playfair font-bold">
+                        One form. Three functions. Infinite satisfaction.
+                      </DialogTitle>
                     </DialogHeader>
+                    <div className="space-y-4 mt-4 text-sm sm:text-base leading-relaxed">
+                      <p>
+                        At first glance, the Vellvii Dox seduces with sleek curves and luxurious finishes. But beneath the beauty lies a thrilling secret—it’s not just a box. It’s an experience. A statement. A seduction.
+                      </p>
+                      <p>
+                        Created to fulfill not one, but three intimate desires, the Dox adapts to your needs—whether you're seeking elegance, excitement, or erotic escape.
+                      </p>
+                      <p>
+                        Choose the role it plays in your world…
+                        <br />Or let it play all three.
+                      </p>
+                    </div>
                   </DialogContent>
                 </Dialog>
               </motion.div>
