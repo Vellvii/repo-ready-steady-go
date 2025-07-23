@@ -300,4 +300,13 @@
   .bounce-fade-in {
     animation: bounceFadeIn 0.6s ease both;
   }
+
+  @keyframes pulseGlow {
+    0%, 100% { transform: scale(1); box-shadow: var(--shadow-glow); }
+    50% { transform: scale(1.05); box-shadow: var(--shadow-luxury); }
+  }
+
+  .pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
 }

@@ -1,16 +1,27 @@
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { ShoppingCart, Minus, Plus, Trash2, X, Heart } from 'lucide-react';
+import { Sheet, SheetContent } from '@/components/ui/sheet';
 import { useCart } from '@/hooks/useCart';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 
 const Cart = () => {
-  const { items, updateQuantity, removeFromCart, getTotalPrice, getTotalItems, clearCart } = useCart();
+  const { items, addToCart, updateQuantity, removeFromCart, getTotalPrice, getTotalItems, clearCart } = useCart();
   const { toast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
+
+  const products = [
+    { id: 'pulse', name: 'Vellvii Pulse', price: 299.99, image: '/uploads/Pulse1.jpg' },
+    { id: 'vibe', name: 'Vellvii Vibe', price: 249.99, image: '/uploads/Vibe1.jpg' },
+    { id: 'g-vibe', name: 'Vellvii G-Vibe', price: 199.99, image: '/uploads/G-Vibe1.jpg' },
+    { id: 'dox', name: 'Vellvii DOX', price: 499.99, image: '/uploads/Dox1.jpg' },
+  ];
+
+  const availableProducts = products.filter(
+    (p) => !items.some((item) => item.id === p.id)
+  );
 
   const handleCheckout = () => {
     toast({
@@ -21,40 +32,28 @@ const Cart = () => {
 
   return (
     <>
-      {/* Sticky Cart Trigger Button */}
-      <Button 
-        variant="ghost" 
-        className="fixed top-4 right-4 z-40 text-white hover:bg-white/10 px-3 py-2 rounded-md transition-all duration-300 bg-black/20 backdrop-blur-md border border-white/10"
+      {/* Sticky Buy Now/Cart Trigger Button */}
+      <Button
+        variant="luxury"
+        className={cn(
+          'fixed top-4 right-4 z-40 pulse-glow',
+          buttonVariants({ variant: 'luxury' })
+        )}
         onClick={() => setIsOpen(true)}
       >
-        <ShoppingCart className="w-4 h-4 sm:mr-2" />
-        <span className="hidden sm:inline">Cart ({getTotalItems()})</span>
-        <span className="sm:hidden">({getTotalItems()})</span>
-        {getTotalItems() > 0 && (
-          <Badge className="absolute -top-1 -right-1 min-w-[1.2rem] h-5 flex items-center justify-center text-xs bg-primary">
-            {getTotalItems()}
-          </Badge>
-        )}
+        <ShoppingCart className="w-4 h-4 mr-2" />
+        {getTotalItems() > 0 ? 'Cart' : 'Buy Now'}
+        {getTotalItems() > 0 && ` (${getTotalItems()})`}
       </Button>
 
       {/* Cart Sidebar Overlay */}
-      {isOpen && (
-        <div className="fixed inset-0 z-50 overflow-hidden">
-          {/* Backdrop */}
-          <div 
-            className="absolute inset-0 bg-black/80 transition-opacity"
-            onClick={() => setIsOpen(false)}
-          />
-          
-          {/* Sidebar */}
-          <div className={cn(
-            "fixed transform transition-transform duration-300 ease-in-out z-50 flex flex-col",
-            "bg-gradient-dark border border-white/20 shadow-2xl",
-            // Desktop: right sidebar
-            "lg:right-0 lg:top-0 lg:h-full lg:w-[400px]",
-            // Mobile/Tablet: bottom sheet (85% height)
-            "max-lg:bottom-0 max-lg:left-0 max-lg:right-0 max-lg:h-[85vh] max-lg:w-full max-lg:rounded-t-xl"
-          )}>
+      <Sheet open={isOpen} onOpenChange={setIsOpen}>
+        <SheetContent
+          side="right"
+          className={cn(
+            'bg-gradient-dark border border-white/20 shadow-2xl flex flex-col w-full lg:w-[400px]'
+          )}
+        >
             {/* Header */}
             <div className="border-b border-white/10 p-4 sm:p-6">
               <div className="flex items-center justify-between">
@@ -80,30 +79,40 @@ const Cart = () => {
               )}
             </div>
             
-            {/* Content */}
-            <div className="flex-1 overflow-hidden flex flex-col p-4 sm:p-6">
+          {/* Content */}
+          <div className="flex-1 overflow-hidden flex flex-col gap-8 p-4 sm:p-6">
+            <div>
+              <h3 className="text-xl font-playfair font-semibold text-white mb-4">Add something to your cart</h3>
+              {availableProducts.length === 0 ? (
+                <p className="text-white/60">All products are in your collection.</p>
+              ) : (
+                <div className="space-y-4 max-h-48 overflow-y-auto pr-2">
+                  {availableProducts.map((p) => (
+                    <Card key={p.id} className="glass-luxury p-4 flex items-center gap-4">
+                      <img src={p.image} alt={p.name} className="w-12 h-12 object-cover rounded-md" />
+                      <div className="flex-1">
+                        <h4 className="text-white font-semibold">{p.name}</h4>
+                      </div>
+                      <Button size="sm" variant="luxury" onClick={() => addToCart(p)}>
+                        Add
+                      </Button>
+                    </Card>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="flex-1 flex flex-col">
+              <h3 className="text-xl font-playfair font-semibold text-white mb-4">Your Collection</h3>
               {items.length === 0 ? (
-                <div className="flex-1 flex items-center justify-center">
-                  <div className="text-center space-y-4">
-                    <div className="w-20 h-20 mx-auto bg-gradient-luxury rounded-full flex items-center justify-center mb-4">
-                      <ShoppingCart className="w-10 h-10 text-white" />
-                    </div>
-                    <h3 className="text-xl font-playfair text-white">Your collection awaits</h3>
-                    <p className="text-white/60 max-w-xs">
-                      Discover our curated luxury intimacy collection and add items to your personal sanctuary.
-                    </p>
-                    <Button 
-                      variant="luxury" 
-                      onClick={() => setIsOpen(false)}
-                      className="mt-4"
-                    >
-                      Explore Collection
-                    </Button>
+                <div className="flex-1 flex flex-col items-center justify-center text-center space-y-4">
+                  <div className="w-20 h-20 mx-auto bg-gradient-luxury rounded-full flex items-center justify-center">
+                    <ShoppingCart className="w-10 h-10 text-white" />
                   </div>
+                  <p className="text-white/60 max-w-xs">Add items from above to start your collection.</p>
                 </div>
               ) : (
                 <>
-                  {/* Items List */}
                   <div className="flex-1 space-y-4 overflow-y-auto pr-2">
                     {items.map((item) => (
                       <Card key={item.id} className="glass-luxury p-4 hover-glow transition-all duration-300">
@@ -111,38 +120,18 @@ const Cart = () => {
                           <div className="flex-1">
                             <h3 className="font-semibold text-white text-lg mb-1">{item.name}</h3>
                             <p className="text-primary font-bold text-lg">${item.price}</p>
-                            <p className="text-white/60 text-sm">Luxury Intimacy Collection</p>
                           </div>
-                          
                           <div className="flex flex-col items-end gap-3">
                             <div className="flex items-center gap-2 bg-white/5 rounded-lg p-1">
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                                className="h-7 w-7 p-0 hover:bg-white/10 text-white/60 hover:text-white"
-                              >
+                              <Button variant="ghost" size="sm" onClick={() => updateQuantity(item.id, item.quantity - 1)} className="h-7 w-7 p-0 hover:bg-white/10 text-white/60 hover:text-white">
                                 <Minus className="w-3 h-3" />
                               </Button>
-                              
                               <span className="w-8 text-center text-white font-medium">{item.quantity}</span>
-                              
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                                className="h-7 w-7 p-0 hover:bg-white/10 text-white/60 hover:text-white"
-                              >
+                              <Button variant="ghost" size="sm" onClick={() => updateQuantity(item.id, item.quantity + 1)} className="h-7 w-7 p-0 hover:bg-white/10 text-white/60 hover:text-white">
                                 <Plus className="w-3 h-3" />
                               </Button>
                             </div>
-                            
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => removeFromCart(item.id)}
-                              className="h-7 w-7 p-0 text-red-400 hover:text-red-300 hover:bg-red-500/10"
-                            >
+                            <Button variant="ghost" size="sm" onClick={() => removeFromCart(item.id)} className="h-7 w-7 p-0 text-red-400 hover:text-red-300 hover:bg-red-500/10">
                               <Trash2 className="w-3 h-3" />
                             </Button>
                           </div>
@@ -150,8 +139,7 @@ const Cart = () => {
                       </Card>
                     ))}
                   </div>
-                  
-                  {/* Footer */}
+
                   <div className="border-t border-white/20 pt-6 mt-6 space-y-6">
                     <div className="glass-dark p-4 rounded-lg">
                       <div className="flex justify-between items-center mb-2">
@@ -169,23 +157,12 @@ const Cart = () => {
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="space-y-3">
-                      <Button 
-                        className="w-full h-12 text-lg font-semibold" 
-                        variant="luxury" 
-                        onClick={handleCheckout}
-                        disabled={items.length === 0}
-                      >
+                      <Button className="w-full h-12 text-lg font-semibold" variant="luxury" onClick={handleCheckout} disabled={items.length === 0}>
                         Proceed to Secure Checkout
                       </Button>
-                      
-                      <Button 
-                        className="w-full" 
-                        variant="outline" 
-                        onClick={clearCart}
-                        disabled={items.length === 0}
-                      >
+                      <Button className="w-full" variant="outline" onClick={clearCart} disabled={items.length === 0}>
                         Clear Collection
                       </Button>
                     </div>
@@ -194,9 +171,9 @@ const Cart = () => {
               )}
             </div>
           </div>
-        </div>
-      )}
-    </>
+          </SheetContent>
+          </Sheet>
+      </>
   );
 };
 
