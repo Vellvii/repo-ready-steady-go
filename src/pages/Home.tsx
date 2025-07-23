@@ -190,19 +190,24 @@ const Home = () => {
                   <DialogContent className="text-left max-h-[80vh] overflow-y-auto scrollbar-luxury">
                     <DialogHeader className="text-center">
                       <DialogTitle className="text-xl sm:text-2xl font-playfair font-bold">
-                        One form. Three functions. Infinite satisfaction.
+                        One Form. Three Functions. Infinite Satisfaction.
                       </DialogTitle>
                     </DialogHeader>
                     <div className="space-y-4 mt-4 text-sm sm:text-base leading-relaxed">
                       <p>
-                        At first glance, the Vellvii Dox seduces with sleek curves and luxurious finishes. But beneath the beauty lies a thrilling secret—it’s not just a box. It’s an experience. A statement. A seduction.
+                        The Vellvii Dox isn’t just an innovation—it’s a revolution in intimacy and elegance.
                       </p>
                       <p>
-                        Created to fulfill not one, but three intimate desires, the Dox adapts to your needs—whether you're seeking elegance, excitement, or erotic escape.
+                        With an award-winning design that fuses luxury aesthetics with genius engineering, the Dox doesn’t merely store, secure, or support—it transforms. There is nothing like it on the market because nothing has ever dared to be this bold, this beautiful, or this versatile.
                       </p>
                       <p>
-                        Choose the role it plays in your world…
-                        <br />Or let it play all three.
+                        It is the solution people never knew they needed—until now. Once experienced, it becomes essential, irreplaceable… a must-have.
+                      </p>
+                      <p>
+                        The Dox doesn’t just meet expectations—it sets the benchmark for what intimate lifestyle design should be. Today it’s rare. Tomorrow, everyone will own one.
+                      </p>
+                      <p>
+                        The Vellvii Dox. Not just a product.<br />It's a statement.<br />An experience.<br />A revolution.
                       </p>
                     </div>
                   </DialogContent>
