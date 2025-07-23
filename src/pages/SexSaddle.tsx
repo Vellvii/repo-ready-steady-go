@@ -51,12 +51,15 @@ const SexSaddle = () => {
                 <MagneticButton as="div" className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "cursor-pointer")}>Explore</MagneticButton>
               </Link>
             </Card>
-            <div className="pt-4 flex justify-center md:justify-start">
+            <div className="pt-4 flex justify-center md:justify-end">
               <Link to="/home" className="w-full md:w-auto">
-                <Button variant="ghost" className="text-white w-full md:w-auto">
+                <MagneticButton
+                  as="div"
+                  className={cn(buttonVariants({ variant: 'luxury' }), 'cursor-pointer px-6 py-3 w-full md:w-auto flex items-center justify-center')}
+                >
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Back to Home
-                </Button>
+                </MagneticButton>
               </Link>
             </div>
           </div>
