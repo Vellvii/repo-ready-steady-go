@@ -9,13 +9,7 @@ import { cn } from "@/lib/utils";
 const LuxuryStorage = () => {
   return (
     <div className="min-h-screen bg-gradient-dark">
-      <nav className="flex justify-between items-center p-4 sm:p-6 min-h-[80px]">
-        <Link to="/home">
-          <Button variant="ghost" className="text-white">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Home
-          </Button>
-        </Link>
+      <nav className="flex justify-end items-center p-4 sm:p-6 min-h-[80px]">
         <UserMenu />
       </nav>
 
@@ -47,20 +41,28 @@ const LuxuryStorage = () => {
                 <MagneticButton as="div" className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "cursor-pointer")}>Explore</MagneticButton>
               </Link>
             </Card>
-            <Card className="glass-luxury p-6 text-center apple-hover">
-              <div className="w-16 h-16 mx-auto bg-gradient-secondary rounded-full flex items-center justify-center mb-2">
-                <Armchair className="w-8 h-8 text-foreground" />
-              </div>
-              <h3 className="text-lg font-playfair font-semibold text-white">The Sex Saddle</h3>
-              <p className="text-sm text-white/80 mb-2">Straddle something built for the art of “O.”</p>
-              <Link to="/sex-saddle">
-                <MagneticButton as="div" className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "cursor-pointer")}>Explore</MagneticButton>
-              </Link>
-            </Card>
+          <Card className="glass-luxury p-6 text-center apple-hover">
+            <div className="w-16 h-16 mx-auto bg-gradient-secondary rounded-full flex items-center justify-center mb-2">
+              <Armchair className="w-8 h-8 text-foreground" />
+            </div>
+            <h3 className="text-lg font-playfair font-semibold text-white">The Sex Saddle</h3>
+            <p className="text-sm text-white/80 mb-2">Straddle something built for the art of “O.”</p>
+            <Link to="/sex-saddle">
+              <MagneticButton as="div" className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "cursor-pointer")}>Explore</MagneticButton>
+            </Link>
+          </Card>
+          <div className="pt-4 flex justify-center md:justify-start">
+            <Link to="/home" className="w-full md:w-auto">
+              <Button variant="ghost" className="text-white w-full md:w-auto">
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to Home
+              </Button>
+            </Link>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
+  </div>
   );
 };
 

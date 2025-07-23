@@ -9,13 +9,7 @@ import { cn } from "@/lib/utils";
 const SexSaddle = () => {
   return (
     <div className="min-h-screen bg-gradient-dark">
-      <nav className="flex justify-between items-center p-4 sm:p-6 min-h-[80px]">
-        <Link to="/home">
-          <Button variant="ghost" className="text-white">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Home
-          </Button>
-        </Link>
+      <nav className="flex justify-end items-center p-4 sm:p-6 min-h-[80px]">
         <UserMenu />
       </nav>
 
@@ -57,6 +51,14 @@ const SexSaddle = () => {
                 <MagneticButton as="div" className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "cursor-pointer")}>Explore</MagneticButton>
               </Link>
             </Card>
+            <div className="pt-4 flex justify-center md:justify-start">
+              <Link to="/home" className="w-full md:w-auto">
+                <Button variant="ghost" className="text-white w-full md:w-auto">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Back to Home
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

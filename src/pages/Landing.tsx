@@ -27,7 +27,7 @@ const Landing = () => {
       videoRef.current?.play();
     }, 2000);
 
-    const handleEnded = () => {
+    const typingTimer = setTimeout(() => {
       setIsTyping(true);
       let index = 0;
       const interval = setInterval(() => {
@@ -40,13 +40,11 @@ const Landing = () => {
           setShowButtons(true);
         }
       }, 30);
-    };
+    }, 500);
 
-    const video = videoRef.current;
-    video?.addEventListener("ended", handleEnded);
     return () => {
       clearTimeout(playTimer);
-      video?.removeEventListener("ended", handleEnded);
+      clearTimeout(typingTimer);
     };
   }, []);
 
