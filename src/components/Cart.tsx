@@ -86,7 +86,7 @@ const Cart = () => {
               {availableProducts.length === 0 ? (
                 <p className="text-white/60">All products are in your collection.</p>
               ) : (
-                <div className="space-y-4 max-h-48 overflow-y-auto pr-2">
+                <div className="space-y-4 overflow-y-auto pr-2">
                   {availableProducts.map((p) => (
                     <Card key={p.id} className="glass-luxury p-4 flex items-center gap-4">
                       <img src={p.image} alt={p.name} className="w-12 h-12 object-cover rounded-md" />
