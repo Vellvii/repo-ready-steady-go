@@ -35,7 +35,8 @@ import { N8nService } from "@/services/n8nService";
 const Home = () => {
   const [concierge, setConcierge] = useState<string | null>(null);
   const [greeting, setGreeting] = useState("Welcome to Vellvii");
-  
+  const [doxOpen, setDoxOpen] = useState(false);
+
   useEffect(() => {
     let selectedConcierge = localStorage.getItem("selectedConcierge");
     
@@ -55,6 +56,17 @@ const Home = () => {
       });
     }
   }, []);
+
+  useEffect(() => {
+    if (doxOpen) {
+      window.history.pushState(null, "");
+      const handlePop = () => setDoxOpen(false);
+      window.addEventListener("popstate", handlePop);
+      return () => {
+        window.removeEventListener("popstate", handlePop);
+      };
+    }
+  }, [doxOpen]);
   
   const getConciergeStyle = () => {
     return "text-secondary font-semibold";
@@ -68,7 +80,6 @@ const Home = () => {
       <motion.div className="fixed inset-0 mesh-bg opacity-30 pointer-events-none" style={{
       y: backgroundY
     }} />
-      <div className="absolute inset-0 bg-gradient-apple pointer-events-none" />
       
       {/* Navigation */}
       <motion.nav className="relative z-50 flex justify-between items-center p-4 sm:p-6 backdrop-blur-md bg-black/20" initial={{
@@ -128,7 +139,12 @@ const Home = () => {
                   name="DOX"
                   className="w-full h-48 sm:h-56 rounded-lg mb-6"
                 />
-                <Dialog>
+                <Dialog open={doxOpen} onOpenChange={(open) => {
+                  setDoxOpen(open);
+                  if (!open) {
+                  window.history.back();
+                  }
+                }}>
                   <DialogTrigger asChild>
                     <MagneticButton
                       as="div"

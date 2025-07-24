@@ -23,28 +23,40 @@ const Landing = () => {
     "Hi, I'm Vivien. I can guide you through our website and you may ask me any questions at any time. To start, please confirm that you are older than 18.";
 
   useEffect(() => {
-    const playTimer = setTimeout(() => {
-      videoRef.current?.play();
-    }, 2000);
+    const video = videoRef.current;
+    let interval: NodeJS.Timeout;
+    const handleReady = () => {
+      setTimeout(() => {
+        video?.play();
+      }, 2000);
 
-    const typingTimer = setTimeout(() => {
-      setIsTyping(true);
-      let index = 0;
-      const interval = setInterval(() => {
-        if (index < message.length) {
-          setDisplayedText(message.slice(0, index + 1));
-          index++;
-        } else {
-          clearInterval(interval);
-          setIsTyping(false);
-          setShowButtons(true);
-        }
-      }, 30);
-    }, 500);
+      setTimeout(() => {
+        if (!video) return;
+        const speed = ((video.duration || 5) * 1000) / message.length;
+        setIsTyping(true);
+        let index = 0;
+        interval = setInterval(() => {
+          if (index < message.length) {
+            setDisplayedText(message.slice(0, index + 1));
+            index++;
+          } else {
+            clearInterval(interval);
+            setIsTyping(false);
+            setShowButtons(true);
+          }
+        }, speed);
+      }, 500);
+    };
+
+    if (video?.readyState >= 1) {
+      handleReady();
+    } else {
+      video?.addEventListener("loadedmetadata", handleReady);
+    }
 
     return () => {
-      clearTimeout(playTimer);
-      clearTimeout(typingTimer);
+      video?.removeEventListener("loadedmetadata", handleReady);
+      clearInterval(interval);
     };
   }, []);
 
