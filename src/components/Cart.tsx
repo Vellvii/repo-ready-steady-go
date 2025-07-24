@@ -53,21 +53,11 @@ const Cart = () => {
         >
             {/* Header */}
             <div className="border-b border-white/10 p-4 sm:p-6">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Heart className="w-6 h-6 text-primary" />
-                  <h2 className="text-white text-2xl font-playfair gradient-text">
-                    Your Collection
-                  </h2>
-                </div>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setIsOpen(false)}
-                  className="text-white/60 hover:text-white h-8 w-8 p-0"
-                >
-                  <X className="w-4 h-4" />
-                </Button>
+              <div className="flex items-center gap-2">
+                <Heart className="w-6 h-6 text-primary" />
+                <h2 className="text-white text-2xl font-playfair gradient-text">
+                  Your Collection
+                </h2>
               </div>
               {getTotalItems() > 0 && (
                 <p className="text-white/70 text-sm mt-2">
