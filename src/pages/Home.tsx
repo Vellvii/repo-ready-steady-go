@@ -274,12 +274,12 @@ const Home = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <Link to="/about" className="w-full sm:w-auto">
-                    <div className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-6 py-3 rounded-md font-semibold w-full sm:w-auto text-center cursor-pointer transition-all duration-300 hover:scale-105">
+                    <div className="relative z-10 bg-secondary text-secondary-foreground hover:bg-secondary/90 px-6 py-3 rounded-md font-semibold w-full sm:w-auto text-center cursor-pointer transition-all duration-300 hover:scale-105">
                       Discover Our Story
                     </div>
                   </Link>
                   <Link to="/products" className="w-full sm:w-auto">
-                    <div className="border border-white/20 text-white hover:bg-white/10 px-6 py-3 rounded-md font-semibold w-full sm:w-auto text-center cursor-pointer transition-all duration-300 hover:scale-105">
+                    <div className="relative z-10 border border-white/20 bg-card/90 text-white hover:bg-white/10 px-6 py-3 rounded-md font-semibold w-full sm:w-auto text-center cursor-pointer transition-all duration-300 hover:scale-105">
                       View Collection
                     </div>
                   </Link>
@@ -434,7 +434,7 @@ const Home = () => {
           <ScrollReveal delay={0.9}>
             <div className="text-center mt-8">
               <Link to="/contact#partners">
-                <MagneticButton as="div" className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-8 py-3 rounded-md text-lg font-semibold cursor-pointer transition-colors duration-300">
+                <MagneticButton as="div" className="relative z-10 bg-secondary text-secondary-foreground hover:bg-secondary/90 px-8 py-3 rounded-md text-lg font-semibold cursor-pointer transition-colors duration-300">
                   Become a Partner
                 </MagneticButton>
               </Link>
@@ -482,7 +482,7 @@ const Home = () => {
                   </h3>
                   <p className="text-white/80 mb-4">Speak with our luxury specialists</p>
                   <a href="tel:+15551234567">
-                    <MagneticButton as="div" className="border border-white/20 text-white hover:bg-white/10 px-4 py-2 rounded-md text-sm font-medium cursor-pointer transition-colors duration-300">
+                    <MagneticButton as="div" className="relative z-10 border border-white/20 bg-card/90 text-white hover:bg-white/10 px-4 py-2 rounded-md text-sm font-medium cursor-pointer transition-colors duration-300">
                       +1 (555) 123-4567
                     </MagneticButton>
                   </a>
@@ -515,7 +515,7 @@ const Home = () => {
                   </h3>
                   <p className="text-white/80 mb-4">Get personalized recommendations</p>
                   <a href="mailto:info@vellvii.com">
-                    <MagneticButton as="div" className="border border-white/20 text-white hover:bg-white/10 px-4 py-2 rounded-md text-sm font-medium cursor-pointer transition-colors duration-300">
+                    <MagneticButton as="div" className="relative z-10 border border-white/20 bg-card/90 text-white hover:bg-white/10 px-4 py-2 rounded-md text-sm font-medium cursor-pointer transition-colors duration-300">
                       info@vellvii.com
                     </MagneticButton>
                   </a>
@@ -547,7 +547,7 @@ const Home = () => {
                     Location
                   </h3>
                   <p className="text-white/80 mb-4">Delaware, USA</p>
-                  <MagneticButton as="div" className="border border-white/20 text-white hover:bg-white/10 px-4 py-2 rounded-md text-sm font-medium cursor-pointer transition-colors duration-300">
+                  <MagneticButton as="div" className="relative z-10 border border-white/20 bg-card/90 text-white hover:bg-white/10 px-4 py-2 rounded-md text-sm font-medium cursor-pointer transition-colors duration-300">
                     View Details
                   </MagneticButton>
                 </Card>
