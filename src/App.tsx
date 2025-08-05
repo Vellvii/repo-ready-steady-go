@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,6 +8,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import { SmoothScroll } from "./components/animations/SmoothScroll";
 import { PageTransition } from "./components/animations/PageTransition";
 import Cart from "./components/Cart";
+import UnderConstruction from "./components/UnderConstruction";
 import Landing from "./pages/Landing";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -54,16 +56,44 @@ const InnerApp = () => {
   );
 };
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <InnerApp />
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const auth = sessionStorage.getItem('site-access');
+    if (auth === 'granted') {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  const handlePasswordCorrect = () => {
+    sessionStorage.setItem('site-access', 'granted');
+    setIsAuthenticated(true);
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <UnderConstruction onPasswordCorrect={handlePasswordCorrect} />
+        </TooltipProvider>
+      </QueryClientProvider>
+    );
+  }
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <InnerApp />
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
