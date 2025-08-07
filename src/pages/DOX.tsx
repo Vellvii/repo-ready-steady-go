@@ -10,6 +10,7 @@ import ConciergeChat from "@/components/ConciergeChat";
 import UserMenu from "@/components/UserMenu";
 import { useCart } from "@/hooks/useCart";
 import { useToast } from "@/hooks/use-toast";
+import { getProductById } from "@/lib/productData";
 
 const DOX = () => {
   const [concierge, setConcierge] = useState<string | null>(null);
@@ -23,16 +24,20 @@ const DOX = () => {
   }, []);
 
   const handleAddToCart = () => {
-    addToCart({
-      id: 'dox',
-      name: 'Vellvii DOX',
-      price: 99.99,
-    });
-    
-    toast({
-      title: "Added to Collection",
-      description: "Vellvii DOX has been added to your collection.",
-    });
+    const product = getProductById("dox");
+    if (product) {
+      addToCart({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.images[0]
+      });
+      
+      toast({
+        title: "Added to Collection",
+        description: "Vellvii DOX has been added to your collection.",
+      });
+    }
   };
 
   const getConciergeRecommendation = () => {
@@ -131,7 +136,7 @@ const DOX = () => {
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
                 <Button size="lg" variant="luxury" className="flex-1 text-sm sm:text-base" onClick={handleAddToCart}>
-                  Add to Collection - $99.99
+                  Add to Collection - ${getProductById("dox")?.price || 899}
                 </Button>
                 <a href="#specifications" className="w-full sm:w-auto">
                   <Button size="lg" variant="outline" className="w-full sm:w-auto">

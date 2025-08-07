@@ -25,6 +25,7 @@ import { ImageSlider } from "@/components/ImageSlider";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -138,6 +139,9 @@ const Home = () => {
                         <br />
                         <span>Infinite Satisfaction.</span>
                       </DialogTitle>
+                      <DialogDescription className="sr-only">
+                        Learn more about the Vellvii Dox luxury storage solution - one form, three functions, infinite satisfaction.
+                      </DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4 mt-4 text-xs sm:text-sm md:text-base leading-snug sm:leading-relaxed px-2">
                       <p>

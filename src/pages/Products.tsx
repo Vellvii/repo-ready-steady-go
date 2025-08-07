@@ -95,7 +95,7 @@ const Products = () => {
             </Link>
 
             {/* G-Vibe */}
-            <Link to="/gvibe">
+            <Link to="/g-vibe">
               <Card className="glass-luxury hover:scale-105 transition-all duration-500 hover-glow p-8 group">
                 <div className="flex items-center gap-6 mb-6">
                   <div className="w-20 h-20 relative">

@@ -5,6 +5,7 @@ import { ShoppingCart, Minus, Plus, Trash2, X, Heart } from 'lucide-react';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
 import { useCart } from '@/hooks/useCart';
 import { useToast } from '@/hooks/use-toast';
+import { PRODUCTS } from '@/lib/productData';
 import { cn } from '@/lib/utils';
 
 const Cart = () => {
@@ -12,12 +13,12 @@ const Cart = () => {
   const { toast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
 
-  const products = [
-    { id: 'pulse', name: 'Vellvii Pulse', price: 299.99, image: '/uploads/Pulse1.jpg' },
-    { id: 'vibe', name: 'Vellvii Vibe', price: 249.99, image: '/uploads/Vibe1.jpg' },
-    { id: 'g-vibe', name: 'Vellvii G-Vibe', price: 199.99, image: '/uploads/G-Vibe1.jpg' },
-    { id: 'dox', name: 'Vellvii DOX', price: 499.99, image: '/uploads/Dox1.jpg' },
-  ];
+  const products = Object.values(PRODUCTS).map(product => ({
+    id: product.id,
+    name: product.name,
+    price: product.price,
+    image: product.images[0]
+  }));
 
   const availableProducts = products.filter(
     (p) => !items.some((item) => item.id === p.id)
@@ -35,7 +36,7 @@ const Cart = () => {
       {/* Sticky Buy Now/Cart Trigger Button */}
       <Button
         variant="luxury"
-        className="fixed top-4 right-4 z-50 pulse-glow bg-gradient-luxury text-white shadow-luxury"
+        className="fixed top-4 right-4 z-[999] pulse-glow bg-gradient-luxury text-white shadow-luxury"
         onClick={() => setIsOpen(true)}
       >
         <ShoppingCart className="w-4 h-4 mr-2" />

@@ -9,6 +9,7 @@ import { SmoothScroll } from "./components/animations/SmoothScroll";
 import { PageTransition } from "./components/animations/PageTransition";
 import Cart from "./components/Cart";
 import UnderConstruction from "./components/UnderConstruction";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 import Landing from "./pages/Landing";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -28,7 +29,7 @@ const queryClient = new QueryClient();
 const InnerApp = () => {
   const location = useLocation();
   return (
-    <>
+    <ErrorBoundary>
       <ScrollToTop />
       <SmoothScroll>
         <PageTransition>
@@ -52,7 +53,7 @@ const InnerApp = () => {
       </SmoothScroll>
       {/* Global sticky cart */}
       {location.pathname !== '/' && <Cart />}
-    </>
+    </ErrorBoundary>
   );
 };
 

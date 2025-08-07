@@ -11,6 +11,7 @@ import UserMenu from "@/components/UserMenu";
 import { useCart } from "@/hooks/useCart";
 import { useToast } from "@/hooks/use-toast";
 import { N8nService } from "@/services/n8nService";
+import { getProductById } from "@/lib/productData";
 
 const GVibe = () => {
   const [concierge, setConcierge] = useState<string | null>(null);
@@ -33,16 +34,20 @@ const GVibe = () => {
   }, []);
 
   const handleAddToCart = () => {
-    addToCart({
-      id: 'g-vibe',
-      name: 'Vellvii G-Vibe',
-      price: 349.99,
-    });
-    
-    toast({
-      title: "Added to Collection",
-      description: "Vellvii G-Vibe has been added to your collection.",
-    });
+    const product = getProductById("g-vibe");
+    if (product) {
+      addToCart({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.images[0]
+      });
+      
+      toast({
+        title: "Added to Collection",
+        description: "Vellvii G-Vibe has been added to your collection.",
+      });
+    }
   };
 
 
@@ -133,7 +138,7 @@ const GVibe = () => {
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
                 <Button size="lg" variant="luxury" className="flex-1 text-sm sm:text-base" onClick={handleAddToCart}>
-                  Add to Collection - $349.99
+                  Add to Collection - ${getProductById("g-vibe")?.price || 279}
                 </Button>
                 <a href="#specifications" className="w-full sm:w-auto">
                   <Button size="lg" variant="outline" className="w-full sm:w-auto">
