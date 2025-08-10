@@ -3,6 +3,7 @@ import { Button, buttonVariants } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { ShoppingCart, Minus, Plus, Trash2, X, Heart } from 'lucide-react';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { useCart } from '@/hooks/useCart';
 import { useToast } from '@/hooks/use-toast';
 import { PRODUCTS } from '@/lib/productData';
@@ -12,6 +13,7 @@ const Cart = () => {
   const { items, addToCart, updateQuantity, removeFromCart, getTotalPrice, getTotalItems, clearCart } = useCart();
   const { toast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
 
   const products = Object.values(PRODUCTS).map(product => ({
     id: product.id,
@@ -51,6 +53,11 @@ const Cart = () => {
           className={cn(
             'bg-gradient-dark border border-white/20 shadow-2xl flex flex-col w-full lg:w-[400px]'
           )}
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+          style={{
+            overscrollBehavior: isHovering ? 'contain' : 'auto'
+          }}
         >
             {/* Header */}
             <div className="border-b border-white/10 p-4 sm:p-6">
@@ -74,19 +81,21 @@ const Cart = () => {
               {availableProducts.length === 0 ? (
                 <p className="text-white/60">All products are in your collection.</p>
               ) : (
-                <div className="space-y-4 overflow-y-auto pr-2">
-                  {availableProducts.map((p) => (
-                    <Card key={p.id} className="glass-luxury p-4 flex items-center gap-4">
-                      <img src={p.image} alt={p.name} className="w-12 h-12 object-cover rounded-md" />
-                      <div className="flex-1">
-                        <h4 className="text-white font-semibold">{p.name}</h4>
-                      </div>
-                      <Button size="sm" variant="luxury" onClick={() => addToCart(p)}>
-                        Add
-                      </Button>
-                    </Card>
-                  ))}
-                </div>
+                <ScrollArea className="h-40">
+                  <div className="space-y-4 pr-2">
+                    {availableProducts.map((p) => (
+                      <Card key={p.id} className="glass-luxury p-4 flex items-center gap-4">
+                        <img src={p.image} alt={p.name} className="w-12 h-12 object-cover rounded-md" />
+                        <div className="flex-1">
+                          <h4 className="text-white font-semibold">{p.name}</h4>
+                        </div>
+                        <Button size="sm" variant="luxury" onClick={() => addToCart(p)}>
+                          Add
+                        </Button>
+                      </Card>
+                    ))}
+                  </div>
+                </ScrollArea>
               )}
             </div>
 
@@ -101,32 +110,34 @@ const Cart = () => {
                 </div>
               ) : (
                 <>
-                  <div className="flex-1 space-y-4 overflow-y-auto pr-2">
-                    {items.map((item) => (
-                      <Card key={item.id} className="glass-luxury p-4 hover-glow transition-all duration-300">
-                        <div className="flex items-start justify-between gap-4">
-                          <div className="flex-1">
-                            <h3 className="font-semibold text-white text-lg mb-1">{item.name}</h3>
-                            <p className="text-primary font-bold text-lg">${item.price}</p>
-                          </div>
-                          <div className="flex flex-col items-end gap-3">
-                            <div className="flex items-center gap-2 bg-white/5 rounded-lg p-1">
-                              <Button variant="ghost" size="sm" onClick={() => updateQuantity(item.id, item.quantity - 1)} className="h-7 w-7 p-0 hover:bg-white/10 text-white/60 hover:text-white">
-                                <Minus className="w-3 h-3" />
-                              </Button>
-                              <span className="w-8 text-center text-white font-medium">{item.quantity}</span>
-                              <Button variant="ghost" size="sm" onClick={() => updateQuantity(item.id, item.quantity + 1)} className="h-7 w-7 p-0 hover:bg-white/10 text-white/60 hover:text-white">
-                                <Plus className="w-3 h-3" />
+                  <ScrollArea className="flex-1">
+                    <div className="space-y-4 pr-2">
+                      {items.map((item) => (
+                        <Card key={item.id} className="glass-luxury p-4 hover-glow transition-all duration-300">
+                          <div className="flex items-start justify-between gap-4">
+                            <div className="flex-1">
+                              <h3 className="font-semibold text-white text-lg mb-1">{item.name}</h3>
+                              <p className="text-primary font-bold text-lg">${item.price}</p>
+                            </div>
+                            <div className="flex flex-col items-end gap-3">
+                              <div className="flex items-center gap-2 bg-white/5 rounded-lg p-1">
+                                <Button variant="ghost" size="sm" onClick={() => updateQuantity(item.id, item.quantity - 1)} className="h-7 w-7 p-0 hover:bg-white/10 text-white/60 hover:text-white">
+                                  <Minus className="w-3 h-3" />
+                                </Button>
+                                <span className="w-8 text-center text-white font-medium">{item.quantity}</span>
+                                <Button variant="ghost" size="sm" onClick={() => updateQuantity(item.id, item.quantity + 1)} className="h-7 w-7 p-0 hover:bg-white/10 text-white/60 hover:text-white">
+                                  <Plus className="w-3 h-3" />
+                                </Button>
+                              </div>
+                              <Button variant="ghost" size="sm" onClick={() => removeFromCart(item.id)} className="h-7 w-7 p-0 text-red-400 hover:text-red-300 hover:bg-red-500/10">
+                                <Trash2 className="w-3 h-3" />
                               </Button>
                             </div>
-                            <Button variant="ghost" size="sm" onClick={() => removeFromCart(item.id)} className="h-7 w-7 p-0 text-red-400 hover:text-red-300 hover:bg-red-500/10">
-                              <Trash2 className="w-3 h-3" />
-                            </Button>
                           </div>
-                        </div>
-                      </Card>
-                    ))}
-                  </div>
+                        </Card>
+                      ))}
+                    </div>
+                  </ScrollArea>
 
                   <div className="border-t border-white/20 pt-6 mt-6 space-y-6">
                     <div className="glass-dark p-4 rounded-lg">
