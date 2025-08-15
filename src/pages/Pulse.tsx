@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Heart, Zap, Droplets, Volume2, ShoppingCart } from "lucide-react";
-import { ImageSlider } from "@/components/ImageSlider";
+import { ProductMediaViewer } from "@/components/ProductMediaViewer";
 import SimilarProducts from "@/components/SimilarProducts";
 import ConciergeChat from "@/components/ConciergeChat";
 import UserMenu from "@/components/UserMenu";
@@ -77,9 +77,10 @@ const Pulse = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center">
             {/* Product Images */}
             <div className="glass-luxury rounded-lg p-6 sm:p-8 md:p-12 text-center">
-              <ImageSlider
+              <ProductMediaViewer
                 images={["/uploads/Pulse1.jpg", "/uploads/Pulse2.jpg"]}
-                name="Pulse"
+                modelPath="/uploads/Vellvii-Pulse.glb"
+                productName="Pulse"
                 className="w-48 h-48 mx-auto mb-6"
               />
               <Badge variant="secondary" className="mb-4">Premium Collection</Badge>

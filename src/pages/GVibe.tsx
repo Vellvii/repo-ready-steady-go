@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Shield, Target, Lightbulb, Zap, ShoppingCart } from "lucide-react";
-import { ImageSlider } from "@/components/ImageSlider";
+import { ProductMediaViewer } from "@/components/ProductMediaViewer";
 import SimilarProducts from "@/components/SimilarProducts";
 import ConciergeChat from "@/components/ConciergeChat";
 import UserMenu from "@/components/UserMenu";
@@ -81,9 +81,10 @@ const GVibe = () => {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Product Images */}
             <div className="glass-luxury rounded-lg p-8 sm:p-12 text-center">
-              <ImageSlider
+              <ProductMediaViewer
                 images={["/uploads/G-Vibe1.jpg", "/uploads/G-Vibe2.jpg", "/uploads/G-Vibe3.jpg"]}
-                name="G-Vibe"
+                modelPath="/uploads/Vellvii-G-Vibe.glb"
+                productName="G-Vibe"
                 className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 mx-auto mb-6"
               />
               <Badge variant="secondary" className="mb-4">Premium Collection</Badge>
