@@ -103,6 +103,14 @@ const Landing = () => {
     };
     setChatMessages(prev => [...prev, newUserMessage]);
 
+    // Auto-scroll to bottom after adding user message
+    setTimeout(() => {
+      const chatContainer = document.querySelector('.overflow-y-auto');
+      if (chatContainer) {
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }
+    }, 100);
+
     try {
       // TODO: Replace with actual API call when ready
       // const response = await fetch('/api/chat', {
@@ -121,6 +129,14 @@ const Landing = () => {
         };
         setChatMessages(prev => [...prev, assistantMessage]);
         setIsSending(false);
+        
+        // Auto-scroll to bottom after adding assistant message
+        setTimeout(() => {
+          const chatContainer = document.querySelector('.overflow-y-auto');
+          if (chatContainer) {
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+          }
+        }, 100);
       }, 1000);
     } catch (error) {
       console.error('Error sending message:', error);
@@ -154,28 +170,34 @@ const Landing = () => {
         /* Chat Mode */
         <div className="flex-1 flex flex-col items-center w-full max-w-2xl px-4">
           {/* Chat Messages Container with fade effect */}
-          <div className="flex-1 w-full relative">
+          <div className="flex-1 w-full relative overflow-hidden">
             <div 
-              className="absolute inset-0 overflow-y-auto pb-4"
+              className="absolute inset-0 overflow-y-auto scrollbar-hide"
               style={{
                 maskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)',
                 WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)'
               }}
             >
-              <div className="space-y-4 pt-8">
+              <div className="space-y-4 pt-8 pb-4">
                 {chatMessages.map((msg, index) => (
-                  <div key={msg.id} className="flex gap-3 animate-fade-in">
+                  <div key={msg.id} className={`flex gap-3 animate-fade-in ${
+                    msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'
+                  }`}>
                     {msg.role === 'assistant' && (
-                      <div className="w-12 h-12 rounded-full overflow-hidden shadow-lg border-2 border-white/10 flex-shrink-0">
+                      <div className="w-10 h-10 rounded-full overflow-hidden shadow-lg border-2 border-white/10 flex-shrink-0">
                         <img src={vivienImage} alt="Vivien" className="w-full h-full object-cover" />
                       </div>
                     )}
-                    <div className={`flex-1 ${msg.role === 'user' ? 'ml-12' : ''}`}>
-                      <div className="text-xs text-white/60 mb-1">
+                    <div className={`max-w-[70%] ${msg.role === 'user' ? 'mr-2' : 'ml-0'}`}>
+                      <div className={`text-xs mb-1 ${
+                        msg.role === 'user' ? 'text-right text-yellow-300/80' : 'text-left text-white/60'
+                      }`}>
                         {msg.role === 'user' ? 'You' : 'Vivien'}
                       </div>
-                      <div className={`text-white text-sm md:text-base leading-relaxed font-playfair ${
-                        msg.role === 'user' ? 'text-yellow-300' : ''
+                      <div className={`p-3 rounded-2xl text-sm md:text-base leading-relaxed font-playfair ${
+                        msg.role === 'user' 
+                          ? 'bg-gradient-to-r from-yellow-600 to-yellow-500 text-black rounded-br-md' 
+                          : 'bg-white/10 text-white border border-white/20 rounded-bl-md'
                       }`}>
                         {msg.content}
                       </div>
@@ -184,12 +206,12 @@ const Landing = () => {
                 ))}
                 {isSending && (
                   <div className="flex gap-3 animate-fade-in">
-                    <div className="w-12 h-12 rounded-full overflow-hidden shadow-lg border-2 border-white/10 flex-shrink-0">
+                    <div className="w-10 h-10 rounded-full overflow-hidden shadow-lg border-2 border-white/10 flex-shrink-0">
                       <img src={vivienImage} alt="Vivien" className="w-full h-full object-cover" />
                     </div>
-                    <div className="flex-1">
+                    <div className="max-w-[70%]">
                       <div className="text-xs text-white/60 mb-1">Vivien</div>
-                      <div className="text-white text-sm md:text-base font-playfair">
+                      <div className="p-3 rounded-2xl rounded-bl-md bg-white/10 border border-white/20 text-white text-sm md:text-base font-playfair">
                         <span className="blinking-cursor">Thinking...</span>
                       </div>
                     </div>
