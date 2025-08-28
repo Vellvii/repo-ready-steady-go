@@ -103,13 +103,13 @@ const Landing = () => {
     };
     setChatMessages(prev => [...prev, newUserMessage]);
 
-    // Auto-scroll to bottom after adding user message
-    setTimeout(() => {
-      const chatContainer = document.querySelector('.overflow-y-auto');
-      if (chatContainer) {
-        chatContainer.scrollTop = chatContainer.scrollHeight;
-      }
-    }, 100);
+        // Auto-scroll to bottom after adding user message
+        setTimeout(() => {
+          const chatContainer = document.querySelector('.overflow-y-auto');
+          if (chatContainer) {
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+          }
+        }, 100);
 
     try {
       // TODO: Replace with actual API call when ready
@@ -130,13 +130,13 @@ const Landing = () => {
         setChatMessages(prev => [...prev, assistantMessage]);
         setIsSending(false);
         
-        // Auto-scroll to bottom after adding assistant message
-        setTimeout(() => {
-          const chatContainer = document.querySelector('.overflow-y-auto');
-          if (chatContainer) {
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-          }
-        }, 100);
+          // Auto-scroll to bottom after adding assistant message
+          setTimeout(() => {
+            const chatContainer = document.querySelector('.overflow-y-auto');
+            if (chatContainer) {
+              chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+          }, 100);
       }, 1000);
     } catch (error) {
       console.error('Error sending message:', error);
@@ -169,15 +169,9 @@ const Landing = () => {
       {isAgeConfirmed ? (
         /* Chat Mode */
         <div className="flex-1 flex flex-col items-center w-full max-w-2xl px-4">
-          {/* Chat Messages Container with fade effect */}
-          <div className="flex-1 w-full relative overflow-hidden">
-            <div 
-              className="absolute inset-0 overflow-y-auto scrollbar-hide"
-              style={{
-                maskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)',
-                WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)'
-              }}
-            >
+          {/* Chat Messages Container with proper scrolling */}
+          <div className="flex-1 w-full overflow-hidden">
+            <div className="h-full overflow-y-auto scrollbar-hide px-2">
               <div className="space-y-4 pt-8 pb-4">
                 {chatMessages.map((msg, index) => (
                   <div key={msg.id} className={`flex gap-3 animate-fade-in ${
@@ -211,8 +205,12 @@ const Landing = () => {
                     </div>
                     <div className="max-w-[70%]">
                       <div className="text-xs text-white/60 mb-1">Vivien</div>
-                      <div className="p-3 rounded-2xl rounded-bl-md bg-white/10 border border-white/20 text-white text-sm md:text-base font-playfair">
-                        <span className="blinking-cursor">Thinking...</span>
+                      <div className="p-3 rounded-2xl rounded-bl-md bg-white/10 border border-white/20 flex items-center justify-center min-h-[48px]">
+                        <div className="flex space-x-1">
+                          <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce" style={{animationDelay: '0ms'}}></div>
+                          <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce" style={{animationDelay: '150ms'}}></div>
+                          <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce" style={{animationDelay: '300ms'}}></div>
+                        </div>
                       </div>
                     </div>
                   </div>
