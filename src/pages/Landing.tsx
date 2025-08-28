@@ -31,25 +31,6 @@ const Landing = () => {
 
   useEffect(() => {
     if (isAgeConfirmed) {
-      // Reset for chat mode
-      setDisplayedText("");
-      setIsTyping(true);
-      setShowButtons(false);
-      
-      // Show welcome message
-      setTimeout(() => {
-        const chatMessage = "Perfect! I'm here to help you explore our luxury collection. What would you like to know?";
-        let index = 0;
-        const interval = setInterval(() => {
-          if (index < chatMessage.length) {
-            setDisplayedText(chatMessage.slice(0, index + 1));
-            index++;
-          } else {
-            clearInterval(interval);
-            setIsTyping(false);
-          }
-        }, 30);
-      }, 500);
       return;
     }
 
@@ -97,6 +78,13 @@ const Landing = () => {
 
   const handleYes = () => {
     setIsAgeConfirmed(true);
+    // Add the welcome message to chat history
+    const welcomeMessage = {
+      id: Date.now().toString(),
+      content: "Perfect! I'm here to help you explore our luxury collection. What would you like to know?",
+      role: 'assistant' as const
+    };
+    setChatMessages([welcomeMessage]);
   };
 
   const handleSendMessage = async (e: React.FormEvent) => {
@@ -145,85 +133,123 @@ const Landing = () => {
   };
 
   return (
-    <div id="landing-lock" className="fixed inset-0 h-full bg-black flex flex-col items-center pt-4 md:pt-6 pb-40 gap-3 overflow-hidden">
+    <div id="landing-lock" className="fixed inset-0 h-full bg-black flex flex-col items-center pt-4 md:pt-6 pb-4 gap-3 overflow-hidden">
       <img
         src="/uploads/V-logo-Shimmer.jpeg"
         alt="V Logo"
-        className="w-32 sm:w-40 h-auto"
+        className="w-32 sm:w-40 h-auto flex-shrink-0"
       />
-      <video
-        ref={videoRef}
-        src="/uploads/Vellvii-lgo-shimmer.mp4"
-        className="w-[90vw] sm:w-3/4 md:w-1/2 max-w-md max-h-[40vh] h-auto"
-        muted
-        playsInline
-      />
+      
+      {!isAgeConfirmed && (
+        <video
+          ref={videoRef}
+          src="/uploads/Vellvii-lgo-shimmer.mp4"
+          className="w-[90vw] sm:w-3/4 md:w-1/2 max-w-md max-h-[40vh] h-auto"
+          muted
+          playsInline
+        />
+      )}
 
-      {/* Vivien Section */}
-      <div className="vivien-container">
-        <div className="w-16 h-16 md:w-32 md:h-32 rounded-full overflow-hidden shadow-2xl border-2 border-white/10 flex-shrink-0">
-          <img src={vivienImage} alt="Vivien" className="w-full h-full object-cover" />
-        </div>
-        <div className="text-white max-w-sm">
-          {/* Chat Messages */}
-          {isAgeConfirmed && chatMessages.length > 0 && (
-            <div className="mb-4 max-h-32 overflow-y-auto space-y-2">
-              {chatMessages.map((msg) => (
-                <div key={msg.id} className={`text-xs md:text-sm ${msg.role === 'user' ? 'text-yellow-300' : 'text-white'}`}>
-                  <span className="font-medium">{msg.role === 'user' ? 'You: ' : 'Vivien: '}</span>
-                  {msg.content}
-                </div>
-              ))}
+      {isAgeConfirmed ? (
+        /* Chat Mode */
+        <div className="flex-1 flex flex-col items-center w-full max-w-2xl px-4">
+          {/* Chat Messages Container with fade effect */}
+          <div className="flex-1 w-full relative">
+            <div 
+              className="absolute inset-0 overflow-y-auto pb-4"
+              style={{
+                maskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)'
+              }}
+            >
+              <div className="space-y-4 pt-8">
+                {chatMessages.map((msg, index) => (
+                  <div key={msg.id} className="flex gap-3 animate-fade-in">
+                    {msg.role === 'assistant' && (
+                      <div className="w-12 h-12 rounded-full overflow-hidden shadow-lg border-2 border-white/10 flex-shrink-0">
+                        <img src={vivienImage} alt="Vivien" className="w-full h-full object-cover" />
+                      </div>
+                    )}
+                    <div className={`flex-1 ${msg.role === 'user' ? 'ml-12' : ''}`}>
+                      <div className="text-xs text-white/60 mb-1">
+                        {msg.role === 'user' ? 'You' : 'Vivien'}
+                      </div>
+                      <div className={`text-white text-sm md:text-base leading-relaxed font-playfair ${
+                        msg.role === 'user' ? 'text-yellow-300' : ''
+                      }`}>
+                        {msg.content}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                {isSending && (
+                  <div className="flex gap-3 animate-fade-in">
+                    <div className="w-12 h-12 rounded-full overflow-hidden shadow-lg border-2 border-white/10 flex-shrink-0">
+                      <img src={vivienImage} alt="Vivien" className="w-full h-full object-cover" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-xs text-white/60 mb-1">Vivien</div>
+                      <div className="text-white text-sm md:text-base font-playfair">
+                        <span className="blinking-cursor">Thinking...</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-          )}
-          
-          {/* Main Text Display */}
-          <div className="min-h-[96px] md:min-h-[112px]">
-            <p className="font-playfair text-sm md:text-base lg:text-lg leading-relaxed">
-              {displayedText}
-              {isTyping && <span className="blinking-cursor">|</span>}
-            </p>
           </div>
           
-          {/* Age Confirmation Buttons */}
-          {showButtons && !isAgeConfirmed && (
-            <div className="mt-4 md:mt-6 space-y-2 md:space-y-3">
-              <MagneticButton
-                onClick={handleYes}
-                className="bounce-fade-in w-full bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-black font-medium py-2 text-sm rounded-lg"
-              >
-                Yes, I am older than 18
-              </MagneticButton>
-              <MagneticButton
-                onClick={handleNo}
-                className="bounce-fade-in w-full border border-white/30 text-white hover:bg-white/10 py-2 text-sm rounded-lg bg-transparent"
-              >
-                No, I am not
-              </MagneticButton>
-            </div>
-          )}
-          
           {/* Chat Input */}
-          {isAgeConfirmed && !isTyping && (
-            <form onSubmit={handleSendMessage} className="mt-4 md:mt-6 flex gap-2">
-              <Input
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Ask me anything about our collection..."
-                className="flex-1 bg-white/20 border-white/30 text-white placeholder:text-white/60 text-sm"
-                disabled={isSending}
-              />
-              <Button
-                type="submit"
-                disabled={!inputValue.trim() || isSending}
-                className="bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-black font-medium px-4 text-sm"
-              >
-                {isSending ? '...' : 'Send'}
-              </Button>
-            </form>
-          )}
+          <form onSubmit={handleSendMessage} className="w-full flex gap-2 mt-4">
+            <Input
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              placeholder="Ask me anything about our collection..."
+              className="flex-1 bg-white/20 border-white/30 text-white placeholder:text-white/60 text-sm"
+              disabled={isSending}
+            />
+            <Button
+              type="submit"
+              disabled={!inputValue.trim() || isSending}
+              className="bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-black font-medium px-4 text-sm"
+            >
+              {isSending ? '...' : 'Send'}
+            </Button>
+          </form>
         </div>
-      </div>
+      ) : (
+        /* Age Verification Mode */
+        <div className="vivien-container">
+          <div className="w-16 h-16 md:w-32 md:h-32 rounded-full overflow-hidden shadow-2xl border-2 border-white/10 flex-shrink-0">
+            <img src={vivienImage} alt="Vivien" className="w-full h-full object-cover" />
+          </div>
+          <div className="text-white max-w-sm">
+            <div className="min-h-[96px] md:min-h-[112px]">
+              <p className="font-playfair text-sm md:text-base lg:text-lg leading-relaxed">
+                {displayedText}
+                {isTyping && <span className="blinking-cursor">|</span>}
+              </p>
+            </div>
+            
+            {showButtons && (
+              <div className="mt-4 md:mt-6 space-y-2 md:space-y-3">
+                <MagneticButton
+                  onClick={handleYes}
+                  className="bounce-fade-in w-full bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-black font-medium py-2 text-sm rounded-lg"
+                >
+                  Yes, I am older than 18
+                </MagneticButton>
+                <MagneticButton
+                  onClick={handleNo}
+                  className="bounce-fade-in w-full border border-white/30 text-white hover:bg-white/10 py-2 text-sm rounded-lg bg-transparent"
+                >
+                  No, I am not
+                </MagneticButton>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
