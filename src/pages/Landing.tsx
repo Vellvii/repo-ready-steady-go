@@ -15,7 +15,9 @@ const Landing = () => {
   const [chatMessages, setChatMessages] = useState<Array<{id: string, content: string, role: 'user' | 'assistant'}>>([]);
   const [inputValue, setInputValue] = useState("");
   const [isSending, setIsSending] = useState(false);
+  const [isVivienTyping, setIsVivienTyping] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (document.getElementById('landing-lock')) {
@@ -96,6 +98,13 @@ const Landing = () => {
     };
   }, [isAgeConfirmed, message]);
 
+  // Auto-scroll to bottom of chat when new messages arrive
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [chatMessages, isVivienTyping]);
+
   const handleYes = () => {
     setIsAgeConfirmed(true);
   };
@@ -117,8 +126,13 @@ const Landing = () => {
     setChatMessages(prev => [...prev, newUserMessage]);
 
     try {
+      setIsVivienTyping(true);
+      
       // Get response from Vivian chat service
       const reply = await sendVivianMessage(userMessage);
+      
+      // Simulate typing delay for better UX
+      await new Promise(resolve => setTimeout(resolve, 800));
       
       const assistantMessage = {
         id: (Date.now() + 1).toString(),
@@ -135,6 +149,7 @@ const Landing = () => {
       };
       setChatMessages(prev => [...prev, errorMessage]);
     } finally {
+      setIsVivienTyping(false);
       setIsSending(false);
     }
   };
@@ -148,12 +163,16 @@ const Landing = () => {
       <img
         src="/uploads/V-logo-Shimmer.jpeg"
         alt="V Logo"
-        className="w-32 sm:w-40 h-auto"
+        className={`w-32 sm:w-40 h-auto transition-all duration-1000 ${
+          isAgeConfirmed ? 'animate-fade-out translate-y-8 opacity-0' : 'animate-fade-in'
+        }`}
       />
       <video
         ref={videoRef}
         src="/uploads/Vellvii-lgo-shimmer.mp4"
-        className="w-[90vw] sm:w-3/4 md:w-1/2 max-w-md max-h-[40vh] h-auto"
+        className={`w-[90vw] sm:w-3/4 md:w-1/2 max-w-md max-h-[40vh] h-auto transition-all duration-1000 ${
+          isAgeConfirmed ? 'animate-slide-out-right opacity-0' : ''
+        }`}
         muted
         playsInline
       />
@@ -163,12 +182,21 @@ const Landing = () => {
         <div className="w-16 h-16 md:w-32 md:h-32 rounded-full overflow-hidden shadow-2xl border-2 border-white/10 flex-shrink-0">
           <img src={vivienImage} alt="Vivien" className="w-full h-full object-cover" />
         </div>
-        <div className="bg-gradient-to-br from-card/95 to-muted/95 backdrop-blur-xl border border-secondary/20 rounded-2xl p-4 md:p-6 max-w-sm md:max-w-md shadow-luxury">
+        <div className={`
+          bg-gradient-to-br from-card/95 to-muted/95 backdrop-blur-xl border border-secondary/20 rounded-2xl p-4 md:p-6 shadow-luxury
+          transition-all duration-700 ease-out
+          ${isAgeConfirmed ? 'max-w-lg md:max-w-2xl' : 'max-w-sm md:max-w-md'}
+        `}>
           {/* Chat Messages Container */}
           {isAgeConfirmed && chatMessages.length > 0 && (
-            <div className="mb-4 max-h-48 overflow-y-auto scrollbar-luxury space-y-3">
+            <div 
+              ref={chatContainerRef}
+              className={`mb-4 overflow-y-auto scrollbar-luxury space-y-3 ${
+                isAgeConfirmed ? 'max-h-80' : 'max-h-48'
+              }`}
+            >
               {chatMessages.map((msg) => (
-                <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in`}>
                   <div className={`
                     max-w-[85%] px-4 py-2.5 rounded-2xl text-sm md:text-base leading-relaxed
                     ${msg.role === 'user' 
@@ -180,6 +208,22 @@ const Landing = () => {
                   </div>
                 </div>
               ))}
+              
+              {/* Vivien Typing Indicator */}
+              {isVivienTyping && (
+                <div className="flex justify-start animate-fade-in">
+                  <div className="bg-gradient-to-r from-accent/20 to-accent/10 border border-accent/30 rounded-2xl rounded-bl-md px-4 py-3 max-w-[50%]">
+                    <div className="flex items-center space-x-1 text-foreground">
+                      <span className="text-sm">Vivien is typing</span>
+                      <div className="flex space-x-1">
+                        <div className="w-1 h-1 bg-secondary rounded-full animate-pulse"></div>
+                        <div className="w-1 h-1 bg-secondary rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
+                        <div className="w-1 h-1 bg-secondary rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           )}
           
