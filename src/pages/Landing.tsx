@@ -30,30 +30,87 @@ const Landing = () => {
   }, []);
 
   const message = isAgeConfirmed 
-    ? "Perfect! I'm here to help you explore our luxury collection. What would you like to know?"
+    ? ""  // Will be handled by the 3-message sequence
     : "Hi, I'm Vivien. I can guide you through our website and you may ask me any questions at any time. To start, please confirm that you are older than 18.";
+
+  const welcomeMessages = [
+    "Welcome to Vellvii. You've arrived just in time for something extraordinary.",
+    "On October 1st, 2025, we'll unveil our first creation — a luxurious experience we call the Art of 'O.' Until then, consider this your private preview lounge.",
+    "You're free to ask me questions — about pleasure, wellness, intimacy, or the little secrets science has to share about feeling good. I can't reveal all of Vellvii's products just yet… but I can keep you intrigued, entertained, and maybe even a little inspired. Shall we begin?"
+  ];
+
+  // Typing effect for assistant messages
+  const startTypingEffect = (messageId: string, fullText: string) => {
+    setTypingMessageId(messageId);
+    let index = 0;
+    
+    const typeChar = () => {
+      setChatMessages(prev => 
+        prev.map(msg => 
+          msg.id === messageId 
+            ? { ...msg, displayedContent: fullText.slice(0, index + 1), isTyping: true }
+            : msg
+        )
+      );
+      
+      index++;
+      
+      if (index < fullText.length) {
+        setTimeout(typeChar, 20);
+      } else {
+        setChatMessages(prev => 
+          prev.map(msg => 
+            msg.id === messageId 
+              ? { ...msg, isTyping: false }
+              : msg
+          )
+        );
+        setTypingMessageId(null);
+      }
+    };
+    
+    setTimeout(typeChar, 300);
+  };
 
   useEffect(() => {
     if (isAgeConfirmed) {
       // Reset for chat mode
       setDisplayedText("");
-      setIsTyping(true);
+      setIsTyping(false);
       setShowButtons(false);
       
-      // Show welcome message
-      setTimeout(() => {
-        const chatMessage = "Perfect! I'm here to help you explore our luxury collection. What would you like to know?";
-        let index = 0;
-        const interval = setInterval(() => {
-          if (index < chatMessage.length) {
-            setDisplayedText(chatMessage.slice(0, index + 1));
-            index++;
-          } else {
-            clearInterval(interval);
-            setIsTyping(false);
+      // Auto-send the 3 welcome messages in sequence
+      const sendWelcomeMessages = async () => {
+        for (let i = 0; i < welcomeMessages.length; i++) {
+          const messageId = `welcome-${Date.now()}-${i}`;
+          const messageContent = welcomeMessages[i];
+          
+          // Add message to chat
+          const welcomeMessage = {
+            id: messageId,
+            content: messageContent,
+            role: 'assistant' as const,
+            displayedContent: '',
+            isTyping: true
+          };
+          
+          setChatMessages(prev => [...prev, welcomeMessage]);
+          
+          // Start typing effect for this message
+          startTypingEffect(messageId, messageContent);
+          
+          // Wait for typing to finish plus a small delay before next message
+          const typingDuration = messageContent.length * 20 + 300; // 20ms per char + 300ms initial delay
+          const delayBetweenMessages = 1000; // 1 second between messages
+          
+          if (i < welcomeMessages.length - 1) {
+            await new Promise(resolve => setTimeout(resolve, typingDuration + delayBetweenMessages));
           }
-        }, 30);
-      }, 500);
+        }
+      };
+      
+      // Start the welcome sequence after a brief delay
+      setTimeout(sendWelcomeMessages, 500);
       return;
     }
 
@@ -105,39 +162,6 @@ const Landing = () => {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, [chatMessages, isVivienTyping]);
-
-  // Typing effect for assistant messages
-  const startTypingEffect = (messageId: string, fullText: string) => {
-    setTypingMessageId(messageId);
-    let index = 0;
-    
-    const typeChar = () => {
-      setChatMessages(prev => 
-        prev.map(msg => 
-          msg.id === messageId 
-            ? { ...msg, displayedContent: fullText.slice(0, index + 1), isTyping: true }
-            : msg
-        )
-      );
-      
-      index++;
-      
-      if (index < fullText.length) {
-        setTimeout(typeChar, 20);
-      } else {
-        setChatMessages(prev => 
-          prev.map(msg => 
-            msg.id === messageId 
-              ? { ...msg, isTyping: false }
-              : msg
-          )
-        );
-        setTypingMessageId(null);
-      }
-    };
-    
-    setTimeout(typeChar, 300);
-  };
 
   const handleYes = () => {
     setIsAgeConfirmed(true);
@@ -231,20 +255,6 @@ const Landing = () => {
           <div className="flex-1 flex flex-col overflow-hidden">
             {/* Initial Message Display */}
             {!isAgeConfirmed && (
-              <div className="mb-4">
-                <div className="flex justify-start">
-                  <div className="bg-gradient-to-r from-accent/20 to-accent/10 border border-accent/30 rounded-2xl rounded-bl-md px-4 py-3 max-w-[90%]">
-                    <p className="font-playfair text-sm md:text-base lg:text-lg leading-relaxed text-foreground">
-                      {displayedText}
-                      {isTyping && <span className="blinking-cursor ml-1 text-secondary">|</span>}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Welcome Message - Show when age confirmed */}
-            {isAgeConfirmed && (
               <div className="mb-4">
                 <div className="flex justify-start">
                   <div className="bg-gradient-to-r from-accent/20 to-accent/10 border border-accent/30 rounded-2xl rounded-bl-md px-4 py-3 max-w-[90%]">
