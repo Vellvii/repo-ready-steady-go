@@ -4,11 +4,11 @@ const SUPABASE_URL = "https://mawaqjqifmvijolucrlp.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hd2FxanFpZm12aWpvbHVjcmxwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE5NTYxMDUsImV4cCI6MjA2NzUzMjEwNX0.QrHerqd8iRD-RoBbZVAtkiSzE3DowV1m5O9mefnt1Gs";
 
 export function extractVivianText(data: any): string {
-  // Try the usual suspects, in order
+  // Try the usual suspects, in order - focusing on Abacus-specific keys
   return (
-    data?.choices?.[0]?.message?.content ??
-    data?.choices?.[0]?.text ??
     data?.output_text ??
+    data?.choices?.[0]?.text ??
+    data?.choices?.[0]?.message?.content ??
     data?.response ??
     data?.answer ??
     data?.message ??
