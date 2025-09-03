@@ -30,20 +30,20 @@ Deno.serve(async (req) => {
       });
     }
 
-    // Validate deployment credentials
-    const deploymentToken = Deno.env.get("ABACUS_DEPLOYMENT_TOKEN");
+    // Validate API credentials  
+    const apiKey = Deno.env.get("ABACUS_API_KEY");
     const deploymentId = Deno.env.get("ABACUS_DEPLOYMENT_ID");
     
-    if (!deploymentToken || !deploymentId) {
-      console.error('ABACUS_DEPLOYMENT_TOKEN or ABACUS_DEPLOYMENT_ID is not set');
-      return new Response(JSON.stringify({ error: "Deployment credentials not configured" }), {
+    if (!apiKey || !deploymentId) {
+      console.error('ABACUS_API_KEY or ABACUS_DEPLOYMENT_ID is not set');
+      return new Response(JSON.stringify({ error: "API credentials not configured" }), {
         status: 500,
         headers: { ...CORS, 'Content-Type': 'application/json' },
       });
     }
 
     console.log('Environment check:', { 
-      deploymentToken: deploymentToken ? 'set' : 'missing',
+      apiKey: apiKey ? 'set' : 'missing',
       deploymentId: deploymentId ? 'set' : 'missing'
     });
 
@@ -67,7 +67,6 @@ Deno.serve(async (req) => {
     });
 
     const payload = {
-      deploymentToken: deploymentToken,
       deploymentId: deploymentId,
       messages: abacusMessages.length > 0 ? abacusMessages : [{ is_user: true, text: "Hello" }],
       systemMessage: systemMessage,
@@ -88,6 +87,7 @@ Deno.serve(async (req) => {
     const upstream = await fetch(ABACUS_URL, {
       method: "POST",
       headers: {
+        "Authorization": `Bearer ${apiKey}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
