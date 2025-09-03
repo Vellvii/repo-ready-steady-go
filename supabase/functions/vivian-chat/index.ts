@@ -1,7 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.50.4';
 
-const ABACUS_URL = "https://api.abacus.ai/v1/predict/getStreamingChatResponse";
+const ABACUS_URL = "https://api.abacus.ai/predict/getStreamingChatResponse";
 const CORS = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
@@ -76,6 +76,7 @@ Deno.serve(async (req) => {
     };
 
     console.log('Payload for Abacus API:', { 
+      deploymentToken: deploymentToken ? 'set' : 'missing',
       deploymentId: payload.deploymentId,
       messages_count: payload.messages.length,
       numCompletionTokens: payload.numCompletionTokens,
@@ -102,22 +103,34 @@ Deno.serve(async (req) => {
 
     if (!upstream.ok || !upstream.body) {
       const errorText = await upstream.text().catch(() => "Failed to read error response");
-      console.error('Abacus API error:', {
+      console.log('Abacus API error:', {
         status: upstream.status,
         statusText: upstream.statusText,
         headers: Object.fromEntries(upstream.headers.entries()),
         body: errorText,
         requestPayload: JSON.stringify(payload)
       });
-      return new Response(JSON.stringify({ 
-        error: "Abacus API error", 
-        status: upstream.status, 
-        statusText: upstream.statusText,
-        body: errorText,
-        payload: payload
-      }), {
-        status: 502,
-        headers: { ...CORS, "Content-Type": "application/json" },
+      
+      // Return a fallback response for failed API calls
+      const fallbackMessage = "I apologize, but I'm experiencing some technical difficulties right now. I'm here to help you with any questions about our luxury collection. Could you please try asking your question again?";
+      
+      const fallbackStream = new ReadableStream({
+        start(controller) {
+          const encoder = new TextEncoder();
+          controller.enqueue(encoder.encode(`data: {"choices":[{"delta":{"content":"${fallbackMessage}"}}]}\n\n`));
+          controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+          controller.close();
+        }
+      });
+      
+      return new Response(fallbackStream, {
+        status: 200,
+        headers: {
+          ...CORS,
+          "Content-Type": "text/event-stream; charset=utf-8",
+          "Cache-Control": "no-cache, no-transform",
+          "Connection": "keep-alive",
+        },
       });
     }
 
