@@ -63,7 +63,7 @@ Deno.serve(async (req) => {
     });
 
     const payload = {
-      model: "gpt-5-nano-2025-08-07",
+      model: "route-llm",
       messages: chatMessages,
       max_tokens: max_tokens,
       stream: true,
