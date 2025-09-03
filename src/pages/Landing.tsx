@@ -229,7 +229,21 @@ const Landing = () => {
         `}>
           {/* Chat Messages Container */}
           <div className="flex-1 flex flex-col overflow-hidden">
-            {/* Initial Welcome Message - Always show when age confirmed */}
+            {/* Initial Message Display */}
+            {!isAgeConfirmed && (
+              <div className="mb-4">
+                <div className="flex justify-start">
+                  <div className="bg-gradient-to-r from-accent/20 to-accent/10 border border-accent/30 rounded-2xl rounded-bl-md px-4 py-3 max-w-[90%]">
+                    <p className="font-playfair text-sm md:text-base lg:text-lg leading-relaxed text-foreground">
+                      {displayedText}
+                      {isTyping && <span className="blinking-cursor ml-1 text-secondary">|</span>}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Welcome Message - Show when age confirmed */}
             {isAgeConfirmed && (
               <div className="mb-4">
                 <div className="flex justify-start">
