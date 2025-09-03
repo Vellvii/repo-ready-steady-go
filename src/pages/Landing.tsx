@@ -239,16 +239,16 @@ const Landing = () => {
       />
 
       {/* Vivien Section */}
-      <div className="vivien-container">
+      <div className="vivien-container px-4 sm:px-0">
         <div className="w-16 h-16 md:w-32 md:h-32 rounded-full overflow-hidden shadow-2xl border-2 border-white/10 flex-shrink-0">
           <img src={vivienImage} alt="Vivien" className="w-full h-full object-cover" />
         </div>
         <div className={`
-          bg-gradient-to-br from-card/95 to-muted/95 backdrop-blur-xl border border-secondary/20 rounded-2xl p-4 md:p-6 shadow-luxury
+          bg-gradient-to-br from-card/95 to-muted/95 backdrop-blur-xl border border-secondary/20 rounded-2xl p-3 sm:p-4 md:p-6 shadow-luxury
           transition-all duration-700 ease-out flex flex-col
           ${isAgeConfirmed 
-            ? 'w-[80vw] min-h-[65vh] max-h-[70vh]' 
-            : 'max-w-sm md:max-w-md'
+            ? 'w-[95vw] sm:w-[85vw] md:w-[80vw] min-h-[60vh] sm:min-h-[65vh] max-h-[75vh] sm:max-h-[70vh]' 
+            : 'w-[90vw] max-w-sm sm:max-w-md'
           }
         `}>
           {/* Chat Messages Container */}
