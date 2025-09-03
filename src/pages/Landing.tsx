@@ -249,8 +249,8 @@ const Landing = () => {
             bg-gradient-to-br from-card/95 to-muted/95 backdrop-blur-xl border border-secondary/20 rounded-2xl shadow-luxury
             transition-all duration-700 ease-out flex flex-col
             ${isAgeConfirmed 
-              ? 'w-full sm:w-[70vw] md:w-[60vw] lg:w-[50vw] max-w-2xl min-h-[50vh] sm:min-h-[55vh] max-h-[65vh] sm:max-h-[60vh] p-3 sm:p-4' 
-              : 'w-full sm:w-auto max-w-xs sm:max-w-sm p-4 sm:p-6'
+              ? 'w-full sm:w-[70vw] md:w-[60vw] lg:w-[50vw] max-w-2xl min-h-[55vh] sm:min-h-[55vh] max-h-[70vh] sm:max-h-[60vh] p-3 sm:p-4' 
+              : 'w-full sm:w-auto max-w-md sm:max-w-lg p-4 sm:p-6'
             }
           `}>
           {/* Chat Messages Container */}
@@ -278,7 +278,7 @@ const Landing = () => {
                  {chatMessages.map((msg) => (
                    <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in`}>
                      <div className={`
-                       max-w-[75%] sm:max-w-[80%] px-3 py-2 sm:px-4 sm:py-2.5 rounded-2xl text-sm leading-relaxed
+                       max-w-[85%] sm:max-w-[80%] px-3 py-2 sm:px-4 sm:py-2.5 rounded-2xl text-sm leading-relaxed
                        ${msg.role === 'user' 
                          ? 'bg-gradient-to-r from-secondary to-secondary/90 text-secondary-foreground rounded-br-md' 
                          : 'bg-gradient-to-r from-accent/20 to-accent/10 text-foreground border border-accent/30 rounded-bl-md'
