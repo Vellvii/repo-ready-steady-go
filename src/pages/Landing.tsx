@@ -184,16 +184,17 @@ const Landing = () => {
           bg-gradient-to-br from-card/95 to-muted/95 backdrop-blur-xl border border-secondary/20 rounded-2xl p-4 md:p-6 shadow-luxury
           transition-all duration-700 ease-out flex flex-col
           ${isAgeConfirmed 
-            ? 'w-full max-w-2xl md:max-w-4xl min-h-[65vh] max-h-[70vh]' 
+            ? 'w-[80vw] min-h-[65vh] max-h-[70vh]' 
             : 'max-w-sm md:max-w-md'
           }
         `}>
           {/* Chat Messages Container */}
-          <div className="flex-grow flex flex-col min-h-0">
+          <div className="flex-1 flex flex-col overflow-hidden">
             {isAgeConfirmed && chatMessages.length > 0 && (
               <div 
                 ref={chatContainerRef}
-                className="flex-grow overflow-y-auto scrollbar-luxury space-y-3 mb-4"
+                className="flex-1 overflow-y-auto scrollbar-luxury space-y-3 mb-4 pr-2"
+                style={{ height: '0', minHeight: '200px' }}
               >
                 {chatMessages.map((msg) => (
                   <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in`}>
