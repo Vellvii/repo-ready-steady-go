@@ -240,17 +240,19 @@ const Landing = () => {
 
       {/* Vivien Section */}
       <div className="vivien-container px-4 sm:px-0">
-        <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-32 md:h-32 rounded-full overflow-hidden shadow-2xl border-2 border-white/10 flex-shrink-0">
-          <img src={vivienImage} alt="Vivien" className="w-full h-full object-cover" />
-        </div>
-        <div className={`
-          bg-gradient-to-br from-card/95 to-muted/95 backdrop-blur-xl border border-secondary/20 rounded-2xl shadow-luxury
-          transition-all duration-700 ease-out flex flex-col
-          ${isAgeConfirmed 
-            ? 'w-[90vw] sm:w-[70vw] md:w-[60vw] lg:w-[50vw] max-w-2xl min-h-[50vh] sm:min-h-[55vh] max-h-[65vh] sm:max-h-[60vh] p-3 sm:p-4' 
-            : 'w-[85vw] max-w-xs sm:max-w-sm p-4 sm:p-6'
-          }
-        `}>
+        {/* Mobile: Avatar on top, Desktop: Avatar on side */}
+        <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+          <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-32 md:h-32 rounded-full overflow-hidden shadow-2xl border-2 border-white/10 flex-shrink-0">
+            <img src={vivienImage} alt="Vivien" className="w-full h-full object-cover" />
+          </div>
+          <div className={`
+            bg-gradient-to-br from-card/95 to-muted/95 backdrop-blur-xl border border-secondary/20 rounded-2xl shadow-luxury
+            transition-all duration-700 ease-out flex flex-col
+            ${isAgeConfirmed 
+              ? 'w-full sm:w-[70vw] md:w-[60vw] lg:w-[50vw] max-w-2xl min-h-[50vh] sm:min-h-[55vh] max-h-[65vh] sm:max-h-[60vh] p-3 sm:p-4' 
+              : 'w-full sm:w-auto max-w-xs sm:max-w-sm p-4 sm:p-6'
+            }
+          `}>
           {/* Chat Messages Container */}
           <div className="flex-1 flex flex-col overflow-hidden">
             {/* Initial Message Display */}
@@ -347,6 +349,7 @@ const Landing = () => {
               </Button>
             </form>
           )}
+        </div>
         </div>
       </div>
     </div>
