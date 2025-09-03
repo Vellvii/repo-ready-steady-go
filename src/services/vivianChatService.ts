@@ -18,8 +18,7 @@ export class VivianChatService {
           messages: [
             { role: 'user', content: userMessage }
           ],
-          temperature: 0.3,
-          max_tokens: 600,
+          numCompletionTokens: 600,
           sessionId: crypto.randomUUID()
         })
       });
