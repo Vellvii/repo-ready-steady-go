@@ -283,7 +283,7 @@ const Landing = () => {
                       }
                      `}>
                        {msg.role === 'assistant' 
-                         ? (msg.displayedContent || msg.content)
+                         ? (msg.displayedContent || '')
                          : msg.content
                        }
                        {msg.role === 'assistant' && msg.isTyping && <span className="blinking-cursor ml-1 text-secondary">|</span>}
