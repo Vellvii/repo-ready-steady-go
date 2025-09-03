@@ -97,6 +97,47 @@ export async function postSSE<T extends object>(
   body: T,
   onToken: (t: string) => void,
   onDone: (final: string) => void
-) {
-  return postSSEWithRetry(url, body, onToken, onDone);
+): Promise<void> {
+  const resp = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+
+  const ct = resp.headers.get("content-type") || "";
+  if (!ct.includes("text/event-stream")) {
+    const data = await resp.json().catch(() => ({}));
+    const text = data?.choices?.[0]?.message?.content ?? data?.output_text ?? "";
+    onToken(text);
+    onDone(text);
+    return;
+  }
+
+  const reader = resp.body!.getReader();
+  const decoder = new TextDecoder();
+  let buffer = "", final = "";
+
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    const parts = buffer.split("\n\n");
+    buffer = parts.pop()!;
+    for (const part of parts) {
+      if (!part.startsWith("data: ")) continue;
+      const data = part.slice(6);
+      if (data === "[DONE]") {
+        onDone(final.trim());
+        return;
+      }
+      try {
+        const json = JSON.parse(data);
+        const delta = json.choices?.[0]?.delta?.content;
+        if (delta) {
+          final += delta;
+          onToken(delta);
+        }
+      } catch {}
+    }
+  }
 }
