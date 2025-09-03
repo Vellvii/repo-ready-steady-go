@@ -64,7 +64,6 @@ serve(async (req) => {
 
     const payload = {
       model: selectedModel,
-      temperature: 0.3,
       max_tokens: 600,
       messages: [systemPersona, ...messages],
       stream
@@ -81,7 +80,13 @@ serve(async (req) => {
 
     if (!abacusResponse.ok) {
       const errorText = await abacusResponse.text();
-      console.error('Abacus API error:', errorText);
+      console.error('Abacus API error:', {
+        status: abacusResponse.status,
+        statusText: abacusResponse.statusText,
+        errorText,
+        model: selectedModel,
+        payload
+      });
       return new Response(JSON.stringify({ 
         error: "AI service temporarily unavailable", 
         detail: errorText 

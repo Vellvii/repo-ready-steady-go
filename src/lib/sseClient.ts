@@ -4,16 +4,29 @@ export async function postSSE<T extends object>(
   onToken: (t: string) => void,
   onDone: (final: string) => void
 ) {
+  console.log('SSE request:', { url, body });
+  
   const resp = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
   });
 
+  console.log('SSE response status:', resp.status, resp.statusText);
+
+  if (!resp.ok) {
+    const errorText = await resp.text();
+    console.error('SSE error response:', errorText);
+    throw new Error(`Request failed: ${resp.status} ${resp.statusText}`);
+  }
+
   // fallback: no stream
   const ct = resp.headers.get("content-type") || "";
+  console.log('Response content-type:', ct);
+  
   if (!ct.includes("text/event-stream")) {
     const data = await resp.json().catch(() => ({}));
+    console.log('Non-streaming response:', data);
     const text =
       data?.choices?.[0]?.message?.content ??
       data?.choices?.[0]?.delta?.content ??
