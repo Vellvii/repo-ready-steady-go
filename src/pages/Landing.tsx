@@ -163,15 +163,13 @@ const Landing = () => {
       <img
         src="/uploads/V-logo-Shimmer.jpeg"
         alt="V Logo"
-        className={`w-32 sm:w-40 h-auto transition-all duration-1000 ${
-          isAgeConfirmed ? 'animate-fade-out translate-y-8 opacity-0' : 'animate-fade-in'
-        }`}
+        className="w-32 sm:w-40 h-auto"
       />
       <video
         ref={videoRef}
         src="/uploads/Vellvii-lgo-shimmer.mp4"
         className={`w-[90vw] sm:w-3/4 md:w-1/2 max-w-md max-h-[40vh] h-auto transition-all duration-1000 ${
-          isAgeConfirmed ? 'animate-slide-out-right opacity-0' : ''
+          isAgeConfirmed ? 'animate-fade-out translate-y-8 opacity-0 pointer-events-none' : ''
         }`}
         muted
         playsInline
@@ -185,7 +183,10 @@ const Landing = () => {
         <div className={`
           bg-gradient-to-br from-card/95 to-muted/95 backdrop-blur-xl border border-secondary/20 rounded-2xl p-4 md:p-6 shadow-luxury
           transition-all duration-700 ease-out
-          ${isAgeConfirmed ? 'max-w-lg md:max-w-2xl' : 'max-w-sm md:max-w-md'}
+          ${isAgeConfirmed 
+            ? 'max-w-lg md:max-w-2xl min-h-[50vh] max-h-[60vh]' 
+            : 'max-w-sm md:max-w-md'
+          }
         `}>
           {/* Chat Messages Container */}
           {isAgeConfirmed && chatMessages.length > 0 && (
