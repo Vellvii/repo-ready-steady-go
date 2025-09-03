@@ -16,6 +16,7 @@ const Landing = () => {
   const [chatMessages, setChatMessages] = useState<Array<{id: string, content: string, role: 'user' | 'assistant'}>>([]);
   const [inputValue, setInputValue] = useState("");
   const [isSending, setIsSending] = useState(false);
+  const [lastSentTime, setLastSentTime] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -101,6 +102,13 @@ const Landing = () => {
     e.preventDefault();
     if (!inputValue.trim() || isSending) return;
 
+    // Debouncing: prevent rapid requests (min 1 second between messages)
+    const now = Date.now();
+    if (now - lastSentTime < 1000) {
+      return;
+    }
+    setLastSentTime(now);
+
     const userMessage = inputValue.trim();
     setInputValue("");
     setIsSending(true);
@@ -121,14 +129,9 @@ const Landing = () => {
     // Auto-scroll to bottom
     setTimeout(scrollToBottom, 100);
 
-    // Create placeholder assistant message for streaming
-    const assistantMessageId = (Date.now() + 1).toString();
-    const assistantMessage = {
-      id: assistantMessageId,
-      content: "",
-      role: 'assistant' as const
-    };
-    setChatMessages(prev => [...prev, assistantMessage]);
+    // Will create assistant message only when content starts arriving
+    let assistantMessageId: string | null = null;
+    let hasStartedContent = false;
 
     try {
       // Store session ID for conversation continuity
@@ -140,7 +143,12 @@ const Landing = () => {
       const { data: { session } } = await supabase.auth.getSession();
       const url = `https://mawaqjqifmvijolucrlp.supabase.co/functions/v1/vivian-chat`;
       
-      await postSSE(
+      // Add timeout promise
+      const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error('Request timeout')), 30000);
+      });
+
+      const ssePromise = postSSE(
         url,
         {
           messages: [...chatMessages, newUserMessage].map(msg => ({
@@ -151,14 +159,26 @@ const Landing = () => {
           sessionId: sessionId
         },
         (token) => {
-          // Update the assistant message with new token
-          setChatMessages(prev => 
-            prev.map(msg => 
-              msg.id === assistantMessageId 
-                ? { ...msg, content: msg.content + token }
-                : msg
-            )
-          );
+          // Create assistant message on first token
+          if (!hasStartedContent) {
+            hasStartedContent = true;
+            assistantMessageId = (Date.now() + 1).toString();
+            const assistantMessage = {
+              id: assistantMessageId,
+              content: token,
+              role: 'assistant' as const
+            };
+            setChatMessages(prev => [...prev, assistantMessage]);
+          } else if (assistantMessageId) {
+            // Update existing assistant message with new token
+            setChatMessages(prev => 
+              prev.map(msg => 
+                msg.id === assistantMessageId 
+                  ? { ...msg, content: msg.content + token }
+                  : msg
+              )
+            );
+          }
           setTimeout(scrollToBottom, 10);
         },
         () => {
@@ -171,19 +191,32 @@ const Landing = () => {
         }
       );
 
+      await Promise.race([ssePromise, timeoutPromise]);
+
     } catch (error) {
       console.error('❌ Error sending message:', error);
-      
-      // Remove any incomplete assistant message and add error message
-      setChatMessages(prev => {
-        const filtered = prev.filter(msg => msg.id !== assistantMessageId);
-        return [...filtered, {
-          id: (Date.now() + 1).toString(),
-          content: "I apologize, but I'm having trouble connecting right now. Please try again in a moment.",
-          role: 'assistant' as const
-        }];
-      });
       setIsSending(false);
+      
+      // Remove any incomplete assistant message if it exists
+      if (assistantMessageId) {
+        setChatMessages(prev => prev.filter(msg => msg.id !== assistantMessageId));
+      }
+      
+      // Add appropriate error message based on error type
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+      let userFriendlyMessage = "I apologize, but I'm having trouble connecting right now. Please try again in a moment.";
+      
+      if (errorMessage.includes('Rate limit')) {
+        userFriendlyMessage = "I'm receiving a lot of messages right now. Please wait a moment before trying again.";
+      } else if (errorMessage.includes('timeout')) {
+        userFriendlyMessage = "The request took too long to process. Please try again.";
+      }
+      
+      setChatMessages(prev => [...prev, {
+        id: (Date.now() + 1).toString(),
+        content: userFriendlyMessage,
+        role: 'assistant' as const
+      }]);
       
       setTimeout(() => {
         scrollToBottom();

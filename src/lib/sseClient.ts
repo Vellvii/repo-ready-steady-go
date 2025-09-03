@@ -1,24 +1,41 @@
-export async function postSSE<T extends object>(
+async function postSSEWithRetry<T extends object>(
   url: string,
   body: T,
   onToken: (t: string) => void,
-  onDone: (final: string) => void
-) {
-  console.log('SSE request:', { url, body });
+  onDone: (final: string) => void,
+  retryCount: number = 0,
+  maxRetries: number = 3
+): Promise<void> {
+  console.log('SSE request:', { url, body, retryCount });
   
-  const resp = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
+  try {
+    const resp = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
 
-  console.log('SSE response status:', resp.status, resp.statusText);
+    console.log('SSE response status:', resp.status, resp.statusText);
 
-  if (!resp.ok) {
-    const errorText = await resp.text();
-    console.error('SSE error response:', errorText);
-    throw new Error(`Request failed: ${resp.status} ${resp.statusText}`);
-  }
+    // Handle rate limiting with exponential backoff
+    if (resp.status === 429 && retryCount < maxRetries) {
+      const errorText = await resp.text();
+      console.warn(`Rate limited (429), retrying in ${Math.pow(2, retryCount)} seconds...`, errorText);
+      
+      await new Promise(resolve => setTimeout(resolve, Math.pow(2, retryCount) * 1000));
+      return postSSEWithRetry(url, body, onToken, onDone, retryCount + 1, maxRetries);
+    }
+
+    if (!resp.ok) {
+      const errorText = await resp.text();
+      console.error('SSE error response:', errorText);
+      
+      if (resp.status === 429) {
+        throw new Error('Rate limit exceeded. Please wait a moment before trying again.');
+      }
+      
+      throw new Error(`Request failed: ${resp.status} ${resp.statusText}`);
+    }
 
   // fallback: no stream
   const ct = resp.headers.get("content-type") || "";
@@ -69,4 +86,17 @@ export async function postSSE<T extends object>(
     }
   }
   onDone(all);
+  } catch (error) {
+    console.error('SSE stream error:', error);
+    throw error;
+  }
+}
+
+export async function postSSE<T extends object>(
+  url: string,
+  body: T,
+  onToken: (t: string) => void,
+  onDone: (final: string) => void
+) {
+  return postSSEWithRetry(url, body, onToken, onDone);
 }
