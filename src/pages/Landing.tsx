@@ -121,55 +121,123 @@ const Landing = () => {
     setTimeout(scrollToBottom, 100);
 
     try {
-      // Call the real Vivian AI service via Supabase Edge Function
-      const { data, error } = await supabase.functions.invoke('vivian-chat', {
-        body: {
+      // Store session ID for conversation continuity
+      const sessionId = sessionStorage.getItem('vivian-session-id') || crypto.randomUUID();
+      if (!sessionStorage.getItem('vivian-session-id')) {
+        sessionStorage.setItem('vivian-session-id', sessionId);
+      }
+
+      // Create placeholder assistant message for streaming
+      const assistantMessageId = (Date.now() + 1).toString();
+      const assistantMessage = {
+        id: assistantMessageId,
+        content: "",
+        role: 'assistant' as const
+      };
+      setChatMessages(prev => [...prev, assistantMessage]);
+      setIsSending(false);
+
+      // Call the edge function directly for SSE streaming
+      const response = await fetch('https://mawaqjqifmvijolucrlp.supabase.co/functions/v1/vivian-chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hd2FxanFpZm12aWpvbHVjcmxwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE5NTYxMDUsImV4cCI6MjA2NzUzMjEwNX0.QrHerqd8iRD-RoBbZVAtkiSzE3DowV1m5O9mefnt1Gs`
+        },
+        body: JSON.stringify({
           messages: [...chatMessages, newUserMessage].map(msg => ({
             role: msg.role,
             content: msg.content
           })),
           stream: true,
-          sessionId: sessionStorage.getItem('vivian-session-id') || crypto.randomUUID()
-        }
+          sessionId: sessionId
+        })
       });
 
-      if (error) {
-        throw new Error(error.message);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      // Store session ID for conversation continuity
-      if (!sessionStorage.getItem('vivian-session-id')) {
-        sessionStorage.setItem('vivian-session-id', crypto.randomUUID());
+      const reader = response.body?.getReader();
+      if (!reader) {
+        throw new Error('No response reader available');
       }
 
-      // Handle non-streaming response for now (can be enhanced later for streaming)
-      if (data?.choices?.[0]?.message?.content) {
-        const assistantMessage = {
-          id: (Date.now() + 1).toString(),
-          content: data.choices[0].message.content,
-          role: 'assistant' as const
-        };
-        setChatMessages(prev => [...prev, assistantMessage]);
-        setIsSending(false);
+      const decoder = new TextDecoder();
+      let buffer = '';
+      let assistantContent = '';
+
+      // Read the SSE stream
+      while (true) {
+        const { done, value } = await reader.read();
         
-        setTimeout(() => {
-          scrollToBottom();
-          inputRef.current?.focus();
-        }, 100);
-      } else {
-        throw new Error('No response content received');
+        if (done) {
+          break;
+        }
+
+        // Decode the chunk and add to buffer
+        buffer += decoder.decode(value, { stream: true });
+        
+        // Process complete lines
+        const lines = buffer.split('\n');
+        buffer = lines.pop() || ''; // Keep incomplete line in buffer
+
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            const data = line.slice(6); // Remove 'data: ' prefix
+            
+            if (data === '[DONE]') {
+              // Streaming complete
+              setTimeout(() => {
+                scrollToBottom();
+                inputRef.current?.focus();
+              }, 100);
+              return;
+            }
+
+            try {
+              const parsed = JSON.parse(data);
+              const content = parsed.choices?.[0]?.delta?.content;
+              
+              if (content) {
+                assistantContent += content;
+                // Update the assistant message with accumulated content
+                setChatMessages(prev => 
+                  prev.map(msg => 
+                    msg.id === assistantMessageId 
+                      ? { ...msg, content: assistantContent }
+                      : msg
+                  )
+                );
+                
+                // Auto-scroll as content updates
+                setTimeout(scrollToBottom, 10);
+              }
+            } catch (parseError) {
+              console.warn('Failed to parse SSE data:', parseError);
+            }
+          }
+        }
       }
+
+      // Final cleanup
+      setTimeout(() => {
+        scrollToBottom();
+        inputRef.current?.focus();
+      }, 100);
 
     } catch (error) {
       console.error('Error sending message:', error);
       
-      // Fallback response on error
-      const errorMessage = {
-        id: (Date.now() + 1).toString(),
-        content: "I apologize, but I'm having trouble connecting right now. Please try again in a moment.",
-        role: 'assistant' as const
-      };
-      setChatMessages(prev => [...prev, errorMessage]);
+      // Remove any incomplete assistant message and add error message
+      setChatMessages(prev => {
+        const filtered = prev.filter(msg => msg.content !== "");
+        return [...filtered, {
+          id: (Date.now() + 1).toString(),
+          content: "I apologize, but I'm having trouble connecting right now. Please try again in a moment.",
+          role: 'assistant' as const
+        }];
+      });
       setIsSending(false);
       
       setTimeout(() => {
