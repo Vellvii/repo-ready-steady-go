@@ -84,7 +84,7 @@ const Landing = () => {
     // Add the welcome message to chat history
     const welcomeMessage = {
       id: Date.now().toString(),
-      content: "Perfect! I'm here to help you explore our luxury collection. What would you like to know?",
+      content: "Welcome to Vellvii. You've arrived just in time for something extraordinary. On October 1st, 2025, we'll unveil our first creation — a luxurious experience we call the Art of 'O.'  Until then, consider this your private preview lounge. You're free to ask me questions — about pleasure, wellness, intimacy, or the little secrets science has to share about feeling good.  I can't reveal all of Vellvii's products just yet… but I can keep you intrigued, entertained, and maybe even a little inspired. Shall we begin?",
       role: 'assistant' as const
     };
     setChatMessages([welcomeMessage]);
