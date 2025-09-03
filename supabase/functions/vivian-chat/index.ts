@@ -1,7 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.50.4';
 
-const ABACUS_URL = "https://api.abacus.ai/v1/deployments/getStreamingChatResponse";
+const ABACUS_URL = "https://api.abacus.ai/v1/predict/getStreamingChatResponse";
 const CORS = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
@@ -69,7 +69,7 @@ Deno.serve(async (req) => {
     const payload = {
       deploymentToken: deploymentToken,
       deploymentId: deploymentId,
-      messages: abacusMessages,
+      messages: abacusMessages.length > 0 ? abacusMessages : [{ is_user: true, text: "Hello" }],
       systemMessage: systemMessage,
       numCompletionTokens: max_tokens,
       temperature: temperature,
@@ -101,16 +101,20 @@ Deno.serve(async (req) => {
     });
 
     if (!upstream.ok || !upstream.body) {
-      const body = await upstream.text().catch(() => "");
+      const errorText = await upstream.text().catch(() => "Failed to read error response");
       console.error('Abacus API error:', {
         status: upstream.status,
         statusText: upstream.statusText,
-        body: body.substring(0, 500)
+        headers: Object.fromEntries(upstream.headers.entries()),
+        body: errorText,
+        requestPayload: JSON.stringify(payload)
       });
       return new Response(JSON.stringify({ 
         error: "Abacus API error", 
         status: upstream.status, 
-        body: body.substring(0, 200) 
+        statusText: upstream.statusText,
+        body: errorText,
+        payload: payload
       }), {
         status: 502,
         headers: { ...CORS, "Content-Type": "application/json" },
