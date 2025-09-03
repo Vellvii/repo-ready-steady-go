@@ -48,8 +48,8 @@ serve(async (req) => {
       }));
 
     const payload = {
-      deployment_token: Deno.env.get('ABACUS_DEPLOYMENT_TOKEN'),
-      deployment_id: Deno.env.get('ABACUS_DEPLOYMENT_ID'),
+      deployment_token: "c7623d1c429a4db3a34082b2175eba56",
+      deployment_id: "13ec530bba", 
       messages: abacusMessages,
       system_message: systemMessage,
       temperature: 0.3,
@@ -66,7 +66,7 @@ serve(async (req) => {
     const abacusResponse = await fetch(ABACUS_URL, {
       method: "POST",
       headers: {
-        'Authorization': `Bearer ${Deno.env.get('ABACUS_API_KEY')}`,
+        'Authorization': `Bearer s2_eb60344b66ef45f9a9c124a4aab9e28f`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(payload),
