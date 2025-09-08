@@ -192,7 +192,10 @@ const Landing = () => {
       // Show "Thinking" for 1 second
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      // Get response from Vivian chat service
+      // Turn off thinking indicator
+      setIsVivienTyping(false);
+      
+      // Get response from Vivian chat service (in background)
       const reply = await sendVivianMessage(userMessage);
       
       const assistantMessage = {
@@ -215,7 +218,6 @@ const Landing = () => {
       };
       setChatMessages(prev => [...prev, errorMessage]);
     } finally {
-      setIsVivienTyping(false);
       setIsSending(false);
     }
   };
