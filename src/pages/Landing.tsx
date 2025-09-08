@@ -184,19 +184,13 @@ const Landing = () => {
     setChatMessages(prev => [...prev, newUserMessage]);
 
     try {
-      // Wait 2 seconds before showing "Thinking"
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
       setIsVivienTyping(true);
       
-      // Show "Thinking" for 1 second
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Turn off thinking indicator
-      setIsVivienTyping(false);
-      
-      // Get response from Vivian chat service (in background)
+      // Get response from Vivian chat service
       const reply = await sendVivianMessage(userMessage);
+      
+      // Simulate typing delay for better UX
+      await new Promise(resolve => setTimeout(resolve, 800));
       
       const assistantMessage = {
         id: (Date.now() + 1).toString(),
@@ -218,6 +212,7 @@ const Landing = () => {
       };
       setChatMessages(prev => [...prev, errorMessage]);
     } finally {
+      setIsVivienTyping(false);
       setIsSending(false);
     }
   };
