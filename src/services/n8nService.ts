@@ -1,3 +1,5 @@
+import { normalizeLLMText } from "@/lib/utils";
+
 interface N8nRequest {
   userMessage?: string;
   pageContext: string;
@@ -32,17 +34,20 @@ export class N8nService {
         throw new Error(result.error);
       }
 
-      return result.message || "I'm here to help you with any questions about our luxury collection.";
+      const message = result.message || "I'm here to help you with any questions about our luxury collection.";
+      return normalizeLLMText(message);
     } catch (error) {
       console.error('N8n service error:', error);
       // Fallback responses based on request type
+      let fallbackMessage: string;
       if (data.requestType === 'greeting') {
-        return "Hello! I'm Vivian, and I'm here to help you discover your perfect match.";
+        fallbackMessage = "Hello! I'm Vivian, and I'm here to help you discover your perfect match.";
       } else if (data.requestType === 'recommendation') {
-        return "This product is beautifully crafted and perfect for exploring new experiences with comfort and elegance.";
+        fallbackMessage = "This product is beautifully crafted and perfect for exploring new experiences with comfort and elegance.";
       } else {
-        return "I'm here to help you with any questions about our luxury collection. Please feel free to ask anything!";
+        fallbackMessage = "I'm here to help you with any questions about our luxury collection. Please feel free to ask anything!";
       }
+      return normalizeLLMText(fallbackMessage);
     }
   }
 

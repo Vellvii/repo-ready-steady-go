@@ -1,3 +1,5 @@
+import { normalizeLLMText } from "@/lib/utils";
+
 export async function sendVivianMessage(message: string): Promise<string> {
   try {
     const res = await fetch(
@@ -17,7 +19,8 @@ export async function sendVivianMessage(message: string): Promise<string> {
     }
 
     const data = await res.json();
-    return data.reply || "Vivien had trouble replying.";
+    const reply = data.reply || "Vivien had trouble replying.";
+    return normalizeLLMText(reply);
   } catch (err) {
     console.error("sendVivianMessage error:", err);
     return "Vivien is offline right now.";
