@@ -177,12 +177,12 @@ const Landing = () => {
                 {/* Email Stefan Button */}
                 {showEmailButton && (
                   <div className="flex justify-center animate-fade-in">
-                    <Button
+                    <MagneticButton
                       onClick={handleEmailStefan}
-                      className="bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-black font-medium px-6 py-3 text-sm rounded-lg"
+                      className="bounce-fade-in bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-black font-medium py-2 px-6 text-sm rounded-lg"
                     >
                       Email Stefan
-                    </Button>
+                    </MagneticButton>
                   </div>
                 )}
               </div>
