@@ -1,9 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { MagneticButton } from "@/components/animations/MagneticButton";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { sendVivianMessage } from "@/services/vivianChatService";
 import vivienImage from "/uploads/976c0d6d-a066-409a-8ad6-6353840958ac.png";
 
 const Landing = () => {
@@ -12,13 +10,9 @@ const Landing = () => {
   const [displayedText, setDisplayedText] = useState("");
   const [showButtons, setShowButtons] = useState(false);
   const [isAgeConfirmed, setIsAgeConfirmed] = useState(false);
-  const [chatMessages, setChatMessages] = useState<Array<{id: string, content: string, role: 'user' | 'assistant', displayedContent?: string, isTyping?: boolean}>>([]);
-  const [inputValue, setInputValue] = useState("");
-  const [isSending, setIsSending] = useState(false);
-  const [isVivienTyping, setIsVivienTyping] = useState(false);
-  const [typingMessageId, setTypingMessageId] = useState<string | null>(null);
+  const [constructionMessage, setConstructionMessage] = useState("");
+  const [showEmailButton, setShowEmailButton] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (document.getElementById('landing-lock')) {
@@ -30,42 +24,24 @@ const Landing = () => {
   }, []);
 
   const message = isAgeConfirmed 
-    ? ""  // Will be handled by the 3-message sequence
+    ? ""  // Will be handled by the construction message
     : "Hi, I'm Vivien. I can guide you through our website and you may ask me any questions at any time. To start, please confirm that you are older than 18.";
 
-  const welcomeMessages = [
-    "Welcome to Vellvii. You've arrived just in time for something extraordinary.",
-    "On October 1st, 2025, we'll unveil our first creation — a luxurious experience we call the Art of 'O.' Until then, consider this your private preview lounge.",
-    "You're free to ask me questions — about pleasure, wellness, intimacy, or the little secrets science has to share about feeling good. I can't reveal all of Vellvii's products just yet… but I can keep you intrigued, entertained, and maybe even a little inspired. Shall we begin?"
-  ];
+  const constructionText = "Thank you so much for confirming, Vellvii and Vivien are currently under construction, if you have any questions please email Stefan below";
 
-  // Typing effect for assistant messages
-  const startTypingEffect = (messageId: string, fullText: string) => {
-    setTypingMessageId(messageId);
+  // Typing effect for construction message
+  const startConstructionTyping = (fullText: string) => {
     let index = 0;
     
     const typeChar = () => {
-      setChatMessages(prev => 
-        prev.map(msg => 
-          msg.id === messageId 
-            ? { ...msg, displayedContent: fullText.slice(0, index + 1), isTyping: true }
-            : msg
-        )
-      );
-      
+      setConstructionMessage(fullText.slice(0, index + 1));
       index++;
       
       if (index < fullText.length) {
-        setTimeout(typeChar, 20);
+        setTimeout(typeChar, 30);
       } else {
-        setChatMessages(prev => 
-          prev.map(msg => 
-            msg.id === messageId 
-              ? { ...msg, isTyping: false }
-              : msg
-          )
-        );
-        setTypingMessageId(null);
+        // Show email button after typing is complete
+        setTimeout(() => setShowEmailButton(true), 500);
       }
     };
     
@@ -74,43 +50,15 @@ const Landing = () => {
 
   useEffect(() => {
     if (isAgeConfirmed) {
-      // Reset for chat mode
+      // Reset for construction message mode
       setDisplayedText("");
       setIsTyping(false);
       setShowButtons(false);
       
-      // Auto-send the 3 welcome messages in sequence
-      const sendWelcomeMessages = async () => {
-        for (let i = 0; i < welcomeMessages.length; i++) {
-          const messageId = `welcome-${Date.now()}-${i}`;
-          const messageContent = welcomeMessages[i];
-          
-          // Add message to chat
-          const welcomeMessage = {
-            id: messageId,
-            content: messageContent,
-            role: 'assistant' as const,
-            displayedContent: '',
-            isTyping: true
-          };
-          
-          setChatMessages(prev => [...prev, welcomeMessage]);
-          
-          // Start typing effect for this message
-          startTypingEffect(messageId, messageContent);
-          
-          // Wait for typing to finish plus a small delay before next message
-          const typingDuration = messageContent.length * 20 + 300; // 20ms per char + 300ms initial delay
-          const delayBetweenMessages = 1000; // 1 second between messages
-          
-          if (i < welcomeMessages.length - 1) {
-            await new Promise(resolve => setTimeout(resolve, typingDuration + delayBetweenMessages));
-          }
-        }
-      };
-      
-      // Start the welcome sequence after a brief delay
-      setTimeout(sendWelcomeMessages, 500);
+      // Start construction message typing
+      setTimeout(() => {
+        startConstructionTyping(constructionText);
+      }, 500);
       return;
     }
 
@@ -156,69 +104,16 @@ const Landing = () => {
     };
   }, [isAgeConfirmed, message]);
 
-  // Auto-scroll to bottom of chat when new messages arrive
-  useEffect(() => {
-    if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
-    }
-  }, [chatMessages, isVivienTyping]);
-
   const handleYes = () => {
     setIsAgeConfirmed(true);
   };
 
-  const handleSendMessage = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!inputValue.trim() || isSending) return;
-
-    const userMessage = inputValue.trim();
-    setInputValue("");
-    setIsSending(true);
-
-    // Add user message to chat
-    const newUserMessage = {
-      id: Date.now().toString(),
-      content: userMessage,
-      role: 'user' as const
-    };
-    setChatMessages(prev => [...prev, newUserMessage]);
-
-    try {
-      setIsVivienTyping(true);
-      
-      // Get response from Vivian chat service
-      const reply = await sendVivianMessage(userMessage);
-      
-      // Simulate typing delay for better UX
-      await new Promise(resolve => setTimeout(resolve, 800));
-      
-      const assistantMessage = {
-        id: (Date.now() + 1).toString(),
-        content: reply,
-        role: 'assistant' as const,
-        displayedContent: '',
-        isTyping: true
-      };
-      setChatMessages(prev => [...prev, assistantMessage]);
-      
-      // Start typing effect
-      startTypingEffect(assistantMessage.id, reply);
-    } catch (error) {
-      console.error('Error sending message:', error);
-      const errorMessage = {
-        id: (Date.now() + 1).toString(),
-        content: "I'm having trouble connecting right now. Please try again.",
-        role: 'assistant' as const
-      };
-      setChatMessages(prev => [...prev, errorMessage]);
-    } finally {
-      setIsVivienTyping(false);
-      setIsSending(false);
-    }
-  };
-
   const handleNo = () => {
     alert("You must be 18 or older to access this website.");
+  };
+
+  const handleEmailStefan = () => {
+    window.location.href = "mailto:stefan@vellvii.com";
   };
 
   return (
@@ -247,11 +142,11 @@ const Landing = () => {
           bg-gradient-to-br from-card/95 to-muted/95 backdrop-blur-xl border border-secondary/20 rounded-2xl shadow-luxury
           transition-all duration-700 ease-out flex flex-col mx-2
           ${isAgeConfirmed 
-            ? 'w-[85vw] sm:w-[70vw] md:w-[60vw] lg:w-[50vw] max-w-2xl min-h-[50vh] sm:min-h-[55vh] max-h-[65vh] sm:max-h-[60vh] p-3 sm:p-4' 
+            ? 'w-[85vw] sm:w-[70vw] md:w-[60vw] lg:w-[50vw] max-w-2xl min-h-[40vh] sm:min-h-[45vh] max-h-[55vh] sm:max-h-[50vh] p-3 sm:p-4' 
             : 'w-[90vw] max-w-sm p-4 sm:p-6'
           }
         `}>
-          {/* Chat Messages Container */}
+          {/* Message Display */}
           <div className="flex-1 flex flex-col overflow-hidden">
             {/* Initial Message Display */}
             {!isAgeConfirmed && (
@@ -267,43 +162,27 @@ const Landing = () => {
               </div>
             )}
 
-            {isAgeConfirmed && chatMessages.length > 0 && (
-              <div 
-                ref={chatContainerRef}
-                className="flex-1 overflow-y-auto scrollbar-luxury space-y-3 mb-4 pr-2"
-                style={{ height: '0', minHeight: '200px' }}
-              >
-                 {chatMessages.map((msg) => (
-                   <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in`}>
-                     <div className={`
-                       max-w-[75%] sm:max-w-[80%] px-3 py-2 sm:px-4 sm:py-2.5 rounded-2xl text-sm leading-relaxed
-                       ${msg.role === 'user' 
-                         ? 'bg-gradient-to-r from-secondary to-secondary/90 text-secondary-foreground rounded-br-md' 
-                         : 'bg-gradient-to-r from-accent/20 to-accent/10 text-foreground border border-accent/30 rounded-bl-md'
-                       }
-                      `}>
-                        {msg.role === 'assistant' 
-                          ? (msg.displayedContent || '')
-                          : msg.content
-                        }
-                        {msg.role === 'assistant' && msg.isTyping && <span className="blinking-cursor ml-1 text-secondary">|</span>}
-                      </div>
-                   </div>
-                 ))}
-                
-                {/* Vivien Typing Indicator */}
-                {isVivienTyping && (
-                  <div className="flex justify-start animate-fade-in">
-                    <div className="bg-gradient-to-r from-accent/20 to-accent/10 border border-accent/30 rounded-2xl rounded-bl-md px-4 py-3 max-w-[50%]">
-                      <div className="flex items-center space-x-1 text-foreground">
-                        <span className="text-sm">Vivien is typing</span>
-                        <div className="flex space-x-1">
-                          <div className="w-1 h-1 bg-secondary rounded-full animate-pulse"></div>
-                          <div className="w-1 h-1 bg-secondary rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
-                          <div className="w-1 h-1 bg-secondary rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
-                        </div>
-                      </div>
-                    </div>
+            {/* Construction Message Display */}
+            {isAgeConfirmed && (
+              <div className="flex-1 flex flex-col justify-center">
+                <div className="flex justify-start mb-6">
+                  <div className="bg-gradient-to-r from-accent/20 to-accent/10 border border-accent/30 rounded-2xl rounded-bl-md px-4 py-3 max-w-[90%]">
+                    <p className="font-playfair text-sm md:text-base lg:text-lg leading-relaxed text-foreground">
+                      {constructionMessage}
+                      {constructionMessage && constructionMessage.length < constructionText.length && <span className="blinking-cursor ml-1 text-secondary">|</span>}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Email Stefan Button */}
+                {showEmailButton && (
+                  <div className="flex justify-center animate-fade-in">
+                    <Button
+                      onClick={handleEmailStefan}
+                      className="bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-black font-medium px-6 py-3 text-sm rounded-lg"
+                    >
+                      Email Stefan
+                    </Button>
                   </div>
                 )}
               </div>
@@ -326,26 +205,6 @@ const Landing = () => {
                 No, I am not
               </MagneticButton>
             </div>
-          )}
-          
-          {/* Chat Input */}
-          {isAgeConfirmed && !isTyping && (
-            <form onSubmit={handleSendMessage} className="mt-4 md:mt-6 flex gap-2">
-              <Input
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Ask me anything about our collection..."
-                className="flex-1 bg-primary/60 border-white/30 text-white placeholder:text-white/70 text-sm"
-                disabled={isSending}
-              />
-              <Button
-                type="submit"
-                disabled={!inputValue.trim() || isSending}
-                className="bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-black font-medium px-4 text-sm"
-              >
-                {isSending ? '...' : 'Send'}
-              </Button>
-            </form>
           )}
         </div>
       </div>
