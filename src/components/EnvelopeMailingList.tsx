@@ -133,7 +133,7 @@ export const EnvelopeMailingList = ({
                   transition={{
                     duration: 1.6,
                     ease: 'easeInOut',
-                    times: [0, 0.6, 0.61],
+                    times: [0, 0.55, 0.56],
                     delay: 0.5
                   }}
                 >
@@ -198,12 +198,12 @@ export const EnvelopeMailingList = ({
                 <motion.div
                   initial={{ rotateX: 0, zIndex: 30 }}
                   animate={{ 
-                    rotateX: isEnvelopeOpen ? 120 : 0,
+                    rotateX: isEnvelopeOpen ? -80 : 0,
                     zIndex: isEnvelopeOpen ? 5 : 30
                   }}
                   transition={{ 
-                    rotateX: { type: "spring", damping: 30, stiffness: 100, delay: 0.4 },
-                    zIndex: { duration: 0, delay: 0.9 }
+                    rotateX: { type: "spring", damping: 22, stiffness: 140, delay: 0.4 },
+                    zIndex: { duration: 0, delay: 0.7 }
                   }}
                   className="absolute"
                   style={{
@@ -214,7 +214,8 @@ export const EnvelopeMailingList = ({
                     transformOrigin: '50% 100%',
                     pointerEvents: isEnvelopeOpen ? 'none' : 'auto',
                     transformStyle: 'preserve-3d',
-                    backfaceVisibility: 'hidden'
+                    backfaceVisibility: 'hidden',
+                    willChange: 'transform'
                   }}
                 >
                   <div
