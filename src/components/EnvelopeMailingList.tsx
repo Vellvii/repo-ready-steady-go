@@ -211,7 +211,7 @@ export const EnvelopeMailingList = ({
                   className="absolute transform-gpu"
                   style={{
                     left: '12.5%',
-                    top: '10%',
+                    top: '33.8%',
                     width: '75%',
                     height: '23.333%',
                     transformOrigin: '50% 0%',
