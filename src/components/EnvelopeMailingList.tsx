@@ -73,7 +73,7 @@ export const EnvelopeMailingList = ({
               </button>
 
               {/* Envelope SVG */}
-              <div className="relative w-full aspect-[4/3] perspective-[1000px]">
+              <div className="relative w-full aspect-[4/3]" style={{ perspective: '1000px', transformStyle: 'preserve-3d' }}>
                 <svg
                   viewBox="0 0 400 300"
                   className="w-full h-full relative z-10"
@@ -118,9 +118,9 @@ export const EnvelopeMailingList = ({
                   className="absolute"
                   style={{
                     left: '12.5%',
-                    top: '34%',
+                    top: '33.8%',
                     width: '75%',
-                    height: '59.3%',
+                    height: '59.6%',
                     overflow: 'hidden',
                     borderRadius: '4px'
                   }}
@@ -138,13 +138,13 @@ export const EnvelopeMailingList = ({
                   }}
                 >
                   <motion.div
-                    initial={{ y: '100%', rotateX: 6 }}
+                    initial={{ y: '102%', rotateX: 6 }}
                     animate={{ 
-                      y: isEnvelopeOpen ? ['100%', '-4%', '0%'] : '100%',
+                      y: isEnvelopeOpen ? ['102%', '-4%', '0%'] : '102%',
                       rotateX: isEnvelopeOpen ? [6, 0, 0] : 6
                     }}
                     transition={{ duration: 1.2, ease: 'easeInOut', times: [0, 0.7, 1], delay: 0.55 }}
-                    className="absolute left-[6.666%] top-[8%] w-[86.666%] h-[84%]"
+                    className="absolute left-[6.666%] top-[8%] w-[86.666%] h-[84%] transform-gpu"
                     style={{
                       background: 'hsl(30, 35%, 96%)',
                       border: '1px solid hsl(30, 20%, 80%)',
@@ -208,13 +208,13 @@ export const EnvelopeMailingList = ({
                     rotateX: { type: "spring", damping: 18, stiffness: 160, delay: 0.2 },
                     zIndex: { duration: 0, delay: 1.05 }
                   }}
-                  className="absolute"
+                  className="absolute transform-gpu"
                   style={{
                     left: '12.5%',
                     top: '10%',
                     width: '75%',
                     height: '23.333%',
-                    transformOrigin: '50% 100%',
+                    transformOrigin: '50% 0%',
                     pointerEvents: isEnvelopeOpen ? 'none' : 'auto',
                     transformStyle: 'preserve-3d',
                     backfaceVisibility: 'hidden',
@@ -226,10 +226,11 @@ export const EnvelopeMailingList = ({
                     className="absolute inset-0 rounded-b-[2px]"
                     style={{
                       background: 'linear-gradient(180deg, hsl(12, 62%, 70%), hsl(12, 48%, 56%))',
-                      clipPath: 'polygon(0% 100%, 50% 0%, 100% 100%)',
+                      clipPath: 'polygon(0% 0%, 50% 100%, 100% 0%)',
                       boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
                       border: '2px solid hsl(12, 50%, 55%)',
-                      backfaceVisibility: 'hidden'
+                      backfaceVisibility: 'hidden',
+                      transform: 'translateZ(0)'
                     }}
                   >
                     <img
@@ -245,9 +246,9 @@ export const EnvelopeMailingList = ({
                     className="absolute inset-0 rounded-b-[2px]"
                     style={{
                       background: 'linear-gradient(180deg, hsl(12, 48%, 58%), hsl(12, 40%, 52%))',
-                      clipPath: 'polygon(0% 100%, 50% 0%, 100% 100%)',
+                      clipPath: 'polygon(0% 0%, 50% 100%, 100% 0%)',
                       border: '2px solid hsl(12, 45%, 50%)',
-                      transform: 'rotateX(180deg)',
+                      transform: 'rotateX(180deg) translateZ(0)',
                       backfaceVisibility: 'hidden'
                     }}
                   />
