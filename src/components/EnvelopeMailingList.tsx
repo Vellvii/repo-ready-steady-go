@@ -118,9 +118,9 @@ export const EnvelopeMailingList = ({
                   className="absolute"
                   style={{
                     left: '12.5%',
-                    top: '33.333%',
+                    top: '34%',
                     width: '75%',
-                    height: '60%',
+                    height: '59.3%',
                     overflow: 'hidden',
                     borderRadius: '4px'
                   }}
@@ -131,18 +131,19 @@ export const EnvelopeMailingList = ({
                       : { zIndex: 0 }
                   }
                   transition={{
-                    duration: 1.4,
+                    duration: 1.2,
                     ease: 'easeInOut',
-                    times: [0, 0.62, 0.63],
-                    delay: 0.5
+                    times: [0, 0.75, 0.76],
+                    delay: 0.55
                   }}
                 >
                   <motion.div
-                    initial={{ y: '100%' }}
+                    initial={{ y: '100%', rotateX: 6 }}
                     animate={{ 
-                      y: isEnvelopeOpen ? ['100%', '-6%', '0%'] : '100%'
+                      y: isEnvelopeOpen ? ['100%', '-4%', '0%'] : '100%',
+                      rotateX: isEnvelopeOpen ? [6, 0, 0] : 6
                     }}
-                    transition={{ duration: 1.4, ease: 'easeInOut', times: [0, 0.72, 1], delay: 0.5 }}
+                    transition={{ duration: 1.2, ease: 'easeInOut', times: [0, 0.7, 1], delay: 0.55 }}
                     className="absolute left-[6.666%] top-[8%] w-[86.666%] h-[84%]"
                     style={{
                       background: 'hsl(30, 35%, 96%)',
@@ -150,7 +151,9 @@ export const EnvelopeMailingList = ({
                       borderRadius: '8px',
                       boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
                       willChange: 'transform',
-                      pointerEvents: 'auto'
+                      pointerEvents: 'auto',
+                      backfaceVisibility: 'hidden',
+                      transformStyle: 'preserve-3d'
                     }}
                   >
                     {/* Paper decoration lines */}
@@ -196,14 +199,14 @@ export const EnvelopeMailingList = ({
 
                 {/* 3D Flap overlay (HTML) for a true flip */}
                 <motion.div
-                  initial={{ rotateX: 0, zIndex: 30 }}
+                  initial={{ rotateX: 0, zIndex: 40 }}
                   animate={{ 
-                    rotateX: isEnvelopeOpen ? -70 : 0,
-                    zIndex: isEnvelopeOpen ? 5 : 30
+                    rotateX: isEnvelopeOpen ? -120 : 0,
+                    zIndex: isEnvelopeOpen ? [40, 40, 5] : 40
                   }}
                   transition={{ 
-                    rotateX: { type: "spring", damping: 22, stiffness: 160, delay: 0.35 },
-                    zIndex: { duration: 0, delay: 0.58 }
+                    rotateX: { type: "spring", damping: 18, stiffness: 160, delay: 0.2 },
+                    zIndex: { duration: 0, delay: 1.05 }
                   }}
                   className="absolute"
                   style={{
@@ -218,13 +221,15 @@ export const EnvelopeMailingList = ({
                     willChange: 'transform'
                   }}
                 >
+                  {/* FRONT FACE (outside of flap) */}
                   <div
-                    className="w-full h-full rounded-b-[2px]"
+                    className="absolute inset-0 rounded-b-[2px]"
                     style={{
                       background: 'linear-gradient(180deg, hsl(12, 62%, 70%), hsl(12, 48%, 56%))',
                       clipPath: 'polygon(0% 100%, 50% 0%, 100% 100%)',
                       boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
-                      border: '2px solid hsl(12, 50%, 55%)'
+                      border: '2px solid hsl(12, 50%, 55%)',
+                      backfaceVisibility: 'hidden'
                     }}
                   >
                     <img
@@ -234,6 +239,18 @@ export const EnvelopeMailingList = ({
                       className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[14%] opacity-95"
                     />
                   </div>
+
+                  {/* BACK FACE (inside of flap) */}
+                  <div
+                    className="absolute inset-0 rounded-b-[2px]"
+                    style={{
+                      background: 'linear-gradient(180deg, hsl(12, 48%, 58%), hsl(12, 40%, 52%))',
+                      clipPath: 'polygon(0% 100%, 50% 0%, 100% 100%)',
+                      border: '2px solid hsl(12, 45%, 50%)',
+                      transform: 'rotateX(180deg)',
+                      backfaceVisibility: 'hidden'
+                    }}
+                  />
                 </motion.div>
 
               </div>
