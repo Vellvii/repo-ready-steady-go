@@ -158,9 +158,10 @@ export const EnvelopeMailingList = ({
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: isEnvelopeOpen ? 1 : 0, y: isEnvelopeOpen ? 0 : 10 }}
                     transition={{ delay: 0.8, duration: 0.5 }}
-                    className="absolute inset-0 flex items-start justify-center pt-[12%] px-[10%]"
+                    className="absolute inset-0 flex flex-col justify-start px-[10%]"
+                    style={{ paddingTop: 'calc(15% - 0.5rem)' }}
                   >
-                    <form onSubmit={handleSubmit} className="w-full space-y-4">
+                    <form onSubmit={handleSubmit} className="w-full flex flex-col" style={{ gap: 'calc(10% - 1rem)' }}>
                       <label 
                         htmlFor="envelope-email" 
                         className="block text-sm font-playfair text-foreground/80 text-center"
