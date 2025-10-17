@@ -211,27 +211,26 @@ export const EnvelopeMailingList = ({
                   className="absolute transform-gpu"
                   style={{
                     left: '12.5%',
-                    top: 'calc(33.33% - 23.333%)',
+                    top: 'calc(33.33% - 23.333% + 1px)',
                     width: '75%',
                     height: '23.333%',
                     transformOrigin: '50% 100%',
                     pointerEvents: isEnvelopeOpen ? 'none' : 'auto',
                     transformStyle: 'preserve-3d',
-                    backfaceVisibility: 'hidden',
                     willChange: 'transform'
                   }}
                 >
                   {/* FRONT FACE (outside of flap) */}
                   <div
-                    className="absolute inset-0 rounded-b-[2px]"
+                    className="absolute inset-0"
                     style={{
                       background: 'linear-gradient(180deg, hsl(12, 62%, 70%), hsl(12, 48%, 56%))',
                       clipPath: 'polygon(0% 100%, 50% 0%, 100% 100%)',
                       boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
-                      border: '2px solid hsl(12, 50%, 55%)',
+                      border: '1px solid hsl(12, 50%, 55%)',
                       transformOrigin: '50% 100%',
                       backfaceVisibility: 'hidden',
-                      transform: 'translateZ(0)'
+                      transform: 'translateZ(0.5px)'
                     }}
                   >
                     <img
@@ -244,13 +243,13 @@ export const EnvelopeMailingList = ({
 
                   {/* BACK FACE (inside of flap) */}
                   <div
-                    className="absolute inset-0 rounded-b-[2px]"
+                    className="absolute inset-0"
                     style={{
                       background: 'linear-gradient(180deg, hsl(12, 48%, 58%), hsl(12, 40%, 52%))',
                       clipPath: 'polygon(0% 100%, 50% 0%, 100% 100%)',
-                      border: '2px solid hsl(12, 45%, 50%)',
+                      border: '1px solid hsl(12, 45%, 50%)',
                       transformOrigin: '50% 100%',
-                      transform: 'rotateX(180deg) translateZ(0)',
+                      transform: 'rotateX(180deg) translateZ(0.5px)',
                       backfaceVisibility: 'hidden'
                     }}
                   />
