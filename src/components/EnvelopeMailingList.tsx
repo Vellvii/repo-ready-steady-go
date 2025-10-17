@@ -131,10 +131,10 @@ export const EnvelopeMailingList = ({
                       : { zIndex: 0 }
                   }
                   transition={{
-                    duration: 1.05,
+                    duration: 1.6,
                     ease: 'easeInOut',
-                    times: [0, 0.6, 0.61],
-                    delay: 0.35
+                    times: [0, 0.65, 0.66],
+                    delay: 0.5
                   }}
                 >
                   <motion.div
@@ -142,7 +142,7 @@ export const EnvelopeMailingList = ({
                     animate={{ 
                       y: isEnvelopeOpen ? ['36%', '-88%', '0%'] : '36%'
                     }}
-                    transition={{ duration: 1.05, ease: 'easeInOut', times: [0, 0.62, 1], delay: 0.35 }}
+                    transition={{ duration: 1.6, ease: 'easeInOut', times: [0, 0.65, 1], delay: 0.5 }}
                     className="absolute left-[6.666%] top-[8%] w-[86.666%] h-[84%]"
                     style={{
                       background: 'hsl(30, 35%, 96%)',
@@ -160,9 +160,9 @@ export const EnvelopeMailingList = ({
                     
                     {/* Embedded form on the paper */}
                     <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: isEnvelopeOpen ? 1 : 0 }}
-                      transition={{ delay: 0.7 }}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: isEnvelopeOpen ? 1 : 0, y: isEnvelopeOpen ? 0 : 10 }}
+                      transition={{ delay: 1.2, duration: 0.6 }}
                       className="absolute inset-0 flex items-start justify-center pt-[15%] px-[7.7%]"
                     >
                       <form onSubmit={handleSubmit} className="w-full space-y-3">
@@ -198,7 +198,7 @@ export const EnvelopeMailingList = ({
                 <motion.div
                   initial={{ rotateX: 0 }}
                   animate={{ rotateX: isEnvelopeOpen ? -150 : 0 }}
-                  transition={{ type: "spring", damping: 24, stiffness: 160, delay: 0.25 }}
+                  transition={{ type: "spring", damping: 30, stiffness: 100, delay: 0.4 }}
                   className="absolute z-30"
                   style={{
                     left: '12.5%',
