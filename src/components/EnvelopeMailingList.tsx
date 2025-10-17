@@ -140,9 +140,9 @@ export const EnvelopeMailingList = ({
                   <motion.div
                     initial={{ y: '36%' }}
                     animate={{ 
-                      y: isEnvelopeOpen ? ['36%', '-88%', '0%'] : '36%'
+                      y: isEnvelopeOpen ? ['36%', '-180%', '0%'] : '36%'
                     }}
-                    transition={{ duration: 1.6, ease: 'easeInOut', times: [0, 0.65, 1], delay: 0.5 }}
+                    transition={{ duration: 1.6, ease: 'easeInOut', times: [0, 0.5, 1], delay: 0.5 }}
                     className="absolute left-[6.666%] top-[8%] w-[86.666%] h-[84%]"
                     style={{
                       background: 'hsl(30, 35%, 96%)',
@@ -197,7 +197,7 @@ export const EnvelopeMailingList = ({
                 {/* 3D Flap overlay (HTML) for a true flip */}
                 <motion.div
                   initial={{ rotateX: 0 }}
-                  animate={{ rotateX: isEnvelopeOpen ? 150 : 0 }}
+                  animate={{ rotateX: isEnvelopeOpen ? -180 : 0 }}
                   transition={{ type: "spring", damping: 30, stiffness: 100, delay: 0.4 }}
                   className="absolute z-30"
                   style={{
