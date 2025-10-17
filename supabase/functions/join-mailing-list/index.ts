@@ -136,7 +136,7 @@ const handler = async (req: Request): Promise<Response> => {
                 <table role="presentation" style="max-width: 600px; margin: 0 auto; background: #FFFFFF; border-radius: 16px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12); overflow: hidden;">
                   <!-- Header with gradient -->
                   <tr>
-                    <td style="background: linear-gradient(135deg, #E9967A 0%, #FF7F50 100%); padding: 48px 40px; text-align: center;">
+                    <td style="background: linear-gradient(135deg, #2C2C2C 0%, #1A1A1A 100%); padding: 48px 40px; text-align: center;">
                       <img src="https://mawaqjqifmvijolucrlp.supabase.co/storage/v1/object/public/email-assets/Vellvii-full-logo-transparent.png" alt="Vellvii" style="max-width: 200px; height: auto; display: block; margin: 0 auto;" />
                     </td>
                   </tr>
