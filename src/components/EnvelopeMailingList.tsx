@@ -73,7 +73,7 @@ export const EnvelopeMailingList = ({
               </button>
 
               {/* Envelope SVG */}
-              <div className="relative w-full aspect-[4/3]">
+              <div className="relative w-full aspect-[4/3] perspective-[1000px]">
                 <svg
                   viewBox="0 0 400 300"
                   className="w-full h-full"
@@ -161,35 +161,40 @@ export const EnvelopeMailingList = ({
                     </foreignObject>
                   </motion.g>
 
-                  {/* Envelope Flap + V-Logo (top layer) */}
-                  <motion.g
-                    initial={{ rotate: 0 }}
-                    animate={{ rotate: isEnvelopeOpen ? -155 : 0 }}
-                    transition={{ type: "spring", damping: 24, stiffness: 140, delay: 0.25 }}
-                    style={{ transformOrigin: "200px 100px", transformBox: "fill-box" }}
-                  >
-                    <path
-                      d="M 50 100 L 200 30 L 350 100 Z"
-                      fill="url(#envelopeFlap)"
-                      stroke="hsl(12, 50%, 55%)"
-                      strokeWidth="2"
-                      filter="url(#shadow)"
-                    />
-                    <motion.image
-                      href="/uploads/V-logo-transparent.png"
-                      x="175"
-                      y="50"
-                      width="50"
-                      height="50"
-                      opacity="0.95"
-                      aria-hidden="true"
-                      initial={{ scale: 1 }}
-                      animate={{ scale: [1, 1.04, 1] }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                      style={{ filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.3))" }}
-                    />
-                  </motion.g>
                 </svg>
+
+                {/* 3D Flap overlay (HTML) for a true flip */}
+                <motion.div
+                  initial={{ rotateX: 0 }}
+                  animate={{ rotateX: isEnvelopeOpen ? -140 : 0 }}
+                  transition={{ type: "spring", damping: 24, stiffness: 160, delay: 0.25 }}
+                  className="absolute z-20"
+                  style={{
+                    left: '12.5%',
+                    top: '10%',
+                    width: '75%',
+                    height: '23.333%',
+                    transformOrigin: '50% 100%',
+                    pointerEvents: isEnvelopeOpen ? 'none' : 'auto'
+                  }}
+                >
+                  <div
+                    className="w-full h-full rounded-b-[2px]"
+                    style={{
+                      background: 'linear-gradient(180deg, hsl(12, 60%, 60%), hsl(12, 55%, 65%))',
+                      clipPath: 'polygon(0% 100%, 50% 0%, 100% 100%)',
+                      boxShadow: '0 6px 16px rgba(0,0,0,0.25)',
+                      border: '2px solid hsl(12, 50%, 55%)'
+                    }}
+                  >
+                    <img
+                      src="/uploads/V-logo-transparent.png"
+                      alt="Vellvii logo seal"
+                      style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }}
+                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[14%] opacity-95"
+                    />
+                  </div>
+                </motion.div>
 
               </div>
             </div>
