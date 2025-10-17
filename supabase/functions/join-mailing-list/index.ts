@@ -39,7 +39,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Add to Resend audience (you'll need to create an audience in Resend dashboard)
     // For now, we'll send a confirmation email
     const emailResponse = await resend.emails.send({
-      from: "Vellvii <onboarding@resend.dev>",
+      from: "Vellvii <noreply@vellvii.com>",
       to: [email],
       subject: "Welcome to Vellvii Mailing List",
       html: `
@@ -61,7 +61,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Also notify Stefan about the new signup
     await resend.emails.send({
-      from: "Vellvii <onboarding@resend.dev>",
+      from: "Vellvii <noreply@vellvii.com>",
       to: ["stefan@vellvii.com"],
       subject: "New Mailing List Signup",
       html: `
