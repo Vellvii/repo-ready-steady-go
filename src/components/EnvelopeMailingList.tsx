@@ -198,7 +198,7 @@ export const EnvelopeMailingList = ({
                 <motion.div
                   initial={{ rotateX: 0, zIndex: 30 }}
                   animate={{ 
-                    rotateX: isEnvelopeOpen ? -180 : 0,
+                    rotateX: isEnvelopeOpen ? 120 : 0,
                     zIndex: isEnvelopeOpen ? 5 : 30
                   }}
                   transition={{ 
@@ -213,13 +213,14 @@ export const EnvelopeMailingList = ({
                     height: '23.333%',
                     transformOrigin: '50% 100%',
                     pointerEvents: isEnvelopeOpen ? 'none' : 'auto',
-                    transformStyle: 'preserve-3d'
+                    transformStyle: 'preserve-3d',
+                    backfaceVisibility: 'hidden'
                   }}
                 >
                   <div
                     className="w-full h-full rounded-b-[2px]"
                     style={{
-                      background: 'linear-gradient(180deg, hsl(12, 48%, 56%), hsl(12, 62%, 70%))',
+                      background: 'linear-gradient(180deg, hsl(12, 62%, 70%), hsl(12, 48%, 56%))',
                       clipPath: 'polygon(0% 100%, 50% 0%, 100% 100%)',
                       boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
                       border: '2px solid hsl(12, 50%, 55%)'
