@@ -76,7 +76,7 @@ export const EnvelopeMailingList = ({
               <div className="relative w-full aspect-[4/3] perspective-[1000px]">
                 <svg
                   viewBox="0 0 400 300"
-                  className="w-full h-full"
+                  className="w-full h-full relative z-10"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <defs>
@@ -115,18 +115,19 @@ export const EnvelopeMailingList = ({
 
                 {/* Paper that slides out - HTML for z-index control */}
                 <motion.div
-                  initial={{ y: '23%', zIndex: 5 }}
+                  initial={{ y: '0%', zIndex: 5 }}
                   animate={{ 
-                    y: isEnvelopeOpen ? '-7%' : '23%',
-                    zIndex: isEnvelopeOpen ? 25 : 5
+                    y: isEnvelopeOpen ? ['0%', '-18%', '0%'] : '0%',
+                    zIndex: isEnvelopeOpen ? [5, 25, 25] : 5
                   }}
-                  transition={{ type: "spring", damping: 24, stiffness: 140, delay: 0.35 }}
-                  className="absolute left-[17.5%] w-[65%] h-[66.67%]"
+                  transition={{ duration: 0.9, ease: 'easeInOut', times: [0, 0.5, 1], delay: 0.35 }}
+                  className="absolute left-[17.5%] top-[40%] w-[65%] h-[66.67%]"
                   style={{
                     background: 'hsl(30, 35%, 96%)',
                     border: '1px solid hsl(30, 20%, 80%)',
                     borderRadius: '8px',
-                    boxShadow: '0 4px 8px rgba(0,0,0,0.3)'
+                    boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+                    willChange: 'transform'
                   }}
                 >
                   {/* Paper decoration lines */}
