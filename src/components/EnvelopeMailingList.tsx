@@ -158,13 +158,12 @@ export const EnvelopeMailingList = ({
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: isEnvelopeOpen ? 1 : 0, y: isEnvelopeOpen ? 0 : 10 }}
                     transition={{ delay: 0.8, duration: 0.5 }}
-                    className="absolute inset-0 px-[10%]"
+                    className="absolute inset-0 px-[10%] pt-[17%]"
                   >
-                    <form onSubmit={handleSubmit} className="w-full flex flex-col">
+                    <form onSubmit={handleSubmit} className="w-full flex flex-col gap-[8%]">
                       <label 
                         htmlFor="envelope-email" 
-                        className="block text-sm font-playfair text-foreground/80 text-center mb-4"
-                        style={{ marginTop: '8%' }}
+                        className="block text-sm font-playfair text-foreground/80 text-center"
                       >
                         Get notified about updates
                       </label>
@@ -174,26 +173,23 @@ export const EnvelopeMailingList = ({
                         value={email}
                         onChange={(e) => onEmailChange(e.target.value)}
                         placeholder="your@email.com"
-                        className="w-full px-3 py-2 text-sm bg-transparent border-b-2 border-primary/30 focus:border-primary outline-none transition-colors text-center font-inter text-foreground placeholder:text-muted-foreground"
+                        className="w-full px-3 py-1.5 text-sm bg-transparent border-none outline-none transition-colors text-center font-inter text-foreground placeholder:text-foreground/60"
                         disabled={isSubmitting}
                         autoComplete="email"
-                        style={{ marginTop: '8%' }}
                       />
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full py-2 px-4 bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-accent text-primary-foreground font-medium text-sm rounded-full shadow-elegant transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                        style={{ marginTop: '10%' }}
+                        className="w-full py-3 px-4 bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-accent text-primary-foreground font-medium text-base rounded-full shadow-elegant transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-4"
                       >
                         {isSubmitting ? "Sending..." : "Join"}
                       </button>
-                      <img
-                        src="/uploads/Vellvii-full-logo-transparent.png"
-                        alt="Vellvii"
-                        className="w-24 mx-auto opacity-60"
-                        style={{ marginTop: '12%' }}
-                      />
                     </form>
+                    <img
+                      src="/uploads/Vellvii-full-logo-transparent.png"
+                      alt="Vellvii"
+                      className="w-28 mx-auto opacity-50 mt-auto absolute bottom-[8%] left-1/2 -translate-x-1/2"
+                    />
                   </motion.div>
                 </motion.div>
 
