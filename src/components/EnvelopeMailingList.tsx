@@ -174,7 +174,7 @@ export const EnvelopeMailingList = ({
                         value={email}
                         onChange={(e) => onEmailChange(e.target.value)}
                         placeholder="your@email.com"
-                        className="w-full px-3 py-1.5 text-sm bg-transparent border-none outline-none transition-colors text-center font-inter text-foreground placeholder:text-foreground/60 absolute left-[10%] right-[10%]"
+                        className="px-3 py-1.5 text-sm bg-transparent border-none outline-none transition-colors text-center font-inter text-foreground placeholder:text-foreground/60 absolute left-[10%] right-[10%]"
                         disabled={isSubmitting}
                         autoComplete="email"
                         style={{ top: '30%', transform: 'translateY(-50%)' }}
