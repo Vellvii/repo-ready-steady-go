@@ -119,7 +119,7 @@ const Landing = () => {
   return (
     <div id="landing-lock" className="fixed inset-0 h-full bg-black flex flex-col items-center pt-4 md:pt-6 pb-40 gap-3 overflow-hidden">
       <img
-        src="/uploads/V-logo-Shimmer.jpeg"
+        src="/uploads/V-logo-transparent.png"
         alt="V Logo"
         className="w-32 sm:w-40 h-auto"
       />
