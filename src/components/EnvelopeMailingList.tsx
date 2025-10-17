@@ -214,7 +214,7 @@ export const EnvelopeMailingList = ({
                     top: 'calc(33.33% + 10px)',
                     width: '75%',
                     height: '23.333%',
-                    transformOrigin: '50% 0%',
+                    transformOrigin: '50% 33.33%',
                     pointerEvents: isEnvelopeOpen ? 'none' : 'auto',
                     transformStyle: 'preserve-3d',
                     backfaceVisibility: 'hidden',
