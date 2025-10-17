@@ -114,8 +114,8 @@ export const EnvelopeMailingList = ({
                 </svg>
 
                 {/* Clipping window over envelope body - keeps paper hidden behind until it rises */}
-                <div
-                  className="absolute z-20"
+                <motion.div
+                  className="absolute"
                   style={{
                     left: '12.5%',
                     top: '33.333%',
@@ -124,15 +124,26 @@ export const EnvelopeMailingList = ({
                     overflow: 'hidden',
                     borderRadius: '4px'
                   }}
+                  initial={{ zIndex: 0 }}
+                  animate={
+                    isEnvelopeOpen
+                      ? { zIndex: [0, 0, 25] }
+                      : { zIndex: 0 }
+                  }
+                  transition={{
+                    duration: 1.05,
+                    ease: 'easeInOut',
+                    times: [0, 0.6, 0.61],
+                    delay: 0.35
+                  }}
                 >
                   <motion.div
-                    initial={{ y: '24%', zIndex: 5 }}
+                    initial={{ y: '36%' }}
                     animate={{ 
-                      y: isEnvelopeOpen ? ['24%', '-72%', '0%'] : '24%',
-                      zIndex: isEnvelopeOpen ? [5, 25, 25] : 5
+                      y: isEnvelopeOpen ? ['36%', '-88%', '0%'] : '36%'
                     }}
-                    transition={{ duration: 1.05, ease: 'easeInOut', times: [0, 0.58, 1], delay: 0.35 }}
-                    className="absolute left-[6.666%] top-[6%] w-[86.666%] h-[86%]"
+                    transition={{ duration: 1.05, ease: 'easeInOut', times: [0, 0.62, 1], delay: 0.35 }}
+                    className="absolute left-[6.666%] top-[8%] w-[86.666%] h-[84%]"
                     style={{
                       background: 'hsl(30, 35%, 96%)',
                       border: '1px solid hsl(30, 20%, 80%)',
@@ -181,12 +192,12 @@ export const EnvelopeMailingList = ({
                       </form>
                     </motion.div>
                   </motion.div>
-                </div>
+                </motion.div>
 
                 {/* 3D Flap overlay (HTML) for a true flip */}
                 <motion.div
                   initial={{ rotateX: 0 }}
-                  animate={{ rotateX: isEnvelopeOpen ? 140 : 0 }}
+                  animate={{ rotateX: isEnvelopeOpen ? -150 : 0 }}
                   transition={{ type: "spring", damping: 24, stiffness: 160, delay: 0.25 }}
                   className="absolute z-30"
                   style={{
@@ -203,7 +214,7 @@ export const EnvelopeMailingList = ({
                   <div
                     className="w-full h-full rounded-b-[2px]"
                     style={{
-                      background: 'linear-gradient(180deg, hsl(12, 55%, 68%), hsl(12, 50%, 58%))',
+                      background: 'linear-gradient(180deg, hsl(12, 62%, 70%), hsl(12, 48%, 56%))',
                       clipPath: 'polygon(0% 100%, 50% 0%, 100% 100%)',
                       boxShadow: '0 6px 16px rgba(0,0,0,0.25)',
                       border: '2px solid hsl(12, 50%, 55%)'
