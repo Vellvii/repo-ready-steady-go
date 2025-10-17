@@ -111,7 +111,7 @@ export const EnvelopeMailingList = ({
                   <motion.g
                     initial={{ y: 0 }}
                     animate={{ y: isEnvelopeOpen ? -80 : 0 }}
-                    transition={{ type: "spring", damping: 25, stiffness: 120, delay: 0.4 }}
+                    transition={{ type: "spring", damping: 24, stiffness: 140, delay: 0.35 }}
                   >
                     <rect
                       x="70"
@@ -121,93 +121,76 @@ export const EnvelopeMailingList = ({
                       fill="hsl(30, 35%, 96%)"
                       stroke="hsl(30, 20%, 80%)"
                       strokeWidth="1"
-                      rx="2"
+                      rx="8"
                       filter="url(#shadow)"
                     />
                     {/* Paper lines decoration */}
                     <line x1="90" y1="160" x2="310" y2="160" stroke="hsl(12, 55%, 70%)" strokeWidth="1" opacity="0.3" />
                     <line x1="90" y1="180" x2="310" y2="180" stroke="hsl(12, 55%, 70%)" strokeWidth="1" opacity="0.3" />
                     <line x1="90" y1="200" x2="310" y2="200" stroke="hsl(12, 55%, 70%)" strokeWidth="1" opacity="0.3" />
+
+                    {/* Embedded form on the paper */}
+                    <foreignObject x="90" y="150" width="220" height="150">
+                      <div style={{ pointerEvents: 'auto', opacity: isEnvelopeOpen ? 1 : 0, transition: 'opacity 300ms 600ms' }}>
+                        <form onSubmit={handleSubmit} className="space-y-3">
+                          <label 
+                            htmlFor="envelope-email" 
+                            className="block text-xs font-playfair text-foreground/80 text-center"
+                          >
+                            Get notified about updates
+                          </label>
+                          <input
+                            id="envelope-email"
+                            type="email"
+                            value={email}
+                            onChange={(e) => onEmailChange(e.target.value)}
+                            placeholder="your@email.com"
+                            className="w-full px-3 py-2 text-xs bg-background/90 border-b-2 border-primary/30 focus:border-primary outline-none transition-colors text-center font-inter text-foreground placeholder:text-muted-foreground rounded"
+                            disabled={isSubmitting}
+                            autoComplete="email"
+                          />
+                          <button
+                            type="submit"
+                            disabled={isSubmitting}
+                            className="w-full py-2 px-4 bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-accent text-primary-foreground font-medium text-xs rounded-full shadow-elegant transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                          >
+                            {isSubmitting ? "Sending..." : "Join"}
+                          </button>
+                        </form>
+                      </div>
+                    </foreignObject>
                   </motion.g>
 
-                  {/* Envelope Flap - rendered last to be on top */}
-                  <motion.path
-                    d="M 50 100 L 200 30 L 350 100 Z"
-                    fill="url(#envelopeFlap)"
-                    stroke="hsl(12, 50%, 55%)"
-                    strokeWidth="2"
-                    filter="url(#shadow)"
+                  {/* Envelope Flap + V-Logo (top layer) */}
+                  <motion.g
                     initial={{ rotate: 0 }}
-                    animate={{ rotate: isEnvelopeOpen ? -180 : 0 }}
-                    transition={{ type: "spring", damping: 25, stiffness: 120, delay: 0.2 }}
-                    style={{ originX: "200px", originY: "100px" }}
-                  />
-
-                  {/* V-Logo on flap */}
-                  <motion.image
-                    href="/uploads/V-logo-transparent.png"
-                    x="175"
-                    y="50"
-                    width="50"
-                    height="50"
-                    opacity="0.95"
-                    initial={{ rotate: 0, scale: 1 }}
-                    animate={{ 
-                      rotate: isEnvelopeOpen ? -180 : 0,
-                      scale: [1, 1.05, 1],
-                    }}
-                    transition={{ 
-                      rotate: { type: "spring", damping: 25, stiffness: 120, delay: 0.2 },
-                      scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
-                    }}
-                    style={{ 
-                      filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.3))",
-                      originX: "200px",
-                      originY: "100px"
-                    }}
-                  />
+                    animate={{ rotate: isEnvelopeOpen ? -155 : 0 }}
+                    transition={{ type: "spring", damping: 24, stiffness: 140, delay: 0.25 }}
+                    style={{ transformOrigin: "200px 100px", transformBox: "fill-box" }}
+                  >
+                    <path
+                      d="M 50 100 L 200 30 L 350 100 Z"
+                      fill="url(#envelopeFlap)"
+                      stroke="hsl(12, 50%, 55%)"
+                      strokeWidth="2"
+                      filter="url(#shadow)"
+                    />
+                    <motion.image
+                      href="/uploads/V-logo-transparent.png"
+                      x="175"
+                      y="50"
+                      width="50"
+                      height="50"
+                      opacity="0.95"
+                      aria-hidden="true"
+                      initial={{ scale: 1 }}
+                      animate={{ scale: [1, 1.04, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                      style={{ filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.3))" }}
+                    />
+                  </motion.g>
                 </svg>
 
-                {/* Form Content Overlay */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ 
-                    opacity: isEnvelopeOpen ? 1 : 0,
-                    y: isEnvelopeOpen ? 0 : 20
-                  }}
-                  transition={{ delay: 0.7, type: "spring", damping: 20 }}
-                  className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[70%] pointer-events-auto z-10"
-                >
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                      <label 
-                        htmlFor="envelope-email" 
-                        className="block text-sm font-playfair text-foreground/80 mb-2 text-center"
-                      >
-                        Get notified about updates
-                      </label>
-                      <input
-                        id="envelope-email"
-                        type="email"
-                        value={email}
-                        onChange={(e) => onEmailChange(e.target.value)}
-                        placeholder="your@email.com"
-                        className="w-full px-4 py-2 text-sm bg-white/90 border-b-2 border-primary/30 focus:border-primary outline-none transition-colors text-center font-inter text-foreground placeholder:text-muted-foreground"
-                        disabled={isSubmitting}
-                        autoComplete="email"
-                      />
-                    </div>
-                    <motion.button
-                      type="submit"
-                      disabled={isSubmitting}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="w-full py-2 px-4 bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-accent text-primary-foreground font-medium text-sm rounded-full shadow-elegant transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {isSubmitting ? "Sending..." : "Join"}
-                    </motion.button>
-                  </form>
-                </motion.div>
               </div>
             </div>
           </motion.div>
