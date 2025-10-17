@@ -1,9 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { MagneticButton } from "@/components/animations/MagneticButton";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
+import { EnvelopeMailingList } from "@/components/EnvelopeMailingList";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import vivienImage from "/uploads/976c0d6d-a066-409a-8ad6-6353840958ac.png";
@@ -249,43 +247,15 @@ const Landing = () => {
         </div>
       </div>
 
-      {/* Mailing List Dialog */}
-      <Dialog open={showMailingDialog} onOpenChange={setShowMailingDialog}>
-        <DialogContent className="bg-gradient-to-br from-card/95 to-muted/95 backdrop-blur-xl border border-secondary/20">
-          <DialogHeader>
-            <DialogTitle className="text-foreground font-playfair text-xl">Join Our Mailing List</DialogTitle>
-            <DialogDescription className="text-foreground/80">
-              Get notified about updates and releases from Vellvii
-            </DialogDescription>
-          </DialogHeader>
-          <div className="space-y-4 mt-4">
-            <Input
-              type="email"
-              placeholder="Enter your email"
-              value={mailingEmail}
-              onChange={(e) => setMailingEmail(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleJoinMailingList()}
-              className="bg-background/50 border-secondary/30"
-            />
-            <div className="flex gap-2">
-              <Button
-                onClick={handleJoinMailingList}
-                disabled={isSubmitting}
-                className="flex-1 bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-accent text-primary-foreground"
-              >
-                {isSubmitting ? "Joining..." : "Join"}
-              </Button>
-              <Button
-                onClick={() => setShowMailingDialog(false)}
-                variant="outline"
-                className="flex-1"
-              >
-                Cancel
-              </Button>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
+      {/* Envelope Mailing List */}
+      <EnvelopeMailingList
+        isOpen={showMailingDialog}
+        onClose={() => setShowMailingDialog(false)}
+        email={mailingEmail}
+        onEmailChange={setMailingEmail}
+        onSubmit={handleJoinMailingList}
+        isSubmitting={isSubmitting}
+      />
     </div>
   );
 };
