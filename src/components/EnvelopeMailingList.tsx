@@ -115,13 +115,13 @@ export const EnvelopeMailingList = ({
 
                 {/* Paper that slides out - HTML for z-index control */}
                 <motion.div
-                  initial={{ y: '0%', zIndex: 5 }}
+                  initial={{ y: '12%', zIndex: 5 }}
                   animate={{ 
-                    y: isEnvelopeOpen ? ['0%', '-18%', '0%'] : '0%',
+                    y: isEnvelopeOpen ? ['12%', '-30%', '0%'] : '12%',
                     zIndex: isEnvelopeOpen ? [5, 25, 25] : 5
                   }}
-                  transition={{ duration: 0.9, ease: 'easeInOut', times: [0, 0.5, 1], delay: 0.35 }}
-                  className="absolute left-[17.5%] top-[40%] w-[65%] h-[66.67%]"
+                  transition={{ duration: 0.9, ease: 'easeInOut', times: [0, 0.52, 1], delay: 0.35 }}
+                  className="absolute left-[17.5%] top-[36%] w-[65%] h-[56%]"
                   style={{
                     background: 'hsl(30, 35%, 96%)',
                     border: '1px solid hsl(30, 20%, 80%)',
@@ -175,7 +175,7 @@ export const EnvelopeMailingList = ({
                   initial={{ rotateX: 0 }}
                   animate={{ rotateX: isEnvelopeOpen ? 140 : 0 }}
                   transition={{ type: "spring", damping: 24, stiffness: 160, delay: 0.25 }}
-                  className="absolute z-20"
+                  className="absolute z-30"
                   style={{
                     left: '12.5%',
                     top: '10%',
