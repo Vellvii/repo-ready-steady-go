@@ -110,8 +110,8 @@ export const EnvelopeMailingList = ({
                   {/* Paper that slides out */}
                   <motion.g
                     initial={{ y: 0 }}
-                    animate={{ y: isEnvelopeOpen ? -120 : 0 }}
-                    transition={{ type: "spring", damping: 20, stiffness: 150, delay: 0.3 }}
+                    animate={{ y: isEnvelopeOpen ? -80 : 0 }}
+                    transition={{ type: "spring", damping: 25, stiffness: 120, delay: 0.4 }}
                   >
                     <rect
                       x="70"
@@ -122,6 +122,7 @@ export const EnvelopeMailingList = ({
                       stroke="hsl(30, 20%, 80%)"
                       strokeWidth="1"
                       rx="2"
+                      filter="url(#shadow)"
                     />
                     {/* Paper lines decoration */}
                     <line x1="90" y1="160" x2="310" y2="160" stroke="hsl(12, 55%, 70%)" strokeWidth="1" opacity="0.3" />
@@ -129,51 +130,53 @@ export const EnvelopeMailingList = ({
                     <line x1="90" y1="200" x2="310" y2="200" stroke="hsl(12, 55%, 70%)" strokeWidth="1" opacity="0.3" />
                   </motion.g>
 
-                  {/* Envelope Flap */}
-                  <motion.g
-                    initial={{ rotateX: 0 }}
-                    animate={{ rotateX: isEnvelopeOpen ? 180 : 0 }}
-                    transition={{ type: "spring", damping: 20, stiffness: 100, delay: 0.2 }}
-                    style={{ transformOrigin: "200px 100px", transformBox: "fill-box" }}
-                  >
-                    <path
-                      d="M 50 100 L 200 30 L 350 100 Z"
-                      fill="url(#envelopeFlap)"
-                      stroke="hsl(12, 50%, 55%)"
-                      strokeWidth="2"
-                      filter="url(#shadow)"
-                    />
+                  {/* Envelope Flap - rendered last to be on top */}
+                  <motion.path
+                    d="M 50 100 L 200 30 L 350 100 Z"
+                    fill="url(#envelopeFlap)"
+                    stroke="hsl(12, 50%, 55%)"
+                    strokeWidth="2"
+                    filter="url(#shadow)"
+                    initial={{ rotate: 0 }}
+                    animate={{ rotate: isEnvelopeOpen ? -180 : 0 }}
+                    transition={{ type: "spring", damping: 25, stiffness: 120, delay: 0.2 }}
+                    style={{ originX: "200px", originY: "100px" }}
+                  />
 
-                    {/* V-Logo on flap */}
-                    <motion.image
-                      href="/uploads/V-logo-transparent.png"
-                      x="175"
-                      y="50"
-                      width="50"
-                      height="50"
-                      opacity="0.95"
-                      initial={{ scale: 1 }}
-                      animate={{ 
-                        scale: [1, 1.05, 1],
-                      }}
-                      transition={{ 
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                      style={{ 
-                        filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.3))"
-                      }}
-                    />
-                  </motion.g>
+                  {/* V-Logo on flap */}
+                  <motion.image
+                    href="/uploads/V-logo-transparent.png"
+                    x="175"
+                    y="50"
+                    width="50"
+                    height="50"
+                    opacity="0.95"
+                    initial={{ rotate: 0, scale: 1 }}
+                    animate={{ 
+                      rotate: isEnvelopeOpen ? -180 : 0,
+                      scale: [1, 1.05, 1],
+                    }}
+                    transition={{ 
+                      rotate: { type: "spring", damping: 25, stiffness: 120, delay: 0.2 },
+                      scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                    }}
+                    style={{ 
+                      filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.3))",
+                      originX: "200px",
+                      originY: "100px"
+                    }}
+                  />
                 </svg>
 
                 {/* Form Content Overlay */}
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: isEnvelopeOpen ? 1 : 0 }}
-                  transition={{ delay: 0.6 }}
-                  className="absolute top-[15%] left-1/2 -translate-x-1/2 w-[70%] pointer-events-auto"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ 
+                    opacity: isEnvelopeOpen ? 1 : 0,
+                    y: isEnvelopeOpen ? 0 : 20
+                  }}
+                  transition={{ delay: 0.7, type: "spring", damping: 20 }}
+                  className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[70%] pointer-events-auto z-10"
                 >
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
