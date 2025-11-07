@@ -32,7 +32,7 @@ const showcaseFeatures = [{
   subcategories: [{
     title: "Biometric Fingerprint Lock",
     description: "One touch. One owner. Total control of your intimate collection.",
-    thumbnails: ["/uploads/fingerprint-video.webm", "/placeholder.svg", "/placeholder.svg"]
+    thumbnails: ["/uploads/fingerprint-video.webm", "/uploads/RedLockClose.png", "/uploads/Dox_fp_lock_video2.webm"]
   }, {
     title: "Intelligent Charging System",
     description: "Seamlessly charges your devices while keeping them beautifully organized.",
