@@ -3,6 +3,7 @@ import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import doxClosedExterior from "@/assets/dox-closed-exterior.png";
 type MediaItem = {
   image?: string;
@@ -13,6 +14,7 @@ type MediaItem = {
 type Subcategory = {
   title: string;
   description: string;
+  thumbnails: string[];
 };
 const showcaseFeatures = [{
   number: 1,
@@ -29,13 +31,16 @@ const showcaseFeatures = [{
   }],
   subcategories: [{
     title: "Biometric Fingerprint Lock",
-    description: "One touch. One owner. Total control of your intimate collection."
+    description: "One touch. One owner. Total control of your intimate collection.",
+    thumbnails: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"]
   }, {
     title: "Intelligent Charging System",
-    description: "Seamlessly charges your devices while keeping them beautifully organized."
+    description: "Seamlessly charges your devices while keeping them beautifully organized.",
+    thumbnails: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"]
   }, {
     title: "Interchangeable Compartment",
-    description: "Customizable storage that adapts to your unique collection."
+    description: "Customizable storage that adapts to your unique collection.",
+    thumbnails: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"]
   }]
 }, {
   number: 2,
@@ -70,6 +75,8 @@ const FeatureCarousel = ({
   index: number;
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxImage, setLightboxImage] = useState("");
   const nextSlide = () => {
     setCurrentIndex(prev => (prev + 1) % feature.images.length);
   };
@@ -142,10 +149,41 @@ const FeatureCarousel = ({
                     <p className="text-sm leading-relaxed text-neutral-600">
                       {sub.description}
                     </p>
+                    
+                    {/* Thumbnails */}
+                    <div className="flex gap-2 justify-center mt-4">
+                      {sub.thumbnails.map((thumb, thumbIndex) => (
+                        <button
+                          key={thumbIndex}
+                          onClick={() => {
+                            setLightboxImage(thumb);
+                            setLightboxOpen(true);
+                          }}
+                          className="w-20 h-20 rounded-lg overflow-hidden border border-white/20 hover:border-primary/50 transition-all hover:scale-105"
+                        >
+                          <img
+                            src={thumb}
+                            alt={`${sub.title} thumbnail ${thumbIndex + 1}`}
+                            className="w-full h-full object-cover"
+                          />
+                        </button>
+                      ))}
+                    </div>
                   </CardContent>
                 </Card>
               </ScrollReveal>)}
           </div>}
+
+        {/* Lightbox Dialog */}
+        <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
+          <DialogContent className="max-w-4xl bg-black/90 border-white/20">
+            <img
+              src={lightboxImage}
+              alt="Lightbox view"
+              className="w-full h-auto rounded-lg"
+            />
+          </DialogContent>
+        </Dialog>
       </div>
     </ScrollReveal>;
 };
