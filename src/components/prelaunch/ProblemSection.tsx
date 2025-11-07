@@ -60,7 +60,7 @@ export const ProblemSection = () => {
               <img 
                 src={improvisedStorageImage} 
                 alt="Improvised Storage" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover scale-120"
               />
             </div>
 
