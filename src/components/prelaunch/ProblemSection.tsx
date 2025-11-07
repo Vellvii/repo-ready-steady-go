@@ -1,16 +1,19 @@
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { Card, CardContent } from "@/components/ui/card";
-import { Layers, BatteryWarning, Lock } from "lucide-react";
+import makeshiftIcon from "@/assets/icon-makeshift-era.png";
+import stigmaIcon from "@/assets/icon-stigma-storage.png";
+import privacyIcon from "@/assets/icon-privacy-sophistication.png";
+
 const problems = [{
-  icon: Layers,
+  icon: makeshiftIcon,
   title: "The Makeshift Era is Over",
   description: "Walls, tiles, toilet seats — places that never belonged in your story. Your pleasure deserves better than improvised spaces."
 }, {
-  icon: BatteryWarning,
+  icon: stigmaIcon,
   title: "Stigma Disguised as Storage",
   description: "Hiding your wellness collection in drawers and bags, as if pleasure needs to apologize for existing."
 }, {
-  icon: Lock,
+  icon: privacyIcon,
   title: "Privacy Without Sophistication",
   description: "No dedicated, elegant space built for your pleasure. Sharing spaces shouldn't mean compromising on beauty or security."
 }];
@@ -34,8 +37,8 @@ export const ProblemSection = () => {
           {problems.map((problem, index) => <ScrollReveal key={problem.title} delay={0.1 * index} direction="up">
               <Card className="glass-dark border-white/10 hover:border-primary/30 transition-all duration-300 hover-glow h-full">
                 <CardContent className="p-6 sm:p-8 text-center space-y-4">
-                  <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
-                    <problem.icon className="w-8 h-8 text-primary" />
+                  <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
+                    <img src={problem.icon} alt={problem.title} className="w-10 h-10 object-contain" />
                   </div>
                   <h3 className="text-xl font-semibold font-playfair text-slate-950">
                     {problem.title}
