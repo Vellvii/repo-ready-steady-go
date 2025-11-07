@@ -58,14 +58,6 @@ export const ProblemSection = () => {
           <div className="grid md:grid-cols-2 gap-4 max-w-5xl mx-auto">
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden glass-dark">
               <img 
-                src={improvisedStorageImage} 
-                alt="Improvised Storage" 
-                className="w-full h-full object-cover scale-120"
-              />
-            </div>
-
-            <div className="relative aspect-[4/3] rounded-xl overflow-hidden glass-dark">
-              <img 
                 src={sanctuaryWithinImage} 
                 alt="A Sanctuary Within" 
                 className="w-full h-full object-cover"
