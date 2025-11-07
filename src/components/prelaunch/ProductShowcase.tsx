@@ -2,12 +2,18 @@ import { useState } from "react";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import doxClosedExterior from "@/assets/dox-closed-exterior.png";
 
 type MediaItem = {
   image?: string;
   video?: string;
   label: string;
+  description: string;
+};
+
+type Subcategory = {
+  title: string;
   description: string;
 };
 
@@ -19,6 +25,11 @@ const showcaseFeatures = [
     images: [
       { image: doxClosedExterior, label: "DOX CLOSED - Faux Leather Exterior", description: "High-quality waterproof faux leather with rose-gold trims" },
       { video: "/uploads/dox-open-animation.mp4", label: "DOX OPEN - A Sanctuary Within", description: "Soft velvet interior with removable compartment tray" },
+    ],
+    subcategories: [
+      { title: "Biometric Fingerprint Lock", description: "One touch. One owner. Total control of your intimate collection." },
+      { title: "Intelligent Charging System", description: "Seamlessly charges your devices while keeping them beautifully organized." },
+      { title: "Interchangeable Compartment", description: "Customizable storage that adapts to your unique collection." }
     ]
   },
   {
@@ -41,7 +52,7 @@ const showcaseFeatures = [
   }
 ];
 
-const FeatureCarousel = ({ feature, index }: { feature: typeof showcaseFeatures[0], index: number }) => {
+const FeatureCarousel = ({ feature, index }: { feature: typeof showcaseFeatures[0] & { subcategories?: Subcategory[] }, index: number }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -147,6 +158,26 @@ const FeatureCarousel = ({ feature, index }: { feature: typeof showcaseFeatures[
             )}
           </div>
         </div>
+
+        {/* Subcategories */}
+        {feature.subcategories && feature.subcategories.length > 0 && (
+          <div className="mt-12 grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {feature.subcategories.map((sub, subIndex) => (
+              <ScrollReveal key={sub.title} delay={0.1 * subIndex} direction="up">
+                <Card className="glass-dark border-white/10 hover:border-primary/30 transition-all duration-300 hover-glow h-full">
+                  <CardContent className="p-6 text-center space-y-3">
+                    <h4 className="text-lg font-semibold text-white font-playfair">
+                      {sub.title}
+                    </h4>
+                    <p className="text-sm text-white/60 leading-relaxed">
+                      {sub.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </ScrollReveal>
+            ))}
+          </div>
+        )}
       </div>
     </ScrollReveal>
   );
