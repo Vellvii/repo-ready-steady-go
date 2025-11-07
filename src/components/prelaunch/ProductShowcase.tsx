@@ -10,6 +10,15 @@ type MediaItem = {
   label: string;
   description: string;
 };
+
+type FeatureItem = {
+  number: number;
+  title: string;
+  subtitle: string;
+  tagline?: string;
+  images: MediaItem[];
+  subcategories?: Subcategory[];
+};
 type Subcategory = {
   title: string;
   description: string;
@@ -70,7 +79,8 @@ const showcaseFeatures = [
   {
     number: 2,
     title: "Flagship Introduction - Conscious Innovation",
-    subtitle: "The most innovative solution of the century. 'DDS - Dildo Docking Station'",
+    subtitle: "The most innovative solution of the century.",
+    tagline: "DDS - Dildo Docking Station",
     images: [
       {
         image: "/uploads/BeigeDDSPieces.png",
@@ -109,9 +119,7 @@ const FeatureCarousel = ({
   feature,
   index,
 }: {
-  feature: (typeof showcaseFeatures)[0] & {
-    subcategories?: Subcategory[];
-  };
+  feature: FeatureItem;
   index: number;
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -162,6 +170,9 @@ const FeatureCarousel = ({
         <div className="text-center mb-8">
           <h3 className="text-2xl sm:text-3xl font-bold text-white font-playfair mb-2">{feature.title}</h3>
           <p className="text-lg text-white/60">{feature.subtitle}</p>
+          {feature.tagline && (
+            <p className="text-xl text-white/80 font-semibold mt-2">{feature.tagline}</p>
+          )}
         </div>
 
         {/* Carousel */}
