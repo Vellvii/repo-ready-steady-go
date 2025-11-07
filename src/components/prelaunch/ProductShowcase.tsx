@@ -70,14 +70,21 @@ const showcaseFeatures = [
   {
     number: 2,
     title: "DDS - Dildo Docking Station",
-    subtitle: "Most innovative design of the century.",
+    subtitle: "The most innovative solution of the century",
     images: [
       {
-        label: "DDS - Dildo Docking Station",
+        image: "/uploads/BeigeDDSPieces.png",
+        label: "DDS - Modular Design",
         description: "Poured acrylic glass surface, engineered elegance",
       },
       {
-        label: "WIRELESS CHARGING - Effortless Power",
+        image: "/uploads/Black-Dildo-Close.png",
+        label: "DDS - Premium Finish",
+        description: "Rose-gold accents with textured surface",
+      },
+      {
+        image: "/uploads/Red-Dildo.png",
+        label: "DDS - Wireless Charging",
         description: "Simply place and charge",
       },
     ],
