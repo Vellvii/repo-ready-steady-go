@@ -4,11 +4,11 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const images = [
-  { label: "DOX CLOSED - Front View", description: "Exterior vegan leather finish" },
-  { label: "DOX OPEN - Interior Velvet Lining", description: "Luxurious velvet compartments" },
-  { label: "CHARGING DOCK - Close-up Detail", description: "Wireless charging technology" },
-  { label: "FINGERPRINT LOCK - Technology Shot", description: "Biometric security system" },
-  { label: "LIFESTYLE - DOX on Nightstand", description: "Seamless bedroom integration" },
+  { label: "DOX CLOSED - Faux Leather Exterior", description: "High-quality waterproof faux leather with rose-gold trims" },
+  { label: "DOX OPEN - A Sanctuary Within", description: "Soft velvet interior with removable compartment tray" },
+  { label: "DDS - Dildo Docking Station", description: "Poured acrylic glass surface, engineered elegance" },
+  { label: "FINGERPRINT LOCK - Biometric Security", description: "One touch. One owner. Total control." },
+  { label: "LIFESTYLE - Pleasure, Elevated", description: "Designed to look, feel, and function like luxury" },
 ];
 
 export const ProductShowcase = () => {
@@ -29,8 +29,11 @@ export const ProductShowcase = () => {
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <ScrollReveal>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mb-16 font-playfair">
-            Exquisite Design
+            3-in-1 Innovation
           </h2>
+          <p className="text-lg text-white/60 text-center max-w-3xl mx-auto mb-16 -mt-12">
+            A discreet innovation that stores beautifully, charges intelligently, and enhances intimately
+          </p>
         </ScrollReveal>
 
         {/* Main Carousel */}

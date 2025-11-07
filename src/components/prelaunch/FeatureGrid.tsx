@@ -5,33 +5,33 @@ import { Fingerprint, Zap, Package, Heart, Shield, Lightbulb } from "lucide-reac
 const features = [
   {
     icon: Fingerprint,
-    title: "Biometric Fingerprint Lock",
-    description: "Military-grade security with 360° fingerprint recognition. Store up to 5 user profiles.",
+    title: "The Future of Privacy. At Your Fingertip.",
+    description: "One touch. One owner. Biometric security ensures your pleasure stays yours — always. No keys. No codes. Just your touch.",
   },
   {
     icon: Zap,
-    title: "Wireless Charging Cradles",
-    description: "Charge up to 3 devices simultaneously. No cables, no hassle, always ready.",
+    title: "The DDS — Dildo Docking Station",
+    description: "The conscious evolution of pleasure engineering. Poured acrylic glass surface with tri-layer construction for flawless suction.",
   },
   {
     icon: Package,
-    title: "Premium Vegan Leather",
-    description: "Museum-quality craftsmanship with sustainable materials. Timeless elegance.",
+    title: "Faux Leather & Rose Gold",
+    description: "High-quality waterproof faux leather exterior with stylish rose-gold trims and leather handle. Designed to be touched.",
   },
   {
     icon: Heart,
-    title: "Custom Velvet Interior",
-    description: "Soft, form-fitting saddles protect each item. Italian velvet lining throughout.",
+    title: "A Sanctuary Within",
+    description: "Soft velvet lining, golden accents, and removable inner tray. Every detail designed to respect what it holds.",
   },
   {
     icon: Shield,
-    title: "Travel Lock System",
-    description: "TSA-approved secure transport mode. Take your collection anywhere with confidence.",
+    title: "Vellvii-Branded Lock",
+    description: "Uniquely designed biometric lock system. It's not just smart — it's personal. Total control at your fingertips.",
   },
   {
     icon: Lightbulb,
-    title: "Smart LED Indicators",
-    description: "Ambient charging status lights. Know at a glance when devices are ready.",
+    title: "Wireless Charging Intelligence",
+    description: "Charge your collection seamlessly. No cables, no clutter — just elegance and function in perfect harmony.",
   },
 ];
 
@@ -41,13 +41,13 @@ export const FeatureGrid = () => {
       <div className="container mx-auto px-4 sm:px-6">
         <ScrollReveal>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mb-4 font-playfair">
-            Designed for Perfection
+            Elegant — Empowering — Luxurious
           </h2>
         </ScrollReveal>
 
         <ScrollReveal delay={0.2}>
           <p className="text-lg text-white/60 text-center max-w-2xl mx-auto mb-16">
-            Every detail crafted to elevate your experience
+            It's more than storage, it's a revolution in intimate design
           </p>
         </ScrollReveal>
 

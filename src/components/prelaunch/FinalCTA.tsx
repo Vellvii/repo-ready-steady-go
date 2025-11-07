@@ -17,18 +17,18 @@ export const FinalCTA = () => {
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <ScrollReveal>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white font-playfair">
-              Don't Miss Out on Launch Day
+              The Future is Coming in 2026
             </h2>
           </ScrollReveal>
 
           <ScrollReveal delay={0.2}>
             <p className="text-lg sm:text-xl text-white/70">
-              Early-bird pricing ends soon. Secure your spot now.
+              Because some things should feel as beautiful as they are private
             </p>
           </ScrollReveal>
 
           <ScrollReveal delay={0.3}>
-            <CountdownTimer targetDate="2025-04-15T00:00:00" size="small" />
+            <CountdownTimer targetDate="2026-06-15T00:00:00" size="small" />
           </ScrollReveal>
 
           <ScrollReveal delay={0.4}>
@@ -42,7 +42,7 @@ export const FinalCTA = () => {
 
           <ScrollReveal delay={0.5}>
             <p className="text-white/40 text-sm">
-              First 500 orders get priority shipping & exclusive colorway
+              Join the waitlist to receive exclusive updates on this revolutionary design
             </p>
           </ScrollReveal>
         </div>

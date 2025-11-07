@@ -1,20 +1,20 @@
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
 const leftSpecs = [
-  { label: "Exterior", value: "Premium vegan leather" },
-  { label: "Interior", value: "Italian velvet lining" },
-  { label: "Dimensions", value: '12" × 8" × 6"' },
-  { label: "Weight", value: "3.2 lbs" },
-  { label: "Colors", value: "Midnight Black, Champagne Ivory" },
+  { label: "Exterior", value: "High-quality waterproof faux leather" },
+  { label: "Accents", value: "Rose-gold trims & leather handle" },
+  { label: "Interior", value: "Soft velvet lining with golden accents" },
+  { label: "Tray", value: "Removable inner compartment" },
+  { label: "Colors", value: "Midnight Black, Rose Gold Edition" },
 ];
 
 const rightSpecs = [
-  { label: "Biometric", value: "360° fingerprint sensor (5 users)" },
-  { label: "Charging", value: "Qi wireless × 3 cradles" },
-  { label: "Power", value: "USB-C input, 65W" },
-  { label: "Connectivity", value: "Bluetooth 5.2 (optional app)" },
-  { label: "Security", value: "256-bit encryption" },
-  { label: "Battery", value: "24hr backup power (optional)" },
+  { label: "Lock System", value: "Vellvii-branded biometric fingerprint" },
+  { label: "DDS Surface", value: "Poured acrylic glass (tri-layer construction)" },
+  { label: "Charging", value: "Wireless charging intelligence" },
+  { label: "Security", value: "One touch. One owner. Total control." },
+  { label: "Design", value: "Museum-quality craftsmanship" },
+  { label: "Experience", value: "3-in-1: Store, Charge, Enhance" },
 ];
 
 export const TechSpecs = () => {
@@ -23,7 +23,7 @@ export const TechSpecs = () => {
       <div className="container mx-auto px-4 sm:px-6">
         <ScrollReveal>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mb-16 font-playfair">
-            Technical Excellence
+            Engineered Elegance. Designed to Perform.
           </h2>
         </ScrollReveal>
 
@@ -70,9 +70,9 @@ export const TechSpecs = () => {
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-transparent" />
               <div className="relative w-full h-full flex items-center justify-center p-8">
                 <p className="text-white/40 text-sm font-medium text-center">
-                  TECH DIAGRAM: DOX Internal Components
+                  AUTOCAD DIAGRAM: Tri-Layer Construction
                   <br />
-                  <span className="text-xs">(Exploded view showing fingerprint sensor, charging coils, battery)</span>
+                  <span className="text-xs">(DDS precision layers with poured acrylic glass surface)</span>
                 </p>
               </div>
             </div>

@@ -8,36 +8,36 @@ import {
 
 const faqs = [
   {
-    question: "When will the DOX ship?",
-    answer: "The DOX is scheduled to ship in Q2 2025. Early-bird backers will receive priority shipping within the first 500 orders. We'll keep you updated throughout the manufacturing process with regular email updates.",
+    question: "When will the DOX launch?",
+    answer: "The Vellvii DOX is launching in 2026. This is the most anticipated sexual wellness innovation, and we're taking the time to perfect every detail. Join the waitlist to receive exclusive updates throughout our journey to launch.",
   },
   {
-    question: "What's the early-bird discount?",
-    answer: "Early-bird backers save $200 off the retail price. This exclusive discount is only available during the prelaunch campaign. Once we launch, the DOX will be sold at full retail price.",
+    question: "What makes the DOX different?",
+    answer: "The DOX is the world's first 3-in-1 luxury wellness innovation — it stores beautifully, charges intelligently, and enhances intimately. With features like the DDS (Dildo Docking Station) with poured acrylic glass surface, biometric security, and museum-quality craftsmanship, it transforms stigma into sophistication.",
   },
   {
-    question: "How many products fit inside?",
-    answer: "The DOX features 3 custom wireless charging cradles designed to fit most devices. The velvet interior is form-fitted to securely hold your collection while keeping everything organized and easily accessible.",
+    question: "What is the DDS?",
+    answer: "The DDS (Dildo Docking Station) is the conscious evolution of pleasure engineering. It features a tri-layer construction topped with poured acrylic glass — perfectly smooth, crystal-clear, and built for flawless suction. Finally, pleasure has its dedicated, elegant space.",
   },
   {
-    question: "Can I add more fingerprints?",
-    answer: "Yes! The biometric fingerprint lock can store up to 5 different user profiles. This makes it perfect for couples or shared spaces while maintaining individual access control.",
+    question: "What materials is the DOX made from?",
+    answer: "The DOX features a high-quality waterproof faux leather exterior with rose-gold trims and a leather handle. Inside, you'll find soft velvet lining with golden accents and a removable inner tray. Every detail is designed to demand to be touched.",
+  },
+  {
+    question: "How does the biometric security work?",
+    answer: "One touch. One owner. The Vellvii-branded biometric fingerprint lock ensures your pleasure stays yours — always. It's not just smart — it's personal. No keys, no codes, just your touch and total control.",
   },
   {
     question: "Is there a warranty?",
-    answer: "Every DOX includes a comprehensive 2-year premium warranty covering all manufacturing defects, electronic components, and materials. We stand behind our craftsmanship with exceptional customer support.",
+    answer: "Yes! Every DOX includes a comprehensive warranty covering all manufacturing defects and components. We stand behind our revolutionary design with exceptional customer support.",
   },
   {
-    question: "Do you ship internationally?",
-    answer: "Yes, we ship worldwide! International shipping costs will be calculated at checkout based on your location. All international orders include customs documentation and tracking.",
+    question: "Will you ship internationally?",
+    answer: "Yes, we plan to ship worldwide. International shipping details will be available closer to launch. Join the waitlist to stay informed about availability in your region.",
   },
   {
-    question: "What if I change my mind?",
-    answer: "We offer a 30-day return policy from the date of delivery. If you're not completely satisfied with your DOX, you can return it for a full refund, no questions asked.",
-  },
-  {
-    question: "Is the fingerprint data stored securely?",
-    answer: "Absolutely. All biometric data is encrypted with 256-bit encryption and stored locally on the device. Your fingerprint data is never uploaded to the cloud or shared with any third parties.",
+    question: "What makes this 'luxury' wellness?",
+    answer: "This isn't adult novelty — it's modern intimacy, elevated to art. The DOX is crafted with the same precision and elegance you'd expect from luxury brands like Louis Vuitton or Bentley. It's designed to look, feel, and function like the luxury it is.",
   },
 ];
 

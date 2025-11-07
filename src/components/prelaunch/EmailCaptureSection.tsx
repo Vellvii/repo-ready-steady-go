@@ -4,10 +4,10 @@ import { WaitlistCounter } from "./WaitlistCounter";
 import { Check } from "lucide-react";
 
 const benefits = [
-  "Exclusive early-bird discount ($200 off retail)",
-  "Priority shipping (first 500 orders)",
-  "Limited edition launch colorway",
-  "VIP concierge setup assistance",
+  "Exclusive launch pricing — be among the first",
+  "Priority access to limited edition colorways",
+  "VIP updates on the journey to 2026 launch",
+  "Early access to revolutionary features reveal",
 ];
 
 export const EmailCaptureSection = () => {
@@ -20,13 +20,13 @@ export const EmailCaptureSection = () => {
         <div className="max-w-4xl mx-auto">
           <ScrollReveal>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mb-4 font-playfair">
-              Be the First to Own the DOX
+              Join the Revolution
             </h2>
           </ScrollReveal>
 
           <ScrollReveal delay={0.2}>
             <p className="text-lg sm:text-xl text-white/70 text-center mb-8">
-              Limited early-bird pricing: <span className="text-primary font-semibold">Save $200</span>
+              Be first to experience <span className="text-primary font-semibold">modern intimacy, elevated to art</span>
             </p>
           </ScrollReveal>
 

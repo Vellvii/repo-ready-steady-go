@@ -20,24 +20,24 @@ export const HeroSection = () => {
           <div className="text-center lg:text-left space-y-8">
             <ScrollReveal delay={0.2}>
               <div className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-4">
-                <p className="text-primary text-sm font-medium">Launching Q2 2025</p>
+                <p className="text-primary text-sm font-medium">Launching 2026</p>
               </div>
             </ScrollReveal>
 
             <AnimatedText 
-              text="The Future of Luxury Intimacy Storage"
+              text="Pleasure: Redefined"
               className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight"
               delay={0.4}
             />
 
             <ScrollReveal delay={0.6}>
               <p className="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto lg:mx-0">
-                World's First Luxury Storage Box with Biometric Security & Wireless Charging
+                The Most Creative, Most Luxurious, and Most Anticipated Sexual Wellness Innovation of 2026
               </p>
             </ScrollReveal>
 
             <ScrollReveal delay={0.8}>
-              <CountdownTimer targetDate="2025-04-15T00:00:00" />
+              <CountdownTimer targetDate="2026-06-15T00:00:00" />
             </ScrollReveal>
 
             <ScrollReveal delay={1}>
@@ -53,7 +53,7 @@ export const HeroSection = () => {
 
             <ScrollReveal delay={1.2}>
               <p className="text-white/50 text-sm">
-                Join <span className="text-primary font-semibold">2,437 others</span> on the waitlist
+                A statement of design and self-respect — <span className="text-primary font-semibold">a new era of elegance in intimacy</span>
               </p>
             </ScrollReveal>
           </div>
@@ -68,7 +68,7 @@ export const HeroSection = () => {
                     <div className="w-0 h-0 border-l-[16px] border-l-white border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent ml-1" />
                   </div>
                   <p className="text-white/60 text-sm font-medium">
-                    HERO VIDEO: DOX Opening/Closing Sequence
+                    HERO VIDEO: DOX Lifestyle Overview — Faux Leather & Rose Gold Trim
                     <br />
                     <span className="text-xs text-white/40">(16:9 aspect ratio)</span>
                   </p>

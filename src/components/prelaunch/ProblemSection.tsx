@@ -5,18 +5,18 @@ import { Layers, BatteryWarning, Lock } from "lucide-react";
 const problems = [
   {
     icon: Layers,
-    title: "Scattered Storage",
-    description: "Your premium collection hidden in drawers, forgotten in bags, scattered across rooms.",
+    title: "The Makeshift Era is Over",
+    description: "Walls, tiles, toilet seats — places that never belonged in your story. Your pleasure deserves better than improvised spaces.",
   },
   {
     icon: BatteryWarning,
-    title: "Dead Batteries",
-    description: "Constantly forgetting to charge devices. Ready for use? Not when you need them most.",
+    title: "Stigma Disguised as Storage",
+    description: "Hiding your wellness collection in drawers and bags, as if pleasure needs to apologize for existing.",
   },
   {
     icon: Lock,
-    title: "Privacy Concerns",
-    description: "No secure place to keep intimate items private. Sharing a space shouldn't mean compromising discretion.",
+    title: "Privacy Without Sophistication",
+    description: "No dedicated, elegant space built for your pleasure. Sharing spaces shouldn't mean compromising on beauty or security.",
   },
 ];
 
@@ -26,13 +26,13 @@ export const ProblemSection = () => {
       <div className="container mx-auto px-4 sm:px-6">
         <ScrollReveal>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mb-4 font-playfair">
-            Your Collection Deserves Better
+            A Design That Demands to Be Touched
           </h2>
         </ScrollReveal>
 
         <ScrollReveal delay={0.2}>
           <p className="text-lg text-white/60 text-center max-w-2xl mx-auto mb-16">
-            The luxury you invest in deserves protection, organization, and accessibility
+            The innovation that should have existed years ago — now perfected
           </p>
         </ScrollReveal>
 
@@ -67,9 +67,9 @@ export const ProblemSection = () => {
                   <span className="text-red-400 text-xs font-semibold uppercase tracking-wider">Before</span>
                 </div>
                 <p className="text-white/40 text-sm font-medium text-center">
-                  IMAGE: Messy Drawer
+                  IMAGE: Improvised Storage
                   <br />
-                  <span className="text-xs">(Scattered products, tangled cables)</span>
+                  <span className="text-xs">(The makeshift places that never honored pleasure)</span>
                 </p>
               </div>
             </div>
@@ -81,9 +81,9 @@ export const ProblemSection = () => {
                   <span className="text-primary text-xs font-semibold uppercase tracking-wider">After</span>
                 </div>
                 <p className="text-white/40 text-sm font-medium text-center">
-                  IMAGE: DOX Interior
+                  IMAGE: A Sanctuary Within
                   <br />
-                  <span className="text-xs">(Organized velvet compartments, charging cradles)</span>
+                  <span className="text-xs">(Soft velvet, golden accents, perfect order)</span>
                 </p>
               </div>
             </div>
