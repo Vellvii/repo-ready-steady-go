@@ -58,22 +58,18 @@ export const HeroSection = () => {
             </ScrollReveal>
           </div>
 
-          {/* Right Side - Video Placeholder */}
+          {/* Right Side - Video */}
           <ScrollReveal delay={0.4} direction="right">
-            <div className="relative aspect-video rounded-2xl overflow-hidden glass-dark shadow-luxury">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-transparent" />
-              <div className="relative w-full h-full flex items-center justify-center">
-                <div className="text-center space-y-4 p-8">
-                  <div className="w-20 h-20 mx-auto rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm">
-                    <div className="w-0 h-0 border-l-[16px] border-l-white border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent ml-1" />
-                  </div>
-                  <p className="text-white/60 text-sm font-medium">
-                    HERO VIDEO: DOX Lifestyle Overview — Faux Leather & Rose Gold Trim
-                    <br />
-                    <span className="text-xs text-white/40">(16:9 aspect ratio)</span>
-                  </p>
-                </div>
-              </div>
+            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-luxury">
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              >
+                <source src="/uploads/HEROPAGE.webm" type="video/webm" />
+              </video>
             </div>
           </ScrollReveal>
         </div>
