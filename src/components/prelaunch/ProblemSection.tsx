@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import makeshiftIcon from "@/assets/icon-makeshift-era.png";
 import stigmaIcon from "@/assets/icon-stigma-storage.png";
 import privacyIcon from "@/assets/icon-privacy-sophistication.png";
-import doxCloseUpImage from "@/assets/dox-close-up.webp";
+import doxClosedImage from "@/assets/dox-closed.png";
 import sanctuaryWithinImage from "@/assets/dox-sanctuary-within.jpg";
 
 const problems = [{
@@ -58,9 +58,9 @@ export const ProblemSection = () => {
           <div className="grid md:grid-cols-2 gap-4 max-w-5xl mx-auto">
             <div className="relative aspect-[4/3] rounded-xl overflow-hidden glass-dark">
               <img 
-                src={doxCloseUpImage} 
-                alt="Dox Close Up" 
-                className="w-full h-full object-cover"
+                src={doxClosedImage} 
+                alt="Dox Closed" 
+                className="w-full h-full object-cover scale-120"
               />
             </div>
 
