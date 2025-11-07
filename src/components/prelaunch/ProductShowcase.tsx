@@ -4,7 +4,6 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import doxClosedExterior from "@/assets/dox-closed-exterior.png";
 type MediaItem = {
   image?: string;
   video?: string;
@@ -21,14 +20,6 @@ const showcaseFeatures = [{
   title: "Luxury Storage",
   subtitle: "Stores Beautifully",
   images: [{
-    image: doxClosedExterior,
-    label: "DOX CLOSED - Faux Leather Exterior",
-    description: "High-quality waterproof faux leather with rose-gold trims"
-  }, {
-    video: "/uploads/dox-open-animation.mp4",
-    label: "DOX OPEN - A Sanctuary Within",
-    description: "Soft velvet interior with removable compartment tray"
-  }, {
     image: "/uploads/Dox_white_open_plugged_in_content2.png",
     label: "DOX IN USE - Organized Storage",
     description: "Customizable compartments for your collection"
@@ -133,7 +124,7 @@ const FeatureCarousel = ({
             
             {/* Image/Video Display */}
             <div className="relative w-full h-full transition-opacity duration-500">
-              {'image' in feature.images[currentIndex] && feature.images[currentIndex].image ? <img src={feature.images[currentIndex].image!} alt={feature.images[currentIndex].label} className="w-full h-full object-cover scale-120" /> : 'video' in feature.images[currentIndex] && feature.images[currentIndex].video ? <video src={feature.images[currentIndex].video!} autoPlay loop muted playsInline className="w-full h-full object-cover" /> : <div className="flex flex-col items-center justify-center h-full p-8">
+              {'image' in feature.images[currentIndex] && feature.images[currentIndex].image ? <img src={String(feature.images[currentIndex].image)} alt={feature.images[currentIndex].label} className="w-full h-full object-cover scale-120" /> : 'video' in feature.images[currentIndex] && feature.images[currentIndex].video ? <video src={String(feature.images[currentIndex].video)} autoPlay loop muted playsInline className="w-full h-full object-cover" /> : <div className="flex flex-col items-center justify-center h-full p-8">
                   <p className="text-white/60 text-base font-medium text-center mb-2">
                     {feature.images[currentIndex].label}
                   </p>
