@@ -83,11 +83,6 @@ const showcaseFeatures = [
     tagline: "DDS - Dildo Docking Station",
     images: [
       {
-        image: "/uploads/BeigeDDSPieces.png",
-        label: "DDS - Modular Design",
-        description: "Poured acrylic glass surface, engineered elegance",
-      },
-      {
         image: "/uploads/Black-Dildo-Close.png",
         label: "DDS - Premium Finish",
         description: "Rose-gold accents with textured surface",
@@ -132,20 +127,23 @@ const FeatureCarousel = ({
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImage, setLightboxImage] = useState("");
 
-  // Auto-play carousel every 3 seconds
+  // Auto-play carousel with custom timing for last image
   useEffect(() => {
     if (feature.images.length > 1) {
+      // Last image shows for 6 seconds, others for 3 seconds
+      const delay = currentIndex === feature.images.length - 1 ? 6000 : 3000;
+      
       const interval = setInterval(() => {
         setIsTransitioning(true);
         setTimeout(() => {
           setCurrentIndex((prev) => (prev + 1) % feature.images.length);
           setIsTransitioning(false);
         }, 300);
-      }, 3000);
+      }, delay);
 
       return () => clearInterval(interval);
     }
-  }, [feature.images.length]);
+  }, [feature.images.length, currentIndex]);
 
   const nextSlide = () => {
     setIsTransitioning(true);
