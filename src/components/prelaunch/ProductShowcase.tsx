@@ -78,6 +78,7 @@ const FeatureCarousel = ({
   index: number;
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImage, setLightboxImage] = useState("");
   
@@ -85,7 +86,11 @@ const FeatureCarousel = ({
   useEffect(() => {
     if (feature.images.length > 1) {
       const interval = setInterval(() => {
-        setCurrentIndex(prev => (prev + 1) % feature.images.length);
+        setIsTransitioning(true);
+        setTimeout(() => {
+          setCurrentIndex(prev => (prev + 1) % feature.images.length);
+          setIsTransitioning(false);
+        }, 300);
       }, 3000);
       
       return () => clearInterval(interval);
@@ -93,10 +98,18 @@ const FeatureCarousel = ({
   }, [feature.images.length]);
   
   const nextSlide = () => {
-    setCurrentIndex(prev => (prev + 1) % feature.images.length);
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentIndex(prev => (prev + 1) % feature.images.length);
+      setIsTransitioning(false);
+    }, 300);
   };
   const prevSlide = () => {
-    setCurrentIndex(prev => (prev - 1 + feature.images.length) % feature.images.length);
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentIndex(prev => (prev - 1 + feature.images.length) % feature.images.length);
+      setIsTransitioning(false);
+    }, 300);
   };
   return <ScrollReveal delay={0.2 * index}>
       <div className="mb-24">
@@ -123,7 +136,7 @@ const FeatureCarousel = ({
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-transparent" />
             
             {/* Image/Video Display */}
-            <div className="relative w-full h-full transition-opacity duration-500">
+            <div className={`relative w-full h-full transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
               {'image' in feature.images[currentIndex] && feature.images[currentIndex].image ? <img src={String(feature.images[currentIndex].image)} alt={feature.images[currentIndex].label} className="w-full h-full object-cover scale-120" /> : 'video' in feature.images[currentIndex] && feature.images[currentIndex].video ? <video src={String(feature.images[currentIndex].video)} autoPlay loop muted playsInline className="w-full h-full object-cover" /> : <div className="flex flex-col items-center justify-center h-full p-8">
                   <p className="text-white/60 text-base font-medium text-center mb-2">
                     {feature.images[currentIndex].label}
