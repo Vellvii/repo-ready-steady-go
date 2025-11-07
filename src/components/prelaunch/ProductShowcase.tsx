@@ -97,6 +97,11 @@ const showcaseFeatures = [
         label: "DDS - Wireless Charging",
         description: "Simply place and charge",
       },
+      {
+        image: "/uploads/DDS_Autocad_sketch_w_descriptions.png",
+        label: "DDS - Engineering Details",
+        description: "Precision layers with Vellvii signature rose gold finish",
+      },
     ],
   },
   {
