@@ -198,13 +198,13 @@ const SubcategoryCarousel = ({
                   loop
                   muted
                   playsInline
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
               ) : (
                 <img
                   src={currentThumb}
                   alt={`${subcategory.title} ${currentIndex + 1}`}
-                  className="w-full h-full object-cover scale-120"
+                  className="w-full h-full object-contain cursor-pointer"
                   onClick={() => {
                     setLightboxImage(currentThumb);
                     setLightboxOpen(true);
