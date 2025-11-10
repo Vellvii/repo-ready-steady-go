@@ -60,14 +60,14 @@ export const TestimonialCarousel = () => {
               </div>
 
               {/* Quote */}
-              <blockquote className="text-lg sm:text-xl text-white/90 leading-relaxed font-light italic">
+              <blockquote className="text-lg sm:text-xl text-zinc-900 leading-relaxed font-light italic">
                 "{testimonials[currentIndex].quote}"
               </blockquote>
 
               {/* Author */}
               <div>
-                <p className="text-white font-semibold">{testimonials[currentIndex].name}</p>
-                <p className="text-white/50 text-sm">{testimonials[currentIndex].role}</p>
+                <p className="text-zinc-900 font-semibold">{testimonials[currentIndex].name}</p>
+                <p className="text-zinc-700 text-sm">{testimonials[currentIndex].role}</p>
               </div>
             </CardContent>
           </Card>
