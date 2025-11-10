@@ -127,6 +127,143 @@ const showcaseFeatures = [
     ],
   },
 ];
+const SubcategoryCarousel = ({
+  subcategory,
+  index,
+}: {
+  subcategory: Subcategory;
+  index: number;
+}) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxImage, setLightboxImage] = useState("");
+
+  // Auto-play carousel
+  useEffect(() => {
+    if (subcategory.thumbnails.length > 1) {
+      const timer = setTimeout(() => {
+        setIsTransitioning(true);
+        setTimeout(() => {
+          setCurrentIndex((prev) => (prev + 1) % subcategory.thumbnails.length);
+          setIsTransitioning(false);
+        }, 300);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [subcategory.thumbnails.length, currentIndex]);
+
+  const nextSlide = () => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentIndex((prev) => (prev + 1) % subcategory.thumbnails.length);
+      setIsTransitioning(false);
+    }, 300);
+  };
+
+  const prevSlide = () => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentIndex((prev) => (prev - 1 + subcategory.thumbnails.length) % subcategory.thumbnails.length);
+      setIsTransitioning(false);
+    }, 300);
+  };
+
+  const currentThumb = subcategory.thumbnails[currentIndex];
+  const isVideo = currentThumb.endsWith(".mp4") || currentThumb.endsWith(".webm");
+
+  return (
+    <ScrollReveal delay={0.1 * index}>
+      <div className="mb-16">
+        {/* Title and Description */}
+        <div className="text-center mb-8">
+          <h3 className="text-2xl sm:text-3xl font-bold text-white font-playfair mb-2">{subcategory.title}</h3>
+          <p className="text-lg text-white/60">{subcategory.description}</p>
+        </div>
+
+        {/* Carousel */}
+        <div className="max-w-4xl mx-auto">
+          <div className="relative aspect-[4/3] rounded-2xl overflow-hidden glass-dark shadow-luxury">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-transparent" />
+
+            {/* Image/Video Display */}
+            <div
+              className={`relative w-full h-full transition-opacity duration-300 ${isTransitioning ? "opacity-0" : "opacity-100"}`}
+            >
+              {isVideo ? (
+                <video
+                  src={currentThumb}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <img
+                  src={currentThumb}
+                  alt={`${subcategory.title} ${currentIndex + 1}`}
+                  className="w-full h-full object-cover scale-120"
+                  onClick={() => {
+                    setLightboxImage(currentThumb);
+                    setLightboxOpen(true);
+                  }}
+                />
+              )}
+            </div>
+
+            {/* Navigation Buttons */}
+            {subcategory.thumbnails.length > 1 && (
+              <>
+                <Button
+                  onClick={prevSlide}
+                  variant="ghost"
+                  size="icon"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20"
+                >
+                  <ChevronLeft className="w-6 h-6 text-white" />
+                </Button>
+                <Button
+                  onClick={nextSlide}
+                  variant="ghost"
+                  size="icon"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20"
+                >
+                  <ChevronRight className="w-6 h-6 text-white" />
+                </Button>
+
+                {/* Dot Navigation */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                  {subcategory.thumbnails.map((_, imgIndex) => (
+                    <button
+                      key={imgIndex}
+                      onClick={() => setCurrentIndex(imgIndex)}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${imgIndex === currentIndex ? "bg-primary w-8" : "bg-white/30 hover:bg-white/50"}`}
+                      aria-label={`Go to slide ${imgIndex + 1}`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+
+        {/* Lightbox Dialog */}
+        <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
+          <DialogContent className="max-w-4xl bg-black/90 border-white/20">
+            {lightboxImage.endsWith(".mp4") || lightboxImage.endsWith(".webm") ? (
+              <video src={lightboxImage} autoPlay loop muted playsInline className="w-full h-auto rounded-lg" />
+            ) : (
+              <img src={lightboxImage} alt="Lightbox view" className="w-full h-auto rounded-lg" />
+            )}
+          </DialogContent>
+        </Dialog>
+      </div>
+    </ScrollReveal>
+  );
+};
+
 const FeatureCarousel = ({
   feature,
   index,
@@ -270,45 +407,11 @@ const FeatureCarousel = ({
           </div>
         </div>
 
-        {/* Subcategories */}
+        {/* Subcategories as Vertical Carousels */}
         {feature.subcategories && feature.subcategories.length > 0 && (
-          <div className="mt-12 grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="mt-12 space-y-16">
             {feature.subcategories.map((sub, subIndex) => (
-              <ScrollReveal key={sub.title} delay={0.1 * subIndex} direction="up">
-                <Card className="glass-dark border-white/10 hover:border-primary/30 transition-all duration-300 hover-glow h-full">
-                  <CardContent className="p-6 text-center space-y-3">
-                    <h4 className="text-lg font-semibold font-playfair text-zinc-900">{sub.title}</h4>
-                    <p className="text-sm leading-relaxed text-neutral-600">{sub.description}</p>
-
-                    {/* Thumbnails */}
-                    <div className="flex gap-2 justify-center mt-4">
-                      {sub.thumbnails.map((thumb, thumbIndex) => {
-                        const isVideo = thumb.endsWith(".mp4") || thumb.endsWith(".webm");
-                        return (
-                          <button
-                            key={thumbIndex}
-                            onClick={() => {
-                              setLightboxImage(thumb);
-                              setLightboxOpen(true);
-                            }}
-                            className="w-20 h-20 rounded-lg overflow-hidden border border-white/20 hover:border-primary/50 transition-all hover:scale-105"
-                          >
-                            {isVideo ? (
-                              <video src={thumb} muted loop playsInline className="w-full h-full object-cover" />
-                            ) : (
-                              <img
-                                src={thumb}
-                                alt={`${sub.title} thumbnail ${thumbIndex + 1}`}
-                                className="w-full h-full object-cover"
-                              />
-                            )}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </CardContent>
-                </Card>
-              </ScrollReveal>
+              <SubcategoryCarousel key={sub.title} subcategory={sub} index={subIndex} />
             ))}
           </div>
         )}
