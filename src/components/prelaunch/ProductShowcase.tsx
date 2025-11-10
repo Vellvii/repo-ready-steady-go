@@ -102,7 +102,7 @@ const showcaseFeatures = [
   {
     number: 3,
     title: "A Position of Power",
-    subtitle: "Designed to Hold More than Your Collection...Designed to Hold You",
+    subtitle: "\"Designed to Hold More than Your Collection...Designed to Hold You\"",
     images: [
       {
         label: "FINGERPRINT LOCK - Biometric Security",
