@@ -105,12 +105,24 @@ const showcaseFeatures = [
     subtitle: "\"Designed to Hold More than Your Collection...Designed to Hold You\"",
     images: [
       {
-        label: "FINGERPRINT LOCK - Biometric Security",
-        description: "One touch. One owner. Total control.",
+        image: "/uploads/BeigeVDS.png",
+        label: "VELLVII THE ART OF YOU - Signature Design",
+        description: "Rose-gold branding on premium beige finish",
       },
       {
-        label: "LIFESTYLE - Pleasure, Elevated",
-        description: "Designed to look, feel, and function like luxury",
+        image: "/uploads/RedDoxEvolveFrontRight.png",
+        label: "EVOLVE SYSTEM - Complete Collection",
+        description: "DOX with integrated charging and storage",
+      },
+      {
+        image: "/uploads/PulsePoBCloseBL.png",
+        label: "POSITION OF POWER - Wireless Charging",
+        description: "Elegant charging on black luxury surface",
+      },
+      {
+        image: "/uploads/RedDoxEvolveFrontRightClose.png",
+        label: "CHARGING DETAIL - Rose Gold Precision",
+        description: "Close-up of the intelligent charging system",
       },
     ],
   },
