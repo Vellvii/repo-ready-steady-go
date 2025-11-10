@@ -320,4 +320,29 @@
   .pulse-glow {
     animation: pulseGlow 2s ease-in-out infinite;
   }
+
+  /* Phone input custom styles */
+  .phone-input .PhoneInputCountry {
+    @apply mr-2;
+  }
+
+  .phone-input .PhoneInputCountryIcon {
+    @apply w-6 h-6;
+  }
+
+  .phone-input .PhoneInputCountrySelect {
+    @apply bg-transparent text-white border-none outline-none cursor-pointer;
+  }
+
+  .phone-input .PhoneInputCountrySelectArrow {
+    @apply text-white/60 opacity-70;
+  }
+
+  .phone-input input {
+    @apply bg-transparent text-white;
+  }
+
+  .phone-input input::placeholder {
+    @apply text-white/40;
+  }
 }
