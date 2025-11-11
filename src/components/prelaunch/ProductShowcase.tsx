@@ -110,9 +110,9 @@ const showcaseFeatures = [
     subtitle: "\"Designed to Hold More than Your Collection...Designed to Hold You\"",
     images: [
       {
-        image: "/uploads/position-of-power-intro.png",
-        label: "PHILOSOPHY - Gallery Presence",
-        description: "What was once taboo now belongs in a gallery",
+        image: "/uploads/PulsePoBCloseBL.png",
+        label: "POSITION OF POWER - Wireless Charging",
+        description: "Elegant charging on black luxury surface",
       },
       {
         image: "/uploads/RedDoxEvolveFrontRight.png",
@@ -120,9 +120,9 @@ const showcaseFeatures = [
         description: "DOX with integrated charging and storage",
       },
       {
-        image: "/uploads/PulsePoBCloseBL.png",
-        label: "POSITION OF POWER - Wireless Charging",
-        description: "Elegant charging on black luxury surface",
+        image: "/uploads/position-of-power-intro.png",
+        label: "PHILOSOPHY - Gallery Presence",
+        description: "What was once taboo now belongs in a gallery",
       },
       {
         image: "/uploads/RedDoxEvolveFrontRightClose.png",
