@@ -88,9 +88,9 @@ const showcaseFeatures = [
         description: "Rose-gold accents with textured surface",
       },
       {
-        video: "/uploads/dds-animation.mp4",
-        label: "DDS - Innovation in Motion",
-        description: "Experience the elegant design transformation",
+        image: "/uploads/dds-suction-cup-purpose.png",
+        label: "DDS - The Purpose",
+        description: "Where design meets desire",
       },
       {
         image: "/uploads/Red-Dildo.png",
