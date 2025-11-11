@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Play, Pause } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
@@ -143,21 +143,26 @@ const SubcategoryCarousel = ({
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImage, setLightboxImage] = useState("");
+  const [isPaused, setIsPaused] = useState(false);
 
   // Auto-play carousel
   useEffect(() => {
-    if (subcategory.thumbnails.length > 1) {
+    if (subcategory.thumbnails.length > 1 && !isPaused) {
+      const currentThumb = subcategory.thumbnails[currentIndex];
+      const isVideo = currentThumb.endsWith(".mp4") || currentThumb.endsWith(".webm");
+      const delay = isVideo ? 10000 : 6000; // Videos: 10s, Images: 6s
+      
       const timer = setTimeout(() => {
         setIsTransitioning(true);
         setTimeout(() => {
           setCurrentIndex((prev) => (prev + 1) % subcategory.thumbnails.length);
           setIsTransitioning(false);
         }, 300);
-      }, 3000);
+      }, delay);
 
       return () => clearTimeout(timer);
     }
-  }, [subcategory.thumbnails.length, currentIndex]);
+  }, [subcategory.thumbnails.length, currentIndex, isPaused]);
 
   const nextSlide = () => {
     setIsTransitioning(true);
@@ -238,6 +243,20 @@ const SubcategoryCarousel = ({
                   <ChevronRight className="w-6 h-6 text-white" />
                 </Button>
 
+                {/* Play/Pause Button */}
+                <Button
+                  onClick={() => setIsPaused(!isPaused)}
+                  variant="ghost"
+                  size="icon"
+                  className="absolute top-4 right-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20"
+                >
+                  {isPaused ? (
+                    <Play className="w-5 h-5 text-white" />
+                  ) : (
+                    <Pause className="w-5 h-5 text-white" />
+                  )}
+                </Button>
+
                 {/* Dot Navigation */}
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
                   {subcategory.thumbnails.map((_, imgIndex) => (
@@ -280,13 +299,16 @@ const FeatureCarousel = ({
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImage, setLightboxImage] = useState("");
+  const [isPaused, setIsPaused] = useState(false);
 
-  // Auto-play carousel - all slides show for 6 seconds
+  // Auto-play carousel - videos: 10s, images: 6s
   useEffect(() => {
-    if (feature.images.length > 1) {
+    if (feature.images.length > 1 && !isPaused) {
       const scheduleNext = (index: number) => {
-        // All images/videos show for 6 seconds
-        const delay = 6000;
+        const currentItem = feature.images[index];
+        const isVideo = "video" in currentItem && currentItem.video;
+        // Videos show for 10 seconds, images for 6 seconds
+        const delay = isVideo ? 10000 : 6000;
         
         return setTimeout(() => {
           setIsTransitioning(true);
@@ -303,7 +325,7 @@ const FeatureCarousel = ({
       const timer = scheduleNext(currentIndex);
       return () => clearTimeout(timer);
     }
-  }, [feature.images.length, currentIndex]);
+  }, [feature.images.length, currentIndex, isPaused]);
 
   const nextSlide = () => {
     setIsTransitioning(true);
@@ -394,6 +416,20 @@ const FeatureCarousel = ({
                   className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20"
                 >
                   <ChevronRight className="w-6 h-6 text-white" />
+                </Button>
+
+                {/* Play/Pause Button */}
+                <Button
+                  onClick={() => setIsPaused(!isPaused)}
+                  variant="ghost"
+                  size="icon"
+                  className="absolute top-4 right-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20"
+                >
+                  {isPaused ? (
+                    <Play className="w-5 h-5 text-white" />
+                  ) : (
+                    <Pause className="w-5 h-5 text-white" />
+                  )}
                 </Button>
 
                 {/* Dot Navigation */}
