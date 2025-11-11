@@ -281,12 +281,12 @@ const FeatureCarousel = ({
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImage, setLightboxImage] = useState("");
 
-  // Auto-play carousel with custom timing for last image
+  // Auto-play carousel - all slides show for 6 seconds
   useEffect(() => {
     if (feature.images.length > 1) {
       const scheduleNext = (index: number) => {
-        // Last image shows for 6 seconds, others for 3 seconds
-        const delay = index === feature.images.length - 1 ? 6000 : 3000;
+        // All images/videos show for 6 seconds
+        const delay = 6000;
         
         return setTimeout(() => {
           setIsTransitioning(true);
