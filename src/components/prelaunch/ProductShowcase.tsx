@@ -51,6 +51,7 @@ const showcaseFeatures = [
         description: "One touch. One owner. Total control of your intimate collection.",
         thumbnails: [
           "/uploads/fingerprint-video.webm",
+          "/uploads/RedLockClose.png",
           "/uploads/Dox_fp_lock_video2.webm",
         ],
       },
@@ -86,6 +87,11 @@ const showcaseFeatures = [
         description: "The DDS is where form and function meet sensual innovation. What began as a bold idea, to elevate pleasure beyond the ordinary, became a sculptural masterpiece of modern design.",
       },
       {
+        video: "/uploads/dds-animation.mp4",
+        label: "",
+        description: "",
+      },
+      {
         image: "/uploads/Black-Dildo-Close-2.png",
         label: "DARE TO COMPARE. WE'LL WAIT.",
         description: "No other creation comes close to the craftsmanship, precision, and presence of the DDS. This isn't competition, it's creation perfected.",
@@ -118,24 +124,24 @@ const showcaseFeatures = [
         description: "Crafted to cradle the Vellvii Pleasure Collection in elegance, it's a masterpiece of deliberate engineering - refined, practical, and irresistibly beautiful. Because when design serves desire, it becomes something extraordinary.",
       },
       {
-        image: "/uploads/RedPinkGVibe2.png",
-        label: "VELLVII SOLUTION",
-        description: "Everyone deserves to own something beautiful, personal, and unapologetically theirs. The Dox isn't about hiding, it's about honoring. Crafted to elevate the most intimate parts of life, without shame, without guilt - Only Art.",
-      },
-      {
-        image: "/uploads/BlackPinkEvolve1.png",
-        label: "VELLVII COLLECTION",
-        description: "With intense and deliberate focus on our mantra — \"The Art of 'O'.\" Every curve, every detail, every innovation is a study in sensual design. Crafted not just to perform, but to move you - emotionally, physically, beautifully. Vellvii doesn't chase pleasure. We sculpt it. We perfect it. We turn it into art.",
-      },
-      {
         image: "/uploads/BeigeRedPulseBackSide.png",
         label: "",
         description: "",
       },
       {
+        image: "/uploads/RedPinkGVibe2.png",
+        label: "VELLVII SOLUTION",
+        description: "Everyone deserves to own something beautiful, personal, and unapologetically theirs. The Dox isn't about hiding, it's about honoring. Crafted to elevate the most intimate parts of life, without shame, without guilt - Only Art.",
+      },
+      {
         image: "/uploads/BlackPinkGVibe1.png",
         label: "",
         description: "",
+      },
+      {
+        image: "/uploads/BlackPinkEvolve1.png",
+        label: "VELLVII COLLECTION",
+        description: "With intense and deliberate focus on our mantra — \"The Art of 'O'.\" Every curve, every detail, every innovation is a study in sensual design. Crafted not just to perform, but to move you - emotionally, physically, beautifully. Vellvii doesn't chase pleasure. We sculpt it. We perfect it. We turn it into art.",
       },
     ],
   },
@@ -209,8 +215,8 @@ const SubcategoryCarousel = ({
             enableLightbox={true}
             altPrefix={subcategory.title}
             transitionDuration={2000}
-            imageDisplayTime={6000}
-            videoDisplayTime={10000}
+            imageDisplayTime={5000}
+            videoDisplayTime={8000}
           />
         </div>
       </div>
@@ -256,8 +262,8 @@ const FeatureCarousel = ({
             enableLightbox={true}
             altPrefix={feature.title}
             transitionDuration={2000}
-            imageDisplayTime={6000}
-            videoDisplayTime={10000}
+            imageDisplayTime={5000}
+            videoDisplayTime={8000}
           />
         </div>
 
