@@ -106,6 +106,11 @@ const showcaseFeatures = [
         description: "The DDS is where form and function meet sensual innovation. What began as a bold idea, to elevate pleasure beyond the ordinary, became a sculptural masterpiece of modern design.",
       },
       {
+        image: "/uploads/Vellvii_description_sketches_separated_VDS_DDS_blk_img_1.png",
+        label: "",
+        description: "",
+      },
+      {
         video: "/uploads/dds-animation.mp4",
         label: "",
         description: "",
@@ -114,6 +119,11 @@ const showcaseFeatures = [
         image: "/uploads/Black-Dildo-Close-2.png",
         label: "DARE TO COMPARE. WE'LL WAIT.",
         description: "No other creation comes close to the craftsmanship, precision, and presence of the DDS. This isn't competition, it's creation perfected.",
+      },
+      {
+        image: "/uploads/BeigeDDSPieces-2.png",
+        label: "",
+        description: "",
       },
       {
         image: "/uploads/DDS_Autocad_sketch_w_descriptions.png",
