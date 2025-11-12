@@ -214,7 +214,6 @@ const SubcategoryCarousel = ({
             items={subcategory.thumbnails}
             enableLightbox={true}
             altPrefix={subcategory.title}
-            transitionDuration={2000}
             imageDisplayTime={5000}
             videoDisplayTime={8000}
           />
@@ -261,7 +260,6 @@ const FeatureCarousel = ({
             aspectRatio="aspect-video"
             enableLightbox={true}
             altPrefix={feature.title}
-            transitionDuration={2000}
             imageDisplayTime={5000}
             videoDisplayTime={8000}
           />

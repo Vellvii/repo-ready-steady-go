@@ -33,12 +33,14 @@ export const CrossfadeCarousel = ({
   const [lightboxImage, setLightboxImage] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [displayedCurrent, setDisplayedCurrent] = useState(items[0]);
-  const [displayedNext, setDisplayedNext] = useState(items[1] || items[0]);
+  
+  // Layer toggle system: A and B alternate as active/inactive
+  const [activeLayer, setActiveLayer] = useState<'A' | 'B'>('A');
+  const [layerA, setLayerA] = useState(items[0]);
+  const [layerB, setLayerB] = useState(items[1] || items[0]);
   
   const loadedSet = useRef<Set<string>>(new Set());
   const transitionTimerRef = useRef<number | null>(null);
-  const pendingNextRef = useRef<string | null>(null);
 
   const isVideo = (url: string) => {
     if (!url) return false;
@@ -89,8 +91,13 @@ export const CrossfadeCarousel = ({
       await preloadMedia(items[next]);
     }
 
-    // Prepare next image/video for crossfade (don't touch current - it's already displaying)
-    setDisplayedNext(items[next]);
+    // Update the HIDDEN layer with the next media (no remount, no flash)
+    if (activeLayer === 'A') {
+      setLayerB(items[next]);
+    } else {
+      setLayerA(items[next]);
+    }
+
     setIsTransitioning(true);
 
     // Clear any existing timer
@@ -98,12 +105,10 @@ export const CrossfadeCarousel = ({
       clearTimeout(transitionTimerRef.current);
     }
 
-    // After transition completes, update current index and displayed content
+    // After crossfade completes, toggle active layer and update index
     transitionTimerRef.current = window.setTimeout(() => {
       setCurrentIndex(next);
-      setDisplayedCurrent(items[next]);
-      // Defer swapping the hidden "next" media until after we hide it to prevent any flash
-      pendingNextRef.current = items[(next + 1) % items.length];
+      setActiveLayer(activeLayer === 'A' ? 'B' : 'A');
       setIsTransitioning(false);
     }, transitionDuration);
   };
@@ -125,14 +130,6 @@ export const CrossfadeCarousel = ({
     const next = (currentIndex + 1) % items.length;
     preloadMedia(items[next]);
   }, [currentIndex, items.length]);
-
-  // After a crossfade ends, update the hidden next media source while it's invisible
-  useEffect(() => {
-    if (!isTransitioning && pendingNextRef.current) {
-      setDisplayedNext(pendingNextRef.current);
-      pendingNextRef.current = null;
-    }
-  }, [isTransitioning]);
 
   const goToIndex = (index: number) => {
     if (index !== currentIndex && !isTransitioning) {
@@ -157,23 +154,29 @@ export const CrossfadeCarousel = ({
     }
   };
 
+  // Determine which layer shows which media
+  const visibleLayer = activeLayer === 'A' ? layerA : layerB;
+  const hiddenLayer = activeLayer === 'A' ? layerB : layerA;
+
   return (
     <>
       <div className={cn("relative rounded-2xl overflow-hidden glass-dark shadow-luxury", aspectRatio, className)}>
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-transparent" />
 
-        {/* Current Layer - Fading Out */}
+        {/* Layer A */}
         <div
           className={cn(
             "absolute inset-0 w-full h-full transition-opacity ease-in-out",
-            isTransitioning ? "opacity-0 z-0 invisible" : "opacity-100 z-10 visible"
+            activeLayer === 'A' 
+              ? (isTransitioning ? "opacity-100 z-10" : "opacity-100 z-10")
+              : (isTransitioning ? "opacity-0 z-0" : "opacity-0 z-0")
           )}
           style={{ transitionDuration: `${transitionDuration}ms` }}
         >
-          {isVideo(displayedCurrent) ? (
+          {isVideo(layerA) ? (
             <video
-              key={displayedCurrent}
-              src={displayedCurrent}
+              key={`layer-a-${layerA}`}
+              src={layerA}
               autoPlay
               loop
               muted
@@ -182,27 +185,29 @@ export const CrossfadeCarousel = ({
             />
           ) : (
             <img
-              key={displayedCurrent}
-              src={displayedCurrent}
+              key={`layer-a-${layerA}`}
+              src={layerA}
               alt={`${altPrefix} ${currentIndex + 1}`}
               className="w-full h-full object-cover cursor-pointer"
-              onClick={() => handleImageClick(displayedCurrent)}
+              onClick={() => handleImageClick(layerA)}
             />
           )}
         </div>
 
-        {/* Next Layer - Fading In */}
+        {/* Layer B */}
         <div
           className={cn(
             "absolute inset-0 w-full h-full transition-opacity ease-in-out",
-            isTransitioning ? "opacity-100 z-10 visible" : "opacity-0 z-0 invisible"
+            activeLayer === 'B' 
+              ? (isTransitioning ? "opacity-100 z-10" : "opacity-100 z-10")
+              : (isTransitioning ? "opacity-0 z-0" : "opacity-0 z-0")
           )}
           style={{ transitionDuration: `${transitionDuration}ms` }}
         >
-          {isVideo(displayedNext) ? (
+          {isVideo(layerB) ? (
             <video
-              key={displayedNext}
-              src={displayedNext}
+              key={`layer-b-${layerB}`}
+              src={layerB}
               autoPlay
               loop
               muted
@@ -211,11 +216,11 @@ export const CrossfadeCarousel = ({
             />
           ) : (
             <img
-              key={displayedNext}
-              src={displayedNext}
+              key={`layer-b-${layerB}`}
+              src={layerB}
               alt={`${altPrefix} ${currentIndex + 1}`}
               className="w-full h-full object-cover cursor-pointer"
-              onClick={() => handleImageClick(displayedNext)}
+              onClick={() => handleImageClick(layerB)}
             />
           )}
         </div>
