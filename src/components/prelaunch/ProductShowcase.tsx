@@ -165,6 +165,8 @@ const showcaseFeatures = [
           "/uploads/Pulse_description_sketches1.png",
           "/uploads/PulsePoBCloseBL-2.png",
           "/uploads/BlackRedPulseBack.png",
+          "/uploads/BlackRedPulseSide.png",
+          "/uploads/BlackRedPulseSideUp1.png",
         ],
       },
       {
