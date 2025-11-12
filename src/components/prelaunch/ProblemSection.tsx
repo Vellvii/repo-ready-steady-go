@@ -12,8 +12,8 @@ const problems = [{
   description: "No More Shoeboxes, No more Hidden Draws. The Vellvii Dox is not storage. It's a statement — of confidence, of beauty, of pleasure without apology. Because sexy can be sophisticated. And elegance should never be hidden."
 }, {
   icon: makeshiftIcon,
-  title: "The Makeshift Era is Over",
-  description: "Walls, tiles, toilet seats — places that never belonged in your story. Your pleasure deserves better than improvised spaces."
+  title: "Shower Walls and Toilet Seats?",
+  description: "For decades, pleasure was stuck to walls and hidden behind doors. Why do that when elegant, intelligent, and breathtakingly refined solutions exist? The Vellvii Dox — where design meets desire."
 }, {
   icon: privacyIcon,
   title: "Privacy Without Sophistication",
