@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
-import { ChevronLeft, ChevronRight, Play, Pause } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
@@ -153,11 +153,10 @@ const SubcategoryCarousel = ({
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImage, setLightboxImage] = useState("");
-  const [isPaused, setIsPaused] = useState(false);
 
   // Auto-play carousel
   useEffect(() => {
-    if (subcategory.thumbnails.length > 1 && !isPaused) {
+    if (subcategory.thumbnails.length > 1) {
       const currentThumb = subcategory.thumbnails[currentIndex];
       const isVideo = currentThumb.endsWith(".mp4") || currentThumb.endsWith(".webm");
       const delay = isVideo ? 10000 : 6000; // Videos: 10s, Images: 6s
@@ -172,7 +171,7 @@ const SubcategoryCarousel = ({
 
       return () => clearTimeout(timer);
     }
-  }, [subcategory.thumbnails.length, currentIndex, isPaused]);
+  }, [subcategory.thumbnails.length, currentIndex]);
 
   const nextSlide = () => {
     setIsTransitioning(true);
@@ -253,20 +252,6 @@ const SubcategoryCarousel = ({
                   <ChevronRight className="w-6 h-6 text-white" />
                 </Button>
 
-                {/* Play/Pause Button */}
-                <Button
-                  onClick={() => setIsPaused(!isPaused)}
-                  variant="ghost"
-                  size="icon"
-                  className="absolute top-4 right-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20"
-                >
-                  {isPaused ? (
-                    <Play className="w-5 h-5 text-white" />
-                  ) : (
-                    <Pause className="w-5 h-5 text-white" />
-                  )}
-                </Button>
-
                 {/* Dot Navigation */}
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
                   {subcategory.thumbnails.map((_, imgIndex) => (
@@ -306,55 +291,42 @@ const FeatureCarousel = ({
   index: number;
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [nextIndex, setNextIndex] = useState(1);
-  const [isCrossfading, setIsCrossfading] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImage, setLightboxImage] = useState("");
-  const [isPaused, setIsPaused] = useState(false);
 
-  // Auto-play carousel with crossfade effect
-  // Images: 5s visible + 2s crossfade = 7s total
-  // Videos: 10s visible + 2s crossfade = 12s total
+  // Auto-play carousel with smooth crossfade
   useEffect(() => {
-    if (feature.images.length > 1 && !isPaused) {
+    if (feature.images.length > 1) {
       const currentItem = feature.images[currentIndex];
       const isVideo = "video" in currentItem && currentItem.video;
-      const displayTime = isVideo ? 10000 : 5000; // Full visibility time
-      const crossfadeTime = 2000; // Crossfade duration
+      const displayTime = isVideo ? 10000 : 5000;
       
-      // Start crossfade after display time
-      const crossfadeTimer = setTimeout(() => {
-        setNextIndex((currentIndex + 1) % feature.images.length);
-        setIsCrossfading(true);
-        
-        // Complete transition after crossfade
+      const timer = setTimeout(() => {
+        setIsTransitioning(true);
         setTimeout(() => {
           setCurrentIndex((prev) => (prev + 1) % feature.images.length);
-          setIsCrossfading(false);
-        }, crossfadeTime);
+          setIsTransitioning(false);
+        }, 2000); // 2 second crossfade
       }, displayTime);
 
-      return () => clearTimeout(crossfadeTimer);
+      return () => clearTimeout(timer);
     }
-  }, [feature.images.length, currentIndex, isPaused]);
+  }, [feature.images.length, currentIndex]);
 
   const nextSlide = () => {
-    const next = (currentIndex + 1) % feature.images.length;
-    setNextIndex(next);
-    setIsCrossfading(true);
+    setIsTransitioning(true);
     setTimeout(() => {
-      setCurrentIndex(next);
-      setIsCrossfading(false);
+      setCurrentIndex((prev) => (prev + 1) % feature.images.length);
+      setIsTransitioning(false);
     }, 2000);
   };
   
   const prevSlide = () => {
-    const prev = (currentIndex - 1 + feature.images.length) % feature.images.length;
-    setNextIndex(prev);
-    setIsCrossfading(true);
+    setIsTransitioning(true);
     setTimeout(() => {
-      setCurrentIndex(prev);
-      setIsCrossfading(false);
+      setCurrentIndex((prev) => (prev - 1 + feature.images.length) % feature.images.length);
+      setIsTransitioning(false);
     }, 2000);
   };
   return (
@@ -381,9 +353,9 @@ const FeatureCarousel = ({
           <div className="relative aspect-[4/3] rounded-2xl overflow-hidden glass-dark shadow-luxury">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-transparent" />
 
-            {/* Current Image/Video Layer */}
+            {/* Image/Video Display */}
             <div
-              className={`absolute inset-0 w-full h-full transition-opacity duration-[2000ms] ${isCrossfading ? "opacity-0" : "opacity-100"}`}
+              className={`w-full h-full transition-opacity duration-[2000ms] ease-in-out ${isTransitioning ? "opacity-0" : "opacity-100"}`}
             >
               {"image" in feature.images[currentIndex] && feature.images[currentIndex].image ? (
                 <img
@@ -414,28 +386,6 @@ const FeatureCarousel = ({
               )}
             </div>
 
-            {/* Next Image/Video Layer (for crossfade) */}
-            {isCrossfading && (
-              <div className="absolute inset-0 w-full h-full transition-opacity duration-[2000ms] opacity-100">
-                {"image" in feature.images[nextIndex] && feature.images[nextIndex].image ? (
-                  <img
-                    src={String(feature.images[nextIndex].image)}
-                    alt={feature.images[nextIndex].label}
-                    className="w-full h-full object-cover scale-120"
-                  />
-                ) : "video" in feature.images[nextIndex] && feature.images[nextIndex].video ? (
-                  <video
-                    src={String(feature.images[nextIndex].video)}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover"
-                  />
-                ) : null}
-              </div>
-            )}
-
             {/* Navigation Buttons */}
             {feature.images.length > 1 && (
               <>
@@ -454,20 +404,6 @@ const FeatureCarousel = ({
                   className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20"
                 >
                   <ChevronRight className="w-6 h-6 text-white" />
-                </Button>
-
-                {/* Play/Pause Button */}
-                <Button
-                  onClick={() => setIsPaused(!isPaused)}
-                  variant="ghost"
-                  size="icon"
-                  className="absolute top-4 right-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20"
-                >
-                  {isPaused ? (
-                    <Play className="w-5 h-5 text-white" />
-                  ) : (
-                    <Pause className="w-5 h-5 text-white" />
-                  )}
                 </Button>
 
                 {/* Dot Navigation */}
