@@ -8,8 +8,8 @@ import sanctuaryWithinImage from "@/assets/dox-sanctuary-within.jpg";
 
 const problems = [{
   icon: stigmaIcon,
-  title: "Stigma Disguised as Storage",
-  description: "Hiding your wellness collection in drawers and bags, as if pleasure needs to apologize for existing."
+  title: "Storage - Unapologetic",
+  description: "No More Shoeboxes, No more Hidden Draws."
 }, {
   icon: makeshiftIcon,
   title: "The Makeshift Era is Over",
