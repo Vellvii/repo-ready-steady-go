@@ -90,7 +90,7 @@ const showcaseFeatures = [
         thumbnails: [
           "/uploads/RedOpen1.png",
           "/uploads/BlackOpen2.png",
-          "/uploads/dox_interior_labeled_white.jpg",
+          "/uploads/Vellvii_description_sketches_open_ls-2.png",
         ],
       },
     ],
