@@ -5,74 +5,77 @@
 
 @layer base {
   :root {
-    /* Rose gold luxury theme */
-    --background: 10 40% 96%;
-    --foreground: 15 30% 20%;
+    /* Ultra-modern luxury theme */
+    --background: 10 40% 98%;
+    --foreground: 15 30% 15%;
     
-    /* Primary - Rich rose gold */
-    --primary: 12 60% 65%;
-    --primary-foreground: 10 40% 98%;
+    /* Primary - Refined champagne gold */
+    --primary: 40 65% 72%;
+    --primary-foreground: 0 0% 5%;
     
-    /* Secondary - Deep rose gold accent */
-    --secondary: 12 55% 70%;
-    --secondary-foreground: 10 40% 98%;
+    /* Secondary - Deep bronze */
+    --secondary: 30 55% 60%;
+    --secondary-foreground: 0 0% 98%;
     
-    /* Accent - Warm rose gold */
-    --accent: 15 50% 75%;
-    --accent-foreground: 10 40% 98%;
+    /* Accent - Warm copper */
+    --accent: 25 70% 65%;
+    --accent-foreground: 0 0% 5%;
     
     /* Muted tones */
-    --muted: 10 30% 90%;
-    --muted-foreground: 15 35% 45%;
+    --muted: 15 15% 92%;
+    --muted-foreground: 15 20% 45%;
     
     /* Border and input */
-    --border: 10 25% 85%;
-    --input: 10 30% 92%;
-    --ring: 12 55% 70%;
+    --border: 15 15% 88%;
+    --input: 15 15% 94%;
+    --ring: 40 65% 72%;
     
     /* Card backgrounds */
-    --card: 10 35% 97%;
-    --card-foreground: 15 30% 20%;
+    --card: 10 30% 97%;
+    --card-foreground: 15 30% 15%;
     
     /* Popover */
-    --popover: 10 35% 97%;
-    --popover-foreground: 15 30% 20%;
+    --popover: 10 30% 97%;
+    --popover-foreground: 15 30% 15%;
     
     /* Destructive */
     --destructive: 0 62.8% 50.6%;
     --destructive-foreground: 10 40% 98%;
     
     /* Chart colors */
-    --chart-1: 12 60% 65%;
-    --chart-2: 12 55% 70%;
-    --chart-3: 15 50% 75%;
-    --chart-4: 10 30% 90%;
-    --chart-5: 15 35% 45%;
+    --chart-1: 40 65% 72%;
+    --chart-2: 30 55% 60%;
+    --chart-3: 25 70% 65%;
+    --chart-4: 15 15% 92%;
+    --chart-5: 15 20% 45%;
     
-    /* Custom rose gold gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(10, 35%, 92%), hsl(10, 40%, 96%));
-    --gradient-secondary: linear-gradient(135deg, hsl(12, 55%, 70%), hsl(15, 50%, 75%));
-    --gradient-luxury: linear-gradient(135deg, hsl(10, 40%, 96%) 0%, hsl(12, 60%, 65%) 50%, hsl(12, 55%, 70%) 100%);
-    --gradient-dark: linear-gradient(0deg, hsl(10, 35%, 92%) 0%, hsl(10, 40%, 96%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(12, 60%, 65%), hsl(15, 50%, 75%));
-    --gradient-apple: linear-gradient(135deg, hsl(10, 40%, 94%) 0%, hsl(10, 35%, 92%) 50%, hsl(10, 40%, 96%) 100%);
-    --gradient-mesh: conic-gradient(from 180deg at 50% 50%, hsl(12 55% 70% / 0.1) 0deg, hsl(10 40% 96%) 60deg, hsl(12 60% 65% / 0.05) 120deg, hsl(10 40% 96%) 180deg, hsl(12 55% 70% / 0.1) 240deg, hsl(10 40% 96%) 360deg);
-    --gradient-hero: radial-gradient(ellipse at center top, hsl(12 55% 70% / 0.15), transparent 50%);
+    /* Ultra-modern gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(40, 65%, 72%) 0%, hsl(45, 70%, 80%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(30, 55%, 60%) 0%, hsl(40, 65%, 72%) 100%);
+    --gradient-luxury: linear-gradient(135deg, hsl(0, 0%, 5%) 0%, hsl(15, 20%, 12%) 50%, hsl(30, 30%, 18%) 100%);
+    --gradient-dark: linear-gradient(180deg, hsl(0, 0%, 8%) 0%, hsl(0, 0%, 12%) 50%, hsl(0, 0%, 8%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(25, 70%, 65%) 0%, hsl(40, 65%, 72%) 100%);
+    --gradient-hero: radial-gradient(ellipse 80% 50% at 50% 0%, hsl(40 65% 72% / 0.12), transparent);
+    --gradient-mesh: radial-gradient(at 0% 0%, hsl(40 65% 72% / 0.08) 0px, transparent 50%),
+                     radial-gradient(at 100% 0%, hsl(30 55% 60% / 0.06) 0px, transparent 50%),
+                     radial-gradient(at 100% 100%, hsl(25 70% 65% / 0.08) 0px, transparent 50%),
+                     radial-gradient(at 0% 100%, hsl(40 65% 72% / 0.06) 0px, transparent 50%);
+    --gradient-glass: linear-gradient(135deg, hsl(0 0% 100% / 0.05) 0%, hsl(0 0% 100% / 0.02) 100%);
+    --gradient-shimmer: linear-gradient(90deg, transparent 0%, hsl(40 65% 72% / 0.4) 50%, transparent 100%);
     
-    /* Shadows with rose gold colors */
-    --shadow-luxury: 0 20px 60px -10px hsl(12 55% 70% / 0.2);
-    --shadow-glow: 0 0 40px hsl(12 55% 70% / 0.15);
-    --shadow-elegant: 0 10px 30px -10px hsl(12 60% 65% / 0.3);
-    --shadow-teal: 0 0 30px hsl(15 50% 75% / 0.3);
-    --shadow-apple: 0 2px 10px hsl(15 30% 20% / 0.15), 0 10px 25px hsl(15 30% 20% / 0.1);
-    --shadow-magnetic: 0 15px 35px hsl(12 55% 70% / 0.15), 0 5px 15px hsl(12 55% 70% / 0.1);
+    /* Sophisticated shadows */
+    --shadow-luxury: 0 30px 90px -20px hsl(40 65% 72% / 0.25), 0 10px 40px -10px hsl(30 55% 60% / 0.15);
+    --shadow-glow: 0 0 60px hsl(40 65% 72% / 0.2), 0 0 100px hsl(40 65% 72% / 0.1);
+    --shadow-elegant: 0 20px 50px -15px hsl(40 65% 72% / 0.35);
+    --shadow-depth: 0 4px 20px hsl(0 0% 0% / 0.08), 0 2px 8px hsl(0 0% 0% / 0.06);
+    --shadow-float: 0 25px 50px -12px hsl(0 0% 0% / 0.25);
+    --shadow-card: 0 8px 32px hsl(0 0% 0% / 0.08), 0 2px 8px hsl(0 0% 0% / 0.04);
     
-    /* Animation and transitions */
-    --transition-luxury: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-apple: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --transition-magnetic: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-spring: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    /* Premium transitions */
+    --transition-luxury: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     /* Z-index scale for layering */
     --z-behind: -1;
@@ -114,27 +117,48 @@
 }
 
 @layer components {
-  /* Glass morphism effects */
+  /* Ultra-modern glass morphism */
   .glass-luxury {
-    @apply backdrop-blur-xl bg-secondary/10 border border-secondary/20;
+    @apply backdrop-blur-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/[0.15];
+    box-shadow: 0 8px 32px 0 hsl(0 0% 0% / 0.1),
+                inset 0 1px 0 0 hsl(0 0% 100% / 0.1);
   }
   
   .glass-dark {
-    @apply backdrop-blur-xl bg-primary/20 border border-primary/30;
+    @apply backdrop-blur-2xl bg-gradient-to-br from-black/[0.4] to-black/[0.2] border border-white/[0.08];
+    box-shadow: 0 8px 32px 0 hsl(0 0% 0% / 0.2),
+                inset 0 1px 0 0 hsl(0 0% 100% / 0.05);
   }
   
   .glass-accent {
-    @apply backdrop-blur-xl bg-accent/10 border border-accent/30;
+    @apply backdrop-blur-2xl bg-gradient-to-br from-primary/[0.12] to-primary/[0.04] border border-primary/[0.2];
+    box-shadow: 0 8px 32px 0 hsl(40 65% 72% / 0.15);
   }
   
-  /* Luxury hover effects */
+  /* Sophisticated hover effects */
   .hover-glow {
     transition: var(--transition-luxury);
+    position: relative;
+  }
+  
+  .hover-glow::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    background: var(--gradient-shimmer);
+    transition: opacity 0.6s ease;
+    pointer-events: none;
   }
   
   .hover-glow:hover {
     box-shadow: var(--shadow-glow);
-    transform: translateY(-2px);
+    transform: translateY(-4px) scale(1.02);
+  }
+  
+  .hover-glow:hover::before {
+    opacity: 1;
   }
   
   /* Elegant scrollbar */
@@ -181,32 +205,56 @@
     animation: fadeInUp 0.8s ease-out;
   }
   
-  /* Gradient text */
+  /* Luxury gradient text */
   .gradient-text {
-    background: linear-gradient(135deg, hsl(12, 55%, 70%), hsl(15, 50%, 75%));
+    background: linear-gradient(135deg, hsl(40, 65%, 72%) 0%, hsl(45, 70%, 80%) 50%, hsl(40, 65%, 72%) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    background-size: 200% auto;
+    animation: shimmer 3s linear infinite;
+  }
+  
+  @keyframes shimmer {
+    to {
+      background-position: 200% center;
+    }
   }
 
-  /* Apple-style hover effects */
+  /* Premium hover effects */
   .apple-hover {
-    transition: var(--transition-apple);
+    transition: var(--transition-luxury);
   }
 
   .apple-hover:hover {
-    transform: translateY(-1px) scale(1.02);
-    box-shadow: var(--shadow-apple);
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: var(--shadow-card);
   }
 
-  /* Magnetic hover effect */
+  /* Magnetic luxury effect */
   .magnetic {
-    transition: var(--transition-magnetic);
+    transition: var(--transition-smooth);
+    position: relative;
+  }
+
+  .magnetic::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: var(--gradient-primary);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.4s ease;
   }
 
   .magnetic:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-magnetic);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: var(--shadow-float);
+  }
+  
+  .magnetic:hover::after {
+    opacity: 0.15;
   }
 
   /* Section title alignment override */
@@ -313,12 +361,22 @@
   }
 
   @keyframes pulseGlow {
-    0%, 100% { transform: scale(1); box-shadow: var(--shadow-glow); }
-    50% { transform: scale(1.05); box-shadow: var(--shadow-luxury); }
+    0%, 100% { 
+      transform: scale(1); 
+      box-shadow: 0 0 40px hsl(40 65% 72% / 0.3), 
+                  0 0 80px hsl(40 65% 72% / 0.15),
+                  0 10px 30px hsl(0 0% 0% / 0.2);
+    }
+    50% { 
+      transform: scale(1.03); 
+      box-shadow: 0 0 60px hsl(40 65% 72% / 0.4), 
+                  0 0 120px hsl(40 65% 72% / 0.2),
+                  0 15px 40px hsl(0 0% 0% / 0.25);
+    }
   }
 
   .pulse-glow {
-    animation: pulseGlow 2s ease-in-out infinite;
+    animation: pulseGlow 3s ease-in-out infinite;
   }
 
   /* Phone input custom styles */
