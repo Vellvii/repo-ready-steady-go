@@ -41,7 +41,7 @@ export const TimelineSection = () => {
       
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <ScrollReveal>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mb-4 font-playfair">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mb-4 font-baskerville">
             The Journey to Launch
           </h2>
         </ScrollReveal>
@@ -80,7 +80,7 @@ export const TimelineSection = () => {
 
                     {/* Content */}
                     <div className="text-center space-y-2">
-                      <h3 className={`text-sm font-semibold font-playfair ${
+                      <h3 className={`text-sm font-semibold font-baskerville ${
                         milestone.status === 'complete' || milestone.status === 'current'
                           ? 'text-white'
                           : 'text-white/40'
@@ -130,7 +130,7 @@ export const TimelineSection = () => {
 
                   {/* Content */}
                   <div className="flex-1 pt-1">
-                    <h3 className={`text-lg font-semibold mb-1 font-playfair ${
+                    <h3 className={`text-lg font-semibold mb-1 font-baskerville ${
                       milestone.status === 'complete' || milestone.status === 'current'
                         ? 'text-white'
                         : 'text-white/40'

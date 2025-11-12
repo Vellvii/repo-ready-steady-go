@@ -30,7 +30,7 @@ export const FeatureGrid = () => {
   return <section className="py-16 md:py-24 relative">
       <div className="container mx-auto px-4 sm:px-6">
         <ScrollReveal>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mb-4 font-playfair">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mb-4 font-baskerville">
             Elegant — Empowering — Luxurious
           </h2>
         </ScrollReveal>
@@ -48,7 +48,7 @@ export const FeatureGrid = () => {
                   <div className="w-14 h-14 rounded-xl bg-gradient-secondary flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <feature.icon className="w-7 h-7 text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold font-playfair text-zinc-800">
+                  <h3 className="text-xl font-semibold font-baskerville text-zinc-800">
                     {feature.title}
                   </h3>
                   <p className="leading-relaxed text-neutral-600">

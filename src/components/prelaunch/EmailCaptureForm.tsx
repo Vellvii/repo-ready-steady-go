@@ -80,7 +80,7 @@ export const EmailCaptureForm = () => {
         <div className="w-16 h-16 mx-auto rounded-full bg-primary/20 flex items-center justify-center">
           <CheckCircle2 className="w-10 h-10 text-primary" />
         </div>
-        <h3 className="text-2xl font-bold text-white font-playfair">
+        <h3 className="text-2xl font-bold text-white font-baskerville">
           You're on the List!
         </h3>
         <p className="text-white/70 leading-relaxed max-w-md mx-auto">

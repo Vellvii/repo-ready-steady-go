@@ -23,7 +23,7 @@ export const ProblemSection = () => {
   return <section className="py-16 md:py-24 relative">
       <div className="container mx-auto px-4 sm:px-6">
         <ScrollReveal>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mb-4 font-playfair">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mb-4 font-baskerville">
             A Design That Demands to Be Touched
           </h2>
         </ScrollReveal>
@@ -70,7 +70,7 @@ export const ProblemSection = () => {
                       }}
                     />
                   </div>
-                  <h3 className="text-xl font-semibold font-playfair text-slate-950">
+                  <h3 className="text-xl font-semibold font-baskerville text-slate-950">
                     {problem.title}
                   </h3>
                   <p className="leading-relaxed text-zinc-600">
