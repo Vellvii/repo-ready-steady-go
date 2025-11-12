@@ -116,16 +116,6 @@ const showcaseFeatures = [
         description: "No other creation comes close to the craftsmanship, precision, and presence of the DDS. This isn't competition, it's creation perfected.",
       },
       {
-        image: "/uploads/Red-Dildo.png",
-        label: "",
-        description: "",
-      },
-      {
-        image: "/uploads/dds-brand-message.png",
-        label: "",
-        description: "",
-      },
-      {
         image: "/uploads/DDS_Autocad_sketch_w_descriptions.png",
         label: "",
         description: "",
