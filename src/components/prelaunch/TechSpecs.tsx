@@ -1,4 +1,5 @@
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import { CrossfadeCarousel } from "@/components/media/CrossfadeCarousel";
 
 const leftSpecs = [
   { label: "Exterior", value: "High-quality waterproof faux leather" },
@@ -63,18 +64,17 @@ export const TechSpecs = () => {
           </ScrollReveal>
         </div>
 
-        {/* Technical Diagram Placeholder */}
+        {/* Technical Diagram */}
         <ScrollReveal delay={0.4}>
           <div className="mt-12 max-w-4xl mx-auto">
-            <div className="relative aspect-[5/4] rounded-2xl overflow-hidden glass-dark">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-transparent" />
-              <div className="relative w-full h-full flex items-center justify-center p-8">
-                <p className="text-white/40 text-sm font-semibold text-center">
-                  AUTOCAD DIAGRAM: Tri-Layer Construction
-                  <br />
-                  <span className="text-xs font-light">(DDS precision layers with poured acrylic glass surface)</span>
-                </p>
-              </div>
+            <div className="rounded-2xl overflow-hidden shadow-float ring-1 ring-white/10">
+              <CrossfadeCarousel
+                items={["/uploads/V_logo_video_2-2.mp4"]}
+                aspectRatio="aspect-[5/4]"
+                enableLightbox={true}
+                altPrefix="Tri-Layer Construction"
+                videoDisplayTime={8000}
+              />
             </div>
           </div>
         </ScrollReveal>
