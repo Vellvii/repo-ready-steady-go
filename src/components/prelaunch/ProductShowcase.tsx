@@ -71,7 +71,6 @@ const showcaseFeatures = [
         description: "One touch. One owner. Total control of your intimate collection.",
         thumbnails: [
           "/uploads/fingerprint-video.webm",
-          "/uploads/RedLockClose.png",
           "/uploads/Dox_fp_lock_video2.webm",
         ],
       },
