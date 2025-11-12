@@ -139,6 +139,60 @@ const showcaseFeatures = [
       },
     ],
   },
+  {
+    number: 4,
+    title: "VELLVII COLLECTION",
+    subtitle: "The Art of \"O\"",
+    images: [
+      {
+        image: "/uploads/BlackPinkEvolve1.png",
+        label: "Sculpted for Sensation",
+        description: "Where engineering meets artistry in the pursuit of perfect pleasure.",
+      },
+      {
+        image: "/uploads/BeigeDoxGVibeFrontRightClose.png",
+        label: "Refined. Personal. Unapologetically Yours.",
+        description: "A collection designed to move you - emotionally, physically, beautifully.",
+      },
+      {
+        image: "/uploads/RedPinkGVibe2.png",
+        label: "The Art of 'O'",
+        description: "Every curve, every detail, every innovation is a study in sensual design.",
+      },
+    ],
+    subcategories: [
+      {
+        title: "PULSE",
+        description: "Precision-engineered pleasure that redefines intimacy.",
+        thumbnails: [
+          "/uploads/Pulse1.jpg",
+          "/uploads/Pulse2.jpg",
+          "/uploads/PulsePoBCloseBL.png",
+          "/uploads/Pulse_-trans.png",
+        ],
+      },
+      {
+        title: "G-VIBE",
+        description: "Dual stimulation perfected through innovative design.",
+        thumbnails: [
+          "/uploads/G-Vibe1.jpg",
+          "/uploads/G-Vibe2.jpg",
+          "/uploads/G-Vibe3.jpg",
+          "/uploads/G-Vibe-transparent.png",
+        ],
+      },
+      {
+        title: "EVOLVE",
+        description: "The evolution of luxury, crafted for your collection.",
+        thumbnails: [
+          "/uploads/BlackPinkEvolve1.png",
+          "/uploads/RedDoxEvolveFrontRight.png",
+          "/uploads/RedDoxEvolveFrontRightClose.png",
+          "/uploads/BeigeDoxGVibeFrontRightClose.png",
+        ],
+      },
+    ],
+  },
 ];
 
 const SubcategoryCarousel = ({
