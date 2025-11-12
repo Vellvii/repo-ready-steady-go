@@ -157,15 +157,28 @@ const SubcategoryCarousel = ({
   const loadedSet = useRef<Set<string>>(new Set());
   const waitRef = useRef<number | null>(null);
 
-  const preloadImage = (url: string) => {
+  const preloadMedia = (url: string) => {
     if (!url || loadedSet.current.has(url)) return;
-    const img = new Image();
-    img.src = url;
-    img.onload = () => {
-      loadedSet.current.add(url);
-    };
+    const isVid = url.endsWith(".mp4") || url.endsWith(".webm");
+    if (isVid) {
+      const video = document.createElement("video");
+      video.preload = "auto";
+      video.muted = true;
+      video.src = url;
+      const onReady = () => {
+        loadedSet.current.add(url);
+        video.removeEventListener("canplaythrough", onReady);
+      };
+      video.addEventListener("canplaythrough", onReady);
+      video.load();
+    } else {
+      const img = new Image();
+      img.src = url;
+      img.onload = () => {
+        loadedSet.current.add(url);
+      };
+    }
   };
-
   function startTransition(targetIndex?: number) {
     setIsTransitioning(true);
     window.setTimeout(() => {
@@ -191,8 +204,8 @@ const SubcategoryCarousel = ({
       const nextThumb = subcategory.thumbnails[next];
       const isNextVideo = nextThumb.endsWith(".mp4") || nextThumb.endsWith(".webm");
 
-      if (!isNextVideo && nextThumb && !loadedSet.current.has(nextThumb)) {
-        preloadImage(nextThumb);
+      if (nextThumb && !loadedSet.current.has(nextThumb)) {
+        preloadMedia(nextThumb);
         const check = () => {
           if (loadedSet.current.has(nextThumb)) {
             startTransition();
@@ -218,15 +231,40 @@ const SubcategoryCarousel = ({
   const nextSlide = () => {
     const next = (currentIndex + 1) % subcategory.thumbnails.length;
     setNextIndex(next);
-    startTransition(next);
+    const nextSrc = subcategory.thumbnails[next];
+    if (nextSrc && !loadedSet.current.has(nextSrc)) {
+      preloadMedia(nextSrc);
+      const check = () => {
+        if (loadedSet.current.has(nextSrc)) {
+          startTransition(next);
+        } else {
+          waitRef.current = window.setTimeout(check, 100);
+        }
+      };
+      check();
+    } else {
+      startTransition(next);
+    }
   };
 
   const prevSlide = () => {
     const prev = (currentIndex - 1 + subcategory.thumbnails.length) % subcategory.thumbnails.length;
     setNextIndex(prev);
-    startTransition(prev);
+    const prevSrc = subcategory.thumbnails[prev];
+    if (prevSrc && !loadedSet.current.has(prevSrc)) {
+      preloadMedia(prevSrc);
+      const check = () => {
+        if (loadedSet.current.has(prevSrc)) {
+          startTransition(prev);
+        } else {
+          waitRef.current = window.setTimeout(check, 100);
+        }
+      };
+      check();
+    } else {
+      startTransition(prev);
+    }
   };
-
   const currentThumb = subcategory.thumbnails[currentIndex];
   const nextThumb = subcategory.thumbnails[nextIndex];
   const isCurrentVideo = currentThumb.endsWith(".mp4") || currentThumb.endsWith(".webm");
@@ -257,6 +295,7 @@ const SubcategoryCarousel = ({
                   loop
                   muted
                   playsInline
+                  preload="auto"
                   className="w-full h-full object-cover"
                 />
               ) : (
@@ -282,6 +321,7 @@ const SubcategoryCarousel = ({
                   loop
                   muted
                   playsInline
+                  preload="auto"
                   className="w-full h-full object-cover"
                 />
               ) : (
@@ -322,7 +362,25 @@ const SubcategoryCarousel = ({
                   {subcategory.thumbnails.map((_, imgIndex) => (
                     <button
                       key={imgIndex}
-                      onClick={() => setCurrentIndex(imgIndex)}
+                      onClick={() => {
+                        if (imgIndex !== currentIndex) {
+                          setNextIndex(imgIndex);
+                          const targetSrc = subcategory.thumbnails[imgIndex];
+                          if (targetSrc && !loadedSet.current.has(targetSrc)) {
+                            preloadMedia(targetSrc);
+                            const check = () => {
+                              if (loadedSet.current.has(targetSrc)) {
+                                startTransition(imgIndex);
+                              } else {
+                                waitRef.current = window.setTimeout(check, 100);
+                              }
+                            };
+                            check();
+                          } else {
+                            startTransition(imgIndex);
+                          }
+                        }
+                      }}
                       className={`w-2 h-2 rounded-full transition-all duration-300 ${imgIndex === currentIndex ? "bg-primary w-8" : "bg-white/30 hover:bg-white/50"}`}
                       aria-label={`Go to slide ${imgIndex + 1}`}
                     />
@@ -565,7 +623,16 @@ const FeatureCarousel = ({
                   {feature.images.map((_, imgIndex) => (
                     <button
                       key={imgIndex}
-                      onClick={() => setCurrentIndex(imgIndex)}
+                        onClick={() => {
+                          if (imgIndex !== currentIndex) {
+                            setNextIndex(imgIndex);
+                            setIsTransitioning(true);
+                            window.setTimeout(() => {
+                              setCurrentIndex(imgIndex);
+                              setIsTransitioning(false);
+                            }, 2000);
+                          }
+                        }}
                       className={`w-2 h-2 rounded-full transition-all duration-300 ${imgIndex === currentIndex ? "bg-primary w-8" : "bg-white/30 hover:bg-white/50"}`}
                       aria-label={`Go to slide ${imgIndex + 1}`}
                     />
