@@ -101,14 +101,9 @@ const showcaseFeatures = [
     tagline: "DDS - Dildo Docking Station",
     images: [
       {
-        image: "/uploads/dds-suction-cup-purpose.png",
+        image: "/uploads/Vellvii_description_sketches_separated_VDS_DDS_blk_img_1.png",
         label: "VELLVII DDS – THE DILDO DOCKING STATION",
         description: "The DDS is where form and function meet sensual innovation. What began as a bold idea, to elevate pleasure beyond the ordinary, became a sculptural masterpiece of modern design.",
-      },
-      {
-        image: "/uploads/Vellvii_description_sketches_separated_VDS_DDS_blk_img_1.png",
-        label: "",
-        description: "",
       },
       {
         video: "/uploads/dds-animation.mp4",
@@ -279,7 +274,7 @@ const FeatureCarousel = ({
           <div className="rounded-3xl overflow-hidden shadow-float ring-1 ring-white/10">
             <CrossfadeCarousel
               items={imageUrls}
-              aspectRatio="aspect-video"
+              aspectRatio="aspect-[4/3]"
               enableLightbox={true}
               altPrefix={feature.title}
               imageDisplayTime={5000}
