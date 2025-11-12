@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -101,7 +101,7 @@
   
   html,
   body {
-    @apply bg-background text-foreground font-inter;
+    @apply bg-background text-foreground font-montserrat;
     background-color: hsl(10, 40%, 96%);
     font-feature-settings: "rlig" 1, "calt" 1;
   }
@@ -112,7 +112,7 @@
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-playfair;
+    @apply font-baskerville;
   }
 }
 
@@ -291,12 +291,12 @@
 }
 
 @layer utilities {
-  .font-playfair {
-    font-family: 'Playfair Display', serif;
+  .font-baskerville {
+    font-family: 'Libre Baskerville', 'Baskerville Old Face', serif;
   }
   
-  .font-inter {
-    font-family: 'Inter', sans-serif;
+  .font-montserrat {
+    font-family: 'Montserrat', sans-serif;
   }
 
 

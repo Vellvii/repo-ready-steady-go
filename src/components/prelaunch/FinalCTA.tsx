@@ -17,7 +17,7 @@ export const FinalCTA = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-5xl mx-auto text-center space-y-10">
           <ScrollReveal>
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white font-playfair leading-[1.1] tracking-tight">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white font-baskerville leading-[1.1] tracking-tight">
               The Future is Coming in 2026
             </h2>
           </ScrollReveal>
