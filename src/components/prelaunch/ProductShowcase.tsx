@@ -114,28 +114,28 @@ const showcaseFeatures = [
     images: [
       {
         image: "/uploads/BeigeDoxGVibeFrontRightClose.png",
-        label: "EVOLVE COLLECTION - Beige Elegance",
-        description: "Premium beige finish with rose-gold accents",
+        label: "VDS - VELLVII DOCKING STATION",
+        description: "Crafted to cradle the Vellvii Pleasure Collection in elegance, it's a masterpiece of deliberate engineering - refined, practical, and irresistibly beautiful. Because when design serves desire, it becomes something extraordinary.",
       },
       {
         image: "/uploads/RedPinkGVibe2.png",
-        label: "EVOLVE COLLECTION - Red Luxury",
-        description: "Bold red DOX with integrated charging",
+        label: "VELLVII SOLUTION",
+        description: "Everyone deserves to own something beautiful, personal, and unapologetically theirs. The Dox isn't about hiding, it's about honoring. Crafted to elevate the most intimate parts of life, without shame, without guilt - Only Art.",
       },
       {
         image: "/uploads/BlackPinkEvolve1.png",
-        label: "EVOLVE COLLECTION - Black Sophistication",
-        description: "Sleek black design with elegant contrast",
+        label: "VELLVII COLLECTION",
+        description: "With intense and deliberate focus on our mantra — \"The Art of 'O'.\" Every curve, every detail, every innovation is a study in sensual design. Crafted not just to perform, but to move you - emotionally, physically, beautifully. Vellvii doesn't chase pleasure. We sculpt it. We perfect it. We turn it into art.",
       },
       {
         image: "/uploads/BeigeRedPulseBackSide.png",
-        label: "POSITION OF POWER - Pulse Detail",
-        description: "Ergonomic design meets wireless charging",
+        label: "",
+        description: "",
       },
       {
         image: "/uploads/BlackPinkGVibe1.png",
-        label: "EVOLVE COLLECTION - Complete System",
-        description: "The ultimate luxury storage and charging solution",
+        label: "",
+        description: "",
       },
     ],
   },
