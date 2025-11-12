@@ -52,8 +52,8 @@ export const FAQSection = () => {
         </ScrollReveal>
 
         <ScrollReveal delay={0.2}>
-          <p className="text-lg text-white/60 text-center max-w-2xl mx-auto mb-16">
-            Everything you need to know about the DOX
+          <p className="text-lg text-white/60 text-center max-w-2xl mx-auto mb-16 font-light">
+            Everything you need to know about <span className="font-semibold text-white/80">the DOX</span>
           </p>
         </ScrollReveal>
 
@@ -67,9 +67,9 @@ export const FAQSection = () => {
                   className="glass-dark border-white/10 rounded-lg px-6 data-[state=open]:border-primary/30 transition-colors"
                 >
                   <AccordionTrigger className="text-white hover:text-primary text-left py-6 hover:no-underline">
-                    <span className="font-semibold">{faq.question}</span>
+                    <span className="font-bold">{faq.question}</span>
                   </AccordionTrigger>
-                  <AccordionContent className="text-white/70 leading-relaxed pb-6">
+                  <AccordionContent className="text-white/70 leading-relaxed pb-6 font-light">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>

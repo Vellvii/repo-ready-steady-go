@@ -44,7 +44,7 @@ export const FinalCTA = () => {
 
           <ScrollReveal delay={0.5}>
             <p className="text-white/50 text-lg font-light">
-              Join the waitlist to receive exclusive updates on this revolutionary design
+              Join the waitlist to receive <span className="font-medium text-white/60">exclusive updates</span> on this revolutionary design
             </p>
           </ScrollReveal>
         </div>

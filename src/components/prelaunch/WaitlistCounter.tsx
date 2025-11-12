@@ -74,8 +74,8 @@ export const WaitlistCounter = () => {
           }}
         />
       </div>
-      <p className="text-white/60 text-lg font-medium">
-        People on Waitlist
+      <p className="text-white/60 text-lg font-light tracking-wide">
+        <span className="font-semibold">People</span> on Waitlist
       </p>
     </div>
   );

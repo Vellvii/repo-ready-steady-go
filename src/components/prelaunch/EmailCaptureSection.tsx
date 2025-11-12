@@ -25,8 +25,8 @@ export const EmailCaptureSection = () => {
           </ScrollReveal>
 
           <ScrollReveal delay={0.2}>
-            <p className="text-lg sm:text-xl text-white/70 text-center mb-8">
-              Be first to experience <span className="text-primary font-semibold">modern intimacy, elevated to art</span>
+            <p className="text-lg sm:text-xl text-white/70 text-center mb-8 font-light">
+              Be first to experience <span className="text-primary font-bold">modern intimacy, elevated to art</span>
             </p>
           </ScrollReveal>
 
@@ -47,14 +47,14 @@ export const EmailCaptureSection = () => {
                   <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                     <Check className="w-4 h-4 text-primary" />
                   </div>
-                  <p className="text-white/80 text-sm leading-relaxed">{benefit}</p>
+                  <p className="text-white/80 text-sm leading-relaxed font-light">{benefit}</p>
                 </div>
               ))}
             </div>
           </ScrollReveal>
 
           <ScrollReveal delay={0.6}>
-            <p className="text-white/40 text-xs text-center mt-8">
+            <p className="text-white/40 text-xs text-center mt-8 font-light">
               No spam. Unsubscribe anytime. Your privacy is our priority.
             </p>
           </ScrollReveal>

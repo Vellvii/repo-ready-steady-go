@@ -59,7 +59,7 @@ export const CountdownTimer = ({ targetDate, size = 'large' }: CountdownTimerPro
           <div className={`${isSmall ? 'text-2xl sm:text-3xl' : 'text-3xl sm:text-5xl'} font-bold text-white font-baskerville`}>
             {value.toString().padStart(2, '0')}
           </div>
-          <div className={`${isSmall ? 'text-xs' : 'text-sm'} text-white/50 mt-1 uppercase tracking-wider`}>
+          <div className={`${isSmall ? 'text-xs' : 'text-sm'} text-white/50 mt-1 uppercase tracking-wider font-semibold`}>
             {label}
           </div>
         </div>

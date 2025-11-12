@@ -37,8 +37,8 @@ export const TechSpecs = () => {
               <div className="space-y-4">
                 {leftSpecs.map((spec, index) => (
                   <div key={index} className="flex justify-between items-center pb-4 border-b border-white/10 last:border-0">
-                    <span className="text-white/60 text-sm sm:text-base">{spec.label}</span>
-                    <span className="text-white font-medium text-sm sm:text-base text-right">{spec.value}</span>
+                    <span className="text-white/60 text-sm sm:text-base font-medium">{spec.label}</span>
+                    <span className="text-white font-semibold text-sm sm:text-base text-right">{spec.value}</span>
                   </div>
                 ))}
               </div>
@@ -54,8 +54,8 @@ export const TechSpecs = () => {
               <div className="space-y-4">
                 {rightSpecs.map((spec, index) => (
                   <div key={index} className="flex justify-between items-center pb-4 border-b border-white/10 last:border-0">
-                    <span className="text-white/60 text-sm sm:text-base">{spec.label}</span>
-                    <span className="text-white font-medium text-sm sm:text-base text-right">{spec.value}</span>
+                    <span className="text-white/60 text-sm sm:text-base font-medium">{spec.label}</span>
+                    <span className="text-white font-semibold text-sm sm:text-base text-right">{spec.value}</span>
                   </div>
                 ))}
               </div>
@@ -69,10 +69,10 @@ export const TechSpecs = () => {
             <div className="relative aspect-[5/4] rounded-2xl overflow-hidden glass-dark">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-transparent" />
               <div className="relative w-full h-full flex items-center justify-center p-8">
-                <p className="text-white/40 text-sm font-medium text-center">
+                <p className="text-white/40 text-sm font-semibold text-center">
                   AUTOCAD DIAGRAM: Tri-Layer Construction
                   <br />
-                  <span className="text-xs">(DDS precision layers with poured acrylic glass surface)</span>
+                  <span className="text-xs font-light">(DDS precision layers with poured acrylic glass surface)</span>
                 </p>
               </div>
             </div>

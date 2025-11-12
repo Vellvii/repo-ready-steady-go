@@ -36,8 +36,8 @@ export const FeatureGrid = () => {
         </ScrollReveal>
 
         <ScrollReveal delay={0.2}>
-          <p className="text-lg text-white/60 text-center max-w-2xl mx-auto mb-16">
-            It's more than storage, it's a revolution in intimate design
+          <p className="text-lg text-white/60 text-center max-w-2xl mx-auto mb-16 font-light">
+            It's more than storage, it's <span className="font-semibold text-white/80">a revolution in intimate design</span>
           </p>
         </ScrollReveal>
 
@@ -48,10 +48,10 @@ export const FeatureGrid = () => {
                   <div className="w-14 h-14 rounded-xl bg-gradient-secondary flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <feature.icon className="w-7 h-7 text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold font-baskerville text-zinc-800">
+                  <h3 className="text-xl font-bold font-baskerville text-zinc-800">
                     {feature.title}
                   </h3>
-                  <p className="leading-relaxed text-neutral-600">
+                  <p className="leading-relaxed text-neutral-600 font-light">
                     {feature.description}
                   </p>
                 </CardContent>

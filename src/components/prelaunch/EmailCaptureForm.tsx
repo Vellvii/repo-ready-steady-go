@@ -83,11 +83,11 @@ export const EmailCaptureForm = () => {
         <h3 className="text-2xl font-bold text-white font-baskerville">
           You're on the List!
         </h3>
-        <p className="text-white/70 leading-relaxed max-w-md mx-auto">
+        <p className="text-white/70 leading-relaxed max-w-md mx-auto font-light">
           Check your email for confirmation. You're now on the waitlist.
         </p>
-        <p className="text-white/50 text-sm">
-          We'll notify you when the DOX launches with your exclusive discount code.
+        <p className="text-white/50 text-sm font-light">
+          We'll notify you when the DOX launches with your <span className="font-semibold text-white/60">exclusive discount code</span>.
         </p>
       </div>
     );
@@ -177,8 +177,8 @@ export const EmailCaptureForm = () => {
                     className="mt-0.5 border-white/30 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
                   />
                 </FormControl>
-                <FormLabel className="text-white/90 text-sm leading-relaxed cursor-pointer font-normal">
-                  I want exclusive launch pricing and to save <span className="text-primary font-semibold">$200</span>
+                <FormLabel className="text-white/90 text-sm leading-relaxed cursor-pointer font-light">
+                  I want exclusive launch pricing and to save <span className="text-primary font-bold">$200</span>
                 </FormLabel>
               </div>
             </FormItem>
@@ -188,7 +188,7 @@ export const EmailCaptureForm = () => {
         <button
           type="submit"
           disabled={form.formState.isSubmitting}
-          className="w-full px-8 py-4 bg-gradient-secondary text-white rounded-lg font-semibold text-lg shadow-luxury hover:shadow-glow transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 hover:scale-105 active:scale-95"
+          className="w-full px-8 py-4 bg-gradient-secondary text-white rounded-lg font-bold text-lg shadow-luxury hover:shadow-glow transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 hover:scale-105 active:scale-95"
         >
           {form.formState.isSubmitting ? (
             <>

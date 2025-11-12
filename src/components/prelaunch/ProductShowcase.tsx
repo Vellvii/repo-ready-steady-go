@@ -297,7 +297,7 @@ const FeatureCarousel = ({
               <h4 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors duration-300">
                 {item.label}
               </h4>
-              <p className="text-base text-white/70 leading-relaxed">{item.description}</p>
+              <p className="text-base text-white/70 leading-relaxed font-light">{item.description}</p>
             </div>
           ))}
         </div>
@@ -329,7 +329,7 @@ export const ProductShowcase = () => {
               Product Showcase
             </h2>
             <p className="text-2xl text-white/70 max-w-3xl mx-auto font-light leading-relaxed">
-              Experience the elegance and innovation of Vellvii's premium collection
+              Experience the elegance and innovation of <span className="font-semibold text-white/80">Vellvii's premium collection</span>
             </p>
           </div>
         </ScrollReveal>

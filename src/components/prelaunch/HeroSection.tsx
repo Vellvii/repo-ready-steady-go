@@ -21,7 +21,7 @@ export const HeroSection = () => {
           <ScrollReveal delay={0.2}>
             <div className="inline-flex items-center gap-2 px-6 py-3 glass-accent rounded-full backdrop-blur-2xl">
               <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <p className="text-primary text-sm font-semibold tracking-wide uppercase">Launching 2026</p>
+              <p className="text-primary text-sm font-bold tracking-wide uppercase">Launching 2026</p>
             </div>
           </ScrollReveal>
 
@@ -32,8 +32,8 @@ export const HeroSection = () => {
           />
 
           <ScrollReveal delay={0.6}>
-            <p className="text-xl sm:text-2xl lg:text-3xl text-white/80 max-w-3xl mx-auto font-light leading-relaxed">
-              The Most Creative, Most Luxurious, and Most Anticipated Sexual Wellness Innovation of 2026
+            <p className="text-xl sm:text-2xl lg:text-3xl text-white/80 max-w-3xl mx-auto font-light leading-relaxed tracking-wide">
+              The Most Creative, Most Luxurious, and Most Anticipated Sexual Wellness Innovation of <span className="font-semibold">2026</span>
             </p>
           </ScrollReveal>
 
@@ -54,8 +54,8 @@ export const HeroSection = () => {
           </ScrollReveal>
 
           <ScrollReveal delay={1.2}>
-            <p className="text-white/60 text-base max-w-2xl mx-auto leading-relaxed">
-              A statement of design and self-respect — <span className="text-primary font-semibold gradient-text">a new era of elegance in intimacy</span>
+            <p className="text-white/60 text-base max-w-2xl mx-auto leading-relaxed font-light">
+              A statement of design and self-respect — <span className="text-primary font-bold gradient-text">a new era of elegance in intimacy</span>
             </p>
           </ScrollReveal>
         </div>

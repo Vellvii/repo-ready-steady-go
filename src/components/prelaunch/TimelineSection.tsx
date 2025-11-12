@@ -47,8 +47,8 @@ export const TimelineSection = () => {
         </ScrollReveal>
 
         <ScrollReveal delay={0.2}>
-          <p className="text-lg text-white/60 text-center max-w-2xl mx-auto mb-16">
-            Transparency every step of the way
+          <p className="text-lg text-white/60 text-center max-w-2xl mx-auto mb-16 font-light">
+            Transparency <span className="font-semibold text-white/80">every step of the way</span>
           </p>
         </ScrollReveal>
 
@@ -96,7 +96,7 @@ export const TimelineSection = () => {
                       }`}>
                         {milestone.date}
                       </p>
-                      <p className="text-xs text-white/50">{milestone.description}</p>
+                      <p className="text-xs text-white/50 font-light">{milestone.description}</p>
                     </div>
                   </div>
                 ))}
@@ -146,7 +146,7 @@ export const TimelineSection = () => {
                     }`}>
                       {milestone.date}
                     </p>
-                    <p className="text-sm text-white/60">{milestone.description}</p>
+                    <p className="text-sm text-white/60 font-light">{milestone.description}</p>
                   </div>
                 </div>
               </ScrollReveal>

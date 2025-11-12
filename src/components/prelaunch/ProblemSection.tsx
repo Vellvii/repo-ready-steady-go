@@ -29,8 +29,8 @@ export const ProblemSection = () => {
         </ScrollReveal>
 
         <ScrollReveal delay={0.2}>
-          <p className="text-lg text-white/60 text-center max-w-2xl mx-auto mb-16">
-            The innovation that should have existed years ago — now perfected
+          <p className="text-lg text-white/60 text-center max-w-2xl mx-auto mb-16 font-light">
+            The innovation that should have existed years ago — <span className="font-semibold text-white/80">now perfected</span>
           </p>
         </ScrollReveal>
 
@@ -70,10 +70,10 @@ export const ProblemSection = () => {
                       }}
                     />
                   </div>
-                  <h3 className="text-xl font-semibold font-baskerville text-slate-950">
+                  <h3 className="text-xl font-bold font-baskerville text-slate-950">
                     {problem.title}
                   </h3>
-                  <p className="leading-relaxed text-zinc-600">
+                  <p className="leading-relaxed text-zinc-600 font-light">
                     {problem.description}
                   </p>
                 </CardContent>
