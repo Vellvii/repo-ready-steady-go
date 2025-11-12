@@ -180,16 +180,19 @@ const SubcategoryCarousel = ({
     }
   };
   function startTransition(targetIndex?: number) {
-    setIsTransitioning(true);
-    window.setTimeout(() => {
-      setCurrentIndex((prev) => {
-        if (typeof targetIndex === "number") return targetIndex;
-        return (prev + 1) % subcategory.thumbnails.length;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setIsTransitioning(true);
+        window.setTimeout(() => {
+          setCurrentIndex((prev) => {
+            if (typeof targetIndex === "number") return targetIndex;
+            return (prev + 1) % subcategory.thumbnails.length;
+          });
+          setIsTransitioning(false);
+        }, 2000);
       });
-      setIsTransitioning(false);
-    }, 2000);
+    });
   }
-
   // Auto-play carousel
   useEffect(() => {
     if (subcategory.thumbnails.length <= 1) return;
@@ -286,7 +289,7 @@ const SubcategoryCarousel = ({
 
             {/* Crossfade Layers */}
             <div
-              className={`absolute inset-0 w-full h-full transition-opacity duration-[2000ms] ease-in-out ${isTransitioning ? "opacity-0" : "opacity-100"}`}
+              className={`absolute inset-0 w-full h-full transition-opacity duration-[2000ms] ease-in-out pointer-events-none will-change-[opacity] transform-gpu [backface-visibility:hidden] ${isTransitioning ? "opacity-0" : "opacity-100"}`}
             >
               {isCurrentVideo ? (
                 <video
@@ -312,7 +315,7 @@ const SubcategoryCarousel = ({
             </div>
 
             <div
-              className={`absolute inset-0 w-full h-full transition-opacity duration-[2000ms] ease-in-out ${isTransitioning ? "opacity-100" : "opacity-0"}`}
+              className={`absolute inset-0 w-full h-full transition-opacity duration-[2000ms] ease-in-out pointer-events-none will-change-[opacity] transform-gpu [backface-visibility:hidden] ${isTransitioning ? "opacity-100" : "opacity-0"}`}
             >
               {isNextVideo ? (
                 <video
@@ -421,33 +424,51 @@ const FeatureCarousel = ({
   const loadedSet = useRef<Set<string>>(new Set());
   const waitRef = useRef<number | null>(null);
 
-  const preloadImage = (url: string) => {
+  const preloadMedia = (url: string) => {
     if (!url || loadedSet.current.has(url)) return;
-    const img = new Image();
-    img.src = url;
-    img.onload = () => {
-      loadedSet.current.add(url);
-    };
+    const isVid = url.endsWith(".mp4") || url.endsWith(".webm");
+    if (isVid) {
+      const video = document.createElement("video");
+      video.preload = "auto";
+      video.muted = true;
+      video.src = url;
+      const onReady = () => {
+        loadedSet.current.add(url);
+        video.removeEventListener("canplaythrough", onReady);
+      };
+      video.addEventListener("canplaythrough", onReady);
+      video.load();
+    } else {
+      const img = new Image();
+      img.src = url;
+      img.onload = () => {
+        loadedSet.current.add(url);
+      };
+    }
   };
-
   // Keep nextIndex in sync and preload it
   useEffect(() => {
     const next = (currentIndex + 1) % feature.images.length;
     setNextIndex(next);
     const nextItem = feature.images[next];
     if ("image" in nextItem && nextItem.image) {
-      preloadImage(String(nextItem.image));
+      preloadMedia(String(nextItem.image));
     }
   }, [currentIndex, feature.images.length]);
 
-  const startTransition = () => {
-    setIsTransitioning(true);
-    window.setTimeout(() => {
-      setCurrentIndex((prev) => (prev + 1) % feature.images.length);
-      setIsTransitioning(false);
-    }, 2000);
+  const startTransition = (targetIndex?: number) => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setIsTransitioning(true);
+        window.setTimeout(() => {
+          setCurrentIndex((prev) =>
+            typeof targetIndex === 'number' ? targetIndex : (prev + 1) % feature.images.length
+          );
+          setIsTransitioning(false);
+        }, 2000);
+      });
+    });
   };
-
   // Auto-play with preloading guard (Images: 5s + 2s fade, Videos: 10s + 2s fade)
   useEffect(() => {
     if (feature.images.length <= 1) return;
@@ -460,22 +481,19 @@ const FeatureCarousel = ({
       const next = (currentIndex + 1) % feature.images.length;
       setNextIndex(next);
       const nextItem = feature.images[next];
-
-      if ("image" in nextItem && nextItem.image) {
-        const url = String(nextItem.image);
-        if (loadedSet.current.has(url)) {
-          startTransition();
-        } else {
-          preloadImage(url);
-          const check = () => {
-            if (loadedSet.current.has(url)) {
-              startTransition();
-            } else {
-              waitRef.current = window.setTimeout(check, 100);
-            }
-          };
-          check();
-        }
+      const src = ("image" in nextItem && nextItem.image)
+        ? String(nextItem.image)
+        : ("video" in nextItem && nextItem.video ? String(nextItem.video) : "");
+      if (src && !loadedSet.current.has(src)) {
+        preloadMedia(src);
+        const check = () => {
+          if (loadedSet.current.has(src)) {
+            startTransition();
+          } else {
+            waitRef.current = window.setTimeout(check, 100);
+          }
+        };
+        check();
       } else {
         startTransition();
       }
@@ -494,24 +512,30 @@ const FeatureCarousel = ({
     const next = (currentIndex + 1) % feature.images.length;
     setNextIndex(next);
     const nextItem = feature.images[next];
-    if ("image" in nextItem && nextItem.image) {
-      const url = String(nextItem.image);
-      if (!loadedSet.current.has(url)) preloadImage(url);
+    const src = ("image" in nextItem && nextItem.image)
+      ? String(nextItem.image)
+      : ("video" in nextItem && nextItem.video ? String(nextItem.video) : "");
+    if (src && !loadedSet.current.has(src)) {
+      preloadMedia(src);
+      const check = () => {
+        if (loadedSet.current.has(src)) {
+          startTransition(next);
+        } else {
+          waitRef.current = window.setTimeout(check, 100);
+        }
+      };
+      check();
+    } else {
+      startTransition(next);
     }
-    setIsTransitioning(true);
-    window.setTimeout(() => {
-      setCurrentIndex(next);
-      setIsTransitioning(false);
-    }, 2000);
   };
-  
   const prevSlide = () => {
     const prev = (currentIndex - 1 + feature.images.length) % feature.images.length;
     setNextIndex(prev);
     const prevItem = feature.images[prev];
     if ("image" in prevItem && prevItem.image) {
       const url = String(prevItem.image);
-      if (!loadedSet.current.has(url)) preloadImage(url);
+      if (!loadedSet.current.has(url)) preloadMedia(url);
     }
     setIsTransitioning(true);
     window.setTimeout(() => {
@@ -545,7 +569,7 @@ const FeatureCarousel = ({
 
             {/* Current Layer (fades out) */}
             <div
-              className={`absolute inset-0 w-full h-full transition-opacity duration-[2000ms] ease-in-out ${isTransitioning ? "opacity-0" : "opacity-100"}`}
+              className={`absolute inset-0 w-full h-full transition-opacity duration-[2000ms] ease-in-out pointer-events-none will-change-[opacity] transform-gpu [backface-visibility:hidden] ${isTransitioning ? "opacity-0" : "opacity-100"}`}
             >
               {"image" in feature.images[currentIndex] && feature.images[currentIndex].image ? (
                 <img
@@ -578,7 +602,7 @@ const FeatureCarousel = ({
 
             {/* Next Layer (fades in) */}
             <div
-              className={`absolute inset-0 w-full h-full transition-opacity duration-[2000ms] ease-in-out ${isTransitioning ? "opacity-100" : "opacity-0"}`}
+              className={`absolute inset-0 w-full h-full transition-opacity duration-[2000ms] ease-in-out pointer-events-none will-change-[opacity] transform-gpu [backface-visibility:hidden] ${isTransitioning ? "opacity-100" : "opacity-0"}`}
             >
               {"image" in feature.images[nextIndex] && feature.images[nextIndex].image ? (
                 <img
@@ -626,11 +650,23 @@ const FeatureCarousel = ({
                         onClick={() => {
                           if (imgIndex !== currentIndex) {
                             setNextIndex(imgIndex);
-                            setIsTransitioning(true);
-                            window.setTimeout(() => {
-                              setCurrentIndex(imgIndex);
-                              setIsTransitioning(false);
-                            }, 2000);
+                            const item = feature.images[imgIndex];
+                            const src = ("image" in item && item.image)
+                              ? String(item.image)
+                              : ("video" in item && item.video ? String(item.video) : "");
+                            if (src && !loadedSet.current.has(src)) {
+                              preloadMedia(src);
+                              const check = () => {
+                                if (loadedSet.current.has(src)) {
+                                  startTransition(imgIndex);
+                                } else {
+                                  waitRef.current = window.setTimeout(check, 100);
+                                }
+                              };
+                              check();
+                            } else {
+                              startTransition(imgIndex);
+                            }
                           }
                         }}
                       className={`w-2 h-2 rounded-full transition-all duration-300 ${imgIndex === currentIndex ? "bg-primary w-8" : "bg-white/30 hover:bg-white/50"}`}
