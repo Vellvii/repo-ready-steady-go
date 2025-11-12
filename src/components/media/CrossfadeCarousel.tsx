@@ -40,7 +40,10 @@ export const CrossfadeCarousel = ({
   const loadedSet = useRef<Set<string>>(new Set());
   const animatingRef = useRef(false);
 
-  const isVideo = (url: string) => url.endsWith(".mp4") || url.endsWith(".webm");
+  const isVideo = (url: string) => {
+    if (!url) return false;
+    return url.endsWith(".mp4") || url.endsWith(".webm");
+  };
 
   const preloadMedia = (url: string): Promise<void> => {
     if (!url || loadedSet.current.has(url)) return Promise.resolve();
