@@ -217,7 +217,7 @@ const FeatureCarousel = ({
         </div>
 
         <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8 mb-12 px-4">
-          {feature.images.map((item, idx) => (
+          {feature.images.filter(item => item.label && item.description).map((item, idx) => (
             <div
               key={idx}
               className="text-center p-6 rounded-xl glass-dark border border-white/10"
