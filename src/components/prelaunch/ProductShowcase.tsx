@@ -35,14 +35,34 @@ const showcaseFeatures = [
         description: "Custom compartments cradle your collection in quiet luxury - because every piece deserves a place of its own.",
       },
       {
+        image: "/uploads/dox_with_toys_2.jpg",
+        label: "",
+        description: "",
+      },
+      {
         image: "/uploads/dox-white-lifestyle-2.jpg",
         label: "Unapologetically Beautiful.",
         description: "The Dox blends into any space with quiet confidence, a statement piece that turns your private passions into part of your décor.",
       },
       {
+        image: "/uploads/Dox_white_open_plugged_in_content2.png",
+        label: "",
+        description: "",
+      },
+      {
         image: "/uploads/dox-black-bookshelf.png",
         label: "Sleek. Seductive. Unforgettable.",
         description: "A flawless finish in soft rose-gold tones turns design into desire, refinement you can feel before you even open it.",
+      },
+      {
+        image: "/uploads/dox_with_toys_1.jpg",
+        label: "",
+        description: "",
+      },
+      {
+        image: "/uploads/Lifestyle_img8.jpg",
+        label: "",
+        description: "",
       },
     ],
     subcategories: [
