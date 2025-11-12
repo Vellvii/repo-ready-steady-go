@@ -150,11 +150,6 @@ const showcaseFeatures = [
         label: "VELLVII COLLECTION",
         description: "With intense and deliberate focus on our mantra — \"The Art of 'O'.\" Every curve, every detail, every innovation is a study in sensual design. Crafted not just to perform, but to move you - emotionally, physically, beautifully. Vellvii doesn't chase pleasure. We sculpt it. We perfect it. We turn it into art.",
       },
-      {
-        video: "/uploads/V_logo_video_2.mp4",
-        label: "",
-        description: "",
-      },
     ],
   },
   {
