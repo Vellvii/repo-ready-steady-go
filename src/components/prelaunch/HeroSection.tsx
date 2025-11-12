@@ -10,27 +10,29 @@ export const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[hsl(12,55%,70%)]/5 to-transparent" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-16 md:py-24">
+      {/* Sophisticated gradient overlays */}
+      <div className="absolute inset-0" style={{ background: 'var(--gradient-hero)' }} />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/[0.02] to-transparent" />
       
-      <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
         {/* Content at the Top */}
-        <div className="text-center space-y-8 mb-12">
+        <div className="text-center space-y-10 mb-16">
           <ScrollReveal delay={0.2}>
-            <div className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-4">
-              <p className="text-primary text-sm font-medium">Launching 2026</p>
+            <div className="inline-flex items-center gap-2 px-6 py-3 glass-accent rounded-full backdrop-blur-2xl">
+              <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              <p className="text-primary text-sm font-semibold tracking-wide uppercase">Launching 2026</p>
             </div>
           </ScrollReveal>
 
           <AnimatedText 
             text="Pleasure: Redefined"
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight"
+            className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold text-white leading-[1.1] tracking-tight"
             delay={0.4}
           />
 
           <ScrollReveal delay={0.6}>
-            <p className="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto">
+            <p className="text-xl sm:text-2xl lg:text-3xl text-white/80 max-w-3xl mx-auto font-light leading-relaxed">
               The Most Creative, Most Luxurious, and Most Anticipated Sexual Wellness Innovation of 2026
             </p>
           </ScrollReveal>
@@ -40,32 +42,35 @@ export const HeroSection = () => {
           </ScrollReveal>
 
           <ScrollReveal delay={1}>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
               <MagneticButton
                 onClick={scrollToEmailCapture}
-                className="px-8 py-4 bg-gradient-secondary text-white rounded-lg font-semibold text-lg shadow-luxury hover:shadow-glow transition-all duration-300"
+                className="group px-10 py-5 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] text-black rounded-2xl font-bold text-lg shadow-elegant hover:shadow-glow transition-all duration-700 hover:bg-right relative overflow-hidden"
               >
-                Reserve Your DOX
+                <span className="relative z-10">Reserve Your DOX</span>
+                <div className="absolute inset-0 bg-gradient-shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               </MagneticButton>
             </div>
           </ScrollReveal>
 
           <ScrollReveal delay={1.2}>
-            <p className="text-white/50 text-sm">
-              A statement of design and self-respect — <span className="text-primary font-semibold">a new era of elegance in intimacy</span>
+            <p className="text-white/60 text-base max-w-2xl mx-auto leading-relaxed">
+              A statement of design and self-respect — <span className="text-primary font-semibold gradient-text">a new era of elegance in intimacy</span>
             </p>
           </ScrollReveal>
         </div>
 
         {/* Full-Width Video Below */}
         <ScrollReveal delay={0.4}>
-          <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-luxury">
+          <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-float group">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 z-10 opacity-60 group-hover:opacity-40 transition-opacity duration-700" />
+            <div className="absolute inset-0 ring-1 ring-white/10 rounded-3xl z-20" />
             <video
               autoPlay
               loop
               muted
               playsInline
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
             >
               <source src="/uploads/HEROPAGE.webm" type="video/webm" />
             </video>
