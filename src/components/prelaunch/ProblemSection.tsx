@@ -16,8 +16,8 @@ const problems = [{
   description: "For decades, pleasure was stuck to walls and hidden behind doors. Why do that when elegant, intelligent, and breathtakingly refined solutions exist? The Vellvii Dox - where design meets desire."
 }, {
   icon: privacyIcon,
-  title: "Privacy Without Sophistication",
-  description: "No dedicated, elegant space built for your pleasure. Sharing spaces shouldn't mean compromising on beauty or security."
+  title: "Not Only In Movies",
+  description: "It's not about imitation - it's about liberation. Inspired by elegance and crafted with precision, The Dox transforms an object once associated with performance into a symbol of empowerment. Pleasure no longer hides in shame — it sits beautifully in your space, waiting for you to own it."
 }];
 export const ProblemSection = () => {
   return <section className="py-16 md:py-24 relative">
