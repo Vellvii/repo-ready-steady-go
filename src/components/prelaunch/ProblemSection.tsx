@@ -9,7 +9,7 @@ import sanctuaryWithinImage from "@/assets/dox-sanctuary-within.jpg";
 const problems = [{
   icon: stigmaIcon,
   title: "Storage - Unapologetic",
-  description: "No More Shoeboxes, No more Hidden Draws."
+  description: "No More Shoeboxes, No more Hidden Draws. The Vellvii Dox is not storage. It's a statement — of confidence, of beauty, of pleasure without apology. Because sexy can be sophisticated. And elegance should never be hidden."
 }, {
   icon: makeshiftIcon,
   title: "The Makeshift Era is Over",
