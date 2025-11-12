@@ -9,20 +9,21 @@ export const FinalCTA = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 relative overflow-hidden">
+    <section className="py-32 relative overflow-hidden">
       {/* Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-secondary/10 to-transparent" />
+      <div className="absolute inset-0" style={{ background: 'var(--gradient-hero)' }} />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-transparent opacity-40" />
       
-      <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-5xl mx-auto text-center space-y-10">
           <ScrollReveal>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white font-playfair">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white font-playfair leading-[1.1] tracking-tight">
               The Future is Coming in 2026
             </h2>
           </ScrollReveal>
 
           <ScrollReveal delay={0.2}>
-            <p className="text-lg sm:text-xl text-white/70">
+            <p className="text-xl sm:text-2xl lg:text-3xl text-white/80 font-light leading-relaxed">
               Because some things should feel as beautiful as they are private
             </p>
           </ScrollReveal>
@@ -34,14 +35,15 @@ export const FinalCTA = () => {
           <ScrollReveal delay={0.4}>
             <MagneticButton
               onClick={scrollToEmailCapture}
-              className="px-8 py-4 bg-gradient-secondary text-white rounded-lg font-semibold text-lg shadow-luxury hover:shadow-glow transition-all duration-300 pulse-glow"
+              className="group px-12 py-6 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] text-black rounded-2xl font-bold text-xl shadow-elegant hover:shadow-glow transition-all duration-700 pulse-glow relative overflow-hidden"
             >
-              Reserve Your DOX Now
+              <span className="relative z-10">Reserve Your DOX Now</span>
+              <div className="absolute inset-0 bg-gradient-shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             </MagneticButton>
           </ScrollReveal>
 
           <ScrollReveal delay={0.5}>
-            <p className="text-white/40 text-sm">
+            <p className="text-white/50 text-lg font-light">
               Join the waitlist to receive exclusive updates on this revolutionary design
             </p>
           </ScrollReveal>
