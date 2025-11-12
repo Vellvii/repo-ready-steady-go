@@ -34,11 +34,9 @@ export const CrossfadeCarousel = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [nextIndex, setNextIndex] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [tFrom, setTFrom] = useState<string | null>(null);
-  const [tTo, setTTo] = useState<string | null>(null);
   
   const loadedSet = useRef<Set<string>>(new Set());
-  const animatingRef = useRef(false);
+  const transitionTimerRef = useRef<number | null>(null);
 
   const isVideo = (url: string) => {
     if (!url) return false;
@@ -80,33 +78,28 @@ export const CrossfadeCarousel = ({
   };
 
   const startTransition = async (targetIndex?: number) => {
-    if (animatingRef.current) return;
+    if (isTransitioning) return;
 
     const next = typeof targetIndex === "number" ? targetIndex : (currentIndex + 1) % items.length;
-    const fromUrl = items[currentIndex];
-    const toUrl = items[next];
-
-    if (!loadedSet.current.has(toUrl)) {
-      await preloadMedia(toUrl);
+    
+    // Preload next media if not already loaded
+    if (!loadedSet.current.has(items[next])) {
+      await preloadMedia(items[next]);
     }
 
-    setTFrom(fromUrl);
-    setTTo(toUrl);
     setNextIndex(next);
-    animatingRef.current = true;
+    setIsTransitioning(true);
 
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        setIsTransitioning(true);
-        window.setTimeout(() => {
-          setCurrentIndex(next);
-          setIsTransitioning(false);
-          setTFrom(null);
-          setTTo(null);
-          animatingRef.current = false;
-        }, transitionDuration);
-      });
-    });
+    // Clear any existing timer
+    if (transitionTimerRef.current) {
+      clearTimeout(transitionTimerRef.current);
+    }
+
+    // After transition completes, update current index
+    transitionTimerRef.current = window.setTimeout(() => {
+      setCurrentIndex(next);
+      setIsTransitioning(false);
+    }, transitionDuration);
   };
 
   useEffect(() => {
@@ -129,7 +122,7 @@ export const CrossfadeCarousel = ({
   }, [currentIndex, items.length]);
 
   const goToIndex = (index: number) => {
-    if (index !== currentIndex && !animatingRef.current) {
+    if (index !== currentIndex && !isTransitioning) {
       startTransition(index);
     }
   };
@@ -144,9 +137,6 @@ export const CrossfadeCarousel = ({
     startTransition(prev);
   };
 
-  const displayCurrent = isTransitioning && tFrom ? tFrom : items[currentIndex];
-  const displayNext = isTransitioning && tTo ? tTo : items[nextIndex];
-
   const handleImageClick = (src: string) => {
     if (enableLightbox && !isVideo(src)) {
       setLightboxImage(src);
@@ -154,70 +144,63 @@ export const CrossfadeCarousel = ({
     }
   };
 
-  const isCurrentVideo = isVideo(displayCurrent);
-  const isNextVideo = isVideo(displayNext);
-
   return (
     <>
       <div className={cn("relative rounded-2xl overflow-hidden glass-dark shadow-luxury", aspectRatio, className)}>
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-transparent" />
 
-        {/* Crossfade Layer - Current (fading out) */}
+        {/* Current Layer - Fading Out */}
         <div
           className={cn(
-            "absolute z-0 inset-0 w-full h-full transition-opacity ease-in-out pointer-events-none will-change-[opacity] transform-gpu [backface-visibility:hidden]",
-            isTransitioning ? "opacity-0" : "opacity-100"
+            "absolute inset-0 w-full h-full transition-opacity duration-[2000ms] ease-in-out",
+            isTransitioning ? "opacity-0 z-0" : "opacity-100 z-10"
           )}
-          style={{ transitionDuration: `${transitionDuration}ms` }}
         >
-          {isCurrentVideo ? (
+          {isVideo(items[currentIndex]) ? (
             <video
-              key={displayCurrent}
-              src={displayCurrent}
+              key={items[currentIndex]}
+              src={items[currentIndex]}
               autoPlay
               loop
               muted
               playsInline
-              preload="auto"
               className="w-full h-full object-cover"
             />
           ) : (
             <img
-              key={displayCurrent}
-              src={displayCurrent}
+              key={items[currentIndex]}
+              src={items[currentIndex]}
               alt={`${altPrefix} ${currentIndex + 1}`}
-              className="w-full h-full object-cover scale-120 cursor-pointer"
-              onClick={() => handleImageClick(displayCurrent)}
+              className="w-full h-full object-cover cursor-pointer"
+              onClick={() => handleImageClick(items[currentIndex])}
             />
           )}
         </div>
 
-        {/* Crossfade Layer - Next (fading in) */}
+        {/* Next Layer - Fading In */}
         <div
           className={cn(
-            "absolute z-10 inset-0 w-full h-full transition-opacity ease-in-out pointer-events-none will-change-[opacity] transform-gpu [backface-visibility:hidden]",
-            isTransitioning ? "opacity-100" : "opacity-0"
+            "absolute inset-0 w-full h-full transition-opacity duration-[2000ms] ease-in-out",
+            isTransitioning ? "opacity-100 z-10" : "opacity-0 z-0"
           )}
-          style={{ transitionDuration: `${transitionDuration}ms` }}
         >
-          {isNextVideo ? (
+          {isVideo(items[nextIndex]) ? (
             <video
-              key={displayNext}
-              src={displayNext}
+              key={items[nextIndex]}
+              src={items[nextIndex]}
               autoPlay
               loop
               muted
               playsInline
-              preload="auto"
               className="w-full h-full object-cover"
             />
           ) : (
             <img
-              key={displayNext}
-              src={displayNext}
-              alt={`${altPrefix} ${currentIndex + 1}`}
-              className="w-full h-full object-cover scale-120 cursor-pointer"
-              onClick={() => handleImageClick(displayNext)}
+              key={items[nextIndex]}
+              src={items[nextIndex]}
+              alt={`${altPrefix} ${nextIndex + 1}`}
+              className="w-full h-full object-cover cursor-pointer"
+              onClick={() => handleImageClick(items[nextIndex])}
             />
           )}
         </div>
