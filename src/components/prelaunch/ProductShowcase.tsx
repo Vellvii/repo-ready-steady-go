@@ -159,6 +159,7 @@ const SubcategoryCarousel = ({
   // Lock sources during the 2s crossfade to avoid flicker
   const [tFrom, setTFrom] = useState<string | null>(null);
   const [tTo, setTTo] = useState<string | null>(null);
+  const animatingRef = useRef(false);
 
   const preloadMedia = (url: string) => {
     if (!url || loadedSet.current.has(url)) return;
@@ -183,27 +184,28 @@ const SubcategoryCarousel = ({
     }
   };
   function startTransition(targetIndex?: number) {
+    if (animatingRef.current) return;
+
     const next = typeof targetIndex === "number"
       ? targetIndex
       : (currentIndex + 1) % subcategory.thumbnails.length;
 
-    // Capture stable sources for the full 2s crossfade
     const fromUrl = subcategory.thumbnails[currentIndex];
     const toUrl = subcategory.thumbnails[next];
     setTFrom(fromUrl);
     setTTo(toUrl);
     setNextIndex(next);
 
-    // Double rAF to ensure classes are applied before animating
+    animatingRef.current = true;
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         setIsTransitioning(true);
         window.setTimeout(() => {
           setCurrentIndex(next);
           setIsTransitioning(false);
-          // Clear locks after transition completes
           setTFrom(null);
           setTTo(null);
+          animatingRef.current = false;
         }, 2000);
       });
     });
@@ -307,10 +309,10 @@ const SubcategoryCarousel = ({
 
             {/* Crossfade Layers */}
             <div
-              className={`absolute inset-0 w-full h-full transition-opacity duration-[2000ms] ease-in-out pointer-events-none will-change-[opacity] transform-gpu [backface-visibility:hidden] ${isTransitioning ? "opacity-0" : "opacity-100"}`}
+              className={`absolute z-0 inset-0 w-full h-full transition-opacity duration-[2000ms] ease-in-out pointer-events-none will-change-[opacity] transform-gpu [backface-visibility:hidden] ${isTransitioning ? "opacity-0" : "opacity-100"}`}
             >
               {isCurrentVideo ? (
-                <video
+                <video key={displayCurrent}
                   src={displayCurrent}
                   autoPlay
                   loop
@@ -320,7 +322,7 @@ const SubcategoryCarousel = ({
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <img
+                <img key={displayCurrent}
                   src={displayCurrent}
                   alt={`${subcategory.title} ${currentIndex + 1}`}
                   className="w-full h-full object-cover scale-120"
@@ -333,10 +335,10 @@ const SubcategoryCarousel = ({
             </div>
 
             <div
-              className={`absolute inset-0 w-full h-full transition-opacity duration-[2000ms] ease-in-out pointer-events-none will-change-[opacity] transform-gpu [backface-visibility:hidden] ${isTransitioning ? "opacity-100" : "opacity-0"}`}
+              className={`absolute z-10 inset-0 w-full h-full transition-opacity duration-[2000ms] ease-in-out pointer-events-none will-change-[opacity] transform-gpu [backface-visibility:hidden] ${isTransitioning ? "opacity-100" : "opacity-0"}`}
             >
               {isNextVideo ? (
-                <video
+                <video key={displayNext}
                   src={displayNext}
                   autoPlay
                   loop
@@ -346,7 +348,7 @@ const SubcategoryCarousel = ({
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <img
+                <img key={displayNext}
                   src={displayNext}
                   alt={`${subcategory.title} ${nextIndex + 1}`}
                   className="w-full h-full object-cover scale-120"
@@ -443,6 +445,7 @@ const FeatureCarousel = ({
   const waitRef = useRef<number | null>(null);
   const [tFrom, setTFrom] = useState<string | null>(null);
   const [tTo, setTTo] = useState<string | null>(null);
+  const animatingRef = useRef(false);
 
   const preloadMedia = (url: string) => {
     if (!url || loadedSet.current.has(url)) return;
@@ -477,6 +480,8 @@ const FeatureCarousel = ({
   }, [currentIndex, feature.images.length]);
 
   const startTransition = (targetIndex?: number) => {
+    if (animatingRef.current) return;
+
     const next = typeof targetIndex === 'number' ? targetIndex : (currentIndex + 1) % feature.images.length;
 
     const fromItem = feature.images[currentIndex];
@@ -492,6 +497,7 @@ const FeatureCarousel = ({
     setTTo(toSrc);
     setNextIndex(next);
 
+    animatingRef.current = true;
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         setIsTransitioning(true);
@@ -500,6 +506,7 @@ const FeatureCarousel = ({
           setIsTransitioning(false);
           setTFrom(null);
           setTTo(null);
+          animatingRef.current = false;
         }, 2000);
       });
     });
@@ -567,16 +574,24 @@ const FeatureCarousel = ({
   const prevSlide = () => {
     const prev = (currentIndex - 1 + feature.images.length) % feature.images.length;
     setNextIndex(prev);
-    const prevItem = feature.images[prev];
-    if ("image" in prevItem && prevItem.image) {
-      const url = String(prevItem.image);
-      if (!loadedSet.current.has(url)) preloadMedia(url);
+    const item = feature.images[prev];
+    const src = ("image" in item && item.image)
+      ? String(item.image)
+      : (("video" in item && item.video) ? String(item.video) : "");
+
+    if (src && !loadedSet.current.has(src)) {
+      preloadMedia(src);
+      const check = () => {
+        if (loadedSet.current.has(src)) {
+          startTransition(prev);
+        } else {
+          waitRef.current = window.setTimeout(check, 100);
+        }
+      };
+      check();
+    } else {
+      startTransition(prev);
     }
-    setIsTransitioning(true);
-    window.setTimeout(() => {
-      setCurrentIndex(prev);
-      setIsTransitioning(false);
-    }, 2000);
   };
   // Derive display sources for crossfade
   const currentItem = feature.images[currentIndex];
@@ -618,10 +633,10 @@ const FeatureCarousel = ({
 
             {/* Current Layer (fades out) */}
             <div
-              className={`absolute inset-0 w-full h-full transition-opacity duration-[2000ms] ease-in-out pointer-events-none will-change-[opacity] transform-gpu [backface-visibility:hidden] ${isTransitioning ? "opacity-0" : "opacity-100"}`}
+              className={`absolute z-0 inset-0 w-full h-full transition-opacity duration-[2000ms] ease-in-out pointer-events-none will-change-[opacity] transform-gpu [backface-visibility:hidden] ${isTransitioning ? "opacity-0" : "opacity-100"}`}
             >
               {isCurrentVid ? (
-                <video
+                <video key={displayCurrent}
                   src={displayCurrent}
                   autoPlay
                   loop
@@ -631,7 +646,7 @@ const FeatureCarousel = ({
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <img
+                <img key={displayCurrent}
                   src={displayCurrent}
                   alt={currentItem.label}
                   className="w-full h-full object-cover scale-120"
@@ -641,10 +656,10 @@ const FeatureCarousel = ({
 
             {/* Next Layer (fades in) */}
             <div
-              className={`absolute inset-0 w-full h-full transition-opacity duration-[2000ms] ease-in-out pointer-events-none will-change-[opacity] transform-gpu [backface-visibility:hidden] ${isTransitioning ? "opacity-100" : "opacity-0"}`}
+              className={`absolute z-10 inset-0 w-full h-full transition-opacity duration-[2000ms] ease-in-out pointer-events-none will-change-[opacity] transform-gpu [backcase-visibility:hidden] ${isTransitioning ? "opacity-100" : "opacity-0"}`}
             >
               {isNextVid ? (
-                <video
+                <video key={displayNext}
                   src={displayNext}
                   autoPlay
                   loop
@@ -654,7 +669,7 @@ const FeatureCarousel = ({
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <img
+                <img key={displayNext}
                   src={displayNext}
                   alt={nextItem.label}
                   className="w-full h-full object-cover scale-120"
