@@ -60,8 +60,15 @@ export const ProblemSection = () => {
           {problems.map((problem, index) => <ScrollReveal key={problem.title} delay={0.1 * index} direction="up">
               <Card className="glass-dark border-white/10 hover:border-primary/30 transition-all duration-300 hover-glow h-full">
                 <CardContent className="p-6 sm:p-8 text-center space-y-4">
-                  <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
-                    <img src={problem.icon} alt={problem.title} className="w-10 h-10 object-contain" />
+                  <div className="w-16 h-16 mx-auto rounded-full bg-primary/20 flex items-center justify-center overflow-visible">
+                    <img 
+                      src={problem.icon} 
+                      alt={problem.title} 
+                      className="w-10 h-10 object-contain brightness-[1.8]" 
+                      style={{ 
+                        filter: 'brightness(1.8) drop-shadow(0 0 12px hsl(var(--primary) / 0.8)) drop-shadow(0 0 24px hsl(var(--primary) / 0.5))' 
+                      }}
+                    />
                   </div>
                   <h3 className="text-xl font-semibold font-playfair text-slate-950">
                     {problem.title}
