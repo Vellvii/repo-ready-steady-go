@@ -155,10 +155,9 @@ const showcaseFeatures = [
         title: "PULSE",
         description: "Precision-engineered pleasure that redefines intimacy.",
         thumbnails: [
-          "/uploads/Pulse1.jpg",
-          "/uploads/Pulse2.jpg",
-          "/uploads/PulsePoBCloseBL.png",
-          "/uploads/Pulse_-trans.png",
+          "/uploads/Pulse_description_sketches1.png",
+          "/uploads/PulsePoBCloseBL-2.png",
+          "/uploads/BlackRedPulseBack.png",
         ],
       },
       {
