@@ -136,11 +136,6 @@ const showcaseFeatures = [
     aspectRatio: "aspect-video",
     images: [
       {
-        image: "/uploads/VDS_top_white.png",
-        label: "VDS - VELLVII DOCKING STATION",
-        description: "Crafted to cradle the Vellvii Pleasure Collection in elegance, it's a masterpiece of deliberate engineering - refined, practical, and irresistibly beautiful. Because when design serves desire, it becomes something extraordinary.",
-      },
-      {
         video: "/uploads/VDS_video.webm",
         label: "VELLVII SOLUTION",
         description: "Everyone deserves to own something beautiful, personal, and unapologetically theirs. The Dox isn't about hiding, it's about honoring. Crafted to elevate the most intimate parts of life, without shame, without guilt - Only Art.",
