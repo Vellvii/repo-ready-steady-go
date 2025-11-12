@@ -88,6 +88,11 @@ const showcaseFeatures = [
         description: "Where design meets desire",
       },
       {
+        image: "/uploads/Black-Dildo-Close-2.png",
+        label: "DDS - Close Detail",
+        description: "Precision design and elegant finish",
+      },
+      {
         image: "/uploads/Red-Dildo.png",
         label: "DDS - Wireless Charging",
         description: "Simply place and charge",
