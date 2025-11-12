@@ -220,22 +220,24 @@ const SubcategoryCarousel = ({
 }) => {
   return (
     <ScrollReveal delay={0.1 * index}>
-      <div className="mb-16">
-        <div className="text-center mb-8">
-          <h3 className="text-2xl sm:text-3xl font-bold text-white font-playfair mb-2">
+      <div className="mb-20">
+        <div className="text-center mb-12">
+          <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white font-playfair mb-4 tracking-tight">
             {subcategory.title}
           </h3>
-          <p className="text-lg text-white/60">{subcategory.description}</p>
+          <p className="text-xl text-white/70 font-light leading-relaxed">{subcategory.description}</p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
-          <CrossfadeCarousel
-            items={subcategory.thumbnails}
-            enableLightbox={true}
-            altPrefix={subcategory.title}
-            imageDisplayTime={5000}
-            videoDisplayTime={8000}
-          />
+        <div className="max-w-5xl mx-auto">
+          <div className="rounded-3xl overflow-hidden shadow-float ring-1 ring-white/10">
+            <CrossfadeCarousel
+              items={subcategory.thumbnails}
+              enableLightbox={true}
+              altPrefix={subcategory.title}
+              imageDisplayTime={5000}
+              videoDisplayTime={8000}
+            />
+          </div>
         </div>
       </div>
     </ScrollReveal>
@@ -253,53 +255,55 @@ const FeatureCarousel = ({
 
   return (
     <ScrollReveal delay={0.1 * index}>
-      <div className="mb-24">
-        <div className="text-center mb-12">
-          <div className="inline-block px-6 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-6">
-            <span className="text-primary font-semibold">
+      <div className="mb-32">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-3 px-8 py-3 rounded-full glass-accent backdrop-blur-2xl mb-8">
+            <span className="text-primary font-bold text-lg tracking-wide">
               Feature {feature.number}
             </span>
           </div>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white font-playfair mb-4">
+          <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white font-playfair mb-6 tracking-tight leading-[1.1]">
             {feature.title}
           </h2>
-          <p className="text-xl sm:text-2xl text-white/70 max-w-3xl mx-auto">
+          <p className="text-2xl sm:text-3xl text-white/80 max-w-4xl mx-auto font-light leading-relaxed">
             {feature.subtitle}
           </p>
           {feature.tagline && (
-            <p className="text-lg text-primary/80 mt-2 font-semibold">
+            <p className="text-xl text-primary/90 mt-4 font-semibold tracking-wide">
               {feature.tagline}
             </p>
           )}
         </div>
 
-        <div className="max-w-6xl mx-auto mb-12">
-          <CrossfadeCarousel
-            items={imageUrls}
-            aspectRatio="aspect-video"
-            enableLightbox={true}
-            altPrefix={feature.title}
-            imageDisplayTime={5000}
-            videoDisplayTime={8000}
-          />
+        <div className="max-w-6xl mx-auto mb-16">
+          <div className="rounded-3xl overflow-hidden shadow-float ring-1 ring-white/10">
+            <CrossfadeCarousel
+              items={imageUrls}
+              aspectRatio="aspect-video"
+              enableLightbox={true}
+              altPrefix={feature.title}
+              imageDisplayTime={5000}
+              videoDisplayTime={8000}
+            />
+          </div>
         </div>
 
-        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8 mb-12 px-4">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8 mb-16 px-4">
           {feature.images.filter(item => item.label && item.description).map((item, idx) => (
             <div
               key={idx}
-              className="text-center p-6 rounded-xl glass-dark border border-white/10"
+              className="group p-8 rounded-2xl glass-dark border border-white/10 hover:border-white/20 transition-all duration-500 hover:shadow-card"
             >
-              <h4 className="text-lg font-semibold text-white mb-2">
+              <h4 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors duration-300">
                 {item.label}
               </h4>
-              <p className="text-sm text-white/60">{item.description}</p>
+              <p className="text-base text-white/70 leading-relaxed">{item.description}</p>
             </div>
           ))}
         </div>
 
         {feature.subcategories && (
-          <div className="max-w-6xl mx-auto space-y-8 px-4">
+          <div className="max-w-6xl mx-auto space-y-12 px-4">
             {feature.subcategories.map((subcategory, subIdx) => (
               <SubcategoryCarousel
                 key={subIdx}
@@ -316,15 +320,15 @@ const FeatureCarousel = ({
 
 export const ProductShowcase = () => {
   return (
-    <section className="py-24 px-4 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+    <section className="py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <div className="absolute inset-0 opacity-30" style={{ background: 'var(--gradient-mesh)' }} />
       <div className="max-w-7xl mx-auto relative">
         <ScrollReveal>
-          <div className="text-center mb-20">
-            <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold text-white font-playfair mb-6">
+          <div className="text-center mb-28">
+            <h2 className="text-6xl sm:text-7xl md:text-8xl font-bold text-white font-playfair mb-8 tracking-tight leading-[1.05]">
               Product Showcase
             </h2>
-            <p className="text-xl text-white/70 max-w-3xl mx-auto">
+            <p className="text-2xl text-white/70 max-w-3xl mx-auto font-light leading-relaxed">
               Experience the elegance and innovation of Vellvii's premium collection
             </p>
           </div>

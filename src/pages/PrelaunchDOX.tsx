@@ -14,7 +14,12 @@ import { PageTransition } from "@/components/animations/PageTransition";
 export default function PrelaunchDOX() {
   return (
     <PageTransition>
-      <div className="min-h-screen bg-gradient-to-b from-[hsl(0,0%,8%)] via-[hsl(0,0%,12%)] to-[hsl(0,0%,8%)]">
+      <div className="min-h-screen relative overflow-hidden" style={{ background: 'var(--gradient-dark)' }}>
+        {/* Mesh gradient overlay */}
+        <div className="absolute inset-0 opacity-40" style={{ background: 'var(--gradient-mesh)' }} />
+        
+        {/* Content */}
+        <div className="relative z-10">
         <HeroSection />
         <ProblemSection />
         <ProductShowcase />
@@ -26,6 +31,7 @@ export default function PrelaunchDOX() {
         <FAQSection />
         <FinalCTA />
         <PrelaunchFooter />
+        </div>
       </div>
     </PageTransition>
   );
