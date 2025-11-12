@@ -54,7 +54,7 @@ export const WaitlistCounter = () => {
     <div className="flex flex-col items-center gap-3 py-8">
       <div className="relative">
         <motion.div 
-          className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white font-playfair"
+          className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white font-baskerville"
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.5 }}

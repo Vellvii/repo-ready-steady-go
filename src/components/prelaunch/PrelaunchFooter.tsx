@@ -16,7 +16,7 @@ export const PrelaunchFooter = () => {
                 e.currentTarget.nextElementSibling?.classList.remove('hidden');
               }}
             />
-            <span className="hidden text-2xl font-bold text-white font-playfair">Vellvii</span>
+            <span className="hidden text-2xl font-bold text-white font-baskerville">Vellvii</span>
           </div>
 
           {/* Social Links */}

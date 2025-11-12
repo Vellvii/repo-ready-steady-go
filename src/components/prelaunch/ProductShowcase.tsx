@@ -222,7 +222,7 @@ const SubcategoryCarousel = ({
     <ScrollReveal delay={0.1 * index}>
       <div className="mb-20">
         <div className="text-center mb-12">
-          <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white font-playfair mb-4 tracking-tight">
+          <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white font-baskerville mb-4 tracking-tight">
             {subcategory.title}
           </h3>
           <p className="text-xl text-white/70 font-light leading-relaxed">{subcategory.description}</p>
@@ -262,7 +262,7 @@ const FeatureCarousel = ({
               Feature {feature.number}
             </span>
           </div>
-          <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white font-playfair mb-6 tracking-tight leading-[1.1]">
+          <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white font-baskerville mb-6 tracking-tight leading-[1.1]">
             {feature.title}
           </h2>
           <p className="text-2xl sm:text-3xl text-white/80 max-w-4xl mx-auto font-light leading-relaxed">
@@ -325,7 +325,7 @@ export const ProductShowcase = () => {
       <div className="max-w-7xl mx-auto relative">
         <ScrollReveal>
           <div className="text-center mb-28">
-            <h2 className="text-6xl sm:text-7xl md:text-8xl font-bold text-white font-playfair mb-8 tracking-tight leading-[1.05]">
+            <h2 className="text-6xl sm:text-7xl md:text-8xl font-bold text-white font-baskerville mb-8 tracking-tight leading-[1.05]">
               Product Showcase
             </h2>
             <p className="text-2xl text-white/70 max-w-3xl mx-auto font-light leading-relaxed">

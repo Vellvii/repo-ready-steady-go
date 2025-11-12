@@ -22,7 +22,7 @@ export const TechSpecs = () => {
     <section className="py-16 md:py-24 relative">
       <div className="container mx-auto px-4 sm:px-6">
         <ScrollReveal>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mb-16 font-playfair">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mb-16 font-baskerville">
             Engineered Elegance. Designed to Perform.
           </h2>
         </ScrollReveal>
@@ -31,7 +31,7 @@ export const TechSpecs = () => {
           {/* Left Column - Materials & Dimensions */}
           <ScrollReveal direction="left" delay={0.2}>
             <div className="glass-dark border-white/10 rounded-2xl p-6 sm:p-8 space-y-6">
-              <h3 className="text-2xl font-semibold text-white mb-6 font-playfair">
+              <h3 className="text-2xl font-semibold text-white mb-6 font-baskerville">
                 Materials & Dimensions
               </h3>
               <div className="space-y-4">
@@ -48,7 +48,7 @@ export const TechSpecs = () => {
           {/* Right Column - Technology */}
           <ScrollReveal direction="right" delay={0.2}>
             <div className="glass-dark border-white/10 rounded-2xl p-6 sm:p-8 space-y-6">
-              <h3 className="text-2xl font-semibold text-white mb-6 font-playfair">
+              <h3 className="text-2xl font-semibold text-white mb-6 font-baskerville">
                 Technology
               </h3>
               <div className="space-y-4">
