@@ -38,6 +38,7 @@ export const CrossfadeCarousel = ({
   
   const loadedSet = useRef<Set<string>>(new Set());
   const transitionTimerRef = useRef<number | null>(null);
+  const pendingNextRef = useRef<string | null>(null);
 
   const isVideo = (url: string) => {
     if (!url) return false;
@@ -101,8 +102,8 @@ export const CrossfadeCarousel = ({
     transitionTimerRef.current = window.setTimeout(() => {
       setCurrentIndex(next);
       setDisplayedCurrent(items[next]);
-      const nextAfterTransition = (next + 1) % items.length;
-      setDisplayedNext(items[nextAfterTransition]);
+      // Defer swapping the hidden "next" media until after we hide it to prevent any flash
+      pendingNextRef.current = items[(next + 1) % items.length];
       setIsTransitioning(false);
     }, transitionDuration);
   };
@@ -124,6 +125,14 @@ export const CrossfadeCarousel = ({
     const next = (currentIndex + 1) % items.length;
     preloadMedia(items[next]);
   }, [currentIndex, items.length]);
+
+  // After a crossfade ends, update the hidden next media source while it's invisible
+  useEffect(() => {
+    if (!isTransitioning && pendingNextRef.current) {
+      setDisplayedNext(pendingNextRef.current);
+      pendingNextRef.current = null;
+    }
+  }, [isTransitioning]);
 
   const goToIndex = (index: number) => {
     if (index !== currentIndex && !isTransitioning) {
@@ -156,9 +165,10 @@ export const CrossfadeCarousel = ({
         {/* Current Layer - Fading Out */}
         <div
           className={cn(
-            "absolute inset-0 w-full h-full transition-opacity duration-[2000ms] ease-in-out",
-            isTransitioning ? "opacity-0 z-0" : "opacity-100 z-10"
+            "absolute inset-0 w-full h-full transition-opacity ease-in-out",
+            isTransitioning ? "opacity-0 z-0 invisible" : "opacity-100 z-10 visible"
           )}
+          style={{ transitionDuration: `${transitionDuration}ms` }}
         >
           {isVideo(displayedCurrent) ? (
             <video
@@ -184,9 +194,10 @@ export const CrossfadeCarousel = ({
         {/* Next Layer - Fading In */}
         <div
           className={cn(
-            "absolute inset-0 w-full h-full transition-opacity duration-[2000ms] ease-in-out",
-            isTransitioning ? "opacity-100 z-10" : "opacity-0 z-0"
+            "absolute inset-0 w-full h-full transition-opacity ease-in-out",
+            isTransitioning ? "opacity-100 z-10 visible" : "opacity-0 z-0 invisible"
           )}
+          style={{ transitionDuration: `${transitionDuration}ms` }}
         >
           {isVideo(displayedNext) ? (
             <video
