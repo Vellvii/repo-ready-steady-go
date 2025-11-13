@@ -56,7 +56,7 @@ export const CountdownTimer = ({ targetDate, size = 'large' }: CountdownTimerPro
           key={label}
           className={`glass-dark rounded-lg ${isSmall ? 'p-2 sm:p-3' : 'p-4 sm:p-6'} text-center min-w-[60px] sm:min-w-[80px]`}
         >
-          <div className={`${isSmall ? 'text-2xl sm:text-3xl' : 'text-3xl sm:text-5xl'} font-bold text-white font-orbitron`}>
+          <div className={`${isSmall ? 'text-2xl sm:text-3xl' : 'text-3xl sm:text-5xl'} font-bold text-white font-rajdhani`}>
             {value.toString().padStart(2, '0')}
           </div>
           <div className={`${isSmall ? 'text-xs' : 'text-sm'} text-white/50 mt-1 uppercase tracking-wider font-semibold`}>

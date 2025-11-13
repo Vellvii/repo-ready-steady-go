@@ -22,6 +22,7 @@ const config: Config = {
         baskerville: ["Libre Baskerville", "Baskerville Old Face", "serif"],
         montserrat: ["Montserrat", "sans-serif"],
         orbitron: ["Orbitron", "sans-serif"],
+        rajdhani: ["Rajdhani", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
