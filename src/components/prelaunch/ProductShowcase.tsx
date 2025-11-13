@@ -166,6 +166,7 @@ const showcaseFeatures = [
           "/uploads/BlackRedPulseSide.png",
           "/uploads/BlackRedPulseSideUp1.png",
         ],
+        aspectRatio: "aspect-video",
       },
       {
         title: "G-VIBE",
