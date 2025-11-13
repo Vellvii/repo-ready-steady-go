@@ -72,6 +72,8 @@ export const TechSpecs = () => {
                 items={["/uploads/V_logo_video_2-2.mp4"]}
                 aspectRatio="aspect-[5/4]"
                 enableLightbox={true}
+                showControls={true}
+                showDots={true}
                 altPrefix="Tri-Layer Construction"
                 videoDisplayTime={8000}
               />
