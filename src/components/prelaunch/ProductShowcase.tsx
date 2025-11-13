@@ -93,7 +93,7 @@ const showcaseFeatures = [
           "/uploads/BlackOpen2.png",
           "/uploads/Vellvii_description_sketches_open_ls-2.png",
         ],
-        aspectRatio: "aspect-[3/2]",
+        aspectRatio: "aspect-video",
       },
     ],
   },
