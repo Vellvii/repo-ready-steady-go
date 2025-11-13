@@ -41,6 +41,7 @@ export const CrossfadeCarousel = ({
   
   const loadedSet = useRef<Set<string>>(new Set());
   const transitionTimerRef = useRef<number | null>(null);
+  const autoAdvanceTimerRef = useRef<number | null>(null);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
@@ -83,10 +84,16 @@ export const CrossfadeCarousel = ({
     });
   };
 
-  const startTransition = async (targetIndex?: number) => {
+  const startTransition = async (targetIndex?: number, isManual = false) => {
     if (isTransitioning) return;
 
     const next = typeof targetIndex === "number" ? targetIndex : (currentIndex + 1) % items.length;
+    
+    // Clear auto-advance timer when manually navigating
+    if (isManual && autoAdvanceTimerRef.current) {
+      clearTimeout(autoAdvanceTimerRef.current);
+      autoAdvanceTimerRef.current = null;
+    }
     
     // Preload next media if not already loaded
     if (!loadedSet.current.has(items[next])) {
@@ -121,11 +128,16 @@ export const CrossfadeCarousel = ({
     const currentUrl = items[currentIndex];
     const displayTime = isVideo(currentUrl) ? videoDisplayTime : imageDisplayTime;
 
-    const timer = window.setTimeout(() => {
+    autoAdvanceTimerRef.current = window.setTimeout(() => {
       startTransition();
     }, displayTime);
 
-    return () => clearTimeout(timer);
+    return () => {
+      if (autoAdvanceTimerRef.current) {
+        clearTimeout(autoAdvanceTimerRef.current);
+        autoAdvanceTimerRef.current = null;
+      }
+    };
   }, [currentIndex, items.length]);
 
   useEffect(() => {
@@ -135,18 +147,20 @@ export const CrossfadeCarousel = ({
 
   const goToIndex = (index: number) => {
     if (index !== currentIndex && !isTransitioning) {
-      startTransition(index);
+      startTransition(index, true);
     }
   };
 
   const nextSlide = () => {
+    if (isTransitioning) return;
     const next = (currentIndex + 1) % items.length;
-    startTransition(next);
+    startTransition(next, true);
   };
 
   const prevSlide = () => {
+    if (isTransitioning) return;
     const prev = (currentIndex - 1 + items.length) % items.length;
-    startTransition(prev);
+    startTransition(prev, true);
   };
 
   const handleImageClick = (src: string) => {
@@ -264,18 +278,26 @@ export const CrossfadeCarousel = ({
         {showControls && items.length > 1 && (
           <>
             <Button
-              onClick={prevSlide}
+              onClick={(e) => {
+                e.stopPropagation();
+                prevSlide();
+              }}
               variant="ghost"
               size="icon"
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20"
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 transition-all duration-200"
+              aria-label="Previous slide"
             >
               <ChevronLeft className="w-6 h-6 text-white" />
             </Button>
             <Button
-              onClick={nextSlide}
+              onClick={(e) => {
+                e.stopPropagation();
+                nextSlide();
+              }}
               variant="ghost"
               size="icon"
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20"
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 transition-all duration-200"
+              aria-label="Next slide"
             >
               <ChevronRight className="w-6 h-6 text-white" />
             </Button>
