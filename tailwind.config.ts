@@ -21,6 +21,7 @@ const config: Config = {
       fontFamily: {
         baskerville: ["Libre Baskerville", "Baskerville Old Face", "serif"],
         montserrat: ["Montserrat", "sans-serif"],
+        orbitron: ["Orbitron", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
