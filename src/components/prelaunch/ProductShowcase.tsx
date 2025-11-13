@@ -84,6 +84,7 @@ const showcaseFeatures = [
           "/uploads/Vellvii_description_sketches_open_ls.png",
           "/uploads/White_charge_outside.png",
         ],
+        aspectRatio: "aspect-video",
       },
       {
         title: "Interchangeable Compartment",
