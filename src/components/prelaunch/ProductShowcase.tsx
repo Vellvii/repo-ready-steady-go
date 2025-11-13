@@ -22,6 +22,7 @@ type Subcategory = {
   title: string;
   description: string;
   thumbnails: string[];
+  aspectRatio?: string;
 };
 
 const showcaseFeatures = [
@@ -92,6 +93,7 @@ const showcaseFeatures = [
           "/uploads/BlackOpen2.png",
           "/uploads/Vellvii_description_sketches_open_ls-2.png",
         ],
+        aspectRatio: "aspect-[3/2]",
       },
     ],
   },
@@ -211,6 +213,7 @@ const SubcategoryCarousel = ({
           <div className="rounded-3xl overflow-hidden shadow-float ring-1 ring-white/10">
             <CrossfadeCarousel
               items={subcategory.thumbnails}
+              aspectRatio={subcategory.aspectRatio || "aspect-[4/3]"}
               enableLightbox={true}
               altPrefix={subcategory.title}
               imageDisplayTime={5000}
