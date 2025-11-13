@@ -147,18 +147,33 @@ export const CrossfadeCarousel = ({
 
   const goToIndex = (index: number) => {
     if (index !== currentIndex && !isTransitioning) {
+      // Clear auto-advance timer immediately for manual override
+      if (autoAdvanceTimerRef.current) {
+        clearTimeout(autoAdvanceTimerRef.current);
+        autoAdvanceTimerRef.current = null;
+      }
       startTransition(index, true);
     }
   };
 
   const nextSlide = () => {
     if (isTransitioning) return;
+    // Clear auto-advance timer immediately for manual override
+    if (autoAdvanceTimerRef.current) {
+      clearTimeout(autoAdvanceTimerRef.current);
+      autoAdvanceTimerRef.current = null;
+    }
     const next = (currentIndex + 1) % items.length;
     startTransition(next, true);
   };
 
   const prevSlide = () => {
     if (isTransitioning) return;
+    // Clear auto-advance timer immediately for manual override
+    if (autoAdvanceTimerRef.current) {
+      clearTimeout(autoAdvanceTimerRef.current);
+      autoAdvanceTimerRef.current = null;
+    }
     const prev = (currentIndex - 1 + items.length) % items.length;
     startTransition(prev, true);
   };
