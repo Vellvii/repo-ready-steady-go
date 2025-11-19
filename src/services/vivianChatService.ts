@@ -1,7 +1,19 @@
 import { normalizeLLMText } from "@/lib/utils";
 
-export async function sendVivianMessage(message: string): Promise<string> {
+interface Message {
+  id: string;
+  content: string;
+  role: "user" | "assistant";
+}
+
+export async function sendVivianMessage(messages: Message[], currentMessage: string): Promise<string> {
   try {
+    // Transform messages to backend format
+    const formattedMessages = messages.map(m => ({
+      is_user: m.role === "user",
+      text: m.content
+    }));
+
     const res = await fetch(
       "https://mawaqjqifmvijolucrlp.supabase.co/functions/v1/vivian-chat",
       {
@@ -9,7 +21,7 @@ export async function sendVivianMessage(message: string): Promise<string> {
         headers: { 
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message }),
+        body: JSON.stringify({ messages: formattedMessages }),
       }
     );
 

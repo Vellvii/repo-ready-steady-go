@@ -15,8 +15,8 @@ serve(async (req) => {
   try {
     console.log('Vivian chat function called');
     
-    const { message } = await req.json();
-    console.log('Received message:', message);
+    const { messages } = await req.json();
+    console.log('Received messages:', messages?.length, 'messages');
 
     const ABACUS_API_KEY = Deno.env.get("ABACUS_API_KEY");
     const ABACUS_URL = Deno.env.get("ABACUS_PREDICTIONS_URL");
@@ -31,7 +31,7 @@ serve(async (req) => {
     console.log('Calling Abacus API with:', {
       url: ABACUS_URL,
       deploymentId: DEPLOYMENT_ID,
-      messageLength: message?.length
+      messageCount: messages?.length
     });
 
     const abacusRes = await fetch(ABACUS_URL, {
@@ -43,7 +43,7 @@ serve(async (req) => {
       body: JSON.stringify({
         deploymentToken: DEPLOYMENT_TOKEN,
         deploymentId: DEPLOYMENT_ID,
-        messages: [{ is_user: true, text: message }],
+        messages: messages, // Send full conversation history
         temperature: 0.3,
       }),
     });
