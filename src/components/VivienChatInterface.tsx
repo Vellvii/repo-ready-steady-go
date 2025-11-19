@@ -45,7 +45,9 @@ export const VivienChatInterface = () => {
     setIsLoading(true);
 
     try {
-      const response = await sendVivianMessage(currentInput);
+      // Filter out the initial greeting (id "1") and send full conversation history
+      const conversationHistory = messages.filter(m => m.id !== "1");
+      const response = await sendVivianMessage(conversationHistory, currentInput);
 
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),

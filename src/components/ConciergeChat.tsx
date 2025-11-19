@@ -43,7 +43,9 @@ const ConciergeChat = () => {
 
     // Get response from Abacus AI via Vivian chat service
     try {
-      const response = await sendVivianMessage(currentInput);
+      // Filter out the initial greeting and send conversation history
+      const conversationHistory = messages.filter(m => m.id !== "1");
+      const response = await sendVivianMessage(conversationHistory, currentInput);
       
       const assistantMessage = {
         id: (Date.now() + 1).toString(),
