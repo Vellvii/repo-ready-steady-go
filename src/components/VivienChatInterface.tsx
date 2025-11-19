@@ -77,36 +77,34 @@ export const VivienChatInterface = () => {
 
   return (
     <div className="flex flex-col h-full w-full">
-      <div className="flex-1 overflow-hidden">
-        <ScrollArea className="h-full w-full pr-4">
-          <div className="px-4 py-6 space-y-4">
-            {messages.map((message) => (
+      <ScrollArea className="flex-1">
+        <div className="px-4 py-6 space-y-4">
+          {messages.map((message) => (
+            <div
+              key={message.id}
+              className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
+            >
               <div
-                key={message.id}
-                className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
+                className={`max-w-[80%] rounded-lg px-4 py-3 ${
+                  message.role === "user"
+                    ? "bg-primary/10 text-foreground ml-auto"
+                    : "bg-secondary/50 text-foreground"
+                }`}
               >
-                <div
-                  className={`max-w-[80%] rounded-lg px-4 py-3 ${
-                    message.role === "user"
-                      ? "bg-primary/10 text-foreground ml-auto"
-                      : "bg-secondary/50 text-foreground"
-                  }`}
-                >
-                  <p className={message.role === "assistant" ? "font-serif" : ""}>{message.content}</p>
-                </div>
+                <p className={message.role === "assistant" ? "font-serif" : ""}>{message.content}</p>
               </div>
-            ))}
-            {isLoading && (
-              <div className="flex justify-start">
-                <div className="bg-secondary/50 text-foreground rounded-lg px-4 py-3">
-                  <p className="font-serif">Typing...</p>
-                </div>
+            </div>
+          ))}
+          {isLoading && (
+            <div className="flex justify-start">
+              <div className="bg-secondary/50 text-foreground rounded-lg px-4 py-3">
+                <p className="font-serif">Typing...</p>
               </div>
-            )}
-            <div ref={messagesEndRef} />
-          </div>
-        </ScrollArea>
-      </div>
+            </div>
+          )}
+          <div ref={messagesEndRef} />
+        </div>
+      </ScrollArea>
 
       <div className="border-t border-border/20 p-4 bg-background/50 backdrop-blur-sm">
         <div className="flex gap-2">
