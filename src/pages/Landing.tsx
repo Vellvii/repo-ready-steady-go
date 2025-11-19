@@ -240,7 +240,7 @@ const Landing = () => {
           bg-gradient-to-br from-card/95 to-muted/95 backdrop-blur-xl border border-secondary/20 rounded-2xl shadow-luxury
           transition-all duration-700 ease-out flex flex-col mx-2
           ${isAgeConfirmed 
-            ? 'w-[85vw] sm:w-[70vw] md:w-[60vw] lg:w-[50vw] max-w-2xl min-h-[40vh] sm:min-h-[45vh] max-h-[55vh] sm:max-h-[50vh] p-3 sm:p-4' 
+            ? 'w-[85vw] sm:w-[70vw] md:w-[60vw] lg:w-[50vw] max-w-2xl min-h-[55vh] sm:min-h-[60vh] max-h-[70vh] sm:max-h-[65vh] p-3 sm:p-4' 
             : 'w-[90vw] max-w-sm p-4 sm:p-6'
           }
         `}>
