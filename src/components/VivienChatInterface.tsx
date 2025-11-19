@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send } from "lucide-react";
 import { sendVivianMessage } from "@/services/vivianChatService";
 
@@ -76,39 +75,35 @@ export const VivienChatInterface = () => {
   };
 
   return (
-    <div className="flex flex-col h-full w-full overflow-hidden">
-      <div className="flex-1 min-h-0">
-        <ScrollArea className="h-full">
-          <div className="px-4 py-6 space-y-4">
-            {messages.map((message) => (
-              <div
-                key={message.id}
-                className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
-              >
-                <div
-                  className={`max-w-[80%] rounded-lg px-4 py-3 ${
-                    message.role === "user"
-                      ? "bg-primary/10 text-foreground ml-auto"
-                      : "bg-secondary/50 text-foreground"
-                  }`}
-                >
-                  <p className={message.role === "assistant" ? "font-serif" : ""}>{message.content}</p>
-                </div>
-              </div>
-            ))}
-            {isLoading && (
-              <div className="flex justify-start">
-                <div className="bg-secondary/50 text-foreground rounded-lg px-4 py-3">
-                  <p className="font-serif">Typing...</p>
-                </div>
-              </div>
-            )}
-            <div ref={messagesEndRef} />
+    <div className="flex flex-col h-full w-full">
+      <div className="flex-1 overflow-y-auto px-4 py-6 space-y-4">
+        {messages.map((message) => (
+          <div
+            key={message.id}
+            className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
+          >
+            <div
+              className={`max-w-[80%] rounded-lg px-4 py-3 ${
+                message.role === "user"
+                  ? "bg-primary/10 text-foreground ml-auto"
+                  : "bg-secondary/50 text-foreground"
+              }`}
+            >
+              <p className={message.role === "assistant" ? "font-serif" : ""}>{message.content}</p>
+            </div>
           </div>
-        </ScrollArea>
+        ))}
+        {isLoading && (
+          <div className="flex justify-start">
+            <div className="bg-secondary/50 text-foreground rounded-lg px-4 py-3">
+              <p className="font-serif">Typing...</p>
+            </div>
+          </div>
+        )}
+        <div ref={messagesEndRef} />
       </div>
 
-      <div className="border-t border-border/20 p-4 bg-background/50 backdrop-blur-sm">
+      <div className="border-t border-border/20 p-4 bg-background/50 backdrop-blur-sm flex-shrink-0">
         <div className="flex gap-2">
           <Input
             value={inputValue}
