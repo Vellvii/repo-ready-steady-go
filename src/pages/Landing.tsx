@@ -4,6 +4,7 @@ import { MagneticButton } from "@/components/animations/MagneticButton";
 import { EnvelopeMailingList, MailingListFormData } from "@/components/EnvelopeMailingList";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import ConciergeChat from "@/components/ConciergeChat";
 import vivienImage from "/uploads/976c0d6d-a066-409a-8ad6-6353840958ac.png";
 
 const Landing = () => {
@@ -321,6 +322,9 @@ const Landing = () => {
         onSubmit={handleJoinMailingList}
         isSubmitting={isSubmitting}
       />
+
+      {/* Vivien AI Chat */}
+      <ConciergeChat />
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { MessageCircle, Send, X, Minimize2 } from "lucide-react";
 import { useLocation } from "react-router-dom";
-import { N8nService } from "@/services/n8nService";
+import { sendVivianMessage } from "@/services/vivianChatService";
 
 const ConciergeChat = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,14 +20,11 @@ const ConciergeChat = () => {
     
     // Add welcome message when component mounts
     if (selectedConcierge === "vivian" && messages.length === 0) {
-      // Get welcome message from n8n service
-      N8nService.getGreeting(location.pathname).then(welcomeMessage => {
-        setMessages([{
-          id: '1',
-          content: welcomeMessage,
-          role: 'assistant'
-        }]);
-      });
+      setMessages([{
+        id: '1',
+        content: "Hello! I'm Vivian, your personal luxury wellness concierge. How may I assist you today?",
+        role: 'assistant'
+      }]);
     }
   }, [location.pathname]);
 
@@ -44,9 +41,9 @@ const ConciergeChat = () => {
     const currentInput = inputValue;
     setInputValue("");
 
-    // Get response from n8n service
+    // Get response from Abacus AI via Vivian chat service
     try {
-      const response = await N8nService.getChatResponse(currentInput, location.pathname);
+      const response = await sendVivianMessage(currentInput);
       
       const assistantMessage = {
         id: (Date.now() + 1).toString(),
