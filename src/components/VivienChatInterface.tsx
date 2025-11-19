@@ -75,7 +75,7 @@ export const VivienChatInterface = () => {
   };
 
   return (
-    <div className="flex flex-col h-full w-full">
+    <div className="flex flex-col flex-1 w-full">
       <div className="flex-1 overflow-y-auto px-4 py-6 space-y-4">
         {messages.map((message) => (
           <div
