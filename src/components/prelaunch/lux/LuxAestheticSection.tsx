@@ -32,7 +32,7 @@ Returning stronger.</h2>
 
           <ScrollReveal delay={0.5}>
             <div className="max-w-3xl mx-auto">
-              <CrossfadeCarousel items={['/uploads/RedOpen1.png', '/uploads/BlackOpen2.png']} aspectRatio="aspect-[4/3]" />
+              <CrossfadeCarousel items={['/uploads/lux-lifestyle-final-v4.png']} aspectRatio="aspect-[4/3]" />
             </div>
           </ScrollReveal>
         </div>
