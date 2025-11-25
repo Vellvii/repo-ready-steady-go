@@ -23,6 +23,7 @@ import DockingStation from "./pages/DockingStation";
 import SexSaddle from "./pages/SexSaddle";
 import NotFound from "./pages/NotFound";
 import PrelaunchDOX from "./pages/PrelaunchDOX";
+import PrelaunchLux from "./pages/PrelaunchLux";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,7 @@ const InnerApp = () => {
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/prelaunch-dox" element={<PrelaunchDOX />} />
+            <Route path="/prelaunch-lux" element={<PrelaunchLux />} />
             {isDev && (
               <>
                 <Route path="/home" element={<Home />} />
