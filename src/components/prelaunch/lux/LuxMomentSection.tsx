@@ -37,8 +37,8 @@ export const LuxMomentSection = () => {
             <div className="max-w-3xl mx-auto">
               <CrossfadeCarousel
                 items={[
-                  '/public/uploads/dox-open-animation.mp4',
-                  '/public/uploads/Dox_white_open_plugged_in_content2.png'
+                  '/uploads/dox-open-animation.mp4',
+                  '/uploads/Dox_white_open_plugged_in_content2.png'
                 ]}
                 aspectRatio="aspect-[4/3]"
               />

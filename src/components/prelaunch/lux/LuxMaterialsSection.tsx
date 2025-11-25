@@ -37,8 +37,8 @@ export const LuxMaterialsSection = () => {
             <div className="max-w-3xl mx-auto">
               <CrossfadeCarousel
                 items={[
-                  '/public/uploads/RedLockClose.png',
-                  '/public/uploads/FP_lock_V_lock_close_ups.png'
+                  '/uploads/RedLockClose.png',
+                  '/uploads/FP_lock_V_lock_close_ups.png'
                 ]}
                 aspectRatio="aspect-[4/3]"
               />

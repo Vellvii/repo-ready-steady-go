@@ -27,7 +27,7 @@ export const LuxPhilosophySection = () => {
 
           <ScrollReveal delay={0.5}>
             <div className="max-w-3xl mx-auto">
-              <CrossfadeCarousel items={['/public/uploads/Dox_white_lifestyle1.jpg', '/public/uploads/dox_with_toys_1.jpg']} aspectRatio="aspect-[4/3]" />
+              <CrossfadeCarousel items={['/uploads/Dox_white_lifestyle1.jpg', '/uploads/dox_with_toys_1.jpg']} aspectRatio="aspect-[4/3]" />
             </div>
           </ScrollReveal>
         </div>
