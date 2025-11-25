@@ -1,14 +1,11 @@
-import { HeroSection } from "@/components/prelaunch/HeroSection";
-import { ProblemSection } from "@/components/prelaunch/ProblemSection";
-import { ProductShowcase } from "@/components/prelaunch/ProductShowcase";
-import { FeatureGrid } from "@/components/prelaunch/FeatureGrid";
+import { LuxHeroSection } from "@/components/prelaunch/lux/LuxHeroSection";
+import { LuxPhilosophySection } from "@/components/prelaunch/lux/LuxPhilosophySection";
+import { LuxMaterialsSection } from "@/components/prelaunch/lux/LuxMaterialsSection";
+import { LuxAestheticSection } from "@/components/prelaunch/lux/LuxAestheticSection";
+import { LuxJourneySection } from "@/components/prelaunch/lux/LuxJourneySection";
+import { LuxMomentSection } from "@/components/prelaunch/lux/LuxMomentSection";
 import { EmailCaptureSection } from "@/components/prelaunch/EmailCaptureSection";
-import { TechSpecs } from "@/components/prelaunch/TechSpecs";
-import { TimelineSection } from "@/components/prelaunch/TimelineSection";
-import { SocialProofSection } from "@/components/prelaunch/SocialProofSection";
-import { FAQSection } from "@/components/prelaunch/FAQSection";
-import { FinalCTA } from "@/components/prelaunch/FinalCTA";
-import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
+import { LuxFooter } from "@/components/prelaunch/lux/LuxFooter";
 import { PageTransition } from "@/components/animations/PageTransition";
 
 export default function PrelaunchLux() {
@@ -20,17 +17,14 @@ export default function PrelaunchLux() {
         
         {/* Content */}
         <div className="relative z-10">
-        <HeroSection />
-        <ProblemSection />
-        <ProductShowcase />
-        <FeatureGrid />
-        <EmailCaptureSection />
-        <TechSpecs />
-        <TimelineSection />
-        <SocialProofSection />
-        <FAQSection />
-        <FinalCTA />
-        <PrelaunchFooter />
+          <LuxHeroSection />
+          <LuxPhilosophySection />
+          <LuxMaterialsSection />
+          <LuxAestheticSection />
+          <LuxJourneySection />
+          <LuxMomentSection />
+          <EmailCaptureSection />
+          <LuxFooter />
         </div>
       </div>
     </PageTransition>
