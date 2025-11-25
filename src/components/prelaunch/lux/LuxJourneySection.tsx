@@ -38,8 +38,8 @@ export const LuxJourneySection = () => {
             <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw]">
               <CrossfadeCarousel
                 items={[
-                  '/uploads/lux-bag-v3.jpg',
-                  '/uploads/lux-lifestyle-2-updated.png'
+                  '/uploads/lux-bag-final-v4.jpg',
+                  '/uploads/lux-lifestyle-final-v3.png'
                 ]}
                 aspectRatio="aspect-[21/9]"
                 className="rounded-none"
