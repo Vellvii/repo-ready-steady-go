@@ -64,7 +64,8 @@ export const LuxHeroSection = () => {
           </ScrollReveal>
 
           <ScrollReveal delay={0.5}>
-            <p className="text-lg sm:text-xl lg:text-2xl text-white/70 max-w-4xl mx-auto leading-relaxed font-light">Introducing VELLVII LUX - a masterpiece of designer leather craftsmanship refined with next-generation biometric technology.
+            <p className="text-lg sm:text-xl lg:text-2xl text-white/70 max-w-4xl mx-auto leading-relaxed font-light">Introducing The VELLVII LUX 
+A masterpiece of designer leather craftsmanship refined with next-generation biometric technology. 
 
 For the traveler who enjoys private lounges, discreet check-ins, and a life where privacy is the most valuable currency… LUX is the only companion worthy of your journey.<br /><br />
               For the traveler who enjoys private lounges, discreet check-ins, and a life where privacy is the most valuable currency… LUX is the only companion worthy of your journey.

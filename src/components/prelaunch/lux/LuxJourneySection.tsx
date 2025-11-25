@@ -11,9 +11,7 @@ export const LuxJourneySection = () => {
         <div className="max-w-5xl mx-auto space-y-12">
           <div className="text-center space-y-8">
             <ScrollReveal>
-              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white font-baskerville leading-tight">
-                Your Travel. Only Better.
-              </h2>
+              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white font-baskerville leading-tight">For the woman who packs confidence and carries desire.</h2>
             </ScrollReveal>
 
             <ScrollReveal delay={0.2}>
