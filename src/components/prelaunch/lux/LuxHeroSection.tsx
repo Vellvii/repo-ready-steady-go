@@ -20,7 +20,7 @@ export const LuxHeroSection = () => {
               <img 
                 src={vellviiLogo} 
                 alt="Vellvii" 
-                className="h-16 sm:h-20 lg:h-24 xl:h-28 w-auto"
+                className="h-48 sm:h-60 lg:h-72 xl:h-84 w-auto"
                 style={{ filter: 'drop-shadow(0 0 30px rgba(178, 145, 108, 0.4))' }}
               />
             </div>
