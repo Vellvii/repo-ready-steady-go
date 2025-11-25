@@ -13,7 +13,7 @@ export const LuxPhilosophySection = () => {
             </ScrollReveal>
 
             <ScrollReveal delay={0.2}>
-              <p className="text-xl sm:text-2xl text-white/70 leading-relaxed font-light max-w-4xl mx-auto">Your expensive toys deserve a home that respects them—something worthy of their quality, not an afterthought. LUX was designed for travel, crafted for privacy, and perfected for the minimalist who keeps only one or two treasured toys. Every line, every fold, every detail exists with intention. It’s discreet yet sophisticated, soft to the touch yet strong enough to protect what matters.</p>
+              <p className="text-xl sm:text-2xl text-white/70 leading-relaxed font-light max-w-4xl mx-auto">Your expensive toys deserve a home that respects them—something worthy of their quality, not an afterthought. The VELLVII LUX was designed for travel, crafted for privacy, and perfected for the minimalist who keeps only one or two treasured toys. Every line, every fold, every detail exists with intention. It’s discreet yet sophisticated, soft to the touch yet strong enough to protect what matters.</p>
             </ScrollReveal>
 
             <ScrollReveal delay={0.3}>

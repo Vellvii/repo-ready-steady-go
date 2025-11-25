@@ -1,10 +1,8 @@
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { LuxReserveCTA } from "./LuxReserveCTA";
 import { CrossfadeCarousel } from "@/components/media/CrossfadeCarousel";
-
 export const LuxPrivacyPocketSection = () => {
-  return (
-    <section className="py-32 relative overflow-hidden">
+  return <section className="py-32 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -17,9 +15,7 @@ export const LuxPrivacyPocketSection = () => {
             </ScrollReveal>
 
             <ScrollReveal delay={0.2}>
-              <p className="text-xl sm:text-2xl text-white/70 leading-relaxed font-light max-w-4xl mx-auto">
-                A dedicated Privacy Pocket that lets you reach for a condom without ever opening your bag or revealing what's inside.
-              </p>
+              <p className="text-xl sm:text-2xl text-white/70 leading-relaxed font-light max-w-4xl mx-auto">A dedicated Privacy Pocket that lets you "reach for a condom" without ever opening your bag or revealing what's inside.</p>
             </ScrollReveal>
 
             <ScrollReveal delay={0.3}>
@@ -35,16 +31,10 @@ export const LuxPrivacyPocketSection = () => {
 
           <ScrollReveal delay={0.5}>
             <div className="max-w-3xl mx-auto">
-              <CrossfadeCarousel
-                items={[
-                  '/uploads/lux-privacy-pocket-lifestyle.jpg'
-                ]}
-                aspectRatio="aspect-[4/3]"
-              />
+              <CrossfadeCarousel items={['/uploads/lux-privacy-pocket-lifestyle.jpg']} aspectRatio="aspect-[4/3]" />
             </div>
           </ScrollReveal>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };

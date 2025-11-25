@@ -17,7 +17,7 @@ Returning stronger.</h2>
               <div className="space-y-4 text-xl sm:text-2xl text-white/80 font-light leading-relaxed">
                 <p>No messy cables. No awkward angles. Just a perfect, effortless connection</p>
                 <p>Every detail whispers purpose.</p>
-                <p className="text-white/60 italic">LUX keeps your favourites charged, warmed by anticipation, hidden from the world but prepared for you. It’s a private ritual: you close the zip, and inside, your pleasure is quietly gathering power, pulsing back to life for the next time you need them.</p>
+                <p className="text-white/60 italic">The VELLVII LUX keeps your favourites charged, warmed by anticipation, hidden from the world but prepared for you. It’s a private ritual: you close the zip, and inside, your pleasure is quietly gathering power, pulsing back to life for the next time you need them.</p>
               </div>
             </ScrollReveal>
 

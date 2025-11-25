@@ -21,7 +21,7 @@ Your Fingerprint.</h2>
             </ScrollReveal>
 
             <ScrollReveal delay={0.3}>
-              <p className="text-xl sm:text-2xl text-white/70 leading-relaxed font-light max-w-4xl mx-auto">With biometric fingerprint security, the Lux responds only to your touch, your heat, your skin, your desire. One gentle press of your finger and it unlocks for you with the kind of obedience that feels… personal.</p>
+              <p className="text-xl sm:text-2xl text-white/70 leading-relaxed font-light max-w-4xl mx-auto">With biometric fingerprint security, the VELLVII LUX responds only to your touch, your heat, your skin, your desire. One gentle press of your finger and it unlocks for you with the kind of obedience that feels… personal.</p>
             </ScrollReveal>
 
             <ScrollReveal delay={0.4}>
