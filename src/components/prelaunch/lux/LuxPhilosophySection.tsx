@@ -14,10 +14,7 @@ export const LuxPhilosophySection = () => {
             <ScrollReveal>
               <h2 className="text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-bold text-white font-baskerville leading-[0.95]" style={{
               textShadow: '0 0 60px rgba(178, 145, 108, 0.3)'
-            }}>Designed for Sex Toys. Deliberate by Nature  Exceptional by Design.
-
-              <br />
-                <span className="gradient-text">Power is Private.</span>
+            }}>Designed for Sex Toys. Deliberate by Nature  Exceptional by Design.
               </h2>
             </ScrollReveal>
 
