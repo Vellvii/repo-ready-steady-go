@@ -2,6 +2,7 @@ import { LuxHeroSection } from "@/components/prelaunch/lux/LuxHeroSection";
 import { LuxPhilosophySection } from "@/components/prelaunch/lux/LuxPhilosophySection";
 import { LuxMaterialsSection } from "@/components/prelaunch/lux/LuxMaterialsSection";
 import { LuxAestheticSection } from "@/components/prelaunch/lux/LuxAestheticSection";
+import { LuxPrivacyPocketSection } from "@/components/prelaunch/lux/LuxPrivacyPocketSection";
 import { LuxJourneySection } from "@/components/prelaunch/lux/LuxJourneySection";
 import { LuxMomentSection } from "@/components/prelaunch/lux/LuxMomentSection";
 import { EmailCaptureSection } from "@/components/prelaunch/EmailCaptureSection";
@@ -21,6 +22,7 @@ export default function PrelaunchLux() {
           <LuxPhilosophySection />
           <LuxMaterialsSection />
           <LuxAestheticSection />
+          <LuxPrivacyPocketSection />
           <LuxJourneySection />
           <LuxMomentSection />
           <EmailCaptureSection />
