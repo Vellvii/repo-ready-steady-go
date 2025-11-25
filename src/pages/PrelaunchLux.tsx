@@ -8,27 +8,33 @@ import { LuxMomentSection } from "@/components/prelaunch/lux/LuxMomentSection";
 import { EmailCaptureSection } from "@/components/prelaunch/EmailCaptureSection";
 import { LuxFooter } from "@/components/prelaunch/lux/LuxFooter";
 import { PageTransition } from "@/components/animations/PageTransition";
+import { SmoothScroll } from "@/components/animations/SmoothScroll";
 
 export default function PrelaunchLux() {
   return (
-    <PageTransition>
-      <div className="min-h-screen relative overflow-hidden" style={{ background: 'var(--gradient-dark)' }}>
-        {/* Mesh gradient overlay */}
-        <div className="absolute inset-0 opacity-40" style={{ background: 'var(--gradient-mesh)' }} />
-        
-        {/* Content */}
-        <div className="relative z-10">
-          <LuxHeroSection />
-          <LuxPhilosophySection />
-          <LuxMaterialsSection />
-          <LuxAestheticSection />
-          <LuxPrivacyPocketSection />
-          <LuxJourneySection />
-          <LuxMomentSection />
-          <EmailCaptureSection />
-          <LuxFooter />
+    <SmoothScroll>
+      <PageTransition>
+        <div className="min-h-screen relative overflow-hidden" style={{ background: 'var(--gradient-dark)' }}>
+          {/* Animated mesh gradient overlay */}
+          <div className="absolute inset-0 opacity-50 mesh-bg" style={{ background: 'var(--gradient-mesh)' }} />
+          
+          {/* Spotlight effect */}
+          <div className="absolute inset-0 opacity-30" style={{ background: 'var(--gradient-spotlight)' }} />
+          
+          {/* Content */}
+          <div className="relative z-10">
+            <LuxHeroSection />
+            <LuxPhilosophySection />
+            <LuxMaterialsSection />
+            <LuxAestheticSection />
+            <LuxPrivacyPocketSection />
+            <LuxJourneySection />
+            <LuxMomentSection />
+            <EmailCaptureSection />
+            <LuxFooter />
+          </div>
         </div>
-      </div>
-    </PageTransition>
+      </PageTransition>
+    </SmoothScroll>
   );
 }

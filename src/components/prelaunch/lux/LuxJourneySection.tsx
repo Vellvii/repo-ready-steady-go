@@ -2,40 +2,64 @@ import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { LuxReserveCTA } from "./LuxReserveCTA";
 import { CrossfadeCarousel } from "@/components/media/CrossfadeCarousel";
 export const LuxJourneySection = () => {
-  return <section className="py-32 relative overflow-hidden">
+  return (
+    <section className="min-h-screen py-32 lg:py-48 relative overflow-hidden">
+      {/* Hero gradient */}
       <div className="absolute inset-0" style={{
-      background: 'var(--gradient-hero)'
-    }} />
+        background: 'var(--gradient-hero)'
+      }} />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/30" />
       
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-5xl mx-auto space-y-12">
-          <div className="text-center space-y-8">
+      <div className="w-full relative z-10 px-4 sm:px-8 lg:px-12">
+        <div className="max-w-7xl mx-auto space-y-20 lg:space-y-32">
+          <div className="text-center space-y-12 lg:space-y-16">
             <ScrollReveal>
-              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white font-baskerville leading-tight">For the woman who packs confidence and carries desire.</h2>
+              <h2 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold text-white font-baskerville leading-[0.95]" style={{
+                textShadow: '0 0 60px rgba(178, 145, 108, 0.3)'
+              }}>
+                For the woman who packs confidence
+                <br />
+                <span className="gradient-text">and carries desire.</span>
+              </h2>
             </ScrollReveal>
 
             <ScrollReveal delay={0.2}>
-              <p className="text-xl sm:text-2xl text-white/70 leading-relaxed font-light max-w-4xl mx-auto">From private jet terminals to city-penthouse arrivals, The VELLVII LUX carries your essentials with grace and silence.</p>
+              <p className="text-2xl sm:text-3xl lg:text-4xl text-white/80 leading-relaxed font-light max-w-6xl mx-auto">
+                From private jet terminals to city-penthouse arrivals, The VELLVII LUX carries your essentials with grace and silence.
+              </p>
             </ScrollReveal>
 
             <ScrollReveal delay={0.3}>
-              <div className="space-y-2 text-lg sm:text-xl text-white/80 font-light">
-                <p>Nothing calls attention.</p>
-                <p className="text-primary/90 font-normal">Everything commands presence.</p>
+              <div className="space-y-6 text-2xl sm:text-3xl lg:text-4xl font-light max-w-5xl mx-auto">
+                <p className="text-white/70">Nothing calls attention.</p>
+                <p className="text-4xl sm:text-5xl lg:text-6xl gradient-text font-normal">Everything commands presence.</p>
               </div>
             </ScrollReveal>
 
             <ScrollReveal delay={0.4}>
-              <LuxReserveCTA />
+              <div className="pt-8">
+                <LuxReserveCTA />
+              </div>
             </ScrollReveal>
           </div>
 
           <ScrollReveal delay={0.5}>
-            <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw]">
-              <CrossfadeCarousel items={['/uploads/lux-travel-suitcase.png', '/uploads/lux-lifestyle-2.jpg', '/uploads/lux-travel-lifestyle-hotel.jpg']} aspectRatio="aspect-[21/9]" className="rounded-none" />
+            <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw]" style={{
+              boxShadow: 'var(--shadow-massive)'
+            }}>
+              <CrossfadeCarousel 
+                items={[
+                  '/uploads/lux-travel-suitcase.png',
+                  '/uploads/lux-lifestyle-2.jpg',
+                  '/uploads/lux-travel-lifestyle-hotel.jpg'
+                ]} 
+                aspectRatio="aspect-[21/9]"
+                className="rounded-none"
+              />
             </div>
           </ScrollReveal>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };

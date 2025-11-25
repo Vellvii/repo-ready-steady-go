@@ -6,78 +6,89 @@ import { CrossfadeCarousel } from "@/components/media/CrossfadeCarousel";
 import vellviiLogo from "@/assets/vellvii-logo-rose-gold.png";
 export const LuxHeroSection = () => {
   return <section className="min-h-screen flex flex-col relative overflow-hidden">
-      {/* Background gradient */}
+      {/* Dramatic background gradient */}
       <div className="absolute inset-0" style={{
       background: 'var(--gradient-hero)'
     }} />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
 
-      <div className="container mx-auto relative z-10 px-4 pt-20">
-        <div className="max-w-6xl mx-auto text-center space-y-8">
-          {/* Logo */}
+      <div className="w-full relative z-10 px-4 sm:px-8 lg:px-12 pt-24 lg:pt-32">
+        <div className="max-w-7xl mx-auto text-center space-y-12 lg:space-y-16">
+          {/* Logo with dramatic glow */}
           <ScrollReveal>
-            <div className="flex justify-center mb-4">
-              <img src={vellviiLogo} alt="Vellvii" className="h-96 sm:h-[30rem] lg:h-[36rem] xl:h-[42rem] w-auto" style={{
-              filter: 'drop-shadow(0 0 30px rgba(178, 145, 108, 0.4))'
+            <div className="flex justify-center mb-8">
+              <img src={vellviiLogo} alt="Vellvii" className="h-[28rem] sm:h-[36rem] lg:h-[44rem] xl:h-[52rem] w-auto float-animation" style={{
+              filter: 'drop-shadow(0 0 60px rgba(178, 145, 108, 0.6)) drop-shadow(0 0 100px rgba(178, 145, 108, 0.3))'
             }} />
             </div>
           </ScrollReveal>
 
-          {/* Introducing */}
+          {/* Introducing with shimmer */}
           <ScrollReveal delay={0.1}>
-            <p className="text-2xl sm:text-3xl text-primary/80 font-light italic tracking-wider uppercase">
+            <p className="text-3xl sm:text-4xl lg:text-5xl gradient-text font-light italic tracking-[0.3em] uppercase">
               Introducing
             </p>
           </ScrollReveal>
 
-          {/* Main Title */}
+          {/* Main Title - Massive */}
           <ScrollReveal delay={0.2}>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold text-white font-baskerville tracking-tight leading-tight">
+            <h1 className="text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-bold text-white font-baskerville tracking-tight leading-[0.95]" style={{
+              textShadow: '0 0 80px rgba(178, 145, 108, 0.4)'
+            }}>
               The Vellvii LUX
             </h1>
           </ScrollReveal>
         </div>
       </div>
 
-      {/* Full-width Carousel */}
+      {/* Full-width Carousel with dramatic shadow */}
       <ScrollReveal delay={0.3}>
-        <div className="w-full mt-12 relative z-10">
-          <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw]">
+        <div className="w-full mt-16 lg:mt-24 relative z-10">
+          <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw]" style={{
+            boxShadow: 'var(--shadow-massive)'
+          }}>
             <CrossfadeCarousel items={['/uploads/lux-private-jet-lounge-hero.jpg']} aspectRatio="aspect-[21/9]" showControls={false} showDots={false} className="rounded-none" />
           </div>
         </div>
       </ScrollReveal>
 
-      {/* Bottom content */}
-      <div className="container mx-auto relative z-10 px-4 mt-12 pb-20">
-        <div className="max-w-6xl mx-auto text-center space-y-8">
+      {/* Bottom content - More dramatic spacing */}
+      <div className="w-full relative z-10 px-4 sm:px-8 lg:px-12 mt-20 lg:mt-32 pb-32 lg:pb-40">
+        <div className="max-w-7xl mx-auto text-center space-y-12 lg:space-y-16">
           <ScrollReveal delay={0.4}>
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl text-white/90 font-baskerville leading-tight">
+            <h2 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-white font-baskerville leading-tight" style={{
+              textShadow: '0 0 40px rgba(255, 255, 255, 0.1)'
+            }}>
               Flying Private?
             </h2>
           </ScrollReveal>
 
           <ScrollReveal delay={0.5}>
-            <h3 className="text-3xl sm:text-4xl lg:text-5xl text-white font-baskerville leading-tight">
+            <h3 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl gradient-text font-baskerville leading-tight">
               Keep it Private!
             </h3>
           </ScrollReveal>
 
-          <ScrollReveal delay={0.5}>
-            <p className="text-lg sm:text-xl lg:text-2xl text-white/70 max-w-4xl mx-auto leading-relaxed font-light">Introducing The VELLVII LUX 
-A masterpiece of designer leather craftsmanship refined with next-generation biometric technology. 
+          <ScrollReveal delay={0.6}>
+            <p className="text-xl sm:text-2xl lg:text-3xl text-white/80 max-w-5xl mx-auto leading-relaxed font-light">
+              A masterpiece of designer leather craftsmanship refined with next-generation biometric technology.
+            </p>
+          </ScrollReveal>
 
-For the traveler who enjoys private lounges, discreet check-ins, and a life where privacy is the most valuable currency… LUX is the only companion worthy of your journey.<br /><br />
+          <ScrollReveal delay={0.7}>
+            <p className="text-lg sm:text-xl lg:text-2xl text-white/60 max-w-5xl mx-auto leading-relaxed font-light">
               For the traveler who enjoys private lounges, discreet check-ins, and a life where privacy is the most valuable currency… LUX is the only companion worthy of your journey.
             </p>
           </ScrollReveal>
 
-          <ScrollReveal delay={0.6}>
+          <ScrollReveal delay={0.8}>
             <LuxCountdown />
           </ScrollReveal>
 
-          <ScrollReveal delay={0.7}>
-            <LuxReserveCTA />
+          <ScrollReveal delay={0.9}>
+            <div className="pt-8">
+              <LuxReserveCTA className="text-xl sm:text-2xl px-16 py-7" />
+            </div>
           </ScrollReveal>
         </div>
       </div>
