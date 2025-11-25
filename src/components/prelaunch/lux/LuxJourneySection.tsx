@@ -34,7 +34,7 @@ export const LuxJourneySection = () => {
 
           <ScrollReveal delay={0.5}>
             <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw]">
-              <CrossfadeCarousel items={['/uploads/lux-travel-suitcase.png', '/uploads/lux-travel-lifestyle-hotel.jpg']} aspectRatio="aspect-[21/9]" className="rounded-none" />
+              <CrossfadeCarousel items={['/uploads/lux-travel-suitcase.png', '/uploads/lux-lifestyle-2.jpg', '/uploads/lux-travel-lifestyle-hotel.jpg']} aspectRatio="aspect-[21/9]" className="rounded-none" />
             </div>
           </ScrollReveal>
         </div>
