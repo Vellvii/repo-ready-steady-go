@@ -48,13 +48,11 @@ export const LuxHeroSection = () => {
           <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw]">
             <CrossfadeCarousel
               items={[
-                '/public/uploads/lux-private-jet-lounge.jpg',
-                '/public/uploads/dox-white-lifestyle-2.jpg',
-                '/public/uploads/dox-black-bookshelf.png'
+                '/public/uploads/lux-private-jet-lounge.jpg'
               ]}
               aspectRatio="aspect-[21/9]"
-              showControls={true}
-              showDots={true}
+              showControls={false}
+              showDots={false}
               className="rounded-none"
             />
           </div>
@@ -63,12 +61,17 @@ export const LuxHeroSection = () => {
 
       {/* Bottom content */}
       <div className="container mx-auto relative z-10 px-4 mt-12 pb-20">
-        <div className="max-w-6xl mx-auto text-center space-y-10">
+        <div className="max-w-6xl mx-auto text-center space-y-8">
           <ScrollReveal delay={0.4}>
-            <AnimatedText 
-              text="Flying Private? Keep it Private."
-              className="text-3xl sm:text-4xl lg:text-5xl text-white/90 font-baskerville leading-tight"
-            />
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl text-white/90 font-baskerville leading-tight">
+              Flying Private?
+            </h2>
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.5}>
+            <h3 className="text-3xl sm:text-4xl lg:text-5xl text-white font-baskerville leading-tight">
+              Keep it Private!
+            </h3>
           </ScrollReveal>
 
           <ScrollReveal delay={0.5}>
