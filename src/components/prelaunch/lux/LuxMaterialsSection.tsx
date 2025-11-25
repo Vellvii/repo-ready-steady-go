@@ -31,7 +31,7 @@ Your Fingerprint.</h2>
 
           <ScrollReveal delay={0.5}>
             <div className="max-w-3xl mx-auto">
-              <CrossfadeCarousel items={['/uploads/RedLockClose.png', '/uploads/FP_lock_V_lock_close_ups.png']} aspectRatio="aspect-[4/3]" />
+              <CrossfadeCarousel items={['/uploads/lux-fingerprint-security-v2.mp4']} aspectRatio="aspect-[4/3]" />
             </div>
           </ScrollReveal>
         </div>
