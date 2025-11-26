@@ -3,7 +3,6 @@ import { AnimatedText } from "@/components/animations/AnimatedText";
 import { LuxCountdown } from "./LuxCountdown";
 import { LuxReserveCTA } from "./LuxReserveCTA";
 import { CrossfadeCarousel } from "@/components/media/CrossfadeCarousel";
-import vellviiLogo from "@/assets/vellvii-logo-rose-gold.png";
 export const LuxHeroSection = () => {
   return <section className="min-h-screen flex flex-col relative overflow-hidden">
       {/* Dramatic background gradient */}
@@ -12,32 +11,45 @@ export const LuxHeroSection = () => {
     }} />
       <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
 
-      <div className="w-full relative z-10 px-4 sm:px-8 lg:px-12 pt-24 lg:pt-32">
+      <div className="w-full relative z-10 pt-24 lg:pt-32">
         <div className="max-w-7xl mx-auto text-center space-y-12 lg:space-y-16">
-          {/* Logo with dramatic glow */}
+          {/* Logo Video - Full Width */}
           <ScrollReveal>
-            <div className="flex justify-center mb-8">
-              <img src={vellviiLogo} alt="Vellvii" className="h-[16rem] sm:h-[20rem] lg:h-[24rem] xl:h-[28rem] w-auto float-animation" style={{
-              filter: 'drop-shadow(0 0 60px rgba(178, 145, 108, 0.6)) drop-shadow(0 0 100px rgba(178, 145, 108, 0.3))'
-            }} />
+            <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw]" style={{
+              boxShadow: 'var(--shadow-massive)'
+            }}>
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-auto"
+                style={{
+                  filter: 'drop-shadow(0 0 60px rgba(178, 145, 108, 0.6)) drop-shadow(0 0 100px rgba(178, 145, 108, 0.3))'
+                }}
+              >
+                <source src="/uploads/vellvii-logo-video.mp4" type="video/mp4" />
+              </video>
             </div>
           </ScrollReveal>
 
-          {/* Introducing with shimmer */}
-          <ScrollReveal delay={0.1}>
-            <p className="text-xl sm:text-2xl lg:text-3xl gradient-text font-light italic tracking-[0.3em] uppercase">
-              Introducing
-            </p>
-          </ScrollReveal>
+          <div className="px-4 sm:px-8 lg:px-12">
+            {/* Introducing with shimmer */}
+            <ScrollReveal delay={0.1}>
+              <p className="text-xl sm:text-2xl lg:text-3xl gradient-text font-light italic tracking-[0.3em] uppercase">
+                Introducing
+              </p>
+            </ScrollReveal>
 
-          {/* Main Title */}
-          <ScrollReveal delay={0.2}>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white font-baskerville tracking-tight leading-[0.95]" style={{
-              textShadow: '0 0 80px rgba(178, 145, 108, 0.4)'
-            }}>
-              The Vellvii LUX
-            </h1>
-          </ScrollReveal>
+            {/* Main Title */}
+            <ScrollReveal delay={0.2}>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white font-baskerville tracking-tight leading-[0.95]" style={{
+                textShadow: '0 0 80px rgba(178, 145, 108, 0.4)'
+              }}>
+                The Vellvii LUX
+              </h1>
+            </ScrollReveal>
+          </div>
         </div>
       </div>
 
