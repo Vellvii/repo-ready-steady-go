@@ -5,6 +5,7 @@ import { LuxAestheticSection } from "@/components/prelaunch/lux/LuxAestheticSect
 import { LuxPrivacyPocketSection } from "@/components/prelaunch/lux/LuxPrivacyPocketSection";
 import { LuxJourneySection } from "@/components/prelaunch/lux/LuxJourneySection";
 import { LuxMomentSection } from "@/components/prelaunch/lux/LuxMomentSection";
+import { LuxFAQSection } from "@/components/prelaunch/lux/LuxFAQSection";
 import { EmailCaptureSection } from "@/components/prelaunch/EmailCaptureSection";
 import { LuxFooter } from "@/components/prelaunch/lux/LuxFooter";
 import { PageTransition } from "@/components/animations/PageTransition";
@@ -30,6 +31,7 @@ export default function PrelaunchLux() {
             <LuxPrivacyPocketSection />
             <LuxJourneySection />
             <LuxMomentSection />
+            <LuxFAQSection />
             <EmailCaptureSection />
             <LuxFooter />
           </div>
