@@ -17,7 +17,7 @@ export const LuxHeroSection = () => {
           {/* Logo with dramatic glow */}
           <ScrollReveal>
             <div className="flex justify-center mb-8">
-              <img src={vellviiLogo} alt="Vellvii" className="h-[28rem] sm:h-[36rem] lg:h-[44rem] xl:h-[52rem] w-auto float-animation" style={{
+              <img src={vellviiLogo} alt="Vellvii" className="h-[16rem] sm:h-[20rem] lg:h-[24rem] xl:h-[28rem] w-auto float-animation" style={{
               filter: 'drop-shadow(0 0 60px rgba(178, 145, 108, 0.6)) drop-shadow(0 0 100px rgba(178, 145, 108, 0.3))'
             }} />
             </div>
@@ -25,14 +25,14 @@ export const LuxHeroSection = () => {
 
           {/* Introducing with shimmer */}
           <ScrollReveal delay={0.1}>
-            <p className="text-3xl sm:text-4xl lg:text-5xl gradient-text font-light italic tracking-[0.3em] uppercase">
+            <p className="text-xl sm:text-2xl lg:text-3xl gradient-text font-light italic tracking-[0.3em] uppercase">
               Introducing
             </p>
           </ScrollReveal>
 
-          {/* Main Title - Massive */}
+          {/* Main Title */}
           <ScrollReveal delay={0.2}>
-            <h1 className="text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-bold text-white font-baskerville tracking-tight leading-[0.95]" style={{
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white font-baskerville tracking-tight leading-[0.95]" style={{
               textShadow: '0 0 80px rgba(178, 145, 108, 0.4)'
             }}>
               The Vellvii LUX
@@ -56,7 +56,7 @@ export const LuxHeroSection = () => {
       <div className="w-full relative z-10 px-4 sm:px-8 lg:px-12 mt-20 lg:mt-32 pb-32 lg:pb-40">
         <div className="max-w-7xl mx-auto text-center space-y-12 lg:space-y-16">
           <ScrollReveal delay={0.4}>
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-white font-baskerville leading-tight" style={{
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-white font-baskerville leading-tight" style={{
               textShadow: '0 0 40px rgba(255, 255, 255, 0.1)'
             }}>
               Flying Private?
@@ -64,19 +64,19 @@ export const LuxHeroSection = () => {
           </ScrollReveal>
 
           <ScrollReveal delay={0.5}>
-            <h3 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl gradient-text font-baskerville leading-tight">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl gradient-text font-baskerville leading-tight">
               Keep it Private!
             </h3>
           </ScrollReveal>
 
           <ScrollReveal delay={0.6}>
-            <p className="text-xl sm:text-2xl lg:text-3xl text-white/80 max-w-5xl mx-auto leading-relaxed font-light">
+            <p className="text-lg sm:text-xl lg:text-2xl text-white/80 max-w-5xl mx-auto leading-relaxed font-light">
               A masterpiece of designer leather craftsmanship refined with next-generation biometric technology.
             </p>
           </ScrollReveal>
 
           <ScrollReveal delay={0.7}>
-            <p className="text-lg sm:text-xl lg:text-2xl text-white/60 max-w-5xl mx-auto leading-relaxed font-light">
+            <p className="text-base sm:text-lg lg:text-xl text-white/60 max-w-5xl mx-auto leading-relaxed font-light">
               For the traveler who enjoys private lounges, discreet check-ins, and a life where privacy is the most valuable currency… LUX is the only companion worthy of your journey.
             </p>
           </ScrollReveal>

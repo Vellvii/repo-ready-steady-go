@@ -14,7 +14,7 @@ export const LuxJourneySection = () => {
         <div className="max-w-7xl mx-auto space-y-20 lg:space-y-32">
           <div className="text-center space-y-12 lg:space-y-16">
             <ScrollReveal>
-              <h2 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold text-white font-baskerville leading-[0.95]" style={{
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white font-baskerville leading-tight" style={{
                 textShadow: '0 0 60px rgba(178, 145, 108, 0.3)'
               }}>
                 For the woman who packs confidence
@@ -24,15 +24,15 @@ export const LuxJourneySection = () => {
             </ScrollReveal>
 
             <ScrollReveal delay={0.2}>
-              <p className="text-2xl sm:text-3xl lg:text-4xl text-white/80 leading-relaxed font-light max-w-6xl mx-auto">
+              <p className="text-lg sm:text-xl lg:text-2xl text-white/80 leading-relaxed font-light max-w-4xl mx-auto">
                 From private jet terminals to city-penthouse arrivals, The VELLVII LUX carries your essentials with grace and silence.
               </p>
             </ScrollReveal>
 
             <ScrollReveal delay={0.3}>
-              <div className="space-y-6 text-2xl sm:text-3xl lg:text-4xl font-light max-w-5xl mx-auto">
+              <div className="space-y-6 text-lg sm:text-xl lg:text-2xl font-light max-w-4xl mx-auto">
                 <p className="text-white/70">Nothing calls attention.</p>
-                <p className="text-4xl sm:text-5xl lg:text-6xl gradient-text font-normal">Everything commands presence.</p>
+                <p className="text-2xl sm:text-3xl lg:text-4xl gradient-text font-normal">Everything commands presence.</p>
               </div>
             </ScrollReveal>
 

@@ -11,7 +11,7 @@ export const LuxMomentSection = () => {
         <div className="max-w-7xl mx-auto space-y-20 lg:space-y-32">
           <div className="text-center space-y-12 lg:space-y-16">
             <ScrollReveal>
-              <h2 className="text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-bold text-white font-baskerville leading-[0.95]" style={{
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white font-baskerville leading-tight" style={{
                 textShadow: '0 0 80px rgba(178, 145, 108, 0.4)'
               }}>
                 Where confidence meets elegance…
@@ -28,14 +28,14 @@ export const LuxMomentSection = () => {
           </div>
 
           <ScrollReveal delay={0.4}>
-            <div className="max-w-6xl mx-auto glass-luxury rounded-3xl p-4 lg:p-8" style={{
-              boxShadow: 'var(--shadow-massive)'
+            <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw]" style={{
+              boxShadow: 'var(--shadow-luxury)'
             }}>
               <CrossfadeCarousel 
                 items={['/uploads/lux-moment-lifestyle.mp4']} 
-                aspectRatio="aspect-[4/3]"
+                aspectRatio="aspect-[16/9]"
                 videoPlaybackRate={0.75}
-                className="rounded-2xl overflow-hidden"
+                className="rounded-none"
               />
             </div>
           </ScrollReveal>
