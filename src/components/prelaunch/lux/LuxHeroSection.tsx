@@ -13,17 +13,15 @@ export const LuxHeroSection = () => {
 
       <div className="w-full relative z-10 pt-24 lg:pt-32">
         <div className="max-w-7xl mx-auto text-center space-y-12 lg:space-y-16">
-          {/* Logo Video - Full Width */}
+          {/* Logo Video */}
           <ScrollReveal>
-            <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw]" style={{
-              boxShadow: 'var(--shadow-massive)'
-            }}>
+            <div className="flex justify-center mb-8">
               <video
                 autoPlay
                 loop
                 muted
                 playsInline
-                className="w-full h-auto"
+                className="h-[12rem] sm:h-[16rem] lg:h-[20rem] xl:h-[24rem] w-auto"
                 style={{
                   filter: 'drop-shadow(0 0 60px rgba(178, 145, 108, 0.6)) drop-shadow(0 0 100px rgba(178, 145, 108, 0.3))'
                 }}
