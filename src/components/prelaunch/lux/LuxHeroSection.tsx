@@ -21,7 +21,7 @@ export const LuxHeroSection = () => {
                 loop
                 muted
                 playsInline
-                className="h-[12rem] sm:h-[16rem] lg:h-[20rem] xl:h-[24rem] w-auto"
+                className="h-[16rem] sm:h-[22rem] lg:h-[28rem] xl:h-[34rem] w-auto"
                 style={{
                   filter: 'drop-shadow(0 0 60px rgba(178, 145, 108, 0.6)) drop-shadow(0 0 100px rgba(178, 145, 108, 0.3))'
                 }}
