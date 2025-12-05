@@ -222,6 +222,7 @@ const Landing = () => {
                   ref={videoRef}
                   src="/uploads/vivien-intro-video.mp4"
                   autoPlay
+                  muted
                   playsInline
                   onTimeUpdate={handleTimeUpdate}
                   onEnded={handleVideoEnded}
