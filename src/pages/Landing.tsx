@@ -33,10 +33,12 @@ const Landing = () => {
 
   // Subtitle timing - adjust these based on actual video timing
   const subtitles = [
-    { start: 0, end: 2, text: "Hi, I'm Vivien." },
-    { start: 2, end: 5, text: "I can guide you through our website" },
-    { start: 5, end: 8, text: "and you may ask me any questions at any time." },
-    { start: 8, end: 12, text: "To start, please confirm that you are older than 18." },
+    { start: 0, end: 2, text: "Hello, I'm Vivien" },
+    { start: 2, end: 5, text: "your personal concierge to the world of Vellvii." },
+    { start: 5, end: 9, text: "Vellvii isn't just a brand; it's an experience," },
+    { start: 9, end: 13, text: "it's a celebration of intimacy, design, and quiet confidence." },
+    { start: 13, end: 15, text: "My purpose is to guide you." },
+    { start: 15, end: 20, text: "Please confirm that you are older than 18 and I will see you on the other side" },
   ];
 
   useEffect(() => {
