@@ -1,6 +1,9 @@
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { CrossfadeCarousel } from "@/components/media/CrossfadeCarousel";
 import { ReserveButtons } from "./ReserveButtons";
+import doxOpenToys from "@/assets/dox-open-toys.png";
+import doxCreamShelf from "@/assets/dox-cream-shelf.png";
+import doxBedroomBookshelf from "@/assets/dox-bedroom-bookshelf.png";
 
 type MediaItem = {
   image?: string;
@@ -26,79 +29,80 @@ type Subcategory = {
   aspectRatio?: string;
 };
 
+// Feature 1 data structure for vertical layout
+const feature1Data = {
+  number: 1,
+  title: "Luxury Storage",
+  subtitle: "Stores Beautifully",
+  sections: [
+    {
+      type: "image" as const,
+      src: doxOpenToys,
+      alt: "Dox open with toys",
+    },
+    {
+      type: "text" as const,
+      label: "Perfectly Organized. Discreetly Decadent.",
+      description: "Custom compartments cradle your collection in quiet luxury - because every piece deserves a place of its own.",
+    },
+    {
+      type: "image" as const,
+      src: doxCreamShelf,
+      alt: "Dox cream on shelf",
+    },
+    {
+      type: "text" as const,
+      label: "Unapologetically Beautiful.",
+      description: "The Dox blends into any space with quiet confidence, a statement piece that turns your private passions into part of your décor.",
+    },
+    {
+      type: "video" as const,
+      src: "/uploads/dox-animation.mp4",
+    },
+    {
+      type: "text" as const,
+      label: "Sleek. Seductive. Unforgettable.",
+      description: "A flawless finish in soft rose-gold tones turns design into desire, refinement you can feel before you even open it.",
+    },
+    {
+      type: "image" as const,
+      src: doxBedroomBookshelf,
+      alt: "Dox on bedroom bookshelf",
+    },
+  ],
+  subcategories: [
+    {
+      title: "Biometric Fingerprint Lock",
+      description: "One touch. One owner. Total control of your intimate collection.",
+      thumbnails: [
+        "/uploads/fingerprint-video.webm",
+        "/uploads/Dox_fp_lock_video2.webm",
+      ],
+    },
+    {
+      title: "Intelligent Charging System",
+      description: "Seamlessly charges your devices while keeping them beautifully organized.",
+      thumbnails: [
+        "/uploads/Red_Dox_charge_inside.png",
+        "/uploads/Vellvii_description_sketches_open_ls.png",
+        "/uploads/White_charge_outside.png",
+      ],
+      aspectRatio: "aspect-video",
+    },
+    {
+      title: "Interchangeable Compartment",
+      description: "Customizable storage that adapts to your unique collection.",
+      thumbnails: [
+        "/uploads/RedOpen1.png",
+        "/uploads/BlackOpen2.png",
+        "/uploads/Vellvii_description_sketches_open_ls-2.png",
+      ],
+      aspectRatio: "aspect-video",
+    },
+  ],
+};
+
 const showcaseFeatures = [
-  {
-    number: 1,
-    title: "Luxury Storage",
-    subtitle: "Stores Beautifully",
-    images: [
-      {
-        video: "/uploads/dox-animation.mp4",
-        label: "Perfectly Organized. Discreetly Decadent.",
-        description: "Custom compartments cradle your collection in quiet luxury - because every piece deserves a place of its own.",
-      },
-      {
-        image: "/uploads/dox_with_toys_2.jpg",
-        label: "",
-        description: "",
-      },
-      {
-        image: "/uploads/dox-white-lifestyle-2.jpg",
-        label: "Unapologetically Beautiful.",
-        description: "The Dox blends into any space with quiet confidence, a statement piece that turns your private passions into part of your décor.",
-      },
-      {
-        image: "/uploads/Dox_white_open_plugged_in_content2.png",
-        label: "",
-        description: "",
-      },
-      {
-        image: "/uploads/dox-black-bookshelf.png",
-        label: "Sleek. Seductive. Unforgettable.",
-        description: "A flawless finish in soft rose-gold tones turns design into desire, refinement you can feel before you even open it.",
-      },
-      {
-        image: "/uploads/dox_with_toys_1.jpg",
-        label: "",
-        description: "",
-      },
-      {
-        image: "/uploads/Lifestyle_img8.jpg",
-        label: "",
-        description: "",
-      },
-    ],
-    subcategories: [
-      {
-        title: "Biometric Fingerprint Lock",
-        description: "One touch. One owner. Total control of your intimate collection.",
-        thumbnails: [
-          "/uploads/fingerprint-video.webm",
-          "/uploads/Dox_fp_lock_video2.webm",
-        ],
-      },
-      {
-        title: "Intelligent Charging System",
-        description: "Seamlessly charges your devices while keeping them beautifully organized.",
-        thumbnails: [
-          "/uploads/Red_Dox_charge_inside.png",
-          "/uploads/Vellvii_description_sketches_open_ls.png",
-          "/uploads/White_charge_outside.png",
-        ],
-        aspectRatio: "aspect-video",
-      },
-      {
-        title: "Interchangeable Compartment",
-        description: "Customizable storage that adapts to your unique collection.",
-        thumbnails: [
-          "/uploads/RedOpen1.png",
-          "/uploads/BlackOpen2.png",
-          "/uploads/Vellvii_description_sketches_open_ls-2.png",
-        ],
-        aspectRatio: "aspect-video",
-      },
-    ],
-  },
   {
     number: 2,
     title: "Flagship Introduction - Conscious Innovation",
@@ -231,6 +235,83 @@ const SubcategoryCarousel = ({
   );
 };
 
+// Feature 1 Vertical Layout Component
+const Feature1VerticalLayout = () => {
+  return (
+    <ScrollReveal>
+      <div className="mb-32">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-3 px-8 py-3 rounded-full glass-accent backdrop-blur-2xl mb-8">
+            <span className="text-primary font-bold text-lg tracking-wide">
+              Feature {feature1Data.number}
+            </span>
+          </div>
+          <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white font-baskerville mb-6 tracking-tight leading-[1.1]">
+            {feature1Data.title}
+          </h2>
+          <p className="text-2xl sm:text-3xl text-white/80 max-w-4xl mx-auto font-light leading-relaxed">
+            {feature1Data.subtitle}
+          </p>
+        </div>
+
+        {/* Vertical layout sections */}
+        <div className="max-w-6xl mx-auto space-y-12 px-4">
+          {feature1Data.sections.map((section, idx) => (
+            <ScrollReveal key={idx} delay={0.1 * idx}>
+              {section.type === "image" && (
+                <div className="rounded-3xl overflow-hidden shadow-float ring-1 ring-white/10">
+                  <img
+                    src={section.src}
+                    alt={section.alt}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+              )}
+              {section.type === "video" && (
+                <div className="rounded-3xl overflow-hidden shadow-float ring-1 ring-white/10">
+                  <video
+                    src={section.src}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-auto"
+                  />
+                </div>
+              )}
+              {section.type === "text" && (
+                <div className="max-w-3xl mx-auto text-center">
+                  <div className="group p-10 rounded-2xl glass-dark border border-white/10 hover:border-white/20 transition-all duration-500 hover:shadow-card">
+                    <h4 className="text-2xl sm:text-3xl font-bold text-white mb-4 group-hover:text-primary transition-colors duration-300 font-baskerville">
+                      {section.label}
+                    </h4>
+                    <p className="text-lg text-white/70 leading-relaxed font-light">
+                      {section.description}
+                    </p>
+                  </div>
+                </div>
+              )}
+            </ScrollReveal>
+          ))}
+        </div>
+
+        {/* Subcategories */}
+        {feature1Data.subcategories && (
+          <div className="max-w-6xl mx-auto space-y-12 px-4 mt-20">
+            {feature1Data.subcategories.map((subcategory, subIdx) => (
+              <SubcategoryCarousel
+                key={subIdx}
+                subcategory={subcategory}
+                index={subIdx}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </ScrollReveal>
+  );
+};
+
 const FeatureCarousel = ({
   feature,
   index,
@@ -327,10 +408,16 @@ export const ProductShowcase = () => {
           </div>
         </ScrollReveal>
 
+        {/* Feature 1 - Vertical Layout */}
+        <Feature1VerticalLayout />
+        
+        {/* Reserve buttons before Feature 2 */}
+        <ReserveButtons />
+        
         {showcaseFeatures.map((feature, index) => (
           <div key={feature.number}>
-            {/* Reserve buttons before Features 2, 3, and 4 */}
-            {feature.number >= 2 && <ReserveButtons />}
+            {/* Reserve buttons before Features 3 and 4 */}
+            {feature.number >= 3 && <ReserveButtons />}
             <FeatureCarousel feature={feature} index={index} />
           </div>
         ))}
