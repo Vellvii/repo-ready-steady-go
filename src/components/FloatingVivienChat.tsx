@@ -14,45 +14,65 @@ export const FloatingVivienChat = () => {
         <div 
           className={`
             absolute bottom-16 right-0 
-            bg-gradient-to-br from-card to-muted backdrop-blur-xl 
-            border border-secondary/20 rounded-2xl shadow-luxury
             transition-all duration-300 ease-out
-            ${isMinimized ? 'h-14' : 'w-[340px] sm:w-[380px] h-[500px]'}
+            ${isMinimized ? 'h-14' : 'w-[340px] sm:w-[380px]'}
           `}
         >
-          {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-secondary/10">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                <span className="text-primary-foreground text-sm font-semibold">V</span>
-              </div>
-              <div>
-                <p className="font-playfair text-sm font-medium text-foreground">Vivien</p>
-                <p className="text-xs text-muted-foreground">Your Concierge</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-1">
-              <button
-                onClick={() => setIsMinimized(!isMinimized)}
-                className="p-1.5 hover:bg-secondary/10 rounded-full transition-colors"
-              >
-                <Minus className="w-4 h-4 text-muted-foreground" />
-              </button>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="p-1.5 hover:bg-secondary/10 rounded-full transition-colors"
-              >
-                <X className="w-4 h-4 text-muted-foreground" />
-              </button>
-            </div>
-          </div>
-
-          {/* Chat Content */}
+          {/* Vivien's Large Image - positioned above chat */}
           {!isMinimized && (
-            <div className="h-[calc(100%-56px)] overflow-hidden">
-              <VivienChatInterface />
+            <div className="flex justify-center mb-2">
+              <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-primary/30 shadow-lg">
+                <img 
+                  src={vivienCloseup} 
+                  alt="Vivien" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
           )}
+          
+          {/* Chat Box */}
+          <div 
+            className={`
+              bg-gradient-to-br from-card to-muted backdrop-blur-xl 
+              border border-secondary/20 rounded-2xl shadow-luxury
+              ${isMinimized ? 'h-14' : 'h-[420px]'}
+            `}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between px-4 py-3 border-b border-secondary/10">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                  <span className="text-primary-foreground text-sm font-semibold">V</span>
+                </div>
+                <div>
+                  <p className="font-playfair text-sm font-medium text-foreground">Vivien</p>
+                  <p className="text-xs text-muted-foreground">Your Concierge</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-1">
+                <button
+                  onClick={() => setIsMinimized(!isMinimized)}
+                  className="p-1.5 hover:bg-secondary/10 rounded-full transition-colors"
+                >
+                  <Minus className="w-4 h-4 text-muted-foreground" />
+                </button>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="p-1.5 hover:bg-secondary/10 rounded-full transition-colors"
+                >
+                  <X className="w-4 h-4 text-muted-foreground" />
+                </button>
+              </div>
+            </div>
+
+            {/* Chat Content */}
+            {!isMinimized && (
+              <div className="h-[calc(100%-56px)] overflow-hidden">
+                <VivienChatInterface />
+              </div>
+            )}
+          </div>
         </div>
       )}
 
