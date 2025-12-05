@@ -14,7 +14,7 @@ export const VivienChatInterface = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      content: "Hello! I'm Vivian, your personal luxury wellness concierge. How may I assist you today?",
+      content: "Hello! I'm Vivien, your personal luxury wellness concierge. How may I assist you today?",
       role: "assistant",
     },
   ]);
@@ -111,7 +111,7 @@ export const VivienChatInterface = () => {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="Ask Vivian anything..."
+            placeholder="Ask Vivien anything..."
             className="flex-1 bg-background/50 border-border/30 focus:border-primary transition-colors"
             disabled={isLoading}
           />

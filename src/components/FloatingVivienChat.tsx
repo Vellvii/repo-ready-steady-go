@@ -21,7 +21,7 @@ export const FloatingVivienChat = () => {
           {/* Vivien's Large Image - positioned above chat */}
           {!isMinimized && (
             <div className="flex justify-center mb-2">
-              <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-primary/30 shadow-lg">
+              <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-primary/30 shadow-lg">
                 <img 
                   src={vivienCloseup} 
                   alt="Vivien" 
