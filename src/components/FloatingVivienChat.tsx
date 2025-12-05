@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { X, MessageCircle, Minus } from "lucide-react";
+import { X, Minus } from "lucide-react";
+import vivienCloseup from "@/assets/vivien-closeup.jpg";
 import { VivienChatInterface } from "./VivienChatInterface";
 
 export const FloatingVivienChat = () => {
@@ -70,10 +71,10 @@ export const FloatingVivienChat = () => {
           ${isOpen ? 'rotate-0' : 'rotate-0'}
         `}
       >
-        {isOpen ? (
+      {isOpen ? (
           <X className="w-6 h-6 text-primary-foreground" />
         ) : (
-          <MessageCircle className="w-6 h-6 text-primary-foreground" />
+          <img src={vivienCloseup} alt="Vivien" className="w-full h-full object-cover rounded-full" />
         )}
       </button>
     </div>
