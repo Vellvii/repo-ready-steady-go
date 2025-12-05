@@ -2,6 +2,9 @@ import { MagneticButton } from "@/components/animations/MagneticButton";
 import { AnimatedText } from "@/components/animations/AnimatedText";
 import { CountdownTimer } from "./CountdownTimer";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import prelaunchLogo from "@/assets/prelaunch-logo.png";
+
+const PRELAUNCH_URL = "https://prelaunch.com/projects/5ff3ce3f-6669-4243-918c-4d57d98b63f6/reservation?userEmail=stefan%40vellvii.com&reservationId=c3452574-55cf-49e6-aa12-79b4c18131ac";
 
 export const HeroSection = () => {
   const scrollToEmailCapture = () => {
@@ -43,13 +46,16 @@ export const HeroSection = () => {
 
           <ScrollReveal delay={1}>
             <div className="flex flex-col gap-4 justify-center items-center">
-              <MagneticButton
-                onClick={scrollToEmailCapture}
-                className="group px-10 py-5 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] text-black rounded-2xl font-bold text-lg shadow-elegant hover:shadow-glow transition-all duration-700 hover:bg-right relative overflow-hidden"
+              <a
+                href={PRELAUNCH_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group px-10 py-5 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] text-black rounded-2xl font-bold text-lg shadow-elegant hover:shadow-glow transition-all duration-700 hover:bg-right relative overflow-hidden flex items-center gap-3"
               >
-                <span className="relative z-10">Reserve Your DOX</span>
+                <span className="relative z-10">Reserve Your DOX on</span>
+                <img src={prelaunchLogo} alt="Prelaunch.com" className="h-6 w-6 relative z-10" />
                 <div className="absolute inset-0 bg-gradient-shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-              </MagneticButton>
+              </a>
               <MagneticButton
                 onClick={scrollToEmailCapture}
                 className="group px-10 py-5 bg-gradient-to-r from-amber-500 via-orange-400 to-amber-500 bg-[length:200%_100%] text-black rounded-2xl font-bold text-lg shadow-elegant hover:shadow-glow transition-all duration-700 hover:bg-right relative overflow-hidden"
