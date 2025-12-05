@@ -5,7 +5,6 @@ import { EnvelopeMailingList, MailingListFormData } from "@/components/EnvelopeM
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { VivienChatInterface } from "@/components/VivienChatInterface";
-import vivienImage from "/uploads/976c0d6d-a066-409a-8ad6-6353840958ac.png";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -14,6 +13,8 @@ const Landing = () => {
   const [showMailingDialog, setShowMailingDialog] = useState(false);
   const [currentSubtitle, setCurrentSubtitle] = useState("");
   const [videoEnded, setVideoEnded] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
+  const [showLogos, setShowLogos] = useState(true);
   const [mailingFormData, setMailingFormData] = useState<MailingListFormData>({
     firstName: '',
     lastName: '',
@@ -43,6 +44,15 @@ const Landing = () => {
     return () => {
       document.body.classList.remove('landing-active');
     };
+  }, []);
+
+  // Show logos for 1.5 seconds, then start video
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLogos(false);
+      setShowVideo(true);
+    }, 1500);
+    return () => clearTimeout(timer);
   }, []);
 
   // Handle video time updates for subtitles
@@ -178,38 +188,36 @@ const Landing = () => {
   };
 
   return (
-    <div id="landing-lock" className="fixed inset-0 h-full bg-black flex flex-col items-center pt-4 md:pt-6 pb-40 gap-8 overflow-hidden">
-      <img
-        src="/uploads/V-logo-transparent.png"
-        alt="V Logo"
-        className="w-32 sm:w-40 h-auto"
-      />
-      <img
-        src="/uploads/Vellvii-full-logo-transparent.png"
-        alt="Vellvii Logo"
-        className={`w-[90vw] sm:w-3/4 md:w-1/2 max-w-md max-h-[40vh] object-contain transition-all duration-1000 ${
-          isAgeConfirmed ? 'animate-fade-out translate-y-8 opacity-0 pointer-events-none' : ''
-        }`}
-      />
+    <div id="landing-lock" className="fixed inset-0 h-full bg-black flex flex-col items-center justify-center gap-8 overflow-hidden">
+      {/* Logos - visible initially, fade out when video starts */}
+      <div className={`flex flex-col items-center gap-4 transition-all duration-700 ${showLogos ? 'opacity-100' : 'opacity-0 pointer-events-none absolute'}`}>
+        <img
+          src="/uploads/V-logo-transparent.png"
+          alt="V Logo"
+          className="w-32 sm:w-40 h-auto"
+        />
+        <img
+          src="/uploads/Vellvii-full-logo-transparent.png"
+          alt="Vellvii Logo"
+          className="w-[90vw] sm:w-3/4 md:w-1/2 max-w-md max-h-[40vh] object-contain"
+        />
+      </div>
 
-      {/* Vivien Section */}
-      <div className="vivien-container px-2 sm:px-4">
-        <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-32 md:h-32 rounded-full overflow-hidden shadow-2xl border-2 border-white/10 flex-shrink-0">
-          <img src={vivienImage} alt="Vivien" className="w-full h-full object-cover" />
-        </div>
+      {/* Video Section - appears after logos */}
+      {showVideo && !showLogos && (
         <div className={`
           bg-gradient-to-br from-card/95 to-muted/95 backdrop-blur-xl border border-secondary/20 rounded-2xl shadow-luxury
-          transition-all duration-700 ease-out flex flex-col mx-2
+          transition-all duration-700 ease-out flex flex-col mx-2 animate-fade-in
           ${isAgeConfirmed 
             ? 'w-[85vw] sm:w-[70vw] md:w-[60vw] lg:w-[50vw] max-w-2xl min-h-[55vh] sm:min-h-[60vh] max-h-[70vh] sm:max-h-[65vh] p-3 sm:p-4' 
-            : 'w-[90vw] max-w-sm p-4 sm:p-6'
+            : 'w-[90vw] max-w-md p-4 sm:p-6'
           }
         `}>
           {/* Message Display */}
           <div className="flex-1 flex flex-col overflow-hidden">
             {/* Video Introduction */}
             {!isAgeConfirmed && !videoEnded && (
-              <div className="mb-4 relative">
+              <div className="relative">
                 <video
                   ref={videoRef}
                   src="/uploads/vivien-intro-video.mp4"
@@ -271,7 +279,7 @@ const Landing = () => {
             </div>
           )}
         </div>
-      </div>
+      )}
 
       {/* Envelope Mailing List */}
       <EnvelopeMailingList
