@@ -1,5 +1,6 @@
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { CheckCircle2, Circle, Loader2 } from "lucide-react";
+import { ReserveButtons } from "./ReserveButtons";
 
 const milestones = [
   {
@@ -46,6 +47,7 @@ export const TimelineSection = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
       
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <ReserveButtons />
         <ScrollReveal>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mb-4 font-baskerville">
             The Journey to Launch

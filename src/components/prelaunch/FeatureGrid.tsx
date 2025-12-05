@@ -1,6 +1,7 @@
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { Card, CardContent } from "@/components/ui/card";
 import { Fingerprint, Zap, Package, Heart, Shield, Lightbulb } from "lucide-react";
+import { ReserveButtons } from "./ReserveButtons";
 const features = [{
   icon: Fingerprint,
   title: "The Future of Privacy. At Your Fingertip.",
@@ -29,6 +30,7 @@ const features = [{
 export const FeatureGrid = () => {
   return <section className="py-16 md:py-24 relative">
       <div className="container mx-auto px-4 sm:px-6">
+        <ReserveButtons />
         <ScrollReveal>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center mb-4 font-baskerville">
             Elegant — Empowering — Luxurious

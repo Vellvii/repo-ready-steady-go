@@ -1,5 +1,6 @@
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { CrossfadeCarousel } from "@/components/media/CrossfadeCarousel";
+import { ReserveButtons } from "./ReserveButtons";
 
 type MediaItem = {
   image?: string;
@@ -327,7 +328,11 @@ export const ProductShowcase = () => {
         </ScrollReveal>
 
         {showcaseFeatures.map((feature, index) => (
-          <FeatureCarousel key={feature.number} feature={feature} index={index} />
+          <div key={feature.number}>
+            {/* Reserve buttons before Features 2, 3, and 4 */}
+            {feature.number >= 2 && <ReserveButtons />}
+            <FeatureCarousel feature={feature} index={index} />
+          </div>
         ))}
       </div>
     </section>
