@@ -4,12 +4,10 @@ import { MagneticButton } from "@/components/animations/MagneticButton";
 import { EnvelopeMailingList, MailingListFormData } from "@/components/EnvelopeMailingList";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { VivienChatInterface } from "@/components/VivienChatInterface";
 
 const Landing = () => {
   const navigate = useNavigate();
   const [showButtons, setShowButtons] = useState(false);
-  const [isAgeConfirmed, setIsAgeConfirmed] = useState(false);
   const [showMailingDialog, setShowMailingDialog] = useState(false);
   const [currentSubtitle, setCurrentSubtitle] = useState("");
   const [videoEnded, setVideoEnded] = useState(false);
@@ -90,7 +88,7 @@ const Landing = () => {
   };
 
   const handleYes = () => {
-    setIsAgeConfirmed(true);
+    navigate('/prelaunch-dox');
   };
 
   const handleNo = () => {
@@ -242,18 +240,11 @@ const Landing = () => {
 
       {/* Video Section - appears after user taps */}
       {showVideo && !showLogos && (
-        <div className={`
-          bg-gradient-to-br from-card/95 to-muted/95 backdrop-blur-xl border border-secondary/20 rounded-2xl shadow-luxury
-          transition-all duration-700 ease-out flex flex-col mx-2 animate-fade-in
-          ${isAgeConfirmed 
-            ? 'w-[85vw] sm:w-[70vw] md:w-[60vw] lg:w-[50vw] max-w-2xl min-h-[55vh] sm:min-h-[60vh] max-h-[70vh] sm:max-h-[65vh] p-3 sm:p-4' 
-            : 'w-[90vw] max-w-md p-4 sm:p-6'
-          }
-        `}>
+        <div className="bg-gradient-to-br from-card/95 to-muted/95 backdrop-blur-xl border border-secondary/20 rounded-2xl shadow-luxury transition-all duration-700 ease-out flex flex-col mx-2 animate-fade-in w-[90vw] max-w-md p-4 sm:p-6">
           {/* Message Display */}
           <div className="flex-1 flex flex-col overflow-hidden">
             {/* Video Introduction */}
-            {!isAgeConfirmed && !videoEnded && (
+            {!videoEnded && (
               <div className="relative">
                 <video
                   ref={videoRef}
@@ -298,7 +289,7 @@ const Landing = () => {
             )}
 
             {/* Age confirmation message after video */}
-            {!isAgeConfirmed && videoEnded && (
+            {videoEnded && (
               <div className="mb-4">
                 <div className="flex justify-start">
                   <div className="bg-gradient-to-r from-accent/20 to-accent/10 border border-accent/30 rounded-2xl rounded-bl-md px-4 py-3 max-w-[90%]">
@@ -309,17 +300,10 @@ const Landing = () => {
                 </div>
               </div>
             )}
-
-            {/* Vivien Chat Interface */}
-            {isAgeConfirmed && (
-              <div className="flex-1 flex flex-col overflow-hidden">
-                <VivienChatInterface />
-              </div>
-            )}
           </div>
           
           {/* Age Confirmation Buttons */}
-          {showButtons && !isAgeConfirmed && (
+          {showButtons && (
             <div className="mt-4 md:mt-6 space-y-2 md:space-y-3">
               <MagneticButton
                 onClick={handleYes}
