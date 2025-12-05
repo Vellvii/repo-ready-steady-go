@@ -53,7 +53,10 @@ export const FinalCTA = () => {
                 rel="noopener noreferrer"
                 className="group px-12 py-6 bg-gradient-to-r from-amber-500 via-orange-400 to-amber-500 bg-[length:200%_100%] text-black rounded-2xl font-bold text-xl shadow-elegant hover:shadow-glow transition-all duration-700 pulse-glow relative overflow-hidden text-center"
               >
-                <span className="relative z-10">Share your opinion or ask if you're unsure. Click Here</span>
+                <span className="relative z-10 flex flex-col leading-tight">
+                  <span>Share Your Thoughts.</span>
+                  <span>Let's Start A Conversation.</span>
+                </span>
                 <div className="absolute inset-0 bg-gradient-shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               </a>
             </div>
