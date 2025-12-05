@@ -15,6 +15,7 @@ const Landing = () => {
   const [videoEnded, setVideoEnded] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
   const [showLogos, setShowLogos] = useState(true);
+  const [showPlayPrompt, setShowPlayPrompt] = useState(false);
   const [mailingFormData, setMailingFormData] = useState<MailingListFormData>({
     firstName: '',
     lastName: '',
@@ -46,14 +47,26 @@ const Landing = () => {
     };
   }, []);
 
-  // Show logos for 1.5 seconds, then start video
+  // Show logos for 1.5 seconds, then show play prompt
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowLogos(false);
-      setShowVideo(true);
+      setShowPlayPrompt(true);
     }, 1500);
     return () => clearTimeout(timer);
   }, []);
+
+  // Start video with audio when user taps
+  const handleStartVideo = () => {
+    setShowPlayPrompt(false);
+    setShowVideo(true);
+    // Small delay to ensure video element is mounted
+    setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.play().catch(console.error);
+      }
+    }, 100);
+  };
 
   // Handle video time updates for subtitles
   const handleTimeUpdate = () => {
@@ -189,7 +202,7 @@ const Landing = () => {
 
   return (
     <div id="landing-lock" className="fixed inset-0 h-full bg-black flex flex-col items-center justify-center gap-8 overflow-hidden">
-      {/* Logos - visible initially, fade out when video starts */}
+      {/* Logos - visible initially, fade out */}
       <div className={`flex flex-col items-center gap-4 transition-all duration-700 ${showLogos ? 'opacity-100' : 'opacity-0 pointer-events-none absolute'}`}>
         <img
           src="/uploads/V-logo-transparent.png"
@@ -203,7 +216,28 @@ const Landing = () => {
         />
       </div>
 
-      {/* Video Section - appears after logos */}
+      {/* Play Prompt - appears after logos, before video */}
+      {showPlayPrompt && !showLogos && (
+        <div 
+          onClick={handleStartVideo}
+          className="flex flex-col items-center gap-6 cursor-pointer animate-fade-in"
+        >
+          <img
+            src="/uploads/V-logo-transparent.png"
+            alt="V Logo"
+            className="w-24 sm:w-32 h-auto opacity-80"
+          />
+          <div className="text-center">
+            <p className="text-secondary/90 font-playfair text-lg sm:text-xl mb-2">Tap to meet</p>
+            <p className="text-secondary font-playfair text-2xl sm:text-3xl font-semibold">Vivien</p>
+          </div>
+          <div className="w-16 h-16 rounded-full border-2 border-secondary/50 flex items-center justify-center animate-pulse">
+            <div className="w-0 h-0 border-l-[12px] border-l-secondary/80 border-y-[8px] border-y-transparent ml-1" />
+          </div>
+        </div>
+      )}
+
+      {/* Video Section - appears after user taps */}
       {showVideo && !showLogos && (
         <div className={`
           bg-gradient-to-br from-card/95 to-muted/95 backdrop-blur-xl border border-secondary/20 rounded-2xl shadow-luxury
@@ -221,8 +255,6 @@ const Landing = () => {
                 <video
                   ref={videoRef}
                   src="/uploads/vivien-intro-video.mp4"
-                  autoPlay
-                  muted
                   playsInline
                   onTimeUpdate={handleTimeUpdate}
                   onEnded={handleVideoEnded}
