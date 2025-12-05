@@ -56,13 +56,15 @@ export const HeroSection = () => {
                 <img src={prelaunchLogo} alt="Prelaunch.com" className="h-6 w-6 relative z-10" />
                 <div className="absolute inset-0 bg-gradient-shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               </a>
-              <MagneticButton
-                onClick={scrollToEmailCapture}
-                className="group px-10 py-5 bg-gradient-to-r from-amber-500 via-orange-400 to-amber-500 bg-[length:200%_100%] text-black rounded-2xl font-bold text-lg shadow-elegant hover:shadow-glow transition-all duration-700 hover:bg-right relative overflow-hidden"
+              <a
+                href="https://prelaunch.com/projects/vellvii-dox-vellvii-dox-pleasure-in-a-luxury-vault/discussions"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group px-10 py-5 bg-gradient-to-r from-amber-500 via-orange-400 to-amber-500 bg-[length:200%_100%] text-black rounded-2xl font-bold text-lg shadow-elegant hover:shadow-glow transition-all duration-700 hover:bg-right relative overflow-hidden text-center"
               >
-                <span className="relative z-10">Reserve Your DOX</span>
+                <span className="relative z-10">Share your opinion or ask if you're unsure. Click Here</span>
                 <div className="absolute inset-0 bg-gradient-shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-              </MagneticButton>
+              </a>
             </div>
           </ScrollReveal>
 
