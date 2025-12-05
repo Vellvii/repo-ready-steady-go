@@ -295,6 +295,9 @@ const Feature1VerticalLayout = () => {
           ))}
         </div>
 
+        {/* Reserve buttons before subcategories */}
+        <ReserveButtons />
+
         {/* Subcategories */}
         {feature1Data.subcategories && (
           <div className="max-w-6xl mx-auto space-y-12 px-4 mt-20">
