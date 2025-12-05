@@ -9,13 +9,11 @@ import vivienImage from "/uploads/976c0d6d-a066-409a-8ad6-6353840958ac.png";
 
 const Landing = () => {
   const navigate = useNavigate();
-  const [isTyping, setIsTyping] = useState(false);
-  const [displayedText, setDisplayedText] = useState("");
   const [showButtons, setShowButtons] = useState(false);
   const [isAgeConfirmed, setIsAgeConfirmed] = useState(false);
-  const [constructionMessage, setConstructionMessage] = useState("");
-  const [showEmailButton, setShowEmailButton] = useState(false);
   const [showMailingDialog, setShowMailingDialog] = useState(false);
+  const [currentSubtitle, setCurrentSubtitle] = useState("");
+  const [videoEnded, setVideoEnded] = useState(false);
   const [mailingFormData, setMailingFormData] = useState<MailingListFormData>({
     firstName: '',
     lastName: '',
@@ -30,6 +28,14 @@ const Landing = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const { toast } = useToast();
 
+  // Subtitle timing - adjust these based on actual video timing
+  const subtitles = [
+    { start: 0, end: 2, text: "Hi, I'm Vivien." },
+    { start: 2, end: 5, text: "I can guide you through our website" },
+    { start: 5, end: 8, text: "and you may ask me any questions at any time." },
+    { start: 8, end: 12, text: "To start, please confirm that you are older than 18." },
+  ];
+
   useEffect(() => {
     if (document.getElementById('landing-lock')) {
       document.body.classList.add('landing-active');
@@ -39,68 +45,23 @@ const Landing = () => {
     };
   }, []);
 
-  const message = isAgeConfirmed 
-    ? ""  // Will be handled by the construction message
-    : "Hi, I'm Vivien. I can guide you through our website and you may ask me any questions at any time. To start, please confirm that you are older than 18.";
-
-  const constructionText = "Thank you so much for confirming, Vellvii and Vivien are currently under construction. If you have any questions, please email Stefan below or join our mailing list to get notified about updates and releases.";
-
-  // Typing effect for construction message
-  const startConstructionTyping = (fullText: string) => {
-    let index = 0;
-    
-    const typeChar = () => {
-      setConstructionMessage(fullText.slice(0, index + 1));
-      index++;
-      
-      if (index < fullText.length) {
-        setTimeout(typeChar, 30);
-      } else {
-        // Show email button after typing is complete
-        setTimeout(() => setShowEmailButton(true), 500);
-      }
-    };
-    
-    setTimeout(typeChar, 300);
+  // Handle video time updates for subtitles
+  const handleTimeUpdate = () => {
+    if (videoRef.current) {
+      const currentTime = videoRef.current.currentTime;
+      const activeSubtitle = subtitles.find(
+        sub => currentTime >= sub.start && currentTime < sub.end
+      );
+      setCurrentSubtitle(activeSubtitle?.text || "");
+    }
   };
 
-  useEffect(() => {
-    if (isAgeConfirmed) {
-      // Reset for construction message mode
-      setDisplayedText("");
-      setIsTyping(false);
-      setShowButtons(false);
-      
-      // Start construction message typing
-      setTimeout(() => {
-        startConstructionTyping(constructionText);
-      }, 500);
-      return;
-    }
-
-    let interval: NodeJS.Timeout;
-    
-    // Start typing after 2 seconds
-    setTimeout(() => {
-      setIsTyping(true);
-      const speed = 50; // Speed of typing in milliseconds
-      let index = 0;
-      interval = setInterval(() => {
-        if (index < message.length) {
-          setDisplayedText(message.slice(0, index + 1));
-          index++;
-        } else {
-          clearInterval(interval);
-          setIsTyping(false);
-          setShowButtons(true);
-        }
-      }, speed);
-    }, 2000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [isAgeConfirmed, message]);
+  // Handle video end
+  const handleVideoEnded = () => {
+    setVideoEnded(true);
+    setShowButtons(true);
+    setCurrentSubtitle("");
+  };
 
   const handleYes = () => {
     setIsAgeConfirmed(true);
@@ -246,14 +207,38 @@ const Landing = () => {
         `}>
           {/* Message Display */}
           <div className="flex-1 flex flex-col overflow-hidden">
-            {/* Initial Message Display */}
-            {!isAgeConfirmed && (
+            {/* Video Introduction */}
+            {!isAgeConfirmed && !videoEnded && (
+              <div className="mb-4 relative">
+                <video
+                  ref={videoRef}
+                  src="/uploads/vivien-intro-video.mp4"
+                  autoPlay
+                  playsInline
+                  onTimeUpdate={handleTimeUpdate}
+                  onEnded={handleVideoEnded}
+                  className="w-full rounded-xl"
+                />
+                {/* Subtitles overlay */}
+                {currentSubtitle && (
+                  <div className="absolute bottom-4 left-0 right-0 flex justify-center px-4">
+                    <div className="bg-black/80 px-4 py-2 rounded-lg">
+                      <p className="text-white text-center font-playfair text-sm md:text-base">
+                        {currentSubtitle}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Age confirmation message after video */}
+            {!isAgeConfirmed && videoEnded && (
               <div className="mb-4">
                 <div className="flex justify-start">
                   <div className="bg-gradient-to-r from-accent/20 to-accent/10 border border-accent/30 rounded-2xl rounded-bl-md px-4 py-3 max-w-[90%]">
                     <p className="font-playfair text-sm md:text-base lg:text-lg leading-relaxed text-foreground">
-                      {displayedText}
-                      {isTyping && <span className="blinking-cursor ml-1 text-secondary">|</span>}
+                      Please confirm that you are older than 18 to continue.
                     </p>
                   </div>
                 </div>
