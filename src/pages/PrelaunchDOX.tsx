@@ -2,7 +2,6 @@ import { HeroSection } from "@/components/prelaunch/HeroSection";
 import { ProblemSection } from "@/components/prelaunch/ProblemSection";
 import { ProductShowcase } from "@/components/prelaunch/ProductShowcase";
 import { FeatureGrid } from "@/components/prelaunch/FeatureGrid";
-import { EmailCaptureSection } from "@/components/prelaunch/EmailCaptureSection";
 import { TechSpecs } from "@/components/prelaunch/TechSpecs";
 import { TimelineSection } from "@/components/prelaunch/TimelineSection";
 import { SocialProofSection } from "@/components/prelaunch/SocialProofSection";
@@ -25,7 +24,6 @@ export default function PrelaunchDOX() {
         <ProblemSection />
         <ProductShowcase />
         <FeatureGrid />
-        <EmailCaptureSection />
         <TechSpecs />
         <TimelineSection />
         <SocialProofSection />
