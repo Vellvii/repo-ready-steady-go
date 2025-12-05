@@ -10,6 +10,7 @@ import { FAQSection } from "@/components/prelaunch/FAQSection";
 import { FinalCTA } from "@/components/prelaunch/FinalCTA";
 import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
 import { PageTransition } from "@/components/animations/PageTransition";
+import { FloatingVivienChat } from "@/components/FloatingVivienChat";
 
 export default function PrelaunchDOX() {
   return (
@@ -32,6 +33,9 @@ export default function PrelaunchDOX() {
         <FinalCTA />
         <PrelaunchFooter />
         </div>
+        
+        {/* Floating Vivien Chat */}
+        <FloatingVivienChat />
       </div>
     </PageTransition>
   );
