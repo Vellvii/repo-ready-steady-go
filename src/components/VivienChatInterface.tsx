@@ -78,7 +78,7 @@ export const VivienChatInterface = () => {
 
   return (
     <div className="flex flex-col flex-1 w-full h-full overflow-hidden">
-      <div className="flex-1 overflow-y-auto px-4 py-6 space-y-4 min-h-0">
+      <div className="flex-1 overflow-y-auto px-4 py-6 space-y-4 min-h-0 touch-pan-y overscroll-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
         {messages.map((message) => (
           <div
             key={message.id}
