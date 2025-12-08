@@ -68,7 +68,7 @@ export const FloatingVivienChat = () => {
 
             {/* Chat Content */}
             {!isMinimized && (
-              <div className="h-[calc(100%-56px)] overflow-hidden">
+              <div className="h-[calc(100%-56px)] flex flex-col overflow-hidden">
                 <VivienChatInterface />
               </div>
             )}
