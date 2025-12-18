@@ -3,7 +3,8 @@ import { Play } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import prelaunchLogo from "@/assets/prelaunch-logo.png";
 
-const PRELAUNCH_URL = "https://prelaunch.com/projects/5ff3ce3f-6669-4243-918c-4d57d98b63f6/reservation?userEmail=stefan%40vellvii.com&reservationId=c3452574-55cf-49e6-aa12-79b4c18131ac";
+const RESERVE_URL = "https://prelaunch.com/projects/5ff3ce3f-6669-4243-918c-4d57d98b63f6/reservation";
+const DISCUSSIONS_URL = "https://prelaunch.com/projects/vellvii-dox-vellvii-dox-pleasure-in-a-luxury-vault/discussions";
 
 const DoxLanding = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -118,30 +119,40 @@ const DoxLanding = () => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.4 }}
-                    href={PRELAUNCH_URL}
+                    href={RESERVE_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative px-10 py-5 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] text-black rounded-xl shadow-elegant hover:shadow-glow transition-all duration-500 overflow-hidden"
+                    className="group relative px-8 py-4 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] text-black rounded-xl shadow-elegant hover:shadow-glow transition-all duration-500 overflow-hidden flex items-center gap-3"
                   >
-                    <span className="relative z-10 font-montserrat font-bold text-lg tracking-wide uppercase">
-                      Reserve Your DOX
+                    <span className="relative z-10 font-montserrat font-bold text-sm tracking-wide uppercase">
+                      Reserve Your DOX on
                     </span>
+                    <img 
+                      src={prelaunchLogo} 
+                      alt="Prelaunch" 
+                      className="h-5 relative z-10"
+                    />
                     <div className="absolute inset-0 bg-gradient-shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </motion.a>
 
-                  {/* Join Button */}
+                  {/* Join Discussion Button */}
                   <motion.a
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.5 }}
-                    href={PRELAUNCH_URL}
+                    href={DISCUSSIONS_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative px-10 py-5 bg-gradient-to-r from-amber-500 via-orange-400 to-amber-500 bg-[length:200%_100%] text-black rounded-xl shadow-elegant hover:shadow-glow transition-all duration-500 overflow-hidden"
+                    className="group relative px-8 py-4 bg-gradient-to-r from-amber-500 via-orange-400 to-amber-500 bg-[length:200%_100%] text-black rounded-xl shadow-elegant hover:shadow-glow transition-all duration-500 overflow-hidden flex items-center gap-3"
                   >
-                    <span className="relative z-10 font-montserrat font-bold text-lg tracking-wide uppercase">
-                      Join Us
+                    <span className="relative z-10 font-montserrat font-bold text-sm tracking-wide uppercase">
+                      Join Discussion on
                     </span>
+                    <img 
+                      src={prelaunchLogo} 
+                      alt="Prelaunch" 
+                      className="h-5 relative z-10"
+                    />
                     <div className="absolute inset-0 bg-gradient-shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </motion.a>
                 </div>
@@ -151,7 +162,7 @@ const DoxLanding = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
-                  href={PRELAUNCH_URL}
+                  href={RESERVE_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-8 flex items-center gap-3 text-foreground/70 hover:text-foreground transition-colors group"
