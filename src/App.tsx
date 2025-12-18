@@ -24,6 +24,7 @@ import SexSaddle from "./pages/SexSaddle";
 import NotFound from "./pages/NotFound";
 import PrelaunchDOX from "./pages/PrelaunchDOX";
 import PrelaunchLux from "./pages/PrelaunchLux";
+import DoxLanding from "./pages/DoxLanding";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +41,7 @@ const InnerApp = () => {
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/prelaunch-dox" element={<PrelaunchDOX />} />
+            <Route path="/dox-landing" element={<DoxLanding />} />
             <Route path="/Vellvii-Lux" element={<PrelaunchLux />} />
             {isDev && (
               <>
