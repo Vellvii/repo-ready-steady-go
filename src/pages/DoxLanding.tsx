@@ -148,7 +148,7 @@ const DoxLanding = () => {
           <video
             ref={videoRef}
             src="/uploads/The_Vellvii_Dox_1.webm"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain bg-black"
             onEnded={handleVideoEnd}
             playsInline
             webkit-playsinline="true"
