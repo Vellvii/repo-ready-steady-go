@@ -47,7 +47,7 @@ const DoxLanding = () => {
               <h1 className="font-baskerville text-5xl md:text-7xl text-primary tracking-wide mb-3">
                 Vellvii Dox
               </h1>
-              <p className="font-montserrat text-lg md:text-xl text-foreground tracking-widest uppercase">
+              <p className="font-montserrat text-lg md:text-xl text-white tracking-widest uppercase drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] animate-pulse">
                 Explained in 60 seconds
               </p>
             </motion.div>
