@@ -1,6 +1,9 @@
 import { useState, useRef } from "react";
 import { Play } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import prelaunchLogo from "@/assets/prelaunch-logo.png";
+
+const PRELAUNCH_URL = "https://prelaunch.com/projects/5ff3ce3f-6669-4243-918c-4d57d98b63f6/reservation?userEmail=stefan%40vellvii.com&reservationId=c3452574-55cf-49e6-aa12-79b4c18131ac";
 
 const DoxLanding = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -44,6 +47,12 @@ const DoxLanding = () => {
               transition={{ duration: 0.5 }}
               className="text-center mb-8"
             >
+              {/* Vellvii Logo */}
+              <img 
+                src="/uploads/Vellvii-full-logo-transparent.png" 
+                alt="Vellvii" 
+                className="h-16 md:h-20 mx-auto mb-6 drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]"
+              />
               <h1 className="font-baskerville text-5xl md:text-7xl text-primary tracking-wide mb-3">
                 Vellvii Dox
               </h1>
@@ -92,13 +101,13 @@ const DoxLanding = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="absolute inset-0 flex flex-col items-center justify-center bg-black/80 backdrop-blur-sm"
+                className="absolute inset-0 flex flex-col items-center justify-center bg-black/80 backdrop-blur-sm px-4"
               >
                 <motion.h2
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
-                  className="font-baskerville text-3xl md:text-5xl text-primary mb-8"
+                  className="font-baskerville text-3xl md:text-5xl text-primary mb-8 text-center"
                 >
                   Ready to Experience Luxury?
                 </motion.h2>
@@ -109,7 +118,7 @@ const DoxLanding = () => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.4 }}
-                    href="https://prelaunch.com/projects/5ff3ce3f-6669-4243-918c-4d57d98b63f6/reservation?userEmail=stefan%40vellvii.com&reservationId=c3452574-55cf-49e6-aa12-79b4c18131ac"
+                    href={PRELAUNCH_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group relative px-10 py-5 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] text-black rounded-xl shadow-elegant hover:shadow-glow transition-all duration-500 overflow-hidden"
@@ -120,22 +129,40 @@ const DoxLanding = () => {
                     <div className="absolute inset-0 bg-gradient-shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </motion.a>
 
-                  {/* Discuss Button */}
+                  {/* Join Button */}
                   <motion.a
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.5 }}
-                    href="https://prelaunch.com/projects/vellvii-dox-vellvii-dox-pleasure-in-a-luxury-vault/discussions"
+                    href={PRELAUNCH_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group relative px-10 py-5 bg-gradient-to-r from-amber-500 via-orange-400 to-amber-500 bg-[length:200%_100%] text-black rounded-xl shadow-elegant hover:shadow-glow transition-all duration-500 overflow-hidden"
                   >
                     <span className="relative z-10 font-montserrat font-bold text-lg tracking-wide uppercase">
-                      Join Discussion
+                      Join Us
                     </span>
                     <div className="absolute inset-0 bg-gradient-shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </motion.a>
                 </div>
+
+                {/* Follow on Prelaunch */}
+                <motion.a
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 }}
+                  href={PRELAUNCH_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-8 flex items-center gap-3 text-foreground/70 hover:text-foreground transition-colors group"
+                >
+                  <span className="font-montserrat text-sm tracking-wide">Follow our progress on</span>
+                  <img 
+                    src={prelaunchLogo} 
+                    alt="Prelaunch" 
+                    className="h-6 opacity-80 group-hover:opacity-100 transition-opacity"
+                  />
+                </motion.a>
 
                 {/* Replay option */}
                 <motion.button
@@ -143,7 +170,7 @@ const DoxLanding = () => {
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.7 }}
                   onClick={handleReplay}
-                  className="mt-8 text-foreground/50 hover:text-primary transition-colors font-montserrat text-sm tracking-wide"
+                  className="mt-4 text-foreground/50 hover:text-primary transition-colors font-montserrat text-sm tracking-wide"
                 >
                   Watch Again
                 </motion.button>
