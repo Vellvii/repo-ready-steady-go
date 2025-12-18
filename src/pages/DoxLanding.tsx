@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Play } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import prelaunchLogo from "@/assets/prelaunch-logo.png";
@@ -11,23 +11,102 @@ const DoxLanding = () => {
   const [videoEnded, setVideoEnded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const handlePlay = () => {
+  const requestFullscreen = async (element: HTMLVideoElement) => {
+    try {
+      // iOS Safari uses webkitEnterFullscreen on video elements
+      if ((element as any).webkitEnterFullscreen) {
+        await (element as any).webkitEnterFullscreen();
+      } else if (element.requestFullscreen) {
+        await element.requestFullscreen();
+      } else if ((element as any).webkitRequestFullscreen) {
+        await (element as any).webkitRequestFullscreen();
+      } else if ((element as any).mozRequestFullScreen) {
+        await (element as any).mozRequestFullScreen();
+      } else if ((element as any).msRequestFullscreen) {
+        await (element as any).msRequestFullscreen();
+      }
+    } catch (err) {
+      console.log("Fullscreen not supported or denied:", err);
+    }
+  };
+
+  const handlePlay = async () => {
     setIsPlaying(true);
-    videoRef.current?.play();
+    const video = videoRef.current;
+    if (video) {
+      try {
+        await video.play();
+        // Request fullscreen after play starts (required for mobile)
+        await requestFullscreen(video);
+      } catch (err) {
+        console.log("Video play error:", err);
+      }
+    }
   };
 
   const handleVideoEnd = () => {
     setVideoEnded(true);
-  };
-
-  const handleReplay = () => {
-    setVideoEnded(false);
-    setIsPlaying(true);
-    if (videoRef.current) {
-      videoRef.current.currentTime = 0;
-      videoRef.current.play();
+    // Exit fullscreen when video ends
+    if (document.fullscreenElement) {
+      document.exitFullscreen().catch(() => {});
+    } else if ((document as any).webkitFullscreenElement) {
+      (document as any).webkitExitFullscreen?.();
     }
   };
+
+  const handleReplay = async () => {
+    setVideoEnded(false);
+    setIsPlaying(true);
+    const video = videoRef.current;
+    if (video) {
+      video.currentTime = 0;
+      try {
+        await video.play();
+        await requestFullscreen(video);
+      } catch (err) {
+        console.log("Replay error:", err);
+      }
+    }
+  };
+
+  // Handle fullscreen exit (user manually exits)
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      const isFullscreen = !!(
+        document.fullscreenElement ||
+        (document as any).webkitFullscreenElement ||
+        (document as any).mozFullScreenElement ||
+        (document as any).msFullscreenElement
+      );
+      
+      // If user exits fullscreen and video was playing, show end screen
+      if (!isFullscreen && isPlaying && videoRef.current && !videoRef.current.ended) {
+        videoRef.current.pause();
+        setVideoEnded(true);
+      }
+    };
+
+    // iOS Safari specific event for video fullscreen
+    const handleWebkitEnd = () => {
+      setVideoEnded(true);
+    };
+
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    document.addEventListener("webkitfullscreenchange", handleFullscreenChange);
+    document.addEventListener("mozfullscreenchange", handleFullscreenChange);
+    document.addEventListener("MSFullscreenChange", handleFullscreenChange);
+    
+    // iOS specific: webkitendfullscreen fires when exiting fullscreen on video
+    videoRef.current?.addEventListener("webkitendfullscreen", handleWebkitEnd);
+
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+      document.removeEventListener("webkitfullscreenchange", handleFullscreenChange);
+      document.removeEventListener("mozfullscreenchange", handleFullscreenChange);
+      document.removeEventListener("MSFullscreenChange", handleFullscreenChange);
+      videoRef.current?.removeEventListener("webkitendfullscreen", handleWebkitEnd);
+    };
+  }, [isPlaying]);
 
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center relative overflow-hidden">
@@ -72,6 +151,8 @@ const DoxLanding = () => {
             className="w-full h-full object-cover"
             onEnded={handleVideoEnd}
             playsInline
+            webkit-playsinline="true"
+            controls={isPlaying}
           />
 
           {/* Play Button Overlay */}
