@@ -214,6 +214,7 @@ const Contact = () => {
       {/* Concierge Chat */}
       <ConciergeChat />
     </div>
+    </>
   );
 };
 

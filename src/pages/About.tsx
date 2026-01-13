@@ -170,6 +170,7 @@ const About = () => {
       
       <ConciergeChat />
     </div>
+    </>
   );
 };
 
