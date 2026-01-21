@@ -36,10 +36,6 @@ import Video6 from "./pages/Video6";
 const queryClient = new QueryClient();
 
 const InnerApp = () => {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const isDev = searchParams.get('dev') === 'true';
-
   return (
     <ErrorBoundary>
       <ScrollToTop />
@@ -56,28 +52,22 @@ const InnerApp = () => {
             <Route path="/v/4" element={<Video4 />} />
             <Route path="/v/5" element={<Video5 />} />
             <Route path="/v/6" element={<Video6 />} />
-            {isDev && (
-              <>
-                <Route path="/home" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/products" element={<Products />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/pulse" element={<Pulse />} />
-                <Route path="/vibe" element={<Vibe />} />
-                <Route path="/g-vibe" element={<GVibe />} />
-                <Route path="/dox" element={<DOX />} />
-                <Route path="/luxury-storage" element={<LuxuryStorage />} />
-                <Route path="/docking-station" element={<DockingStation />} />
-                <Route path="/sex-saddle" element={<SexSaddle />} />
-              </>
-            )}
-            {/* All other routes redirect to landing during development */}
-            <Route path="*" element={<DoxLanding />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/pulse" element={<Pulse />} />
+            <Route path="/vibe" element={<Vibe />} />
+            <Route path="/g-vibe" element={<GVibe />} />
+            <Route path="/dox" element={<DOX />} />
+            <Route path="/luxury-storage" element={<LuxuryStorage />} />
+            <Route path="/docking-station" element={<DockingStation />} />
+            <Route path="/sex-saddle" element={<SexSaddle />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </PageTransition>
       </SmoothScroll>
-      {/* Global sticky cart - only show in dev mode and not on landing */}
-      {isDev && location.pathname !== '/' && <Cart />}
+      <Cart />
     </ErrorBoundary>
   );
 };
