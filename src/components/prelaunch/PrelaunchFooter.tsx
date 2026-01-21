@@ -76,15 +76,15 @@ export const PrelaunchFooter = () => {
 
           {/* Links */}
           <div className="flex flex-wrap justify-center gap-6 text-sm text-white/50">
-            <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
+            <a href="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</a>
             <span>•</span>
-            <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
+            <a href="/terms-of-service" className="hover:text-primary transition-colors">Terms of Service</a>
           </div>
 
           {/* Copyright */}
           <div className="text-center">
             <p className="text-white/40 text-sm">
-              © 2025 Vellvii. All rights reserved.
+              © 2026 Vellvii. All rights reserved.
             </p>
           </div>
         </div>

@@ -34,6 +34,8 @@ import Video5 from "./pages/Video5";
 import Video6 from "./pages/Video6";
 import Video7 from "./pages/Video7";
 import Video8 from "./pages/Video8";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
 
 const queryClient = new QueryClient();
 
@@ -67,6 +69,8 @@ const InnerApp = () => {
             <Route path="/luxury-storage" element={<LuxuryStorage />} />
             <Route path="/docking-station" element={<DockingStation />} />
             <Route path="/sex-saddle" element={<SexSaddle />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </PageTransition>
