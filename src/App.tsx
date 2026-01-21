@@ -32,6 +32,8 @@ import Video3 from "./pages/Video3";
 import Video4 from "./pages/Video4";
 import Video5 from "./pages/Video5";
 import Video6 from "./pages/Video6";
+import Video7 from "./pages/Video7";
+import Video8 from "./pages/Video8";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +54,8 @@ const InnerApp = () => {
             <Route path="/v/4" element={<Video4 />} />
             <Route path="/v/5" element={<Video5 />} />
             <Route path="/v/6" element={<Video6 />} />
+            <Route path="/v/7" element={<Video7 />} />
+            <Route path="/v/8" element={<Video8 />} />
             <Route path="/home" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/products" element={<Products />} />
