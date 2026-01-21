@@ -82,20 +82,9 @@ export const PrelaunchFooter = () => {
           </div>
 
           {/* Copyright */}
-          <div className="text-center space-y-2">
+          <div className="text-center">
             <p className="text-white/40 text-sm">
               © 2025 Vellvii. All rights reserved.
-            </p>
-            <p className="text-white/30 text-xs">
-              Crafted by{" "}
-              <a
-                href="https://lumarostudios.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline"
-              >
-                Lumaro Studios
-              </a>
             </p>
           </div>
         </div>
