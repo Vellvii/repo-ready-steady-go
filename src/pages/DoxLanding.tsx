@@ -3,6 +3,7 @@ import { Play } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import prelaunchLogo from "@/assets/prelaunch-logo.png";
 import { SEO } from "@/components/SEO";
+import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
 
 const RESERVE_URL = "https://prelaunch.com/projects/5ff3ce3f-6669-4243-918c-4d57d98b63f6/reservation";
 const DISCUSSIONS_URL = "https://prelaunch.com/projects/vellvii-dox-vellvii-dox-pleasure-in-a-luxury-vault/discussions";
@@ -286,6 +287,9 @@ const DoxLanding = () => {
           </AnimatePresence>
         </div>
       </div>
+
+      {/* Footer */}
+      <PrelaunchFooter />
     </div>
     </>
   );
