@@ -26,6 +26,12 @@ import NotFound from "./pages/NotFound";
 import PrelaunchDOX from "./pages/PrelaunchDOX";
 import PrelaunchLux from "./pages/PrelaunchLux";
 import DoxLanding from "./pages/DoxLanding";
+import Video1 from "./pages/Video1";
+import Video2 from "./pages/Video2";
+import Video3 from "./pages/Video3";
+import Video4 from "./pages/Video4";
+import Video5 from "./pages/Video5";
+import Video6 from "./pages/Video6";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +50,12 @@ const InnerApp = () => {
             <Route path="/prelaunch-dox" element={<PrelaunchDOX />} />
             <Route path="/landing" element={<Landing />} />
             <Route path="/Vellvii-Lux" element={<PrelaunchLux />} />
+            <Route path="/v/1" element={<Video1 />} />
+            <Route path="/v/2" element={<Video2 />} />
+            <Route path="/v/3" element={<Video3 />} />
+            <Route path="/v/4" element={<Video4 />} />
+            <Route path="/v/5" element={<Video5 />} />
+            <Route path="/v/6" element={<Video6 />} />
             {isDev && (
               <>
                 <Route path="/home" element={<Home />} />
