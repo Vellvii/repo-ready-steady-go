@@ -1,5 +1,11 @@
 import { Instagram, Twitter, Facebook, Mail } from "lucide-react";
 
+const TikTokIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+  </svg>
+);
+
 export const PrelaunchFooter = () => {
   return (
     <footer className="py-12 border-t border-white/10 relative">
@@ -20,27 +26,42 @@ export const PrelaunchFooter = () => {
           </div>
 
           {/* Social Links */}
-          <div className="flex gap-6">
+          <div className="flex gap-4">
             <a
-              href="#"
-              className="w-10 h-10 rounded-full glass-dark flex items-center justify-center hover:border-primary/30 transition-colors"
+              href="https://instagram.com/vellvii.official"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 rounded-full glass-dark flex items-center justify-center hover:border-primary/30 transition-colors group"
               aria-label="Instagram"
             >
-              <Instagram className="w-5 h-5 text-white/70 hover:text-primary transition-colors" />
+              <Instagram className="w-5 h-5 text-white/70 group-hover:text-primary transition-colors" />
             </a>
             <a
-              href="#"
-              className="w-10 h-10 rounded-full glass-dark flex items-center justify-center hover:border-primary/30 transition-colors"
-              aria-label="Twitter"
+              href="https://x.com/OfficialVellvii"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 rounded-full glass-dark flex items-center justify-center hover:border-primary/30 transition-colors group"
+              aria-label="X (Twitter)"
             >
-              <Twitter className="w-5 h-5 text-white/70 hover:text-primary transition-colors" />
+              <Twitter className="w-5 h-5 text-white/70 group-hover:text-primary transition-colors" />
             </a>
             <a
-              href="#"
-              className="w-10 h-10 rounded-full glass-dark flex items-center justify-center hover:border-primary/30 transition-colors"
+              href="https://tiktok.com/@vellvii.official"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 rounded-full glass-dark flex items-center justify-center hover:border-primary/30 transition-colors group"
+              aria-label="TikTok"
+            >
+              <TikTokIcon className="w-5 h-5 text-white/70 group-hover:text-primary transition-colors" />
+            </a>
+            <a
+              href="https://www.facebook.com/profile.php?id=61580639793053"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 rounded-full glass-dark flex items-center justify-center hover:border-primary/30 transition-colors group"
               aria-label="Facebook"
             >
-              <Facebook className="w-5 h-5 text-white/70 hover:text-primary transition-colors" />
+              <Facebook className="w-5 h-5 text-white/70 group-hover:text-primary transition-colors" />
             </a>
           </div>
 
