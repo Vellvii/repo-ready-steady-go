@@ -2,13 +2,13 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import ScrollToTop from "./components/ScrollToTop";
 import { SmoothScroll } from "./components/animations/SmoothScroll";
 import { PageTransition } from "./components/animations/PageTransition";
-import Cart from "./components/Cart";
-
+import CartDrawer from "./components/CartDrawer";
+import { useCartSync } from "./hooks/useCartSync";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import Landing from "./pages/Landing";
 import Home from "./pages/Home";
@@ -36,10 +36,14 @@ import Video7 from "./pages/Video7";
 import Video8 from "./pages/Video8";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
+import Shop from "./pages/Shop";
+import ProductDetail from "./pages/ProductDetail";
 
 const queryClient = new QueryClient();
 
 const InnerApp = () => {
+  useCartSync();
+  
   return (
     <ErrorBoundary>
       <ScrollToTop />
@@ -47,6 +51,9 @@ const InnerApp = () => {
         <PageTransition>
           <Routes>
             <Route path="/" element={<DoxLanding />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/product/:handle" element={<ProductDetail />} />
+            <Route path="/products" element={<Navigate to="/shop" replace />} />
             <Route path="/prelaunch-dox" element={<PrelaunchDOX />} />
             <Route path="/landing" element={<Landing />} />
             <Route path="/Vellvii-Lux" element={<PrelaunchLux />} />
@@ -60,7 +67,6 @@ const InnerApp = () => {
             <Route path="/v/8" element={<Video8 />} />
             <Route path="/home" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/products" element={<Products />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/pulse" element={<Pulse />} />
             <Route path="/vibe" element={<Vibe />} />
@@ -75,7 +81,7 @@ const InnerApp = () => {
           </Routes>
         </PageTransition>
       </SmoothScroll>
-      <Cart />
+      <CartDrawer />
     </ErrorBoundary>
   );
 };
