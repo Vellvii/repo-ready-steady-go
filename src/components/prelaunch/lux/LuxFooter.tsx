@@ -8,15 +8,15 @@ const TikTokIcon = ({ className }: { className?: string }) => (
 
 export const LuxFooter = () => {
   return (
-    <footer className="py-20 border-t border-white/10 relative">
+    <footer className="relative border-t border-border bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/70">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="flex flex-col items-center space-y-12">
+        <div className="flex flex-col items-center space-y-12 py-20">
           {/* Tagline */}
           <div className="text-center space-y-4">
-            <p className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white font-baskerville leading-tight">
+            <p className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground font-baskerville leading-tight">
               LUX
             </p>
-            <p className="text-xl sm:text-2xl text-white/70 font-light italic">
+            <p className="text-xl sm:text-2xl text-muted-foreground font-light italic">
               Where Privilege Becomes Presence.
             </p>
           </div>
@@ -24,7 +24,7 @@ export const LuxFooter = () => {
           {/* Logo */}
           <div className="flex items-center">
             <img
-              src="/public/uploads/Vellvii-full-logo-transparent.png"
+              src="/uploads/Vellvii-full-logo-transparent.png"
               alt="Vellvii"
               className="h-8 w-auto"
               onError={(e) => {
@@ -32,7 +32,7 @@ export const LuxFooter = () => {
                 e.currentTarget.nextElementSibling?.classList.remove('hidden');
               }}
             />
-            <span className="hidden text-2xl font-bold text-white font-baskerville">Vellvii</span>
+            <span className="hidden text-2xl font-bold text-foreground font-baskerville">Vellvii</span>
           </div>
 
           {/* Social Links */}
@@ -41,71 +41,60 @@ export const LuxFooter = () => {
               href="https://instagram.com/vellvii.official"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full glass-dark flex items-center justify-center hover:border-primary/30 transition-colors group"
+              className="w-10 h-10 rounded-full border border-border bg-card/70 backdrop-blur flex items-center justify-center hover:border-primary/40 transition-colors group"
               aria-label="Instagram"
             >
-              <Instagram className="w-5 h-5 text-white/70 group-hover:text-primary transition-colors" />
+              <Instagram className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
             </a>
             <a
               href="https://x.com/OfficialVellvii"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full glass-dark flex items-center justify-center hover:border-primary/30 transition-colors group"
+              className="w-10 h-10 rounded-full border border-border bg-card/70 backdrop-blur flex items-center justify-center hover:border-primary/40 transition-colors group"
               aria-label="X (Twitter)"
             >
-              <Twitter className="w-5 h-5 text-white/70 group-hover:text-primary transition-colors" />
+              <Twitter className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
             </a>
             <a
               href="https://tiktok.com/@vellvii.official"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full glass-dark flex items-center justify-center hover:border-primary/30 transition-colors group"
+              className="w-10 h-10 rounded-full border border-border bg-card/70 backdrop-blur flex items-center justify-center hover:border-primary/40 transition-colors group"
               aria-label="TikTok"
             >
-              <TikTokIcon className="w-5 h-5 text-white/70 group-hover:text-primary transition-colors" />
+              <TikTokIcon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
             </a>
             <a
               href="https://www.facebook.com/profile.php?id=61580639793053"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full glass-dark flex items-center justify-center hover:border-primary/30 transition-colors group"
+              className="w-10 h-10 rounded-full border border-border bg-card/70 backdrop-blur flex items-center justify-center hover:border-primary/40 transition-colors group"
               aria-label="Facebook"
             >
-              <Facebook className="w-5 h-5 text-white/70 group-hover:text-primary transition-colors" />
+              <Facebook className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
             </a>
           </div>
 
           {/* Email */}
           <a
             href="mailto:hello@vellvii.com"
-            className="flex items-center gap-2 text-white/70 hover:text-primary transition-colors"
+            className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
           >
             <Mail className="w-4 h-4" />
             <span className="text-sm">hello@vellvii.com</span>
           </a>
 
           {/* Links */}
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-white/50">
+          <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
             <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
-            <span>•</span>
+            <span className="text-muted-foreground/60">•</span>
             <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
           </div>
 
           {/* Copyright */}
           <div className="text-center space-y-2">
-            <p className="text-white/40 text-sm">
+            <p className="text-muted-foreground/80 text-sm">
               © 2025 Vellvii. All rights reserved.
-            </p>
-            <p className="text-white/30 text-xs">
-              Crafted by{" "}
-              <a
-                href="https://lumarostudios.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline"
-              >
-                Lumaro Studios
-              </a>
             </p>
           </div>
         </div>
