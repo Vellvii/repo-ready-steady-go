@@ -443,14 +443,22 @@
   
   /* Collection hero styling */
   .collection-hero {
-    @apply relative py-24 px-4 text-center overflow-hidden;
+    @apply relative text-center overflow-hidden;
     background: linear-gradient(180deg, hsl(15, 10%, 6%) 0%, hsl(15, 12%, 10%) 100%);
   }
-  
+
   .collection-hero::before {
     content: '';
     @apply absolute inset-0 pointer-events-none;
     background: radial-gradient(ellipse 80% 50% at 50% 0%, hsl(40 65% 72% / 0.12), transparent 60%);
+  }
+  
+  /* Line clamp utility */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }
 

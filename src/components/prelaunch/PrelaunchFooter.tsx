@@ -14,84 +14,84 @@ const XIcon = ({ className }: { className?: string }) => (
 
 export const PrelaunchFooter = () => {
   return (
-    <footer className="relative border-t border-border bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/70">
+    <footer className="relative border-t border-white/10 surface-dark">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="flex flex-col items-center space-y-8 py-12">
+        <div className="flex flex-col items-center space-y-6 sm:space-y-8 py-10 sm:py-12">
           {/* Logo */}
           <div className="flex items-center">
             <img
               src="/uploads/Vellvii-full-logo-transparent.png"
               alt="Vellvii"
-              className="h-8 w-auto"
+              className="h-6 sm:h-8 w-auto"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
                 e.currentTarget.nextElementSibling?.classList.remove('hidden');
               }}
             />
-            <span className="hidden text-2xl font-bold text-foreground font-baskerville">Vellvii</span>
+            <span className="hidden text-xl sm:text-2xl font-bold text-light-primary font-baskerville">Vellvii</span>
           </div>
 
           {/* Social Links */}
-          <div className="flex gap-4">
+          <div className="flex gap-3 sm:gap-4">
             <a
               href="https://instagram.com/vellvii.official"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full border border-border bg-card/70 backdrop-blur flex items-center justify-center hover:border-primary/40 transition-colors group"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/10 bg-white/5 backdrop-blur flex items-center justify-center hover:border-primary/40 hover:bg-primary/10 transition-all group"
               aria-label="Instagram"
             >
-              <Instagram className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+              <Instagram className="w-4 h-4 sm:w-5 sm:h-5 text-light-secondary group-hover:text-primary transition-colors" />
             </a>
             <a
               href="https://x.com/OfficialVellvii"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full border border-border bg-card/70 backdrop-blur flex items-center justify-center hover:border-primary/40 transition-colors group"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/10 bg-white/5 backdrop-blur flex items-center justify-center hover:border-primary/40 hover:bg-primary/10 transition-all group"
               aria-label="X"
             >
-              <XIcon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+              <XIcon className="w-4 h-4 sm:w-5 sm:h-5 text-light-secondary group-hover:text-primary transition-colors" />
             </a>
             <a
               href="https://tiktok.com/@vellvii.official"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full border border-border bg-card/70 backdrop-blur flex items-center justify-center hover:border-primary/40 transition-colors group"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/10 bg-white/5 backdrop-blur flex items-center justify-center hover:border-primary/40 hover:bg-primary/10 transition-all group"
               aria-label="TikTok"
             >
-              <TikTokIcon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+              <TikTokIcon className="w-4 h-4 sm:w-5 sm:h-5 text-light-secondary group-hover:text-primary transition-colors" />
             </a>
             <a
               href="https://www.facebook.com/profile.php?id=61580639793053"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full border border-border bg-card/70 backdrop-blur flex items-center justify-center hover:border-primary/40 transition-colors group"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/10 bg-white/5 backdrop-blur flex items-center justify-center hover:border-primary/40 hover:bg-primary/10 transition-all group"
               aria-label="Facebook"
             >
-              <Facebook className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+              <Facebook className="w-4 h-4 sm:w-5 sm:h-5 text-light-secondary group-hover:text-primary transition-colors" />
             </a>
           </div>
 
           {/* Email */}
           <a
             href="mailto:hello@vellvii.com"
-            className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+            className="flex items-center gap-2 text-light-secondary hover:text-primary transition-colors"
           >
             <Mail className="w-4 h-4" />
-            <span className="text-sm">hello@vellvii.com</span>
+            <span className="text-xs sm:text-sm font-montserrat">hello@vellvii.com</span>
           </a>
 
           {/* Links */}
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-light-secondary font-montserrat">
             <a href="/shop" className="hover:text-primary transition-colors">Shop</a>
-            <span className="text-muted-foreground/60">•</span>
+            <span className="text-light-muted hidden sm:inline">•</span>
             <a href="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</a>
-            <span className="text-muted-foreground/60">•</span>
+            <span className="text-light-muted hidden sm:inline">•</span>
             <a href="/terms-of-service" className="hover:text-primary transition-colors">Terms of Service</a>
           </div>
 
           {/* Copyright */}
           <div className="text-center">
-            <p className="text-muted-foreground/80 text-sm">
+            <p className="text-light-muted text-xs sm:text-sm font-montserrat">
               © 2026 Vellvii. All rights reserved.
             </p>
           </div>
