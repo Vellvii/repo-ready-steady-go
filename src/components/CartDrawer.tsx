@@ -130,12 +130,12 @@ export const CartDrawer = () => {
                           </div>
                         </div>
                         <div className="flex items-center justify-between mt-3 pt-2 border-t border-white/5">
-                          <div className="flex items-center gap-1 bg-white/5 rounded-lg p-0.5">
+                          <div className="flex items-center gap-0.5 bg-white/10 rounded-lg p-0.5">
                             <Button 
                               variant="ghost" 
                               size="sm" 
                               onClick={() => updateQuantity(item.variantId, item.quantity - 1)} 
-                              className="h-7 w-7 sm:h-8 sm:w-8 p-0 hover:bg-white/10 text-light-secondary hover:text-light-primary"
+                              className="h-7 w-7 sm:h-8 sm:w-8 p-0 bg-transparent hover:bg-primary/20 text-primary hover:text-primary border-0"
                               disabled={isLoading}
                             >
                               <Minus className="w-3 h-3 sm:w-4 sm:h-4" />
@@ -147,7 +147,7 @@ export const CartDrawer = () => {
                               variant="ghost" 
                               size="sm" 
                               onClick={() => updateQuantity(item.variantId, item.quantity + 1)} 
-                              className="h-7 w-7 sm:h-8 sm:w-8 p-0 hover:bg-white/10 text-light-secondary hover:text-light-primary"
+                              className="h-7 w-7 sm:h-8 sm:w-8 p-0 bg-transparent hover:bg-primary/20 text-primary hover:text-primary border-0"
                               disabled={isLoading}
                             >
                               <Plus className="w-3 h-3 sm:w-4 sm:h-4" />
@@ -157,7 +157,7 @@ export const CartDrawer = () => {
                             variant="ghost" 
                             size="sm" 
                             onClick={() => removeItem(item.variantId)} 
-                            className="h-7 w-7 sm:h-8 sm:w-8 p-0 text-red-400 hover:text-red-300 hover:bg-red-500/10"
+                            className="h-7 w-7 sm:h-8 sm:w-8 p-0 bg-transparent hover:bg-red-500/20 text-red-400 hover:text-red-300 border-0"
                             disabled={isLoading}
                           >
                             <Trash2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
