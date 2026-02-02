@@ -21,8 +21,9 @@ export const StickyProductBar = ({
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show after scrolling 400px
-      setIsVisible(window.scrollY > 400);
+      // Show after scrolling 300px on mobile, 400px on desktop
+      const threshold = window.innerWidth < 640 ? 300 : 400;
+      setIsVisible(window.scrollY > threshold);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -31,27 +32,28 @@ export const StickyProductBar = ({
 
   return (
     <div className={`sticky-product-bar ${isVisible ? "visible" : ""}`}>
-      <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
+      <div className="max-w-6xl mx-auto flex items-center justify-between gap-3 sm:gap-4">
         <div className="flex-1 min-w-0">
-          <h3 className="text-light-primary font-baskerville font-semibold truncate">
+          <h3 className="text-light-primary font-baskerville font-semibold text-sm sm:text-base truncate">
             {productName}
           </h3>
-          <p className="text-primary font-montserrat font-bold">${price}</p>
+          <p className="text-primary font-montserrat font-bold text-sm sm:text-base">${price}</p>
         </div>
         <Button
-          size="lg"
-          className="btn-premium px-6 h-11 flex-shrink-0"
+          size="default"
+          className="btn-premium px-4 sm:px-6 h-10 sm:h-11 flex-shrink-0 text-sm sm:text-base"
           onClick={onAddToCart}
           disabled={isLoading || !isAvailable}
         >
           {isLoading ? (
-            <Loader2 className="w-5 h-5 animate-spin" />
+            <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin" />
           ) : !isAvailable ? (
-            "Sold Out"
+            <span className="text-xs sm:text-base">Sold Out</span>
           ) : (
             <>
-              <ShoppingCart className="w-5 h-5 mr-2" />
-              Add to Cart
+              <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">Add to Cart</span>
+              <span className="sm:hidden">Add</span>
             </>
           )}
         </Button>
