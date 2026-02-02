@@ -3,13 +3,15 @@ import { useShopifyProduct } from "@/hooks/useShopifyProducts";
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ShoppingCart, Loader2, ArrowLeft } from "lucide-react";
+import { ShoppingCart, Loader2, ArrowLeft, Expand } from "lucide-react";
 import { toast } from "sonner";
 import { SEO } from "@/components/SEO";
 import { useState } from "react";
 import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
 import { TrustBadges } from "@/components/TrustBadges";
 import { StickyProductBar } from "@/components/StickyProductBar";
+import { ImageLightbox } from "@/components/ImageLightbox";
+import { DoxVideoSection } from "@/components/DoxVideoSection";
 
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
@@ -17,6 +19,10 @@ const ProductDetail = () => {
   const addItem = useCartStore((state) => state.addItem);
   const cartLoading = useCartStore((state) => state.isLoading);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+
+  // Check if this is the DOX product
+  const isDoxProduct = handle?.toLowerCase().includes("dox");
 
   if (isLoading) {
     return (
@@ -76,6 +82,11 @@ const ProductDetail = () => {
     });
   };
 
+  const openLightbox = (index: number) => {
+    setSelectedImageIndex(index);
+    setLightboxOpen(true);
+  };
+
   return (
     <>
       <SEO
@@ -102,14 +113,25 @@ const ProductDetail = () => {
             <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 xl:gap-16 items-start">
               {/* Image Gallery */}
               <div className="space-y-3 sm:space-y-4">
-                {/* Main Image - Full width on mobile */}
-                <div className="product-image-container aspect-square rounded-xl sm:rounded-2xl -mx-3 sm:mx-0">
+                {/* Main Image - Clickable for lightbox */}
+                <div
+                  className="product-image-container aspect-square rounded-xl sm:rounded-2xl -mx-3 sm:mx-0 cursor-pointer group relative"
+                  onClick={() => openLightbox(selectedImageIndex)}
+                >
                   {selectedImage ? (
-                    <img
-                      src={selectedImage.url}
-                      alt={selectedImage.altText || product.node.title}
-                      className="w-full h-full object-cover"
-                    />
+                    <>
+                      <img
+                        src={selectedImage.url}
+                        alt={selectedImage.altText || product.node.title}
+                        className="w-full h-full object-cover"
+                      />
+                      {/* Expand icon overlay */}
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                        <div className="w-12 h-12 rounded-full bg-white/0 group-hover:bg-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
+                          <Expand className="w-5 h-5 text-white" />
+                        </div>
+                      </div>
+                    </>
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-light-muted">
                       No Image
@@ -189,6 +211,9 @@ const ProductDetail = () => {
           </div>
         </section>
 
+        {/* DOX Video Section - Only for DOX product */}
+        {isDoxProduct && <DoxVideoSection onReserve={handleAddToCart} />}
+
         {/* Sticky Product Bar */}
         <StickyProductBar
           productName={product.node.title}
@@ -196,6 +221,18 @@ const ProductDetail = () => {
           onAddToCart={handleAddToCart}
           isLoading={cartLoading}
           isAvailable={variant?.availableForSale}
+        />
+
+        {/* Image Lightbox */}
+        <ImageLightbox
+          images={images.map((img) => ({
+            url: img.node.url,
+            altText: img.node.altText,
+          }))}
+          initialIndex={selectedImageIndex}
+          isOpen={lightboxOpen}
+          onClose={() => setLightboxOpen(false)}
+          autoPlayInterval={4000}
         />
 
         <PrelaunchFooter />
