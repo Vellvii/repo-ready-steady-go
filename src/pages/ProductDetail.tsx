@@ -3,7 +3,7 @@ import { useShopifyProduct } from "@/hooks/useShopifyProducts";
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ShoppingCart, Loader2, ArrowLeft } from "lucide-react";
+import { ShoppingCart, Loader2, ArrowLeft, Check } from "lucide-react";
 import { toast } from "sonner";
 import { SEO } from "@/components/SEO";
 import { useState } from "react";
@@ -17,15 +17,15 @@ const ProductDetail = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-dark pt-24 px-4">
+      <div className="min-h-screen bg-background pt-24 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8">
-            <Skeleton className="aspect-square rounded-lg" />
+            <Skeleton className="aspect-square rounded-lg bg-muted/50" />
             <div className="space-y-4">
-              <Skeleton className="h-10 w-3/4" />
-              <Skeleton className="h-8 w-1/4" />
-              <Skeleton className="h-32 w-full" />
-              <Skeleton className="h-12 w-full" />
+              <Skeleton className="h-10 w-3/4 bg-muted/50" />
+              <Skeleton className="h-8 w-1/4 bg-muted/50" />
+              <Skeleton className="h-32 w-full bg-muted/50" />
+              <Skeleton className="h-12 w-full bg-muted/50" />
             </div>
           </div>
         </div>
@@ -35,11 +35,11 @@ const ProductDetail = () => {
 
   if (error || !product) {
     return (
-      <div className="min-h-screen bg-gradient-dark pt-24 px-4">
+      <div className="min-h-screen bg-background pt-24 px-4">
         <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-3xl font-playfair text-white mb-4">Product Not Found</h1>
+          <h1 className="text-3xl font-baskerville text-foreground mb-4">Product Not Found</h1>
           <Link to="/shop">
-            <Button variant="luxury">
+            <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Shop
             </Button>
@@ -76,110 +76,119 @@ const ProductDetail = () => {
         title={`${product.node.title} | Vellvii`}
         description={product.node.description.slice(0, 160)}
       />
-      <div className="min-h-screen bg-gradient-dark pt-24 px-4 pb-24">
-        <div className="max-w-6xl mx-auto">
-          {/* Back Link */}
-          <Link to="/shop" className="inline-flex items-center text-white/60 hover:text-white mb-8 transition-colors">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Collection
-          </Link>
+      <div className="min-h-screen bg-background">
+        {/* Decorative gradient overlay */}
+        <div 
+          className="fixed inset-0 pointer-events-none opacity-40"
+          style={{ background: 'var(--gradient-hero)' }}
+        />
+        
+        <div className="relative pt-24 px-4 pb-24">
+          <div className="max-w-6xl mx-auto">
+            {/* Back Link */}
+            <Link 
+              to="/shop" 
+              className="inline-flex items-center text-muted-foreground hover:text-foreground mb-8 transition-colors font-montserrat"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Collection
+            </Link>
 
-          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-            {/* Image Gallery */}
-            <div className="space-y-4">
-              <div className="aspect-square rounded-lg overflow-hidden bg-black/20">
-                {selectedImage ? (
-                  <img 
-                    src={selectedImage.url} 
-                    alt={selectedImage.altText || product.node.title}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-white/40">
-                    No Image
+            <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+              {/* Image Gallery */}
+              <div className="space-y-4">
+                <div className="aspect-square rounded-xl overflow-hidden bg-muted/30 border border-border shadow-elegant">
+                  {selectedImage ? (
+                    <img 
+                      src={selectedImage.url} 
+                      alt={selectedImage.altText || product.node.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-muted-foreground">
+                      No Image
+                    </div>
+                  )}
+                </div>
+                {images.length > 1 && (
+                  <div className="flex gap-2 overflow-x-auto pb-2">
+                    {images.map((img, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setSelectedImageIndex(index)}
+                        className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all duration-300 ${
+                          index === selectedImageIndex 
+                            ? 'border-primary shadow-glow' 
+                            : 'border-border hover:border-primary/50'
+                        }`}
+                      >
+                        <img 
+                          src={img.node.url} 
+                          alt={img.node.altText || `${product.node.title} ${index + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    ))}
                   </div>
                 )}
               </div>
-              {images.length > 1 && (
-                <div className="flex gap-2 overflow-x-auto pb-2">
-                  {images.map((img, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setSelectedImageIndex(index)}
-                      className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-colors ${
-                        index === selectedImageIndex 
-                          ? 'border-primary' 
-                          : 'border-transparent hover:border-white/30'
-                      }`}
-                    >
-                      <img 
-                        src={img.node.url} 
-                        alt={img.node.altText || `${product.node.title} ${index + 1}`}
-                        className="w-full h-full object-cover"
-                      />
-                    </button>
-                  ))}
+
+              {/* Product Info */}
+              <div className="space-y-6">
+                <div>
+                  <h1 className="text-3xl md:text-4xl font-baskerville font-bold text-foreground mb-3">
+                    {product.node.title}
+                  </h1>
+                  <p className="text-3xl font-bold gradient-text font-montserrat">
+                    ${parseFloat(product.node.priceRange.minVariantPrice.amount).toFixed(0)}
+                  </p>
                 </div>
-              )}
-            </div>
 
-            {/* Product Info */}
-            <div className="space-y-6">
-              <div>
-                <h1 className="text-3xl md:text-4xl font-playfair font-bold text-white mb-2">
-                  {product.node.title}
-                </h1>
-                <p className="text-3xl font-bold gradient-text">
-                  ${parseFloat(product.node.priceRange.minVariantPrice.amount).toFixed(0)}
-                </p>
-              </div>
+                <div className="prose max-w-none">
+                  <p className="text-muted-foreground leading-relaxed whitespace-pre-line font-montserrat text-base">
+                    {product.node.description}
+                  </p>
+                </div>
 
-              <div className="prose prose-invert max-w-none">
-                <p className="text-white/70 leading-relaxed whitespace-pre-line">
-                  {product.node.description}
-                </p>
-              </div>
+                <Button 
+                  size="lg"
+                  className="w-full h-14 text-lg bg-primary text-primary-foreground hover:bg-primary/90 shadow-luxury font-montserrat font-semibold"
+                  onClick={handleAddToCart}
+                  disabled={cartLoading || !variant?.availableForSale}
+                >
+                  {cartLoading ? (
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                  ) : !variant?.availableForSale ? (
+                    'Sold Out'
+                  ) : (
+                    <>
+                      <ShoppingCart className="w-5 h-5 mr-2" />
+                      Add to Cart
+                    </>
+                  )}
+                </Button>
 
-              <Button 
-                variant="luxury" 
-                size="lg"
-                className="w-full h-14 text-lg"
-                onClick={handleAddToCart}
-                disabled={cartLoading || !variant?.availableForSale}
-              >
-                {cartLoading ? (
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                ) : !variant?.availableForSale ? (
-                  'Sold Out'
-                ) : (
-                  <>
-                    <ShoppingCart className="w-5 h-5 mr-2" />
-                    Add to Cart
-                  </>
-                )}
-              </Button>
-
-              {/* Product Features */}
-              <div className="glass-luxury p-6 rounded-lg space-y-4">
-                <h3 className="text-white font-semibold">Included with your purchase:</h3>
-                <ul className="space-y-2 text-white/70">
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
-                    Free shipping on all orders
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
-                    Discreet packaging
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
-                    1-year warranty
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
-                    30-day return policy
-                  </li>
-                </ul>
+                {/* Product Features */}
+                <div className="glass-luxury p-6 rounded-xl border border-primary/20">
+                  <h3 className="text-foreground font-baskerville font-semibold text-lg mb-4">
+                    Included with your purchase
+                  </h3>
+                  <ul className="space-y-3 font-montserrat">
+                    {[
+                      'Free shipping on all orders',
+                      'Discreet packaging',
+                      '1-year warranty',
+                      '30-day return policy'
+                    ].map((feature, i) => (
+                      <li key={i} className="flex items-center gap-3 text-muted-foreground">
+                        <span className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                          <Check className="w-3 h-3 text-primary" />
+                        </span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
