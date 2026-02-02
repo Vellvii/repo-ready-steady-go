@@ -202,8 +202,8 @@ export const CartDrawer = () => {
                       )}
                     </Button>
                     <Button 
-                      className="w-full h-9 sm:h-10 text-sm font-montserrat border-white/20 text-light-secondary hover:bg-white/5 hover:text-light-primary" 
-                      variant="outline" 
+                      className="w-full h-9 sm:h-10 text-sm font-montserrat bg-transparent border border-white/20 text-light-secondary hover:bg-white/10 hover:text-light-primary hover:border-white/30" 
+                      variant="ghost" 
                       onClick={clearCart} 
                       disabled={items.length === 0 || isLoading}
                     >
