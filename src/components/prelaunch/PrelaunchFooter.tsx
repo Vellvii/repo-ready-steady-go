@@ -82,6 +82,8 @@ export const PrelaunchFooter = () => {
 
           {/* Links */}
           <div className="flex flex-wrap justify-center gap-6 text-sm text-white/50">
+            <a href="/shop" className="hover:text-primary transition-colors">Shop</a>
+            <span>•</span>
             <a href="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</a>
             <span>•</span>
             <a href="/terms-of-service" className="hover:text-primary transition-colors">Terms of Service</a>
