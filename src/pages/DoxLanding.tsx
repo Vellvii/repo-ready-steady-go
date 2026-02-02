@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import { Play } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Play, ShoppingBag, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import prelaunchLogo from "@/assets/prelaunch-logo.png";
 import { SEO } from "@/components/SEO";
@@ -11,6 +12,7 @@ const DISCUSSIONS_URL = "https://prelaunch.com/projects/vellvii-dox-vellvii-dox-
 const DoxLanding = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoEnded, setVideoEnded] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const requestFullscreen = async (element: HTMLVideoElement) => {
@@ -126,6 +128,94 @@ const DoxLanding = () => {
         }}
       />
     <div className="min-h-screen bg-black flex flex-col items-center justify-center relative overflow-hidden">
+      {/* Navigation Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <Link to="/" className="flex items-center">
+              <img 
+                src="/uploads/Vellvii-full-logo-transparent.png" 
+                alt="Vellvii" 
+                className="h-8 w-auto"
+              />
+            </Link>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center gap-8">
+              <Link to="/shop" className="font-montserrat text-sm text-light-secondary hover:text-primary transition-colors tracking-wide">
+                Shop
+              </Link>
+              <Link to="/about" className="font-montserrat text-sm text-light-secondary hover:text-primary transition-colors tracking-wide">
+                About
+              </Link>
+              <Link to="/contact" className="font-montserrat text-sm text-light-secondary hover:text-primary transition-colors tracking-wide">
+                Contact
+              </Link>
+              <Link 
+                to="/shop" 
+                className="flex items-center gap-2 px-4 py-2 bg-primary text-black rounded-lg font-montserrat text-sm font-semibold hover:bg-primary/90 transition-colors"
+              >
+                <ShoppingBag className="w-4 h-4" />
+                Buy Now
+              </Link>
+            </nav>
+
+            {/* Mobile Menu Button */}
+            <button 
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 text-light-secondary hover:text-primary transition-colors"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+
+          {/* Mobile Navigation */}
+          <AnimatePresence>
+            {mobileMenuOpen && (
+              <motion.nav
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                className="md:hidden border-t border-white/10 overflow-hidden"
+              >
+                <div className="py-4 space-y-3">
+                  <Link 
+                    to="/shop" 
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block font-montserrat text-sm text-light-secondary hover:text-primary transition-colors tracking-wide py-2"
+                  >
+                    Shop
+                  </Link>
+                  <Link 
+                    to="/about" 
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block font-montserrat text-sm text-light-secondary hover:text-primary transition-colors tracking-wide py-2"
+                  >
+                    About
+                  </Link>
+                  <Link 
+                    to="/contact" 
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block font-montserrat text-sm text-light-secondary hover:text-primary transition-colors tracking-wide py-2"
+                  >
+                    Contact
+                  </Link>
+                  <Link 
+                    to="/shop" 
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-2 px-4 py-2 bg-primary text-black rounded-lg font-montserrat text-sm font-semibold hover:bg-primary/90 transition-colors w-fit"
+                  >
+                    <ShoppingBag className="w-4 h-4" />
+                    Buy Now
+                  </Link>
+                </div>
+              </motion.nav>
+            )}
+          </AnimatePresence>
+        </div>
+      </header>
+
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black/90" />
 
