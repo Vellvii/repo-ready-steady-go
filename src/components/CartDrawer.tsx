@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2, Heart } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 export const CartDrawer = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -58,7 +59,13 @@ export const CartDrawer = () => {
           style={{
             overscrollBehavior: isHovering ? 'contain' : 'auto'
           }}
+          aria-describedby={undefined}
         >
+          <VisuallyHidden>
+            <SheetTitle>Shopping Cart</SheetTitle>
+            <SheetDescription>Your shopping cart with items</SheetDescription>
+          </VisuallyHidden>
+          
           {/* Header */}
           <div className="border-b border-border p-4 sm:p-6">
             <div className="flex items-center gap-2">
