@@ -1,144 +1,349 @@
 
-# Plan: Add Shopify 3D Model Support + Product Filtering
 
-## Overview
-This plan adds two major features:
-1. **3D Model Support** - Display 3D models uploaded to Shopify products on your website
-2. **Product Filtering** - Filter products by Shopify collections or tags
+# Plan: Apple-Inspired Home Page with DOX Focus
+
+## Design Philosophy
+
+Inspired by Apple's product marketing and LELO's luxury aesthetic, the new home page will:
+- Lead with the **DOX as the hero** (flagship product) - like Apple leads with iPhone
+- Use **full-bleed imagery** and **cinematic video**
+- **Minimal text**, maximum visual impact
+- Smooth scroll-driven reveals
+- Showcase other products as part of the ecosystem (like Apple shows AirPods, Watch alongside iPhone)
 
 ---
 
-## Part 1: 3D Model Support
+## Page Structure (7 Sections)
 
-### How It Works
-When you upload a 3D model to a product in the Shopify app, it gets stored in Shopify's media library. We need to update our API queries to fetch the `media` object instead of just `images`, then display the 3D model using the existing `Model3DViewer` component.
-
-### Changes Required
-
-#### 1. Update Shopify Types (`src/lib/shopify.ts`)
-Add media types to handle 3D models:
-- Add `ShopifyMedia` type with support for `Image`, `Model3d`, and `Video` media types
-- Extend `ShopifyProduct` interface to include media edges
-
-#### 2. Update GraphQL Queries (`src/lib/shopify.ts`)
-Modify `PRODUCTS_QUERY` and `PRODUCT_BY_HANDLE_QUERY` to fetch media:
 ```text
-media(first: 10) {
-  edges {
-    node {
-      mediaContentType
-      ... on MediaImage {
-        image { url altText }
-      }
-      ... on Model3d {
-        sources { url format mimeType }
-        alt
-      }
-      ... on Video {
-        sources { url format mimeType }
-      }
-    }
-  }
-}
++-----------------------------------------------+
+|  SECTION 1: HERO - DOX CINEMATIC              |
+|  Full-screen video/image with minimal text    |
+|  "The Art of 'O'" + "Explore DOX" CTA         |
++-----------------------------------------------+
+|  SECTION 2: DOX FEATURES - SPLIT PANELS       |
+|  3 key features in large image panels         |
+|  Biometric Lock | Charging Dock | Design      |
++-----------------------------------------------+
+|  SECTION 3: DOX VIDEO - 60 SECONDS            |
+|  Embedded video with elegant play button      |
+|  "Experience in 60 Seconds"                   |
++-----------------------------------------------+
+|  SECTION 4: THE ECOSYSTEM                     |
+|  "Designed to Work Together"                  |
+|  Horizontal product carousel from Shopify     |
++-----------------------------------------------+
+|  SECTION 5: BRAND PHILOSOPHY                  |
+|  Centered manifesto text block                |
+|  "Luxury. Privacy. Pleasure."                 |
++-----------------------------------------------+
+|  SECTION 6: WHY VELLVII - TRUST               |
+|  4 icon blocks with value propositions        |
++-----------------------------------------------+
+|  SECTION 7: FINAL CTA                         |
+|  "Shop the Collection" + email capture        |
++-----------------------------------------------+
+|  FOOTER                                       |
++-----------------------------------------------+
 ```
 
-#### 3. Update Product Detail Page (`src/pages/ProductDetail.tsx`)
-- Import the existing `Model3DViewer` component
-- Detect if product has 3D model in media
-- Add toggle buttons (Images / 3D View) when a 3D model exists
-- Display the 3D model using the existing viewer component
-- Keep current image gallery as the default view
-
-#### 4. Update Product Hooks (if needed)
-Ensure the hooks properly pass through the new media data structure.
-
 ---
 
-## Part 2: Product Filtering by Collections/Tags
+## Section 1: DOX Hero (Full-Screen)
 
-### How It Works
-Shopify collections let you group products. We'll fetch available collections and add filter buttons on the shop page.
+Apple-style hero with cinematic presence:
 
-### Changes Required
-
-#### 1. Add Collections Query (`src/lib/shopify.ts`)
-Add a new GraphQL query to fetch collections:
 ```text
-query GetCollections {
-  collections(first: 20) {
-    edges {
-      node {
-        id
-        title
-        handle
-        productsCount
-      }
-    }
-  }
-}
++--------------------------------------------------+
+|                                                  |
+|              [NAVIGATION BAR]                    |
+|                                                  |
+|                                                  |
+|    [Full-screen DOX image/video background]      |
+|                                                  |
+|                                                  |
+|              V E L L V I I                       |
+|                                                  |
+|            "The Art of 'O'"                      |
+|                                                  |
+|           [Explore DOX]  [Shop]                  |
+|                                                  |
+|                  ↓                               |
++--------------------------------------------------+
 ```
 
-#### 2. Add Products by Collection Query
-Modify the products query to support filtering by collection:
+**Technical:**
+- Full viewport height (`min-h-screen`)
+- Background: `/uploads/Dox1.jpg` or `/uploads/HEROPAGE.webm` with overlay
+- Centered logo with glow effect
+- Two CTAs: primary "Explore DOX" (scrolls to DOX section), secondary "Shop All"
+- Smooth scroll indicator at bottom
+
+---
+
+## Section 2: DOX Feature Panels
+
+Three large split panels showcasing key features:
+
 ```text
-query GetProductsByCollection($handle: String!, $first: Int!) {
-  collection(handle: $handle) {
-    products(first: $first) {
-      edges { node { ... } }
-    }
-  }
-}
++--------------------------------------------------+
+|  +----------------+  +----------------+           |
+|  |                |  |  BIOMETRIC     |           |
+|  |  [Fingerprint  |  |  SECURITY      |           |
+|  |   video/image] |  |                |           |
+|  |                |  |  Your privacy, |           |
+|  |                |  |  sealed.       |           |
+|  +----------------+  +----------------+           |
+|                                                   |
+|  +----------------+  +----------------+           |
+|  |  INTEGRATED    |  |                |           |
+|  |  CHARGING      |  |  [Charging     |           |
+|  |                |  |   dock image]  |           |
+|  |  Always ready. |  |                |           |
+|  |  Always hidden.|  |                |           |
+|  +----------------+  +----------------+           |
+|                                                   |
+|  +----------------+  +----------------+           |
+|  |                |  |  VEGAN         |           |
+|  |  [Interior     |  |  LEATHER       |           |
+|  |   velvet image]|  |                |           |
+|  |                |  |  Crafted with  |           |
+|  |                |  |  intention.    |           |
+|  +----------------+  +----------------+           |
++--------------------------------------------------+
 ```
 
-#### 3. Add Collection Hooks (`src/hooks/useShopifyProducts.ts`)
-- Add `useShopifyCollections()` hook to fetch all collections
-- Add `useShopifyProductsByCollection(handle)` hook for filtered products
-
-#### 4. Update Shop Page (`src/pages/Shop.tsx`)
-- Add horizontal scrollable filter bar below the hero
-- Show "All Products" plus each collection as filter buttons
-- Track selected filter in state
-- Fetch appropriate products based on selection
+**Technical:**
+- Alternating image/text layout (image left, text right; then flip)
+- Images: `/uploads/fingerprint-video.webm`, `/uploads/Red_Dox_charge_inside.png`, `/uploads/dox-interior-labeled.jpg`
+- Large typography (Baskerville headings)
+- ScrollReveal animations on each panel
 
 ---
 
-## Technical Details
+## Section 3: DOX Video Section
 
-### Files to Modify
-1. `src/lib/shopify.ts` - Types and queries
-2. `src/hooks/useShopifyProducts.ts` - New hooks
-3. `src/pages/ProductDetail.tsx` - 3D viewer integration
-4. `src/pages/Shop.tsx` - Collection filter UI
+Cinematic video section (reusing the 60-second explainer):
 
-### Dependencies
-- Already have `@react-three/fiber` and `@react-three/drei` installed
-- Already have `Model3DViewer` component ready
+```text
++--------------------------------------------------+
+|                                                  |
+|         EXPERIENCE DOX IN 60 SECONDS             |
+|                                                  |
+|  +------------------------------------------+    |
+|  |                                          |    |
+|  |              [Video Player]              |    |
+|  |                                          |    |
+|  |              [Play Button]               |    |
+|  |                                          |    |
+|  +------------------------------------------+    |
+|                                                  |
+|               [Pre-Order DOX]                    |
+|                                                  |
++--------------------------------------------------+
+```
 
-### Cache Behavior
-- 5-minute stale time on product data
-- Hard refresh or waiting 5 minutes will show updated data from Shopify
-- Can reduce stale time if more immediate updates are needed
-
----
-
-## User Experience
-
-### 3D Models on Product Pages
-- If a product has a 3D model, show "Images | 3D View" toggle buttons
-- Default to images view
-- 3D view shows interactive model that can be rotated/zoomed
-- Graceful fallback if 3D model fails to load
-
-### Collection Filtering on Shop Page
-- Clean horizontal filter bar with collection names
-- Rose gold highlight for active filter
-- Smooth loading states when switching filters
-- Mobile-friendly scrollable filter bar
+**Technical:**
+- Reuse video logic from current `DoxLanding.tsx`
+- Video source: `/uploads/The_Vellvii_Dox_1.webm`
+- Large centered play button with glow effect
+- CTA button below video
 
 ---
 
-## Next Steps After Implementation
-1. Upload a 3D model to a product in Shopify to test
-2. Create collections in Shopify (Vibes, Storage, etc.)
-3. Assign products to collections
-4. Verify filtering works on the shop page
+## Section 4: The Ecosystem (Product Carousel)
+
+Horizontal scrolling product cards fetched from Shopify:
+
+```text
++--------------------------------------------------+
+|                                                  |
+|         THE VELLVII COLLECTION                   |
+|         Designed to Work Together                |
+|                                                  |
+|  +------+ +------+ +------+ +------+ +------+    |
+|  |Pulse | |G-Vibe| |Evolve| | DOX  | | LUX  |    |
+|  |$169  | |$169  | |$199  | |$299  | |$399  |    |
+|  +------+ +------+ +------+ +------+ +------+    |
+|               ← Scroll →                         |
+|                                                  |
+|              [Shop All Products]                 |
+|                                                  |
++--------------------------------------------------+
+```
+
+**Technical:**
+- Use `useShopifyProducts()` hook for dynamic data
+- Horizontal scroll with `overflow-x-auto` and snap scrolling
+- Each card shows: image, name, price
+- Links to `/product/{handle}`
+- "Shop All" button links to `/shop`
+
+---
+
+## Section 5: Brand Philosophy
+
+Minimalist centered text block (Apple-style manifesto):
+
+```text
++--------------------------------------------------+
+|                                                  |
+|                                                  |
+|                    VELLVII                       |
+|                                                  |
+|          "We believe intimacy deserves          |
+|           the same thoughtful design            |
+|           as everything else in your life."     |
+|                                                  |
+|                                                  |
++--------------------------------------------------+
+```
+
+**Technical:**
+- Centered text with generous whitespace
+- Baskerville font for elegance
+- Subtle fade-in animation on scroll
+- Dark background with rose gold accents
+
+---
+
+## Section 6: Trust Section (Why Vellvii)
+
+Four-column grid with icons and value props:
+
+```text
++--------------------------------------------------+
+|                                                  |
+|              WHY CHOOSE VELLVII                  |
+|                                                  |
+|  +----------+  +----------+  +----------+        |
+|  |   🔒     |  |   🔌     |  |   ✨     |        |
+|  | Biometric|  | Wireless |  | Premium  |        |
+|  | Security |  | Charging |  | Materials|        |
+|  +----------+  +----------+  +----------+        |
+|                                                  |
+|  +----------+  +----------+                      |
+|  |   📦     |  |   🎁     |                      |
+|  | Discreet |  | 2-Year   |                      |
+|  | Shipping |  | Warranty |                      |
+|  +----------+  +----------+                      |
+|                                                  |
++--------------------------------------------------+
+```
+
+**Technical:**
+- CSS grid: 2 cols on mobile, 4 on desktop
+- Lucide icons with rose gold color
+- Short descriptions
+- ScrollReveal stagger animation
+
+---
+
+## Section 7: Final CTA
+
+Conversion section at the bottom:
+
+```text
++--------------------------------------------------+
+|                                                  |
+|         READY TO EXPERIENCE LUXURY?              |
+|                                                  |
+|         [Shop the Collection]                    |
+|                                                  |
+|              or                                  |
+|                                                  |
+|         [Reserve Your DOX]  (Prelaunch)          |
+|                                                  |
++--------------------------------------------------+
+```
+
+**Technical:**
+- Two CTAs: "Shop Collection" (to /shop) and "Reserve DOX" (prelaunch.com)
+- Background with subtle gradient
+
+---
+
+## Technical Implementation
+
+### File Structure
+
+Create modular components for maintainability:
+
+```text
+src/
+├── pages/
+│   └── DoxLanding.tsx          (completely rewritten)
+└── components/
+    └── home/
+        ├── HomeHero.tsx        (new)
+        ├── DoxFeatures.tsx     (new)
+        ├── DoxVideo.tsx        (new)
+        ├── ProductCarousel.tsx (new)
+        ├── BrandPhilosophy.tsx (new)
+        ├── TrustSection.tsx    (new)
+        └── FinalCTA.tsx        (new)
+```
+
+### Dependencies Used
+- `framer-motion` - Animations
+- `@tanstack/react-query` - Product fetching
+- Existing: `ScrollReveal`, animation components
+- Existing: `useShopifyProducts` hook
+
+### Key Design Tokens
+- Background: `surface-dark-rich` (near-black)
+- Primary accent: Rose gold (`primary`)
+- Typography: Baskerville (headings), Montserrat (body)
+- Shadows: `shadow-elegant`, `shadow-glow`
+
+---
+
+## Mobile Responsiveness
+
+| Section | Mobile Behavior |
+|---------|-----------------|
+| Hero | Full screen, stacked CTAs |
+| Features | Single column, image above text |
+| Video | Full width, maintains aspect ratio |
+| Products | Horizontal scroll with touch |
+| Philosophy | Smaller text, more padding |
+| Trust | 2x2 grid |
+| CTA | Stacked buttons |
+
+---
+
+## Files to Modify/Create
+
+1. **Create** `src/components/home/HomeHero.tsx`
+2. **Create** `src/components/home/DoxFeatures.tsx`
+3. **Create** `src/components/home/DoxVideo.tsx`
+4. **Create** `src/components/home/ProductCarousel.tsx`
+5. **Create** `src/components/home/BrandPhilosophy.tsx`
+6. **Create** `src/components/home/TrustSection.tsx`
+7. **Create** `src/components/home/FinalCTA.tsx`
+8. **Rewrite** `src/pages/DoxLanding.tsx` - Compose all sections together
+
+---
+
+## Assets Used
+
+All from existing `/uploads/`:
+- Hero: `Dox1.jpg` or `HEROPAGE.webm`
+- Fingerprint: `fingerprint-video.webm` or `Dox_fp_lock_video2.webm`
+- Charging: `Red_Dox_charge_inside.png` or `White_charge_outside.png`
+- Interior: `dox-interior-labeled.jpg`
+- Video: `The_Vellvii_Dox_1.webm`
+- Products: Fetched from Shopify API
+
+---
+
+## Summary
+
+This redesign positions Vellvii as the "Apple of sex toys" by:
+1. Leading with DOX as the flagship hero product
+2. Using cinematic, full-bleed imagery
+3. Minimal text, maximum visual impact
+4. Showcasing the full ecosystem while keeping DOX central
+5. Building trust through clear value propositions
+6. Smooth, premium animations throughout
+
