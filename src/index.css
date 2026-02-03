@@ -5,9 +5,9 @@
 
 @layer base {
   :root {
-    /* Ultra-modern luxury theme */
-    --background: 10 40% 98%;
-    --foreground: 15 30% 15%;
+    /* Ultra-modern luxury dark theme */
+    --background: 15 12% 8%;
+    --foreground: 0 0% 95%;
     
     /* Primary - Refined champagne gold */
     --primary: 40 65% 72%;
@@ -94,8 +94,8 @@
   }
 
   .dark {
-    --background: 10 40% 96%;
-    --foreground: 15 30% 20%;
+    --background: 15 12% 6%;
+    --foreground: 0 0% 98%;
   }
   
   * {
@@ -105,7 +105,7 @@
   html,
   body {
     @apply bg-background text-foreground font-montserrat;
-    background-color: hsl(10, 40%, 96%);
+    background-color: hsl(15, 12%, 8%);
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
