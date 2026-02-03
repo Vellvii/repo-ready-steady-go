@@ -110,7 +110,7 @@ const FeaturePanel = ({ feature, index }: { feature: FeaturePanel; index: number
 
 export const DoxFeatures = () => {
   return (
-    <section id="dox-features" className="bg-background">
+    <section id="dox-features" className="bg-surface-dark">
       {features.map((feature, index) => (
         <FeaturePanel key={feature.title} feature={feature} index={index} />
       ))}
