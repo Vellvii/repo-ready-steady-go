@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ShoppingBag, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SEO } from "@/components/SEO";
 import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
@@ -11,12 +11,9 @@ import { ProductCarousel } from "@/components/home/ProductCarousel";
 import { BrandPhilosophy } from "@/components/home/BrandPhilosophy";
 import { TrustSection } from "@/components/home/TrustSection";
 import { FinalCTA } from "@/components/home/FinalCTA";
-import { useCartStore } from "@/stores/cartStore";
 
 const DoxLanding = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { getTotalItems } = useCartStore();
-  const cartHasItems = getTotalItems() > 0;
 
   return (
     <>
@@ -68,16 +65,6 @@ const DoxLanding = () => {
                 >
                   Contact
                 </Link>
-                {/* Only show Shop Now button when cart is empty - cart button handles navigation when items exist */}
-                {!cartHasItems && (
-                  <Link
-                    to="/shop"
-                    className="flex items-center gap-2 px-4 py-2 bg-primary text-black rounded-lg font-montserrat text-sm font-semibold hover:bg-primary/90 transition-colors"
-                  >
-                    <ShoppingBag className="w-4 h-4" />
-                    Shop Now
-                  </Link>
-                )}
               </nav>
 
               {/* Mobile Menu Button */}
@@ -120,17 +107,6 @@ const DoxLanding = () => {
                     >
                       Contact
                     </Link>
-                    {/* Only show Shop Now button when cart is empty on mobile too */}
-                    {!cartHasItems && (
-                      <Link
-                        to="/shop"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="flex items-center gap-2 px-4 py-2 bg-primary text-black rounded-lg font-montserrat text-sm font-semibold hover:bg-primary/90 transition-colors w-fit"
-                      >
-                        <ShoppingBag className="w-4 h-4" />
-                        Shop Now
-                      </Link>
-                    )}
                   </div>
                 </motion.nav>
               )}
