@@ -1,11 +1,42 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { useShopifyCollections, useShopifyProductsByCollection } from "@/hooks/useShopifyProducts";
+import { useShopifyProducts, useShopifyCollections, useShopifyProductsByCollection } from "@/hooks/useShopifyProducts";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ShopifyProduct } from "@/lib/shopify";
 import { SEO } from "@/components/SEO";
 import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
 import { cn } from "@/lib/utils";
+import { Search, X } from "lucide-react";
+
+// Simple fuzzy match - checks if query letters appear in order within the target
+const fuzzyMatch = (query: string, target: string): { match: boolean; score: number } => {
+  const q = query.toLowerCase();
+  const t = target.toLowerCase();
+  
+  // Direct include is best match
+  if (t.includes(q)) {
+    return { match: true, score: 100 - t.indexOf(q) };
+  }
+  
+  // Check if letters appear in sequence
+  let qIdx = 0;
+  let consecutiveBonus = 0;
+  let lastMatchIdx = -1;
+  
+  for (let tIdx = 0; tIdx < t.length && qIdx < q.length; tIdx++) {
+    if (t[tIdx] === q[qIdx]) {
+      if (lastMatchIdx === tIdx - 1) consecutiveBonus += 5;
+      lastMatchIdx = tIdx;
+      qIdx++;
+    }
+  }
+  
+  if (qIdx === q.length) {
+    return { match: true, score: 50 + consecutiveBonus - (t.length - q.length) };
+  }
+  
+  return { match: false, score: 0 };
+};
 
 const ProductCard = ({ product }: { product: ShopifyProduct }) => {
   const image = product.node.images.edges[0]?.node;
@@ -14,7 +45,6 @@ const ProductCard = ({ product }: { product: ShopifyProduct }) => {
   return (
     <Link to={`/product/${product.node.handle}`} className="group block">
       <div className="card-dark rounded-xl sm:rounded-2xl overflow-hidden">
-        {/* Image - Full width on mobile */}
         <div className="product-image-container aspect-[3/4] sm:aspect-[4/5]">
           {image ? (
             <img
@@ -28,8 +58,6 @@ const ProductCard = ({ product }: { product: ShopifyProduct }) => {
             </div>
           )}
         </div>
-
-        {/* Info */}
         <div className="p-4 sm:p-5">
           <h3 className="text-light-primary font-baskerville font-semibold text-base sm:text-lg mb-1 sm:mb-2 group-hover:text-primary transition-colors line-clamp-2">
             {product.node.title}
@@ -52,6 +80,78 @@ const ProductSkeleton = () => (
     </div>
   </div>
 );
+
+const SearchBar = ({
+  value,
+  onChange,
+  suggestions,
+  onSuggestionClick,
+  showSuggestions,
+  onFocus,
+  onBlur,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  suggestions: ShopifyProduct[];
+  onSuggestionClick: (product: ShopifyProduct) => void;
+  showSuggestions: boolean;
+  onFocus: () => void;
+  onBlur: () => void;
+}) => {
+  return (
+    <div className="relative w-full max-w-md mx-auto">
+      <div className="relative">
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-light-muted" />
+        <input
+          type="text"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          placeholder="Search products..."
+          className="w-full h-11 sm:h-12 pl-11 pr-10 rounded-full bg-white/5 border border-white/10 text-light-primary placeholder:text-light-muted font-montserrat text-sm focus:outline-none focus:border-primary/50 focus:bg-white/10 transition-all"
+        />
+        {value && (
+          <button
+            onClick={() => onChange("")}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-light-muted hover:text-light-primary transition-colors"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        )}
+      </div>
+      
+      {/* Suggestions dropdown */}
+      {showSuggestions && suggestions.length > 0 && (
+        <div className="absolute top-full left-0 right-0 mt-2 bg-card/95 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden shadow-2xl z-50">
+          {suggestions.slice(0, 5).map((product) => (
+            <button
+              key={product.node.id}
+              onMouseDown={() => onSuggestionClick(product)}
+              className="w-full flex items-center gap-3 p-3 hover:bg-white/5 transition-colors text-left"
+            >
+              {product.node.images.edges[0]?.node && (
+                <img
+                  src={product.node.images.edges[0].node.url}
+                  alt=""
+                  className="w-10 h-10 rounded-lg object-cover"
+                />
+              )}
+              <div className="flex-1 min-w-0">
+                <p className="text-light-primary font-montserrat text-sm truncate">
+                  {product.node.title}
+                </p>
+                <p className="text-primary text-xs font-medium">
+                  ${parseFloat(product.node.priceRange.minVariantPrice.amount).toFixed(0)}
+                </p>
+              </div>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
 const CollectionFilterBar = ({
   collections,
@@ -76,7 +176,6 @@ const CollectionFilterBar = ({
 
   return (
     <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-2 scrollbar-luxury -mx-3 px-3 sm:mx-0 sm:px-0">
-      {/* All Products button */}
       <button
         onClick={() => onSelect(null)}
         className={cn(
@@ -89,7 +188,6 @@ const CollectionFilterBar = ({
         All Products
       </button>
       
-      {/* Collection buttons */}
       {collections.map((collection) => (
         <button
           key={collection.node.id}
@@ -110,12 +208,50 @@ const CollectionFilterBar = ({
 
 const Shop = () => {
   const [selectedCollection, setSelectedCollection] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(false);
   
+  const { data: allProducts } = useShopifyProducts(50);
   const { data: collections, isLoading: collectionsLoading } = useShopifyCollections(20);
   const { data: products, isLoading: productsLoading, error } = useShopifyProductsByCollection(
     selectedCollection,
     20
   );
+
+  // Filter products by search query with fuzzy matching
+  const filteredProducts = useMemo(() => {
+    if (!products || !searchQuery.trim()) return products;
+    
+    return products
+      .map((product) => ({
+        product,
+        ...fuzzyMatch(searchQuery, product.node.title),
+      }))
+      .filter((item) => item.match)
+      .sort((a, b) => b.score - a.score)
+      .map((item) => item.product);
+  }, [products, searchQuery]);
+
+  // Suggestions from all products
+  const suggestions = useMemo(() => {
+    if (!allProducts || !searchQuery.trim() || searchQuery.length < 2) return [];
+    
+    return allProducts
+      .map((product) => ({
+        product,
+        ...fuzzyMatch(searchQuery, product.node.title),
+      }))
+      .filter((item) => item.match)
+      .sort((a, b) => b.score - a.score)
+      .map((item) => item.product);
+  }, [allProducts, searchQuery]);
+
+  const handleSuggestionClick = (product: ShopifyProduct) => {
+    setSearchQuery(product.node.title);
+    setShowSuggestions(false);
+  };
+
+  const displayProducts = searchQuery.trim() ? filteredProducts : products;
 
   return (
     <>
@@ -124,36 +260,50 @@ const Shop = () => {
         description="Explore the Vellvii collection of luxury wellness products designed for privacy, elegance, and modern living."
       />
       <div className="min-h-screen surface-dark-rich">
-        {/* Hero Section - Responsive padding and text */}
-        <div className="collection-hero py-16 sm:py-20 lg:py-24 px-4 sm:px-6">
-          <div className="relative z-10 max-w-4xl mx-auto">
+        {/* Hero Section */}
+        <div className="collection-hero pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 px-4 sm:px-6">
+          <div className="relative z-10 max-w-4xl mx-auto text-center">
             <p className="text-primary font-montserrat text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] mb-3 sm:mb-4">
               Luxury Wellness
             </p>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-baskerville font-bold text-light-primary mb-4 sm:mb-6">
               The <span className="gradient-text">Collection</span>
             </h1>
-            <p className="text-light-secondary text-base sm:text-lg md:text-xl max-w-2xl mx-auto font-montserrat leading-relaxed px-2">
+            <p className="text-light-secondary text-base sm:text-lg md:text-xl max-w-2xl mx-auto font-montserrat leading-relaxed mb-8 sm:mb-10">
               Refined wellness products designed for privacy, elegance, and
               modern living.
             </p>
+            
+            {/* Search Bar */}
+            <SearchBar
+              value={searchQuery}
+              onChange={setSearchQuery}
+              suggestions={suggestions}
+              onSuggestionClick={handleSuggestionClick}
+              showSuggestions={showSuggestions}
+              onFocus={() => setShowSuggestions(true)}
+              onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
+            />
           </div>
         </div>
 
         {/* Collection Filter Bar */}
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 -mt-2 sm:-mt-4 mb-6 sm:mb-8">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 mb-8 sm:mb-10">
           <CollectionFilterBar
             collections={collections || []}
             selectedCollection={selectedCollection}
-            onSelect={setSelectedCollection}
+            onSelect={(handle) => {
+              setSelectedCollection(handle);
+              setSearchQuery("");
+            }}
             isLoading={collectionsLoading}
           />
         </div>
 
-        {/* Products Grid - Responsive spacing and columns */}
+        {/* Products Grid */}
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pb-16 sm:pb-24">
           {productsLoading ? (
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
               {[...Array(6)].map((_, i) => (
                 <ProductSkeleton key={i} />
               ))}
@@ -164,17 +314,29 @@ const Shop = () => {
                 Failed to load products. Please try again later.
               </p>
             </div>
-          ) : products && products.length > 0 ? (
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
-              {products.map((product) => (
+          ) : displayProducts && displayProducts.length > 0 ? (
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+              {displayProducts.map((product) => (
                 <ProductCard key={product.node.id} product={product} />
               ))}
             </div>
           ) : (
             <div className="text-center py-12 sm:py-20 px-4">
               <p className="text-light-secondary text-base sm:text-lg font-montserrat">
-                No products found{selectedCollection ? " in this collection" : ""}.
+                {searchQuery 
+                  ? `No products found for "${searchQuery}"`
+                  : selectedCollection 
+                    ? "No products found in this collection."
+                    : "No products found."}
               </p>
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="mt-4 text-primary hover:underline font-montserrat text-sm"
+                >
+                  Clear search
+                </button>
+              )}
             </div>
           )}
         </div>
