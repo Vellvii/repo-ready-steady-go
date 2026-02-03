@@ -3,16 +3,18 @@ import { useShopifyProduct } from "@/hooks/useShopifyProducts";
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ShoppingCart, Loader2, ArrowLeft, Expand } from "lucide-react";
+import { ShoppingCart, Loader2, ArrowLeft, Expand, Images, Box } from "lucide-react";
 import { toast } from "sonner";
 import { SEO } from "@/components/SEO";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
 import { TrustBadges } from "@/components/TrustBadges";
 import { StickyProductBar } from "@/components/StickyProductBar";
 import { ImageLightbox } from "@/components/ImageLightbox";
 import { DoxVideoSection } from "@/components/DoxVideoSection";
 import { RelatedProducts } from "@/components/RelatedProducts";
+import { Model3DViewer } from "@/components/Model3DViewer";
+import { ShopifyMediaModel3d } from "@/lib/shopify";
 
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
@@ -21,9 +23,31 @@ const ProductDetail = () => {
   const cartLoading = useCartStore((state) => state.isLoading);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [viewMode, setViewMode] = useState<'images' | '3d'>('images');
 
   // Check if this is the DOX product
   const isDoxProduct = handle?.toLowerCase().includes("dox");
+
+  // Extract 3D model from media if available
+  const model3d = useMemo(() => {
+    if (!product?.node?.media?.edges) return null;
+    
+    const model3dMedia = product.node.media.edges.find(
+      (edge) => edge.node.mediaContentType === 'MODEL_3D'
+    );
+    
+    if (!model3dMedia) return null;
+    
+    const model = model3dMedia.node as ShopifyMediaModel3d;
+    // Find GLB format (preferred for web)
+    const glbSource = model.sources.find(
+      (s) => s.format === 'glb' || s.mimeType === 'model/gltf-binary'
+    );
+    
+    return glbSource?.url || model.sources[0]?.url || null;
+  }, [product]);
+
+  const has3DModel = !!model3d;
 
   if (isLoading) {
     return (
@@ -112,35 +136,69 @@ const ProductDetail = () => {
         <section className="py-6 sm:py-10 lg:py-16 px-3 sm:px-4 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 xl:gap-16 items-start">
-              {/* Image Gallery */}
+              {/* Image Gallery / 3D Viewer */}
               <div className="space-y-3 sm:space-y-4">
-                {/* Main Image - Clickable for lightbox */}
-                <div
-                  className="product-image-container aspect-square rounded-xl sm:rounded-2xl -mx-3 sm:mx-0 cursor-pointer group relative"
-                  onClick={() => openLightbox(selectedImageIndex)}
-                >
-                  {selectedImage ? (
-                    <>
-                      <img
-                        src={selectedImage.url}
-                        alt={selectedImage.altText || product.node.title}
-                        className="w-full h-full object-cover"
-                      />
-                      {/* Expand icon overlay */}
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                        <div className="w-12 h-12 rounded-full bg-white/0 group-hover:bg-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
-                          <Expand className="w-5 h-5 text-white" />
+                {/* View Mode Toggle - Only show if 3D model exists */}
+                {has3DModel && (
+                  <div className="flex gap-2 mb-2">
+                    <Button
+                      variant={viewMode === 'images' ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => setViewMode('images')}
+                      className="flex items-center gap-2"
+                    >
+                      <Images size={16} />
+                      Images
+                    </Button>
+                    <Button
+                      variant={viewMode === '3d' ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => setViewMode('3d')}
+                      className="flex items-center gap-2"
+                    >
+                      <Box size={16} />
+                      3D View
+                    </Button>
+                  </div>
+                )}
+
+                {/* Main Image or 3D Viewer */}
+                {viewMode === '3d' && model3d ? (
+                  <div className="aspect-square rounded-xl sm:rounded-2xl -mx-3 sm:mx-0 overflow-hidden bg-card/50">
+                    <Model3DViewer 
+                      modelPath={model3d} 
+                      className="w-full h-full"
+                    />
+                  </div>
+                ) : (
+                  <div
+                    className="product-image-container aspect-square rounded-xl sm:rounded-2xl -mx-3 sm:mx-0 cursor-pointer group relative"
+                    onClick={() => openLightbox(selectedImageIndex)}
+                  >
+                    {selectedImage ? (
+                      <>
+                        <img
+                          src={selectedImage.url}
+                          alt={selectedImage.altText || product.node.title}
+                          className="w-full h-full object-cover"
+                        />
+                        {/* Expand icon overlay */}
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                          <div className="w-12 h-12 rounded-full bg-white/0 group-hover:bg-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
+                            <Expand className="w-5 h-5 text-white" />
+                          </div>
                         </div>
+                      </>
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-light-muted">
+                        No Image
                       </div>
-                    </>
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-light-muted">
-                      No Image
-                    </div>
-                  )}
-                </div>
-                {/* Thumbnails */}
-                {images.length > 1 && (
+                    )}
+                  </div>
+                )}
+
+                {/* Thumbnails - Only show in images mode */}
+                {viewMode === 'images' && images.length > 1 && (
                   <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-2 -mx-3 px-3 sm:mx-0 sm:px-0 scrollbar-luxury">
                     {images.map((img, index) => (
                       <button

@@ -6,6 +6,42 @@ export const SHOPIFY_STORE_PERMANENT_DOMAIN = 'vellvii-site-2h1iu.myshopify.com'
 export const SHOPIFY_STOREFRONT_URL = `https://${SHOPIFY_STORE_PERMANENT_DOMAIN}/api/${SHOPIFY_API_VERSION}/graphql.json`;
 export const SHOPIFY_STOREFRONT_TOKEN = 'ccac5d8a630596d8084334c5ca58fd93';
 
+// Media Types for 3D models, videos, and images
+export interface ShopifyMediaSource {
+  url: string;
+  format: string;
+  mimeType: string;
+}
+
+export interface ShopifyMediaImage {
+  mediaContentType: 'IMAGE';
+  image: {
+    url: string;
+    altText: string | null;
+  };
+}
+
+export interface ShopifyMediaModel3d {
+  mediaContentType: 'MODEL_3D';
+  alt: string | null;
+  sources: ShopifyMediaSource[];
+}
+
+export interface ShopifyMediaVideo {
+  mediaContentType: 'VIDEO';
+  sources: ShopifyMediaSource[];
+}
+
+export type ShopifyMedia = ShopifyMediaImage | ShopifyMediaModel3d | ShopifyMediaVideo;
+
+export interface ShopifyCollection {
+  node: {
+    id: string;
+    title: string;
+    handle: string;
+  };
+}
+
 // Product Types
 export interface ShopifyProduct {
   node: {
@@ -25,6 +61,11 @@ export interface ShopifyProduct {
           url: string;
           altText: string | null;
         };
+      }>;
+    };
+    media?: {
+      edges: Array<{
+        node: ShopifyMedia;
       }>;
     };
     variants: {
@@ -86,50 +127,83 @@ export async function storefrontApiRequest(query: string, variables: Record<stri
 }
 
 // GraphQL Queries
+// Product fragment for reuse
+const PRODUCT_FIELDS = `
+  id
+  title
+  description
+  handle
+  priceRange {
+    minVariantPrice {
+      amount
+      currencyCode
+    }
+  }
+  images(first: 10) {
+    edges {
+      node {
+        url
+        altText
+      }
+    }
+  }
+  media(first: 10) {
+    edges {
+      node {
+        mediaContentType
+        ... on MediaImage {
+          image {
+            url
+            altText
+          }
+        }
+        ... on Model3d {
+          alt
+          sources {
+            url
+            format
+            mimeType
+          }
+        }
+        ... on Video {
+          sources {
+            url
+            format
+            mimeType
+          }
+        }
+      }
+    }
+  }
+  variants(first: 20) {
+    edges {
+      node {
+        id
+        title
+        price {
+          amount
+          currencyCode
+        }
+        availableForSale
+        selectedOptions {
+          name
+          value
+        }
+      }
+    }
+  }
+  options {
+    name
+    values
+  }
+`;
+
 export const PRODUCTS_QUERY = `
   query GetProducts($first: Int!, $query: String) {
     products(first: $first, query: $query) {
       edges {
         node {
-          id
-          title
-          description
-          handle
-          priceRange {
-            minVariantPrice {
-              amount
-              currencyCode
-            }
-          }
-          images(first: 5) {
-            edges {
-              node {
-                url
-                altText
-              }
-            }
-          }
-          variants(first: 10) {
-            edges {
-              node {
-                id
-                title
-                price {
-                  amount
-                  currencyCode
-                }
-                availableForSale
-                selectedOptions {
-                  name
-                  value
-                }
-              }
-            }
-          }
-          options {
-            name
-            values
-          }
+          ${PRODUCT_FIELDS}
         }
       }
     }
@@ -139,44 +213,35 @@ export const PRODUCTS_QUERY = `
 export const PRODUCT_BY_HANDLE_QUERY = `
   query GetProductByHandle($handle: String!) {
     productByHandle(handle: $handle) {
-      id
+      ${PRODUCT_FIELDS}
+    }
+  }
+`;
+
+export const COLLECTIONS_QUERY = `
+  query GetCollections($first: Int!) {
+    collections(first: $first) {
+      edges {
+        node {
+          id
+          title
+          handle
+        }
+      }
+    }
+  }
+`;
+
+export const PRODUCTS_BY_COLLECTION_QUERY = `
+  query GetProductsByCollection($handle: String!, $first: Int!) {
+    collection(handle: $handle) {
       title
-      description
-      handle
-      priceRange {
-        minVariantPrice {
-          amount
-          currencyCode
-        }
-      }
-      images(first: 10) {
+      products(first: $first) {
         edges {
           node {
-            url
-            altText
+            ${PRODUCT_FIELDS}
           }
         }
-      }
-      variants(first: 20) {
-        edges {
-          node {
-            id
-            title
-            price {
-              amount
-              currencyCode
-            }
-            availableForSale
-            selectedOptions {
-              name
-              value
-            }
-          }
-        }
-      }
-      options {
-        name
-        values
       }
     }
   }

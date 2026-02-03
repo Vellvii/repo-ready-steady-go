@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useShopifyProducts } from "@/hooks/useShopifyProducts";
+import { useShopifyCollections, useShopifyProductsByCollection } from "@/hooks/useShopifyProducts";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ShopifyProduct } from "@/lib/shopify";
 import { SEO } from "@/components/SEO";
 import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
+import { cn } from "@/lib/utils";
 
 const ProductCard = ({ product }: { product: ShopifyProduct }) => {
   const image = product.node.images.edges[0]?.node;
@@ -51,8 +53,69 @@ const ProductSkeleton = () => (
   </div>
 );
 
+const CollectionFilterBar = ({
+  collections,
+  selectedCollection,
+  onSelect,
+  isLoading,
+}: {
+  collections: { node: { id: string; title: string; handle: string } }[];
+  selectedCollection: string | null;
+  onSelect: (handle: string | null) => void;
+  isLoading: boolean;
+}) => {
+  if (isLoading) {
+    return (
+      <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-2 scrollbar-luxury">
+        {[...Array(4)].map((_, i) => (
+          <Skeleton key={i} className="h-9 sm:h-10 w-20 sm:w-24 rounded-full bg-white/5 flex-shrink-0" />
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-2 scrollbar-luxury -mx-3 px-3 sm:mx-0 sm:px-0">
+      {/* All Products button */}
+      <button
+        onClick={() => onSelect(null)}
+        className={cn(
+          "flex-shrink-0 px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-montserrat text-xs sm:text-sm font-medium transition-all duration-300",
+          selectedCollection === null
+            ? "bg-primary text-primary-foreground shadow-glow"
+            : "bg-white/5 text-light-secondary hover:bg-white/10 hover:text-light-primary border border-white/10"
+        )}
+      >
+        All Products
+      </button>
+      
+      {/* Collection buttons */}
+      {collections.map((collection) => (
+        <button
+          key={collection.node.id}
+          onClick={() => onSelect(collection.node.handle)}
+          className={cn(
+            "flex-shrink-0 px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-montserrat text-xs sm:text-sm font-medium transition-all duration-300 whitespace-nowrap",
+            selectedCollection === collection.node.handle
+              ? "bg-primary text-primary-foreground shadow-glow"
+              : "bg-white/5 text-light-secondary hover:bg-white/10 hover:text-light-primary border border-white/10"
+          )}
+        >
+          {collection.node.title}
+        </button>
+      ))}
+    </div>
+  );
+};
+
 const Shop = () => {
-  const { data: products, isLoading, error } = useShopifyProducts(20);
+  const [selectedCollection, setSelectedCollection] = useState<string | null>(null);
+  
+  const { data: collections, isLoading: collectionsLoading } = useShopifyCollections(20);
+  const { data: products, isLoading: productsLoading, error } = useShopifyProductsByCollection(
+    selectedCollection,
+    20
+  );
 
   return (
     <>
@@ -77,9 +140,19 @@ const Shop = () => {
           </div>
         </div>
 
+        {/* Collection Filter Bar */}
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 -mt-2 sm:-mt-4 mb-6 sm:mb-8">
+          <CollectionFilterBar
+            collections={collections || []}
+            selectedCollection={selectedCollection}
+            onSelect={setSelectedCollection}
+            isLoading={collectionsLoading}
+          />
+        </div>
+
         {/* Products Grid - Responsive spacing and columns */}
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pb-16 sm:pb-24 -mt-4 sm:-mt-8">
-          {isLoading ? (
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pb-16 sm:pb-24">
+          {productsLoading ? (
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
               {[...Array(6)].map((_, i) => (
                 <ProductSkeleton key={i} />
@@ -100,7 +173,7 @@ const Shop = () => {
           ) : (
             <div className="text-center py-12 sm:py-20 px-4">
               <p className="text-light-secondary text-base sm:text-lg font-montserrat">
-                No products found.
+                No products found{selectedCollection ? " in this collection" : ""}.
               </p>
             </div>
           )}
