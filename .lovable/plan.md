@@ -1,162 +1,144 @@
 
+# Plan: Add Shopify 3D Model Support + Product Filtering
 
-# Professional Shop & Product Page Redesign
+## Overview
+This plan adds two major features:
+1. **3D Model Support** - Display 3D models uploaded to Shopify products on your website
+2. **Product Filtering** - Filter products by Shopify collections or tags
 
-## Competitor Analysis Summary
+---
 
-### LELO Design Patterns (Premium Leader)
-- **Dark, immersive backgrounds** with high-contrast product photography
-- **Full-width hero images** that make products the star
-- **Sticky navigation bar** with product info, color swatches, and pricing
-- **Tabbed content sections**: Product Info, Highlights, How To Use, Product Details
-- **Minimal text** - let imagery do the talking
-- **Strong typography hierarchy** with sans-serif headings and refined spacing
-- **Color swatches** as visual selectors (not dropdowns)
-- **Prominent sale/pricing** with strikethrough original price
+## Part 1: 3D Model Support
 
-### Sybian Design Patterns
-- **Lifestyle imagery** featuring people/atmosphere (not just product shots)
-- **Trust badges** prominently displayed (45-Day Trial, Free Shipping, etc.)
-- **Emotional headlines** focusing on benefits, not features
-- **Value proposition grid** with icons and short copy
-- **Clear CTAs** with contrasting button colors
+### How It Works
+When you upload a 3D model to a product in the Shopify app, it gets stored in Shopify's media library. We need to update our API queries to fetch the `media` object instead of just `images`, then display the 3D model using the existing `Model3DViewer` component.
 
-## Current Issues Identified
+### Changes Required
 
-1. **Readability problems**: Light text on gradient backgrounds causing strain
-2. **Inconsistent styling**: Mix of glass effects that don't always provide enough contrast
-3. **Generic product cards**: Lack the premium feel of competitor sites
-4. **Missing trust elements**: No visible badges for shipping, warranty, returns
-5. **Weak visual hierarchy**: Product images too small, not commanding attention
-6. **Footer still has legacy "Crafted by" link** in DOX.tsx (violates brand policy)
+#### 1. Update Shopify Types (`src/lib/shopify.ts`)
+Add media types to handle 3D models:
+- Add `ShopifyMedia` type with support for `Image`, `Model3d`, and `Video` media types
+- Extend `ShopifyProduct` interface to include media edges
 
-## Implementation Plan
-
-### Phase 1: Core Design System Updates
-
-**File: `src/index.css`**
-- Add new utility classes for dark surfaces with proper text contrast
-- Create `.surface-dark` for dark product sections (similar to LELO's dark aesthetic)
-- Add `.text-on-dark` and `.text-on-light` utility classes for guaranteed readability
-- Enhance button styles with proper hover states
-- Add trust badge styling
-
-### Phase 2: Shop Page Redesign (`src/pages/Shop.tsx`)
-
-Transform the collection page into a premium shopping experience:
-
-- **Hero Section**: Full-width brand banner with "The Collection" headline on dark background
-- **Product Grid**: 
-  - Larger product images (16:9 or 4:3 aspect ratio for impact)
-  - Dark card backgrounds with light text (like LELO)
-  - Rose gold accents on hover and borders
-  - Remove "Add to Cart" button from cards (like LELO - click leads to detail)
-  - Add subtle price display
-- **Improved loading skeletons** matching the new dark aesthetic
-
-### Phase 3: Product Detail Page Redesign (`src/pages/ProductDetail.tsx`)
-
-Create an immersive, LELO-inspired product experience:
-
-- **Full-width Hero Section**:
-  - Dark background spanning viewport width
-  - Large product image (main focus)
-  - Product title, price, and Add to Cart on the side
-  - Color variant swatches (if applicable)
-  
-- **Sticky Product Bar**:
-  - Appears on scroll with product name, price, and quick Add to Cart
-  - Similar to LELO's bottom bar
-  
-- **Trust Badges Section**:
-  - Icons with "Free Shipping", "Discreet Packaging", "1-Year Warranty", "30-Day Returns"
-  - Horizontal layout, subtle styling
-  
-- **Product Description**:
-  - Clean, readable typography on proper backgrounds
-  - Section breaks with visual dividers
-  
-- **Image Gallery**:
-  - Larger thumbnail previews
-  - Smooth transitions between images
-
-### Phase 4: Cart Drawer Polish (`src/components/CartDrawer.tsx`)
-
-- Ensure dark background with rose gold accents
-- High-contrast text throughout
-- Refined product item cards
-- Clear visual hierarchy for totals
-
-### Phase 5: Legacy Page Cleanup (`src/pages/DOX.tsx`, etc.)
-
-- Remove "Crafted by Lumaro Studios" footer attribution (per brand policy)
-- Add `PrelaunchFooter` component
-- Ensure consistent dark aesthetic with readable text
-
-## Visual Design Specifications
-
-### Color Usage
-- **Backgrounds**: Dark surfaces using `hsl(15, 15%, 8%)` to `hsl(15, 12%, 12%)`
-- **Text on Dark**: Pure white (`#ffffff`) for headings, `rgba(255,255,255,0.85)` for body
-- **Accents**: Rose gold (`hsl(40, 65%, 72%)`) for buttons, borders, highlights
-- **Cards**: `hsl(15, 15%, 12%)` with subtle border `rgba(255,255,255,0.08)`
-
-### Typography
-- Headings: Baskerville, bold, generous letter-spacing
-- Body: Montserrat, regular/medium weight
-- Prices: Montserrat, bold, rose gold gradient or solid rose gold
-
-### Spacing
-- Generous padding (32-64px sections)
-- Product images given visual breathing room
-- Trust badges with icon + text alignment
-
-## Technical Implementation Details
-
-### New CSS Classes to Add
-```css
-.surface-dark {
-  background: linear-gradient(180deg, hsl(15, 12%, 8%) 0%, hsl(15, 15%, 10%) 100%);
-}
-
-.card-dark {
-  background: hsl(15, 15%, 12%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.text-light-primary {
-  color: rgba(255, 255, 255, 0.95);
-}
-
-.text-light-secondary {
-  color: rgba(255, 255, 255, 0.7);
+#### 2. Update GraphQL Queries (`src/lib/shopify.ts`)
+Modify `PRODUCTS_QUERY` and `PRODUCT_BY_HANDLE_QUERY` to fetch media:
+```text
+media(first: 10) {
+  edges {
+    node {
+      mediaContentType
+      ... on MediaImage {
+        image { url altText }
+      }
+      ... on Model3d {
+        sources { url format mimeType }
+        alt
+      }
+      ... on Video {
+        sources { url format mimeType }
+      }
+    }
+  }
 }
 ```
 
-### Component Structure Changes
-- Shop page: Remove inline "Add to Cart", link entire card to product detail
-- ProductDetail: Add sticky bar component, trust badges component
-- Both pages: Use dark surfaces as primary background
+#### 3. Update Product Detail Page (`src/pages/ProductDetail.tsx`)
+- Import the existing `Model3DViewer` component
+- Detect if product has 3D model in media
+- Add toggle buttons (Images / 3D View) when a 3D model exists
+- Display the 3D model using the existing viewer component
+- Keep current image gallery as the default view
 
-## Files to Modify
+#### 4. Update Product Hooks (if needed)
+Ensure the hooks properly pass through the new media data structure.
 
-| File | Changes |
-|------|---------|
-| `src/index.css` | Add dark surface utilities, trust badge styles |
-| `src/pages/Shop.tsx` | Complete redesign with dark aesthetic, larger images |
-| `src/pages/ProductDetail.tsx` | LELO-inspired layout, sticky bar, trust badges |
-| `src/components/CartDrawer.tsx` | Minor polish for consistency |
-| `src/pages/DOX.tsx` | Remove footer attribution, add PrelaunchFooter |
-| `src/pages/GVibe.tsx` | Ensure PrelaunchFooter, remove any legacy credits |
-| `src/pages/Pulse.tsx` | Ensure PrelaunchFooter, remove any legacy credits |
-| `src/pages/Vibe.tsx` | Ensure PrelaunchFooter, remove any legacy credits |
+---
 
-## Expected Outcome
+## Part 2: Product Filtering by Collections/Tags
 
-A cohesive, professional shopping experience that:
-- Matches or exceeds the polish of LELO and Sybian
-- Maintains Vellvii's champagne gold/rose gold brand identity
-- Prioritizes readability with high-contrast dark surfaces
-- Builds trust with clear badges and warranties
-- Creates an immersive, luxury feel befitting the brand
+### How It Works
+Shopify collections let you group products. We'll fetch available collections and add filter buttons on the shop page.
 
+### Changes Required
+
+#### 1. Add Collections Query (`src/lib/shopify.ts`)
+Add a new GraphQL query to fetch collections:
+```text
+query GetCollections {
+  collections(first: 20) {
+    edges {
+      node {
+        id
+        title
+        handle
+        productsCount
+      }
+    }
+  }
+}
+```
+
+#### 2. Add Products by Collection Query
+Modify the products query to support filtering by collection:
+```text
+query GetProductsByCollection($handle: String!, $first: Int!) {
+  collection(handle: $handle) {
+    products(first: $first) {
+      edges { node { ... } }
+    }
+  }
+}
+```
+
+#### 3. Add Collection Hooks (`src/hooks/useShopifyProducts.ts`)
+- Add `useShopifyCollections()` hook to fetch all collections
+- Add `useShopifyProductsByCollection(handle)` hook for filtered products
+
+#### 4. Update Shop Page (`src/pages/Shop.tsx`)
+- Add horizontal scrollable filter bar below the hero
+- Show "All Products" plus each collection as filter buttons
+- Track selected filter in state
+- Fetch appropriate products based on selection
+
+---
+
+## Technical Details
+
+### Files to Modify
+1. `src/lib/shopify.ts` - Types and queries
+2. `src/hooks/useShopifyProducts.ts` - New hooks
+3. `src/pages/ProductDetail.tsx` - 3D viewer integration
+4. `src/pages/Shop.tsx` - Collection filter UI
+
+### Dependencies
+- Already have `@react-three/fiber` and `@react-three/drei` installed
+- Already have `Model3DViewer` component ready
+
+### Cache Behavior
+- 5-minute stale time on product data
+- Hard refresh or waiting 5 minutes will show updated data from Shopify
+- Can reduce stale time if more immediate updates are needed
+
+---
+
+## User Experience
+
+### 3D Models on Product Pages
+- If a product has a 3D model, show "Images | 3D View" toggle buttons
+- Default to images view
+- 3D view shows interactive model that can be rotated/zoomed
+- Graceful fallback if 3D model fails to load
+
+### Collection Filtering on Shop Page
+- Clean horizontal filter bar with collection names
+- Rose gold highlight for active filter
+- Smooth loading states when switching filters
+- Mobile-friendly scrollable filter bar
+
+---
+
+## Next Steps After Implementation
+1. Upload a 3D model to a product in Shopify to test
+2. Create collections in Shopify (Vibes, Storage, etc.)
+3. Assign products to collections
+4. Verify filtering works on the shop page
