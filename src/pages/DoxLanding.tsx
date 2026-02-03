@@ -37,7 +37,7 @@ const DoxLanding = () => {
           <div className="container mx-auto px-4 sm:px-6">
             <div className="flex items-center justify-between h-16">
               {/* Logo */}
-              <Link to="/" className="flex items-center">
+              <Link to="/" className="flex items-center flex-shrink-0">
                 <img
                   src="/uploads/Vellvii-full-logo-transparent.png"
                   alt="Vellvii"
@@ -45,32 +45,32 @@ const DoxLanding = () => {
                 />
               </Link>
 
-              {/* Desktop Navigation */}
-              <nav className="hidden md:flex items-center gap-8">
+              {/* Desktop Navigation - with right padding for cart button */}
+              <nav className="hidden md:flex items-center gap-6 lg:gap-8 pr-28">
                 <Link
                   to="/shop"
-                  className="font-montserrat text-sm text-light-secondary hover:text-primary transition-colors tracking-wide"
+                  className="font-montserrat text-sm text-light-secondary hover:text-primary transition-colors tracking-wide whitespace-nowrap"
                 >
                   Shop
                 </Link>
                 <Link
                   to="/about"
-                  className="font-montserrat text-sm text-light-secondary hover:text-primary transition-colors tracking-wide"
+                  className="font-montserrat text-sm text-light-secondary hover:text-primary transition-colors tracking-wide whitespace-nowrap"
                 >
                   About
                 </Link>
                 <Link
                   to="/contact"
-                  className="font-montserrat text-sm text-light-secondary hover:text-primary transition-colors tracking-wide"
+                  className="font-montserrat text-sm text-light-secondary hover:text-primary transition-colors tracking-wide whitespace-nowrap"
                 >
                   Contact
                 </Link>
               </nav>
 
-              {/* Mobile Menu Button */}
+              {/* Mobile Menu Button - positioned with right margin for cart button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 text-light-secondary hover:text-primary transition-colors"
+                className="md:hidden p-2 text-light-secondary hover:text-primary transition-colors mr-16"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
