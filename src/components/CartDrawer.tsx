@@ -39,15 +39,14 @@ export const CartDrawer = () => {
 
   return (
     <>
-      {/* Sticky Buy Now/Cart Trigger Button - hidden when drawer is open */}
+      {/* Sticky Buy Now/Cart Trigger Button - Show Shop when empty, Cart when items exist */}
       {!isOpen && (
         <Button
           className="fixed top-4 right-4 z-[999] bg-primary text-primary-foreground hover:bg-primary/90 shadow-luxury pulse-glow font-montserrat font-semibold"
-          onClick={() => setIsOpen(true)}
+          onClick={() => totalItems > 0 ? setIsOpen(true) : window.location.href = '/shop'}
         >
           <ShoppingCart className="w-4 h-4 mr-2" />
-          {totalItems > 0 ? 'Cart' : 'Buy Now'}
-          {totalItems > 0 && ` (${totalItems})`}
+          {totalItems > 0 ? `Cart (${totalItems})` : 'Shop Now'}
         </Button>
       )}
 
