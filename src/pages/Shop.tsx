@@ -260,18 +260,17 @@ const Shop = () => {
         description="Explore the Vellvii collection of luxury wellness products designed for privacy, elegance, and modern living."
       />
       <div className="min-h-screen surface-dark-rich">
-        {/* Hero Section */}
-        <div className="collection-hero pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 px-4 sm:px-6">
+        {/* Hero Section - Compact */}
+        <div className="pt-20 sm:pt-24 pb-6 sm:pb-8 px-4 sm:px-6">
           <div className="relative z-10 max-w-4xl mx-auto text-center">
-            <p className="text-primary font-montserrat text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] mb-3 sm:mb-4">
+            <p className="text-primary font-montserrat text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] mb-2">
               Luxury Wellness
             </p>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-baskerville font-bold text-light-primary mb-4 sm:mb-6">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-baskerville font-bold text-light-primary mb-2 sm:mb-3">
               The <span className="gradient-text">Collection</span>
             </h1>
-            <p className="text-light-secondary text-base sm:text-lg md:text-xl max-w-2xl mx-auto font-montserrat leading-relaxed mb-8 sm:mb-10">
-              Refined wellness products designed for privacy, elegance, and
-              modern living.
+            <p className="text-light-secondary text-sm sm:text-base max-w-xl mx-auto font-montserrat leading-relaxed mb-5 sm:mb-6">
+              Refined wellness products designed for privacy, elegance, and modern living.
             </p>
             
             {/* Search Bar */}
