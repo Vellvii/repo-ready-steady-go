@@ -66,11 +66,26 @@ const ProductDetail = () => {
       const altText = img.node.altText?.toLowerCase() || '';
       const url = img.node.url?.toLowerCase() || '';
       
-      // Check for color in alt text or URL (handles various naming conventions)
-      return altText.includes(selectedColor) || 
-             url.includes(selectedColor) ||
-             url.includes(selectedColor.replace(' ', '-')) ||
-             url.includes(selectedColor.replace(' ', '_'));
+      // Extract filename from URL for better matching
+      const filename = url.split('/').pop()?.split('?')[0] || '';
+      
+      // Check for color in alt text, full URL, or filename
+      // Also check if filename STARTS with the color (e.g., "redclosefrontleft.png")
+      const colorVariants = [
+        selectedColor,
+        selectedColor.replace(' ', '-'),
+        selectedColor.replace(' ', '_'),
+        selectedColor.replace(' ', ''),
+      ];
+      
+      return colorVariants.some((colorVar) => 
+        altText.includes(colorVar) || 
+        filename.includes(colorVar) ||
+        filename.startsWith(colorVar) ||
+        // Also check for dox-color pattern in alt text (e.g., "dox-red.jpg")
+        altText.includes(`dox-${colorVar}`) ||
+        altText.includes(`dox_${colorVar}`)
+      );
     });
     
     // If we found color-matched images, use those; otherwise show all
