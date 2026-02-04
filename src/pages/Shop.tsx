@@ -4,6 +4,7 @@ import { useShopifyProducts, useShopifyCollections, useShopifyProductsByCollecti
 import { Skeleton } from "@/components/ui/skeleton";
 import { ShopifyProduct } from "@/lib/shopify";
 import { SEO } from "@/components/SEO";
+import { ScrollHeader } from "@/components/ScrollHeader";
 import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
 import { cn } from "@/lib/utils";
 import { Search, X } from "lucide-react";
@@ -260,6 +261,9 @@ const Shop = () => {
         description="Explore the Vellvii collection of luxury wellness products designed for privacy, elegance, and modern living."
       />
       <div className="min-h-screen surface-dark-rich">
+        {/* Scroll-aware Navigation Header */}
+        <ScrollHeader />
+        
         {/* Hero Section - Compact */}
         <div className="pt-20 sm:pt-24 pb-6 sm:pb-8 px-4 sm:px-6">
           <div className="relative z-10 max-w-4xl mx-auto text-center">
