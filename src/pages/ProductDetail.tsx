@@ -6,7 +6,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { ShoppingCart, Loader2, ArrowLeft, Expand, Images, Box } from "lucide-react";
 import { toast } from "sonner";
 import { SEO } from "@/components/SEO";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
 import { TrustBadges } from "@/components/TrustBadges";
 import { StickyProductBar } from "@/components/StickyProductBar";
@@ -24,9 +24,56 @@ const ProductDetail = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'images' | '3d'>('images');
+  const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({});
 
   // Check if this is the DOX product
   const isDoxProduct = handle?.toLowerCase().includes("dox");
+
+  // Initialize selected options when product loads
+  useEffect(() => {
+    if (product?.node?.variants?.edges?.[0]?.node?.selectedOptions) {
+      const initialOptions: Record<string, string> = {};
+      product.node.variants.edges[0].node.selectedOptions.forEach((opt) => {
+        initialOptions[opt.name] = opt.value;
+      });
+      setSelectedOptions(initialOptions);
+    }
+  }, [product]);
+
+  // Find the selected variant based on selected options
+  const selectedVariant = useMemo(() => {
+    if (!product?.node?.variants?.edges) return null;
+    
+    return product.node.variants.edges.find((v) => {
+      return v.node.selectedOptions.every(
+        (opt) => selectedOptions[opt.name] === opt.value
+      );
+    })?.node || product.node.variants.edges[0]?.node;
+  }, [product, selectedOptions]);
+
+  // Find images that match the selected color (by alt text or position)
+  const filteredImages = useMemo(() => {
+    if (!product?.node?.images?.edges) return [];
+    
+    const allImages = product.node.images.edges;
+    const selectedColor = selectedOptions['Color']?.toLowerCase();
+    
+    if (!selectedColor) return allImages;
+    
+    // Try to find images with matching alt text containing the color
+    const colorMatchedImages = allImages.filter((img) => {
+      const altText = img.node.altText?.toLowerCase() || '';
+      return altText.includes(selectedColor);
+    });
+    
+    // If we found color-matched images, use those; otherwise show all
+    return colorMatchedImages.length > 0 ? colorMatchedImages : allImages;
+  }, [product, selectedOptions]);
+
+  // Reset image index when color changes
+  useEffect(() => {
+    setSelectedImageIndex(0);
+  }, [selectedOptions['Color']]);
 
   // Extract 3D model from media if available
   const model3d = useMemo(() => {
@@ -48,6 +95,14 @@ const ProductDetail = () => {
   }, [product]);
 
   const has3DModel = !!model3d;
+
+  // Handle option change
+  const handleOptionChange = (optionName: string, value: string) => {
+    setSelectedOptions((prev) => ({
+      ...prev,
+      [optionName]: value,
+    }));
+  };
 
   if (isLoading) {
     return (
@@ -85,10 +140,10 @@ const ProductDetail = () => {
     );
   }
 
-  const variant = product.node.variants.edges[0]?.node;
-  const images = product.node.images.edges;
+  const variant = selectedVariant;
+  const images = filteredImages;
   const selectedImage = images[selectedImageIndex]?.node;
-  const price = parseFloat(product.node.priceRange.minVariantPrice.amount);
+  const price = variant ? parseFloat(variant.price.amount) : parseFloat(product.node.priceRange.minVariantPrice.amount);
 
   const handleAddToCart = async () => {
     if (!variant) return;
@@ -243,6 +298,70 @@ const ProductDetail = () => {
                     {product.node.description}
                   </p>
                 </div>
+
+                {/* Variant Options (Color, Size, etc.) */}
+                {product.node.options && product.node.options.length > 0 && (
+                  <div className="space-y-4">
+                    {product.node.options.map((option) => (
+                      <div key={option.name} className="space-y-2">
+                        <label className="text-light-primary font-montserrat text-sm font-medium">
+                          {option.name}: <span className="text-primary">{selectedOptions[option.name]}</span>
+                        </label>
+                        <div className="flex flex-wrap gap-2">
+                          {option.values.map((value) => {
+                            const isSelected = selectedOptions[option.name] === value;
+                            const isColor = option.name.toLowerCase() === 'color';
+                            
+                            // Color swatch styling
+                            if (isColor) {
+                              const colorMap: Record<string, string> = {
+                                'black': '#1a1a1a',
+                                'midnight black': '#1a1a1a',
+                                'red': '#8B0000',
+                                'deep red': '#8B0000',
+                                'cream': '#F5F5DC',
+                                'white': '#FFFFFF',
+                                'rose gold': '#B76E79',
+                                'pink': '#FFC0CB',
+                              };
+                              const bgColor = colorMap[value.toLowerCase()] || '#808080';
+                              
+                              return (
+                                <button
+                                  key={value}
+                                  onClick={() => handleOptionChange(option.name, value)}
+                                  className={`w-10 h-10 rounded-full border-2 transition-all duration-200 ${
+                                    isSelected 
+                                      ? 'border-primary ring-2 ring-primary ring-offset-2 ring-offset-background' 
+                                      : 'border-white/20 hover:border-primary/50'
+                                  }`}
+                                  style={{ backgroundColor: bgColor }}
+                                  title={value}
+                                  aria-label={`Select ${value}`}
+                                />
+                              );
+                            }
+                            
+                            // Default button styling for other options
+                            return (
+                              <button
+                                key={value}
+                                onClick={() => handleOptionChange(option.name, value)}
+                                className={`px-4 py-2 rounded-lg border transition-all duration-200 font-montserrat text-sm ${
+                                  isSelected
+                                    ? 'border-primary bg-primary/20 text-primary'
+                                    : 'border-white/20 text-light-secondary hover:border-primary/50 hover:text-light-primary'
+                                }`}
+                              >
+                                {value}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
 
                 {/* Add to Cart Button */}
                 <Button
