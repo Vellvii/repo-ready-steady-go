@@ -15,6 +15,7 @@ import { DoxVideoSection } from "@/components/DoxVideoSection";
 import { RelatedProducts } from "@/components/RelatedProducts";
 import { Model3DViewer } from "@/components/Model3DViewer";
 import { ShopifyMediaModel3d } from "@/lib/shopify";
+import { ScrollHeader } from "@/components/ScrollHeader";
 
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
@@ -180,8 +181,11 @@ const ProductDetail = () => {
         description={product.node.description.slice(0, 160)}
       />
       <div className="min-h-screen surface-dark-rich">
+        {/* Scroll-aware Navigation Header */}
+        <ScrollHeader />
+
         {/* Back Navigation */}
-        <div className="pt-16 sm:pt-20 px-3 sm:px-4 lg:px-8">
+        <div className="pt-20 sm:pt-24 px-3 sm:px-4 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <Link
               to="/shop"
