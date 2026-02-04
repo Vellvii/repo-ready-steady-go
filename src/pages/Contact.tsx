@@ -243,11 +243,16 @@ const Contact = () => {
               <h2 className="text-2xl sm:text-3xl font-baskerville font-bold text-light-primary mb-4">
                 Our Location
               </h2>
-              <p className="text-xl font-baskerville text-primary mb-3">
-                Delaware, USA
-              </p>
+              <div className="space-y-2 mb-4">
+                <p className="text-lg font-baskerville text-primary">
+                  1309 Coffeen Avenue
+                </p>
+                <p className="text-light-secondary font-montserrat text-sm sm:text-base">
+                  Sheridan, Wyoming 82801
+                </p>
+              </div>
               <p className="text-light-secondary font-montserrat text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
-                We operate primarily online to serve customers worldwide with discretion and privacy.
+                We currently operate online to serve customers worldwide with discretion and privacy. Brick and mortar store coming soon.
               </p>
             </motion.div>
           </div>
