@@ -59,37 +59,53 @@ const ProductDetail = () => {
     const allImages = product.node.images.edges;
     const selectedColor = selectedOptions['Color']?.toLowerCase();
     
+    // If no color selected or product has no color option, show all images
     if (!selectedColor) return allImages;
     
-    // Try to find images with matching alt text or URL containing the color
-    const colorMatchedImages = allImages.filter((img) => {
+    // Helper function to check if image matches a color
+    const imageMatchesColor = (img: typeof allImages[0], color: string) => {
       const altText = img.node.altText?.toLowerCase() || '';
       const url = img.node.url?.toLowerCase() || '';
-      
-      // Extract filename from URL for better matching
       const filename = url.split('/').pop()?.split('?')[0] || '';
       
-      // Check for color in alt text, full URL, or filename
-      // Also check if filename STARTS with the color (e.g., "redclosefrontleft.png")
       const colorVariants = [
-        selectedColor,
-        selectedColor.replace(' ', '-'),
-        selectedColor.replace(' ', '_'),
-        selectedColor.replace(' ', ''),
+        color,
+        color.replace(' ', '-'),
+        color.replace(' ', '_'),
+        color.replace(' ', ''),
       ];
       
       return colorVariants.some((colorVar) => 
         altText.includes(colorVar) || 
         filename.includes(colorVar) ||
         filename.startsWith(colorVar) ||
-        // Also check for dox-color pattern in alt text (e.g., "dox-red.jpg")
         altText.includes(`dox-${colorVar}`) ||
         altText.includes(`dox_${colorVar}`)
       );
-    });
+    };
     
-    // If we found color-matched images, use those; otherwise show all
-    return colorMatchedImages.length > 0 ? colorMatchedImages : allImages;
+    // Find images matching selected color
+    const colorMatchedImages = allImages.filter((img) => imageMatchesColor(img, selectedColor));
+    
+    // If we found color-matched images, use those
+    if (colorMatchedImages.length > 0) {
+      return colorMatchedImages;
+    }
+    
+    // Fallback: Find images that DON'T match any OTHER color variant
+    // This prevents showing "Red" images when "Beige" is selected
+    const otherColors = (product.node.options
+      ?.find(opt => opt.name.toLowerCase() === 'color')
+      ?.values || [])
+      .map(v => v.toLowerCase())
+      .filter(c => c !== selectedColor);
+    
+    const neutralImages = allImages.filter((img) => 
+      !otherColors.some(otherColor => imageMatchesColor(img, otherColor))
+    );
+    
+    // Return neutral images if any, otherwise just the first image as placeholder
+    return neutralImages.length > 0 ? neutralImages : allImages.slice(0, 1);
   }, [product, selectedOptions]);
 
   // Reset image index when color changes
