@@ -4,8 +4,6 @@ import { useInView } from "react-intersection-observer";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
-const RESERVE_URL = "https://prelaunch.com/projects/5ff3ce3f-6669-4243-918c-4d57d98b63f6/reservation";
-
 export const FinalCTA = () => {
   const [ref, inView] = useInView({
     threshold: 0.3,
@@ -64,15 +62,14 @@ export const FinalCTA = () => {
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </Link>
-            <a href={RESERVE_URL} target="_blank" rel="noopener noreferrer">
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-primary/30 text-primary hover:bg-primary/10 font-montserrat tracking-wide px-10 py-6 text-base w-full sm:w-auto"
-              >
-                Reserve Your DOX
-              </Button>
-            </a>
+            <Button
+              variant="outline"
+              size="lg"
+              disabled
+              className="border-primary/30 text-primary/60 font-montserrat tracking-wide px-10 py-6 text-base w-full sm:w-auto cursor-not-allowed"
+            >
+              Crowdfunding Coming Soon
+            </Button>
           </motion.div>
         </div>
       </div>

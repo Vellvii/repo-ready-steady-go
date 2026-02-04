@@ -10,7 +10,7 @@ import { PageTransition } from "./components/animations/PageTransition";
 import CartDrawer from "./components/CartDrawer";
 import { useCartSync } from "./hooks/useCartSync";
 import { ErrorBoundary } from "./components/ErrorBoundary";
-import Landing from "./pages/Landing";
+import AgeGateLanding from "./pages/Landing";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Products from "./pages/Products";
@@ -25,7 +25,7 @@ import SexSaddle from "./pages/SexSaddle";
 import NotFound from "./pages/NotFound";
 import PrelaunchDOX from "./pages/PrelaunchDOX";
 import PrelaunchLux from "./pages/PrelaunchLux";
-import DoxLanding from "./pages/DoxLanding";
+import Landing from "./pages/DoxLanding";
 import Video1 from "./pages/Video1";
 import Video2 from "./pages/Video2";
 import Video3 from "./pages/Video3";
@@ -50,12 +50,12 @@ const InnerApp = () => {
       <SmoothScroll>
         <PageTransition>
           <Routes>
-            <Route path="/" element={<DoxLanding />} />
+            <Route path="/" element={<Landing />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/product/:handle" element={<ProductDetail />} />
             <Route path="/products" element={<Navigate to="/shop" replace />} />
             <Route path="/prelaunch-dox" element={<PrelaunchDOX />} />
-            <Route path="/landing" element={<Landing />} />
+            <Route path="/landing" element={<AgeGateLanding />} />
             <Route path="/Vellvii-Lux" element={<PrelaunchLux />} />
             <Route path="/v/1" element={<Video1 />} />
             <Route path="/v/2" element={<Video2 />} />
