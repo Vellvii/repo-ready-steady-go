@@ -36,6 +36,7 @@ import Video7 from "./pages/Video7";
 import Video8 from "./pages/Video8";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
+import Warranty from "./pages/Warranty";
 import Shop from "./pages/Shop";
 import ProductDetail from "./pages/ProductDetail";
 
@@ -77,6 +78,7 @@ const InnerApp = () => {
             <Route path="/sex-saddle" element={<SexSaddle />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
+            <Route path="/warranty" element={<Warranty />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </PageTransition>

@@ -86,9 +86,11 @@ export const LuxFooter = () => {
 
           {/* Links */}
           <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
-            <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
+            <a href="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</a>
             <span className="text-muted-foreground/60">•</span>
-            <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
+            <a href="/warranty" className="hover:text-primary transition-colors">Warranty</a>
+            <span className="text-muted-foreground/60">•</span>
+            <a href="/terms-of-service" className="hover:text-primary transition-colors">Terms of Service</a>
           </div>
 
           {/* Copyright */}

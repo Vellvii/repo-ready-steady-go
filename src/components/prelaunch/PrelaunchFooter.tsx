@@ -86,6 +86,8 @@ export const PrelaunchFooter = () => {
             <span className="text-light-muted hidden sm:inline">•</span>
             <a href="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</a>
             <span className="text-light-muted hidden sm:inline">•</span>
+            <a href="/warranty" className="hover:text-primary transition-colors">Warranty</a>
+            <span className="text-light-muted hidden sm:inline">•</span>
             <a href="/terms-of-service" className="hover:text-primary transition-colors">Terms of Service</a>
           </div>
 
