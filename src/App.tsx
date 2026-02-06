@@ -52,7 +52,8 @@ const InnerApp = () => {
       <SmoothScroll>
         <PageTransition>
           <Routes>
-            <Route path="/" element={<Landing />} />
+            <Route path="/" element={<PrelaunchDOX />} />
+            <Route path="/showcase" element={<Landing />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/products/:handle" element={<ProductDetail />} />
             <Route path="/product/:handle" element={<Navigate to="/products/:handle" replace />} />
