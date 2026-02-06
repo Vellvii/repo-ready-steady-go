@@ -25,7 +25,8 @@ import SexSaddle from "./pages/SexSaddle";
 import NotFound from "./pages/NotFound";
 import PrelaunchDOX from "./pages/PrelaunchDOX";
 import PrelaunchLux from "./pages/PrelaunchLux";
-import Landing from "./pages/DoxLanding";
+import DoxLanding from "./pages/DoxLanding";
+import DoxVideoLanding from "./pages/DoxVideoLanding";
 import Video1 from "./pages/Video1";
 import Video2 from "./pages/Video2";
 import Video3 from "./pages/Video3";
@@ -52,11 +53,12 @@ const InnerApp = () => {
       <SmoothScroll>
         <PageTransition>
           <Routes>
-            <Route path="/" element={<PrelaunchDOX />} />
-            <Route path="/showcase" element={<Landing />} />
+            <Route path="/" element={<DoxVideoLanding />} />
+            <Route path="/showcase" element={<DoxLanding />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/products/:handle" element={<ProductDetail />} />
             <Route path="/product/:handle" element={<Navigate to="/products/:handle" replace />} />
+            <Route path="/prelaunch" element={<PrelaunchDOX />} />
             <Route path="/prelaunch-dox" element={<PrelaunchDOX />} />
             <Route path="/landing" element={<AgeGateLanding />} />
             <Route path="/Vellvii-Lux" element={<PrelaunchLux />} />
