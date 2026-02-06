@@ -37,6 +37,7 @@ import Video8 from "./pages/Video8";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Warranty from "./pages/Warranty";
+import WarrantyRegister from "./pages/WarrantyRegister";
 import Shop from "./pages/Shop";
 import ProductDetail from "./pages/ProductDetail";
 
@@ -79,6 +80,7 @@ const InnerApp = () => {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/warranty" element={<Warranty />} />
+            <Route path="/warranty/register" element={<WarrantyRegister />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </PageTransition>

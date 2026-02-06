@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
 import { ScrollHeader } from "@/components/ScrollHeader";
-import { Shield, CheckCircle, XCircle, Mail, AlertTriangle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Shield, CheckCircle, XCircle, Mail, AlertTriangle, QrCode, ArrowRight } from "lucide-react";
 
 const Warranty = () => {
   return (
@@ -29,6 +30,58 @@ const Warranty = () => {
               Our Promise of Lasting Quality
             </p>
           </div>
+
+          {/* Registration Required Section */}
+          <section className="mb-16">
+            <div className="bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20 rounded-2xl p-8 sm:p-10">
+              <div className="flex items-start gap-4 mb-6">
+                <div className="p-3 rounded-xl bg-primary/20">
+                  <QrCode className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-light-primary font-baskerville mb-2">
+                    Registration Required
+                  </h2>
+                  <p className="text-light-secondary">
+                    Your warranty must be registered to receive service
+                  </p>
+                </div>
+              </div>
+              
+              <div className="space-y-4 text-light-secondary mb-8">
+                <p>
+                  To activate your warranty coverage, you must register your product using the 
+                  QR code included with your DOX or LUX. We recommend registering within 
+                  <strong className="text-light-primary"> 7 days of purchase</strong>, though 
+                  there is no hard deadline.
+                </p>
+                <div className="bg-background/50 rounded-xl p-4 border border-white/5">
+                  <p className="text-sm flex items-start gap-2">
+                    <AlertTriangle className="w-4 h-4 text-destructive flex-shrink-0 mt-0.5" />
+                    <span>
+                      <strong className="text-light-primary">Important:</strong> Unregistered 
+                      products cannot receive warranty service. Please ensure you register 
+                      before filing any claims.
+                    </span>
+                  </p>
+                </div>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link to="/warranty/register" className="flex-1">
+                  <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-6">
+                    <QrCode className="w-5 h-5 mr-2" />
+                    Register Your Warranty
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </Link>
+              </div>
+              
+              <p className="text-sm text-muted-foreground mt-4 text-center">
+                Already registered? Save your registration ID for future claims.
+              </p>
+            </div>
+          </section>
 
           {/* Lifetime Warranty Section */}
           <section className="mb-16">
