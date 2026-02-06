@@ -32,11 +32,11 @@ const Warranty = () => {
 
           {/* Lifetime Warranty Section */}
           <section className="mb-16">
-            <div className="bg-card/50 border border-border rounded-2xl p-8 sm:p-10">
-              <h2 className="text-2xl sm:text-3xl font-bold text-foreground font-baskerville mb-6">
+            <div className="bg-surface-dark border border-white/10 rounded-2xl p-8 sm:p-10">
+              <h2 className="text-2xl sm:text-3xl font-bold text-light-primary font-baskerville mb-6">
                 DOX & LUX Lifetime Warranty
               </h2>
-              <p className="text-muted-foreground mb-8 leading-relaxed">
+              <p className="text-light-secondary mb-8 leading-relaxed">
                 Your Vellvii DOX and Vellvii LUX storage products are built to last a lifetime. 
                 We stand behind our craftsmanship with a comprehensive lifetime warranty covering 
                 manufacturing defects and material failures under normal use.
@@ -44,11 +44,11 @@ const Warranty = () => {
 
               {/* What's Covered */}
               <div className="mb-8">
-                <h3 className="text-lg font-semibold text-foreground flex items-center gap-2 mb-4">
+                <h3 className="text-lg font-semibold text-light-primary flex items-center gap-2 mb-4">
                   <CheckCircle className="w-5 h-5 text-primary" />
                   What's Covered
                 </h3>
-                <ul className="space-y-3 text-muted-foreground">
+                <ul className="space-y-3 text-light-secondary">
                   <li className="flex items-start gap-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
                     Hinge mechanism failure
@@ -78,11 +78,11 @@ const Warranty = () => {
 
               {/* What's NOT Covered */}
               <div>
-                <h3 className="text-lg font-semibold text-foreground flex items-center gap-2 mb-4">
+                <h3 className="text-lg font-semibold text-light-primary flex items-center gap-2 mb-4">
                   <XCircle className="w-5 h-5 text-destructive" />
                   What's NOT Covered
                 </h3>
-                <ul className="space-y-3 text-muted-foreground">
+                <ul className="space-y-3 text-light-secondary">
                   <li className="flex items-start gap-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/50 mt-2 flex-shrink-0" />
                     Intentional damage or misuse
@@ -114,12 +114,12 @@ const Warranty = () => {
 
           {/* Toy Product Warranty */}
           <section className="mb-16">
-            <div className="bg-card/30 border border-border rounded-2xl p-8 sm:p-10">
-              <h2 className="text-2xl font-bold text-foreground font-baskerville mb-4">
+            <div className="bg-surface-dark border border-white/10 rounded-2xl p-8 sm:p-10">
+              <h2 className="text-2xl font-bold text-light-primary font-baskerville mb-4">
                 Standard Product Warranty
               </h2>
-              <p className="text-muted-foreground leading-relaxed">
-                The Vellvii Pulse, Vibe, and G-Vibe are covered by a <strong className="text-foreground">standard 1-year warranty</strong> from 
+              <p className="text-light-secondary leading-relaxed">
+                The Vellvii Pulse, Vibe, and G-Vibe are covered by a <strong className="text-light-primary">standard 1-year warranty</strong> from 
                 the date of purchase. This warranty covers manufacturing defects only. For warranty 
                 inquiries regarding these products, please contact our support team.
               </p>
@@ -128,36 +128,36 @@ const Warranty = () => {
 
           {/* No Refunds Policy */}
           <section className="mb-16">
-            <div className="bg-destructive/5 border border-destructive/20 rounded-2xl p-8 sm:p-10">
+            <div className="bg-surface-dark border border-destructive/30 rounded-2xl p-8 sm:p-10">
               <div className="flex items-start gap-4 mb-6">
-                <div className="p-2 rounded-lg bg-destructive/10">
+                <div className="p-2 rounded-lg bg-destructive/20">
                   <AlertTriangle className="w-6 h-6 text-destructive" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-foreground font-baskerville mb-2">
+                  <h2 className="text-2xl font-bold text-light-primary font-baskerville mb-2">
                     No Refunds Policy
                   </h2>
-                  <p className="text-muted-foreground font-medium">
+                  <p className="text-light-secondary font-medium">
                     All Sales Are Final
                   </p>
                 </div>
               </div>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="space-y-4 text-light-secondary">
                 <p>
-                  Due to the intimate nature of our products, <strong className="text-foreground">all sales are final</strong> and 
+                  Due to the intimate nature of our products, <strong className="text-light-primary">all sales are final</strong> and 
                   we do not offer refunds under any circumstances.
                 </p>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-destructive/50 mt-2 flex-shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-destructive mt-2 flex-shrink-0" />
                     Returns are not accepted for any reason
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-destructive/50 mt-2 flex-shrink-0" />
-                    Warranty claims result in <strong className="text-foreground">repair or replacement only</strong>, not refunds
+                    <span className="w-1.5 h-1.5 rounded-full bg-destructive mt-2 flex-shrink-0" />
+                    Warranty claims result in <strong className="text-light-primary">repair or replacement only</strong>, not refunds
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-destructive/50 mt-2 flex-shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-destructive mt-2 flex-shrink-0" />
                     Defective items will be replaced at Vellvii's discretion
                   </li>
                 </ul>
@@ -167,10 +167,10 @@ const Warranty = () => {
 
           {/* How to File a Claim */}
           <section className="mb-16">
-            <div className="bg-card/50 border border-border rounded-2xl p-8 sm:p-10">
+            <div className="bg-surface-dark border border-white/10 rounded-2xl p-8 sm:p-10">
               <div className="flex items-center gap-3 mb-6">
                 <Mail className="w-6 h-6 text-primary" />
-                <h2 className="text-2xl font-bold text-foreground font-baskerville">
+                <h2 className="text-2xl font-bold text-light-primary font-baskerville">
                   How to File a Warranty Claim
                 </h2>
               </div>
@@ -180,8 +180,8 @@ const Warranty = () => {
                     1
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground mb-1">Contact Us</h3>
-                    <p className="text-muted-foreground">
+                    <h3 className="font-semibold text-light-primary mb-1">Contact Us</h3>
+                    <p className="text-light-secondary">
                       Email <a href="mailto:hello@vellvii.com" className="text-primary hover:underline">hello@vellvii.com</a> with 
                       your order number and a description of the issue.
                     </p>
@@ -192,8 +192,8 @@ const Warranty = () => {
                     2
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground mb-1">Document the Issue</h3>
-                    <p className="text-muted-foreground">
+                    <h3 className="font-semibold text-light-primary mb-1">Document the Issue</h3>
+                    <p className="text-light-secondary">
                       Include clear photos of the defect or malfunction.
                     </p>
                   </div>
@@ -203,8 +203,8 @@ const Warranty = () => {
                     3
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground mb-1">Review Process</h3>
-                    <p className="text-muted-foreground">
+                    <h3 className="font-semibold text-light-primary mb-1">Review Process</h3>
+                    <p className="text-light-secondary">
                       Our team will review your claim within 48 hours.
                     </p>
                   </div>
@@ -214,8 +214,8 @@ const Warranty = () => {
                     4
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground mb-1">Resolution</h3>
-                    <p className="text-muted-foreground">
+                    <h3 className="font-semibold text-light-primary mb-1">Resolution</h3>
+                    <p className="text-light-secondary">
                       Receive repair, replacement, or further instructions based on our assessment.
                     </p>
                   </div>
@@ -226,7 +226,7 @@ const Warranty = () => {
 
           {/* Questions */}
           <section className="text-center">
-            <p className="text-muted-foreground">
+            <p className="text-light-secondary">
               Have questions about our warranty? Contact us at{" "}
               <a href="mailto:hello@vellvii.com" className="text-primary hover:underline">
                 hello@vellvii.com
