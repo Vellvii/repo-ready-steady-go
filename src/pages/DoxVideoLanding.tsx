@@ -1,17 +1,49 @@
 import { useState, useRef } from "react";
-import { Play } from "lucide-react";
+import { Play, CheckCircle2, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SEO } from "@/components/SEO";
 import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
 import prelaunchLogo from "@/assets/prelaunch-logo.png";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import * as z from "zod";
 
 const PRELAUNCH_URL = "https://prelaunch.com/projects/5ff3ce3f-6669-4243-918c-4d57d98b63f6/reservation?userEmail=stefan%40vellvii.com&reservationId=c3452574-55cf-49e6-aa12-79b4c18131ac";
-const DISCUSS_URL = "https://prelaunch.com/projects/vellvii-dox-vellvii-dox-pleasure-in-a-luxury-vault/discussions";
 
+const emailSchema = z.string().trim().min(1, "Email is required").email("Please enter a valid email").max(255, "Email too long");
 const DoxVideoLanding = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoEnded, setVideoEnded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [notifyOpen, setNotifyOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleNotifySubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setEmailError("");
+    
+    const result = emailSchema.safeParse(email);
+    if (!result.success) {
+      setEmailError(result.error.errors[0].message);
+      return;
+    }
+    
+    setIsSubmitting(true);
+    // Simulate API call - can connect to edge function later
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    console.log("USA notification email:", result.data);
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+  };
 
   const handlePlay = async () => {
     setIsPlaying(true);
@@ -190,15 +222,14 @@ const DoxVideoLanding = () => {
                   <img src={prelaunchLogo} alt="Prelaunch.com" className="h-5 w-5 relative z-10" />
                   <div className="absolute inset-0 bg-gradient-shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 </a>
-                <a
-                  href={DISCUSS_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 group px-8 py-4 bg-gradient-to-r from-secondary via-accent to-secondary bg-[length:200%_100%] text-foreground rounded-xl font-bold text-base shadow-elegant hover:shadow-glow transition-all duration-700 hover:bg-right relative overflow-hidden text-center"
+                <button
+                  onClick={() => setNotifyOpen(true)}
+                  className="flex-1 group px-8 py-4 bg-gradient-to-r from-secondary via-accent to-secondary bg-[length:200%_100%] text-foreground rounded-xl font-bold text-base shadow-elegant hover:shadow-glow transition-all duration-700 hover:bg-right relative overflow-hidden text-center flex items-center justify-center gap-2"
                 >
-                  <span className="relative z-10">Join the Discussion</span>
+                  <span className="text-lg">🇺🇸</span>
+                  <span className="relative z-10">Notify Me When Available in USA</span>
                   <div className="absolute inset-0 bg-gradient-shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                </a>
+                </button>
               </motion.div>
             )}
           </AnimatePresence>
@@ -206,6 +237,64 @@ const DoxVideoLanding = () => {
 
         {/* Footer */}
         <PrelaunchFooter />
+
+        {/* Notify Me Modal */}
+        <Dialog open={notifyOpen} onOpenChange={setNotifyOpen}>
+          <DialogContent className="bg-card border-white/10 max-w-md">
+            {isSubmitted ? (
+              <div className="text-center py-6 space-y-4">
+                <div className="w-16 h-16 mx-auto rounded-full bg-primary/20 flex items-center justify-center">
+                  <CheckCircle2 className="w-10 h-10 text-primary" />
+                </div>
+                <DialogTitle className="text-2xl font-baskerville text-light-primary">
+                  You're on the List!
+                </DialogTitle>
+                <p className="text-white/70 text-sm">
+                  We'll notify you as soon as DOX becomes available in the USA.
+                </p>
+              </div>
+            ) : (
+              <>
+                <DialogHeader>
+                  <DialogTitle className="text-2xl font-baskerville text-light-primary text-center">
+                    <span className="text-2xl mr-2">🇺🇸</span> Get Notified for USA Launch
+                  </DialogTitle>
+                  <DialogDescription className="text-center text-white/60">
+                    Be first to know when DOX becomes available in your area
+                  </DialogDescription>
+                </DialogHeader>
+                <form onSubmit={handleNotifySubmit} className="space-y-4 mt-4">
+                  <div>
+                    <Input
+                      type="email"
+                      placeholder="Enter your email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="bg-white/5 border-white/10 text-white placeholder:text-white/40 focus:border-primary"
+                    />
+                    {emailError && (
+                      <p className="text-red-400 text-sm mt-1">{emailError}</p>
+                    )}
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full px-6 py-3 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] text-black rounded-xl font-bold shadow-elegant hover:shadow-glow transition-all duration-500 hover:bg-right disabled:opacity-50 flex items-center justify-center gap-2"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        <span>Submitting...</span>
+                      </>
+                    ) : (
+                      <span>Notify Me</span>
+                    )}
+                  </button>
+                </form>
+              </>
+            )}
+          </DialogContent>
+        </Dialog>
       </div>
     </>
   );
