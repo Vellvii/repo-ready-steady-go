@@ -210,24 +210,24 @@ const DoxVideoLanding = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ delay: 0.2 }}
-                className="flex flex-col sm:flex-row gap-3 mt-8 w-full max-w-xl px-4"
+                className="flex flex-col gap-3 mt-8 w-full max-w-sm px-4 items-center"
               >
                 <a
                   href={PRELAUNCH_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group px-6 py-3 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] text-black rounded-lg font-semibold text-sm shadow-elegant hover:shadow-glow transition-all duration-500 hover:bg-right relative overflow-hidden flex items-center justify-center gap-2 whitespace-nowrap"
+                  className="w-full group px-6 py-4 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] text-black rounded-xl font-bold text-base shadow-elegant hover:shadow-glow transition-all duration-500 hover:bg-right relative overflow-hidden flex items-center justify-center gap-2"
                 >
                   <span className="relative z-10">Reserve Your DOX</span>
-                  <img src={prelaunchLogo} alt="Prelaunch.com" className="h-4 w-4 relative z-10" />
+                  <img src={prelaunchLogo} alt="Prelaunch.com" className="h-5 w-5 relative z-10" />
                   <div className="absolute inset-0 bg-gradient-shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </a>
                 <button
                   onClick={() => setNotifyOpen(true)}
-                  className="group px-6 py-3 border border-primary/40 hover:border-primary bg-card/50 backdrop-blur-sm text-light-primary rounded-lg font-semibold text-sm transition-all duration-300 hover:bg-primary/10 flex items-center justify-center gap-2 whitespace-nowrap"
+                  className="w-full group px-6 py-4 bg-gradient-to-r from-primary/20 via-accent/30 to-primary/20 border-2 border-primary/50 hover:border-primary text-light-primary rounded-xl font-bold text-base transition-all duration-300 hover:bg-primary/20 flex items-center justify-center gap-2"
                 >
                   <span>🇺🇸</span>
-                  <span>Notify Me for USA</span>
+                  <span>Notify Me When Available in USA</span>
                 </button>
               </motion.div>
             )}
@@ -239,7 +239,7 @@ const DoxVideoLanding = () => {
 
         {/* Notify Me Modal */}
         <Dialog open={notifyOpen} onOpenChange={setNotifyOpen}>
-          <DialogContent className="bg-card border-white/10 max-w-md">
+          <DialogContent className="bg-background border-primary/20 max-w-md">
             {isSubmitted ? (
               <div className="text-center py-6 space-y-4">
                 <div className="w-16 h-16 mx-auto rounded-full bg-primary/20 flex items-center justify-center">
