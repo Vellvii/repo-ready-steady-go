@@ -428,6 +428,48 @@ export type Database = {
         }
         Relationships: []
       }
+      warranty_registrations: {
+        Row: {
+          created_at: string
+          customer_email: string
+          customer_name: string
+          customer_phone: string | null
+          id: string
+          order_number: string
+          product_type: string
+          purchase_date: string
+          receipt_url: string
+          registered_at: string
+          registration_id: string
+        }
+        Insert: {
+          created_at?: string
+          customer_email: string
+          customer_name: string
+          customer_phone?: string | null
+          id?: string
+          order_number: string
+          product_type: string
+          purchase_date: string
+          receipt_url: string
+          registered_at?: string
+          registration_id: string
+        }
+        Update: {
+          created_at?: string
+          customer_email?: string
+          customer_name?: string
+          customer_phone?: string | null
+          id?: string
+          order_number?: string
+          product_type?: string
+          purchase_date?: string
+          receipt_url?: string
+          registered_at?: string
+          registration_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
