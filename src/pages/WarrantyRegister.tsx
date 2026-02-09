@@ -375,7 +375,7 @@ const WarrantyRegister = () => {
                 >
                   <Store className="w-5 h-5 mx-auto mb-2 text-light-primary" />
                   <span className="font-semibold text-light-primary">Retail Partner</span>
-                  <p className="text-xs text-muted-foreground mt-1">Amazon, etc.</p>
+                  <p className="text-xs text-muted-foreground mt-1">Authorized retailer</p>
                 </button>
               </div>
               {purchaseSource === "shopify" && (
