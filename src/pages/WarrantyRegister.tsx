@@ -321,7 +321,7 @@ const WarrantyRegister = () => {
                 onChange={(e) => setCustomerName(e.target.value)}
                 required
                 placeholder="Enter your full name"
-                className="bg-surface-dark border-white/10 text-light-primary placeholder:text-muted-foreground"
+                className="!bg-[hsl(15,12%,12%)] border-white/10 !text-white placeholder:text-white/50"
               />
             </div>
 
@@ -338,7 +338,7 @@ const WarrantyRegister = () => {
                 onChange={(e) => setCustomerEmail(e.target.value)}
                 required
                 placeholder="Enter your email"
-                className="bg-surface-dark border-white/10 text-light-primary placeholder:text-muted-foreground"
+                className="!bg-[hsl(15,12%,12%)] border-white/10 !text-white placeholder:text-white/50"
               />
             </div>
 
@@ -354,7 +354,7 @@ const WarrantyRegister = () => {
                 value={customerPhone}
                 onChange={(e) => setCustomerPhone(e.target.value)}
                 placeholder="Enter your phone number"
-                className="bg-surface-dark border-white/10 text-light-primary placeholder:text-muted-foreground"
+                className="!bg-[hsl(15,12%,12%)] border-white/10 !text-white placeholder:text-white/50"
               />
             </div>
 
@@ -371,7 +371,7 @@ const WarrantyRegister = () => {
                 onChange={(e) => setOrderNumber(e.target.value)}
                 required
                 placeholder="e.g. #12345 or VELLVII-12345"
-                className="bg-surface-dark border-white/10 text-light-primary placeholder:text-muted-foreground"
+                className="!bg-[hsl(15,12%,12%)] border-white/10 !text-white placeholder:text-white/50"
               />
               <p className="text-xs text-muted-foreground">
                 Found in your order confirmation email
@@ -391,7 +391,7 @@ const WarrantyRegister = () => {
                 onChange={(e) => setPurchaseDate(e.target.value)}
                 required
                 max={new Date().toISOString().split("T")[0]}
-                className="bg-surface-dark border-white/10 text-light-primary"
+                className="!bg-[hsl(15,12%,12%)] border-white/10 !text-white [color-scheme:dark]"
               />
             </div>
 
