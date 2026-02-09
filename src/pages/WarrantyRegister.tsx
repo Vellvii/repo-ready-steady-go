@@ -19,11 +19,15 @@ import {
   Phone,
   User,
   FileText,
-  Package
+  Package,
+  Store,
+  ShoppingBag,
+  AlertCircle
 } from "lucide-react";
 import { motion } from "framer-motion";
 
 type ProductType = "dox" | "lux" | "";
+type PurchaseSource = "shopify" | "retailer" | "";
 
 const generateRegistrationId = (): string => {
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -39,6 +43,7 @@ const WarrantyRegister = () => {
   const { toast } = useToast();
   
   const [productType, setProductType] = useState<ProductType>("");
+  const [purchaseSource, setPurchaseSource] = useState<PurchaseSource>("");
   const [customerName, setCustomerName] = useState("");
   const [customerEmail, setCustomerEmail] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
@@ -49,6 +54,7 @@ const WarrantyRegister = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [registrationId, setRegistrationId] = useState("");
+  const [verificationError, setVerificationError] = useState<string | null>(null);
 
   useEffect(() => {
     const product = searchParams.get("product")?.toLowerCase();
@@ -98,11 +104,21 @@ const WarrantyRegister = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setVerificationError(null);
     
     if (!productType) {
       toast({
         title: "Product type required",
         description: "Please select whether you're registering a DOX or LUX.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    if (!purchaseSource) {
+      toast({
+        title: "Purchase source required",
+        description: "Please select where you purchased your product.",
         variant: "destructive",
       });
       return;
@@ -148,9 +164,23 @@ const WarrantyRegister = () => {
             order_number: orderNumber,
             purchase_date: purchaseDate,
             receipt_url: fileName,
+            purchase_source: purchaseSource,
           },
         }
       );
+      
+      if (functionError) {
+        throw new Error("Failed to register warranty: " + functionError.message);
+      }
+      
+      if (data?.error) {
+        // Handle verification error specifically
+        if (data?.code === "ORDER_NOT_VERIFIED") {
+          setVerificationError(data.reason || "Order could not be verified");
+          throw new Error(data.reason || "Order verification failed");
+        }
+        throw new Error(data.error);
+      }
       
       if (functionError) {
         throw new Error("Failed to register warranty: " + functionError.message);
@@ -307,6 +337,76 @@ const WarrantyRegister = () => {
                 </button>
               </div>
             </div>
+
+            {/* Purchase Source */}
+            <div className="space-y-2">
+              <Label className="text-light-primary flex items-center gap-2">
+                <Store className="w-4 h-4" />
+                Where did you purchase? *
+              </Label>
+              <div className="grid grid-cols-2 gap-4">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPurchaseSource("shopify");
+                    setVerificationError(null);
+                  }}
+                  className={`p-4 rounded-xl border-2 transition-all ${
+                    purchaseSource === "shopify"
+                      ? "border-primary bg-primary/10"
+                      : "border-white/10 bg-surface-dark hover:border-white/20"
+                  }`}
+                >
+                  <ShoppingBag className="w-5 h-5 mx-auto mb-2 text-light-primary" />
+                  <span className="font-semibold text-light-primary">Vellvii.com</span>
+                  <p className="text-xs text-muted-foreground mt-1">Our online store</p>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPurchaseSource("retailer");
+                    setVerificationError(null);
+                  }}
+                  className={`p-4 rounded-xl border-2 transition-all ${
+                    purchaseSource === "retailer"
+                      ? "border-primary bg-primary/10"
+                      : "border-white/10 bg-surface-dark hover:border-white/20"
+                  }`}
+                >
+                  <Store className="w-5 h-5 mx-auto mb-2 text-light-primary" />
+                  <span className="font-semibold text-light-primary">Retail Partner</span>
+                  <p className="text-xs text-muted-foreground mt-1">Amazon, etc.</p>
+                </button>
+              </div>
+              {purchaseSource === "shopify" && (
+                <p className="text-xs text-primary mt-2">
+                  ✓ Your order will be automatically verified
+                </p>
+              )}
+              {purchaseSource === "retailer" && (
+                <p className="text-xs text-muted-foreground mt-2">
+                  Receipt will be reviewed for verification
+                </p>
+              )}
+            </div>
+
+            {/* Verification Error */}
+            {verificationError && (
+              <div className="bg-destructive/10 border border-destructive/30 rounded-xl p-4">
+                <div className="flex gap-3">
+                  <AlertCircle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
+                  <div className="text-sm">
+                    <p className="text-destructive font-medium mb-1">
+                      Order Verification Failed
+                    </p>
+                    <p className="text-light-secondary">
+                      {verificationError}. Please check your order number and email, 
+                      or select "Retail Partner" if you purchased from a retailer.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Full Name */}
             <div className="space-y-2">

@@ -19,6 +19,272 @@ interface WarrantyRegistrationRequest {
   order_number: string;
   purchase_date: string;
   receipt_url: string;
+  purchase_source: "shopify" | "retailer";
+}
+
+interface ShopifyOrder {
+  id: number;
+  name: string;
+  email: string;
+  created_at: string;
+  line_items: Array<{
+    title: string;
+    product_id: number;
+  }>;
+}
+
+interface ReceiptVerificationResult {
+  is_valid: boolean;
+  confidence: number;
+  extracted_data: {
+    vendor?: string;
+    product_name?: string;
+    date?: string;
+    amount?: string;
+  };
+  flags: string[];
+}
+
+// Verify order against Shopify Admin API
+async function verifyShopifyOrder(
+  orderNumber: string, 
+  customerEmail: string,
+  productType: string
+): Promise<{ verified: boolean; reason?: string; order?: ShopifyOrder }> {
+  const shopifyAccessToken = Deno.env.get("SHOPIFY_ACCESS_TOKEN");
+  const shopifyStoreDomain = "vellvii-site-2h1iu.myshopify.com";
+  
+  if (!shopifyAccessToken) {
+    console.warn("SHOPIFY_ACCESS_TOKEN not configured, skipping Shopify verification");
+    return { verified: false, reason: "Shopify verification unavailable" };
+  }
+
+  try {
+    // Clean up order number (remove # if present)
+    const cleanOrderNumber = orderNumber.replace(/^#/, "").trim();
+    
+    // Search for order by name/number
+    const searchUrl = `https://${shopifyStoreDomain}/admin/api/2025-01/orders.json?name=${encodeURIComponent(cleanOrderNumber)}&status=any`;
+    
+    console.log("Searching Shopify for order:", cleanOrderNumber);
+    
+    const response = await fetch(searchUrl, {
+      headers: {
+        "X-Shopify-Access-Token": shopifyAccessToken,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      console.error("Shopify API error:", response.status, await response.text());
+      return { verified: false, reason: "Failed to verify with Shopify" };
+    }
+
+    const data = await response.json();
+    const orders: ShopifyOrder[] = data.orders || [];
+    
+    if (orders.length === 0) {
+      // Try searching by order number directly
+      const altSearchUrl = `https://${shopifyStoreDomain}/admin/api/2025-01/orders.json?status=any`;
+      const altResponse = await fetch(altSearchUrl, {
+        headers: {
+          "X-Shopify-Access-Token": shopifyAccessToken,
+          "Content-Type": "application/json",
+        },
+      });
+      
+      if (altResponse.ok) {
+        const altData = await altResponse.json();
+        const matchingOrder = (altData.orders || []).find((o: ShopifyOrder) => 
+          o.name.replace(/^#/, "").toLowerCase() === cleanOrderNumber.toLowerCase() ||
+          o.id.toString() === cleanOrderNumber
+        );
+        
+        if (matchingOrder) {
+          orders.push(matchingOrder);
+        }
+      }
+    }
+    
+    if (orders.length === 0) {
+      return { verified: false, reason: "Order not found in Shopify" };
+    }
+
+    const order = orders[0];
+    
+    // Verify email matches
+    if (order.email.toLowerCase() !== customerEmail.toLowerCase()) {
+      return { 
+        verified: false, 
+        reason: "Email does not match order",
+        order 
+      };
+    }
+
+    // Check if order contains the product type
+    const productNames = order.line_items.map(item => item.title.toLowerCase());
+    const hasProduct = productNames.some(name => 
+      name.includes(productType.toLowerCase()) || 
+      name.includes("vellvii")
+    );
+
+    if (!hasProduct) {
+      console.log("Order found but product type mismatch. Products:", productNames);
+      // Still allow but flag it
+    }
+
+    return { verified: true, order };
+    
+  } catch (error) {
+    console.error("Error verifying Shopify order:", error);
+    return { verified: false, reason: "Verification error occurred" };
+  }
+}
+
+// Analyze receipt image using AI
+async function analyzeReceipt(
+  receiptUrl: string,
+  supabaseUrl: string,
+  supabaseServiceKey: string
+): Promise<ReceiptVerificationResult> {
+  const lovableApiKey = Deno.env.get("LOVABLE_API_KEY");
+  
+  if (!lovableApiKey) {
+    console.warn("LOVABLE_API_KEY not configured, skipping receipt analysis");
+    return {
+      is_valid: true,
+      confidence: 0.5,
+      extracted_data: {},
+      flags: ["AI analysis unavailable"],
+    };
+  }
+
+  try {
+    // Get signed URL for the receipt
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+    const { data: signedUrlData, error: signedUrlError } = await supabase.storage
+      .from("warranty-receipts")
+      .createSignedUrl(receiptUrl, 300); // 5 minute expiry
+
+    if (signedUrlError || !signedUrlData?.signedUrl) {
+      console.error("Failed to get signed URL for receipt:", signedUrlError);
+      return {
+        is_valid: true,
+        confidence: 0.5,
+        extracted_data: {},
+        flags: ["Could not access receipt image"],
+      };
+    }
+
+    const imageUrl = signedUrlData.signedUrl;
+    
+    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${lovableApiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "google/gemini-2.5-flash",
+        messages: [
+          {
+            role: "system",
+            content: `You are a receipt verification assistant. Analyze the receipt/order confirmation image and extract key information. 
+            
+Determine if this appears to be a legitimate purchase receipt or order confirmation for a Vellvii product (DOX storage box or LUX travel bag).
+
+Look for:
+- Vendor/store name (should be Vellvii or an authorized retailer)
+- Product name (DOX or LUX)
+- Purchase date
+- Price/amount
+- Order number
+
+Flag suspicious items like:
+- Generic or stock images
+- Digitally altered receipts
+- Inconsistent formatting
+- Missing key details
+- Non-Vellvii products
+
+Respond with a JSON object only, no other text:
+{
+  "is_valid": boolean,
+  "confidence": number between 0 and 1,
+  "extracted_data": {
+    "vendor": "store name or null",
+    "product_name": "product name or null",
+    "date": "date string or null",
+    "amount": "price/amount or null"
+  },
+  "flags": ["array of concerns if any"]
+}`
+          },
+          {
+            role: "user",
+            content: [
+              {
+                type: "text",
+                text: "Please analyze this receipt/order confirmation image and verify if it appears legitimate:"
+              },
+              {
+                type: "image_url",
+                image_url: {
+                  url: imageUrl
+                }
+              }
+            ]
+          }
+        ],
+      }),
+    });
+
+    if (!response.ok) {
+      console.error("AI Gateway error:", response.status, await response.text());
+      return {
+        is_valid: true,
+        confidence: 0.5,
+        extracted_data: {},
+        flags: ["AI analysis failed"],
+      };
+    }
+
+    const data = await response.json();
+    const content = data.choices?.[0]?.message?.content || "";
+    
+    // Parse JSON from response
+    try {
+      // Extract JSON from response (handle markdown code blocks)
+      const jsonMatch = content.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        const result = JSON.parse(jsonMatch[0]);
+        return {
+          is_valid: result.is_valid ?? true,
+          confidence: result.confidence ?? 0.5,
+          extracted_data: result.extracted_data || {},
+          flags: result.flags || [],
+        };
+      }
+    } catch (parseError) {
+      console.error("Failed to parse AI response:", parseError, content);
+    }
+
+    return {
+      is_valid: true,
+      confidence: 0.5,
+      extracted_data: {},
+      flags: ["Could not parse AI analysis"],
+    };
+
+  } catch (error) {
+    console.error("Error analyzing receipt:", error);
+    return {
+      is_valid: true,
+      confidence: 0.5,
+      extracted_data: {},
+      flags: ["Analysis error occurred"],
+    };
+  }
 }
 
 const generateCustomerEmail = (data: WarrantyRegistrationRequest): string => {
@@ -151,10 +417,36 @@ const generateCustomerEmail = (data: WarrantyRegistrationRequest): string => {
   `;
 };
 
-const generateAdminEmail = (data: WarrantyRegistrationRequest): string => {
+const generateAdminEmail = (
+  data: WarrantyRegistrationRequest, 
+  shopifyVerification: { verified: boolean; reason?: string },
+  receiptAnalysis: ReceiptVerificationResult
+): string => {
   const productName = data.product_type.toUpperCase();
   const supabaseProjectId = Deno.env.get("SUPABASE_URL")?.match(/https:\/\/(.+)\.supabase\.co/)?.[1] || "mawaqjqifmvijolucrlp";
   const receiptLink = `https://supabase.com/dashboard/project/${supabaseProjectId}/storage/buckets/warranty-receipts`;
+  
+  // Determine verification status
+  const isFullyVerified = data.purchase_source === "shopify" && shopifyVerification.verified;
+  const verificationBadge = isFullyVerified 
+    ? '<span style="display: inline-block; padding: 4px 10px; background-color: #16a34a; color: #ffffff; border-radius: 4px; font-size: 12px; font-weight: 600;">✓ VERIFIED</span>'
+    : data.purchase_source === "retailer"
+    ? '<span style="display: inline-block; padding: 4px 10px; background-color: #f59e0b; color: #000000; border-radius: 4px; font-size: 12px; font-weight: 600;">RETAILER PURCHASE</span>'
+    : '<span style="display: inline-block; padding: 4px 10px; background-color: #ef4444; color: #ffffff; border-radius: 4px; font-size: 12px; font-weight: 600;">⚠ NOT VERIFIED</span>';
+  
+  // Receipt analysis section
+  const receiptFlags = receiptAnalysis.flags.length > 0 
+    ? receiptAnalysis.flags.map(f => `<li style="color: #f59e0b;">${f}</li>`).join("")
+    : '<li style="color: #16a34a;">No issues detected</li>';
+  
+  const extractedDataRows = Object.entries(receiptAnalysis.extracted_data)
+    .filter(([_, value]) => value)
+    .map(([key, value]) => `
+      <tr>
+        <td style="padding: 4px 0; color: #888888; font-size: 13px;">${key.charAt(0).toUpperCase() + key.slice(1)}</td>
+        <td style="padding: 4px 0; text-align: right; color: #333333; font-size: 13px;">${value}</td>
+      </tr>
+    `).join("");
   
   return `
 <!DOCTYPE html>
@@ -199,6 +491,52 @@ const generateAdminEmail = (data: WarrantyRegistrationRequest): string => {
             </td>
           </tr>
           
+          <!-- Verification Status -->
+          <tr>
+            <td style="padding: 0 24px 24px 24px;">
+              <table role="presentation" width="100%" style="background-color: ${isFullyVerified ? '#f0fdf4' : data.purchase_source === 'retailer' ? '#fffbeb' : '#fef2f2'}; border-radius: 8px; border: 1px solid ${isFullyVerified ? '#bbf7d0' : data.purchase_source === 'retailer' ? '#fde68a' : '#fecaca'};">
+                <tr>
+                  <td style="padding: 16px;">
+                    <p style="margin: 0 0 8px 0; color: #333333; font-size: 14px; font-weight: 600;">
+                      Verification Status
+                    </p>
+                    <p style="margin: 0;">
+                      ${verificationBadge}
+                    </p>
+                    ${!isFullyVerified && data.purchase_source === 'shopify' ? `<p style="margin: 8px 0 0 0; color: #666666; font-size: 13px;">${shopifyVerification.reason || 'Could not verify order'}</p>` : ''}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
+          <!-- Receipt Analysis -->
+          <tr>
+            <td style="padding: 0 24px 24px 24px;">
+              <h3 style="margin: 0 0 12px 0; color: #333333; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                AI Receipt Analysis
+              </h3>
+              <table role="presentation" width="100%" style="background-color: #f8f8f8; border-radius: 8px;">
+                <tr>
+                  <td style="padding: 16px;">
+                    <p style="margin: 0 0 8px 0; color: #666666; font-size: 13px;">
+                      Confidence: <strong style="color: #333333;">${Math.round(receiptAnalysis.confidence * 100)}%</strong>
+                    </p>
+                    ${extractedDataRows ? `
+                    <table role="presentation" width="100%" style="margin-bottom: 12px;">
+                      ${extractedDataRows}
+                    </table>
+                    ` : ''}
+                    <p style="margin: 0 0 4px 0; color: #666666; font-size: 12px; font-weight: 600;">Flags:</p>
+                    <ul style="margin: 0; padding-left: 16px; font-size: 13px;">
+                      ${receiptFlags}
+                    </ul>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
           <!-- Customer Details -->
           <tr>
             <td style="padding: 0 24px 24px 24px;">
@@ -228,6 +566,14 @@ const generateAdminEmail = (data: WarrantyRegistrationRequest): string => {
                   </td>
                   <td style="padding: 8px 0; border-bottom: 1px solid #eeeeee; text-align: right;">
                     <span style="color: #333333; font-size: 14px;">${data.customer_phone || "Not provided"}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; border-bottom: 1px solid #eeeeee;">
+                    <span style="color: #888888; font-size: 14px;">Purchase Source</span>
+                  </td>
+                  <td style="padding: 8px 0; border-bottom: 1px solid #eeeeee; text-align: right;">
+                    <span style="color: #333333; font-size: 14px; font-weight: 500;">${data.purchase_source === 'shopify' ? 'Vellvii.com (Shopify)' : 'Retail Partner'}</span>
                   </td>
                 </tr>
               </table>
@@ -305,10 +651,16 @@ const handler = async (req: Request): Promise<Response> => {
   try {
     const data: WarrantyRegistrationRequest = await req.json();
     
+    // Default to shopify if not specified (backward compatibility)
+    if (!data.purchase_source) {
+      data.purchase_source = "shopify";
+    }
+    
     console.log("Received warranty registration request:", {
       registration_id: data.registration_id,
       product_type: data.product_type,
       customer_email: data.customer_email,
+      purchase_source: data.purchase_source,
     });
 
     // Validate required fields
@@ -317,9 +669,46 @@ const handler = async (req: Request): Promise<Response> => {
       throw new Error("Missing required fields");
     }
 
-    // Create Supabase client with service role for DB insert
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    
+    // Verify Shopify order if purchased from Shopify
+    let shopifyVerification = { verified: false, reason: "Not applicable for retailer purchases" };
+    if (data.purchase_source === "shopify") {
+      console.log("Verifying Shopify order...");
+      shopifyVerification = await verifyShopifyOrder(
+        data.order_number,
+        data.customer_email,
+        data.product_type
+      );
+      console.log("Shopify verification result:", shopifyVerification);
+      
+      // For Shopify orders, if order is not found, reject the registration
+      if (!shopifyVerification.verified) {
+        return new Response(
+          JSON.stringify({ 
+            error: "Order verification failed",
+            reason: shopifyVerification.reason,
+            code: "ORDER_NOT_VERIFIED"
+          }),
+          {
+            status: 400,
+            headers: { "Content-Type": "application/json", ...corsHeaders },
+          }
+        );
+      }
+    }
+    
+    // Analyze receipt using AI
+    console.log("Analyzing receipt...");
+    const receiptAnalysis = await analyzeReceipt(
+      data.receipt_url,
+      supabaseUrl,
+      supabaseServiceKey
+    );
+    console.log("Receipt analysis result:", receiptAnalysis);
+
+    // Create Supabase client with service role for DB insert
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     // Insert registration record
@@ -353,12 +742,12 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log("Customer email sent:", customerEmailResult);
 
-    // Send admin notification email
+    // Send admin notification email with verification details
     const adminEmailResult = await resend.emails.send({
       from: "Vellvii Warranty System <noreply@vellvii.com>",
       to: ["warranties@vellvii.com"],
-      subject: `🛡️ New Warranty Registration - ${data.product_type.toUpperCase()} - ${data.customer_name}`,
-      html: generateAdminEmail(data),
+      subject: `🛡️ New Warranty Registration - ${data.product_type.toUpperCase()} - ${data.customer_name}${!shopifyVerification.verified && data.purchase_source === 'shopify' ? ' ⚠️ UNVERIFIED' : ''}`,
+      html: generateAdminEmail(data, shopifyVerification, receiptAnalysis),
     });
 
     console.log("Admin email sent:", adminEmailResult);
@@ -367,6 +756,10 @@ const handler = async (req: Request): Promise<Response> => {
       JSON.stringify({
         success: true,
         registration_id: data.registration_id,
+        verification: {
+          shopify: shopifyVerification,
+          receipt: receiptAnalysis,
+        },
         emails_sent: {
           customer: customerEmailResult,
           admin: adminEmailResult,
