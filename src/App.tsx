@@ -41,6 +41,7 @@ import Warranty from "./pages/Warranty";
 import WarrantyRegister from "./pages/WarrantyRegister";
 import Shop from "./pages/Shop";
 import ProductDetail from "./pages/ProductDetail";
+import VellviiKickstarter from "./pages/VellviiKickstarter";
 
 const queryClient = new QueryClient();
 
@@ -62,6 +63,7 @@ const InnerApp = () => {
             <Route path="/prelaunch-dox" element={<PrelaunchDOX />} />
             <Route path="/landing" element={<AgeGateLanding />} />
             <Route path="/Vellvii-Lux" element={<PrelaunchLux />} />
+            <Route path="/Vellvii-Kickstarter" element={<VellviiKickstarter />} />
             <Route path="/v/1" element={<Video1 />} />
             <Route path="/v/2" element={<Video2 />} />
             <Route path="/v/3" element={<Video3 />} />
