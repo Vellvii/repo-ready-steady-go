@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Play, Volume2, VolumeX } from "lucide-react";
-import heroVilla from "@/assets/kickstarter/ks-hero-villa.jpg";
+import heroImage from "@/assets/kickstarter/ks-modern-bedroom.jpg";
 
 export const KickstarterHero = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -25,11 +25,11 @@ export const KickstarterHero = () => {
       {!isPlaying && (
         <div className="absolute inset-0">
           <img
-            src={heroVilla}
-            alt="Ultra-luxury cliffside villa"
+            src={heroImage}
+            alt="Modern minimalist bedroom with warm ambient lighting"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/70" />
         </div>
       )}
 
@@ -43,7 +43,7 @@ export const KickstarterHero = () => {
       />
 
       {isPlaying && (
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/50" />
       )}
 
       {/* Content */}
@@ -52,31 +52,31 @@ export const KickstarterHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 1 }}
-          className="font-montserrat text-xs sm:text-sm uppercase tracking-[0.35em] text-primary mb-6"
+          className="font-montserrat text-[10px] sm:text-xs uppercase tracking-[0.4em] text-primary/80 mb-8"
         >
-          Launching Soon on Kickstarter
+          A Design Innovation in Intimate Wellness
         </motion.p>
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 1.2 }}
-          className="font-baskerville text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-light-primary leading-[0.95] mb-6"
+          className="font-baskerville text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-light-primary leading-[1] mb-6 max-w-4xl"
         >
-          Privacy is the
+          Belongs in your
           <br />
-          <span className="gradient-text">ultimate luxury.</span>
+          <span className="gradient-text">curated life.</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 1 }}
-          className="font-montserrat text-sm sm:text-base text-light-secondary max-w-lg mb-12 leading-relaxed"
+          className="font-montserrat text-sm sm:text-base text-light-muted max-w-lg mb-14 leading-relaxed"
         >
-          The world's first biometric luxury storage system
+          The world's first biometric storage and docking system
           <br className="hidden sm:block" />
-          for those who demand more from their private world.
+          for intimate wellness - designed, not hidden.
         </motion.p>
 
         {/* Play Button */}
@@ -88,10 +88,10 @@ export const KickstarterHero = () => {
             onClick={handlePlay}
             className="group flex flex-col items-center gap-4"
           >
-            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 border-primary/40 flex items-center justify-center group-hover:border-primary/80 group-hover:shadow-[0_0_40px_hsl(40_65%_72%/0.3)] transition-all duration-700">
-              <Play className="w-8 h-8 sm:w-10 sm:h-10 text-primary ml-1" fill="currentColor" />
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border border-primary/30 flex items-center justify-center group-hover:border-primary/60 group-hover:shadow-[0_0_30px_hsl(40_65%_72%/0.15)] transition-all duration-700">
+              <Play className="w-6 h-6 sm:w-7 sm:h-7 text-primary ml-0.5" fill="currentColor" />
             </div>
-            <span className="font-montserrat text-xs uppercase tracking-[0.2em] text-light-muted group-hover:text-primary transition-colors">
+            <span className="font-montserrat text-[10px] uppercase tracking-[0.25em] text-light-muted group-hover:text-primary/80 transition-colors">
               Watch the Film
             </span>
           </motion.button>
@@ -106,9 +106,9 @@ export const KickstarterHero = () => {
               setIsMuted(!isMuted);
               if (videoRef.current) videoRef.current.muted = !isMuted;
             }}
-            className="absolute bottom-8 right-8 p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all"
+            className="absolute bottom-8 right-8 p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 hover:bg-white/15 transition-all"
           >
-            {isMuted ? <VolumeX className="w-5 h-5 text-white" /> : <Volume2 className="w-5 h-5 text-white" />}
+            {isMuted ? <VolumeX className="w-5 h-5 text-white/80" /> : <Volume2 className="w-5 h-5 text-white/80" />}
           </motion.button>
         )}
       </div>
@@ -117,10 +117,10 @@ export const KickstarterHero = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
+        transition={{ delay: 2.2, duration: 1 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10"
       >
-        <div className="w-px h-12 bg-gradient-to-b from-transparent via-primary/50 to-transparent" />
+        <div className="w-px h-10 bg-gradient-to-b from-primary/40 to-transparent" />
       </motion.div>
     </section>
   );

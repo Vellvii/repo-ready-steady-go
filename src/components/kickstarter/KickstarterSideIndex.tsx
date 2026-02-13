@@ -8,13 +8,20 @@ interface Section {
 }
 
 const sections: Section[] = [
-  { id: "hero", label: "The Vision" },
-  { id: "story", label: "Our Story" },
-  { id: "video", label: "The DOX" },
-  { id: "lifestyle", label: "A World Apart" },
-  { id: "features", label: "Engineered" },
-  { id: "gallery", label: "Gallery" },
-  { id: "rewards", label: "Rewards" },
+  { id: "hero", label: "Vision" },
+  { id: "story", label: "Story" },
+  { id: "problem", label: "Problem" },
+  { id: "breakthrough", label: "Breakthrough" },
+  { id: "dox", label: "The Dox" },
+  { id: "ecosystem", label: "Ecosystem" },
+  { id: "lifestyle", label: "Lifestyle" },
+  { id: "materials", label: "Materials" },
+  { id: "security", label: "Security" },
+  { id: "pricing", label: "Pricing" },
+  { id: "lux", label: "Lux" },
+  { id: "why", label: "Why KS" },
+  { id: "timeline", label: "Timeline" },
+  { id: "founder", label: "Founder" },
   { id: "faq", label: "FAQ" },
 ];
 
@@ -52,28 +59,28 @@ export const KickstarterSideIndex = () => {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
-          className="fixed left-6 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-3"
+          className="fixed left-5 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-2"
         >
           {sections.map(({ id, label }) => (
             <button
               key={id}
               onClick={() => scrollTo(id)}
-              className="group flex items-center gap-3"
+              className="group flex items-center gap-2.5"
             >
               <div
                 className={cn(
-                  "w-2 h-2 rounded-full transition-all duration-500",
+                  "w-1.5 h-1.5 rounded-full transition-all duration-500",
                   activeSection === id
-                    ? "bg-primary w-3 h-3 shadow-[0_0_12px_hsl(40_65%_72%/0.5)]"
-                    : "bg-white/20 group-hover:bg-white/40"
+                    ? "bg-primary w-2.5 h-2.5 shadow-[0_0_8px_hsl(40_65%_72%/0.4)]"
+                    : "bg-white/15 group-hover:bg-white/30"
                 )}
               />
               <span
                 className={cn(
-                  "font-montserrat text-[11px] uppercase tracking-[0.15em] transition-all duration-300 whitespace-nowrap",
+                  "font-montserrat text-[10px] uppercase tracking-[0.12em] transition-all duration-300 whitespace-nowrap",
                   activeSection === id
-                    ? "text-primary opacity-100"
-                    : "text-white/0 group-hover:text-white/60"
+                    ? "text-primary/80 opacity-100"
+                    : "text-white/0 group-hover:text-white/50"
                 )}
               >
                 {label}
