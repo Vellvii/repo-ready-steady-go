@@ -8,10 +8,10 @@ const videos = [
   { label: "Vellvii Dox — Video 1", src: "/uploads/prototype-video-1.mp4" },
   { label: "Vellvii Dox — Video 2", src: "/uploads/prototype-video-2.mp4" },
   { label: "Vellvii Dox — Video 3", src: "/uploads/prototype-video-3.mp4" },
-  { label: "Vellvii Pulse", src: "" },
-  { label: "Vellvii Evolve", src: "" },
-  { label: "Vellvii G-Vibe", src: "" },
-  { label: "Vellvii Lux", src: "" },
+  { label: "Vellvii Pulse", src: "/uploads/prototype-pulse.mp4" },
+  { label: "Vellvii Evolve", src: "/uploads/prototype-evolve.mp4" },
+  { label: "Vellvii G-Vibe", src: "/uploads/prototype-gvibe.mp4" },
+  { label: "Vellvii Lux", src: "/uploads/prototype-lux.mp4" },
 ];
 
 const VideoBlock = ({ label, src }: { label: string; src: string }) => {
