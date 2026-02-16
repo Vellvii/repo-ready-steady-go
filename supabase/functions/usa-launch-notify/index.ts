@@ -86,7 +86,7 @@ const handler = async (req: Request): Promise<Response> => {
     try {
       await resend.emails.send({
         from: "Vellvii Notifications <noreply@vellvii.com>",
-        to: ["stefan@vellvii.com"],
+        to: ["hello@vellvii.com"],
         subject: "🇺🇸 New USA Launch Notification Signup",
         html: `
           <div style="font-family: sans-serif; padding: 20px;">
