@@ -5,9 +5,9 @@ import { ScrollHeader } from "@/components/ScrollHeader";
 import { SEO } from "@/components/SEO";
 
 const videos = [
-  { label: "Video 1", src: "/uploads/prototype-video-1.mp4" },
-  { label: "Video 2", src: "/uploads/prototype-video-2.mp4" },
-  { label: "Video 3", src: "/uploads/prototype-video-3.mp4" },
+  { label: "Vellvii Dox — Video 1", src: "/uploads/prototype-video-1.mp4" },
+  { label: "Vellvii Dox — Video 2", src: "/uploads/prototype-video-2.mp4" },
+  { label: "Vellvii Dox — Video 3", src: "/uploads/prototype-video-3.mp4" },
 ];
 
 const VideoBlock = ({ label, src }: { label: string; src: string }) => {
