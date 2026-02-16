@@ -28,40 +28,34 @@ const VideoBlock = ({ label, src }: { label: string; src: string }) => {
       <h2 className="font-baskerville text-2xl sm:text-3xl text-stone-800 text-center">
         {label}
       </h2>
-      {src ? (
-        <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-stone-900 shadow-lg">
-          <video
-            ref={ref}
-            src={src}
-            className="w-full h-full object-contain bg-black"
-            playsInline
-            controls={playing}
-          />
-          <AnimatePresence>
-            {!playing && (
+      <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-stone-900 shadow-lg">
+        <video
+          ref={ref}
+          src={src}
+          className="w-full h-full object-contain bg-black"
+          playsInline
+          controls={playing}
+        />
+        <AnimatePresence>
+          {!playing && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 flex items-center justify-center bg-black/40 cursor-pointer"
+              onClick={play}
+            >
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="absolute inset-0 flex items-center justify-center bg-black/40 cursor-pointer"
-                onClick={play}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-amber-700/90 flex items-center justify-center shadow-xl"
               >
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-amber-700/90 flex items-center justify-center shadow-xl"
-                >
-                  <Play className="w-7 h-7 sm:w-8 sm:h-8 text-white ml-1" fill="currentColor" />
-                </motion.div>
+                <Play className="w-7 h-7 sm:w-8 sm:h-8 text-white ml-1" fill="currentColor" />
               </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      ) : (
-        <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-stone-200 border border-stone-300 shadow-lg flex items-center justify-center">
-          <p className="text-stone-400 font-montserrat text-sm uppercase tracking-widest">Coming Soon</p>
-        </div>
-      )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </section>
   );
 };

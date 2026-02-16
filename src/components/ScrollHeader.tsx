@@ -46,26 +46,9 @@ export const ScrollHeader = () => {
             />
           </Link>
 
-          {/* Desktop Navigation - with right padding for cart button */}
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6 lg:gap-8 pr-28">
-            <Link
-              to="/shop"
-              className="font-montserrat text-sm text-light-secondary hover:text-primary transition-colors tracking-wide whitespace-nowrap"
-            >
-              Shop
-            </Link>
-            <Link
-              to="/about"
-              className="font-montserrat text-sm text-light-secondary hover:text-primary transition-colors tracking-wide whitespace-nowrap"
-            >
-              About
-            </Link>
-            <Link
-              to="/contact"
-              className="font-montserrat text-sm text-light-secondary hover:text-primary transition-colors tracking-wide whitespace-nowrap"
-            >
-              Contact
-            </Link>
+            {/* Shop, About, Contact temporarily disabled */}
           </nav>
 
           {/* Mobile Menu Button - positioned with right margin for cart button */}
@@ -87,27 +70,7 @@ export const ScrollHeader = () => {
               className="md:hidden border-t border-white/10 overflow-hidden"
             >
               <div className="py-4 space-y-3">
-                <Link
-                  to="/shop"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block font-montserrat text-sm text-light-secondary hover:text-primary transition-colors tracking-wide py-2"
-                >
-                  Shop
-                </Link>
-                <Link
-                  to="/about"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block font-montserrat text-sm text-light-secondary hover:text-primary transition-colors tracking-wide py-2"
-                >
-                  About
-                </Link>
-                <Link
-                  to="/contact"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block font-montserrat text-sm text-light-secondary hover:text-primary transition-colors tracking-wide py-2"
-                >
-                  Contact
-                </Link>
+                {/* Shop, About, Contact temporarily disabled */}
               </div>
             </motion.nav>
           )}
