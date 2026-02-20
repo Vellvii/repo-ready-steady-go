@@ -54,7 +54,7 @@ export const ScrollHeader = () => {
           {/* Mobile Menu Button - positioned with right margin for cart button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-light-secondary hover:text-primary transition-colors mr-16"
+            className="md:hidden p-2 text-light-secondary hover:text-primary transition-colors mr-14 sm:mr-16"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>

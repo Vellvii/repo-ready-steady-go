@@ -8,14 +8,14 @@ export const FloatingVivienChat = () => {
   const [isMinimized, setIsMinimized] = useState(false);
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-4 right-3 sm:bottom-6 sm:right-6 z-50">
       {/* Chat Window */}
       {isOpen && (
         <div 
           className={`
             absolute bottom-16 right-0 
             transition-all duration-300 ease-out
-            ${isMinimized ? 'h-14' : 'w-[340px] sm:w-[380px]'}
+            ${isMinimized ? 'h-14' : 'w-[calc(100vw-24px)] max-w-[340px] sm:w-[380px]'}
           `}
         >
           {/* Vivien's Large Image - positioned above chat */}

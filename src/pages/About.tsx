@@ -54,7 +54,7 @@ const About = () => {
         {/* Philosophy Section */}
         <section className="py-16 sm:py-24 px-4 sm:px-6 border-t border-white/5">
           <div className="max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}

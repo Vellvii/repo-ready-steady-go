@@ -125,12 +125,12 @@ const DoxVideoLanding = () => {
 
         {/* Main Content */}
         <main className="flex-1 flex flex-col items-center justify-center px-4 pb-8">
-          {/* Section Header */}
-          <div className="text-center mb-6 sm:mb-8">
+        {/* Section Header */}
+          <div className="text-center mb-5 sm:mb-8">
             <p className="text-primary font-montserrat text-xs sm:text-sm uppercase tracking-[0.2em] mb-2">
               Experience
             </p>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-baskerville font-bold text-light-primary">
+            <h1 className="text-xl sm:text-2xl md:text-4xl font-baskerville font-bold text-light-primary">
               DOX in <span className="gradient-text">60 Seconds</span>
             </h1>
           </div>
@@ -238,10 +238,10 @@ const DoxVideoLanding = () => {
                 </a>
                 <button
                   onClick={() => setNotifyOpen(true)}
-                  className="w-full group px-6 py-4 bg-gradient-to-r from-primary/20 via-accent/30 to-primary/20 border-2 border-primary/50 hover:border-primary text-light-primary rounded-xl font-bold text-base transition-all duration-300 hover:bg-primary/20 flex items-center justify-center gap-2"
+                  className="w-full group px-4 py-4 bg-gradient-to-r from-primary/20 via-accent/30 to-primary/20 border-2 border-primary/50 hover:border-primary text-light-primary rounded-xl font-bold text-sm sm:text-base transition-all duration-300 hover:bg-primary/20 flex items-center justify-center gap-2 text-center"
                 >
-                  <span>🇺🇸</span>
-                  <span>Notify Me When Available in USA</span>
+                  <span className="text-base sm:text-lg">🇺🇸</span>
+                  <span>Notify Me – USA Launch</span>
                 </button>
               </motion.div>
             )}

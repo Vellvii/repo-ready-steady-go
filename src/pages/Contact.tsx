@@ -51,7 +51,7 @@ const Contact = () => {
         {/* Contact Options */}
         <section className="px-4 sm:px-6 pb-16 sm:pb-24">
           <div className="max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
               {/* Customer Support */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}

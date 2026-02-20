@@ -91,7 +91,7 @@ const Home = () => {
             <div className="text-center mb-12">
               <AnimatedText
                 text="Vellvii Dox"
-                className="section-title justify-center text-5xl font-playfair font-bold text-foreground mb-4"
+                className="section-title justify-center text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-foreground mb-4"
               />
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Our Flagship Solution
@@ -109,7 +109,7 @@ const Home = () => {
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="glass-luxury apple-hover p-6 sm:p-8 md:p-10 rounded-lg text-center dox-card w-[80vw] max-w-none"
+                className="glass-luxury apple-hover p-5 sm:p-8 md:p-10 rounded-lg text-center w-full max-w-3xl"
               >
                 <ImageSlider
                   images={["/uploads/Dox1.jpg", "/uploads/Dox2.jpg", "/uploads/Dox3.jpg", "/uploads/Dox4.jpg", "/uploads/Dox5.jpg"]}
@@ -166,7 +166,7 @@ const Home = () => {
             </ScrollReveal>
 
             <ScrollReveal delay={0.3}>
-              <h2 className="text-center text-3xl sm:text-4xl font-playfair font-bold mt-6 mb-4">
+              <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-playfair font-bold mt-6 mb-4 px-4">
                 One Form, Three Functions, All Pleasure
               </h2>
             </ScrollReveal>
@@ -219,8 +219,8 @@ const Home = () => {
             </div>
 
             <ScrollReveal delay={0.6}>
-              <div className="text-center mt-10 mb-4">
-                <AnimatedText text="Our Pleasure Collection" className="text-4xl font-playfair font-bold text-foreground" />
+              <div className="text-center mt-10 mb-4 px-4">
+                <AnimatedText text="Our Pleasure Collection" className="text-2xl sm:text-3xl md:text-4xl font-playfair font-bold text-foreground" />
               </div>
             </ScrollReveal>
 
@@ -266,7 +266,7 @@ const Home = () => {
             <ScrollReveal delay={0.2} direction="left">
               <div>
                 <Badge variant="outline" className="mb-4">About Vellvii</Badge>
-                <AnimatedText text="Redefining Intimate Luxury" className="text-4xl font-playfair font-bold text-foreground mb-6" />
+                <AnimatedText text="Redefining Intimate Luxury" className="text-2xl sm:text-3xl md:text-4xl font-playfair font-bold text-foreground mb-6" />
                 <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                   At Vellvii, we believe that intimacy deserves the finest craftsmanship. 
                   Our collection represents the perfect fusion of sophisticated design, 
@@ -351,12 +351,12 @@ const Home = () => {
       </section>
 
       {/* Partner Marketing Section */}
-      <section className="py-16 px-6 border-t border-white/10">
+      <section className="py-10 sm:py-16 px-4 sm:px-6 border-t border-white/10">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal delay={0.2}>
             <div className="text-center mb-12">
               <Badge variant="outline" className="mb-4">Business Partnership</Badge>
-              <AnimatedText text="Retail Partners Wanted" className="text-4xl font-playfair font-bold text-foreground mb-4" />
+              <AnimatedText text="Retail Partners Wanted" className="text-2xl sm:text-3xl md:text-4xl font-playfair font-bold text-foreground mb-4" />
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Own a sex shop or intimate wellness store? Join our exclusive retail network and offer 
                 your customers the finest in luxury intimacy products.
@@ -448,7 +448,7 @@ const Home = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-16 px-6 border-t border-white/10">
+      <section className="py-10 sm:py-16 px-4 sm:px-6 border-t border-white/10">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal delay={0.2}>
             <div className="text-center mb-12">
