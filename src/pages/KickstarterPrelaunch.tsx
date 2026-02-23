@@ -1,7 +1,7 @@
 import { KSPHero } from "@/components/ks-prelaunch/KSPHero";
 import { KSPProblem } from "@/components/ks-prelaunch/KSPProblem";
-import { KSPFeatures } from "@/components/ks-prelaunch/KSPFeatures";
-import { KSPCredibility } from "@/components/ks-prelaunch/KSPCredibility";
+import { KSPInnovation } from "@/components/ks-prelaunch/KSPInnovation";
+import { KSPEcosystem } from "@/components/ks-prelaunch/KSPEcosystem";
 import { KSPFooterCTA } from "@/components/ks-prelaunch/KSPFooterCTA";
 import { KSPStickyBar } from "@/components/ks-prelaunch/KSPStickyBar";
 import { PageTransition } from "@/components/animations/PageTransition";
@@ -11,8 +11,8 @@ const KickstarterPrelaunch = () => {
   return (
     <>
       <SEO
-        title="Vellvii DOX — Back Us on Kickstarter"
-        description="The world's first biometric storage & docking system for intimate wellness. Super Early Bird pricing from $99. Notify me on launch."
+        title="Vellvii DOX — Intimate Suction Cups: Problem Solved"
+        description="No more suction cups on shower walls. The world's first biometric storage & docking system for intimate wellness. Super Early Bird pricing from $99."
       />
       <PageTransition>
         <div className="min-h-screen relative overflow-hidden" style={{ background: 'var(--gradient-dark)' }}>
@@ -20,8 +20,8 @@ const KickstarterPrelaunch = () => {
           <div className="relative z-10">
             <KSPHero />
             <KSPProblem />
-            <KSPFeatures />
-            <KSPCredibility />
+            <KSPInnovation />
+            <KSPEcosystem />
             <KSPFooterCTA />
           </div>
           <KSPStickyBar />
