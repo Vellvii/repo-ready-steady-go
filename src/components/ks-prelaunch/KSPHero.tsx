@@ -69,7 +69,7 @@ export const KSPHero = () => {
           </ScrollReveal>
 
           <AnimatedText
-            text="Problem Solved."
+            text="Problem : Solved."
             className="text-5xl sm:text-6xl lg:text-8xl xl:text-9xl font-bold text-white leading-[1] tracking-tight mx-auto justify-center"
             delay={0.3}
           />
@@ -79,6 +79,8 @@ export const KSPHero = () => {
               No more suction cups on shower walls.
               <br className="hidden sm:block" />
               No more shoeboxes under the bed.
+              <br className="hidden sm:block" />
+              No more charging under a pillow.
             </p>
           </ScrollReveal>
 
