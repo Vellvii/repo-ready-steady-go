@@ -1,10 +1,64 @@
 import { AnimatedText } from "@/components/animations/AnimatedText";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import { motion } from "framer-motion";
+import { useMemo } from "react";
+
+const Particle = ({ delay, x, y, size, duration }: { delay: number; x: number; y: number; size: number; duration: number }) => (
+  <motion.div
+    className="absolute rounded-full"
+    style={{
+      left: `${x}%`,
+      top: `${y}%`,
+      width: size,
+      height: size,
+      background: `radial-gradient(circle, hsl(40 65% 72% / 0.6), hsl(40 65% 72% / 0))`,
+    }}
+    initial={{ opacity: 0, scale: 0 }}
+    animate={{
+      opacity: [0, 0.8, 0.4, 0.8, 0],
+      scale: [0, 1, 1.2, 1, 0],
+      y: [0, -40, -80, -120],
+    }}
+    transition={{
+      duration,
+      delay,
+      repeat: Infinity,
+      ease: "easeInOut",
+    }}
+  />
+);
 
 export const KSPHero = () => {
+  const particles = useMemo(() =>
+    Array.from({ length: 30 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: 20 + Math.random() * 70,
+      size: 2 + Math.random() * 4,
+      delay: Math.random() * 6,
+      duration: 4 + Math.random() * 4,
+    })), []
+  );
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Ambient glow layers */}
       <div className="absolute inset-0" style={{ background: 'var(--gradient-hero)' }} />
+      <motion.div
+        className="absolute inset-0"
+        style={{
+          background: 'radial-gradient(ellipse 60% 40% at 50% 50%, hsl(40 65% 72% / 0.08), transparent 70%)',
+        }}
+        animate={{ opacity: [0.4, 0.8, 0.4] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Floating particles */}
+      <div className="absolute inset-0 pointer-events-none">
+        {particles.map((p) => (
+          <Particle key={p.id} {...p} />
+        ))}
+      </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-5xl">
         <div className="text-center space-y-8">
