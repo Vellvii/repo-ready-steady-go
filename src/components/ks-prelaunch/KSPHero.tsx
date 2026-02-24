@@ -1,4 +1,3 @@
-import { AnimatedText } from "@/components/animations/AnimatedText";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { motion } from "framer-motion";
 import { useMemo } from "react";
@@ -47,9 +46,23 @@ export const KSPHero = () => {
       <motion.div
         className="absolute inset-0"
         style={{
-          background: 'radial-gradient(ellipse 60% 40% at 50% 50%, hsl(40 65% 72% / 0.08), transparent 70%)',
+          background: 'radial-gradient(ellipse 60% 40% at 50% 50%, hsl(40 65% 72% / 0.12), transparent 70%)',
         }}
-        animate={{ opacity: [0.4, 0.8, 0.4] }}
+        animate={{ opacity: [0.3, 1, 0.3] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Dramatic spotlight behind headline */}
+      <motion.div
+        className="absolute pointer-events-none"
+        style={{
+          width: '120vw',
+          height: '60vh',
+          top: '20%',
+          left: '-10vw',
+          background: 'radial-gradient(ellipse 50% 40% at 50% 50%, hsl(40 65% 72% / 0.15), transparent 70%)',
+        }}
+        animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.9, 0.5] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       />
 
@@ -60,31 +73,88 @@ export const KSPHero = () => {
         ))}
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-5xl">
-        <div className="text-center space-y-8">
-          <ScrollReveal delay={0.1}>
-            <p className="text-primary text-xs sm:text-sm font-bold tracking-[0.3em] uppercase">
-              Coming to Kickstarter
-            </p>
-          </ScrollReveal>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-6xl">
+        <div className="text-center space-y-10">
+          <motion.p
+            className="text-primary text-xs sm:text-sm font-bold tracking-[0.4em] uppercase"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Coming to Kickstarter
+          </motion.p>
 
-          <AnimatedText
-            text="Problem : Solved."
-            className="text-5xl sm:text-6xl lg:text-8xl xl:text-9xl font-bold text-white leading-[1] tracking-tight mx-auto justify-center"
-            delay={0.3}
-          />
+          {/* THE HEADLINE — unmissable */}
+          <div className="relative">
+            {/* Glow behind text */}
+            <motion.div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: 'radial-gradient(ellipse 60% 50% at 50% 50%, hsl(40 65% 72% / 0.2), transparent 60%)',
+                filter: 'blur(40px)',
+              }}
+              animate={{ opacity: [0.4, 0.8, 0.4] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            />
 
-          <ScrollReveal delay={0.6}>
-            <p className="text-xl sm:text-2xl lg:text-3xl text-white/70 max-w-3xl mx-auto font-light leading-relaxed font-baskerville">
-              No more suction cups on shower walls.
-              <br className="hidden sm:block" />
-              No more shoeboxes under the bed.
-              <br className="hidden sm:block" />
-              No more charging under a pillow.
-            </p>
-          </ScrollReveal>
+            <div className="relative flex flex-col items-center gap-2 sm:gap-4">
+              {/* PROBLEM */}
+              <motion.span
+                className="block font-baskerville text-white/40 text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-bold tracking-wide uppercase"
+                initial={{ opacity: 0, x: -80, filter: 'blur(10px)' }}
+                animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              >
+                Problem
+              </motion.span>
 
-          <ScrollReveal delay={0.8}>
+              {/* Divider line */}
+              <motion.div
+                className="h-px bg-gradient-to-r from-transparent via-primary to-transparent"
+                initial={{ width: 0 }}
+                animate={{ width: '80%' }}
+                transition={{ duration: 1.2, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              />
+
+              {/* SOLVED — the star */}
+              <motion.span
+                className="block font-baskerville text-7xl sm:text-8xl lg:text-[10rem] xl:text-[12rem] font-bold leading-[0.85] tracking-tight"
+                style={{
+                  background: 'linear-gradient(135deg, hsl(40 65% 82%), hsl(40 70% 72%), hsl(30 60% 65%))',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  filter: 'drop-shadow(0 0 60px hsl(40 65% 72% / 0.4))',
+                }}
+                initial={{ opacity: 0, x: 80, filter: 'blur(10px)' }}
+                animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                transition={{ duration: 1, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              >
+                Solved.
+              </motion.span>
+            </div>
+          </div>
+
+          {/* Subtitle lines — staggered reveal */}
+          <div className="max-w-3xl mx-auto space-y-1">
+            {[
+              { text: "No more suction cups on shower walls.", delay: 1.4 },
+              { text: "No more shoeboxes under the bed.", delay: 1.6 },
+              { text: "No more charging under a pillow.", delay: 1.8 },
+            ].map(({ text, delay }) => (
+              <motion.p
+                key={text}
+                className="text-lg sm:text-xl lg:text-2xl text-white/60 font-light font-baskerville"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay, ease: "easeOut" }}
+              >
+                {text}
+              </motion.p>
+            ))}
+          </div>
+
+          <ScrollReveal delay={2.2}>
             <div className="flex items-center justify-center gap-3 pt-4">
               <div className="w-px h-16 bg-gradient-to-b from-transparent via-primary/60 to-transparent" />
               <p className="text-white/40 text-sm uppercase tracking-widest font-semibold">
