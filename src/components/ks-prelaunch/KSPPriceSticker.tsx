@@ -41,18 +41,34 @@ export const KSPPriceSticker = ({
       className={`relative ${className}`}
       style={{ filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.5))" }}
     >
-      {/* Pulsing glow ring */}
+      {/* Outer pulsing glow — large and dramatic */}
       <motion.div
-        className="absolute -inset-3 rounded-3xl pointer-events-none"
+        className="absolute -inset-6 sm:-inset-8 rounded-[2rem] pointer-events-none z-0"
         style={{
-          background: "radial-gradient(ellipse, hsl(40 65% 72% / 0.35), transparent 70%)",
+          background: "radial-gradient(ellipse, hsl(40 70% 65% / 0.6), hsl(40 65% 55% / 0.3) 50%, transparent 75%)",
+          filter: "blur(12px)",
         }}
         animate={{
-          opacity: [0.3, 0.8, 0.3],
-          scale: [1, 1.08, 1],
+          opacity: [0.15, 0.9, 0.15],
+          scale: [0.95, 1.15, 0.95],
         }}
         transition={{
-          duration: 2.2,
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      {/* Inner tight glow ring */}
+      <motion.div
+        className="absolute -inset-2 rounded-3xl pointer-events-none z-0"
+        style={{
+          boxShadow: "0 0 30px 8px hsl(40 65% 65% / 0.5), 0 0 60px 20px hsl(40 65% 65% / 0.2)",
+        }}
+        animate={{
+          opacity: [0.2, 1, 0.2],
+        }}
+        transition={{
+          duration: 2,
           repeat: Infinity,
           ease: "easeInOut",
         }}
