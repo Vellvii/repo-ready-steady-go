@@ -1,67 +1,50 @@
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
-import doxOpenToys from "@/assets/dox-open-toys.png";
+import { ImageIcon } from "lucide-react";
 
 export const KSPEcosystem = () => {
+  const products = [
+    { name: "Vellvii Pulse", tagline: "Deep, Resonant Vibration" },
+    { name: "Vellvii G-Vibe", tagline: "Precision G-Spot Stimulation" },
+    { name: "Vellvii Evolve", tagline: "Adaptive Pleasure, Redefined" },
+  ];
+
   return (
     <section className="py-20 md:py-32 relative">
       <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
         <ScrollReveal>
           <p className="text-primary/60 text-xs uppercase tracking-[0.4em] font-semibold text-center mb-6">
-            Chapter 03 — The Ecosystem
+            Chapter 03 — The Collection
           </p>
         </ScrollReveal>
 
         <ScrollReveal delay={0.15}>
           <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white text-center mb-6 font-baskerville leading-tight">
-            Everything Works Together
+            Our <span className="gradient-text">Pleasure Collection</span>
           </h2>
         </ScrollReveal>
 
         <ScrollReveal delay={0.25}>
           <p className="text-lg text-white/60 text-center max-w-2xl mx-auto mb-14 font-light leading-relaxed">
-            The DOX isn't just storage — it's a complete ecosystem. Every device docks, charges, and
-            lives elegantly inside. No more improvising.
+            Three devices, one ecosystem. Each crafted for a distinct sensation — all designed to dock, charge, and live inside the DOX.
           </p>
         </ScrollReveal>
 
-        {/* Ecosystem image */}
-        <ScrollReveal delay={0.35}>
-          <div className="relative max-w-2xl mx-auto rounded-3xl overflow-hidden shadow-float ring-1 ring-white/10 mb-14">
-            <img
-              src={doxOpenToys}
-              alt="Vellvii DOX open with full collection inside"
-              className="w-full h-auto object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-          </div>
-        </ScrollReveal>
-
-        {/* Prototype videos */}
-        <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 mb-14">
-          <ScrollReveal delay={0.4}>
-            <div className="rounded-2xl overflow-hidden ring-1 ring-white/10 shadow-float">
-              <video
-                src="/uploads/dox-animation.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-auto"
-              />
-            </div>
-          </ScrollReveal>
-          <ScrollReveal delay={0.5}>
-            <div className="rounded-2xl overflow-hidden ring-1 ring-white/10 shadow-float">
-              <video
-                src="/uploads/dox-open-animation.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-auto"
-              />
-            </div>
-          </ScrollReveal>
+        {/* Product placeholders */}
+        <div className="grid sm:grid-cols-3 gap-4 sm:gap-6 mb-14">
+          {products.map((product, i) => (
+            <ScrollReveal key={i} delay={0.3 + i * 0.1}>
+              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/[0.03] flex flex-col items-center justify-center gap-4 group hover:ring-primary/30 transition-all duration-500">
+                <div className="w-14 h-14 rounded-full border border-primary/20 flex items-center justify-center">
+                  <ImageIcon className="w-6 h-6 text-primary/40" />
+                </div>
+                <div className="text-center px-4">
+                  <p className="text-white font-baskerville font-bold text-lg mb-1">{product.name}</p>
+                  <p className="text-white/40 text-sm font-light">{product.tagline}</p>
+                </div>
+                <p className="text-white/20 text-[10px] uppercase tracking-widest">Image coming soon</p>
+              </div>
+            </ScrollReveal>
+          ))}
         </div>
 
         {/* Super Early Bird Pricing */}
