@@ -39,15 +39,21 @@ export const KSPEcosystem = () => {
         <div className="grid sm:grid-cols-3 gap-4 sm:gap-6 mb-14">
           {products.map((product, i) => (
             <ScrollReveal key={i} delay={0.3 + i * 0.1}>
-              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden ring-1 ring-white/10 bg-white/[0.03] flex flex-col items-center justify-center gap-4 group hover:ring-primary/30 transition-all duration-500">
+              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden ring-1 ring-white/10 bg-transparent flex flex-col items-center justify-center gap-4 group hover:ring-primary/30 transition-all duration-500">
+                {/* Subtle radial glow behind product */}
+                <div className="absolute inset-0 bg-radial-gradient opacity-30 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center 60%, hsl(var(--primary) / 0.15), transparent 70%)' }} />
                 {product.image ? (
-                  <img src={product.image} alt={product.name} className="absolute inset-0 w-full h-full object-contain p-6" />
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="absolute inset-0 w-full h-full object-contain p-6 mix-blend-lighten"
+                  />
                 ) : (
                   <div className="w-14 h-14 rounded-full border border-primary/20 flex items-center justify-center">
                     <ImageIcon className="w-6 h-6 text-primary/40" />
                   </div>
                 )}
-                <div className={`text-center px-4 ${product.image ? 'absolute bottom-6' : ''}`}>
+                <div className={`text-center px-4 relative z-10 ${product.image ? 'absolute bottom-6' : ''}`}>
                   <p className="text-white font-baskerville font-bold text-lg mb-1">{product.name}</p>
                   <p className="text-white/40 text-sm font-light">{product.tagline}</p>
                 </div>
