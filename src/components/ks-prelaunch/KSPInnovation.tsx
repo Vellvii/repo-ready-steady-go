@@ -18,7 +18,7 @@ export const KSPInnovation = () => {
 
         <ScrollReveal delay={0.15}>
           <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white text-center mb-6 font-baskerville leading-tight">
-            Meet the <span className="gradient-text">DOX</span>
+            The <span className="gradient-text">DOX</span> — So much more than just a product.
           </h2>
         </ScrollReveal>
 
@@ -39,7 +39,6 @@ export const KSPInnovation = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
             <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8">
-              <p className="text-primary text-xs uppercase tracking-widest mb-2">After</p>
               <p className="text-white font-baskerville text-xl sm:text-2xl lg:text-3xl">
                 Designed. Elegant. <span className="text-primary">Empowering.</span>
               </p>
@@ -48,11 +47,12 @@ export const KSPInnovation = () => {
         </ScrollReveal>
 
         {/* How it solves */}
-        <div className="grid sm:grid-cols-3 gap-4 mt-12 max-w-3xl mx-auto">
+        <div className="grid sm:grid-cols-2 gap-4 mt-12 max-w-3xl mx-auto">
           {[
-            { label: "Docking Cradles", desc: "Built-in mounts replace suction cups forever" },
-            { label: "USB-C Charging", desc: "Devices charge while stored — always ready" },
-            { label: "Fingerprint Lock", desc: "One touch. Only you. Total privacy." },
+            { label: "Docking", desc: "From Suction Cups to Saddle Toys. Built-in mounts to secure your intimate toys." },
+            { label: "USB-C Charging", desc: "Charging Simplified. One Cable, Multiple Toys." },
+            { label: "Fingerprint Lock", desc: "One Touch. Total Privacy. Programmable with more than 1 set of prints." },
+            { label: "Exceptional Design", desc: "Created as a masterpiece, not an afterthought." },
           ].map((item, i) => (
             <ScrollReveal key={i} delay={0.4 + i * 0.1}>
               <div className="glass-accent border border-primary/20 rounded-xl px-5 py-5 text-center">
