@@ -2,6 +2,7 @@ import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { motion } from "framer-motion";
 import { Fingerprint, Plug, Lock, Gem } from "lucide-react";
 import doxCloseUp from "@/assets/dox-close-up.webp";
+import { KSPPriceSticker } from "@/components/ks-prelaunch/KSPPriceSticker";
 
 const features = [
   { icon: Plug, label: "Docking", desc: "Built-in mounts for suction cups to saddle toys." },
@@ -81,27 +82,17 @@ export const KSV2Innovation = () => {
           </div>
         </div>
 
-        {/* Price callout */}
+        {/* Price sticker */}
         <ScrollReveal delay={0.6}>
           <div className="mt-16 flex justify-center">
-            <motion.div
-              className="relative px-8 py-5 rounded-2xl border border-primary/30 text-center"
-              style={{ background: "linear-gradient(135deg, hsl(40 70% 75% / 0.08), hsl(350 50% 60% / 0.05))" }}
-              animate={{
-                boxShadow: [
-                  "0 0 20px hsl(40 70% 65% / 0.1)",
-                  "0 0 40px hsl(40 70% 65% / 0.25)",
-                  "0 0 20px hsl(40 70% 65% / 0.1)",
-                ],
-              }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <p className="text-white/50 text-xs uppercase tracking-widest mb-2">The DOX — Super Early Bird</p>
-              <div className="flex items-center justify-center gap-3">
-                <span className="text-white/30 text-lg line-through">$299</span>
-                <span className="text-3xl font-bold text-white">$149</span>
-              </div>
-            </motion.div>
+            <KSPPriceSticker
+              label="The DOX"
+              retailPrice="$299"
+              kickstarterPrice="$199"
+              vipPrice="$149"
+              rotation={3}
+              size="lg"
+            />
           </div>
         </ScrollReveal>
       </div>

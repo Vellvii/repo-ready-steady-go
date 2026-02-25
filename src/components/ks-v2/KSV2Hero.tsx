@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { KSPPriceSticker } from "@/components/ks-prelaunch/KSPPriceSticker";
 
 export const KSV2Hero = () => {
   return (
@@ -87,7 +88,7 @@ export const KSV2Hero = () => {
 
           {/* CTA row */}
           <motion.div
-            className="flex flex-col sm:flex-row items-start gap-4 mt-10 sm:mt-14"
+            className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mt-10 sm:mt-14"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 1.3 }}
@@ -109,13 +110,14 @@ export const KSV2Hero = () => {
                 }}
               />
             </a>
-            <div className="flex items-center gap-3 text-white/40 text-sm">
-              <div className="w-px h-8 bg-white/20" />
-              <span>
-                Super Early Bird from{" "}
-                <span className="text-primary font-bold text-base">$149</span>
-              </span>
-            </div>
+            <KSPPriceSticker
+              label="The DOX"
+              retailPrice="$299"
+              kickstarterPrice="$199"
+              vipPrice="$149"
+              rotation={-3}
+              size="md"
+            />
           </motion.div>
 
           {/* Scroll indicator */}

@@ -1,5 +1,6 @@
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { motion } from "framer-motion";
+import { KSPPriceSticker } from "@/components/ks-prelaunch/KSPPriceSticker";
 
 const products = [
   { name: "Pulse", tagline: "Deep Resonant Vibration", image: "/uploads/PinkPulseBack.png", price: "$99", retail: "$169" },
@@ -68,10 +69,15 @@ export const KSV2Ecosystem = () => {
                 </div>
                 <div className="p-6 pt-0 text-center">
                   <p className="text-white font-bold text-lg">{p.name}</p>
-                  <p className="text-white/40 text-sm font-light mb-3">{p.tagline}</p>
-                  <div className="flex items-center justify-center gap-2">
-                    <span className="text-white/30 text-sm line-through">{p.retail}</span>
-                    <span className="text-white font-bold text-xl">{p.price}</span>
+                  <p className="text-white/40 text-sm font-light mb-4">{p.tagline}</p>
+                  <div className="flex justify-center">
+                    <KSPPriceSticker
+                      retailPrice={p.retail}
+                      kickstarterPrice="$129"
+                      vipPrice={p.price}
+                      rotation={i === 0 ? -2 : i === 1 ? 1.5 : -1}
+                      size="sm"
+                    />
                   </div>
                 </div>
               </motion.div>
@@ -81,26 +87,16 @@ export const KSV2Ecosystem = () => {
 
         {/* Bundle callout */}
         <ScrollReveal delay={0.6}>
-          <motion.div
-            className="mt-16 max-w-lg mx-auto p-8 rounded-3xl border border-primary/30 text-center relative overflow-hidden"
-            style={{ background: "linear-gradient(135deg, hsl(40 70% 75% / 0.06), hsl(350 50% 60% / 0.04))" }}
-            animate={{
-              boxShadow: [
-                "0 0 30px hsl(40 70% 65% / 0.1)",
-                "0 0 60px hsl(40 70% 65% / 0.2)",
-                "0 0 30px hsl(40 70% 65% / 0.1)",
-              ],
-            }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <p className="text-primary text-xs font-bold tracking-[0.3em] uppercase mb-3">Best Value</p>
-            <p className="text-white font-bold text-xl mb-1">Full Ecosystem Bundle</p>
-            <p className="text-white/40 text-sm font-light mb-4">DOX + Pulse + G-Vibe + Evolve</p>
-            <div className="flex items-center justify-center gap-3">
-              <span className="text-white/30 text-lg line-through">$749</span>
-              <span className="text-4xl font-bold text-white">$399</span>
-            </div>
-          </motion.div>
+          <div className="mt-16 flex justify-center">
+            <KSPPriceSticker
+              label="Full Ecosystem"
+              retailPrice="$749"
+              kickstarterPrice="$499"
+              vipPrice="$399"
+              rotation={-2}
+              size="lg"
+            />
+          </div>
         </ScrollReveal>
       </div>
     </section>
