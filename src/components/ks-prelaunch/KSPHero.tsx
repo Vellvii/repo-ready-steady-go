@@ -76,14 +76,19 @@ export const KSPHero = () => {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-6xl">
         <div className="text-center space-y-10">
-          <motion.p
-            className="text-primary text-xs sm:text-sm font-bold tracking-[0.4em] uppercase"
+          <motion.div
+            className="flex items-center justify-center gap-3"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Coming to Kickstarter
-          </motion.p>
+            <span className="text-primary text-xs sm:text-sm font-bold tracking-[0.4em] uppercase">VIP Offers on</span>
+            <img
+              src="/uploads/kickstarter-logo.webp"
+              alt="Kickstarter"
+              className="h-6 sm:h-8 w-auto rounded"
+            />
+          </motion.div>
 
           {/* THE HEADLINE — unmissable */}
           <div className="relative">
