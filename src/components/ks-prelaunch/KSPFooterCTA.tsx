@@ -13,10 +13,10 @@ export const KSPFooterCTA = () => {
         <div className="max-w-3xl mx-auto text-center space-y-8">
           <ScrollReveal>
             <p className="text-primary/60 text-xs uppercase tracking-[0.4em] font-semibold mb-4">
-              Chapter 04 — Join the Movement
+              Chapter 04 — The Ecosystem
             </p>
             <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white font-baskerville leading-[1.1]">
-              Be First. Back the DOX.
+              The Full <span className="gradient-text">Vellvii</span> Ecosystem
             </h2>
           </ScrollReveal>
 
@@ -27,7 +27,7 @@ export const KSPFooterCTA = () => {
           </ScrollReveal>
 
           <ScrollReveal delay={0.3}>
-            <CountdownTimer targetDate="2026-06-15T00:00:00" size="small" />
+            <CountdownTimer targetDate="2026-03-10T12:00:00Z" size="small" />
           </ScrollReveal>
 
           <ScrollReveal delay={0.4}>
