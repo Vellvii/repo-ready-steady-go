@@ -9,8 +9,14 @@ export const KSPEcosystem = () => {
   ];
 
   return (
-    <section className="py-20 md:py-32 relative">
-      <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
+    <section className="py-20 md:py-32 relative overflow-hidden">
+      {/* Background image */}
+      <div
+        className="absolute inset-0 bg-center bg-cover bg-no-repeat opacity-[0.08] pointer-events-none"
+        style={{ backgroundImage: "url('/uploads/Pulse_Gvibe2.png')" }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background pointer-events-none" />
+      <div className="container mx-auto px-4 sm:px-6 max-w-5xl relative z-10">
         <ScrollReveal>
           <p className="text-primary/60 text-xs uppercase tracking-[0.4em] font-semibold text-center mb-6">
             Chapter 03 — The Collection
