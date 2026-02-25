@@ -21,6 +21,12 @@ export const KSPFooterCTA = () => {
             </h2>
           </ScrollReveal>
 
+          <ScrollReveal delay={0.15}>
+            <p className="text-base sm:text-lg text-white/40 font-light max-w-xl mx-auto">
+              The Vellvii DOX + all 3 Pleasure Collection devices — Pulse, G-Vibe &amp; Evolve.
+            </p>
+          </ScrollReveal>
+
           <ScrollReveal delay={0.2}>
             <p className="text-lg sm:text-xl text-white/60 font-light">
               Super Early Bird pricing won't last. Get notified the moment we go live.
