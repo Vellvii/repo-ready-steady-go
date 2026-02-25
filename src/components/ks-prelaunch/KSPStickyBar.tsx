@@ -27,10 +27,10 @@ export const KSPStickyBar = () => {
       <div className="container mx-auto flex items-center justify-between gap-4 max-w-4xl">
         <div className="hidden sm:block">
           <p className="text-white font-baskerville font-bold text-sm">Vellvii DOX</p>
-          <p className="text-white/50 text-xs">Super Early Bird from <span className="text-primary font-bold">$99</span></p>
+          <p className="text-white/50 text-xs">Super Early Bird from <span className="text-primary font-bold">$149</span></p>
         </div>
         <div className="sm:hidden">
-          <p className="text-white/50 text-xs">From <span className="text-primary font-bold text-sm">$99</span></p>
+          <p className="text-white/50 text-xs">From <span className="text-primary font-bold text-sm">$149</span></p>
         </div>
         <a
           href={KICKSTARTER_URL}
