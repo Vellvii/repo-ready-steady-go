@@ -41,6 +41,22 @@ export const KSPPriceSticker = ({
       className={`relative ${className}`}
       style={{ filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.5))" }}
     >
+      {/* Pulsing glow ring */}
+      <motion.div
+        className="absolute -inset-3 rounded-3xl pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse, hsl(40 65% 72% / 0.35), transparent 70%)",
+        }}
+        animate={{
+          opacity: [0.3, 0.8, 0.3],
+          scale: [1, 1.08, 1],
+        }}
+        transition={{
+          duration: 2.2,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
       {/* The sticker body */}
       <div
         className={`${sizeClasses[size]} rounded-2xl text-center relative overflow-hidden`}
