@@ -26,7 +26,7 @@ export const KSPProblem = () => {
 
         <ScrollReveal delay={0.15}>
           <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white text-center mb-14 font-baskerville leading-tight">
-            Meet the Dox.
+            Meet the <span className="text-primary">Vellvii DOX</span> in under 60 seconds.
           </h2>
         </ScrollReveal>
 
