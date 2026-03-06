@@ -12,7 +12,7 @@ import { PageTransition } from "@/components/animations/PageTransition";
 import { SEO } from "@/components/SEO";
 
 const doxFaqs = [
-  { question: "What is the Vellvii Dox?", answer: "The Vellvii Dox is a luxury sex toy storage and docking station featuring biometric fingerprint lock, USB-C charging, and premium vegan leather with velvet interior." },
+  { question: "What is the Vellvii Dox?", answer: "The Vellvii Dox is a luxury pleasure collection storage and docking station featuring biometric fingerprint lock, USB-C charging, and premium vegan leather with velvet interior." },
   { question: "How does the fingerprint lock work?", answer: "The biometric lock stores multiple fingerprints for secure, instant access. Only registered users can unlock the Dox, ensuring complete privacy." },
   { question: "Can I charge my toys inside the Dox?", answer: "Yes, the Dox features an embedded USB-C charging dock with dedicated cradle slots for Vellvii Pulse, Vibe, and G-Vibe products." },
   { question: "When will the Dox be available?", answer: "The Vellvii Dox is currently in pre-order phase. Reserve yours now for exclusive early access and special launch pricing." },
@@ -22,12 +22,12 @@ export default function PrelaunchDOX() {
   return (
     <>
       <SEO
-        title="Pre-Order Luxury Sex Toy Storage | Vellvii Dox"
+        title="Pre-Order Luxury Pleasure Collection Storage | Vellvii Dox"
         description="Reserve the Vellvii Dox - premium docking station with fingerprint lock, charging dock, and designer storage. Exclusive prelaunch access."
         canonical="/prelaunch-dox"
         productData={{
           name: "Vellvii Dox Pre-Order",
-          description: "Luxury sex toy storage prelaunch with biometric security, USB-C charging, and premium materials.",
+          description: "Luxury pleasure collection storage prelaunch with biometric security, USB-C charging, and premium materials.",
           availability: "PreOrder",
           brand: "Vellvii",
           images: ["/uploads/Dox1.jpg", "/uploads/Dox2.jpg"],
