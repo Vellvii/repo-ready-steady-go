@@ -194,11 +194,14 @@ const DoxVideoLanding = () => {
           {/* Massive Kickstarter Banner */}
           <div className="w-full max-w-4xl mt-10 sm:mt-14 space-y-8 sm:space-y-10 text-center">
             {/* Giant headline */}
-            <motion.h2
+            <motion.a
+              href={KICKSTARTER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold uppercase leading-[0.95] tracking-tight"
+              className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold uppercase leading-[0.95] tracking-tight hover:opacity-80 transition-opacity cursor-pointer block"
               style={{
                 background: "linear-gradient(135deg, hsl(40 70% 75%), hsl(350 50% 60%), hsl(40 70% 75%))",
                 backgroundSize: "200% 100%",
@@ -209,7 +212,7 @@ const DoxVideoLanding = () => {
               }}
             >
               Follow Us On Kickstarter
-            </motion.h2>
+            </motion.a>
             <style>{`
               @keyframes shimmer-text {
                 0%, 100% { background-position: 0% 50%; }
