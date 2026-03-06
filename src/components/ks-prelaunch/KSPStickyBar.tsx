@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { trackKickstarterClick } from "@/lib/trackKickstarterClick";
 
 const KICKSTARTER_URL = "https://www.kickstarter.com/projects/vellvii/vellvii-dox"; // TODO: Replace with actual URL
 
@@ -37,7 +36,6 @@ export const KSPStickyBar = () => {
           href={KICKSTARTER_URL}
           target="_blank"
           rel="noopener noreferrer"
-          onClick={() => trackKickstarterClick("Sticky Bar - Notify Me on Launch")}
           className="px-6 py-2.5 bg-gradient-to-r from-primary to-accent text-black rounded-lg font-bold text-sm shadow-elegant hover:shadow-glow transition-all duration-300 whitespace-nowrap"
         >
           Notify Me on Launch

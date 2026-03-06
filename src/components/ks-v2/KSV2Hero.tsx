@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { KSPPriceSticker } from "@/components/ks-prelaunch/KSPPriceSticker";
-import { trackKickstarterClick } from "@/lib/trackKickstarterClick";
 
 export const KSV2Hero = () => {
   return (
@@ -98,7 +97,6 @@ export const KSV2Hero = () => {
               href="https://www.kickstarter.com/projects/vellvii/vellvii-dox"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackKickstarterClick("Hero - Get Notified on Launch")}
               className="group relative px-10 py-5 rounded-xl font-bold text-lg text-black overflow-hidden"
               style={{
                 background: "linear-gradient(135deg, hsl(40 70% 75%), hsl(40 65% 60%))",

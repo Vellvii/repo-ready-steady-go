@@ -163,33 +163,6 @@ export type Database = {
           },
         ]
       }
-      kickstarter_clicks: {
-        Row: {
-          button_label: string | null
-          clicked_at: string
-          id: string
-          page: string
-          referrer: string | null
-          user_agent: string | null
-        }
-        Insert: {
-          button_label?: string | null
-          clicked_at?: string
-          id?: string
-          page: string
-          referrer?: string | null
-          user_agent?: string | null
-        }
-        Update: {
-          button_label?: string | null
-          clicked_at?: string
-          id?: string
-          page?: string
-          referrer?: string | null
-          user_agent?: string | null
-        }
-        Relationships: []
-      }
       mailing_list_signups: {
         Row: {
           country: string

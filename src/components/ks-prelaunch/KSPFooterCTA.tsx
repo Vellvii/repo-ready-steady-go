@@ -1,7 +1,6 @@
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { CountdownTimer } from "@/components/prelaunch/CountdownTimer";
 import { KSPPriceSticker } from "./KSPPriceSticker";
-import { trackKickstarterClick } from "@/lib/trackKickstarterClick";
 
 const KICKSTARTER_URL = "https://www.kickstarter.com/projects/vellvii/vellvii-dox";
 
@@ -57,7 +56,6 @@ export const KSPFooterCTA = () => {
               href={KICKSTARTER_URL}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackKickstarterClick("KSP Footer - Notify Me on Launch")}
               className="inline-flex items-center gap-3 px-12 py-6 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] text-black rounded-2xl font-bold text-xl shadow-elegant hover:shadow-glow transition-all duration-700 hover:bg-right relative overflow-hidden pulse-glow"
             >
               <span className="relative z-10">Notify Me on Launch</span>

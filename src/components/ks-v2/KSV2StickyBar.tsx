@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { trackKickstarterClick } from "@/lib/trackKickstarterClick";
 
 const KICKSTARTER_URL = "https://www.kickstarter.com/projects/vellvii/vellvii-dox";
 
@@ -36,7 +35,6 @@ export const KSV2StickyBar = () => {
               href={KICKSTARTER_URL}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackKickstarterClick("KSV2 Sticky Bar - Get Notified")}
               className="px-6 py-2.5 rounded-xl font-bold text-sm text-black"
               style={{ background: "linear-gradient(135deg, hsl(40 70% 75%), hsl(40 65% 60%))" }}
             >

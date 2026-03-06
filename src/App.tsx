@@ -61,9 +61,9 @@ const InnerApp = () => {
           <Routes>
             <Route path="/" element={<DoxVideoLanding />} />
             <Route path="/showcase" element={<DoxLanding />} />
-            <Route path="/shop" element={<Navigate to="/" replace />} />
-            <Route path="/products/:handle" element={<Navigate to="/" replace />} />
-            <Route path="/product/:handle" element={<Navigate to="/" replace />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/products/:handle" element={<ProductDetail />} />
+            <Route path="/product/:handle" element={<Navigate to="/products/:handle" replace />} />
             <Route path="/prelaunch" element={<PrelaunchDOX />} />
             <Route path="/prelaunch-dox" element={<PrelaunchDOX />} />
             <Route path="/landing" element={<AgeGateLanding />} />

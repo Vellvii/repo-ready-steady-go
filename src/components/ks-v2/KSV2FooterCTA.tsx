@@ -1,7 +1,6 @@
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { CountdownTimer } from "@/components/prelaunch/CountdownTimer";
 import { motion } from "framer-motion";
-import { trackKickstarterClick } from "@/lib/trackKickstarterClick";
 
 const KICKSTARTER_URL = "https://www.kickstarter.com/projects/vellvii/vellvii-dox";
 
@@ -44,7 +43,6 @@ export const KSV2FooterCTA = () => {
               href={KICKSTARTER_URL}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackKickstarterClick("Footer - Notify Me on Launch")}
               className="inline-flex items-center gap-3 px-14 py-6 rounded-2xl font-bold text-xl text-black relative overflow-hidden group"
               style={{ background: "linear-gradient(135deg, hsl(40 70% 75%), hsl(40 65% 60%))" }}
             >
