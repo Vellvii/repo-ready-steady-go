@@ -2,7 +2,7 @@ import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { CountdownTimer } from "@/components/prelaunch/CountdownTimer";
 import { motion } from "framer-motion";
 
-const KICKSTARTER_URL = "https://www.kickstarter.com/projects/vellvii/vellvii-dox";
+const KICKSTARTER_URL = "https://www.kickstarter.com/projects/vellvii/vellvii-dox-a-premium-luxury-vault-for-intimacy-and-storage";
 
 export const KSV2FooterCTA = () => {
   return (
@@ -11,46 +11,67 @@ export const KSV2FooterCTA = () => {
       <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 60% at 50% 80%, hsl(40 65% 72% / 0.12), transparent 60%)" }} />
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <div className="max-w-3xl mx-auto text-center space-y-8">
+        <div className="max-w-4xl mx-auto text-center space-y-10">
+          {/* Massive headline */}
           <ScrollReveal>
-            <h2 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-[0.95] tracking-tight">
-              Don't Miss{" "}
-              <span
-                style={{
-                  background: "linear-gradient(135deg, hsl(40 70% 75%), hsl(350 50% 60%))",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                Launch Day
-              </span>
+            <h2
+              className="text-5xl sm:text-7xl lg:text-9xl font-bold uppercase leading-[0.95] tracking-tight"
+              style={{
+                background: "linear-gradient(135deg, hsl(40 70% 75%), hsl(350 50% 60%), hsl(40 70% 75%))",
+                backgroundSize: "200% 100%",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                animation: "shimmer-text 3s ease-in-out infinite",
+              }}
+            >
+              Follow Us On Kickstarter
             </h2>
+            <style>{`
+              @keyframes shimmer-text {
+                0%, 100% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+              }
+            `}</style>
           </ScrollReveal>
 
+          {/* Launch date */}
           <ScrollReveal delay={0.15}>
-            <p className="text-lg text-white/50 font-light max-w-xl mx-auto">
-              Super Early Bird pricing won't last. Follow the project and be first in line.
+            <p className="text-xl sm:text-2xl lg:text-3xl text-white/80 font-light tracking-wide">
+              Launch Date:{" "}
+              <span className="font-bold text-white">10 March 2026</span>
+              {" · "}
+              <span className="font-bold text-white">08:30 USA Time</span>
             </p>
           </ScrollReveal>
 
+          {/* Countdown */}
           <ScrollReveal delay={0.25}>
-            <CountdownTimer targetDate="2026-03-10T12:00:00Z" size="small" />
+            <div className="flex justify-center">
+              <CountdownTimer targetDate="2026-03-10T13:30:00Z" size="large" />
+            </div>
           </ScrollReveal>
 
+          {/* Big CTA button */}
           <ScrollReveal delay={0.35}>
             <a
               href={KICKSTARTER_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-14 py-6 rounded-2xl font-bold text-xl text-black relative overflow-hidden group"
-              style={{ background: "linear-gradient(135deg, hsl(40 70% 75%), hsl(40 65% 60%))" }}
+              className="inline-block relative group"
             >
-              <span className="relative z-10">Notify Me on Launch</span>
               <motion.div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{ background: "linear-gradient(135deg, hsl(40 75% 80%), hsl(350 50% 60%), hsl(40 70% 65%))" }}
+                className="absolute -inset-1 rounded-2xl opacity-75 blur-lg"
+                style={{ background: "linear-gradient(135deg, hsl(40 70% 75%), hsl(350 50% 60%))" }}
+                animate={{ opacity: [0.5, 0.9, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               />
+              <div
+                className="relative px-16 py-7 rounded-2xl font-bold text-xl sm:text-2xl text-black"
+                style={{ background: "linear-gradient(135deg, hsl(40 70% 75%), hsl(40 65% 60%))" }}
+              >
+                Notify Me on Launch
+              </div>
             </a>
           </ScrollReveal>
 
