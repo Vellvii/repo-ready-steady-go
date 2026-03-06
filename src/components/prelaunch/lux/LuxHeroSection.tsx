@@ -53,7 +53,7 @@ export const LuxHeroSection = () => {
               <p className="relative text-2xl sm:text-3xl lg:text-4xl font-light italic text-white/90 font-baskerville mt-8 sparkle-text" style={{
                 textShadow: '0 0 40px rgba(178, 145, 108, 0.5), 0 0 20px rgba(178, 145, 108, 0.3)'
               }}>
-                Because Your Sex Toys Deserve...........
+                Because Your Pleasure Collection Deserves...........
               </p>
             </ScrollReveal>
           </div>

@@ -14,7 +14,7 @@ export const LuxPhilosophySection = () => {
             <ScrollReveal>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white font-baskerville leading-tight" style={{
               textShadow: '0 0 60px rgba(178, 145, 108, 0.3)'
-            }}>Designed for Sex Toys. 
+            }}>Designed for Your Pleasure Collection. 
             </h2>
             </ScrollReveal>
 

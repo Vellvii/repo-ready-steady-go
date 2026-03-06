@@ -12,8 +12,8 @@ const Products = () => {
   return (
     <>
       <SEO
-        title="Luxury Sex Toys | Premium Adult Wellness Collection"
-        description="Explore Vellvii's luxury sex toys collection featuring premium pleasure devices, designer intimacy products, and high-end adult wellness accessories."
+        title="Luxury Pleasure Collection | Premium Adult Wellness"
+        description="Explore Vellvii's luxury pleasure collection featuring premium wellness devices, designer intimacy products, and high-end adult wellness accessories."
         canonical="/products"
         breadcrumbs={[
           { name: "Home", url: "/" },
@@ -37,7 +37,7 @@ const Products = () => {
         <div className="max-w-4xl mx-auto text-center">
           <Badge variant="secondary" className="mb-4">Luxury Collection</Badge>
           <h1 className="text-5xl font-playfair font-bold gradient-text mb-6">
-            Luxury Sex Toys for Discerning Clients
+            Luxury Pleasure Collection for Discerning Clients
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
             Each piece in our premium pleasure collection is meticulously crafted to deliver unparalleled quality and sophisticated intimate wellness
