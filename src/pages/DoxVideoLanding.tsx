@@ -230,7 +230,7 @@ const DoxVideoLanding = () => {
               Launch Date:{" "}
               <span className="font-bold text-foreground">10 March 2026</span>
               {" · "}
-              <span className="font-bold text-foreground">08:30 USA Time</span>
+              <span className="font-bold text-foreground">08:30 NY Time</span>
             </motion.p>
 
             {/* Countdown */}

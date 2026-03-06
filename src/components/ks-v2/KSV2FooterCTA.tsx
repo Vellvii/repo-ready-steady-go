@@ -41,7 +41,7 @@ export const KSV2FooterCTA = () => {
               Launch Date:{" "}
               <span className="font-bold text-white">10 March 2026</span>
               {" · "}
-              <span className="font-bold text-white">08:30 USA Time</span>
+              <span className="font-bold text-white">08:30 NY Time</span>
             </p>
           </ScrollReveal>
 
