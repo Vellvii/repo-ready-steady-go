@@ -168,27 +168,6 @@ const DoxVideoLanding = () => {
               )}
             </AnimatePresence>
 
-            {/* End Screen - Watch Again only */}
-            <AnimatePresence>
-              {videoEnded && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm"
-                >
-                  <motion.button
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.2 }}
-                    onClick={handleReplay}
-                    className="px-8 py-4 border border-primary/50 hover:border-primary text-primary rounded-xl transition-all font-montserrat text-base hover:bg-primary/10"
-                  >
-                    Watch Again
-                  </motion.button>
-                </motion.div>
-              )}
-            </AnimatePresence>
           </div>
 
           {/* Massive Kickstarter Banner */}
@@ -240,11 +219,12 @@ const DoxVideoLanding = () => {
               <CountdownTimer targetDate="2026-03-10T13:30:00Z" size="large" />
             </motion.div>
 
-            {/* Big CTA */}
+            {/* CTAs: Notify + Watch Again */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9 }}
+              className="flex flex-col items-center gap-4"
             >
               <a
                 href={KICKSTARTER_URL}
@@ -265,9 +245,17 @@ const DoxVideoLanding = () => {
                   Notify Me on Launch
                 </div>
               </a>
-              <p className="text-muted-foreground/50 text-xs sm:text-sm mt-4 font-light">
+              <p className="text-muted-foreground/50 text-xs sm:text-sm font-light">
                 No payment required. Just click to follow & get notified.
               </p>
+
+              {/* Watch Again */}
+              <button
+                onClick={handleReplay}
+                className="mt-2 px-6 py-3 border border-primary/30 hover:border-primary text-primary rounded-xl transition-all font-montserrat text-sm hover:bg-primary/10"
+              >
+                Watch Again
+              </button>
             </motion.div>
           </div>
         </main>
