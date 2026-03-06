@@ -215,35 +215,85 @@ const DoxVideoLanding = () => {
             </AnimatePresence>
           </div>
 
-          {/* CTA Buttons (visible when not playing or video ended) */}
-          <AnimatePresence>
-            {(!isPlaying || videoEnded) && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ delay: 0.2 }}
-                className="flex flex-col gap-4 mt-8 w-full max-w-lg px-4 items-center"
+          {/* Massive Kickstarter Banner */}
+          <div className="w-full max-w-4xl mt-10 sm:mt-14 space-y-8 sm:space-y-10 text-center">
+            {/* Giant headline */}
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold uppercase leading-[0.95] tracking-tight"
+              style={{
+                background: "linear-gradient(135deg, hsl(40 70% 75%), hsl(350 50% 60%), hsl(40 70% 75%))",
+                backgroundSize: "200% 100%",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                animation: "shimmer-text 3s ease-in-out infinite",
+              }}
+            >
+              Follow Us On Kickstarter
+            </motion.h2>
+            <style>{`
+              @keyframes shimmer-text {
+                0%, 100% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+              }
+            `}</style>
+
+            {/* Launch date */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="text-lg sm:text-xl lg:text-2xl text-muted-foreground font-light tracking-wide"
+            >
+              Launch Date:{" "}
+              <span className="font-bold text-foreground">10 March 2026</span>
+              {" · "}
+              <span className="font-bold text-foreground">08:30 USA Time</span>
+            </motion.p>
+
+            {/* Countdown */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.7 }}
+              className="flex justify-center"
+            >
+              <CountdownTimer targetDate="2026-03-10T13:30:00Z" size="large" />
+            </motion.div>
+
+            {/* Big CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9 }}
+            >
+              <a
+                href={KICKSTARTER_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block relative group"
               >
-                <a
-                  href={KICKSTARTER_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full group relative overflow-hidden rounded-2xl"
+                <motion.div
+                  className="absolute -inset-1 rounded-2xl opacity-75 blur-lg"
+                  style={{ background: "linear-gradient(135deg, hsl(40 70% 75%), hsl(350 50% 60%))" }}
+                  animate={{ opacity: [0.5, 0.9, 0.5] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                />
+                <div
+                  className="relative px-12 sm:px-16 py-5 sm:py-7 rounded-2xl font-bold text-lg sm:text-2xl text-black"
+                  style={{ background: "linear-gradient(135deg, hsl(40 70% 75%), hsl(40 65% 60%))" }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-primary bg-[length:300%_100%] animate-[shimmer_2s_ease-in-out_infinite]" />
-                  <div className="relative z-10 px-6 py-5 sm:py-6 flex flex-col items-center gap-2">
-                    <span className="text-black font-bold text-lg sm:text-xl tracking-wide uppercase">
-                      Follow Us on Kickstarter
-                    </span>
-                    <span className="text-black/70 text-xs sm:text-sm font-medium">
-                      Click Notify Me to Follow Us
-                    </span>
-                  </div>
-                </a>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                  Notify Me on Launch
+                </div>
+              </a>
+              <p className="text-muted-foreground/50 text-xs sm:text-sm mt-4 font-light">
+                No payment required. Just click to follow & get notified.
+              </p>
+            </motion.div>
+          </div>
         </main>
 
         {/* Footer */}
