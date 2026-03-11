@@ -52,10 +52,8 @@ export const KSV2FooterCTA = () => {
           {/* Launch date */}
           <ScrollReveal delay={0.15}>
             <p className="text-xl sm:text-2xl lg:text-3xl text-white/80 font-light tracking-wide">
-              Launch Date:{" "}
-              <span className="font-bold text-white">10 March 2026</span>
-              {" · "}
-              <span className="font-bold text-white">08:30 NY Time</span>
+              Project Ends:{" "}
+              <span className="font-bold text-white">10 April 2026</span>
             </p>
           </ScrollReveal>
 
