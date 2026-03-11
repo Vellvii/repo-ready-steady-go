@@ -243,7 +243,7 @@ const DoxVideoLanding = () => {
               className="text-lg sm:text-xl lg:text-2xl text-muted-foreground font-light tracking-wide"
             >
               Project Ends:{" "}
-              <span className="font-bold text-foreground">10 April 2026</span>
+              <span className="font-bold text-foreground">9 April 2026</span>
             </motion.p>
 
             {/* Countdown */}
