@@ -253,7 +253,7 @@ const DoxVideoLanding = () => {
               transition={{ delay: 0.7 }}
               className="flex justify-center"
             >
-              <CountdownTimer targetDate="2026-04-10T23:59:59Z" size="large" />
+              <CountdownTimer targetDate="2026-04-09T23:59:59Z" size="large" />
             </motion.div>
 
             {/* Big CTA */}
