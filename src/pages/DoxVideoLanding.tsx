@@ -235,17 +235,15 @@ const DoxVideoLanding = () => {
               }
             `}</style>
 
-            {/* Launch date */}
+            {/* Project end date */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
               className="text-lg sm:text-xl lg:text-2xl text-muted-foreground font-light tracking-wide"
             >
-              Launch Date:{" "}
-              <span className="font-bold text-foreground">10 March 2026</span>
-              {" · "}
-              <span className="font-bold text-foreground">08:30 NY Time</span>
+              Project Ends:{" "}
+              <span className="font-bold text-foreground">10 April 2026</span>
             </motion.p>
 
             {/* Countdown */}
