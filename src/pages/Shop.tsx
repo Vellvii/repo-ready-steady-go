@@ -44,11 +44,51 @@ const fuzzyMatch = (query: string, target: string): { match: boolean; score: num
 const ProductCard = ({ product }: { product: ShopifyProduct }) => {
   const image = product.node.images.edges[0]?.node;
   const price = product.node.priceRange.minVariantPrice;
+  const addItem = useCartStore((state) => state.addItem);
+  const cartLoading = useCartStore((state) => state.isLoading);
+  const [isAdding, setIsAdding] = useState(false);
+
+  const variants = product.node.variants.edges;
+  // Detect if product has meaningful variant choices (e.g. Color, Size)
+  const hasOptions =
+    product.node.options &&
+    product.node.options.some(
+      (opt) =>
+        !(opt.name === "Title" && opt.values.length === 1 && opt.values[0] === "Default Title") &&
+        opt.values.length > 1
+    );
+  // If any variant is available, product is purchasable.
+  // Shopify's availableForSale already respects "continue selling when out of stock".
+  const isAvailable = variants.some((v) => v.node.availableForSale);
+  // Pick the first available variant for quick-add
+  const quickAddVariant = variants.find((v) => v.node.availableForSale)?.node;
+
+  const handleQuickAdd = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!quickAddVariant || !isAvailable) return;
+    setIsAdding(true);
+    try {
+      await addItem({
+        product,
+        variantId: quickAddVariant.id,
+        variantTitle: quickAddVariant.title,
+        price: quickAddVariant.price,
+        quantity: 1,
+        selectedOptions: quickAddVariant.selectedOptions || [],
+      });
+      toast.success(`${product.node.title} added to cart`, { position: "top-center" });
+    } catch (err) {
+      toast.error("Could not add to cart", { position: "top-center" });
+    } finally {
+      setIsAdding(false);
+    }
+  };
 
   return (
     <Link to={`/products/${product.node.handle}`} className="group block">
-      <div className="card-dark rounded-xl sm:rounded-2xl overflow-hidden">
-        <div className="product-image-container aspect-[3/4] sm:aspect-[4/5]">
+      <div className="card-dark rounded-xl sm:rounded-2xl overflow-hidden relative">
+        <div className="product-image-container aspect-[3/4] sm:aspect-[4/5] relative">
           {image ? (
             <img
               src={image.url}
@@ -60,14 +100,48 @@ const ProductCard = ({ product }: { product: ShopifyProduct }) => {
               No Image
             </div>
           )}
+          {!isAvailable && (
+            <div className="absolute top-2 left-2 sm:top-3 sm:left-3 px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-sm border border-white/15">
+              <span className="text-light-primary font-montserrat text-[10px] sm:text-xs uppercase tracking-wider">
+                Sold Out
+              </span>
+            </div>
+          )}
         </div>
         <div className="p-4 sm:p-5">
           <h3 className="text-light-primary font-baskerville font-semibold text-base sm:text-lg mb-1 sm:mb-2 group-hover:text-primary transition-colors line-clamp-2">
             {product.node.title}
           </h3>
-          <p className="text-primary font-montserrat font-bold text-lg sm:text-xl">
-            ${parseFloat(price.amount).toFixed(0)}
-          </p>
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-primary font-montserrat font-bold text-lg sm:text-xl">
+              ${parseFloat(price.amount).toFixed(0)}
+            </p>
+            {!isAvailable ? (
+              <span className="text-light-muted font-montserrat text-xs uppercase tracking-wider">
+                Unavailable
+              </span>
+            ) : hasOptions ? (
+              <span className="font-montserrat text-xs text-light-secondary group-hover:text-primary transition-colors">
+                Select options →
+              </span>
+            ) : (
+              <button
+                onClick={handleQuickAdd}
+                disabled={isAdding || cartLoading}
+                aria-label={`Add ${product.node.title} to cart`}
+                className="flex-shrink-0 inline-flex items-center justify-center gap-1.5 h-9 px-3 rounded-full bg-primary text-primary-foreground font-montserrat text-xs font-medium hover:shadow-glow transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {isAdding ? (
+                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                ) : (
+                  <>
+                    <ShoppingCart className="w-3.5 h-3.5" />
+                    <span>Add</span>
+                  </>
+                )}
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </Link>
