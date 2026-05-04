@@ -243,7 +243,7 @@ const ProductDetail = () => {
             <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 xl:gap-16 items-start lg:items-stretch">
               {/* Image Gallery / 3D Viewer */}
               <div className="lg:h-full">
-                <div className="space-y-3 sm:space-y-4 lg:sticky lg:top-24 lg:flex lg:flex-col lg:justify-end lg:min-h-[calc(100vh-7rem)]">
+                <div className="space-y-3 sm:space-y-4 lg:sticky lg:top-20 lg:flex lg:flex-col lg:justify-end lg:min-h-[calc(100vh-12rem)] lg:pb-24">
                 {/* View Mode Toggle - Only show if 3D model exists */}
                 {has3DModel && (
                   <div className="flex gap-2 mb-2">
