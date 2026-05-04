@@ -240,9 +240,10 @@ const ProductDetail = () => {
         {/* Product Hero */}
         <section className="py-6 sm:py-10 lg:py-16 px-3 sm:px-4 lg:px-8">
           <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 xl:gap-16 items-start">
+            <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 xl:gap-16 items-start lg:items-stretch">
               {/* Image Gallery / 3D Viewer */}
-              <div className="space-y-3 sm:space-y-4">
+              <div className="lg:h-full">
+                <div className="space-y-3 sm:space-y-4 lg:sticky lg:top-24 lg:flex lg:flex-col lg:justify-end lg:min-h-[calc(100vh-7rem)]">
                 {/* View Mode Toggle - Only show if 3D model exists */}
                 {has3DModel && (
                   <div className="flex gap-2 mb-2">
