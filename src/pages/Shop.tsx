@@ -101,8 +101,8 @@ const ProductCard = ({ product }: { product: ShopifyProduct }) => {
             </div>
           )}
           {!isAvailable && (
-            <div className="absolute top-2 left-2 sm:top-3 sm:left-3 px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-sm border border-white/15">
-              <span className="text-light-primary font-montserrat text-[10px] sm:text-xs uppercase tracking-wider">
+            <div className="absolute top-2 left-2 sm:top-3 sm:left-3 px-2.5 py-1 rounded-full bg-red-600 border border-red-400/40 shadow-lg">
+              <span className="text-white font-montserrat text-[10px] sm:text-xs font-semibold uppercase tracking-wider">
                 Sold Out
               </span>
             </div>
@@ -117,8 +117,8 @@ const ProductCard = ({ product }: { product: ShopifyProduct }) => {
               ${parseFloat(price.amount).toFixed(0)}
             </p>
             {!isAvailable ? (
-              <span className="text-light-muted font-montserrat text-xs uppercase tracking-wider">
-                Unavailable
+              <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-red-600 text-white font-montserrat text-[10px] sm:text-xs font-semibold uppercase tracking-wider">
+                Sold Out
               </span>
             ) : hasOptions ? (
               <span className="font-montserrat text-xs text-light-secondary group-hover:text-primary transition-colors">
