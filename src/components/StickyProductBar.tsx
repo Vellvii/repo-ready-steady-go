@@ -8,6 +8,7 @@ interface StickyProductBarProps {
   onAddToCart: () => void;
   isLoading?: boolean;
   isAvailable?: boolean;
+  ctaLabel?: string;
 }
 
 export const StickyProductBar = ({
@@ -16,6 +17,7 @@ export const StickyProductBar = ({
   onAddToCart,
   isLoading = false,
   isAvailable = true,
+  ctaLabel,
 }: StickyProductBarProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -49,6 +51,8 @@ export const StickyProductBar = ({
             <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin" />
           ) : !isAvailable ? (
             <span className="text-xs sm:text-base">Sold Out</span>
+          ) : ctaLabel ? (
+            <span className="text-xs sm:text-base font-semibold">{ctaLabel}</span>
           ) : (
             <>
               <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />

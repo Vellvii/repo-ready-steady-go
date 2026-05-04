@@ -15,6 +15,14 @@ import { DoxVideoSection } from "@/components/DoxVideoSection";
 import { RelatedProducts } from "@/components/RelatedProducts";
 import { Model3DViewer } from "@/components/Model3DViewer";
 import { ShopifyMediaModel3d } from "@/lib/shopify";
+import {
+  LuxPreOrderBanner,
+  LuxFreeGiftBadge,
+  LuxCountdown,
+  LuxStockCounter,
+  LuxUrgencyBlock,
+  LuxShippingClarity,
+} from "@/components/lux/LuxPreOrderPanel";
 import { ScrollHeader } from "@/components/ScrollHeader";
 
 const ProductDetail = () => {
@@ -29,6 +37,7 @@ const ProductDetail = () => {
 
   // Check if this is the DOX product
   const isDoxProduct = handle?.toLowerCase().includes("dox");
+  const isLuxProduct = handle?.toLowerCase().includes("lux");
 
   // Initialize selected options when product loads
   useEffect(() => {
@@ -329,10 +338,22 @@ const ProductDetail = () => {
                   <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-baskerville font-bold text-light-primary mb-3 sm:mb-4 leading-tight">
                     {product.node.title}
                   </h1>
+                  {isLuxProduct && (
+                    <div className="mb-4">
+                      <LuxPreOrderBanner />
+                    </div>
+                  )}
                   <p className="text-3xl sm:text-4xl font-bold gradient-text font-montserrat">
                     ${price.toFixed(0)}
                   </p>
+                  {isLuxProduct && (
+                    <div className="mt-3">
+                      <LuxFreeGiftBadge />
+                    </div>
+                  )}
                 </div>
+
+                {isLuxProduct && <LuxCountdown />}
 
                 <div className="prose max-w-none">
                   <p className="text-light-secondary leading-relaxed whitespace-pre-line font-montserrat text-sm sm:text-base lg:text-lg">
@@ -408,7 +429,11 @@ const ProductDetail = () => {
                 {/* Add to Cart Button */}
                 <Button
                   size="lg"
-                  className="w-full h-12 sm:h-14 text-base sm:text-lg btn-premium"
+                  className={`w-full btn-premium ${
+                    isLuxProduct
+                      ? "h-14 sm:h-16 text-lg sm:text-xl font-bold tracking-wide"
+                      : "h-12 sm:h-14 text-base sm:text-lg"
+                  }`}
                   onClick={handleAddToCart}
                   disabled={cartLoading || !variant?.availableForSale}
                 >
@@ -416,6 +441,8 @@ const ProductDetail = () => {
                     <Loader2 className="w-5 h-5 animate-spin" />
                   ) : !variant?.availableForSale ? (
                     "Sold Out"
+                  ) : isLuxProduct ? (
+                    "Secure My Pre-Order"
                   ) : (
                     <>
                       <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
@@ -423,6 +450,14 @@ const ProductDetail = () => {
                     </>
                   )}
                 </Button>
+
+                {isLuxProduct && (
+                  <>
+                    <LuxStockCounter quantityAvailable={variant?.quantityAvailable} />
+                    <LuxUrgencyBlock />
+                    <LuxShippingClarity />
+                  </>
+                )}
 
                 {/* Trust Badges */}
                 <TrustBadges />
@@ -444,6 +479,7 @@ const ProductDetail = () => {
           onAddToCart={handleAddToCart}
           isLoading={cartLoading}
           isAvailable={variant?.availableForSale}
+          ctaLabel={isLuxProduct ? "Secure My Pre-Order" : undefined}
         />
 
         {/* Image Lightbox */}

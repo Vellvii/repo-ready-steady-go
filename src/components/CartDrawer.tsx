@@ -4,7 +4,7 @@ import { Sheet, SheetContent, SheetTitle, SheetDescription } from "@/components/
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2, Heart } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+
 
 export const CartDrawer = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -62,10 +62,10 @@ export const CartDrawer = () => {
           }}
           aria-describedby={undefined}
         >
-          <VisuallyHidden>
+          <span className="sr-only">
             <SheetTitle>Shopping Cart</SheetTitle>
             <SheetDescription>Your shopping cart with items</SheetDescription>
-          </VisuallyHidden>
+          </span>
           
           {/* Header */}
           <div className="border-b border-white/10 px-4 py-4 sm:px-6 sm:py-5 flex-shrink-0">
