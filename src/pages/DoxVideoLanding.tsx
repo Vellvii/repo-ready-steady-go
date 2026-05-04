@@ -25,56 +25,8 @@ const emailSchema = z
   .email("Please enter a valid email")
   .max(255, "Email too long");
 
-interface CollectionItem {
-  name: string;
-  tagline: string;
-  image: string;
-  to: string;
-  badge?: string;
-}
-
-const COLLECTION: CollectionItem[] = [
-  {
-    name: "Vellvii Lux",
-    tagline: "Limited pre-order. Ships first week of June.",
-    image: "/uploads/lux-bag-final-v4.jpg",
-    to: "/products/vellvii-lux",
-    badge: "Pre-Order",
-  },
-  {
-    name: "DOX",
-    tagline: "The flagship vault. New batch releasing soon.",
-    image: "/uploads/Dox1.jpg",
-    to: "/dox",
-    badge: "Restock Soon",
-  },
-  {
-    name: "Pulse",
-    tagline: "Refined rhythm, quiet power.",
-    image: "/uploads/Pulse1.jpg",
-    to: "/pulse",
-  },
-  {
-    name: "Vibe",
-    tagline: "Sculpted for the everyday.",
-    image: "/uploads/Vibe1.jpg",
-    to: "/vibe",
-  },
-  {
-    name: "G-Vibe",
-    tagline: "Designed with intention.",
-    image: "/uploads/G-Vibe1.jpg",
-    to: "/g-vibe",
-  },
-  {
-    name: "Sex Saddle",
-    tagline: "Sculptured for the art of the 'O'.",
-    image: "/uploads/Dox5.jpg",
-    to: "/sex-saddle",
-  },
-];
-
 const DoxVideoLanding = () => {
+  const { data: shopifyProducts, isLoading: productsLoading } = useShopifyProducts(12);
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoEnded, setVideoEnded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
