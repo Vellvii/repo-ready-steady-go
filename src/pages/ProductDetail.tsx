@@ -479,6 +479,7 @@ const ProductDetail = () => {
           onAddToCart={handleAddToCart}
           isLoading={cartLoading}
           isAvailable={variant?.availableForSale}
+          ctaLabel={isLuxProduct ? "Secure My Pre-Order" : undefined}
         />
 
         {/* Image Lightbox */}
