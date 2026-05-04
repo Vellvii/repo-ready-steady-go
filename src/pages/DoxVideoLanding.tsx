@@ -152,6 +152,29 @@ const DoxVideoLanding = () => {
           />
         </header>
 
+        {/* [1b] Hero Image */}
+        <section className="px-4 mb-10 sm:mb-14">
+          <div className="max-w-6xl mx-auto relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 shadow-elegant">
+            <div className="aspect-[16/9] sm:aspect-[21/9] w-full">
+              <img
+                src="/uploads/lux-private-jet-lounge-hero.jpg"
+                alt="Vellvii Lux - The Art of 'O'"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8 md:p-10 text-center">
+              <p className="font-montserrat text-[10px] sm:text-xs uppercase tracking-[0.3em] text-primary mb-1 sm:mb-2">
+                The Art of 'O'
+              </p>
+              <p className="font-baskerville text-lg sm:text-2xl md:text-3xl text-light-primary">
+                Quiet luxury, designed for desire.
+              </p>
+            </div>
+          </div>
+        </section>
+
+
         {/* [2] Backer thank-you + processing status */}
         <section className="px-4 mb-8 sm:mb-12">
           <motion.div
