@@ -15,6 +15,14 @@ import { DoxVideoSection } from "@/components/DoxVideoSection";
 import { RelatedProducts } from "@/components/RelatedProducts";
 import { Model3DViewer } from "@/components/Model3DViewer";
 import { ShopifyMediaModel3d } from "@/lib/shopify";
+import {
+  LuxPreOrderBanner,
+  LuxFreeGiftBadge,
+  LuxCountdown,
+  LuxStockCounter,
+  LuxUrgencyBlock,
+  LuxShippingClarity,
+} from "@/components/lux/LuxPreOrderPanel";
 import { ScrollHeader } from "@/components/ScrollHeader";
 
 const ProductDetail = () => {
@@ -29,6 +37,7 @@ const ProductDetail = () => {
 
   // Check if this is the DOX product
   const isDoxProduct = handle?.toLowerCase().includes("dox");
+  const isLuxProduct = handle?.toLowerCase().includes("lux");
 
   // Initialize selected options when product loads
   useEffect(() => {
