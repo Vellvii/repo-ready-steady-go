@@ -39,10 +39,10 @@ export const LuxFreeGiftBadge = () => (
     <Gift className="w-4 h-4 text-primary mt-0.5 shrink-0" />
     <div className="text-left">
       <p className="font-montserrat text-xs sm:text-sm font-semibold text-light-primary leading-tight">
-        Includes Complimentary Vellvii Toy
+        Includes Complimentary Vellvii Nova
       </p>
       <p className="font-montserrat text-[10px] sm:text-xs text-light-muted leading-tight">
-        Limited to first 1500 orders
+        Handheld suction toy - first 1500 orders
       </p>
     </div>
   </div>

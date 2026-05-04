@@ -1,10 +1,10 @@
-import { Truck, Package, Shield, RotateCcw } from "lucide-react";
+import { Truck, Package, Shield, BadgeCheck } from "lucide-react";
 
 const badges = [
   { icon: Truck, label: "Free Shipping", sublabel: "On all orders" },
   { icon: Package, label: "Discreet Packaging", sublabel: "Plain exterior" },
-  { icon: Shield, label: "1-Year Warranty", sublabel: "Full coverage" },
-  { icon: RotateCcw, label: "30-Day Returns", sublabel: "Easy process" },
+  { icon: Shield, label: "Lifetime Warranty", sublabel: "Registration required" },
+  { icon: BadgeCheck, label: "Authorized Retailer", sublabel: "Direct from Vellvii" },
 ];
 
 export const TrustBadges = () => {
