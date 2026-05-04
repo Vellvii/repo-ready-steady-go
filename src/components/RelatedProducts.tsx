@@ -69,7 +69,7 @@ export const RelatedProducts = ({ currentHandle, maxProducts = 8 }: RelatedProdu
           <div className="flex items-center justify-between mb-6 sm:mb-8">
             <div>
               <p className="text-primary font-montserrat text-xs sm:text-sm uppercase tracking-[0.2em] mb-2">
-                Discover More
+                Complete Your Collection
               </p>
               <h2 className="text-2xl sm:text-3xl font-baskerville font-bold text-light-primary">
                 You May Also <span className="gradient-text">Like</span>
@@ -97,7 +97,7 @@ export const RelatedProducts = ({ currentHandle, maxProducts = 8 }: RelatedProdu
         <div className="flex items-center justify-between mb-6 sm:mb-8">
           <div>
             <p className="text-primary font-montserrat text-xs sm:text-sm uppercase tracking-[0.2em] mb-2">
-              Discover More
+              Complete Your Collection
             </p>
             <h2 className="text-2xl sm:text-3xl font-baskerville font-bold text-light-primary">
               You May Also <span className="gradient-text">Like</span>
