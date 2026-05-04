@@ -1,54 +1,89 @@
 ## Goal
 
-On desktop product pages (Lux especially), the right info column is taller than the left image column. Because the right column is `lg:sticky lg:top-24`, scrolling leaves a large empty gap below the image on the left. We want the image column to slowly drift down with scroll so its bottom finishes roughly level with the trust badges / bottom of the info column — eliminating the gap, while still letting the user scroll the page normally.
+The Kickstarter campaign has wrapped, so the homepage at `/` (`DoxVideoLanding`) shouldn't keep urging people to "Back us on Kickstarter" with a live countdown to April 9. The new homepage will:
 
-This change is desktop-only. Mobile (single-column stack) stays exactly as it is.
+1. **Thank Kickstarter and prelaunch backers**, and reassure them their orders are in processing.
+2. **Spotlight Lux** as the next live drop (1,500-unit limited pre-order, ships first week of June).
+3. **Showcase the wider Pleasure Collection** (DOX, Pulse, Vibe, G-Vibe, Docking Station, Sex Saddle) so the homepage isn't a one-product page anymore.
+4. **Tell the public**: more units of all products — including Lux — will be released soon, with an email list to be first in line.
+5. Keep the 60-second DOX video as the brand moment in the middle of the page.
 
-## Approach
+## New homepage structure
 
-Use a CSS-only "reverse sticky" pattern — no JS scroll listeners, no jank.
+```text
+[1] Header (logo)
+[2] Backer thank-you + status ribbon       <-- NEW
+[3] Lux pre-order hero (primary CTA)       <-- REPLACES Kickstarter banner
+[4] DOX 60-second video                    <-- KEEP, repositioned
+[5] The Vellvii Collection (product grid)  <-- NEW
+[6] Public waitlist (next batch notify)    <-- NEW
+[7] Footer
+```
 
-The image column is wrapped in an inner block. The outer wrapper grows to match the height of the info column (via the existing CSS grid `items-start` row — we'll switch the row to `items-stretch` only at `lg`). The inner block is given:
+### [2] Backer thank-you + status ribbon (new)
+Compact, rose-gold-bordered card directly under the logo. Two-line voice:
+- "To our Kickstarter and prelaunch backers - thank you. You made Vellvii real."
+- "Your orders are now in processing. You'll receive shipping confirmation by email as your unit moves through fulfillment."
 
-- `lg:sticky`
-- `lg:top-[calc(100vh-IMAGE_HEIGHT-PADDING)]` style so it sticks to the BOTTOM of the viewport instead of the top.
+Quiet, elegant, no buttons - just acknowledgment and reassurance.
 
-Effect: while there's room, the image scrolls normally with the page; once its bottom would leave the viewport, it sticks to the bottom of the viewport and stays visible while the info column continues scrolling. By the time the user reaches the end of the info column, the image's bottom naturally lines up with the bottom of the info column — no empty gap.
+### [3] Lux pre-order hero
+Replaces the giant "Officially Live On Kickstarter" block (lines 194–285).
+- Headline: "The Vellvii Lux is here." (gradient shimmer, reusing the existing animation).
+- Sub-line: "Limited pre-order - 1,500 units. Ships first week of June. Includes a complimentary Vellvii Nova."
+- Reuses `LuxCountdown` from `src/components/lux/LuxPreOrderPanel.tsx` (already counts down to midnight Pacific Time on June 1, 2026).
+- Primary CTA button: **"Reserve Your Lux"** -> `/products/vellvii-lux` (Shopify cart). Same gold gradient styling as the current Kickstarter button so visual weight is preserved.
+- Drops the `KICKSTARTER_URL` constant and the "Project Ends: 9 April 2026" line.
 
-This is the standard Tailwind/CSS technique for "tall column + short column" sticky pairs.
+### [4] DOX 60-second video
+Untouched logic - `videoRef`, `handlePlay`, `handleVideoEnd`, `handleReplay`, fullscreen flow, end-screen "Watch Again" all preserved. Just sits below the Lux hero now with a slightly softer headline: "DOX in 60 Seconds" -> "Meet the DOX" (subline: "The flagship vault. New batches releasing soon.").
 
-## Changes
+### [5] The Vellvii Collection (new product grid)
+Six small cards in a responsive grid (2 cols mobile, 3 cols tablet+):
+- DOX (`/dox`)
+- Lux (`/products/vellvii-lux`)
+- Pulse (`/pulse`)
+- Vibe (`/vibe`)
+- G-Vibe (`/g-vibe`)
+- Sex Saddle / Docking Station (one of these to keep the grid balanced - Sex Saddle for variety)
 
-Single file: `src/pages/ProductDetail.tsx`
+Each card: edge-to-edge product image (uses existing `/uploads/...` assets already loaded by `Home.tsx`), product name in Baskerville, single rose-gold "Explore" link. Section heading: **"Discover the Collection"** with sub-line: **"More units of every product - including Lux - release soon. Reserve your place below."**
 
-1. Image column outer wrapper (`<div className="space-y-3 sm:space-y-4">` around the gallery, line ~245):
-   - Change to `<div className="space-y-3 sm:space-y-4 lg:h-full">` so it stretches to match the info column on desktop.
+This satisfies your "focus on other products" ask without bloating the page; each card is a doorway, not a sales pitch.
 
-2. Inside that wrapper, wrap the existing gallery contents (toggle + main image + thumbnails) in a new inner div:
-   - `<div className="lg:sticky lg:top-24 lg:flex lg:flex-col lg:justify-end lg:min-h-[calc(100vh-8rem)]">`
-   - `justify-end` pushes the image to the bottom of the sticky box, so as the user scrolls the image gradually moves down within its column until its bottom reaches the bottom of the info column.
-   - `min-h-[calc(100vh-8rem)]` ensures the sticky container fills the viewport height (minus header offset) so the image is anchored to the viewport bottom while sticking.
+### [6] Public waitlist (next batch notify)
+Reuses the existing `notifyOpen` modal + `usa-launch-notify` Supabase edge function (already wired up in this file).
+- Quiet inline section: "Be first when the next batch drops."
+- Single email field + "Join the Waitlist" button -> opens the existing dialog flow with success state intact.
+- Source field passed to the edge function changed from `dox_video_landing` to `homepage_waitlist` so you can segment signups in the database.
+- Copy makes clear: "We'll notify you when DOX, Lux, and the rest of the Vellvii Collection open for restock." This is the "more available soon to the public" promise you mentioned.
 
-3. Grid row alignment (line ~244, `items-start`):
-   - Change to `items-start lg:items-stretch` so on desktop the two columns share the same height and the left wrapper can stretch.
+## Imports / cleanup in `DoxVideoLanding.tsx`
 
-## Why this works
-
-- Grid `items-stretch` makes both columns the same height (= height of taller info column).
-- The left wrapper now has that full height, but its inner sticky child only takes its natural size.
-- `lg:sticky` + `top-24` + `min-h-[calc(100vh-6rem)]` + `justify-end` makes the inner child behave as: "stay pinned to the bottom of the viewport while my parent is scrolling past." This is the inverse of the existing right-column behavior.
-- Net result on desktop: image scrolls with page initially → sticks near bottom of viewport while user reads info → its bottom aligns with the bottom of the info column at the end. The empty gap disappears.
-- On mobile (`<lg`), none of the `lg:` classes apply, so layout is unchanged.
+- Remove `CountdownTimer` import (no longer used - replaced by `LuxCountdown`).
+- Add `LuxCountdown` from `@/components/lux/LuxPreOrderPanel`.
+- Add `Link` from `react-router-dom` for in-app navigation to `/products/vellvii-lux` and the collection cards.
+- Drop the `KICKSTARTER_URL` constant.
+- Update `<SEO description>` to reflect Lux pre-order + collection focus (small, helps Google).
 
 ## Out of scope
 
-- No changes to mobile layout, content, or other product pages' content.
-- No JS scroll handlers, no IntersectionObserver — pure CSS.
-- Lightbox, 3D toggle, thumbnails, related products: untouched.
+- `src/pages/Home.tsx` (lives at `/home`, not the public root) - left as-is.
+- All Kickstarter pages (`/kickstarter`, `/Vellvii-Kickstarter`, etc.) - kept intact for archival / inbound link continuity.
+- The Lux product page itself - already polished.
+- `useCartSync`, cart drawer, footer - untouched.
+- No new edge functions or DB migrations - we reuse `usa-launch-notify` with a new `source` value.
 
-## Verification after implementation
+## Brand & UX guardrails
 
-- Desktop (≥1024px): scroll the Lux product page; confirm the image gradually descends with scroll and its bottom ends near the trust badges, with no large empty space below it.
-- Desktop non-Lux (e.g. Pulse, G-Vibe): same behavior, gap (if any) is removed.
-- Mobile (375–414px): layout unchanged, image stays above info as before.
-- Lightbox click and 3D toggle still work.
+- Rose-gold + champagne-gold tokens, Baskerville headings, Montserrat body, hyphens (no em dashes), copyright 2026 - per project memory.
+- Mobile-first sizing preserved (`text-4xl sm:text-6xl md:text-7xl lg:text-8xl` for the Lux headline; product grid is 2 cols at 375px).
+- No fake reviews / social proof claims.
+- "Pleasure Collection" terminology, never "sex toy."
+
+## After approval
+
+1. Edit `src/pages/DoxVideoLanding.tsx` per above.
+2. Save a memory note: homepage now leads with backer thank-you + Lux pre-order + collection grid (post-Kickstarter), so future me doesn't accidentally re-add a Kickstarter banner.
+
+If you'd like the order swapped (e.g., video before Lux hero, or collection grid above the video), or want a more emotional dedicated `/thanks` page for backers, say the word and I'll revise.
