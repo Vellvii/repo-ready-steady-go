@@ -92,11 +92,11 @@ export const Milestones = () => {
                 />
 
                 <div className="relative z-10 flex flex-col items-center">
-                  <div className="h-14 flex items-center justify-center">
+                  <div className="h-20 px-7 flex items-center justify-center rounded-xl bg-[hsl(40_30%_94%)] ring-1 ring-primary/20 shadow-[0_1px_0_hsl(40_65%_72%/0.15)_inset] transition-all duration-700 group-hover:ring-primary/40">
                     <img
                       src={m.logo}
                       alt={`${m.name} logo`}
-                      className={`${m.logoHeight} w-auto object-contain transition-all duration-700 group-hover:-translate-y-0.5`}
+                      className={`${m.logoHeight} w-auto object-contain transition-transform duration-700 group-hover:-translate-y-0.5`}
                       loading="lazy"
                     />
                   </div>
