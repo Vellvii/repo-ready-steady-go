@@ -32,8 +32,7 @@ const milestones: Milestone[] = [
     name: "Prelaunch",
     logo: prelaunchLogo,
     caption: "Reservation campaign · Complete",
-    href: KICKSTARTER_URL,
-    external: true,
+    href: SHOP_URL,
     logoHeight: "h-7 md:h-8",
   },
   {
