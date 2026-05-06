@@ -104,8 +104,7 @@ export const Milestones = () => {
                       alt={`${m.name} logo`}
                       className={`${m.logoHeight} w-auto object-contain transition-all duration-700 group-hover:-translate-y-0.5`}
                       style={{
-                        filter:
-                          "brightness(0) invert(1) sepia(0.35) saturate(1.6) hue-rotate(355deg) brightness(0.95) opacity(0.85)",
+                        filter: m.filter ?? GOLD_MONO,
                       }}
                       loading="lazy"
                     />
