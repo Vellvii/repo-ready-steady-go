@@ -16,6 +16,9 @@ import {
   Armchair,
 } from "lucide-react";
 import ConciergeChat from "@/components/ConciergeChat";
+import { Milestones } from "@/components/home/Milestones";
+import { HomeFAQ, homeFAQs } from "@/components/home/HomeFAQ";
+import { SEO } from "@/components/SEO";
 import UserMenu from "@/components/UserMenu";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { ParallaxContainer } from "@/components/animations/ParallaxContainer";
@@ -77,6 +80,14 @@ const Home = () => {
   } = useScroll();
   const backgroundY = useTransform(scrollY, [0, 500], [0, 150]);
   return <div className="min-h-screen relative overflow-hidden">
+      <SEO
+        title="Vellvii - The Newest Luxury Pleasure Storage and Wellness House of 2026"
+        description="Vellvii is the American premium wellness house behind the DOX biometric storage system and the newest luxury pleasure storage box launching in 2026 - the Vellvii Lux. Quiet luxury, design-led intimate wellness."
+        canonical="/"
+        keywords="newest luxury pleasure storage 2026, Vellvii, Vellvii Lux, Vellvii DOX, biometric pleasure storage, premium intimate wellness, design-led pleasure collection, American luxury wellness brand"
+        organizationData
+        faqData={homeFAQs.map(f => ({ question: f.question, answer: f.answerText }))}
+      />
       {/* Animated background mesh */}
       <motion.div className="fixed inset-0 mesh-bg opacity-30 pointer-events-none" style={{
       y: backgroundY
@@ -561,6 +572,12 @@ const Home = () => {
         </div>
       </section>
       
+      {/* Milestones strip */}
+      <Milestones />
+
+      {/* FAQ */}
+      <HomeFAQ />
+
       {/* Creative Credit Footer */}
       <footer className="py-8 px-6 border-t border-white/10">
         <div className="max-w-6xl mx-auto text-center">

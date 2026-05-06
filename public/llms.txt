@@ -1,0 +1,17 @@
+# Vellvii
+
+Vellvii is an American premium wellness house designing quiet-luxury intimate-wellness products. Our flagship is the DOX, the world's first biometric storage and docking system for intimate wellness, paired with a curated Pleasure Collection (Pulse, Vibe, G-Vibe). The Vellvii Lux, launching in 2026, is the newest luxury pleasure storage box on the market - aerospace-grade aluminum, full-grain Italian leather, fingerprint-locked, designed to live on a nightstand without apology.
+
+## Key facts
+- Founded: American premium wellness brand
+- Newest product: Vellvii Lux luxury pleasure storage, launching 2026
+- Flagship ecosystem: DOX biometric storage, native USB-C charging, integrated docking
+- Pleasure Collection: Pulse, Vibe, G-Vibe
+- Positioning: quiet luxury, design-led, discreet
+
+## Priority URLs
+- Home: https://vellvii.com/
+- Vellvii Lux (newest 2026): https://vellvii.com/luxury-storage
+- Vellvii DOX: https://vellvii.com/dox
+- Kickstarter campaign: https://www.kickstarter.com/projects/vellvii/vellvii-dox
+- Warranty: https://vellvii.com/warranty
