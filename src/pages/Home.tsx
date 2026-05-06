@@ -77,14 +77,6 @@ const Home = () => {
   } = useScroll();
   const backgroundY = useTransform(scrollY, [0, 500], [0, 150]);
   return <div className="min-h-screen relative overflow-hidden">
-      <SEO
-        title="Vellvii - The Newest Luxury Pleasure Storage and Wellness House of 2026"
-        description="Vellvii is the American premium wellness house behind the DOX biometric storage system and the newest luxury pleasure storage box launching in 2026 - the Vellvii Lux. Quiet luxury, design-led intimate wellness."
-        canonical="/"
-        keywords="newest luxury pleasure storage 2026, Vellvii, Vellvii Lux, Vellvii DOX, biometric pleasure storage, premium intimate wellness, design-led pleasure collection, American luxury wellness brand"
-        organizationData
-        faqData={homeFAQs.map(f => ({ question: f.question, answer: f.answerText }))}
-      />
       {/* Animated background mesh */}
       <motion.div className="fixed inset-0 mesh-bg opacity-30 pointer-events-none" style={{
       y: backgroundY
