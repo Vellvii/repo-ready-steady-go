@@ -31,7 +31,6 @@ const DoxVideoLanding = () => {
   const { data: shopifyProducts, isLoading: productsLoading } = useShopifyProducts(12);
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoEnded, setVideoEnded] = useState(false);
-  const [includeNova, setIncludeNova] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Waitlist dialog
