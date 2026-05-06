@@ -1,34 +1,53 @@
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import kickstarterLogo from "/uploads/kickstarter-logo.webp";
+import prelaunchLogo from "@/assets/logos/prelaunch.svg";
+import stimulateLogo from "@/assets/logos/stimulate.png";
 
 const KICKSTARTER_URL = "https://www.kickstarter.com/projects/vellvii/vellvii-dox";
-const PRELAUNCH_URL =
-  "https://prelaunch.com/projects/5ff3ce3f-6669-4243-918c-4d57d98b63f6/reservation?userEmail=stefan%40vellvii.com&reservationId=c3452574-55cf-49e6-aa12-79b4c18131ac";
+const SHOP_URL = "/shop";
 const STIMULATE_URL =
   "https://stimulatetheshow.com/2026-emerging-brands-experience-mentorship-experience/";
 
 interface Milestone {
   name: string;
+  logo: string;
   caption: string;
   href: string;
-  /** Sub-line under wordmark, optional */
-  subline?: string;
+  external?: boolean;
+  /** width in px on desktop (preserves optical balance) */
+  logoHeight: string;
 }
 
 const milestones: Milestone[] = [
-  { name: "Kickstarter", caption: "Live campaign · 2026", href: KICKSTARTER_URL },
-  { name: "Prelaunch", caption: "VIP early access · 1,500 units", href: PRELAUNCH_URL },
+  {
+    name: "Kickstarter",
+    logo: kickstarterLogo,
+    caption: "Successfully funded · April 10, 2026",
+    href: KICKSTARTER_URL,
+    external: true,
+    logoHeight: "h-7 md:h-8",
+  },
+  {
+    name: "Prelaunch",
+    logo: prelaunchLogo,
+    caption: "Reservation campaign · Complete",
+    href: KICKSTARTER_URL,
+    external: true,
+    logoHeight: "h-7 md:h-8",
+  },
   {
     name: "Stimulate",
-    subline: "Sexual Wellness",
+    logo: stimulateLogo,
     caption: "Emerging brands · USA 2026",
     href: STIMULATE_URL,
+    external: true,
+    logoHeight: "h-9 md:h-10",
   },
 ];
 
 export const Milestones = () => {
   return (
     <section className="relative py-24 md:py-32 px-4 sm:px-6 border-t border-primary/10">
-      {/* hairline gold gradient top */}
       <div
         className="absolute top-0 left-0 right-0 h-px"
         style={{
@@ -61,11 +80,10 @@ export const Milestones = () => {
             <ScrollReveal key={m.name} delay={0.25 + i * 0.1}>
               <a
                 href={m.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={m.external ? "_blank" : undefined}
+                rel={m.external ? "noopener noreferrer" : undefined}
                 className="group relative flex flex-col items-center justify-center text-center px-8 py-12 md:py-16 h-full bg-background/80 hover:bg-background/40 transition-all duration-700"
               >
-                {/* gold radial glow on hover */}
                 <div
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                   style={{
@@ -75,24 +93,19 @@ export const Milestones = () => {
                 />
 
                 <div className="relative z-10 flex flex-col items-center">
-                  <div className="h-14 flex flex-col items-center justify-center">
-                    <span
-                      className="font-baskerville text-2xl md:text-[1.75rem] tracking-wide leading-none transition-transform duration-700 group-hover:-translate-y-0.5"
-                      style={{ color: "hsl(40 65% 72%)" }}
-                    >
-                      {m.name}
-                    </span>
-                    {m.subline && (
-                      <span
-                        className="mt-1 text-[0.68rem] uppercase tracking-[0.35em] font-light"
-                        style={{ color: "hsl(40 65% 72% / 0.7)" }}
-                      >
-                        {m.subline}
-                      </span>
-                    )}
+                  <div className="h-14 flex items-center justify-center">
+                    <img
+                      src={m.logo}
+                      alt={`${m.name} logo`}
+                      className={`${m.logoHeight} w-auto object-contain transition-all duration-700 group-hover:-translate-y-0.5`}
+                      style={{
+                        filter:
+                          "brightness(0) saturate(100%) invert(82%) sepia(28%) saturate(380%) hue-rotate(358deg) brightness(95%) contrast(88%)",
+                      }}
+                      loading="lazy"
+                    />
                   </div>
 
-                  {/* hairline divider */}
                   <div className="w-10 h-px my-5 bg-primary/30 group-hover:bg-primary/60 transition-colors duration-700" />
 
                   <p className="text-white/55 text-xs uppercase tracking-[0.25em] font-light">
@@ -105,7 +118,6 @@ export const Milestones = () => {
         </div>
       </div>
 
-      {/* hairline gold gradient bottom */}
       <div
         className="absolute bottom-0 left-0 right-0 h-px"
         style={{
