@@ -20,24 +20,18 @@ export const homeFAQs: FAQItem[] = [
       "Vellvii is an American premium wellness house designing the world's first biometric storage and docking system for intimate wellness, alongside a curated Pleasure Collection of design-led devices. Quiet luxury, by intent.",
   },
   {
-    question: "What is the newest luxury pleasure storage box launching in 2026?",
+    question: "What is the DOX made of?",
     answerText:
-      "The Vellvii Lux is the newest luxury pleasure storage piece launching in 2026 - a discreet, fingerprint-locked vessel built from aerospace-grade aluminum and Italian leather, designed to live on a nightstand without apology.",
+      "The DOX is built from premium-quality components - genuine leather on the outside, soft velvet on the inside, with an integrated fingerprint lock and built-in charging and docking stations for your devices.",
     answer:
-      "The Vellvii Lux is the newest luxury pleasure storage piece launching in 2026 - a discreet, fingerprint-locked vessel built from aerospace-grade aluminum and Italian leather, designed to live on a nightstand without apology.",
+      "The DOX is built from premium-quality components - genuine leather on the outside, soft velvet on the inside, with an integrated fingerprint lock and built-in charging and docking stations for your devices.",
   },
   {
-    question: "When does the Vellvii Lux ship?",
+    question: "When do Kickstarter and Prelaunch orders ship?",
     answerText:
-      "The Vellvii Lux ships to VIP early-access reservation holders first in 2026, with broader retail availability following the Kickstarter campaign. Reserve through the official Prelaunch page to secure a unit from the first 1,500.",
-    answer: (
-      <>
-        The Vellvii Lux ships to VIP early-access reservation holders first in
-        2026, with broader retail availability following the Kickstarter
-        campaign. Reserve through the official Prelaunch page to secure a unit
-        from the first 1,500.
-      </>
-    ),
+      "As communicated on Kickstarter, all Kickstarter and Prelaunch clients are expected to receive their ordered products in July 2026.",
+    answer:
+      "As communicated on Kickstarter, all Kickstarter and Prelaunch clients are expected to receive their ordered products in July 2026.",
   },
   {
     question: "Are Vellvii products discreet?",
@@ -49,9 +43,9 @@ export const homeFAQs: FAQItem[] = [
   {
     question: "What materials is the Vellvii Lux made from?",
     answerText:
-      "The Vellvii Lux is built from CNC-machined aerospace-grade aluminum, full-grain Italian leather, and medical-grade silicone touchpoints. Hardware is finished in champagne-gold or rose-gold tones.",
+      "The Vellvii Lux is a soft bag - crafted from genuine leather with a velvet-lined interior. No hard casing. Designed to cushion, protect, and travel quietly.",
     answer:
-      "The Vellvii Lux is built from CNC-machined aerospace-grade aluminum, full-grain Italian leather, and medical-grade silicone touchpoints. Hardware is finished in champagne-gold or rose-gold tones.",
+      "The Vellvii Lux is a soft bag - crafted from genuine leather with a velvet-lined interior. No hard casing. Designed to cushion, protect, and travel quietly.",
   },
   {
     question: "How does the Vellvii ecosystem work?",
