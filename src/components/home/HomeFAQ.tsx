@@ -86,57 +86,81 @@ export const HomeFAQ = () => {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="relative py-24 md:py-32 px-4 sm:px-6">
-      <div className="max-w-3xl mx-auto">
+    <section className="relative py-28 md:py-40 px-4 sm:px-6 overflow-hidden">
+      {/* Soft ambient glow */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-60"
+        style={{
+          background:
+            "radial-gradient(60% 50% at 50% 0%, hsl(40 50% 70% / 0.06), transparent 70%)",
+        }}
+      />
+
+      <div className="max-w-3xl mx-auto relative">
         <ScrollReveal>
-          <p className="text-primary/60 text-[0.7rem] uppercase tracking-[0.45em] font-semibold text-center mb-5">
+          <p className="text-primary/60 text-[0.7rem] uppercase tracking-[0.5em] font-light text-center mb-6">
             Considered Questions
           </p>
         </ScrollReveal>
 
         <ScrollReveal delay={0.1}>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-baskerville text-white text-center mb-3 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-baskerville italic text-white text-center mb-4 leading-tight tracking-tight">
             Plainly answered.
           </h2>
         </ScrollReveal>
 
+        {/* Decorative hairline */}
+        <ScrollReveal delay={0.15}>
+          <div className="flex justify-center mb-6">
+            <span className="block w-16 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+          </div>
+        </ScrollReveal>
+
         <ScrollReveal delay={0.2}>
-          <p className="text-white/50 font-light text-center mb-14 tracking-wide">
+          <p className="text-white/45 font-light text-center mb-16 tracking-wide text-sm sm:text-base">
             Everything you might be wondering, without the small print.
           </p>
         </ScrollReveal>
 
-        <div className="border-t border-primary/15">
+        <div className="space-y-1">
           {homeFAQs.map((item, i) => {
             const isOpen = open === i;
             return (
               <div
                 key={i}
-                className={`border-b border-primary/15 transition-colors duration-500 ${
-                  isOpen ? "bg-primary/[0.025]" : ""
-                }`}
+                className="relative"
               >
+                {/* Soft gradient hairline */}
+                <div
+                  aria-hidden
+                  className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent"
+                />
+
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="w-full flex items-start justify-between gap-6 py-6 md:py-7 text-left group"
+                  className="w-full flex items-start justify-between gap-8 py-7 md:py-8 text-left group"
                   aria-expanded={isOpen}
                 >
                   <span
-                    className={`font-baskerville text-lg md:text-xl leading-snug transition-colors duration-500 ${
-                      isOpen ? "text-white" : "text-white/85 group-hover:text-white"
+                    className={`font-baskerville text-lg md:text-xl leading-snug transition-all duration-500 ${
+                      isOpen
+                        ? "text-white italic"
+                        : "text-white/80 group-hover:text-white"
                     }`}
                   >
                     {item.question}
                   </span>
-                  <span className="shrink-0 mt-1">
+                  <span className="shrink-0 mt-1.5">
                     <motion.span
                       animate={{ rotate: isOpen ? 45 : 0 }}
-                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                      className="block"
+                      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                      className="flex items-center justify-center w-8 h-8 rounded-full border border-primary/25 group-hover:border-primary/50 transition-colors duration-500"
                     >
                       <Plus
-                        className="w-4 h-4"
-                        style={{ color: "hsl(40 65% 72%)" }}
+                        className="w-3 h-3"
+                        style={{ color: "hsl(40 60% 75%)" }}
+                        strokeWidth={1.25}
                       />
                     </motion.span>
                   </span>
@@ -149,10 +173,10 @@ export const HomeFAQ = () => {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                       className="overflow-hidden"
                     >
-                      <div className="pb-7 pr-12 text-white/65 font-light leading-relaxed">
+                      <div className="pb-8 pr-12 text-white/60 font-light leading-[1.85] text-[0.95rem] sm:text-base">
                         {item.answer}
                       </div>
                     </motion.div>
@@ -161,6 +185,11 @@ export const HomeFAQ = () => {
               </div>
             );
           })}
+          {/* Closing hairline */}
+          <div
+            aria-hidden
+            className="h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent"
+          />
         </div>
       </div>
     </section>
