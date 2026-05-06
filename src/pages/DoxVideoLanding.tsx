@@ -56,10 +56,22 @@ const DoxVideoLanding = () => {
       return { ok: false, message: result.error.errors[0].message };
     }
     try {
-      const { data, error } = await supabase.functions.invoke("usa-launch-notify", {
+      const { data, error } = await supabase.functions.invoke("mailchimp-subscribe", {
         body: { email: result.data, source },
       });
-      if (error) throw error;
+      if (error) {
+        const serverMsg = (error as any)?.context?.body
+          ? (() => {
+              try {
+                return JSON.parse((error as any).context.body)?.error;
+              } catch {
+                return null;
+              }
+            })()
+          : null;
+        return { ok: false, message: serverMsg || error.message || "Something went wrong. Please try again." };
+      }
+      if (data?.error) return { ok: false, message: data.error };
       return { ok: true, message: data?.message || "You're on the list!" };
     } catch (err: any) {
       console.error("Waitlist signup error:", err);
