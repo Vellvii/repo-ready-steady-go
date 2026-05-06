@@ -74,36 +74,40 @@ export const Milestones = () => {
           </p>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-primary/10 rounded-2xl overflow-hidden ring-1 ring-primary/15">
+        <div className="grid grid-cols-1 md:grid-cols-3 md:divide-x divide-y md:divide-y-0 divide-primary/10">
           {milestones.map((m, i) => (
             <ScrollReveal key={m.name} delay={0.25 + i * 0.1}>
               <a
                 href={m.href}
                 target={m.external ? "_blank" : undefined}
                 rel={m.external ? "noopener noreferrer" : undefined}
-                className="group relative flex flex-col items-center justify-center text-center px-8 py-12 md:py-16 h-full bg-background/80 hover:bg-background/40 transition-all duration-700"
+                className="group relative flex flex-col items-center justify-center text-center px-8 py-14 md:py-20 h-full transition-all duration-700"
               >
                 <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none"
                   style={{
                     background:
-                      "radial-gradient(ellipse at center, hsl(40 65% 72% / 0.12), transparent 65%)",
+                      "radial-gradient(ellipse at center, hsl(40 65% 72% / 0.08), transparent 70%)",
                   }}
                 />
 
                 <div className="relative z-10 flex flex-col items-center">
-                  <div className="h-20 px-7 flex items-center justify-center rounded-xl bg-[hsl(40_30%_94%)] ring-1 ring-primary/20 shadow-[0_1px_0_hsl(40_65%_72%/0.15)_inset] transition-all duration-700 group-hover:ring-primary/40">
+                  <div className="h-12 flex items-center justify-center">
                     <img
                       src={m.logo}
                       alt={`${m.name} logo`}
-                      className={`${m.logoHeight} w-auto object-contain transition-transform duration-700 group-hover:-translate-y-0.5`}
+                      className={`${m.logoHeight} w-auto object-contain transition-all duration-700 group-hover:-translate-y-0.5`}
+                      style={{
+                        filter:
+                          "brightness(0) invert(1) sepia(0.35) saturate(1.6) hue-rotate(355deg) brightness(0.95) opacity(0.85)",
+                      }}
                       loading="lazy"
                     />
                   </div>
 
-                  <div className="w-10 h-px my-5 bg-primary/30 group-hover:bg-primary/60 transition-colors duration-700" />
+                  <div className="w-8 h-px my-6 bg-primary/25 group-hover:bg-primary/55 group-hover:w-12 transition-all duration-700" />
 
-                  <p className="text-white/55 text-xs uppercase tracking-[0.25em] font-light">
+                  <p className="text-white/45 text-[0.7rem] uppercase tracking-[0.32em] font-light leading-relaxed">
                     {m.caption}
                   </p>
                 </div>
