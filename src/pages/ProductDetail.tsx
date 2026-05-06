@@ -216,10 +216,72 @@ const ProductDetail = () => {
 
   return (
     <>
-      <SEO
-        title={`${product.node.title} | Vellvii`}
-        description={product.node.description.slice(0, 160)}
-      />
+      {(() => {
+        const allImageUrls = (product.node.images?.edges || []).map((e) => e.node.url);
+        const heroImage = allImageUrls[0];
+        const priceAmount = variant ? parseFloat(variant.price.amount) : parseFloat(product.node.priceRange.minVariantPrice.amount);
+        const currency = variant?.price.currencyCode || product.node.priceRange.minVariantPrice.currencyCode || "USD";
+        const availability: "InStock" | "OutOfStock" | "PreOrder" = isLuxProduct
+          ? "PreOrder"
+          : variant?.availableForSale
+          ? "InStock"
+          : "OutOfStock";
+        const skuTail = variant?.id ? variant.id.split("/").pop() : undefined;
+
+        const luxTitle = `Vellvii Lux - Luxury Pleasure Storage | Pre-Order USA`;
+        const luxDescription =
+          "Reserve the Vellvii Lux: a biometric, designer-leather pleasure storage system. Limited 1,500-unit USA launch. Pre-order now, ships June 2026.";
+        const luxKeywords =
+          "vellvii lux, luxury pleasure storage, biometric pleasure case, designer pleasure collection storage, discreet intimate storage, made in usa luxury wellness, pleasure collection furniture";
+
+        const luxFaqs = [
+          { question: "What is the Vellvii Lux?", answer: "The Vellvii Lux is a biometric, designer-leather luxury pleasure storage system - furniture-grade discretion engineered for the modern bedroom and private travel." },
+          { question: "When does the Vellvii Lux ship?", answer: "Pre-orders ship from the USA the first week of June 2026. Reserve now to secure your unit from the limited 1,500-unit run." },
+          { question: "How many Vellvii Lux units are being made?", answer: "This is a strictly limited 1,500-unit numbered launch. Once sold out, the next batch is not guaranteed and may take months to produce." },
+          { question: "Is the Vellvii Lux made in the USA?", answer: "Yes - the Vellvii Lux is assembled and fulfilled from the United States, with no international shipping delays for US customers." },
+          { question: "How is the Lux different from the Vellvii Dox?", answer: "The Dox is a portable docking station for daily use; the Lux is a larger furniture-grade biometric storage system designed for bedroom integration and discreet travel." },
+          { question: "What materials are used?", answer: "Designer leather exterior, precision-machined metal hardware, and a fingerprint-secured biometric lock - built to luxury standards." },
+          { question: "Do I get any free gifts with my pre-order?", answer: "The first 1,500 orders include a complimentary Vellvii Nova handheld suction toy at no extra cost." },
+          { question: "What is the Vellvii Lux warranty?", answer: "All Vellvii products are covered by our authorized retailer warranty when registered within 7 days of receipt. Repair or replacement only - no refunds on final sales." },
+          { question: "Can I return the Vellvii Lux?", answer: "All sales are final. Warranty covers manufacturing defects with repair or replacement only. Register your warranty within 7 days of delivery." },
+          { question: "Is checkout discreet?", answer: "Yes - Vellvii ships in unbranded packaging with discreet billing descriptors. Privacy is core to the product and the experience." },
+        ];
+
+        return (
+          <SEO
+            title={isLuxProduct ? luxTitle : `${product.node.title} - Luxury Pleasure Collection`}
+            description={
+              isLuxProduct
+                ? luxDescription
+                : product.node.description.slice(0, 160)
+            }
+            canonical={`/products/${handle}`}
+            type="product"
+            image={heroImage}
+            keywords={isLuxProduct ? luxKeywords : undefined}
+            organizationData
+            breadcrumbs={[
+              { name: "Home", url: "/" },
+              { name: "Shop", url: "/shop" },
+              { name: product.node.title, url: `/products/${handle}` },
+            ]}
+            productData={{
+              name: product.node.title,
+              description: product.node.description.slice(0, 500),
+              price: priceAmount,
+              currency,
+              availability,
+              brand: "Vellvii",
+              sku: skuTail,
+              images: allImageUrls,
+              priceValidUntil: isLuxProduct ? "2026-06-01" : undefined,
+              itemCondition: "NewCondition",
+              url: `/products/${handle}`,
+            }}
+            faqData={isLuxProduct ? luxFaqs : undefined}
+          />
+        );
+      })()}
       <div className="min-h-screen surface-dark-rich">
         {/* Scroll-aware Navigation Header */}
         <ScrollHeader />
