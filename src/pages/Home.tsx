@@ -16,6 +16,9 @@ import {
   Armchair,
 } from "lucide-react";
 import ConciergeChat from "@/components/ConciergeChat";
+import { Milestones } from "@/components/home/Milestones";
+import { HomeFAQ, homeFAQs } from "@/components/home/HomeFAQ";
+import { SEO } from "@/components/SEO";
 import UserMenu from "@/components/UserMenu";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { ParallaxContainer } from "@/components/animations/ParallaxContainer";
