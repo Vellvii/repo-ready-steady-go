@@ -11,6 +11,7 @@ import {
   formatCheckoutUrl,
   isCartNotFoundError
 } from '@/lib/shopify';
+import { trackRemoveFromCart } from '@/lib/analytics';
 
 export interface CartItem {
   lineId: string | null;
