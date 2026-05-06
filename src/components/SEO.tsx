@@ -89,12 +89,29 @@ export const SEO = ({
             price: productData.price,
             priceCurrency: productData.currency || 'USD',
             availability: `https://schema.org/${productData.availability || 'PreOrder'}`,
+            itemCondition: `https://schema.org/${productData.itemCondition || 'NewCondition'}`,
+            ...(productData.priceValidUntil && { priceValidUntil: productData.priceValidUntil }),
+            ...(productData.url && { url: productData.url.startsWith('http') ? productData.url : `${SITE_URL}${productData.url}` }),
+            seller: { '@type': 'Organization', name: 'Vellvii' },
           },
         }),
         ...(productData.images && {
-          image: productData.images.map((img) => `${SITE_URL}${img}`),
+          image: productData.images.map((img) => (img.startsWith('http') ? img : `${SITE_URL}${img}`)),
         }),
         ...(productData.sku && { sku: productData.sku }),
+      }
+    : null;
+
+  // Video Schema
+  const videoSchema = videoData
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'VideoObject',
+        name: videoData.name,
+        description: videoData.description,
+        thumbnailUrl: videoData.thumbnailUrl.startsWith('http') ? videoData.thumbnailUrl : `${SITE_URL}${videoData.thumbnailUrl}`,
+        contentUrl: videoData.contentUrl.startsWith('http') ? videoData.contentUrl : `${SITE_URL}${videoData.contentUrl}`,
+        uploadDate: videoData.uploadDate,
       }
     : null;
 
