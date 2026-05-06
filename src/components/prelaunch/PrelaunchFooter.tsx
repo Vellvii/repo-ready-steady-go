@@ -22,7 +22,7 @@ export const PrelaunchFooter = () => {
             <img
               src="/uploads/Vellvii-full-logo-transparent.png"
               alt="Vellvii"
-              className="h-6 sm:h-8 w-auto"
+              className="h-12 sm:h-16 md:h-20 w-auto drop-shadow-[0_0_24px_rgba(212,175,55,0.3)]"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
                 e.currentTarget.nextElementSibling?.classList.remove('hidden');
