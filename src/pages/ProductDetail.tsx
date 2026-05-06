@@ -24,6 +24,7 @@ import {
   LuxShippingClarity,
 } from "@/components/lux/LuxPreOrderPanel";
 import { ScrollHeader } from "@/components/ScrollHeader";
+import { trackViewItem, trackAddToCart } from "@/lib/analytics";
 
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
