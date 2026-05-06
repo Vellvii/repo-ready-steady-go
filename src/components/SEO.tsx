@@ -46,6 +46,9 @@ export const SEO = ({
   faqData,
   organizationData,
   breadcrumbs,
+  keywords,
+  videoData,
+  hreflang = 'en-us',
 }: SEOProps) => {
   const fullTitle = title.includes('Vellvii') ? title : `${title} | Vellvii`;
   const canonicalUrl = canonical ? `${SITE_URL}${canonical}` : undefined;
