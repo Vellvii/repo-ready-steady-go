@@ -227,6 +227,16 @@ const ProductDetail = () => {
       selectedOptions: variant.selectedOptions || [],
     });
 
+    trackAddToCart({
+      item_id: variant.id,
+      item_name: product.node.title,
+      item_brand: "Vellvii",
+      item_variant: variant.title,
+      price: parseFloat(variant.price.amount),
+      quantity: 1,
+      currency: variant.price.currencyCode,
+    });
+
     if (isLuxProduct && typeof window !== "undefined" && (window as any).gtag) {
       (window as any).gtag("event", "lux_add_to_cart", {
         currency: variant.price.currencyCode,
