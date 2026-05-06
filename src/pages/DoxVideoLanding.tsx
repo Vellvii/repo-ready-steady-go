@@ -178,27 +178,38 @@ const DoxVideoLanding = () => {
 
 
         {/* [2] Backer thank-you + processing status */}
-        <section className="px-4 mb-8 sm:mb-12">
+        <section className="px-4 mb-12 sm:mb-20">
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl mx-auto rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 backdrop-blur-sm px-5 py-5 sm:px-8 sm:py-6 text-center"
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            className="max-w-2xl mx-auto text-center px-4 sm:px-6"
           >
-            <div className="inline-flex items-center gap-2 mb-3">
-              <Heart className="w-4 h-4 text-primary" fill="currentColor" />
-              <span className="font-montserrat text-[10px] sm:text-xs uppercase tracking-[0.25em] text-primary">
+            {/* Hairline ornament */}
+            <div className="flex items-center justify-center gap-3 mb-7">
+              <span className="block w-12 h-px bg-gradient-to-r from-transparent to-primary/40" />
+              <span className="font-baskerville italic text-[0.78rem] sm:text-sm tracking-[0.32em] uppercase text-primary/70">
                 To Our Backers
               </span>
-              <Heart className="w-4 h-4 text-primary" fill="currentColor" />
+              <span className="block w-12 h-px bg-gradient-to-l from-transparent to-primary/40" />
             </div>
-            <p className="font-baskerville text-base sm:text-lg md:text-xl text-light-primary leading-relaxed mb-2">
-              To our Kickstarter and prelaunch backers - thank you. You made Vellvii real.
+
+            <p className="font-baskerville italic text-xl sm:text-2xl md:text-[1.7rem] text-white/90 leading-[1.45] tracking-tight mb-5">
+              To our Kickstarter and Prelaunch backers - thank you.
+              <br className="hidden sm:block" />
+              <span className="text-primary/85"> You made Vellvii real.</span>
             </p>
-            <p className="font-montserrat text-sm sm:text-base text-light-secondary leading-relaxed">
-              Your orders are now in processing. You'll receive shipping confirmation by email as
-              your unit moves through fulfillment.
+
+            <p className="font-montserrat font-light text-[0.92rem] sm:text-base text-white/55 leading-[1.85] max-w-xl mx-auto">
+              Your orders are now quietly in processing. A shipping confirmation
+              will arrive by email as your piece moves through fulfillment.
             </p>
+
+            {/* Closing flourish */}
+            <div className="flex justify-center mt-8">
+              <span className="block w-16 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+            </div>
           </motion.div>
         </section>
 
