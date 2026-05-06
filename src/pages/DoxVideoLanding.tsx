@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { SEO } from "@/components/SEO";
 import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
 import { LuxCountdown } from "@/components/lux/LuxPreOrderPanel";
+import { Milestones } from "@/components/home/Milestones";
+import { HomeFAQ, homeFAQs } from "@/components/home/HomeFAQ";
 import { useShopifyProducts } from "@/hooks/useShopifyProducts";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -137,9 +139,12 @@ const DoxVideoLanding = () => {
   return (
     <>
       <SEO
-        title="Vellvii | The Art of 'O' - Lux Pre-Order, DOX & The Pleasure Collection"
-        description="The Vellvii Lux is now in limited pre-order, shipping first week of June with a complimentary Vellvii Nova. Discover DOX, Pulse, Vibe and the full Pleasure Collection."
+        title="Vellvii - The Newest Luxury Pleasure Storage and Wellness House of 2026"
+        description="Vellvii is the American premium wellness house behind the DOX biometric storage system and the Vellvii Lux - the newest luxury pleasure storage box launching in 2026. Quiet luxury, design-led intimate wellness."
         canonical="/"
+        keywords="newest luxury pleasure storage 2026, Vellvii, Vellvii Lux, Vellvii DOX, biometric pleasure storage, premium intimate wellness, design-led pleasure collection, American luxury wellness brand"
+        organizationData
+        faqData={homeFAQs.map(f => ({ question: f.question, answer: f.answerText }))}
       />
 
       <div className="min-h-screen bg-background flex flex-col">
@@ -495,6 +500,12 @@ const DoxVideoLanding = () => {
             )}
           </div>
         </section>
+
+        {/* Milestones strip */}
+        <Milestones />
+
+        {/* FAQ */}
+        <HomeFAQ />
 
         {/* Footer */}
         <PrelaunchFooter />
