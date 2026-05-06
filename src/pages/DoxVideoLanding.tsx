@@ -267,43 +267,6 @@ const DoxVideoLanding = () => {
               <LuxCountdown />
             </motion.div>
 
-            {/* Complimentary Nova - elegant opt-in */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="max-w-md mx-auto"
-            >
-              <button
-                type="button"
-                onClick={() => setIncludeNova((v) => !v)}
-                aria-pressed={includeNova}
-                className="group w-full flex items-center justify-between gap-4 px-5 sm:px-6 py-4 rounded-full border border-primary/25 hover:border-primary/50 bg-gradient-to-r from-primary/[0.04] via-transparent to-primary/[0.04] backdrop-blur-sm transition-all duration-500 text-left"
-              >
-                <span className="flex flex-col">
-                  <span className="font-baskerville italic text-[0.95rem] sm:text-base text-white/85 leading-tight">
-                    Add the complimentary Vellvii Nova
-                  </span>
-                  <span className="font-montserrat text-[0.68rem] sm:text-[0.72rem] tracking-[0.2em] uppercase text-white/40 mt-1">
-                    Reserved for the first 1,500 - no extra cost
-                  </span>
-                </span>
-                <span
-                  className={`relative shrink-0 w-12 h-6 rounded-full transition-all duration-500 ${
-                    includeNova
-                      ? "bg-primary/70"
-                      : "bg-white/10 group-hover:bg-white/15"
-                  }`}
-                >
-                  <span
-                    className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-md transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                      includeNova ? "translate-x-6" : "translate-x-0"
-                    }`}
-                  />
-                </span>
-              </button>
-            </motion.div>
-
             {/* CTA */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -311,7 +274,7 @@ const DoxVideoLanding = () => {
               transition={{ delay: 0.5 }}
             >
               <Link
-                to={`/products/vellvii-lux${includeNova ? "?nova=1" : ""}`}
+                to="/products/vellvii-lux"
                 className="inline-block relative group"
               >
                 <motion.div
