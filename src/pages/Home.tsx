@@ -572,6 +572,12 @@ const Home = () => {
         </div>
       </section>
       
+      {/* Milestones strip */}
+      <Milestones />
+
+      {/* FAQ */}
+      <HomeFAQ />
+
       {/* Creative Credit Footer */}
       <footer className="py-8 px-6 border-t border-white/10">
         <div className="max-w-6xl mx-auto text-center">
