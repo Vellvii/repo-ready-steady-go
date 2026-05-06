@@ -4,6 +4,7 @@ import { Sheet, SheetContent, SheetTitle, SheetDescription } from "@/components/
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2, Heart } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
+import { trackBeginCheckout, appendCheckoutAttribution } from "@/lib/analytics";
 
 
 export const CartDrawer = () => {
