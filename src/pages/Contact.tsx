@@ -5,6 +5,7 @@ import { SEO } from "@/components/SEO";
 import { ScrollHeader } from "@/components/ScrollHeader";
 import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
 import { motion } from "framer-motion";
+import { pixelContact } from "@/lib/metaPixel";
 
 const Contact = () => {
   return (
@@ -84,7 +85,7 @@ const Contact = () => {
                     <p className="text-light-secondary font-montserrat text-sm mb-4">
                       Get personalized assistance with your Vellvii experience
                     </p>
-                    <a href="mailto:hello@vellvii.com" className="block">
+                    <a href="mailto:hello@vellvii.com" className="block" onClick={() => pixelContact()}>
                       <Button className="w-full btn-premium h-11">
                         hello@vellvii.com
                         <ArrowRight className="w-4 h-4 ml-2" />
@@ -105,7 +106,7 @@ const Contact = () => {
                     <p className="text-light-secondary font-montserrat text-sm mb-4">
                       Speak directly with our luxury specialists
                     </p>
-                    <a href="tel:+15551234567" className="block">
+                    <a href="tel:+15551234567" className="block" onClick={() => pixelContact()}>
                       <Button variant="outline" className="w-full h-11 border-white/20 text-light-primary hover:bg-white/10 hover:border-primary/50 font-montserrat">
                         +1 (555) 123-4567
                         <ArrowRight className="w-4 h-4 ml-2" />
