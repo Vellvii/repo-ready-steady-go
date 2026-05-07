@@ -25,6 +25,7 @@ import {
   AlertCircle
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { pixelCompleteRegistration } from "@/lib/metaPixel";
 
 type ProductType = "dox" | "lux" | "";
 type PurchaseSource = "shopify" | "retailer" | "";
@@ -192,6 +193,10 @@ const WarrantyRegister = () => {
       
       setRegistrationId(newRegistrationId);
       setIsSuccess(true);
+      pixelCompleteRegistration({
+        content_name: `warranty_${productType}`,
+        status: "completed",
+      });
       
       toast({
         title: "Warranty Registered!",
