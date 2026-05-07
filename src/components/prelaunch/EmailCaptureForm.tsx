@@ -15,6 +15,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { pixelLead, pixelSubscribe } from "@/lib/metaPixel";
 
 const formSchema = z.object({
   firstName: z.string()
@@ -69,8 +70,16 @@ export const EmailCaptureForm = () => {
   const onSubmit = async (data: FormValues) => {
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1500));
-    
+
     console.log("Form data:", data);
+    pixelLead({
+      content_name: data.wantsEarlyBird ? "prelaunch_vip_waitlist" : "prelaunch_waitlist",
+      value: data.wantsEarlyBird ? 99 : undefined,
+      currency: data.wantsEarlyBird ? "USD" : undefined,
+    });
+    pixelSubscribe(
+      data.wantsEarlyBird ? { value: 99, currency: "USD" } : {},
+    );
     setIsSubmitted(true);
   };
 
