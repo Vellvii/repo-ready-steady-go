@@ -25,6 +25,7 @@ import {
 } from "@/components/lux/LuxPreOrderPanel";
 import { ScrollHeader } from "@/components/ScrollHeader";
 import { trackViewItem, trackAddToCart } from "@/lib/analytics";
+import { pixelViewContent, pixelAddToCart } from "@/lib/metaPixel";
 
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
@@ -62,6 +63,13 @@ const ProductDetail = () => {
         item_brand: "Vellvii",
         price: parseFloat(variant.price.amount),
         quantity: 1,
+        currency: variant.price.currencyCode,
+      });
+      pixelViewContent({
+        content_ids: [variant.id],
+        content_name: product.node.title,
+        content_category: product.node.productType,
+        value: parseFloat(variant.price.amount),
         currency: variant.price.currencyCode,
       });
     }
@@ -234,6 +242,14 @@ const ProductDetail = () => {
       item_variant: variant.title,
       price: parseFloat(variant.price.amount),
       quantity: 1,
+      currency: variant.price.currencyCode,
+    });
+
+    pixelAddToCart({
+      content_ids: [variant.id],
+      content_name: product.node.title,
+      contents: [{ id: variant.id, quantity: 1, item_price: parseFloat(variant.price.amount) }],
+      value: parseFloat(variant.price.amount),
       currency: variant.price.currencyCode,
     });
 
