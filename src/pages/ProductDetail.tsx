@@ -68,7 +68,6 @@ const ProductDetail = () => {
       pixelViewContent({
         content_ids: [variant.id],
         content_name: product.node.title,
-        content_category: product.node.productType,
         value: parseFloat(variant.price.amount),
         currency: variant.price.currencyCode,
       });
