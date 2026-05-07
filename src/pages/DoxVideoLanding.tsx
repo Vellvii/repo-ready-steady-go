@@ -19,6 +19,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import * as z from "zod";
+import { pixelLead, pixelSubscribe } from "@/lib/metaPixel";
 
 const emailSchema = z
   .string()
@@ -72,6 +73,8 @@ const DoxVideoLanding = () => {
         return { ok: false, message: serverMsg || error.message || "Something went wrong. Please try again." };
       }
       if (data?.error) return { ok: false, message: data.error };
+      pixelLead({ content_name: source });
+      pixelSubscribe();
       return { ok: true, message: data?.message || "You're on the list!" };
     } catch (err: any) {
       console.error("Waitlist signup error:", err);
