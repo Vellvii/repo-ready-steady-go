@@ -11,14 +11,14 @@ export const HomeHero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Video/Image */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 bg-black flex items-center justify-center">
         <video
           autoPlay
           muted
           loop
           playsInline
           className="w-full h-full object-cover"
-          poster="/uploads/Dox1.jpg"
+          poster="/uploads/Vellvii-full-logo-transparent.png"
         >
           <source src="/uploads/HEROPAGE.webm" type="video/webm" />
         </video>
