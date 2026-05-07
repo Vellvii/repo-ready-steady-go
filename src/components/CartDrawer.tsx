@@ -5,6 +5,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2, Heart } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { trackBeginCheckout, appendCheckoutAttribution } from "@/lib/analytics";
+import { pixelInitiateCheckout } from "@/lib/metaPixel";
 
 
 export const CartDrawer = () => {
@@ -47,6 +48,17 @@ export const CartDrawer = () => {
         totalPrice,
         currency
       );
+      pixelInitiateCheckout({
+        content_ids: items.map((i) => i.variantId),
+        contents: items.map((i) => ({
+          id: i.variantId,
+          quantity: i.quantity,
+          item_price: parseFloat(i.price.amount),
+        })),
+        num_items: totalItems,
+        value: totalPrice,
+        currency,
+      });
       window.open(appendCheckoutAttribution(checkoutUrl), "_blank");
       setIsOpen(false);
     }
