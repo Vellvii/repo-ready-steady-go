@@ -1,29 +1,20 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 export const ScrollHeader = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      
-      // Show header when scrolling up or at top
-      if (currentScrollY < lastScrollY || currentScrollY < 50) {
-        setIsVisible(true);
-      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Hide header when scrolling down (after scrolling past 100px)
-        setIsVisible(false);
-        setMobileMenuOpen(false); // Close mobile menu when hiding
-      }
-      
-      setLastScrollY(currentScrollY);
+      const y = window.scrollY;
+      setScrolled(y > 20);
+      if (y < lastScrollY || y < 50) setIsVisible(true);
+      else if (y > lastScrollY && y > 100) setIsVisible(false);
+      setLastScrollY(y);
     };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
@@ -33,48 +24,33 @@ export const ScrollHeader = () => {
       initial={{ y: 0 }}
       animate={{ y: isVisible ? 0 : -100 }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="fixed top-0 left-0 right-0 z-[1000] bg-black/80 backdrop-blur-md border-b border-white/10"
+      className={`fixed top-0 left-0 right-0 z-[1000] backdrop-blur-xl transition-colors duration-500 ${
+        scrolled
+          ? "bg-black/55 border-b border-primary/15"
+          : "bg-transparent border-b border-transparent"
+      }`}
     >
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-20 sm:h-24">
-          {/* Logo - Larger and more visible */}
+        <div className="relative flex items-center justify-between h-16 sm:h-20">
+          {/* Logo */}
           <Link to="/" className="flex items-center flex-shrink-0">
             <img
               src="/uploads/Vellvii-full-logo-transparent.png"
               alt="Vellvii"
-              className="h-14 sm:h-16 md:h-20 w-auto drop-shadow-[0_0_20px_rgba(212,175,55,0.35)]"
+              className="h-12 sm:h-14 md:h-16 w-auto"
             />
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6 lg:gap-8 pr-28">
-            {/* Shop, About, Contact temporarily disabled */}
-          </nav>
+          {/* Centered tagline (desktop only) */}
+          <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+            <span className="font-baskerville italic text-[0.7rem] tracking-[0.32em] uppercase text-primary/70">
+              The Art of &lsquo;O&rsquo;
+            </span>
+          </div>
 
-          {/* Mobile Menu Button - positioned with right margin for cart button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-light-secondary hover:text-primary transition-colors mr-14 sm:mr-16"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          {/* Right spacer for floating cart button */}
+          <div className="w-12 sm:w-14" aria-hidden />
         </div>
-
-        {/* Mobile Navigation */}
-        <AnimatePresence>
-          {mobileMenuOpen && (
-            <motion.nav
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden border-t border-white/10 overflow-hidden"
-            >
-              <div className="py-4 space-y-3">
-                {/* Shop, About, Contact temporarily disabled */}
-              </div>
-            </motion.nav>
-          )}
-        </AnimatePresence>
       </div>
     </motion.header>
   );

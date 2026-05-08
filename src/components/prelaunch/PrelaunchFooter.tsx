@@ -16,7 +16,15 @@ export const PrelaunchFooter = () => {
   return (
     <footer className="relative border-t border-white/10 surface-dark">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="flex flex-col items-center space-y-6 sm:space-y-8 py-10 sm:py-12">
+        {/* Tagline */}
+        <div className="pt-10 sm:pt-12 pb-2 flex flex-col items-center">
+          <span className="block w-16 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent mb-5" />
+          <p className="font-baskerville italic text-xl sm:text-2xl md:text-3xl text-primary/85 tracking-wide">
+            The Art of &lsquo;O&rsquo;
+          </p>
+          <span className="block w-16 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent mt-5" />
+        </div>
+        <div className="flex flex-col items-center space-y-6 sm:space-y-8 py-8 sm:py-10">
           {/* Logo */}
           <div className="flex items-center">
             <img

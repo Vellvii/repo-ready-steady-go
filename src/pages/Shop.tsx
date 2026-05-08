@@ -87,7 +87,7 @@ const ProductCard = ({ product }: { product: ShopifyProduct }) => {
 
   return (
     <Link to={`/products/${product.node.handle}`} className="group block">
-      <div className="card-dark rounded-xl sm:rounded-2xl overflow-hidden relative">
+      <div className="card-dark rounded-xl sm:rounded-2xl overflow-hidden relative ring-1 ring-primary/0 group-hover:ring-primary/30 transition-all duration-500">
         <div className="product-image-container aspect-[3/4] sm:aspect-[4/5] relative">
           {image ? (
             <img
@@ -101,8 +101,8 @@ const ProductCard = ({ product }: { product: ShopifyProduct }) => {
             </div>
           )}
           {!isAvailable && (
-            <div className="absolute top-2 left-2 sm:top-3 sm:left-3 px-2.5 py-1 rounded-full bg-red-600 border border-red-400/40 shadow-lg">
-              <span className="text-white font-montserrat text-[10px] sm:text-xs font-semibold uppercase tracking-wider">
+            <div className="absolute top-2 left-2 sm:top-3 sm:left-3 px-3 py-1 rounded-full bg-black/45 backdrop-blur-sm border border-primary/30">
+              <span className="text-primary/90 font-montserrat text-[10px] sm:text-xs font-medium uppercase tracking-[0.2em]">
                 Sold Out
               </span>
             </div>
@@ -117,8 +117,8 @@ const ProductCard = ({ product }: { product: ShopifyProduct }) => {
               ${parseFloat(price.amount).toFixed(0)}
             </p>
             {!isAvailable ? (
-              <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-red-600 text-white font-montserrat text-[10px] sm:text-xs font-semibold uppercase tracking-wider">
-                Sold Out
+              <span className="font-montserrat text-[10px] sm:text-xs text-light-muted uppercase tracking-[0.2em]">
+                —
               </span>
             ) : hasOptions ? (
               <span className="font-montserrat text-xs text-light-secondary group-hover:text-primary transition-colors">
@@ -349,6 +349,9 @@ const Shop = () => {
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-baskerville font-bold text-light-primary mb-2 sm:mb-3">
               The <span className="gradient-text">Collection</span>
             </h1>
+            <p className="font-baskerville italic text-sm sm:text-base text-primary/70 tracking-wide mb-3">
+              The Art of &lsquo;O&rsquo;
+            </p>
             <p className="text-light-secondary text-sm sm:text-base max-w-xl mx-auto font-montserrat leading-relaxed mb-5 sm:mb-6">
               Refined wellness products designed for privacy, elegance, and modern living.
             </p>

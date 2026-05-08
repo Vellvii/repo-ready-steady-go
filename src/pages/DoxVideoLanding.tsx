@@ -7,6 +7,7 @@ import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
 import { LuxCountdown } from "@/components/lux/LuxPreOrderPanel";
 import { Milestones } from "@/components/home/Milestones";
 import { HomeFAQ, homeFAQs } from "@/components/home/HomeFAQ";
+import { FounderNote } from "@/components/home/FounderNote";
 import { useShopifyProducts } from "@/hooks/useShopifyProducts";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -446,8 +447,8 @@ const DoxVideoLanding = () => {
                               />
                             )}
                             {!inStock && (
-                              <div className="absolute top-2 left-2 sm:top-3 sm:left-3 px-2.5 py-1 rounded-full bg-red-600/95 backdrop-blur-sm">
-                                <span className="font-montserrat text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-white">
+                              <div className="absolute top-2 left-2 sm:top-3 sm:left-3 px-3 py-1 rounded-full bg-black/45 backdrop-blur-sm border border-primary/30">
+                                <span className="font-montserrat text-[9px] sm:text-[10px] font-medium uppercase tracking-[0.2em] text-primary/90">
                                   Sold Out
                                 </span>
                               </div>
@@ -529,6 +530,9 @@ const DoxVideoLanding = () => {
             )}
           </div>
         </section>
+
+        {/* Founder Note */}
+        <FounderNote />
 
         {/* Milestones strip */}
         <Milestones />
