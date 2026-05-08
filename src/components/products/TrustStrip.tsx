@@ -1,13 +1,23 @@
 import { Truck, ShieldCheck, Lock, Sparkles } from "lucide-react";
 
-const items = [
-  { icon: Truck, label: "Discreet Shipping" },
-  { icon: ShieldCheck, label: "1-Year Warranty" },
-  { icon: Lock, label: "Plain Packaging" },
-  { icon: Sparkles, label: "Body-Safe Materials" },
-];
+interface TrustStripProps {
+  /** Product handle - used to determine warranty coverage */
+  productHandle?: string;
+}
 
-export const TrustStrip = () => {
+export const TrustStrip = ({ productHandle }: TrustStripProps) => {
+  const handle = productHandle?.toLowerCase() || "";
+  // DOX and LUX get lifetime warranty; all other products (Pulse, Vibe, G-Vibe) get 1-year
+  const isLifetime = handle.includes("dox") || handle.includes("lux");
+  const warrantyLabel = isLifetime ? "Lifetime Warranty" : "1-Year Warranty";
+
+  const items = [
+    { icon: Truck, label: "Discreet Shipping" },
+    { icon: ShieldCheck, label: warrantyLabel },
+    { icon: Lock, label: "Plain Packaging" },
+    { icon: Sparkles, label: "Body-Safe Materials" },
+  ];
+
   return (
     <div className="border-y border-primary/15 py-5 sm:py-6">
       <ul className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-2">
