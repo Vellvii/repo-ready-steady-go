@@ -531,6 +531,9 @@ const DoxVideoLanding = () => {
           </div>
         </section>
 
+        {/* Founder Note */}
+        <FounderNote />
+
         {/* Milestones strip */}
         <Milestones />
 

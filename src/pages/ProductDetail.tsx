@@ -9,6 +9,7 @@ import { SEO } from "@/components/SEO";
 import { useState, useMemo, useEffect } from "react";
 import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
 import { TrustBadges } from "@/components/TrustBadges";
+import { TrustStrip } from "@/components/products/TrustStrip";
 import { StickyProductBar } from "@/components/StickyProductBar";
 import { ImageLightbox } from "@/components/ImageLightbox";
 import { DoxVideoSection } from "@/components/DoxVideoSection";
@@ -453,7 +454,7 @@ const ProductDetail = () => {
               <div className={`lg:sticky lg:top-24 ${isLuxProduct ? "space-y-3 sm:space-y-5" : "space-y-5 sm:space-y-6 lg:space-y-8"}`}>
                 <div>
                   <p className="text-primary font-montserrat text-xs sm:text-sm uppercase tracking-[0.15em] sm:tracking-[0.2em] mb-2 sm:mb-3">
-                    Vellvii
+                    Vellvii <span className="font-baskerville italic normal-case tracking-normal text-primary/60">- The Art of &lsquo;O&rsquo;</span>
                   </p>
                   <h1 className={`font-baskerville font-bold text-light-primary leading-tight ${isLuxProduct ? "text-xl sm:text-3xl md:text-4xl lg:text-5xl mb-2 sm:mb-4" : "text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-3 sm:mb-4"}`}>
                     {product.node.title}
@@ -572,6 +573,9 @@ const ProductDetail = () => {
                     </>
                   )}
                 </Button>
+
+                {/* Trust Strip - hairline icons under add-to-cart */}
+                <TrustStrip />
 
                 {isLuxProduct && (
                   <>
