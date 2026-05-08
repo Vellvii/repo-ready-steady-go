@@ -575,7 +575,7 @@ const ProductDetail = () => {
                 </Button>
 
                 {/* Trust Strip - hairline icons under add-to-cart */}
-                <TrustStrip />
+                <TrustStrip productHandle={handle} />
 
                 {isLuxProduct && (
                   <>
@@ -590,9 +590,6 @@ const ProductDetail = () => {
                     </div>
                   </>
                 )}
-
-                {/* Trust Badges */}
-                <TrustBadges />
               </div>
             </div>
           </div>
