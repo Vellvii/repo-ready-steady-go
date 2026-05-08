@@ -8,6 +8,7 @@ import { LuxCountdown } from "@/components/lux/LuxPreOrderPanel";
 import { Milestones } from "@/components/home/Milestones";
 import { HomeFAQ, homeFAQs } from "@/components/home/HomeFAQ";
 import { FounderNote } from "@/components/home/FounderNote";
+import { StatusPill, getProductStatus } from "@/components/products/StatusPill";
 import { useShopifyProducts } from "@/hooks/useShopifyProducts";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -446,13 +447,10 @@ const DoxVideoLanding = () => {
                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                               />
                             )}
-                            {!inStock && (
-                              <div className="absolute top-2 left-2 sm:top-3 sm:left-3 px-3 py-1 rounded-full bg-black/45 backdrop-blur-sm border border-primary/30">
-                                <span className="font-montserrat text-[9px] sm:text-[10px] font-medium uppercase tracking-[0.2em] text-primary/90">
-                                  Sold Out
-                                </span>
-                              </div>
-                            )}
+                            <StatusPill
+                              status={getProductStatus(node.handle, inStock)}
+                              className="absolute top-2 left-2 sm:top-3 sm:left-3"
+                            />
                           </div>
                           <div className="p-3 sm:p-4">
                             <h3 className="font-baskerville font-bold text-base sm:text-lg text-light-primary group-hover:text-primary transition-colors mb-1">

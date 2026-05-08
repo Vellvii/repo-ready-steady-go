@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import { Search, X, ShoppingCart, Loader2 } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
+import { StatusPill, getProductStatus } from "@/components/products/StatusPill";
 
 // Simple fuzzy match - checks if query letters appear in order within the target
 const fuzzyMatch = (query: string, target: string): { match: boolean; score: number } => {
@@ -100,13 +101,10 @@ const ProductCard = ({ product }: { product: ShopifyProduct }) => {
               No Image
             </div>
           )}
-          {!isAvailable && (
-            <div className="absolute top-2 left-2 sm:top-3 sm:left-3 px-3 py-1 rounded-full bg-black/45 backdrop-blur-sm border border-primary/30">
-              <span className="text-primary/90 font-montserrat text-[10px] sm:text-xs font-medium uppercase tracking-[0.2em]">
-                Sold Out
-              </span>
-            </div>
-          )}
+          <StatusPill
+            status={getProductStatus(product.node.handle, isAvailable)}
+            className="absolute top-2 left-2 sm:top-3 sm:left-3"
+          />
         </div>
         <div className="p-4 sm:p-5">
           <h3 className="text-light-primary font-baskerville font-semibold text-base sm:text-lg mb-1 sm:mb-2 group-hover:text-primary transition-colors line-clamp-2">

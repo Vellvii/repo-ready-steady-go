@@ -10,6 +10,7 @@ import { useState, useMemo, useEffect } from "react";
 import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
 import { TrustBadges } from "@/components/TrustBadges";
 import { TrustStrip } from "@/components/products/TrustStrip";
+import { StatusPill, getProductStatus } from "@/components/products/StatusPill";
 import { StickyProductBar } from "@/components/StickyProductBar";
 import { ImageLightbox } from "@/components/ImageLightbox";
 import { DoxVideoSection } from "@/components/DoxVideoSection";
@@ -406,6 +407,11 @@ const ProductDetail = () => {
                           src={selectedImage.url}
                           alt={selectedImage.altText || product.node.title}
                           className="w-full h-full object-cover"
+                        />
+                        <StatusPill
+                          status={getProductStatus(handle, !!variant?.availableForSale)}
+                          size="md"
+                          className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10"
                         />
                         {/* Expand icon overlay */}
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
