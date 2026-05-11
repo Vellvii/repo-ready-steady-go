@@ -18,6 +18,10 @@ interface SEOProps {
     priceValidUntil?: string;
     itemCondition?: string;
     url?: string;
+    aggregateRating?: {
+      ratingValue: number;
+      reviewCount: number;
+    };
   };
   faqData?: Array<{ question: string; answer: string }>;
   organizationData?: boolean;
@@ -99,6 +103,13 @@ export const SEO = ({
           image: productData.images.map((img) => (img.startsWith('http') ? img : `${SITE_URL}${img}`)),
         }),
         ...(productData.sku && { sku: productData.sku }),
+        ...(productData.aggregateRating && {
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: productData.aggregateRating.ratingValue,
+            reviewCount: productData.aggregateRating.reviewCount,
+          },
+        }),
       }
     : null;
 
