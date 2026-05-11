@@ -36,7 +36,7 @@ export default function PrelaunchLux() {
       />
       <SmoothScroll>
         <PageTransition>
-          <div className="min-h-screen relative overflow-hidden" style={{ background: 'var(--gradient-dark)' }}>
+          <div className="min-h-screen relative overflow-hidden overflow-x-clip" style={{ background: 'var(--gradient-dark)' }}>
             {/* Animated mesh gradient overlay */}
             <div className="absolute inset-0 opacity-50 mesh-bg" style={{ background: 'var(--gradient-mesh)' }} />
             

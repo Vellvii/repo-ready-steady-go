@@ -12,7 +12,7 @@ export const LuxHeroSection = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
 
       <div className="w-full relative z-10 pt-24 lg:pt-32">
-        <div className="max-w-7xl mx-auto text-center space-y-12 lg:space-y-16">
+        <div className="max-w-7xl mx-auto text-center space-y-8 sm:space-y-12 lg:space-y-16">
           {/* Logo Video */}
           <ScrollReveal>
             <div className="flex justify-center mb-8">
@@ -21,7 +21,7 @@ export const LuxHeroSection = () => {
                 loop
                 muted
                 playsInline
-                className="h-[16rem] sm:h-[22rem] lg:h-[28rem] xl:h-[34rem] w-auto"
+                className="h-[12rem] sm:h-[18rem] lg:h-[28rem] xl:h-[34rem] w-auto"
                 style={{
                   filter: 'drop-shadow(0 0 60px rgba(178, 145, 108, 0.6)) drop-shadow(0 0 100px rgba(178, 145, 108, 0.3))'
                 }}
@@ -50,7 +50,7 @@ export const LuxHeroSection = () => {
 
             {/* Tagline Hook */}
             <ScrollReveal delay={0.25}>
-              <p className="relative text-2xl sm:text-3xl lg:text-4xl font-light italic text-white/90 font-baskerville mt-8 sparkle-text" style={{
+              <p className="relative text-xl sm:text-3xl lg:text-4xl font-light italic text-white/90 font-baskerville mt-8 px-2 sparkle-text" style={{
                 textShadow: '0 0 40px rgba(178, 145, 108, 0.5), 0 0 20px rgba(178, 145, 108, 0.3)'
               }}>
                 Because Your Pleasure Collection Deserves...........
@@ -72,8 +72,8 @@ export const LuxHeroSection = () => {
       </ScrollReveal>
 
       {/* Bottom content - More dramatic spacing */}
-      <div className="w-full relative z-10 px-4 sm:px-8 lg:px-12 mt-20 lg:mt-32 pb-32 lg:pb-40">
-        <div className="max-w-7xl mx-auto text-center space-y-12 lg:space-y-16">
+      <div className="w-full relative z-10 px-4 sm:px-8 lg:px-12 mt-16 sm:mt-20 lg:mt-32 pb-20 sm:pb-28 lg:pb-40">
+        <div className="max-w-7xl mx-auto text-center space-y-8 sm:space-y-12 lg:space-y-16">
           <ScrollReveal delay={0.4}>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-white font-baskerville leading-tight" style={{
               textShadow: '0 0 40px rgba(255, 255, 255, 0.1)'
@@ -106,7 +106,7 @@ export const LuxHeroSection = () => {
 
           <ScrollReveal delay={0.9}>
             <div className="pt-8">
-              <LuxReserveCTA className="text-xl sm:text-2xl px-16 py-7" />
+              <LuxReserveCTA className="text-base sm:text-xl lg:text-2xl px-8 sm:px-16 py-5 sm:py-7" />
             </div>
           </ScrollReveal>
         </div>
