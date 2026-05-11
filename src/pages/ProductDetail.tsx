@@ -360,41 +360,9 @@ const ProductDetail = () => {
               {/* Image Gallery / 3D Viewer */}
               <div className="lg:h-full">
                 <div className="space-y-3 sm:space-y-4 lg:sticky lg:top-20 lg:flex lg:flex-col lg:justify-end lg:min-h-[calc(100vh-12rem)] lg:pb-24">
-                {/* View Mode Toggle - Only show if 3D model exists */}
-                {has3DModel && (
-                  <div className="flex gap-2 mb-2">
-                    <Button
-                      variant={viewMode === 'images' ? 'default' : 'outline'}
-                      size="sm"
-                      onClick={() => setViewMode('images')}
-                      className="flex items-center gap-2"
-                    >
-                      <Images size={16} />
-                      Images
-                    </Button>
-                    <Button
-                      variant={viewMode === '3d' ? 'default' : 'outline'}
-                      size="sm"
-                      onClick={() => setViewMode('3d')}
-                      className="flex items-center gap-2"
-                    >
-                      <Box size={16} />
-                      3D View
-                    </Button>
-                  </div>
-                )}
-
-                {/* Main Image or 3D Viewer */}
-                {viewMode === '3d' && model3d ? (
-                  <div className="aspect-square rounded-xl sm:rounded-2xl -mx-3 sm:mx-0 overflow-hidden bg-card/50">
-                    <Model3DViewer 
-                      modelPath={model3d} 
-                      className="w-full h-full"
-                    />
-                  </div>
-                ) : (
+                {/* Main Image */}
                   <div
-                    className="product-image-container aspect-square rounded-xl sm:rounded-2xl -mx-3 sm:mx-0 cursor-pointer group relative"
+                    className="product-image-container aspect-square rounded-lg sm:rounded-2xl overflow-hidden cursor-pointer group relative"
                     onClick={() => openLightbox(selectedImageIndex)}
                   >
                     {selectedImage ? (
@@ -402,7 +370,7 @@ const ProductDetail = () => {
                         <img
                           src={selectedImage.url}
                           alt={selectedImage.altText || product.node.title}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-contain bg-card/50"
                         />
                         <StatusPill
                           status={getProductStatus(handle, !!variant?.availableForSale)}
@@ -422,11 +390,10 @@ const ProductDetail = () => {
                       </div>
                     )}
                   </div>
-                )}
 
-                {/* Thumbnails - Only show in images mode */}
-                {viewMode === 'images' && images.length > 1 && (
-                  <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-2 -mx-3 px-3 sm:mx-0 sm:px-0 scrollbar-luxury">
+                {/* Thumbnails */}
+                {images.length > 1 && (
+                  <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-2 scrollbar-luxury">
                     {images.map((img, index) => (
                       <button
                         key={index}
