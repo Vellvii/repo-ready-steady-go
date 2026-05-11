@@ -21,7 +21,7 @@ interface ProductReviewsProps {
  * write-a-review widget. Real `aggregateRating` JSON-LD remains gated on real
  * review counts (in ProductDetail.tsx) so we never emit fake structured data.
  */
-export const ProductReviews = ({ productId, reviewData }: ProductReviewsProps) => {
+export const ProductReviews = ({ productId, productTitle, reviewData }: ProductReviewsProps) => {
   // Always inject the Judge.me preloader so the write-a-review widget works.
   useEffect(() => {
     const SCRIPT_ID = "judgeme-widget-preloader";
