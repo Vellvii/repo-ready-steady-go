@@ -15,7 +15,6 @@ import { StickyProductBar } from "@/components/StickyProductBar";
 import { ImageLightbox } from "@/components/ImageLightbox";
 import { DoxVideoSection } from "@/components/DoxVideoSection";
 import { RelatedProducts } from "@/components/RelatedProducts";
-import { ShopifyMediaModel3d } from "@/lib/shopify";
 import {
   LuxPreOrderBanner,
   LuxFreeGiftBadge,
@@ -151,25 +150,6 @@ const ProductDetail = () => {
   useEffect(() => {
     setSelectedImageIndex(0);
   }, [selectedOptions['Color']]);
-
-  // Extract 3D model from media if available
-  const model3d = useMemo(() => {
-    if (!product?.node?.media?.edges) return null;
-    
-    const model3dMedia = product.node.media.edges.find(
-      (edge) => edge.node.mediaContentType === 'MODEL_3D'
-    );
-    
-    if (!model3dMedia) return null;
-    
-    const model = model3dMedia.node as ShopifyMediaModel3d;
-    // Find GLB format (preferred for web)
-    const glbSource = model.sources.find(
-      (s) => s.format === 'glb' || s.mimeType === 'model/gltf-binary'
-    );
-    
-    return glbSource?.url || model.sources[0]?.url || null;
-  }, [product]);
 
   // Handle option change
   const handleOptionChange = (optionName: string, value: string) => {
