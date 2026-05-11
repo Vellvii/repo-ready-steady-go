@@ -334,15 +334,15 @@ const ProductDetail = () => {
         </div>
 
         {/* Product Hero */}
-        <section className="py-6 sm:py-10 lg:py-16 px-3 sm:px-4 lg:px-8">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 xl:gap-16 items-start lg:items-stretch">
+        <section className="py-6 sm:py-10 lg:py-16 px-3 sm:px-4 lg:px-8 overflow-x-clip">
+          <div className="w-full max-w-7xl mx-auto min-w-0">
+            <div className="grid min-w-0 grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 xl:gap-16 items-start lg:items-stretch">
               {/* Image Gallery / 3D Viewer */}
-              <div className="lg:h-full">
-                <div className="space-y-3 sm:space-y-4 lg:sticky lg:top-20 lg:flex lg:flex-col lg:justify-end lg:min-h-[calc(100vh-12rem)] lg:pb-24">
+              <div className="min-w-0 w-full lg:h-full">
+                <div className="min-w-0 w-full space-y-3 sm:space-y-4 lg:sticky lg:top-20 lg:flex lg:flex-col lg:justify-end lg:min-h-[calc(100vh-12rem)] lg:pb-24">
                 {/* Main Image */}
                   <div
-                    className="relative flex min-h-[320px] items-center justify-center overflow-hidden rounded-lg border border-border/20 bg-card/50 cursor-pointer group sm:aspect-square sm:rounded-2xl"
+                    className="relative flex min-h-[320px] w-full max-w-full items-center justify-center overflow-hidden rounded-lg border border-border/20 bg-card/50 cursor-pointer group sm:aspect-square sm:rounded-2xl"
                     onClick={() => openLightbox(selectedImageIndex)}
                   >
                     {selectedImage ? (
@@ -350,7 +350,7 @@ const ProductDetail = () => {
                         <img
                           src={selectedImage.url}
                           alt={selectedImage.altText || product.node.title}
-                          className="h-auto max-h-[70vh] w-full object-contain sm:h-full sm:max-h-none"
+                          className="h-auto max-h-[70vh] w-full max-w-full object-contain sm:h-full sm:max-h-none"
                         />
                         <StatusPill
                           status={getProductStatus(handle, !!variant?.availableForSale)}
@@ -373,7 +373,7 @@ const ProductDetail = () => {
 
                 {/* Thumbnails */}
                 {images.length > 1 && (
-                  <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-2 scrollbar-luxury">
+                  <div className="flex w-full max-w-full min-w-0 gap-2 sm:gap-3 overflow-x-auto overscroll-x-contain pb-2 scrollbar-luxury">
                     {images.map((img, index) => (
                       <button
                         key={index}
@@ -400,12 +400,12 @@ const ProductDetail = () => {
               </div>
 
               {/* Product Info */}
-              <div className={`lg:sticky lg:top-24 ${isLuxProduct ? "space-y-3 sm:space-y-5" : "space-y-5 sm:space-y-6 lg:space-y-8"}`}>
-                <div>
-                  <p className="text-primary font-montserrat text-xs sm:text-sm uppercase tracking-[0.15em] sm:tracking-[0.2em] mb-2 sm:mb-3">
+              <div className={`min-w-0 w-full lg:sticky lg:top-24 ${isLuxProduct ? "space-y-3 sm:space-y-5" : "space-y-5 sm:space-y-6 lg:space-y-8"}`}>
+                <div className="min-w-0">
+                  <p className="text-primary font-montserrat text-xs sm:text-sm uppercase tracking-[0.1em] sm:tracking-[0.2em] mb-2 sm:mb-3 break-words">
                     Vellvii <span className="font-baskerville italic normal-case tracking-normal text-primary/60">- The Art of &lsquo;O&rsquo;</span>
                   </p>
-                  <h1 className={`font-baskerville font-bold text-light-primary leading-tight ${isLuxProduct ? "text-xl sm:text-3xl md:text-4xl lg:text-5xl mb-2 sm:mb-4" : "text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-3 sm:mb-4"}`}>
+                  <h1 className={`font-baskerville font-bold text-light-primary leading-tight break-words ${isLuxProduct ? "text-xl sm:text-3xl md:text-4xl lg:text-5xl mb-2 sm:mb-4" : "text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-3 sm:mb-4"}`}>
                     {product.node.title}
                   </h1>
                   {isLuxProduct && (
@@ -426,8 +426,8 @@ const ProductDetail = () => {
                 {isLuxProduct && <LuxCountdown />}
 
                 {!isLuxProduct && (
-                  <div className="prose max-w-none">
-                    <p className="text-light-secondary leading-relaxed whitespace-pre-line font-montserrat text-sm sm:text-base lg:text-lg">
+                    <div className="prose max-w-none min-w-0 overflow-hidden">
+                    <p className="text-light-secondary leading-relaxed whitespace-pre-line break-words font-montserrat text-sm sm:text-base lg:text-lg">
                       {product.node.description}
                     </p>
                   </div>
@@ -501,7 +501,7 @@ const ProductDetail = () => {
                 {/* Add to Cart Button */}
                 <Button
                   size="lg"
-                  className={`w-full btn-premium ${
+                    className={`w-full max-w-full btn-premium whitespace-normal text-center leading-tight ${
                     isLuxProduct
                       ? "h-12 sm:h-16 text-base sm:text-xl font-bold tracking-wide"
                       : "h-12 sm:h-14 text-base sm:text-lg"
@@ -532,8 +532,8 @@ const ProductDetail = () => {
                     <LuxStockCounter quantityAvailable={undefined} />
                     <LuxUrgencyBlock />
                     <LuxShippingClarity />
-                    <div className="prose max-w-none pt-2">
-                      <p className="text-light-secondary leading-relaxed whitespace-pre-line font-montserrat text-sm sm:text-base lg:text-lg">
+                    <div className="prose max-w-none min-w-0 overflow-hidden pt-2">
+                      <p className="text-light-secondary leading-relaxed whitespace-pre-line break-words font-montserrat text-sm sm:text-base lg:text-lg">
                         {product.node.description}
                       </p>
                     </div>

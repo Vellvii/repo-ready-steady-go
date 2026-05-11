@@ -34,7 +34,7 @@ export const StickyProductBar = ({
 
   return (
     <div className={`sticky-product-bar ${isVisible ? "visible" : ""}`}>
-      <div className="max-w-6xl mx-auto flex items-center justify-between gap-3 sm:gap-4">
+      <div className="max-w-6xl mx-auto flex min-w-0 items-center justify-between gap-2 sm:gap-4">
         <div className="flex-1 min-w-0">
           <h3 className="text-light-primary font-baskerville font-semibold text-sm sm:text-base truncate">
             {productName}
@@ -43,7 +43,7 @@ export const StickyProductBar = ({
         </div>
         <Button
           size="default"
-          className="btn-premium px-4 sm:px-6 h-10 sm:h-11 flex-shrink-0 text-sm sm:text-base"
+          className="btn-premium h-10 sm:h-11 max-w-[52vw] flex-shrink-0 whitespace-normal px-3 sm:px-6 text-center text-xs sm:text-base leading-tight"
           onClick={onAddToCart}
           disabled={isLoading || !isAvailable}
         >
@@ -52,7 +52,7 @@ export const StickyProductBar = ({
           ) : !isAvailable ? (
             <span className="text-xs sm:text-base">Sold Out</span>
           ) : ctaLabel ? (
-            <span className="text-xs sm:text-base font-semibold">{ctaLabel}</span>
+            <span className="font-semibold leading-tight">{ctaLabel}</span>
           ) : (
             <>
               <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />

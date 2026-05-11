@@ -14,7 +14,7 @@ const ProductCard = ({ product }: { product: ShopifyProduct }) => {
   const price = product.node.priceRange.minVariantPrice;
 
   return (
-    <Link to={`/products/${product.node.handle}`} className="group block flex-shrink-0 w-[160px] sm:w-[200px] lg:w-[240px]">
+    <Link to={`/products/${product.node.handle}`} className="group block flex-shrink-0 w-[150px] sm:w-[200px] lg:w-[240px]">
       <div className="card-dark rounded-xl overflow-hidden h-full">
         <div className="product-image-container aspect-square">
           {image ? (
@@ -43,7 +43,7 @@ const ProductCard = ({ product }: { product: ShopifyProduct }) => {
 };
 
 const ProductSkeleton = () => (
-  <div className="flex-shrink-0 w-[160px] sm:w-[200px] lg:w-[240px]">
+  <div className="flex-shrink-0 w-[150px] sm:w-[200px] lg:w-[240px]">
     <div className="card-dark rounded-xl overflow-hidden">
       <Skeleton className="aspect-square bg-white/5" />
       <div className="p-3 sm:p-4 space-y-2">
@@ -76,7 +76,7 @@ export const RelatedProducts = ({ currentHandle, maxProducts = 8 }: RelatedProdu
               </h2>
             </div>
           </div>
-          <div className="flex gap-3 sm:gap-4 overflow-x-auto pb-4 -mx-3 px-3 scrollbar-luxury">
+          <div className="flex max-w-full gap-3 sm:gap-4 overflow-x-auto overscroll-x-contain pb-4 scrollbar-luxury">
             {[...Array(4)].map((_, i) => (
               <ProductSkeleton key={i} />
             ))}
@@ -113,7 +113,7 @@ export const RelatedProducts = ({ currentHandle, maxProducts = 8 }: RelatedProdu
         </div>
 
         {/* Horizontal Scroll Container */}
-        <div className="flex gap-3 sm:gap-4 overflow-x-auto pb-4 -mx-3 px-3 sm:mx-0 sm:px-0 scrollbar-luxury">
+        <div className="flex max-w-full gap-3 sm:gap-4 overflow-x-auto overscroll-x-contain pb-4 scrollbar-luxury">
           {relatedProducts.map((product) => (
             <ProductCard key={product.node.id} product={product} />
           ))}
