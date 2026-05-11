@@ -554,6 +554,7 @@ const ProductDetail = () => {
         {/* Reviews - powered by Judge.me; hidden until real reviews exist */}
         <ProductReviews
           productId={product.node.id}
+          productTitle={product.node.title}
           reviewData={parseReviewMetafields(product)}
         />
 

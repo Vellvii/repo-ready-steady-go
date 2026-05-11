@@ -1,38 +1,61 @@
-# Show "Be the first to review" on Product Pages
+## Context
 
-## Goal
+The snippet you pasted is Judge.me's **Shopify Liquid theme** install code. It's meant to be pasted into `templates/product.liquid` inside a Shopify Online Store theme — the `{{ product.id }}`, `{% if %}`, `{% assign %}` tags are Liquid and only run on Shopify's server.
 
-Replace the current "hide entirely when zero reviews" behavior with a visible Judge.me review section that invites the first review. No fake structured data — `aggregateRating` JSON-LD still only emits with real reviews.
+Our store is a **headless React storefront** (Vite + Storefront API), so we can't paste that Liquid verbatim. Instead, we render the equivalent `<div class="jdgm-widget jdgm-review-widget">` ourselves and let Judge.me's `widget_preloader.js` hydrate it client-side — which is what `ProductReviews.tsx` already does.
 
-## Changes
+That said, comparing our current div with the official snippet, we're missing a few data attributes Judge.me's loader expects in 2025. Worth tightening up.
 
-### 1. Always render the reviews section
+## What's missing on our widget div
 
-`src/components/products/ProductReviews.tsx`
+Current:
+```tsx
+<div
+  className="jdgm-widget jdgm-review-widget"
+  data-id={numericId}
+  data-product-title=""
+  data-product-handle=""
+/>
+```
 
-- Remove the `if (!reviewData) return null;` early exit.
-- Always inject the Judge.me preloader script (it's cached + tiny).
-- When `reviewData` exists: render the star summary + count above the widget (as today).
-- When `reviewData` is null: render only the section heading + a short invite line ("Be the first to share your experience") above the widget. Judge.me's widget itself renders the "Write a review" button and review form, so no custom form is needed.
+Official snippet expects (translated to React/JSX):
+- `data-id` - numeric product id (we have it)
+- `data-product-id` - same numeric id (missing)
+- `data-product-title` - real product title, escaped (we send empty string)
+- `data-widget='review'` (missing)
+- `data-auto-install='false'` (missing)
+- `data-entry-point='review_widget.js'` (missing)
+- `data-entry-key='review-widget/main.js'` (missing)
 
-### 2. Keep JSON-LD honest
+Without these, Judge.me's newer widget loader sometimes silently no-ops or falls back to slower paths.
 
-`src/pages/ProductDetail.tsx`
+## Plan
 
-- No change needed — `aggregateRating` is already conditional on `parseReviewMetafields()` returning non-null. Stays out of the schema until a real review exists. Google's two non-critical warnings remain until then.
+### 1. `src/components/products/ProductReviews.tsx`
+- Add a `productTitle: string` prop.
+- Update the rendered div to include the full attribute set above. `data-product-title` is rendered via React (which escapes automatically — equivalent to Liquid's `| escape`).
+- Keep the preloader `<script src="https://cdn.judge.me/widget_preloader.js">` injection as-is (this is the headless equivalent of installing the Judge.me Shopify app's theme block).
+- Add a `<div style={{ clear: "both" }} />` before the widget div, matching the snippet (prevents float collapse on legacy review layouts).
+- Leave both states intact: "What guests are saying" (with stars) when `reviewData` exists; "Be the first to review" invitation when `null`. Judge.me's widget renders its own "Write a review" CTA inside the div either way.
 
-### 3. Update the memory note
+### 2. `src/pages/ProductDetail.tsx`
+- Pass `productTitle={product.node.title}` to `<ProductReviews />`. One-line change at the existing call site (around line 555).
 
-`mem://integrations/judgeme-reviews` — flip the description from "hidden until count > 0" to "always visible; aggregateRating JSON-LD still gated on real reviews." Update the index entry accordingly.
+### 3. No memory changes
+- The existing `mem://integrations/judgeme-reviews` memory already covers the policy (section always visible, JSON-LD gated on real counts). This is a small attribute tightening, not a policy shift.
+
+## Why we can't just use the Liquid snippet you pasted
+
+| Liquid (Shopify theme) | Our headless React app |
+|---|---|
+| `{{ product.id }}` resolved server-side by Shopify | Resolved client-side via Storefront API |
+| `{% if %}` / `{% assign %}` Liquid tags | JSX conditionals + JS |
+| `product.metafields.judgeme.widget` pre-rendered HTML cached on the Shopify product | Not available — we don't render through Shopify's theme |
+| `shop.metafields.judgeme.shop_reviews_count` | Not exposed to Storefront API (Judge.me-private metafield) |
+
+So the legacy SSR-cached widget content (`has_legacy` branch in your snippet) doesn't apply to us — Judge.me's preloader fetches review data via its own JS API instead. That's the correct headless behavior.
 
 ## Files touched
 
-```text
-src/components/products/ProductReviews.tsx   (remove null-return, add empty state)
-mem://integrations/judgeme-reviews.md        (update policy note)
-mem://index.md                               (update one-line description)
-```
-
-## Setup reminder
-
-For the "Write a review" button to actually work, Judge.me must be installed in your Shopify admin (free plan). The widget on the storefront is just the front-end — collection + moderation lives in Judge.me. Once installed, the empty-state CTA becomes functional automatically.
+- `src/components/products/ProductReviews.tsx` - add prop, expand data attributes, add clear-both spacer
+- `src/pages/ProductDetail.tsx` - pass `productTitle` prop (1 line)

@@ -5,6 +5,8 @@ import { SHOPIFY_STORE_PERMANENT_DOMAIN } from "@/lib/shopify";
 interface ProductReviewsProps {
   /** Shopify product GID, e.g. gid://shopify/Product/1234567890 */
   productId: string;
+  /** Product title - passed to Judge.me widget for analytics & review form */
+  productTitle: string;
   reviewData: {
     ratingValue: number;
     reviewCount: number;
@@ -19,7 +21,7 @@ interface ProductReviewsProps {
  * write-a-review widget. Real `aggregateRating` JSON-LD remains gated on real
  * review counts (in ProductDetail.tsx) so we never emit fake structured data.
  */
-export const ProductReviews = ({ productId, reviewData }: ProductReviewsProps) => {
+export const ProductReviews = ({ productId, productTitle, reviewData }: ProductReviewsProps) => {
   // Always inject the Judge.me preloader so the write-a-review widget works.
   useEffect(() => {
     const SCRIPT_ID = "judgeme-widget-preloader";
@@ -79,11 +81,17 @@ export const ProductReviews = ({ productId, reviewData }: ProductReviewsProps) =
         </div>
 
         {/* Judge.me product review widget - renders its own "Write a review" CTA */}
+        <div style={{ clear: "both" }} />
         <div
+          id="judgeme_product_reviews"
           className="jdgm-widget jdgm-review-widget"
           data-id={numericId}
-          data-product-title=""
-          data-product-handle=""
+          data-product-id={numericId}
+          data-product-title={productTitle}
+          data-widget="review"
+          data-auto-install="false"
+          data-entry-point="review_widget.js"
+          data-entry-key="review-widget/main.js"
         />
       </div>
     </section>
