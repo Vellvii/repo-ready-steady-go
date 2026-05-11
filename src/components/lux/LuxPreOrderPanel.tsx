@@ -24,20 +24,20 @@ const calc = (target: string): TimeLeft => {
 };
 
 export const LuxPreOrderBanner = () => (
-  <div className="rounded-xl overflow-hidden border border-primary/40 bg-gradient-to-r from-primary/20 via-accent/15 to-primary/20 px-4 py-3 sm:px-5 sm:py-4 text-center shadow-elegant">
-    <p className="font-baskerville font-bold tracking-[0.2em] text-light-primary text-base sm:text-lg uppercase">
+  <div className="w-full max-w-full rounded-xl overflow-hidden border border-primary/40 bg-gradient-to-r from-primary/20 via-accent/15 to-primary/20 px-3 py-3 sm:px-5 sm:py-4 text-center shadow-elegant">
+    <p className="font-baskerville font-bold tracking-[0.12em] sm:tracking-[0.2em] text-light-primary text-sm sm:text-lg uppercase break-words">
       Pre-Order Now
     </p>
-    <p className="font-montserrat text-xs sm:text-sm text-light-secondary mt-1">
+    <p className="font-montserrat text-[11px] sm:text-sm text-light-secondary mt-1 leading-snug">
       Ships from the USA — First Week of June
     </p>
   </div>
 );
 
 export const LuxFreeGiftBadge = () => (
-  <div className="inline-flex items-start gap-2 rounded-full border border-primary/40 bg-primary/10 px-4 py-2">
+  <div className="inline-flex max-w-full items-start gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-2 sm:px-4">
     <Gift className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-    <div className="text-left">
+    <div className="min-w-0 text-left">
       <p className="font-montserrat text-xs sm:text-sm font-semibold text-light-primary leading-tight">
         Includes Complimentary Vellvii Nova
       </p>
@@ -61,20 +61,20 @@ export const LuxCountdown = ({ endDate = "2026-06-01T00:00:00-07:00" }: { endDat
     { label: "Minutes", value: time.minutes },
   ];
   return (
-    <div>
-      <p className="font-montserrat text-xs uppercase tracking-[0.2em] text-light-muted mb-2">
+    <div className="w-full max-w-full min-w-0">
+      <p className="font-montserrat text-xs uppercase tracking-[0.14em] sm:tracking-[0.2em] text-light-muted mb-2">
         Pre-orders close in:
       </p>
-      <div className="flex gap-2 sm:gap-3">
+      <div className="grid grid-cols-3 gap-2 sm:gap-3">
         {units.map((u) => (
           <div
             key={u.label}
-            className="flex-1 rounded-lg border border-white/10 bg-white/5 backdrop-blur-sm py-3 text-center"
+            className="min-w-0 rounded-lg border border-white/10 bg-white/5 backdrop-blur-sm px-1 py-3 text-center"
           >
-            <div className="font-rajdhani font-bold text-2xl sm:text-3xl text-light-primary leading-none">
+            <div className="font-rajdhani font-bold text-xl sm:text-3xl text-light-primary leading-none">
               {u.value.toString().padStart(2, "0")}
             </div>
-            <div className="font-montserrat text-[10px] uppercase tracking-wider text-light-muted mt-1">
+            <div className="font-montserrat text-[9px] sm:text-[10px] uppercase tracking-wide text-light-muted mt-1">
               {u.label}
             </div>
           </div>
