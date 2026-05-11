@@ -426,8 +426,8 @@ const ProductDetail = () => {
                 {isLuxProduct && <LuxCountdown />}
 
                 {!isLuxProduct && (
-                  <div className="prose max-w-none">
-                    <p className="text-light-secondary leading-relaxed whitespace-pre-line font-montserrat text-sm sm:text-base lg:text-lg">
+                    <div className="prose max-w-none min-w-0 overflow-hidden">
+                    <p className="text-light-secondary leading-relaxed whitespace-pre-line break-words font-montserrat text-sm sm:text-base lg:text-lg">
                       {product.node.description}
                     </p>
                   </div>
@@ -501,7 +501,7 @@ const ProductDetail = () => {
                 {/* Add to Cart Button */}
                 <Button
                   size="lg"
-                  className={`w-full btn-premium ${
+                    className={`w-full max-w-full btn-premium whitespace-normal text-center leading-tight ${
                     isLuxProduct
                       ? "h-12 sm:h-16 text-base sm:text-xl font-bold tracking-wide"
                       : "h-12 sm:h-14 text-base sm:text-lg"
@@ -532,8 +532,8 @@ const ProductDetail = () => {
                     <LuxStockCounter quantityAvailable={undefined} />
                     <LuxUrgencyBlock />
                     <LuxShippingClarity />
-                    <div className="prose max-w-none pt-2">
-                      <p className="text-light-secondary leading-relaxed whitespace-pre-line font-montserrat text-sm sm:text-base lg:text-lg">
+                    <div className="prose max-w-none min-w-0 overflow-hidden pt-2">
+                      <p className="text-light-secondary leading-relaxed whitespace-pre-line break-words font-montserrat text-sm sm:text-base lg:text-lg">
                         {product.node.description}
                       </p>
                     </div>
