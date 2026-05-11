@@ -1,5 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useShopifyProduct } from "@/hooks/useShopifyProducts";
+import { parseReviewMetafields } from "@/lib/shopify";
+import { ProductReviews } from "@/components/products/ProductReviews";
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -253,6 +255,7 @@ const ProductDetail = () => {
       {(() => {
         const allImageUrls = (product.node.images?.edges || []).map((e) => e.node.url);
         const heroImage = allImageUrls[0];
+        const reviewAggregate = parseReviewMetafields(product);
         const priceAmount = variant ? parseFloat(variant.price.amount) : parseFloat(product.node.priceRange.minVariantPrice.amount);
         const currency = variant?.price.currencyCode || product.node.priceRange.minVariantPrice.currencyCode || "USD";
         const availability: "InStock" | "OutOfStock" | "PreOrder" = isLuxProduct
@@ -311,6 +314,7 @@ const ProductDetail = () => {
               priceValidUntil: isLuxProduct ? "2026-06-01" : undefined,
               itemCondition: "NewCondition",
               url: `/products/${handle}`,
+              aggregateRating: reviewAggregate ?? undefined,
             }}
             faqData={isLuxProduct ? luxFaqs : undefined}
           />
@@ -546,6 +550,12 @@ const ProductDetail = () => {
 
         {/* DOX Video Section - Only for DOX product */}
         {isDoxProduct && <DoxVideoSection onReserve={handleAddToCart} />}
+
+        {/* Reviews - powered by Judge.me; hidden until real reviews exist */}
+        <ProductReviews
+          productId={product.node.id}
+          reviewData={parseReviewMetafields(product)}
+        />
 
         {/* Related Products */}
         <RelatedProducts currentHandle={handle || ""} maxProducts={6} />
