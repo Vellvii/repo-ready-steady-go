@@ -340,7 +340,7 @@ const ProductDetail = () => {
           />
         );
       })()}
-      <div className="min-h-screen surface-dark-rich">
+      <div className="min-h-screen surface-dark-rich overflow-x-clip pb-24 sm:pb-0">
         {/* Scroll-aware Navigation Header */}
         <ScrollHeader />
 
