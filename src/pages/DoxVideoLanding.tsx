@@ -403,6 +403,14 @@ const DoxVideoLanding = () => {
                 More units of every product - including Lux - release soon. Reserve your place on
                 the waitlist below.
               </p>
+              <div className="mt-4">
+                <Link
+                  to="/collections/dox-compatible-products"
+                  className="inline-flex items-center gap-2 font-montserrat text-xs sm:text-sm text-primary hover:text-primary/80 transition-colors"
+                >
+                  Explore DOX-Compatible Products →
+                </Link>
+              </div>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-5 md:gap-6">

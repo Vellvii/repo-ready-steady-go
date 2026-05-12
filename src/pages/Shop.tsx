@@ -369,7 +369,7 @@ const Shop = () => {
         </div>
 
         {/* Collection Filter Bar */}
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 mb-8 sm:mb-10">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 mb-4 sm:mb-5">
           <CollectionFilterBar
             collections={collections || []}
             selectedCollection={selectedCollection}
@@ -379,6 +379,17 @@ const Shop = () => {
             }}
             isLoading={collectionsLoading}
           />
+        </div>
+
+        {/* Featured collection chip */}
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 mb-8 sm:mb-10">
+          <Link
+            to="/collections/dox-compatible-products"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 text-primary hover:bg-primary/10 hover:border-primary/50 transition-colors font-montserrat text-xs sm:text-sm"
+          >
+            <span className="font-baskerville italic text-primary/80">Featured</span>
+            <span>DOX-Compatible Products →</span>
+          </Link>
         </div>
 
         {/* Products Grid */}
