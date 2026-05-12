@@ -91,34 +91,33 @@ export const FALLBACK_CARE: string[] = [
 export const PDP_CONTENT: Record<CanonicalHandle, PdpContent> = {
   "vellvii-dox": {
     tagline:
-      "A refined storage companion built around discretion and design.",
+      "A larger, sturdier storage system designed for discreet bedroom integration.",
     keyBenefits: [
-      { icon: "ShieldCheck", label: "Discreet design", copy: "Furniture-grade form that disappears into the modern bedroom." },
-      { icon: "Lock", label: "Refined storage", copy: "Considered interior layout for a calm, organized ritual." },
-      { icon: "Sparkles", label: "Premium materials", copy: "Crafted finishes selected for quiet luxury and longevity." },
-      { icon: "Package", label: "Designed for modern couples", copy: "A shared object built around intimacy and respect for space." },
+      { icon: "Package", label: "Discreet bedroom integration", copy: "A refined form designed to sit naturally within a modern bedroom." },
+      { icon: "ShieldCheck", label: "Larger storage presence", copy: "Built as a more substantial home for the Vellvii collection." },
+      { icon: "Lock", label: "Refined organization", copy: "Designed to keep the collection calm, private, and intentional." },
+      { icon: "Sparkles", label: "Premium experience", copy: "A fixed storage piece built around discretion and design." },
     ],
   },
   "vellvii-lux": {
     tagline:
-      "Furniture-grade biometric storage for the modern bedroom.",
+      "A portable fingerprint-lock storage case designed for refined discretion at home or on the move.",
     keyBenefits: [
-      { icon: "Lock", label: "Biometric privacy", copy: "Fingerprint-secured access keeps your collection truly yours." },
-      { icon: "Gem", label: "Designer leather", copy: "A material story built around quiet luxury and craftsmanship." },
-      { icon: "ShieldCheck", label: "Built to last", copy: "Precision hardware engineered for daily, lifelong use." },
-      { icon: "Sparkles", label: "Limited edition", copy: "A strictly limited 1,500-unit USA launch run." },
+      { icon: "Package", label: "Portable discretion", copy: "A compact storage companion designed for travel and everyday privacy." },
+      { icon: "Lock", label: "Fingerprint access", copy: "Secured with biometric access for a more personal storage experience." },
+      { icon: "Gem", label: "Refined case design", copy: "Inspired by premium toiletries-style storage with a clean, discreet silhouette." },
+      { icon: "Sparkles", label: "Easy to keep close", copy: "Designed to fit naturally into daily routines without drawing attention." },
     ],
     productDetails: [
-      { label: "Materials", value: "Designer leather exterior, precision-machined metal hardware" },
-      { label: "Security", value: "Fingerprint biometric lock" },
-      { label: "Origin", value: "Assembled and fulfilled in the USA" },
+      { label: "Security", value: "Fingerprint lock" },
+      { label: "Format", value: "Portable storage case" },
+      { label: "Use Case", value: "Travel-friendly and everyday personal storage" },
     ],
     faqs: [
-      { question: "What is the Vellvii Lux?", answer: "The Vellvii Lux is a biometric, designer-leather luxury storage system - furniture-grade discretion engineered for the modern bedroom and private travel." },
-      { question: "When does the Vellvii Lux ship?", answer: "Pre-orders ship from the USA the first week of June 2026. Reserve now to secure your unit from the limited 1,500-unit run." },
-      { question: "How many Vellvii Lux units are being made?", answer: "This is a strictly limited 1,500-unit numbered launch. Once sold out, the next batch is not guaranteed and may take months to produce." },
-      { question: "Is the Vellvii Lux made in the USA?", answer: "Yes - the Vellvii Lux is assembled and fulfilled from the United States." },
-      { question: "How is the Lux different from the Vellvii Dox?", answer: "The Dox is a portable storage companion for daily use; the Lux is a larger furniture-grade biometric storage system designed for bedroom integration and discreet travel." },
+      { question: "What is the Vellvii Lux?", answer: "Vellvii Lux is a portable fingerprint-lock storage case - a compact, discreet companion designed with the feel of a refined toiletries-style case for travel and everyday personal storage." },
+      { question: "How is the Lux different from the Vellvii DOX?", answer: "Vellvii Lux is the more portable storage companion, designed with the feel of a refined toiletries-style case and secured with fingerprint access. Vellvii DOX is the larger, sturdier storage system, designed as a more substantial piece for the bedroom." },
+      { question: "When does the Vellvii Lux ship?", answer: "Pre-orders ship the first week of June 2026. Reserve now to secure your unit from the current first-run offer." },
+      { question: "Is the Vellvii Nova included with Lux?", answer: "The complimentary Vellvii Nova is included with the current Lux first-run offer. Future Lux runs are planned, but the Nova gift will not be included after this first run." },
       { question: "What is the Vellvii Lux warranty?", answer: "All Vellvii products are covered by our authorized retailer warranty when registered within 7 days of receipt. Repair or replacement only - no refunds on final sales." },
       { question: "Where can I find warranty information?", answer: "Full warranty terms and registration details are available at /warranty." },
     ],
