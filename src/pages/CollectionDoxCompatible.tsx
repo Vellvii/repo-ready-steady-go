@@ -28,7 +28,7 @@ const COLLECTION_FAQS: FaqItem[] = [
   {
     question: "What is the DDS?",
     answer:
-      "DDS stands for Dildo Docking Station. It is the round insert on the Vellvii DOX designed for compatible suction-base products up to 90mm in diameter.",
+      "DDS stands for Dildo Docking Station. It is the round insert on the Vellvii DOX designed for compatible suction-base products up to 90mm (approximately 3.5 inches) in diameter.",
   },
   {
     question: "Does Vellvii Lux fit into the DOX?",

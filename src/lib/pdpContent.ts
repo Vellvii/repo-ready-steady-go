@@ -82,7 +82,7 @@ export const DOCKING_INFO: DockingInfo = {
   dds: {
     title: "DDS",
     subtitle: "Dildo Docking Station",
-    copy: "The DDS is a round docking insert designed for compatible suction-base products up to 90mm in diameter.",
+    copy: "The DDS is a round docking insert designed for compatible suction-base products up to 90mm (approximately 3.5 inches) in diameter.",
   },
 };
 
