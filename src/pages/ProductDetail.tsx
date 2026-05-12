@@ -570,6 +570,10 @@ const ProductDetail = () => {
                 {/* Trust Strip - hairline icons under add-to-cart */}
                 <TrustStrip productHandle={handle} />
 
+                <div className="pt-1">
+                  <WarrantyLink variant="inline" />
+                </div>
+
                 {isLuxProduct && (
                   <>
                     {/* Live inventory requires `unauthenticated_read_product_inventory` Storefront scope; falls back to total units. */}
