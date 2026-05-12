@@ -35,6 +35,8 @@ interface SEOProps {
     uploadDate: string;
   };
   hreflang?: string;
+  /** When true, emits `noindex, follow` so this page is excluded from search indexes but links are still crawled. */
+  noindex?: boolean;
 }
 
 const SITE_URL = 'https://vellvii.com';
