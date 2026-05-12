@@ -196,7 +196,7 @@ export const SEO = ({
       <meta name="twitter:image" content={fullImageUrl} />
 
       {/* Additional SEO */}
-      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+      <meta name="robots" content={noindex ? "noindex, follow" : "index, follow, max-image-preview:large, max-snippet:-1"} />
       <meta name="language" content="English" />
       <meta name="author" content="Vellvii" />
 
