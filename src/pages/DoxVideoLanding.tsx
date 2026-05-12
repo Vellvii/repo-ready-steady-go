@@ -156,10 +156,10 @@ const DoxVideoLanding = () => {
   return (
     <>
       <SEO
-        title="Vellvii - The Newest Luxury Pleasure Storage and Wellness House of 2026"
-        description="Vellvii is the American premium wellness house behind the DOX biometric storage system and the Vellvii Lux - the newest luxury pleasure storage box launching in 2026. Quiet luxury, design-led intimate wellness."
+        title="Vellvii | Luxury Intimate Wellness Products"
+        description="Discover Vellvii's luxury intimate wellness collection, designed for modern couples who value elegance, discretion, and premium design."
         canonical="/"
-        keywords="newest luxury pleasure storage 2026, Vellvii, Vellvii Lux, Vellvii DOX, biometric pleasure storage, premium intimate wellness, design-led pleasure collection, American luxury wellness brand"
+        keywords="Vellvii, luxury intimate wellness, pleasure collection, premium wellness, design-led intimate wellness, Vellvii DOX, Vellvii Lux, Vellvii G-Vibe, Vellvii Evolve, Vellvii Pulse"
         organizationData
         faqData={homeFAQs.map(f => ({ question: f.question, answer: f.answerText }))}
       />
