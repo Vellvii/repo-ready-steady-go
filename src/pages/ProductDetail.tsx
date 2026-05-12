@@ -27,7 +27,8 @@ import { WarrantyLink } from "@/components/products/WarrantyLink";
 import { DockingSystemSection } from "@/components/products/DockingSystemSection";
 import { DoxCompatibleSection } from "@/components/products/DoxCompatibleSection";
 import { RelatedStorageNote } from "@/components/products/RelatedStorageNote";
-import { getPdpContent, FALLBACK_FAQS, FALLBACK_CARE } from "@/lib/pdpContent";
+import { RelatedCollections } from "@/components/products/RelatedCollections";
+import { getPdpContent, getRelatedCollections, FALLBACK_FAQS, FALLBACK_CARE } from "@/lib/pdpContent";
 import {
   LuxPreOrderBanner,
   LuxFreeGiftBadge,
@@ -633,6 +634,9 @@ const ProductDetail = () => {
 
         {/* FAQ - product-specific or refined fallback */}
         <ProductFAQ faqs={pdpContent.faqs ?? FALLBACK_FAQS} />
+
+        {/* Related Vellvii Collections (subtle chip strip) */}
+        <RelatedCollections links={getRelatedCollections(handle)} />
 
         {/* Related Products (canonical Vellvii products only) */}
         <RelatedProducts currentHandle={handle || ""} maxProducts={6} />

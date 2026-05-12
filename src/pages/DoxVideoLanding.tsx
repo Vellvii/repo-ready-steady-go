@@ -403,14 +403,25 @@ const DoxVideoLanding = () => {
                 More units of every product - including Lux - release soon. Reserve your place on
                 the waitlist below.
               </p>
-              <div className="mt-4">
-                <Link
-                  to="/collections/dox-compatible-products"
-                  className="inline-flex items-center gap-2 font-montserrat text-xs sm:text-sm text-primary hover:text-primary/80 transition-colors"
-                >
-                  Explore DOX-Compatible Products →
-                </Link>
-              </div>
+              <nav
+                aria-label="Vellvii collections"
+                className="mt-5 flex flex-wrap justify-center gap-2 sm:gap-3"
+              >
+                {[
+                  { label: "Pleasure Collection", href: "/collections/pleasure-collection" },
+                  { label: "DOX-Compatible Products", href: "/collections/dox-compatible-products" },
+                  { label: "Discreet Storage", href: "/collections/discreet-storage" },
+                ].map((c) => (
+                  <Link
+                    key={c.href}
+                    to={c.href}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-white/10 hover:border-primary/40 hover:bg-primary/5 transition-colors font-montserrat text-[11px] sm:text-xs text-light-secondary hover:text-primary"
+                  >
+                    <span>{c.label}</span>
+                    <span aria-hidden className="text-primary/70">→</span>
+                  </Link>
+                ))}
+              </nav>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-5 md:gap-6">

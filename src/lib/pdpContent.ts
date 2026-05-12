@@ -93,6 +93,35 @@ export const DOX_COMPATIBLE_HANDLES: CanonicalHandle[] = [
   "vellvii-pulse",
 ];
 
+/** PDP -> related collection chips. Subtle internal links per canonical handle. */
+export const PDP_RELATED_COLLECTIONS: Record<CanonicalHandle, { label: string; href: string }[]> = {
+  "vellvii-dox": [
+    { label: "Bedroom Storage", href: "/collections/bedroom-storage" },
+    { label: "DOX-Compatible Products", href: "/collections/dox-compatible-products" },
+  ],
+  "vellvii-lux": [
+    { label: "Portable Storage", href: "/collections/portable-storage" },
+    { label: "Discreet Storage", href: "/collections/discreet-storage" },
+  ],
+  "vellvii-g-vibe": [
+    { label: "DOX-Compatible Products", href: "/collections/dox-compatible-products" },
+    { label: "Products for Couples", href: "/collections/products-for-couples" },
+  ],
+  "vellvii-evolve": [
+    { label: "DOX-Compatible Products", href: "/collections/dox-compatible-products" },
+    { label: "Products for Couples", href: "/collections/products-for-couples" },
+  ],
+  "vellvii-pulse": [
+    { label: "DOX-Compatible Products", href: "/collections/dox-compatible-products" },
+    { label: "Products for Couples", href: "/collections/products-for-couples" },
+  ],
+};
+
+export const getRelatedCollections = (handle: string | undefined) => {
+  if (!handle) return [];
+  return PDP_RELATED_COLLECTIONS[handle as CanonicalHandle] ?? [];
+};
+
 /** Safe, non-promissory fallback FAQs. */
 export const FALLBACK_FAQS: FaqItem[] = [
   {

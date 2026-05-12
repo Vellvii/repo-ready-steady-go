@@ -1,17 +1,37 @@
 # Vellvii
 
-Vellvii is an American premium wellness house designing quiet-luxury intimate-wellness products. Our flagship is the DOX, the world's first biometric storage and docking system for intimate wellness, paired with a curated Pleasure Collection (Pulse, Vibe, G-Vibe). The Vellvii Lux, launching in 2026, is the newest luxury pleasure storage box on the market - aerospace-grade aluminum, full-grain Italian leather, fingerprint-locked, designed to live on a nightstand without apology.
+Vellvii is a US-based luxury intimate wellness brand creating discreet, refined products for modern couples. The collection includes portable and home-focused storage pieces, DOX-compatible products, and a design-led Pleasure Collection built around privacy, elegance, and thoughtful use.
 
-## Key facts
-- Founded: American premium wellness brand
-- Newest product: Vellvii Lux luxury pleasure storage, launching 2026
-- Flagship ecosystem: DOX biometric storage, native USB-C charging, integrated docking
-- Pleasure Collection: Pulse, Vibe, G-Vibe
-- Positioning: quiet luxury, design-led, discreet
+## Current product lineup
+- Vellvii DOX - the larger, sturdier storage and docking hub of the Vellvii Pleasure Collection, designed for discreet bedroom integration.
+- Vellvii Lux - a portable fingerprint-lock storage case designed for everyday personal use and travel-friendly privacy. Lux is a separate portable storage product and is not part of the DOX docking system.
+- Vellvii G-Vibe - DOX-compatible through the VDS insert.
+- Vellvii Evolve - DOX-compatible through the VDS insert.
+- Vellvii Pulse - DOX-compatible through the VDS insert.
+
+## DOX docking system
+- VDS (Vellvii Docking Station) - shaped specifically for current Vellvii products (G-Vibe, Evolve, Pulse).
+- DDS (Dildo Docking Station) - supports compatible suction-base products up to 90mm (approximately 3.5 inches) in diameter.
+
+## Positioning
+Premium wellness, design-led, quiet luxury. Discreet, refined, and conversion-focused. App-connected functionality is not currently available and should not be referenced as a live feature.
 
 ## Priority URLs
 - Home: https://vellvii.com/
-- Vellvii Lux (newest 2026): https://vellvii.com/luxury-storage
-- Vellvii DOX: https://vellvii.com/dox
-- Kickstarter campaign: https://www.kickstarter.com/projects/vellvii/vellvii-dox-a-premium-luxury-vault-for-intimacy-and-storage
+- Shop: https://vellvii.com/shop
+- Vellvii DOX: https://vellvii.com/products/vellvii-dox
+- Vellvii Lux: https://vellvii.com/products/vellvii-lux
+- Vellvii G-Vibe: https://vellvii.com/products/vellvii-g-vibe
+- Vellvii Evolve: https://vellvii.com/products/vellvii-evolve
+- Vellvii Pulse: https://vellvii.com/products/vellvii-pulse
+
+## Collections
+- Pleasure Collection: https://vellvii.com/collections/pleasure-collection
+- DOX-Compatible Products: https://vellvii.com/collections/dox-compatible-products
+- Discreet Storage: https://vellvii.com/collections/discreet-storage
+- Portable Storage: https://vellvii.com/collections/portable-storage
+- Bedroom Storage: https://vellvii.com/collections/bedroom-storage
+- Products for Couples: https://vellvii.com/collections/products-for-couples
+
+## Support
 - Warranty: https://vellvii.com/warranty

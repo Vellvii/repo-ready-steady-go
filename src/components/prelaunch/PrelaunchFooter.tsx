@@ -89,15 +89,14 @@ export const PrelaunchFooter = () => {
           </a>
 
           {/* Links */}
-          <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-light-secondary font-montserrat">
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 sm:gap-x-6 text-xs sm:text-sm text-light-secondary font-montserrat">
             <a href="/shop" className="hover:text-primary transition-colors">Shop</a>
-            <span className="text-light-muted hidden sm:inline">•</span>
+            <a href="/collections/pleasure-collection" className="hover:text-primary transition-colors">Pleasure Collection</a>
             <a href="/collections/dox-compatible-products" className="hover:text-primary transition-colors">DOX-Compatible Products</a>
-            <span className="text-light-muted hidden sm:inline">•</span>
+            <a href="/collections/discreet-storage" className="hover:text-primary transition-colors">Discreet Storage</a>
+            <a href="/collections/products-for-couples" className="hover:text-primary transition-colors">Products for Couples</a>
             <a href="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</a>
-            <span className="text-light-muted hidden sm:inline">•</span>
             <a href="/warranty" className="hover:text-primary transition-colors">Warranty</a>
-            <span className="text-light-muted hidden sm:inline">•</span>
             <a href="/terms-of-service" className="hover:text-primary transition-colors">Terms of Service</a>
           </div>
 

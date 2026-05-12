@@ -381,15 +381,33 @@ const Shop = () => {
           />
         </div>
 
-        {/* Featured collection chip */}
+        {/* Vellvii Collection Strip - navigation to dedicated collection landing pages */}
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 mb-8 sm:mb-10">
-          <Link
-            to="/collections/dox-compatible-products"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 text-primary hover:bg-primary/10 hover:border-primary/50 transition-colors font-montserrat text-xs sm:text-sm"
+          <p className="font-baskerville italic text-xs sm:text-sm text-primary/70 mb-2 sm:mb-3 tracking-wide">
+            Explore by collection
+          </p>
+          <nav
+            aria-label="Vellvii collections"
+            className="flex gap-2 sm:gap-3 overflow-x-auto pb-2 scrollbar-luxury -mx-3 px-3 sm:mx-0 sm:px-0"
           >
-            <span className="font-baskerville italic text-primary/80">Featured</span>
-            <span>DOX-Compatible Products →</span>
-          </Link>
+            {[
+              { label: "Pleasure Collection", href: "/collections/pleasure-collection" },
+              { label: "DOX-Compatible", href: "/collections/dox-compatible-products" },
+              { label: "Discreet Storage", href: "/collections/discreet-storage" },
+              { label: "Portable Storage", href: "/collections/portable-storage" },
+              { label: "Bedroom Storage", href: "/collections/bedroom-storage" },
+              { label: "Products for Couples", href: "/collections/products-for-couples" },
+            ].map((c) => (
+              <Link
+                key={c.href}
+                to={c.href}
+                className="flex-shrink-0 inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-primary/25 bg-primary/5 text-primary hover:bg-primary/10 hover:border-primary/50 transition-colors font-montserrat text-xs sm:text-sm whitespace-nowrap"
+              >
+                <span>{c.label}</span>
+                <span aria-hidden className="text-primary/70">→</span>
+              </Link>
+            ))}
+          </nav>
         </div>
 
         {/* Products Grid */}

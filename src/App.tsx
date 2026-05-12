@@ -33,6 +33,11 @@ import WarrantyRegister from "./pages/WarrantyRegister";
 import Shop from "./pages/Shop";
 import ProductDetail from "./pages/ProductDetail";
 import CollectionDoxCompatible from "./pages/CollectionDoxCompatible";
+import CollectionPleasureCollection from "./pages/CollectionPleasureCollection";
+import CollectionDiscreetStorage from "./pages/CollectionDiscreetStorage";
+import CollectionPortableStorage from "./pages/CollectionPortableStorage";
+import CollectionBedroomStorage from "./pages/CollectionBedroomStorage";
+import CollectionProductsForCouples from "./pages/CollectionProductsForCouples";
 
 const queryClient = new QueryClient();
 
@@ -64,6 +69,11 @@ const InnerApp = () => {
             <Route path="/landing" element={<AgeGateLanding />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/collections/dox-compatible-products" element={<CollectionDoxCompatible />} />
+            <Route path="/collections/pleasure-collection" element={<CollectionPleasureCollection />} />
+            <Route path="/collections/discreet-storage" element={<CollectionDiscreetStorage />} />
+            <Route path="/collections/portable-storage" element={<CollectionPortableStorage />} />
+            <Route path="/collections/bedroom-storage" element={<CollectionBedroomStorage />} />
+            <Route path="/collections/products-for-couples" element={<CollectionProductsForCouples />} />
             <Route path="/products/:handle" element={<ProductDetail />} />
             <Route path="/product/:handle" element={<Navigate to="/products/:handle" replace />} />
             <Route path="/prelaunch" element={<PrelaunchDOX />} />
