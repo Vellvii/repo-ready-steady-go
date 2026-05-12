@@ -225,7 +225,11 @@ export const LuxuryNavDrawer = () => {
 
             {/* Nav groups */}
             <motion.nav
-              className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-5 sm:px-6 pb-6 pr-1"
+              data-lenis-prevent
+              data-lenis-prevent-wheel
+              data-lenis-prevent-touch
+              className="flex-1 min-h-0 overflow-y-auto overscroll-contain touch-pan-y px-5 sm:px-6 pb-6 pr-1 scrollbar-luxury"
+              style={{ WebkitOverflowScrolling: "touch" }}
               initial="hidden"
               animate="visible"
               variants={{
