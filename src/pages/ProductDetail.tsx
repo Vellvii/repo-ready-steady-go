@@ -24,6 +24,9 @@ import { ProductFAQ } from "@/components/products/ProductFAQ";
 import { NotifyMePanel } from "@/components/products/NotifyMePanel";
 import { BackToShopCTA } from "@/components/products/BackToShopCTA";
 import { WarrantyLink } from "@/components/products/WarrantyLink";
+import { DockingSystemSection } from "@/components/products/DockingSystemSection";
+import { DoxCompatibleSection } from "@/components/products/DoxCompatibleSection";
+import { RelatedStorageNote } from "@/components/products/RelatedStorageNote";
 import { getPdpContent, FALLBACK_FAQS, FALLBACK_CARE } from "@/lib/pdpContent";
 import {
   LuxPreOrderBanner,
@@ -595,6 +598,17 @@ const ProductDetail = () => {
         {/* Key Benefits */}
         {pdpContent.keyBenefits && (
           <KeyBenefits benefits={pdpContent.keyBenefits} tagline={pdpContent.tagline} />
+        )}
+
+        {/* DOX-only: Vellvii Docking System (VDS / DDS) */}
+        {pdpContent.docking && <DockingSystemSection info={pdpContent.docking} />}
+
+        {/* G-Vibe / Evolve / Pulse: DOX-Compatible by Design */}
+        {pdpContent.doxCompatible && <DoxCompatibleSection />}
+
+        {/* Lux: subtle related-storage note linking to DOX */}
+        {pdpContent.relatedStorageNote && (
+          <RelatedStorageNote {...pdpContent.relatedStorageNote} />
         )}
 
         {/* Product Details (only confirmed spec rows) */}

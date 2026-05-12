@@ -32,6 +32,7 @@ import Warranty from "./pages/Warranty";
 import WarrantyRegister from "./pages/WarrantyRegister";
 import Shop from "./pages/Shop";
 import ProductDetail from "./pages/ProductDetail";
+import CollectionDoxCompatible from "./pages/CollectionDoxCompatible";
 
 const queryClient = new QueryClient();
 
@@ -62,6 +63,7 @@ const InnerApp = () => {
             <Route path="/showcase" element={<DoxLanding />} />
             <Route path="/landing" element={<AgeGateLanding />} />
             <Route path="/shop" element={<Shop />} />
+            <Route path="/collections/dox-compatible-products" element={<CollectionDoxCompatible />} />
             <Route path="/products/:handle" element={<ProductDetail />} />
             <Route path="/product/:handle" element={<Navigate to="/products/:handle" replace />} />
             <Route path="/prelaunch" element={<PrelaunchDOX />} />

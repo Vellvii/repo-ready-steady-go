@@ -92,6 +92,8 @@ export const PrelaunchFooter = () => {
           <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-light-secondary font-montserrat">
             <a href="/shop" className="hover:text-primary transition-colors">Shop</a>
             <span className="text-light-muted hidden sm:inline">•</span>
+            <a href="/collections/dox-compatible-products" className="hover:text-primary transition-colors">DOX-Compatible Products</a>
+            <span className="text-light-muted hidden sm:inline">•</span>
             <a href="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</a>
             <span className="text-light-muted hidden sm:inline">•</span>
             <a href="/warranty" className="hover:text-primary transition-colors">Warranty</a>
