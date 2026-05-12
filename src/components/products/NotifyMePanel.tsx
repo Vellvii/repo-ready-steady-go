@@ -1,30 +1,50 @@
 import { useState, FormEvent } from "react";
-import { Bell } from "lucide-react";
+import { Bell, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 interface NotifyMePanelProps {
   productTitle: string;
 }
 
 /**
- * Notify-me UI for sold-out products.
- *
- * UI-ONLY: This panel visually accepts an email and shows a non-persistent
- * confirmation message. No backend storage or email dispatch is wired.
- *
- * TODO: Integrate with Klaviyo or a Supabase edge function to actually
- * persist the email and send back-in-stock notifications.
+ * Notify-me form for sold-out products.
+ * Subscribes the email to the Mailchimp audience via the
+ * `mailchimp-subscribe` edge function (same backend as homepage waitlist),
+ * tagged with a per-product source so we can segment back-in-stock alerts.
  */
 export const NotifyMePanel = ({ productTitle }: NotifyMePanelProps) => {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!email) return;
-    // TODO: wire to Klaviyo/Supabase notify-list. For now, UI-only acknowledgement.
-    setSubmitted(true);
+    const trimmed = email.trim();
+    if (!trimmed || loading) return;
+
+    setLoading(true);
+    try {
+      const source = `notify_${productTitle}`.slice(0, 64);
+      const { error } = await supabase.functions.invoke("mailchimp-subscribe", {
+        body: { email: trimmed, source },
+      });
+      if (error) throw error;
+      setSubmitted(true);
+    } catch (err) {
+      console.error("Notify me subscribe failed", err);
+      toast({
+        title: "Something went wrong",
+        description:
+          "We could not save your email just now. Please try again in a moment.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -55,14 +75,27 @@ export const NotifyMePanel = ({ productTitle }: NotifyMePanelProps) => {
             <Input
               type="email"
               required
+              maxLength={255}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="your@email.com"
               className="bg-background/40 border-white/15 text-light-primary placeholder:text-light-muted/60 font-montserrat"
               aria-label="Email address"
+              disabled={loading}
             />
-            <Button type="submit" className="btn-premium whitespace-nowrap">
-              Notify me
+            <Button
+              type="submit"
+              className="btn-premium whitespace-nowrap"
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  Saving
+                </>
+              ) : (
+                "Notify me"
+              )}
             </Button>
           </form>
         )}

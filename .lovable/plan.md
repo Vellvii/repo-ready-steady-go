@@ -1,29 +1,35 @@
-## Homepage Lux Copy Cleanup
+## Issue
 
-Soften scarcity wording in `src/pages/DoxVideoLanding.tsx` Lux section so it does not imply Lux itself is forever-limited, while keeping the Nova first-run bonus accurate.
+The product page "Notify me when available" panel (`src/components/products/NotifyMePanel.tsx`, used by `ProductDetail.tsx` for sold-out products) is currently UI-only. Submitting the form just flips a local `submitted` state — the email is **not** sent anywhere, so users are not added to Mailchimp.
 
-### Changes
+The homepage / DOX landing already use the existing `mailchimp-subscribe` edge function, which accepts `{ email, source }` and adds the subscriber to the configured Mailchimp audience.
 
-**`src/pages/DoxVideoLanding.tsx`**
+## Fix
 
-1. Line 239 — replace pill text:
-   - From: `Limited Pre-Order - 1,500 Units`
-   - To: `First-Run Offer`
+Update `NotifyMePanel.tsx` to call the same `mailchimp-subscribe` edge function on submit, identically to the landing pages.
 
-2. Lines 264-265 — replace supporting paragraph:
-   - From: "Ships first week of June. The first 1,500 orders may add a complimentary Vellvii Nova - our handheld suction piece - at checkout."
-   - To: "Ships first week of June. The current Lux first-run offer includes a complimentary Vellvii Nova - our handheld suction piece. Future Lux runs are planned, but the Nova gift will not be included after this first run."
+### Changes (single file: `src/components/products/NotifyMePanel.tsx`)
 
-### QA grep
+1. Import `supabase` from `@/integrations/supabase/client` and `useToast` from `@/hooks/use-toast`.
+2. Make `handleSubmit` async; add a `loading` state and disable the button while submitting.
+3. Validate email (basic regex / HTML required already in place).
+4. Call:
+   ```ts
+   supabase.functions.invoke("mailchimp-subscribe", {
+     body: { email, source: `notify_${productTitle}` }
+   })
+   ```
+   Truncate `source` to keep within the function's 64-char cap.
+5. On success → set `submitted = true` (keeps existing thank-you message).
+6. On error → show a toast with a graceful message; do not flip `submitted`.
+7. Remove the "UI-ONLY" / TODO comments now that it is wired.
 
-After the edit, re-run grep for: `Limited Pre-Order`, `1,500 Units`, `only 1,500`, `limited forever`, `USA launch`, `made in USA`, `assembled in USA`, `fulfilled in USA` across `src/` and `public/`.
+No backend, schema, or other component changes. Cart, drawer, and other CTAs are untouched.
 
-Initial grep already found:
-- `src/components/prelaunch/lux/LuxCountdown.tsx:73` — `USA Launch Badge` (inside legacy `/Vellvii-Lux` prelaunch page, which is noindex). Out of scope per the user's "homepage and canonical public surfaces" instruction, but will be flagged in the report for manual review.
-- `src/components/lux/LuxPreOrderPanel.tsx` — contains `1,500`, `1500 units` and `Ships from the USA`. This file powers the canonical Lux PDP (not legacy). Will flag in the report and ask whether to soften in a follow-up; the user's current request is scoped to the homepage only.
+## QA
 
-### Out of scope (will not edit)
-
-- Lux PDP panel (`LuxPreOrderPanel.tsx`) and legacy `/Vellvii-Lux` prelaunch components — flagged for follow-up.
-- No origin/manufacturing changes elsewhere.
-- No changes to Lux positioning (remains portable fingerprint-lock storage).
+- Visit a sold-out product page (e.g. one currently rendering `NotifyMePanel`).
+- Enter an email, submit → confirmation message appears.
+- Verify the address shows up in the Mailchimp audience with `SOURCE = notify_<product>`.
+- Submit invalid email → browser validation blocks; submit a duplicate → still resolves successfully (Mailchimp returns 200 for already-subscribed).
+- Network failure path shows the error toast and lets the user retry.
