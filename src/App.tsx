@@ -13,17 +13,6 @@ import CartDrawer from "./components/CartDrawer";
 import { useCartSync } from "./hooks/useCartSync";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import AgeGateLanding from "./pages/Landing";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Products from "./pages/Products";
-import Contact from "./pages/Contact";
-import Pulse from "./pages/Pulse";
-import Vibe from "./pages/Vibe";
-import GVibe from "./pages/GVibe";
-import DOX from "./pages/DOX";
-import LuxuryStorage from "./pages/LuxuryStorage";
-import DockingStation from "./pages/DockingStation";
-import SexSaddle from "./pages/SexSaddle";
 import NotFound from "./pages/NotFound";
 import PrelaunchDOX from "./pages/PrelaunchDOX";
 import PrelaunchLux from "./pages/PrelaunchLux";
@@ -43,12 +32,6 @@ import Warranty from "./pages/Warranty";
 import WarrantyRegister from "./pages/WarrantyRegister";
 import Shop from "./pages/Shop";
 import ProductDetail from "./pages/ProductDetail";
-import VellviiKickstarter from "./pages/VellviiKickstarter";
-import VellviiKickstarter2 from "./pages/VellviiKickstarter2";
-import VellviiPrototype from "./pages/VellviiPrototype";
-import KickstarterPrelaunch from "./pages/KickstarterPrelaunch";
-import KickstarterV2 from "./pages/KickstarterV2";
-import KickstarterHeroDownload from "./pages/KickstarterHeroDownload";
 
 const queryClient = new QueryClient();
 
@@ -74,21 +57,19 @@ const InnerApp = () => {
       <SmoothScroll>
         <PageTransition>
           <Routes>
+            {/* Live pages */}
             <Route path="/" element={<DoxVideoLanding />} />
             <Route path="/showcase" element={<DoxLanding />} />
+            <Route path="/landing" element={<AgeGateLanding />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/products/:handle" element={<ProductDetail />} />
             <Route path="/product/:handle" element={<Navigate to="/products/:handle" replace />} />
             <Route path="/prelaunch" element={<PrelaunchDOX />} />
-            <Route path="/prelaunch-dox" element={<PrelaunchDOX />} />
-            <Route path="/landing" element={<AgeGateLanding />} />
+            <Route path="/prelaunch-dox" element={<Navigate to="/prelaunch" replace />} />
             <Route path="/Vellvii-Lux" element={<PrelaunchLux />} />
-            <Route path="/Vellvii-Kickstarter" element={<VellviiKickstarter />} />
-            <Route path="/Vellvii-Kickstarter2" element={<VellviiKickstarter2 />} />
-            <Route path="/Vellvii-Prototype" element={<VellviiPrototype />} />
-            <Route path="/kickstarter" element={<KickstarterPrelaunch />} />
-            <Route path="/kickstarterV2" element={<KickstarterV2 />} />
-            <Route path="/kickstarter-hero-download" element={<KickstarterHeroDownload />} />
+            <Route path="/vellvii-lux" element={<Navigate to="/Vellvii-Lux" replace />} />
+
+            {/* QR-code video landings (packaging) */}
             <Route path="/v/1" element={<Video1 />} />
             <Route path="/v/2" element={<Video2 />} />
             <Route path="/v/3" element={<Video3 />} />
@@ -97,20 +78,32 @@ const InnerApp = () => {
             <Route path="/v/6" element={<Video6 />} />
             <Route path="/v/7" element={<Video7 />} />
             <Route path="/v/8" element={<Video8 />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/pulse" element={<Pulse />} />
-            <Route path="/vibe" element={<Vibe />} />
-            <Route path="/g-vibe" element={<GVibe />} />
-            <Route path="/dox" element={<DOX />} />
-            <Route path="/luxury-storage" element={<LuxuryStorage />} />
-            <Route path="/docking-station" element={<DockingStation />} />
-            <Route path="/sex-saddle" element={<SexSaddle />} />
+
+            {/* Legal & support */}
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/warranty" element={<Warranty />} />
             <Route path="/warranty/register" element={<WarrantyRegister />} />
+
+            {/* Legacy redirects: pre-Shopify product pages → Shopify PDPs */}
+            <Route path="/dox" element={<Navigate to="/products/vellvii-dox" replace />} />
+            <Route path="/docking-station" element={<Navigate to="/products/vellvii-dox" replace />} />
+            <Route path="/pulse" element={<Navigate to="/products/vellvii-pulse" replace />} />
+            <Route path="/vibe" element={<Navigate to="/products/vellvii-vibe" replace />} />
+            <Route path="/g-vibe" element={<Navigate to="/products/vellvii-g-vibe" replace />} />
+            <Route path="/luxury-storage" element={<Navigate to="/products/vellvii-lux" replace />} />
+
+            {/* Legacy redirects: deleted Kickstarter & nav pages → home (preserve ad traffic) */}
+            <Route path="/home" element={<Navigate to="/" replace />} />
+            <Route path="/about" element={<Navigate to="/" replace />} />
+            <Route path="/contact" element={<Navigate to="/" replace />} />
+            <Route path="/sex-saddle" element={<Navigate to="/shop" replace />} />
+            <Route path="/kickstarter" element={<Navigate to="/" replace />} />
+            <Route path="/kickstarterV2" element={<Navigate to="/" replace />} />
+            <Route path="/Vellvii-Kickstarter" element={<Navigate to="/" replace />} />
+            <Route path="/Vellvii-Kickstarter2" element={<Navigate to="/" replace />} />
+            <Route path="/Vellvii-Prototype" element={<Navigate to="/" replace />} />
+
             <Route path="*" element={<NotFound />} />
           </Routes>
         </PageTransition>

@@ -89,7 +89,7 @@ const Landing = () => {
   };
 
   const handleYes = () => {
-    navigate('/prelaunch-dox');
+    navigate('/prelaunch');
   };
 
   const handleNo = () => {
