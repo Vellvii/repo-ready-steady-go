@@ -89,9 +89,12 @@ const InnerApp = () => {
             <Route path="/dox" element={<Navigate to="/products/vellvii-dox" replace />} />
             <Route path="/docking-station" element={<Navigate to="/products/vellvii-dox" replace />} />
             <Route path="/pulse" element={<Navigate to="/products/vellvii-pulse" replace />} />
-            <Route path="/vibe" element={<Navigate to="/products/vellvii-vibe" replace />} />
             <Route path="/g-vibe" element={<Navigate to="/products/vellvii-g-vibe" replace />} />
             <Route path="/luxury-storage" element={<Navigate to="/products/vellvii-lux" replace />} />
+            {/* Evolve canonicalisation: /vibe and old /products/vellvii-vibe → Evolve */}
+            <Route path="/evolve" element={<Navigate to="/products/vellvii-evolve" replace />} />
+            <Route path="/vibe" element={<Navigate to="/products/vellvii-evolve" replace />} />
+            <Route path="/products/vellvii-vibe" element={<Navigate to="/products/vellvii-evolve" replace />} />
 
             {/* Legacy redirects: deleted Kickstarter & nav pages → home (preserve ad traffic) */}
             <Route path="/home" element={<Navigate to="/" replace />} />
