@@ -1,87 +1,29 @@
-## Goal
+## Homepage Lux Copy Cleanup
 
-Clean up the route map: remove dead pages, redirect pre-Shopify product URLs to the canonical Shopify PDPs, normalize URL casing, and update the sitemap and memory to match the new state.
+Soften scarcity wording in `src/pages/DoxVideoLanding.tsx` Lux section so it does not imply Lux itself is forever-limited, while keeping the Nova first-run bonus accurate.
 
-## Routes to remove (delete page files + remove from `App.tsx`)
+### Changes
 
-All Kickstarter & related campaign experiments — no longer in use:
-- `/Vellvii-Kickstarter` → `VellviiKickstarter.tsx`
-- `/Vellvii-Kickstarter2` → `VellviiKickstarter2.tsx`
-- `/Vellvii-Prototype` → `VellviiPrototype.tsx`
-- `/kickstarter` → `KickstarterPrelaunch.tsx`
-- `/kickstarterV2` → `KickstarterV2.tsx`
-- `/kickstarter-hero-download` → `KickstarterHeroDownload.tsx`
+**`src/pages/DoxVideoLanding.tsx`**
 
-Disabled-nav pages:
-- `/home` → `Home.tsx`
-- `/about` → `About.tsx`
-- `/contact` → `Contact.tsx`
+1. Line 239 — replace pill text:
+   - From: `Limited Pre-Order - 1,500 Units`
+   - To: `First-Run Offer`
 
-Off-brand:
-- `/sex-saddle` → `SexSaddle.tsx`
+2. Lines 264-265 — replace supporting paragraph:
+   - From: "Ships first week of June. The first 1,500 orders may add a complimentary Vellvii Nova - our handheld suction piece - at checkout."
+   - To: "Ships first week of June. The current Lux first-run offer includes a complimentary Vellvii Nova - our handheld suction piece. Future Lux runs are planned, but the Nova gift will not be included after this first run."
 
-Also delete the related component folders that nothing else imports:
-- `src/components/kickstarter/*`
-- `src/components/kickstarter2/*`
-- `src/components/ks-prelaunch/*`
-- `src/components/ks-v2/*`
+### QA grep
 
-(I'll grep for any external imports first; if anything is still referenced from a kept page, I'll leave that file in place.)
+After the edit, re-run grep for: `Limited Pre-Order`, `1,500 Units`, `only 1,500`, `limited forever`, `USA launch`, `made in USA`, `assembled in USA`, `fulfilled in USA` across `src/` and `public/`.
 
-## Routes to redirect (keep route entry, swap element to `<Navigate>`)
+Initial grep already found:
+- `src/components/prelaunch/lux/LuxCountdown.tsx:73` — `USA Launch Badge` (inside legacy `/Vellvii-Lux` prelaunch page, which is noindex). Out of scope per the user's "homepage and canonical public surfaces" instruction, but will be flagged in the report for manual review.
+- `src/components/lux/LuxPreOrderPanel.tsx` — contains `1,500`, `1500 units` and `Ships from the USA`. This file powers the canonical Lux PDP (not legacy). Will flag in the report and ask whether to soften in a follow-up; the user's current request is scoped to the homepage only.
 
-Pre-Shopify product pages → canonical Shopify PDPs (301-equivalent client redirect):
+### Out of scope (will not edit)
 
-| From | To |
-|---|---|
-| `/dox` | `/products/vellvii-dox` |
-| `/pulse` | `/products/vellvii-pulse` |
-| `/vibe` | `/products/vellvii-vibe` |
-| `/g-vibe` | `/products/vellvii-g-vibe` |
-| `/luxury-storage` | `/products/vellvii-lux` |
-| `/docking-station` | `/products/vellvii-dox` |
-
-Also delete the underlying `src/pages/{DOX,Pulse,Vibe,GVibe,LuxuryStorage,DockingStation}.tsx` files since redirects don't render them.
-
-## Final route map after cleanup
-
-```text
-/                       DoxVideoLanding   (homepage)
-/showcase               DoxLanding        (legacy hero, kept per request)
-/landing                AgeGateLanding
-/shop                   Shop
-/products/:handle       ProductDetail
-/product/:handle        → /products/:handle
-/prelaunch              PrelaunchDOX
-/prelaunch-dox          → /prelaunch       (dedupe)
-/Vellvii-Lux            PrelaunchLux
-/v/1 ... /v/8           QR video landings
-/warranty               Warranty
-/warranty/register      WarrantyRegister
-/privacy-policy         PrivacyPolicy
-/terms-of-service       TermsOfService
-
-# Redirects
-/dox, /pulse, /vibe, /g-vibe, /luxury-storage, /docking-station → matching /products/<handle>
-
-*                       NotFound
-```
-
-Note: `/Vellvii-Lux` keeps its mixed-case URL because it's actively shared in marketing. I'll add a lowercase `/vellvii-lux` alias that redirects to it so future links can use the clean form.
-
-## Files to update
-
-1. `src/App.tsx` — remove deleted routes, add `<Navigate>` redirects, prune imports.
-2. `public/sitemap.xml` — remove dead URLs; current entries are still accurate (`/`, `/shop`, four `/products/*`, `/warranty`, `/privacy-policy`, `/terms-of-service`). Add `/Vellvii-Lux` and `/prelaunch`. Bump `lastmod` to today.
-3. `public/llms.txt` and `public/robots.txt` — quick scan; remove references to deleted routes if any.
-4. Delete the page files and component folders listed above.
-5. Update memory `mem://routing/homepage-and-parked-routes` to reflect the new map, and remove now-stale memories: `mem://constraints/kickstarter-platform-limitations`, `mem://tools/kickstarter-hero-generator`, `mem://marketing/kickstarter-pricing-tiers`, `mem://marketing/official-kickstarter-campaign-link`, `mem://marketing/kickstarter-page-requirements`, `mem://analytics/kickstarter-conversion-tracking`. Also update the Core memory line that mentions Kickstarter.
-
-## Out of scope
-
-- Re-enabling /about, /contact in nav (deleted per your call).
-- Search Console resubmission — you'll want to do this manually after deploy so Google picks up the redirects and the trimmed sitemap.
-
-## One thing to flag
-
-If any Meta/Google ad currently points to a Kickstarter route (`/kickstarter`, `/kickstarterV2`, etc.), those ads will start hitting the 404 page. I'll route all six deleted Kickstarter URLs to `/` as a safety net so no traffic is lost — confirm if you'd rather they 404 instead.
+- Lux PDP panel (`LuxPreOrderPanel.tsx`) and legacy `/Vellvii-Lux` prelaunch components — flagged for follow-up.
+- No origin/manufacturing changes elsewhere.
+- No changes to Lux positioning (remains portable fingerprint-lock storage).

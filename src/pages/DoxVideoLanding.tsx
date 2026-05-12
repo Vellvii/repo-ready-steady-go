@@ -236,7 +236,7 @@ const DoxVideoLanding = () => {
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/40 bg-primary/10">
               <Sparkles className="w-3.5 h-3.5 text-primary" />
               <span className="font-montserrat text-[10px] sm:text-xs uppercase tracking-[0.25em] text-primary">
-                Limited Pre-Order - 1,500 Units
+                First-Run Offer
               </span>
             </div>
 
@@ -261,8 +261,9 @@ const DoxVideoLanding = () => {
                 The Vellvii Lux is here.
               </h1>
               <p className="text-base sm:text-lg md:text-xl text-light-secondary font-montserrat max-w-2xl mx-auto leading-relaxed">
-                Ships first week of June. The first 1,500 orders may add a complimentary
-                Vellvii Nova - our handheld suction piece - at checkout.
+                Ships first week of June. The current Lux first-run offer includes a complimentary
+                Vellvii Nova - our handheld suction piece. Future Lux runs are planned, but the
+                Nova gift will not be included after this first run.
               </p>
             </motion.div>
 
