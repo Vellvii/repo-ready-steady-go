@@ -331,8 +331,9 @@ const Shop = () => {
   return (
     <>
       <SEO
-        title="Shop | Vellvii"
-        description="Explore the Vellvii collection of luxury wellness products designed for privacy, elegance, and modern living."
+        title="Shop Vellvii | Luxury Intimate Wellness Collection"
+        description="Explore the Vellvii collection, including DOX, Lux, G-Vibe, Evolve, and Pulse. Premium intimate wellness products designed with elegance and discretion."
+        canonical="/shop"
       />
       <div className="min-h-screen surface-dark-rich">
         {/* Scroll-aware Navigation Header */}
