@@ -38,6 +38,19 @@ export interface FaqItem {
   answer: string;
 }
 
+export interface DockingCard {
+  title: string;
+  subtitle: string;
+  copy: string;
+}
+
+export interface DockingInfo {
+  heading: string;
+  intro: string;
+  vds: DockingCard;
+  dds: DockingCard;
+}
+
 export interface PdpContent {
   /** Short premium one-liner shown above benefits */
   tagline?: string;
@@ -48,7 +61,37 @@ export interface PdpContent {
   careStorage?: string[];
   /** Product-specific FAQs - falls back to FALLBACK_FAQS if undefined */
   faqs?: FaqItem[];
+  /** DOX-only: docking system (VDS / DDS) section content */
+  docking?: DockingInfo;
+  /** Toys that fit the DOX through the VDS insert */
+  doxCompatible?: boolean;
+  /** Lux-only: subtle related-storage note linking to DOX */
+  relatedStorageNote?: { copy: string; href: string; label: string };
 }
+
+/** Shared docking system content - reused by DOX PDP and the collection page. */
+export const DOCKING_INFO: DockingInfo = {
+  heading: "Designed Around the Vellvii Docking System",
+  intro:
+    "The Vellvii DOX is designed as the home of the Vellvii Pleasure Collection, with dedicated docking spaces that keep compatible products organized, discreet, and ready for storage.",
+  vds: {
+    title: "VDS",
+    subtitle: "Vellvii Docking Station",
+    copy: "The VDS is shaped specifically for current Vellvii products, allowing the Vellvii G-Vibe, Evolve, and Pulse to fit securely into the DOX ecosystem.",
+  },
+  dds: {
+    title: "DDS",
+    subtitle: "Dildo Docking Station",
+    copy: "The DDS is a round docking insert designed for compatible suction-base products up to 90mm in diameter.",
+  },
+};
+
+export const DOX_COMPATIBLE_HANDLES: CanonicalHandle[] = [
+  "vellvii-dox",
+  "vellvii-g-vibe",
+  "vellvii-evolve",
+  "vellvii-pulse",
+];
 
 /** Safe, non-promissory fallback FAQs. */
 export const FALLBACK_FAQS: FaqItem[] = [
