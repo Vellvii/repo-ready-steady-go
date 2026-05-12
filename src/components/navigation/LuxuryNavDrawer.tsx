@@ -169,7 +169,7 @@ export const LuxuryNavDrawer = () => {
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed left-0 top-0 h-full w-[88vw] max-w-[420px] bg-background border-r border-white/10 z-[1110] flex flex-col shadow-2xl"
+            className="fixed left-0 top-0 h-full h-[100dvh] w-[88vw] max-w-[420px] bg-background border-r border-white/10 z-[1110] flex flex-col overflow-hidden shadow-2xl"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-5 sm:px-6 pt-5 pb-4">
@@ -225,7 +225,7 @@ export const LuxuryNavDrawer = () => {
 
             {/* Nav groups */}
             <motion.nav
-              className="flex-1 overflow-y-auto px-5 sm:px-6 pb-6"
+              className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-5 sm:px-6 pb-6 pr-1"
               initial="hidden"
               animate="visible"
               variants={{
