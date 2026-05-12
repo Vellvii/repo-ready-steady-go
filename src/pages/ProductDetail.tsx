@@ -17,6 +17,14 @@ import { StickyProductBar } from "@/components/StickyProductBar";
 import { ImageLightbox } from "@/components/ImageLightbox";
 import { DoxVideoSection } from "@/components/DoxVideoSection";
 import { RelatedProducts } from "@/components/RelatedProducts";
+import { KeyBenefits } from "@/components/products/KeyBenefits";
+import { ProductDetailsList } from "@/components/products/ProductDetailsList";
+import { CareAndStorage } from "@/components/products/CareAndStorage";
+import { ProductFAQ } from "@/components/products/ProductFAQ";
+import { NotifyMePanel } from "@/components/products/NotifyMePanel";
+import { BackToShopCTA } from "@/components/products/BackToShopCTA";
+import { WarrantyLink } from "@/components/products/WarrantyLink";
+import { getPdpContent, FALLBACK_FAQS, FALLBACK_CARE } from "@/lib/pdpContent";
 import {
   LuxPreOrderBanner,
   LuxFreeGiftBadge,
