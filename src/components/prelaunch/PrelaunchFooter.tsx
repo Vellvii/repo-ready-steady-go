@@ -110,7 +110,7 @@ export const PrelaunchFooter = () => {
               <ul className="font-montserrat text-xs sm:text-sm text-light-secondary space-y-3">
                 <li><a href="/warranty" className="hover:text-primary transition-colors">Warranty</a></li>
                 <li><a href="/warranty/register" className="hover:text-primary transition-colors">Register Warranty</a></li>
-                <li><a href="mailto:hello@vellvii.com" className="hover:text-primary transition-colors">Contact</a></li>
+                <li><a href="/contact" className="hover:text-primary transition-colors">Contact</a></li>
               </ul>
             </div>
 

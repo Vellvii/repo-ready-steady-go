@@ -39,6 +39,7 @@ import CollectionDiscreetStorage from "./pages/CollectionDiscreetStorage";
 import CollectionPortableStorage from "./pages/CollectionPortableStorage";
 import CollectionBedroomStorage from "./pages/CollectionBedroomStorage";
 import CollectionProductsForCouples from "./pages/CollectionProductsForCouples";
+import Contact from "./pages/Contact";
 
 const queryClient = new QueryClient();
 
@@ -97,6 +98,7 @@ const InnerApp = () => {
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/warranty" element={<Warranty />} />
             <Route path="/warranty/register" element={<WarrantyRegister />} />
+            <Route path="/contact" element={<Contact />} />
 
             {/* Legacy redirects: pre-Shopify product pages → Shopify PDPs */}
             <Route path="/dox" element={<Navigate to="/products/vellvii-dox" replace />} />

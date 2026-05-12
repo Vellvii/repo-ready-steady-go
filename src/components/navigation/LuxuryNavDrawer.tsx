@@ -55,7 +55,7 @@ const NAV_GROUPS: NavGroup[] = [
     links: [
       { label: "Warranty", href: "/warranty" },
       { label: "Register Warranty", href: "/warranty/register" },
-      { label: "Contact", href: "mailto:hello@vellvii.com", external: true },
+      { label: "Contact", href: "/contact" },
     ],
   },
   {
