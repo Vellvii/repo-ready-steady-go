@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { NavMenuButton } from "@/components/navigation/LuxuryNavDrawer";
 
 export const ScrollHeader = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -31,22 +32,18 @@ export const ScrollHeader = () => {
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="relative flex items-center justify-between h-16 sm:h-20">
-          {/* Logo */}
-          <Link to="/" className="flex items-center flex-shrink-0">
+        <div className="grid grid-cols-[auto_1fr_auto] items-center gap-2 sm:gap-3 h-16 sm:h-20">
+          {/* Left: menu trigger */}
+          <NavMenuButton className="-ml-2" />
+
+          {/* Center: Logo */}
+          <Link to="/" className="flex items-center justify-self-center">
             <img
               src="/uploads/Vellvii-full-logo-transparent.png"
               alt="Vellvii"
               className="h-12 sm:h-14 md:h-16 w-auto"
             />
           </Link>
-
-          {/* Centered tagline (desktop only) */}
-          <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-            <span className="font-baskerville italic text-[0.7rem] tracking-[0.32em] uppercase text-primary/70">
-              The Art of &lsquo;O&rsquo;
-            </span>
-          </div>
 
           {/* Right spacer for floating cart button */}
           <div className="w-12 sm:w-14" aria-hidden />

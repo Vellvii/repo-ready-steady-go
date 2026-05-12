@@ -165,13 +165,15 @@ const DoxVideoLanding = () => {
       />
 
       <div className="min-h-screen bg-background flex flex-col">
-        {/* Header with Logo */}
-        <header className="py-5 sm:py-6 px-5 sm:px-8 flex justify-start">
+        {/* Header with menu + logo (cart trigger floats top-right) */}
+        <header className="py-5 sm:py-6 px-5 sm:px-8 grid grid-cols-[auto_1fr_auto] items-center gap-2 sm:gap-3">
+          <NavMenuButton className="-ml-1" />
           <img
             src="/uploads/Vellvii-full-logo-transparent.png"
             alt="Vellvii"
-            className="h-16 sm:h-20 md:h-24 w-auto drop-shadow-[0_0_24px_rgba(212,175,55,0.35)]"
+            className="h-12 sm:h-16 md:h-20 w-auto justify-self-start sm:justify-self-center pl-1 sm:pl-0 drop-shadow-[0_0_24px_rgba(212,175,55,0.35)]"
           />
+          <div className="w-20 sm:w-24" aria-hidden />
         </header>
 
         {/* [1b] Hero Video */}
