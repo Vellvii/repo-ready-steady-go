@@ -344,6 +344,7 @@ const Landing = () => {
         isSubmitting={isSubmitting}
       />
     </div>
+    </>
   );
 };
 
