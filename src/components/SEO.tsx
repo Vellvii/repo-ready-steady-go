@@ -24,6 +24,15 @@ interface SEOProps {
     };
   };
   faqData?: Array<{ question: string; answer: string }>;
+  articleData?: {
+    headline: string;
+    description: string;
+    datePublished: string;
+    dateModified?: string;
+    image?: string;
+    url?: string;
+    section?: string;
+  };
   organizationData?: boolean;
   breadcrumbs?: Array<{ name: string; url: string }>;
   keywords?: string;
@@ -50,6 +59,7 @@ export const SEO = ({
   image = DEFAULT_IMAGE,
   productData,
   faqData,
+  articleData,
   organizationData,
   breadcrumbs,
   keywords,
@@ -145,6 +155,37 @@ export const SEO = ({
       }
     : null;
 
+  // Article Schema
+  const articleSchema = articleData
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: articleData.headline,
+        description: articleData.description,
+        datePublished: articleData.datePublished,
+        dateModified: articleData.dateModified || articleData.datePublished,
+        ...(articleData.section && { articleSection: articleData.section }),
+        image: (articleData.image
+          ? (articleData.image.startsWith('http') ? articleData.image : `${SITE_URL}${articleData.image}`)
+          : `${SITE_URL}/uploads/Vellvii-full-logo-transparent.png`),
+        author: { '@type': 'Organization', name: 'Vellvii', url: SITE_URL },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Vellvii',
+          logo: {
+            '@type': 'ImageObject',
+            url: `${SITE_URL}/uploads/Vellvii-full-logo-transparent.png`,
+          },
+        },
+        ...(articleData.url && {
+          mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': articleData.url.startsWith('http') ? articleData.url : `${SITE_URL}${articleData.url}`,
+          },
+        }),
+      }
+    : null;
+
   // Breadcrumb Schema
   const breadcrumbSchema = breadcrumbs && breadcrumbs.length > 0
     ? {
@@ -219,6 +260,11 @@ export const SEO = ({
       {faqSchema && (
         <script type="application/ld+json">
           {JSON.stringify(faqSchema)}
+        </script>
+      )}
+      {articleSchema && (
+        <script type="application/ld+json">
+          {JSON.stringify(articleSchema)}
         </script>
       )}
       {breadcrumbSchema && (

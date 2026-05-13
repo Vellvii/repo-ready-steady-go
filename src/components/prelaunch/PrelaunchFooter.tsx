@@ -100,6 +100,7 @@ export const PrelaunchFooter = () => {
                 <li><a href="/collections/pleasure-collection" className="hover:text-primary transition-colors">Pleasure Collection</a></li>
                 <li><a href="/collections/dox-compatible-products" className="hover:text-primary transition-colors whitespace-nowrap">DOX-Compatible Products</a></li>
                 <li><a href="/collections/discreet-storage" className="hover:text-primary transition-colors">Discreet Storage</a></li>
+                <li><a href="/guides" className="hover:text-primary transition-colors">Guides</a></li>
               </ul>
             </div>
 

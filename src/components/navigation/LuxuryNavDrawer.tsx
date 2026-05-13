@@ -38,6 +38,7 @@ const NAV_GROUPS: NavGroup[] = [
       { label: "Portable Storage", href: "/collections/portable-storage" },
       { label: "Bedroom Storage", href: "/collections/bedroom-storage" },
       { label: "Products for Couples", href: "/collections/products-for-couples" },
+      { label: "Guides", href: "/guides" },
     ],
   },
   {
