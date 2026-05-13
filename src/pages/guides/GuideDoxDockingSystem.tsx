@@ -25,11 +25,13 @@ const GuideDoxDockingSystem = () => {
   return (
     <GuideLayout
       seoTitle="How the Vellvii DOX Docking System Works | VDS & DDS"
-      seoDescription="Learn how the Vellvii DOX docking system works, including VDS for Vellvii products and DDS for compatible suction-base products up to 90mm, approximately 3.5 inches, in diameter."
+      seoDescription="How the Vellvii DOX docking system works, including VDS for Vellvii G-Vibe, Evolve and Pulse, and DDS for compatible suction-base products up to 90mm."
       canonical="/guides/how-the-vellvii-dox-docking-system-works"
       category="DOX Compatibility"
       title="How the Vellvii DOX Docking System Works"
       intro="The Vellvii DOX uses two distinct docking inserts - the VDS and the DDS - to keep the Pleasure Collection organized and refined. Here is how each one works."
+      heroImage="/uploads/dox-interior-labeled.jpg"
+      heroImageAlt="Vellvii DOX interior showing the VDS and DDS docking inserts"
       faq={FAQ}
     >
       <h2 className={H2}>Introduction</h2>
@@ -44,6 +46,14 @@ const GuideDoxDockingSystem = () => {
       </p>
 
       <h2 className={H2}>What is the VDS?</h2>
+      <figure className="my-6 overflow-hidden rounded-lg border border-white/10">
+        <img
+          src="/uploads/BeigeVDS.png"
+          alt="Vellvii VDS docking insert shaped for Vellvii G-Vibe, Evolve and Pulse"
+          loading="lazy"
+          className="w-full h-auto object-cover"
+        />
+      </figure>
       <p>
         VDS stands for Vellvii Docking Station. It is the shaped insert built into the DOX for current Vellvii products. The VDS is sculpted to hold each compatible Vellvii piece securely in its intended position.
       </p>
