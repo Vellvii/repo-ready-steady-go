@@ -25,11 +25,13 @@ const GuideDiscreetStorage = () => {
   return (
     <GuideLayout
       seoTitle="Discreet Storage for Intimate Wellness Products | Vellvii"
-      seoDescription="Learn how discreet storage helps protect privacy, organization, and product care while exploring Vellvii Lux and DOX storage options."
+      seoDescription="Discreet storage for intimate wellness products: privacy at home and on the move with Vellvii Lux portable case and Vellvii DOX bedroom hub."
       canonical="/guides/discreet-storage-for-intimate-wellness-products"
       category="Storage & Privacy"
       title="Discreet Storage for Intimate Wellness Products"
       intro="Discreet storage is about more than hiding things away. It is about privacy, organization, and the everyday care that keeps a refined collection feeling considered."
+      heroImage="/uploads/lux-philosophy-lifestyle-v4.png"
+      heroImageAlt="Vellvii Lux on a refined surface, illustrating discreet everyday storage for intimate wellness products"
       faq={FAQ}
     >
       <h2 className={H2}>Introduction</h2>
@@ -59,12 +61,28 @@ const GuideDiscreetStorage = () => {
       </p>
 
       <h2 className={H2}>How Vellvii Lux supports everyday privacy</h2>
+      <figure className="my-6 overflow-hidden rounded-lg border border-white/10">
+        <img
+          src="/uploads/lux-bag-lifestyle-2.jpg"
+          alt="Vellvii Lux portable fingerprint-lock storage case styled in an everyday travel setting"
+          loading="lazy"
+          className="w-full h-auto object-cover"
+        />
+      </figure>
       <p>
         Vellvii Lux is a portable fingerprint-lock storage case designed for personal, everyday privacy. It is the piece that travels with you, lives in a drawer, or moves with your routine.{" "}
         <Link to="/products/vellvii-lux" className="text-primary hover:underline">Explore Vellvii Lux</Link>.
       </p>
 
       <h2 className={H2}>How Vellvii DOX supports refined bedroom organization</h2>
+      <figure className="my-6 overflow-hidden rounded-lg border border-white/10">
+        <img
+          src="/uploads/dox_with_toys_1.jpg"
+          alt="Vellvii DOX bedroom storage and docking hub holding the Vellvii Pleasure Collection"
+          loading="lazy"
+          className="w-full h-auto object-cover"
+        />
+      </figure>
       <p>
         Vellvii DOX is a larger, sturdier bedroom storage and docking hub. It gives a refined home to the Vellvii Pleasure Collection, with shaped inserts that keep compatible pieces organized and in place.{" "}
         <Link to="/products/vellvii-dox" className="text-primary hover:underline">View Vellvii DOX</Link>.
