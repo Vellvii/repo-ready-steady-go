@@ -25,11 +25,13 @@ const GuideLuxVsDox = () => {
   return (
     <GuideLayout
       seoTitle="Vellvii Lux vs DOX | Portable vs Bedroom Storage"
-      seoDescription="Compare Vellvii Lux and Vellvii DOX to choose between portable fingerprint-lock storage and a larger bedroom-focused storage system."
+      seoDescription="Compare Vellvii Lux portable fingerprint-lock storage with the Vellvii DOX bedroom docking hub. See which refined storage piece fits your lifestyle."
       canonical="/guides/lux-vs-dox"
       category="Storage Guide"
       title="Vellvii Lux vs DOX: Which Storage Piece Fits Your Lifestyle?"
       intro="Vellvii Lux and Vellvii DOX are two different approaches to discreet storage. This guide breaks down what each one is for, who each one fits, and how to decide between them."
+      heroImage="/uploads/lux-lifestyle-final-v5.jpg"
+      heroImageAlt="Vellvii Lux portable fingerprint-lock storage case shown in a refined lifestyle setting"
       faq={FAQ}
     >
       <h2 className={H2}>Introduction</h2>
