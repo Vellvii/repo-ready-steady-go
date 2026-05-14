@@ -41,6 +41,8 @@ interface CollectionLayoutProps {
   relatedLinks: RelatedLink[];
   /** Optional Lux-style callout below the grid */
   callout?: { copy: string; href: string; label: string };
+  /** Optional subtle SEO paragraph rendered low on the page (after FAQ). */
+  seoParagraph?: string;
 }
 
 const CollectionCard = ({ product }: { product: ShopifyProduct }) => {
