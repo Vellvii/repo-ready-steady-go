@@ -50,9 +50,9 @@ export const homeFAQs: FAQItem[] = [
   {
     question: "How does the Vellvii ecosystem work?",
     answerText:
-      "The DOX is the centerpiece - biometric storage with native USB-C charging and built-in docking mounts. The Pleasure Collection (Pulse, Vibe, G-Vibe) is engineered to charge and store inside it, so a single, considered object replaces drawers, chargers, and shower-suction shortcuts.",
+      "The DOX is the centerpiece - biometric storage with built-in docking spaces designed for organization. The Pleasure Collection (Pulse, Vibe, G-Vibe) is engineered to live inside it, so a single, considered object replaces drawers and shower-suction shortcuts.",
     answer:
-      "The DOX is the centerpiece - biometric storage with native USB-C charging and built-in docking mounts. The Pleasure Collection (Pulse, Vibe, G-Vibe) is engineered to charge and store inside it, so a single, considered object replaces drawers, chargers, and shower-suction shortcuts.",
+      "The DOX is the centerpiece - biometric storage with built-in docking spaces designed for organization. The Pleasure Collection (Pulse, Vibe, G-Vibe) is engineered to live inside it, so a single, considered object replaces drawers and shower-suction shortcuts.",
   },
   {
     question: "Is there a warranty?",
