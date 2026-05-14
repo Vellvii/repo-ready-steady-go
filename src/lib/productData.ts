@@ -16,7 +16,7 @@ export const PRODUCTS: Record<string, Product> = {
     price: 299,
     description: 'Rhythmic Clitoral Stimulator',
     images: ['/uploads/Pulse1.jpg', '/uploads/Pulse2.jpg'],
-    features: ['10 Intensities', 'IPX7 Waterproof', 'Whisper Quiet'],
+    features: ['10 Intensities', 'Designed for Everyday Care', 'Whisper Quiet'],
     route: '/pulse'
   },
   vibe: {
@@ -43,7 +43,7 @@ export const PRODUCTS: Record<string, Product> = {
     price: 899,
     description: 'Luxury Storage Box',
     images: ['/uploads/Dox1.jpg', '/uploads/Dox2.jpg', '/uploads/Dox3.jpg', '/uploads/Dox4.jpg', '/uploads/Dox5.jpg'],
-    features: ['Faux Leather', 'Charging Dock', 'Fingerprint Lock'],
+    features: ['Refined Textured Exterior', 'Biometric Lock Box', 'Designed for Everyday Care'],
     route: '/dox'
   }
 };

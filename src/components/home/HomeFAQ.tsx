@@ -22,9 +22,9 @@ export const homeFAQs: FAQItem[] = [
   {
     question: "What is the DOX made of?",
     answerText:
-      "The DOX is built from premium-quality components - genuine leather on the outside, soft velvet on the inside, with an integrated fingerprint lock and built-in charging and docking stations for your devices.",
+      "The DOX is built from premium-quality components - a refined textured exterior on the outside, soft velvet on the inside, with an integrated fingerprint lock and built-in storage and docking spaces designed for organization.",
     answer:
-      "The DOX is built from premium-quality components - genuine leather on the outside, soft velvet on the inside, with an integrated fingerprint lock and built-in charging and docking stations for your devices.",
+      "The DOX is built from premium-quality components - a refined textured exterior on the outside, soft velvet on the inside, with an integrated fingerprint lock and built-in storage and docking spaces designed for organization.",
   },
   {
     question: "When do Kickstarter and Prelaunch orders ship?",
@@ -43,16 +43,16 @@ export const homeFAQs: FAQItem[] = [
   {
     question: "What materials is the Vellvii Lux made from?",
     answerText:
-      "The Vellvii Lux is a soft bag - crafted from genuine leather with a velvet-lined interior. No hard casing. Designed to cushion, protect, and travel quietly.",
+      "The Vellvii Lux is a soft case - crafted with a refined textured exterior and a velvet-lined interior. No hard casing. Designed to cushion, protect, and travel quietly.",
     answer:
-      "The Vellvii Lux is a soft bag - crafted from genuine leather with a velvet-lined interior. No hard casing. Designed to cushion, protect, and travel quietly.",
+      "The Vellvii Lux is a soft case - crafted with a refined textured exterior and a velvet-lined interior. No hard casing. Designed to cushion, protect, and travel quietly.",
   },
   {
     question: "How does the Vellvii ecosystem work?",
     answerText:
-      "The DOX is the centerpiece - biometric storage with native USB-C charging and built-in docking mounts. The Pleasure Collection (Pulse, Vibe, G-Vibe) is engineered to charge and store inside it, so a single, considered object replaces drawers, chargers, and shower-suction shortcuts.",
+      "The DOX is the centerpiece - biometric storage with built-in docking spaces designed for organization. The Pleasure Collection (Pulse, Vibe, G-Vibe) is engineered to live inside it, so a single, considered object replaces drawers and shower-suction shortcuts.",
     answer:
-      "The DOX is the centerpiece - biometric storage with native USB-C charging and built-in docking mounts. The Pleasure Collection (Pulse, Vibe, G-Vibe) is engineered to charge and store inside it, so a single, considered object replaces drawers, chargers, and shower-suction shortcuts.",
+      "The DOX is the centerpiece - biometric storage with built-in docking spaces designed for organization. The Pleasure Collection (Pulse, Vibe, G-Vibe) is engineered to live inside it, so a single, considered object replaces drawers and shower-suction shortcuts.",
   },
   {
     question: "Is there a warranty?",
