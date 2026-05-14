@@ -32,6 +32,33 @@ const GUIDES = [
     image: "/uploads/lux-philosophy-lifestyle-v4.png",
     imageAlt: "Vellvii Lux on a refined surface, illustrating discreet everyday storage",
   },
+  {
+    to: "/guides/portable-vs-bedroom-storage",
+    category: "Storage Guide",
+    title: "Portable vs Bedroom Storage: Which Vellvii Option Fits You?",
+    excerpt:
+      "Compare portable private storage with a larger bedroom-focused system to choose the right Vellvii option for your lifestyle.",
+    image: "/uploads/lux-bag-lifestyle.jpg",
+    imageAlt: "Vellvii Lux portable fingerprint-lock storage case beside a refined bedroom setting",
+  },
+  {
+    to: "/guides/how-to-choose-premium-products-for-couples",
+    category: "Couples Guide",
+    title: "How to Choose Premium Products for Couples",
+    excerpt:
+      "A refined guide for couples choosing products around privacy, connection, storage, and shared intention.",
+    image: "/uploads/Dox_white_lifestyle1.jpg",
+    imageAlt: "Vellvii DOX bedroom storage and docking hub styled in a refined shared interior",
+  },
+  {
+    to: "/guides/how-to-care-for-your-vellvii-products",
+    category: "Care Guide",
+    title: "How to Care for Your Vellvii Products",
+    excerpt:
+      "Simple care and storage habits to help keep your Vellvii products organized, protected, and supported.",
+    image: "/uploads/lux-philosophy-bag-v5.jpg",
+    imageAlt: "Vellvii Lux styled on a refined surface, illustrating considered product care",
+  },
 ];
 
 const Guides = () => {

@@ -44,6 +44,9 @@ import Guides from "./pages/Guides";
 import GuideLuxVsDox from "./pages/guides/GuideLuxVsDox";
 import GuideDoxDockingSystem from "./pages/guides/GuideDoxDockingSystem";
 import GuideDiscreetStorage from "./pages/guides/GuideDiscreetStorage";
+import GuidePortableVsBedroomStorage from "./pages/guides/GuidePortableVsBedroomStorage";
+import GuideProductsForCouples from "./pages/guides/GuideProductsForCouples";
+import GuideProductCare from "./pages/guides/GuideProductCare";
 
 const queryClient = new QueryClient();
 
@@ -109,6 +112,9 @@ const InnerApp = () => {
             <Route path="/guides/lux-vs-dox" element={<GuideLuxVsDox />} />
             <Route path="/guides/how-the-vellvii-dox-docking-system-works" element={<GuideDoxDockingSystem />} />
             <Route path="/guides/discreet-storage-for-intimate-wellness-products" element={<GuideDiscreetStorage />} />
+            <Route path="/guides/portable-vs-bedroom-storage" element={<GuidePortableVsBedroomStorage />} />
+            <Route path="/guides/how-to-choose-premium-products-for-couples" element={<GuideProductsForCouples />} />
+            <Route path="/guides/how-to-care-for-your-vellvii-products" element={<GuideProductCare />} />
 
             {/* Legacy redirects: pre-Shopify product pages → Shopify PDPs */}
             <Route path="/dox" element={<Navigate to="/products/vellvii-dox" replace />} />
