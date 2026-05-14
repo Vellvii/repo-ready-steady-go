@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X, Search } from "lucide-react";
+import { Menu, X, Search, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // ---------- Module-level open state (single global drawer) ----------
@@ -23,26 +23,29 @@ const subscribe = (l: Listener) => {
   };
 };
 
-// ---------- Nav data (live routes only) ----------
+// ---------- Nav data ----------
 type NavLink = { label: string; href: string; external?: boolean };
-type NavGroup = { heading: string; links: NavLink[] };
+type NavItem =
+  | { kind: "link"; label: string; href: string; external?: boolean }
+  | { kind: "group"; label: string; links: NavLink[] };
 
-const NAV_GROUPS: NavGroup[] = [
+const NAV_ITEMS: NavItem[] = [
   {
-    heading: "Shop",
+    kind: "group",
+    label: "Shop",
     links: [
       { label: "All Products", href: "/shop" },
       { label: "Pleasure Collection", href: "/collections/pleasure-collection" },
-      { label: "DOX-Compatible Products", href: "/collections/dox-compatible-products" },
+      { label: "DOX-Compatible", href: "/collections/dox-compatible-products" },
       { label: "Discreet Storage", href: "/collections/discreet-storage" },
       { label: "Portable Storage", href: "/collections/portable-storage" },
       { label: "Bedroom Storage", href: "/collections/bedroom-storage" },
-      { label: "Products for Couples", href: "/collections/products-for-couples" },
-      { label: "Guides", href: "/guides" },
+      { label: "For Couples", href: "/collections/products-for-couples" },
     ],
   },
   {
-    heading: "Products",
+    kind: "group",
+    label: "Products",
     links: [
       { label: "Vellvii DOX", href: "/products/vellvii-dox" },
       { label: "Vellvii Lux", href: "/products/vellvii-lux" },
@@ -51,17 +54,14 @@ const NAV_GROUPS: NavGroup[] = [
       { label: "Vellvii Pulse", href: "/products/vellvii-pulse" },
     ],
   },
+  { kind: "link", label: "Guides", href: "/guides" },
+  { kind: "link", label: "Warranty", href: "/warranty" },
+  { kind: "link", label: "Contact", href: "/contact" },
   {
-    heading: "Support",
+    kind: "group",
+    label: "More",
     links: [
-      { label: "Warranty", href: "/warranty" },
       { label: "Register Warranty", href: "/warranty/register" },
-      { label: "Contact", href: "/contact" },
-    ],
-  },
-  {
-    heading: "Legal",
-    links: [
       { label: "Privacy Policy", href: "/privacy-policy" },
       { label: "Terms of Service", href: "/terms-of-service" },
     ],
@@ -91,10 +91,24 @@ export const NavMenuButton = ({ className }: { className?: string }) => {
 export const LuxuryNavDrawer = () => {
   const [open, setOpenState] = useState(_open);
   const [query, setQuery] = useState("");
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const searchRef = useRef<HTMLInputElement>(null);
   const location = useLocation();
 
   useEffect(() => subscribe(setOpenState), []);
+
+  // Auto-expand the group containing the active route when drawer opens
+  useEffect(() => {
+    if (!open) return;
+    const next: Record<string, boolean> = {};
+    NAV_ITEMS.forEach((item) => {
+      if (item.kind === "group") {
+        const active = item.links.some((l) => location.pathname.startsWith(l.href));
+        if (active) next[item.label] = true;
+      }
+    });
+    setExpanded((prev) => ({ ...prev, ...next }));
+  }, [open, location.pathname]);
 
   // Close on route change
   useEffect(() => {
@@ -113,19 +127,16 @@ export const LuxuryNavDrawer = () => {
     };
     window.addEventListener("keydown", onKey);
 
-    // Focus search after mount
     const t = window.setTimeout(() => searchRef.current?.focus(), 50);
 
     return () => {
       document.body.style.overflow = prevOverflow;
       window.removeEventListener("keydown", onKey);
       window.clearTimeout(t);
-      // Return focus to last trigger
       _lastTrigger?.focus?.();
     };
   }, [open]);
 
-  // Cleanup on unmount as a safety net
   useEffect(() => {
     return () => {
       document.body.style.overflow = "";
@@ -134,18 +145,32 @@ export const LuxuryNavDrawer = () => {
 
   const close = useCallback(() => setOpen(false), []);
 
-  const filteredGroups = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) return NAV_GROUPS;
-    return NAV_GROUPS
-      .map((g) => ({
-        ...g,
-        links: g.links.filter((l) => l.label.toLowerCase().includes(q)),
-      }))
-      .filter((g) => g.links.length > 0);
-  }, [query]);
+  // Search filtering: when querying, auto-expand groups that have matches
+  const q = query.trim().toLowerCase();
+  const filteredItems = useMemo(() => {
+    if (!q) return NAV_ITEMS;
+    const out: NavItem[] = [];
+    for (const item of NAV_ITEMS) {
+      if (item.kind === "link") {
+        if (item.label.toLowerCase().includes(q)) out.push(item);
+      } else {
+        const links = item.links.filter((l) => l.label.toLowerCase().includes(q));
+        if (links.length) out.push({ ...item, links });
+      }
+    }
+    return out;
+  }, [q]);
 
-  const totalMatches = filteredGroups.reduce((n, g) => n + g.links.length, 0);
+  const totalMatches = filteredItems.reduce(
+    (n, i) => n + (i.kind === "link" ? 1 : i.links.length),
+    0
+  );
+
+  const toggle = (label: string) =>
+    setExpanded((prev) => ({ ...prev, [label]: !prev[label] }));
+
+  const linkClass =
+    "block py-2.5 font-montserrat text-sm text-light-secondary hover:text-primary transition-colors border-l-2 border-transparent hover:border-primary/40 pl-3 -ml-3";
 
   return (
     <AnimatePresence>
@@ -224,65 +249,87 @@ export const LuxuryNavDrawer = () => {
               </div>
             </div>
 
-            {/* Nav groups */}
-            <motion.nav
+            {/* Nav */}
+            <nav
               data-lenis-prevent
               data-lenis-prevent-wheel
               data-lenis-prevent-touch
               className="flex-1 min-h-0 overflow-y-auto overscroll-contain touch-pan-y px-5 sm:px-6 pb-6 pr-1 scrollbar-luxury"
               style={{ WebkitOverflowScrolling: "touch" }}
-              initial="hidden"
-              animate="visible"
-              variants={{
-                hidden: {},
-                visible: { transition: { staggerChildren: 0.025, delayChildren: 0.05 } },
-              }}
             >
               {totalMatches === 0 ? (
                 <p className="font-montserrat text-sm text-light-secondary/80 py-4">
                   No results found.
                 </p>
               ) : (
-                <div className="space-y-8">
-                  {filteredGroups.map((group) => (
-                    <div key={group.heading}>
-                      <h3 className="font-baskerville italic text-xs uppercase tracking-[0.2em] text-primary/80 mb-3">
-                        {group.heading}
-                      </h3>
-                      <ul>
-                        {group.links.map((link) => (
-                          <motion.li
-                            key={link.href + link.label}
-                            variants={{
-                              hidden: { opacity: 0, x: -8 },
-                              visible: { opacity: 1, x: 0 },
-                            }}
+                <ul className="space-y-1">
+                  {filteredItems.map((item) => {
+                    if (item.kind === "link") {
+                      return (
+                        <li key={item.href + item.label}>
+                          <Link
+                            to={item.href}
+                            onClick={close}
+                            className="block py-3 font-baskerville italic text-sm uppercase tracking-[0.18em] text-light-primary hover:text-primary transition-colors"
                           >
-                            {link.external ? (
-                              <a
-                                href={link.href}
-                                onClick={close}
-                                className="block py-2.5 font-montserrat text-sm text-light-secondary hover:text-primary transition-colors border-l-2 border-transparent hover:border-primary/40 pl-3 -ml-3"
-                              >
-                                {link.label}
-                              </a>
-                            ) : (
-                              <Link
-                                to={link.href}
-                                onClick={close}
-                                className="block py-2.5 font-montserrat text-sm text-light-secondary hover:text-primary transition-colors border-l-2 border-transparent hover:border-primary/40 pl-3 -ml-3"
-                              >
-                                {link.label}
-                              </Link>
-                            )}
-                          </motion.li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
+                            {item.label}
+                          </Link>
+                        </li>
+                      );
+                    }
+
+                    const isOpen = !!q || !!expanded[item.label];
+                    return (
+                      <li key={item.label} className="border-b border-white/5 last:border-b-0">
+                        <button
+                          type="button"
+                          onClick={() => toggle(item.label)}
+                          aria-expanded={isOpen}
+                          className="w-full flex items-center justify-between py-3 font-baskerville italic text-sm uppercase tracking-[0.18em] text-light-primary hover:text-primary transition-colors"
+                        >
+                          <span>{item.label}</span>
+                          <motion.span
+                            animate={{ rotate: isOpen ? 180 : 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="text-primary/70"
+                          >
+                            <ChevronDown className="h-4 w-4" strokeWidth={1.5} />
+                          </motion.span>
+                        </button>
+                        <AnimatePresence initial={false}>
+                          {isOpen && (
+                            <motion.div
+                              key="content"
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                              className="overflow-hidden"
+                            >
+                              <ul className="pl-3 pb-2">
+                                {item.links.map((link) => (
+                                  <li key={link.href + link.label}>
+                                    {link.external ? (
+                                      <a href={link.href} onClick={close} className={linkClass}>
+                                        {link.label}
+                                      </a>
+                                    ) : (
+                                      <Link to={link.href} onClick={close} className={linkClass}>
+                                        {link.label}
+                                      </Link>
+                                    )}
+                                  </li>
+                                ))}
+                              </ul>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </li>
+                    );
+                  })}
+                </ul>
               )}
-            </motion.nav>
+            </nav>
 
             {/* Footer */}
             <div className="border-t border-white/10 px-5 sm:px-6 py-4 space-y-1.5">
