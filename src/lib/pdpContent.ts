@@ -171,7 +171,7 @@ export const PDP_CONTENT: Record<CanonicalHandle, PdpContent> = {
       { icon: "Gem", label: "A refined sex toy lock box", copy: "Designed as a discreet, design-led biometric storage system - a quiet anchor for the Vellvii Pleasure Collection." },
     ],
     productDetails: [
-      { label: "Exterior", value: "Faux leather with rose gold accents" },
+      { label: "Exterior", value: "Premium textured exterior with rose-gold accents" },
       { label: "Interior", value: "Velvet-lined, with a movable velvet-lined tray for smaller items" },
       { label: "Security", value: "Biometric fingerprint lock" },
       { label: "Top Mounts", value: "VDS and DDS suction-base mounting stations" },

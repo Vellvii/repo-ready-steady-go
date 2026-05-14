@@ -16,7 +16,7 @@ export const PRODUCTS: Record<string, Product> = {
     price: 299,
     description: 'Rhythmic Clitoral Stimulator',
     images: ['/uploads/Pulse1.jpg', '/uploads/Pulse2.jpg'],
-    features: ['10 Intensities', 'IPX7 Waterproof', 'Whisper Quiet'],
+    features: ['10 Intensities', 'Designed for Everyday Care', 'Whisper Quiet'],
     route: '/pulse'
   },
   vibe: {
