@@ -7,7 +7,7 @@ import { SEO } from "@/components/SEO";
 import { ScrollHeader } from "@/components/ScrollHeader";
 import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
 import { cn } from "@/lib/utils";
-import { Search, X, ShoppingCart, Loader2 } from "lucide-react";
+import { Search, X, ShoppingCart, Loader2, SlidersHorizontal, ChevronDown } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { StatusPill, getProductStatus } from "@/components/products/StatusPill";
@@ -281,11 +281,18 @@ const CollectionFilterBar = ({
   );
 };
 
+type SortOption = "featured" | "price-asc" | "price-desc" | "title-asc";
+
 const Shop = () => {
   const [selectedCollection, setSelectedCollection] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
-  
+  const [filtersOpen, setFiltersOpen] = useState(false);
+  const [sortBy, setSortBy] = useState<SortOption>("featured");
+  const [priceMin, setPriceMin] = useState("");
+  const [priceMax, setPriceMax] = useState("");
+  const [inStockOnly, setInStockOnly] = useState(false);
+
   const { data: allProducts } = useShopifyProducts(50);
   const { data: collections, isLoading: collectionsLoading } = useShopifyCollections(20);
   const { data: products, isLoading: productsLoading, error } = useShopifyProductsByCollection(
@@ -296,7 +303,7 @@ const Shop = () => {
   // Filter products by search query with fuzzy matching
   const filteredProducts = useMemo(() => {
     if (!products || !searchQuery.trim()) return products;
-    
+
     return products
       .map((product) => ({
         product,
@@ -310,7 +317,7 @@ const Shop = () => {
   // Suggestions from all products
   const suggestions = useMemo(() => {
     if (!allProducts || !searchQuery.trim() || searchQuery.length < 2) return [];
-    
+
     return allProducts
       .map((product) => ({
         product,
@@ -326,7 +333,47 @@ const Shop = () => {
     setShowSuggestions(false);
   };
 
-  const displayProducts = searchQuery.trim() ? filteredProducts : products;
+  const baseProducts = searchQuery.trim() ? filteredProducts : products;
+
+  // Apply price / stock filters and sort
+  const displayProducts = useMemo(() => {
+    if (!baseProducts) return baseProducts;
+    const min = priceMin ? parseFloat(priceMin) : null;
+    const max = priceMax ? parseFloat(priceMax) : null;
+
+    let list = baseProducts.filter((p) => {
+      const price = parseFloat(p.node.priceRange.minVariantPrice.amount);
+      if (min !== null && price < min) return false;
+      if (max !== null && price > max) return false;
+      if (inStockOnly) {
+        const available = p.node.variants.edges.some((v) => v.node.availableForSale);
+        if (!available) return false;
+      }
+      return true;
+    });
+
+    if (sortBy !== "featured") {
+      list = [...list].sort((a, b) => {
+        const ap = parseFloat(a.node.priceRange.minVariantPrice.amount);
+        const bp = parseFloat(b.node.priceRange.minVariantPrice.amount);
+        if (sortBy === "price-asc") return ap - bp;
+        if (sortBy === "price-desc") return bp - ap;
+        if (sortBy === "title-asc") return a.node.title.localeCompare(b.node.title);
+        return 0;
+      });
+    }
+    return list;
+  }, [baseProducts, priceMin, priceMax, inStockOnly, sortBy]);
+
+  const activeFilterCount =
+    (priceMin ? 1 : 0) + (priceMax ? 1 : 0) + (inStockOnly ? 1 : 0) + (sortBy !== "featured" ? 1 : 0);
+
+  const clearFilters = () => {
+    setPriceMin("");
+    setPriceMax("");
+    setInStockOnly(false);
+    setSortBy("featured");
+  };
 
   return (
     <>
