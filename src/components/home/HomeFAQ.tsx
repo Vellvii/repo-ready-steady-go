@@ -43,9 +43,9 @@ export const homeFAQs: FAQItem[] = [
   {
     question: "What materials is the Vellvii Lux made from?",
     answerText:
-      "The Vellvii Lux is a soft bag - crafted from genuine leather with a velvet-lined interior. No hard casing. Designed to cushion, protect, and travel quietly.",
+      "The Vellvii Lux is a soft case - crafted with a refined textured exterior and a velvet-lined interior. No hard casing. Designed to cushion, protect, and travel quietly.",
     answer:
-      "The Vellvii Lux is a soft bag - crafted from genuine leather with a velvet-lined interior. No hard casing. Designed to cushion, protect, and travel quietly.",
+      "The Vellvii Lux is a soft case - crafted with a refined textured exterior and a velvet-lined interior. No hard casing. Designed to cushion, protect, and travel quietly.",
   },
   {
     question: "How does the Vellvii ecosystem work?",
