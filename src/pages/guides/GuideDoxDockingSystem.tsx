@@ -24,19 +24,19 @@ const H2 = "font-baskerville text-2xl sm:text-3xl text-light-primary mt-12 mb-4"
 const GuideDoxDockingSystem = () => {
   return (
     <GuideLayout
-      seoTitle="How the Vellvii DOX Docking System Works | VDS & DDS"
-      seoDescription="How the Vellvii DOX docking system works, including VDS for Vellvii G-Vibe, Evolve and Pulse, and DDS for compatible suction-base products up to 90mm."
+      seoTitle="How the Vellvii DOX Docking System Works | Sex Toy Storage with VDS & DDS"
+      seoDescription="How the Vellvii DOX storage and docking system works, including VDS for Vellvii G-Vibe, Evolve and Pulse, and DDS for compatible suction-base products up to 90mm."
       canonical="/guides/how-the-vellvii-dox-docking-system-works"
       category="DOX Compatibility"
-      title="How the Vellvii DOX Docking System Works"
+      title="How the Vellvii DOX Storage and Docking System Works"
       intro="The Vellvii DOX uses two distinct top-mounted suction stations - the VDS and the DDS - turning the DOX itself into a refined stand for compatible suction-base pieces. Here is how each one works."
       heroImage="/uploads/dox-interior-labeled.jpg"
-      heroImageAlt="Vellvii DOX shown with the VDS and DDS suction-base mounting stations on top"
+      heroImageAlt="Vellvii DOX biometric sex toy lock box shown with the VDS and DDS suction-base mounting stations on top"
       faq={FAQ}
     >
       <h2 className={H2}>Introduction</h2>
       <p>
-        The Vellvii DOX is more than a storage box. On top of the DOX, two suction-base mounting stations - the VDS for current Vellvii products and the DDS for compatible suction-base pieces - turn the DOX itself into a refined stand. Inside, the DOX is velvet-lined with a movable velvet-lined tray for smaller items, and a USB-C input on the exterior powers 3 internal USB-A ports for charging while stored.
+        The Vellvii DOX is a refined sex toy storage and docking system. On top of the DOX, two suction-base mounting stations - the VDS for current Vellvii products and the DDS for compatible suction-base pieces - turn the DOX itself into a refined stand. Inside, the DOX is velvet-lined with a movable velvet-lined tray for smaller items.
       </p>
 
       <h2 className={H2}>What is the Vellvii DOX?</h2>
