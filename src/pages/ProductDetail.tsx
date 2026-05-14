@@ -283,15 +283,18 @@ const ProductDetail = () => {
           : "OutOfStock";
         const skuTail = variant?.id ? variant.id.split("/").pop() : undefined;
 
-        const luxTitle = `Vellvii Lux - Portable Fingerprint Storage Case | Pleasure Collection`;
+        const luxTitle = `Vellvii Lux | Portable Biometric Sex Toy Storage Case`;
         const luxDescription =
-          "Vellvii Lux is a portable fingerprint-lock storage case designed for refined discretion at home or on the move. Part of the Vellvii Pleasure Collection.";
+          "Vellvii Lux is a portable fingerprint-lock storage case for everyday discreet sex toy storage and travel-friendly privacy. Part of the Vellvii Pleasure Collection.";
         const luxKeywords =
-          "vellvii lux, portable pleasure storage, fingerprint storage case, biometric pleasure case, discreet travel storage, pleasure collection case, refined intimate storage";
+          "sex toy bag, portable sex toy storage, sex toy lock box, biometric lock box, discreet sex toy storage, fingerprint storage case, vellvii lux";
 
         const luxFaqs = [
-          { question: "What is the Vellvii Lux?", answer: "Vellvii Lux is a portable fingerprint-lock storage case - a compact, discreet companion designed with the feel of a refined toiletries-style case for travel and everyday personal storage." },
+          { question: "Is Vellvii Lux a portable sex toy bag?", answer: "Yes. Vellvii Lux is a portable fingerprint-lock storage case designed for discreet sex toy storage at home and on the move - a refined alternative to a standard sex toy bag." },
+          { question: "Does Lux work as a travel-friendly sex toy storage case?", answer: "Yes. Lux is designed as a travel-friendly sex toy storage case, sized like a refined toiletries-style bag and secured with biometric access." },
+          { question: "Is Vellvii Lux a portable biometric storage case?", answer: "Yes. Lux is a portable biometric storage case - a compact, fingerprint-lock companion built for everyday personal storage and travel." },
           { question: "How is the Lux different from the Vellvii DOX?", answer: "Vellvii Lux is the more portable storage companion, designed with the feel of a refined toiletries-style case and secured with fingerprint access. Vellvii DOX is the larger, sturdier storage system, designed as a more substantial piece for the bedroom." },
+          { question: "How should I care for Vellvii Lux?", answer: "Follow the care instructions included with your product, store the case in a clean, dry place, and avoid extreme heat, direct sunlight, and unnecessary exposure. If you are unsure, contact Vellvii support." },
           { question: "When does the Vellvii Lux ship?", answer: "Pre-orders ship the first week of June 2026. Reserve now to secure your unit from the current first-run offer." },
           { question: "Is the Vellvii Nova included with Lux?", answer: "The complimentary Vellvii Nova is included with the current Lux first-run offer. Future Lux runs are planned, but the Nova gift will not be included after this first run." },
           { question: "What is the Vellvii Lux warranty?", answer: "All Vellvii products are covered by our authorized retailer warranty when registered within 7 days of receipt. Repair or replacement only - no refunds on final sales." },
@@ -301,14 +304,16 @@ const ProductDetail = () => {
 
         // Per-handle SEO override map for canonical Vellvii products.
         // Falls back to Shopify product data for any future products.
-        const PDP_SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
+        const PDP_SEO_OVERRIDES: Record<string, { title: string; description: string; keywords?: string }> = {
           "vellvii-dox": {
-            title: "Vellvii DOX | Luxury Smart Storage for Intimate Wellness",
-            description: "Meet Vellvii DOX, a premium storage solution designed for modern intimate wellness products with elegance, discretion, and refined design.",
+            title: "Vellvii DOX | Biometric Sex Toy Lock Box & Storage System",
+            description: "Vellvii DOX is a refined biometric lock box and bedroom storage hub for the Vellvii Pleasure Collection - discreet sex toy storage, designed with intention.",
+            keywords: "sex toy storage, sex toy box, sex toy lock box, biometric lock box, adult toy box, discreet sex toy storage, vellvii dox",
           },
           "vellvii-lux": {
-            title: "Vellvii Lux | Luxury Storage Case for Intimate Wellness",
-            description: "Discover Vellvii Lux, a premium blush storage case designed for discreet, elegant intimate wellness storage.",
+            title: "Vellvii Lux | Portable Biometric Sex Toy Storage Case",
+            description: "Vellvii Lux is a portable fingerprint-lock storage case for everyday discreet sex toy storage and travel-friendly privacy.",
+            keywords: "sex toy bag, portable sex toy storage, sex toy lock box, biometric lock box, discreet sex toy storage, vellvii lux",
           },
           "vellvii-g-vibe": {
             title: "Vellvii G-Vibe | Premium Intimate Wellness Product",
