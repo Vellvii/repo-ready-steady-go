@@ -146,10 +146,10 @@ const CollectionDoxCompatible = () => {
   return (
     <>
       <SEO
-        title="DOX-Compatible Products | Vellvii Pleasure Collection"
-        description="Explore DOX-compatible products in the Vellvii Pleasure Collection, designed to work with the VDS and DDS suction-base mounting stations that sit atop the Vellvii DOX."
+        title="DOX-Compatible Storage System | Vellvii DOX-Compatible Products"
+        description="DOX-compatible storage system - explore Vellvii products designed to work with the VDS and DDS suction-base mounting stations atop the Vellvii DOX."
         canonical="/collections/dox-compatible-products"
-        keywords="DOX-compatible products, Vellvii Docking Station, VDS, DDS, Vellvii Pleasure Collection, discreet storage"
+        keywords="DOX-compatible storage system, DOX-compatible products, Vellvii Docking Station, VDS, DDS, biometric sex toy lock box, discreet sex toy storage"
         organizationData
         breadcrumbs={[
           { name: "Home", url: "/" },
