@@ -358,7 +358,11 @@ const Shop = () => {
         const bp = parseFloat(b.node.priceRange.minVariantPrice.amount);
         if (sortBy === "price-asc") return ap - bp;
         if (sortBy === "price-desc") return bp - ap;
-        if (sortBy === "title-asc") return a.node.title.localeCompare(b.node.title);
+        if (sortBy === "title-asc") {
+          const stripBrand = (t: string) =>
+            t.replace(/^\s*vellvii[\s\-:]*/i, "").trim().toLowerCase();
+          return stripBrand(a.node.title).localeCompare(stripBrand(b.node.title));
+        }
         return 0;
       });
     }
@@ -455,75 +459,118 @@ const Shop = () => {
           </div>
 
           {filtersOpen && (
-            <div className="mt-4 p-5 sm:p-6 rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-sm">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6">
+            <div className="mt-4 rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.015] backdrop-blur-md overflow-hidden">
+              <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/[0.06]">
                 {/* Sort */}
-                <div>
-                  <label className="block font-montserrat text-[0.65rem] uppercase tracking-[0.2em] text-light-secondary/60 mb-2">
-                    Sort by
-                  </label>
-                  <select
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value as SortOption)}
-                    className="w-full h-10 px-3 rounded-md bg-background border border-white/10 text-light-primary font-montserrat text-sm focus:outline-none focus:border-primary/50"
-                  >
-                    <option value="featured">Featured</option>
-                    <option value="price-asc">Price: Low to High</option>
-                    <option value="price-desc">Price: High to Low</option>
-                    <option value="title-asc">Name: A to Z</option>
-                  </select>
+                <div className="p-5 sm:p-6">
+                  <p className="font-baskerville italic text-[0.7rem] uppercase tracking-[0.24em] text-primary/70 mb-3">
+                    Sort
+                  </p>
+                  <div className="flex flex-col gap-1.5">
+                    {[
+                      { value: "featured", label: "Featured" },
+                      { value: "price-asc", label: "Price - low to high" },
+                      { value: "price-desc", label: "Price - high to low" },
+                      { value: "title-asc", label: "Name - A to Z" },
+                    ].map((opt) => {
+                      const active = sortBy === opt.value;
+                      return (
+                        <button
+                          key={opt.value}
+                          onClick={() => setSortBy(opt.value as SortOption)}
+                          className={cn(
+                            "group flex items-center justify-between gap-2 px-3 py-2 rounded-lg font-montserrat text-sm transition-all duration-200",
+                            active
+                              ? "bg-primary/10 text-light-primary"
+                              : "text-light-secondary/80 hover:bg-white/[0.04] hover:text-light-primary"
+                          )}
+                        >
+                          <span>{opt.label}</span>
+                          <span
+                            className={cn(
+                              "h-1.5 w-1.5 rounded-full transition-all",
+                              active ? "bg-primary shadow-[0_0_10px_hsl(var(--primary)/0.6)]" : "bg-transparent"
+                            )}
+                          />
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
 
                 {/* Price */}
-                <div>
-                  <label className="block font-montserrat text-[0.65rem] uppercase tracking-[0.2em] text-light-secondary/60 mb-2">
+                <div className="p-5 sm:p-6">
+                  <p className="font-baskerville italic text-[0.7rem] uppercase tracking-[0.24em] text-primary/70 mb-3">
                     Price (USD)
-                  </label>
+                  </p>
                   <div className="flex items-center gap-2">
-                    <input
-                      type="number"
-                      inputMode="numeric"
-                      min="0"
-                      placeholder="Min"
-                      value={priceMin}
-                      onChange={(e) => setPriceMin(e.target.value)}
-                      className="w-full h-10 px-3 rounded-md bg-background border border-white/10 text-light-primary placeholder:text-light-muted font-montserrat text-sm focus:outline-none focus:border-primary/50"
-                    />
-                    <span className="text-light-muted">-</span>
-                    <input
-                      type="number"
-                      inputMode="numeric"
-                      min="0"
-                      placeholder="Max"
-                      value={priceMax}
-                      onChange={(e) => setPriceMax(e.target.value)}
-                      className="w-full h-10 px-3 rounded-md bg-background border border-white/10 text-light-primary placeholder:text-light-muted font-montserrat text-sm focus:outline-none focus:border-primary/50"
-                    />
+                    <div className="relative flex-1">
+                      <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 font-montserrat text-xs text-light-muted">$</span>
+                      <input
+                        type="number"
+                        inputMode="numeric"
+                        min="0"
+                        placeholder="Min"
+                        value={priceMin}
+                        onChange={(e) => setPriceMin(e.target.value)}
+                        className="w-full h-11 pl-7 pr-3 rounded-lg bg-white/[0.04] border border-white/10 text-light-primary placeholder:text-light-muted font-montserrat text-sm focus:outline-none focus:border-primary/40 focus:bg-white/[0.06] transition-colors"
+                      />
+                    </div>
+                    <span className="text-light-muted/60 text-xs">to</span>
+                    <div className="relative flex-1">
+                      <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 font-montserrat text-xs text-light-muted">$</span>
+                      <input
+                        type="number"
+                        inputMode="numeric"
+                        min="0"
+                        placeholder="Max"
+                        value={priceMax}
+                        onChange={(e) => setPriceMax(e.target.value)}
+                        className="w-full h-11 pl-7 pr-3 rounded-lg bg-white/[0.04] border border-white/10 text-light-primary placeholder:text-light-muted font-montserrat text-sm focus:outline-none focus:border-primary/40 focus:bg-white/[0.06] transition-colors"
+                      />
+                    </div>
                   </div>
                 </div>
 
                 {/* Availability */}
-                <div>
-                  <label className="block font-montserrat text-[0.65rem] uppercase tracking-[0.2em] text-light-secondary/60 mb-2">
+                <div className="p-5 sm:p-6">
+                  <p className="font-baskerville italic text-[0.7rem] uppercase tracking-[0.24em] text-primary/70 mb-3">
                     Availability
-                  </label>
-                  <label className="inline-flex items-center gap-2 h-10 cursor-pointer select-none font-montserrat text-sm text-light-secondary hover:text-light-primary transition-colors">
-                    <input
-                      type="checkbox"
-                      checked={inStockOnly}
-                      onChange={(e) => setInStockOnly(e.target.checked)}
-                      className="w-4 h-4 rounded border-white/20 bg-background text-primary focus:ring-primary/40"
-                    />
-                    <span>In stock only</span>
-                  </label>
+                  </p>
+                  <button
+                    type="button"
+                    role="switch"
+                    aria-checked={inStockOnly}
+                    onClick={() => setInStockOnly((v) => !v)}
+                    className="group flex items-center justify-between gap-3 w-full px-3 py-2.5 rounded-lg hover:bg-white/[0.04] transition-colors"
+                  >
+                    <span className="font-montserrat text-sm text-light-secondary group-hover:text-light-primary transition-colors">
+                      In stock only
+                    </span>
+                    <span
+                      className={cn(
+                        "relative inline-flex h-5 w-9 shrink-0 items-center rounded-full border transition-all duration-300",
+                        inStockOnly
+                          ? "bg-primary/30 border-primary/60"
+                          : "bg-white/[0.04] border-white/15"
+                      )}
+                    >
+                      <span
+                        className={cn(
+                          "inline-block h-3.5 w-3.5 rounded-full bg-light-primary shadow transition-transform duration-300",
+                          inStockOnly ? "translate-x-[1.15rem]" : "translate-x-0.5"
+                        )}
+                      />
+                    </span>
+                  </button>
                 </div>
               </div>
 
               {activeFilterCount > 0 && (
-                <div className="mt-5 pt-4 border-t border-white/10 flex justify-end">
+                <div className="px-5 sm:px-6 py-3 border-t border-white/[0.06] flex justify-end bg-black/20">
                   <button
                     onClick={clearFilters}
-                    className="font-montserrat text-xs uppercase tracking-[0.2em] text-light-secondary hover:text-primary transition-colors"
+                    className="font-montserrat text-[0.7rem] uppercase tracking-[0.22em] text-light-secondary/70 hover:text-primary transition-colors"
                   >
                     Clear filters
                   </button>
