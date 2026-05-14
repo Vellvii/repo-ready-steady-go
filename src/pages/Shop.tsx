@@ -574,6 +574,36 @@ const Shop = () => {
           )}
         </div>
 
+        {/* Explore by collection - quiet footer-style strip */}
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pb-12 sm:pb-16">
+          <div className="pt-8 sm:pt-10 border-t border-white/10">
+            <p className="font-baskerville italic text-[0.7rem] sm:text-xs uppercase tracking-[0.22em] text-light-secondary/55 mb-4 text-center">
+              Explore by collection
+            </p>
+            <nav
+              aria-label="Vellvii collections"
+              className="flex items-center justify-center gap-x-5 sm:gap-x-7 gap-y-2 flex-wrap"
+            >
+              {[
+                { label: "Pleasure Collection", href: "/collections/pleasure-collection" },
+                { label: "DOX-Compatible", href: "/collections/dox-compatible-products" },
+                { label: "Discreet Storage", href: "/collections/discreet-storage" },
+                { label: "Portable Storage", href: "/collections/portable-storage" },
+                { label: "Bedroom Storage", href: "/collections/bedroom-storage" },
+                { label: "Products for Couples", href: "/collections/products-for-couples" },
+              ].map((c) => (
+                <Link
+                  key={c.href}
+                  to={c.href}
+                  className="font-montserrat text-[0.72rem] sm:text-xs tracking-wide text-light-secondary/70 hover:text-primary transition-colors whitespace-nowrap"
+                >
+                  {c.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </div>
+
         <PrelaunchFooter />
       </div>
     </>
