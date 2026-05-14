@@ -9,8 +9,8 @@ const trustItems = [
   },
   {
     icon: Zap,
-    title: "Wireless Charging",
-    description: "Integrated USB-C dock powers devices discreetly",
+    title: "Integrated Charging",
+    description: "Internal USB-A ports powered by an external USB-C input",
   },
   {
     icon: Shield,

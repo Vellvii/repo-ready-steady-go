@@ -22,7 +22,7 @@ const features: FeaturePanel[] = [
   {
     title: "INTEGRATED",
     subtitle: "CHARGING",
-    description: "Always ready. Always hidden. Wireless charging keeps your devices powered discreetly.",
+    description: "3 internal USB-A charging ports powered through an external USB-C input - devices stay organized and ready inside the DOX.",
     media: "/uploads/Red_Dox_charge_inside.png",
     isVideo: false,
     reverse: true,

@@ -1,63 +1,88 @@
-# Correct DOX & Lux Product Descriptions Sitewide
+# Reintroduce Confirmed DOX & Lux Specs
 
-## Source of truth (per your message + answers)
+Confirmed specs (now approved):
+- **DOX**: faux leather exterior, velvet interior, 3 internal USB-A ports powered by external USB-C input, VDS/DDS docking
+- **Lux**: genuine leather exterior, velvet interior, 2 internal USB-A ports powered by external USB-C input, fingerprint lock, portable case
 
-**Vellvii DOX**
-- Faux leather exterior with rose gold accents
-- Velvet-lined interior
-- Movable, velvet-lined internal tray for small items (bullet/rose toys, condoms, lubes) - can be repositioned or removed
-- Biometric fingerprint lock - up to 10 fingerprints
-- USB-C input port on exterior (opposite side from the lock); feeds 3 internal USB-A ports for charging toys securely inside
-- VDS and DDS are external suction-base mounting stations that sit atop the DOX (not internal shaped inserts), turning the DOX into a mount for suction-cup toys
+Forbidden (still): universal/wireless/fast/smart charging, app-connected, waterproof, medical-grade, body-safe certified, country of origin.
 
-**Vellvii Lux**
-- Soft portable bag, roughly the size of a refined toiletries bag
-- Genuine leather exterior, velvet interior
-- Same biometric fingerprint lock system
-- USB-C input on exterior; 2 internal USB-A ports for charging toys
+## Files to update (active/canonical only)
 
-## Files to update
+### 1. `src/lib/pdpContent.ts`
+**DOX `productDetails`** → set:
+- Exterior: "Faux leather with rose-gold accents"
+- Interior: "Velvet-lined, with a movable velvet-lined tray for smaller items"
+- Security: "Biometric fingerprint lock"
+- Charging: "3 internal USB-A charging ports powered by an external USB-C input"
+- Top Mounts: "VDS and DDS suction-base mounting stations"
 
-**Guides**
-- `src/pages/guides/GuideProductsForCouples.tsx` (line ~73, the line you flagged + line ~94 "DOX-compatible through the VDS insert")
-- `src/pages/guides/GuideLuxVsDox.tsx` (lines ~70, 84, 102 - replace "shaped inserts/docking inserts" wording; expand Lux description to include leather/velvet/charging/biometric)
-- `src/pages/guides/GuidePortableVsBedroomStorage.tsx` (lines ~65, 96 - same replacements; add accurate materials & charging detail)
-- `src/pages/guides/GuideDiscreetStorage.tsx` (line ~87 - replace "shaped inserts that keep compatible pieces organized")
-- `src/pages/guides/GuideDoxDockingSystem.tsx` (lines ~32, 39, 52, 58 - rewrite VDS/DDS as top-mounted suction stations; update intro & alt text)
+**DOX `keyBenefits`** → revise one card to surface charging (e.g. replace generic "refined sex toy lock box" with "Integrated internal charging — 3 internal USB-A ports powered through a single external USB-C input").
 
-**Collections / shared content**
-- `src/lib/pdpContent.ts`
-  - `DOCKING_INFO` (lines 73-87): rewrite VDS/DDS copy as external suction mounting stations on top of the DOX
-  - DOX product details: add faux leather exterior, velvet interior + tray, fingerprint lock (up to 10 prints), USB-C in + 3 USB-A internal
-  - Lux product details (lines ~177-195): genuine leather exterior, velvet interior, USB-C in + 2 USB-A internal
-  - DOX-compatibility spec rows (lines 212/224/236): change "Fits the Vellvii DOX through the VDS insert" -> language about being compatible with the VDS suction mount atop the DOX
-- `src/pages/CollectionDoxCompatible.tsx` (lines ~21, 26, 150, 176): VDS/DDS are top-mounted suction stations, not shaped interior inserts
-- `src/pages/CollectionPleasureCollection.tsx` (line 47): update "DOX-compatible through the VDS docking insert" wording
-- `src/pages/CollectionBedroomStorage.tsx` (line 46): same
-- `src/components/products/DoxCompatibleSection.tsx` (line 19): "Designed to fit the Vellvii DOX through the VDS insert" -> compatible with the VDS suction mount on top of the DOX
-- `src/components/products/DockingSystemSection.tsx`: copy reads from `DOCKING_INFO`, no direct edits needed once pdpContent is updated
-- `src/components/home/DoxFeatures.tsx`: change "VEGAN LEATHER" panel to "FAUX LEATHER" with corrected description (faux leather exterior, velvet interior, movable tray)
+**DOX `faqs`** → append two FAQs:
+- "Does Vellvii DOX include charging ports?" → "Yes. Vellvii DOX includes 3 internal USB-A charging ports powered through an external USB-C input."
+- "What materials are used on Vellvii DOX?" → "Vellvii DOX uses a faux leather exterior with a velvet interior."
 
-**Prelaunch / SEO**
-- `src/pages/PrelaunchDOX.tsx` (lines 15-17, 26, 31): replace "vegan leather" with "faux leather"; update FAQ about charging to reflect USB-C input + 3 internal USB-A ports (not "embedded USB-C charging dock with cradle slots"); fingerprint FAQ note up to 10 prints
-- `public/llms.txt` (lines 8-10): rephrase "DOX-compatible through the VDS insert" to top-mounted VDS suction station wording
+**Lux `productDetails`** → set:
+- Exterior: "Genuine leather"
+- Interior: "Velvet-lined"
+- Format: "Portable storage case, sized like a refined toiletries bag"
+- Security: "Biometric fingerprint lock"
+- Charging: "2 internal USB-A charging ports powered by an external USB-C input"
 
-**Memory updates**
-- Update `mem://content/product-colors` or create new `mem://products/dox-product-specifications` capturing the corrected DOX spec (faux leather + rose gold, velvet interior, movable velvet tray, biometric up to 10 prints, USB-C in -> 3x USB-A inside, VDS/DDS = top-mounted suction stations)
-- Add charging + materials facts to `mem://products/lux-product-specifications` (USB-C in, 2x USB-A inside, genuine leather, velvet)
-- Update `mem://index.md` Core to note: "VDS/DDS are external suction-base mounting stations atop the DOX, never internal shaped inserts."
+**Lux `keyBenefits`** → swap one card for "Integrated internal charging — 2 internal USB-A ports powered through a single external USB-C input".
 
-## Editorial rules applied throughout
+**Lux `faqs`** → append:
+- "Does Vellvii Lux include charging ports?" → "Yes. Vellvii Lux includes 2 internal USB-A charging ports powered through an external USB-C input."
+- "What materials are used on Vellvii Lux?" → "Vellvii Lux uses a genuine leather exterior with a velvet interior."
 
-- "Faux leather" for DOX, "genuine leather" for Lux - never confuse the two
-- Drop all "shaped inserts" / "shaped docking inserts" / "fits through the VDS insert" phrasing
-- VDS/DDS framed as "suction-base mounting stations that sit atop the DOX, letting suction-cup pieces be mounted to the DOX itself"
-- DOX interior described as "velvet-lined with a movable, velvet-lined tray for smaller pieces (bullet, rose, condoms, lubricants)"
-- Charging described factually: USB-C exterior input on the opposite side of the lock; powers internal USB-A ports (3 in DOX, 2 in Lux)
-- Hyphens, not em dashes; no marketing exaggeration
+### 2. `src/lib/productData.ts`
+DOX `features`: `['Faux Leather Exterior', 'Biometric Lock Box', 'Internal USB-A Charging']`
+
+### 3. `src/components/home/HomeFAQ.tsx`
+- DOX material answer: restore "faux leather exterior with a velvet interior" phrasing.
+- DOX charging answer: restore "3 internal USB-A charging ports powered by an external USB-C input" (replace the softened "storage and docking spaces" line).
+- Lux material answer (if present): "genuine leather exterior with a velvet interior".
+- Keep premium tone — facts in second sentences, not headlines.
+
+### 4. `src/components/home/DoxFeatures.tsx`
+View first; restore charging/material feature tiles where they were softened. Keep hero copy elegant.
+
+### 5. `src/components/home/TrustSection.tsx`
+View first; if a "Considered Materials" tile exists, may upgrade to "Faux leather and velvet" (DOX-leaning) but keep brand-voice; otherwise leave.
+
+### 6. `src/components/products/TrustStrip.tsx`
+Leave "Considered Materials" generic OR change to "Premium Materials". Avoid "body-safe".
+
+### 7. `src/pages/DoxLanding.tsx`
+SEO `productData.description` → "Vellvii DOX — biometric sex toy lock box and bedroom storage hub with faux leather exterior, velvet interior, VDS/DDS docking, and internal USB-A charging powered by external USB-C input." Remove the lingering "faux leather with velvet-lined interior" + "USB-C charging dock" phrasing and replace with confirmed wording. Keep `noindex`.
+
+### 8. `src/pages/ProductDetail.tsx`
+Update per-product SEO `description` for DOX and Lux to the approved meta:
+- DOX: "Vellvii DOX is a refined biometric sex toy lock box and bedroom storage hub with a faux leather exterior, velvet interior, VDS/DDS docking, and internal USB-A charging ports."
+- Lux: "Vellvii Lux is a portable fingerprint-lock sex toy storage case with a genuine leather exterior, velvet interior, and internal USB-A charging ports for travel-friendly privacy."
+- Titles stay clean (no charging in title).
+
+### 9. Guides (light touch, only where natural)
+- `GuideBiometricLockBoxForSexToys.tsx`: add one factual line — DOX (faux leather + 3 USB-A via USB-C); Lux (genuine leather + 2 USB-A via USB-C).
+- `GuideHowToCleanAndStoreSexToys.tsx`: mention internal USB-A charging once in storage-tip context.
+- `GuideLuxVsDox.tsx`: ensure comparison table reflects exact materials + 3 vs 2 USB-A ports.
+- No new claims beyond the confirmed list.
+
+### 10. `public/llms.txt`
+Update DOX and Lux bullet lines to include faux leather/velvet + 3 USB-A via USB-C, and genuine leather/velvet + 2 USB-A via USB-C. Keep the "no app-connected / no waterproof / no origin claims" guardrails.
 
 ## Out of scope
+- Legacy/noindex prelaunch files (`PrelaunchDOX.tsx`, `prelaunch/*`, `LuxFAQSection.tsx`) — untouched.
+- Homepage hero, PDP hero, brand storytelling — unchanged.
+- No design/component structure changes.
+- No sitemap, no new routes, no disavow.
 
-- No layout, route, or component-structure changes
-- No new images
-- No pricing or warranty edits
+## QA checklist
+- DOX material/charging specs restored with exact wording.
+- Lux material/charging specs restored with exact wording.
+- No "universal/wireless/fast/smart charging" anywhere.
+- No app-connected, waterproof, medical-grade, body-safe certified, or origin claims.
+- Visible FAQ copy matches JSON-LD (auto via `pdpContent`).
+- Hero copy untouched.
+- Legacy noindex pages untouched.
+- llms.txt updated, guardrails preserved.

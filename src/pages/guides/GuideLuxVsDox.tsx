@@ -72,7 +72,7 @@ const GuideLuxVsDox = () => {
         />
       </figure>
       <p>
-        Vellvii Lux is a portable fingerprint-lock storage case - sized like a refined toiletries-style bag and secured with biometric access. It is designed as a discreet sex toy bag for the moments when privacy needs to travel with you, and is its own self-contained piece - not part of the DOX docking system.{" "}
+        Vellvii Lux is a portable fingerprint-lock storage case - sized like a refined toiletries-style bag, with a genuine leather exterior, velvet interior, and 2 internal USB-A charging ports powered through an external USB-C input. It is designed as a discreet sex toy bag for the moments when privacy needs to travel with you, and is its own self-contained piece - not part of the DOX docking system.{" "}
         <Link to="/products/vellvii-lux" className="text-primary hover:underline">Explore Vellvii Lux</Link>.
       </p>
 
@@ -86,7 +86,7 @@ const GuideLuxVsDox = () => {
         />
       </figure>
       <p>
-        Vellvii DOX is the larger biometric sex toy lock box and storage hub. It is the central piece of the Vellvii ecosystem - velvet-lined inside with a movable velvet-lined tray for smaller pieces, and a biometric fingerprint lock for fast, private access. On top, the VDS and DDS act as suction-base mounting stations, turning the DOX itself into a refined stand. DOX is a bedroom-focused storage piece, not a portable one.{" "}
+        Vellvii DOX is the larger biometric sex toy lock box and storage hub. It is the central piece of the Vellvii ecosystem - faux leather exterior, velvet interior with a movable velvet-lined tray, biometric fingerprint lock for fast, private access, and 3 internal USB-A charging ports powered through an external USB-C input. On top, the VDS and DDS act as suction-base mounting stations, turning the DOX itself into a refined stand. DOX is a bedroom-focused storage piece, not a portable one.{" "}
         <Link to="/products/vellvii-dox" className="text-primary hover:underline">View Vellvii DOX</Link>.
       </p>
 

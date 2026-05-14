@@ -15,7 +15,7 @@ export const TrustStrip = ({ productHandle }: TrustStripProps) => {
     { icon: Truck, label: "Discreet Shipping" },
     { icon: ShieldCheck, label: warrantyLabel },
     { icon: Lock, label: "Plain Packaging" },
-    { icon: Sparkles, label: "Considered Materials" },
+    { icon: Sparkles, label: "Premium Materials" },
   ];
 
   return (
