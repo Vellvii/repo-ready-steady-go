@@ -222,7 +222,7 @@ export const PDP_CONTENT: Record<CanonicalHandle, PdpContent> = {
     keyBenefits: [
       { icon: "Heart", label: "Designed for modern couples", copy: "Considered ergonomics for shared, intentional moments." },
       { icon: "Sparkles", label: "Premium experience", copy: "A refined object you will actually want to keep on display." },
-      { icon: "ShieldCheck", label: "Body-safe materials", copy: "Selected with comfort and quality at the center." },
+      { icon: "ShieldCheck", label: "Considered materials", copy: "Selected for refinement and a premium feel." },
     ],
     doxCompatible: true,
     productDetails: [
@@ -234,7 +234,7 @@ export const PDP_CONTENT: Record<CanonicalHandle, PdpContent> = {
     keyBenefits: [
       { icon: "Heart", label: "Designed for modern couples", copy: "An object built around connection, not novelty." },
       { icon: "Sparkles", label: "Premium experience", copy: "Quiet luxury in every detail." },
-      { icon: "ShieldCheck", label: "Body-safe materials", copy: "Selected with comfort and quality at the center." },
+      { icon: "ShieldCheck", label: "Considered materials", copy: "Selected for refinement and a premium feel." },
     ],
     doxCompatible: true,
     productDetails: [
@@ -246,7 +246,7 @@ export const PDP_CONTENT: Record<CanonicalHandle, PdpContent> = {
     keyBenefits: [
       { icon: "Sparkles", label: "Premium experience", copy: "A considered object with a refined silhouette." },
       { icon: "Heart", label: "Designed for modern couples", copy: "Built around intimacy and shared discretion." },
-      { icon: "ShieldCheck", label: "Body-safe materials", copy: "Selected with comfort and quality at the center." },
+      { icon: "ShieldCheck", label: "Considered materials", copy: "Selected for refinement and a premium feel." },
     ],
     doxCompatible: true,
     productDetails: [
