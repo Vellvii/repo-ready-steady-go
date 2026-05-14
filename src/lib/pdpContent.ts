@@ -218,6 +218,8 @@ export const PDP_CONTENT: Record<CanonicalHandle, PdpContent> = {
       { question: "When does the Vellvii Lux ship?", answer: "Pre-orders ship the first week of June 2026. Reserve now to secure your unit from the current first-run offer." },
       { question: "Is the Vellvii Nova included with Lux?", answer: "The complimentary Vellvii Nova is included with the current Lux first-run offer. Future Lux runs are planned, but the Nova gift will not be included after this first run." },
       { question: "What is the Vellvii Lux warranty?", answer: "All Vellvii products are covered by our authorized retailer warranty when registered within 7 days of receipt. Repair or replacement only - no refunds on final sales." },
+      { question: "Does Vellvii Lux include charging ports?", answer: "Yes. Vellvii Lux includes 2 internal USB-A charging ports powered through an external USB-C input." },
+      { question: "What materials are used on Vellvii Lux?", answer: "Vellvii Lux uses a genuine leather exterior with a velvet interior." },
       { question: "Where can I find warranty information?", answer: "Full warranty terms and registration details are available at /warranty." },
     ],
   },

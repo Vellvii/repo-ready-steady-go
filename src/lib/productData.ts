@@ -43,7 +43,7 @@ export const PRODUCTS: Record<string, Product> = {
     price: 899,
     description: 'Luxury Storage Box',
     images: ['/uploads/Dox1.jpg', '/uploads/Dox2.jpg', '/uploads/Dox3.jpg', '/uploads/Dox4.jpg', '/uploads/Dox5.jpg'],
-    features: ['Refined Textured Exterior', 'Biometric Lock Box', 'Designed for Everyday Care'],
+    features: ['Faux Leather Exterior', 'Biometric Lock Box', 'Internal USB-A Charging'],
     route: '/dox'
   }
 };

@@ -20,7 +20,7 @@ const DoxLanding = () => {
         organizationData
         productData={{
           name: "Vellvii DOX",
-          description: "Luxury docking station for intimate wellness products featuring biometric fingerprint lock, USB-C charging dock, and faux leather with velvet-lined interior.",
+          description: "Vellvii DOX - biometric sex toy lock box and bedroom storage hub with a faux leather exterior, velvet interior, VDS and DDS docking, and 3 internal USB-A charging ports powered by an external USB-C input.",
           availability: "PreOrder",
           brand: "Vellvii",
           images: ["/uploads/Dox1.jpg", "/uploads/Dox2.jpg", "/uploads/Dox3.jpg"],
