@@ -1,64 +1,38 @@
 ## Goal
 
-Reduce visual noise in the nav drawer by collapsing long lists into expandable accordion groups, while keeping every link reachable.
+Tighten the footer used across the site (`PrelaunchFooter`) so it reads cleaner and more editorial — less stacked, less "card-y" social pills, less repeated divider lines — while keeping every existing link, social, contact, and the "The Art of 'O'" tagline.
 
-## New drawer structure
+## Scope
 
-Top-level items (always visible). Items marked with > expand on tap; everything else navigates immediately.
+- Single file: `src/components/prelaunch/PrelaunchFooter.tsx`
+- No route, content, or schema changes. No removals of links. No new dependencies.
+- Applies everywhere `PrelaunchFooter` is rendered (Shop, Guides, Contact, Warranty, Privacy, Terms, PrelaunchDOX, CollectionDoxCompatible, DoxVideoLanding).
 
-```
-> Shop
-    All Products
-    Pleasure Collection
-    DOX-Compatible
-    Discreet Storage
-    Portable Storage
-    Bedroom Storage
-    For Couples
-> Products
-    Vellvii DOX
-    Vellvii Lux
-    Vellvii G-Vibe
-    Vellvii Evolve
-    Vellvii Pulse
-  Guides
-  Warranty
-  Contact
-> More
-    Register Warranty
-    Privacy Policy
-    Terms of Service
-```
+## Refinements
 
-Result: 6 visible rows instead of 18. Power-user paths (collections, individual products, legal) are one tap away.
+1. **Structure** — Replace the centered vertical stack with a refined two-row editorial layout:
+   - **Top row**: Logo on the left, link columns (Explore / Support / Legal) on the right. On mobile it stacks: logo first, then a 3-column compact link grid.
+   - **Bottom row**: A single hairline divider, then a slim line containing — copyright (left), email (center), social icons (right). Mobile collapses to centered stack.
+2. **Tagline block** — Keep "The Art of 'O'" but make it quieter: remove the two horizontal hairline accents, reduce size to `text-lg sm:text-xl`, set above the main grid with generous breathing room. Only one decorative element retained.
+3. **Social icons** — Drop the circular pill buttons. Use plain inline icons (`w-4 h-4`) with `text-light-secondary/70 hover:text-primary` and `gap-5` spacing. Keeps the same four links and aria-labels.
+4. **Email** — Inline text link `hello@vellvii.com` in Montserrat with subtle underline-on-hover, no icon, sits in the bottom row.
+5. **Link columns** — Keep the same headings (Explore, Support, Legal) and the exact same list items. Headings switch from italic Baskerville chip to a simple uppercase Montserrat micro-label (`text-[0.65rem] tracking-[0.22em] text-light-secondary/55`) for a calmer hierarchy. Item text stays Montserrat, slightly tighter spacing (`space-y-2.5`).
+6. **Dividers** — Remove the two internal `border-t` lines (above grid, above copyright). Keep only the top `border-t border-white/10` on the `<footer>` element and one hairline above the bottom row.
+7. **Spacing** — Use `pt-14 pb-8` overall, `gap-12` between logo and columns. Reduce visual weight of drop-shadow on logo (`drop-shadow-[0_0_18px_rgba(212,175,55,0.18)]`).
+8. **Tokens** — All colors continue to use semantic tokens (`text-light-secondary`, `text-light-muted`, `text-primary`, `border-white/10`). No raw hex outside the existing logo glow.
 
-## Behavior
+## Out of scope
 
-- Default state: all groups collapsed. Drawer opens short and scannable.
-- Auto-expand the group that contains the current route (so the active page is always visible without tapping).
-- Single-expand optional - users can have multiple groups open at once (simpler, no surprise collapses).
-- Chevron icon rotates 180 deg when open. Smooth height transition (framer-motion, ~200ms).
-- Search still filters across all links and auto-expands matching groups.
-- Tapping a leaf link closes the drawer (existing behavior preserved).
+- Newsletter signup, language/currency switcher, address block — not adding new sections.
+- LuxFooter (separate component, untouched).
+- Footer copy/links.
 
-## Visual treatment
+## QA after implementation
 
-- Group header: same Baskerville italic uppercase styling as today, but now a button row with chevron on the right.
-- Indent leaf links by 12px under expanded groups so hierarchy reads clearly.
-- Keep existing hover border-left accent on leaves.
-- Tagline, search, footer (email + copyright) unchanged.
-
-## Files to change
-
-- `src/components/navigation/LuxuryNavDrawer.tsx` - restructure NAV_GROUPS into tiered shape (top-level item OR collapsible group), add expansion state, chevron, animated height. Move Privacy/Terms + Register Warranty into a new "More" group. Promote Guides/Warranty/Contact to top-level.
-
-## QA
-
-- 375px mobile: drawer scrolls cleanly, no overflow.
-- Tap each group header: expands/collapses smoothly.
-- Navigate to /warranty/register: drawer reopens with "More" pre-expanded.
-- Search "lux": Products group auto-expands and shows Vellvii Lux.
-- Keyboard: Escape closes; Tab order reaches headers and leaves.
-- Active route still closes drawer on tap.
-
-No changes to footer, routes, sitemap, or other components.
+- Render `/shop`, `/guides`, `/contact`, `/privacy-policy`, `/terms-of-service` and confirm:
+  - All original links present, same hrefs.
+  - Tagline still reads "The Art of 'O'".
+  - Mobile (375px) stacks cleanly with no horizontal scroll.
+  - Desktop two-row layout aligns logo + columns.
+  - Social icons hover to primary; email link works.
+  - Copyright still "© 2026 Vellvii. All rights reserved."
