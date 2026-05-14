@@ -22,9 +22,9 @@ export const homeFAQs: FAQItem[] = [
   {
     question: "What is the DOX made of?",
     answerText:
-      "The DOX is built from premium-quality components - genuine leather on the outside, soft velvet on the inside, with an integrated fingerprint lock and built-in charging and docking stations for your devices.",
+      "The DOX is built from premium-quality components - a refined textured exterior on the outside, soft velvet on the inside, with an integrated fingerprint lock and built-in storage and docking spaces designed for organization.",
     answer:
-      "The DOX is built from premium-quality components - genuine leather on the outside, soft velvet on the inside, with an integrated fingerprint lock and built-in charging and docking stations for your devices.",
+      "The DOX is built from premium-quality components - a refined textured exterior on the outside, soft velvet on the inside, with an integrated fingerprint lock and built-in storage and docking spaces designed for organization.",
   },
   {
     question: "When do Kickstarter and Prelaunch orders ship?",
