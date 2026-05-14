@@ -16,8 +16,9 @@ export const DoxCompatibleSection = () => {
             DOX-Compatible by Design
           </h2>
           <p className="font-montserrat text-sm sm:text-base text-light-secondary leading-relaxed mb-5 sm:mb-6">
-            Designed to fit the Vellvii DOX through the VDS insert, this product forms part of the
-            Vellvii Pleasure Collection and stores cleanly within the DOX ecosystem.
+            Compatible with the VDS suction-base mounting station that sits atop the Vellvii DOX,
+            this product forms part of the Vellvii Pleasure Collection and integrates cleanly into
+            the DOX ecosystem.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-5">
             <Link

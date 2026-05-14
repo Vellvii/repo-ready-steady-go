@@ -21,7 +21,7 @@ const GUIDES = [
     excerpt:
       "Learn how VDS and DDS help organize the Vellvii Pleasure Collection inside the DOX ecosystem.",
     image: "/uploads/dox-interior-labeled.jpg",
-    imageAlt: "Vellvii DOX interior showing the VDS and DDS docking inserts",
+    imageAlt: "Vellvii DOX interior showing the VDS and DDS suction-base mounting stations on top",
   },
   {
     to: "/guides/discreet-storage-for-intimate-wellness-products",

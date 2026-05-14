@@ -63,7 +63,7 @@ export interface PdpContent {
   faqs?: FaqItem[];
   /** DOX-only: docking system (VDS / DDS) section content */
   docking?: DockingInfo;
-  /** Toys that fit the DOX through the VDS insert */
+  /** Toys that work with the VDS suction mount atop the DOX */
   doxCompatible?: boolean;
   /** Lux-only: subtle related-storage note linking to DOX */
   relatedStorageNote?: { copy: string; href: string; label: string };
@@ -73,16 +73,16 @@ export interface PdpContent {
 export const DOCKING_INFO: DockingInfo = {
   heading: "Designed Around the Vellvii Docking System",
   intro:
-    "The Vellvii DOX is designed as the home of the Vellvii Pleasure Collection, with dedicated docking spaces that keep compatible products organized, discreet, and ready for storage.",
+    "The VDS and DDS are external mounting stations that sit atop the Vellvii DOX, turning the DOX into a discreet stand for suction-base pieces. Inside, the DOX stays open and velvet-lined, with a movable velvet-lined tray for smaller items.",
   vds: {
     title: "VDS",
     subtitle: "Vellvii Docking Station",
-    copy: "The VDS is shaped specifically for current Vellvii products, allowing the Vellvii G-Vibe, Evolve, and Pulse to fit securely into the DOX ecosystem.",
+    copy: "The VDS is a suction-base mounting station that sits atop the DOX, designed to hold compatible Vellvii products with suction bases - including the Vellvii G-Vibe, Evolve, and Pulse - so the DOX itself becomes the mount.",
   },
   dds: {
     title: "DDS",
     subtitle: "Dildo Docking Station",
-    copy: "The DDS is a round docking insert designed for compatible suction-base products up to 90mm (approximately 3.5 inches) in diameter.",
+    copy: "The DDS is a round suction-base mounting station that sits atop the DOX, supporting compatible suction-base products up to 90mm (approximately 3.5 inches) in diameter.",
   },
 };
 
@@ -165,10 +165,18 @@ export const PDP_CONTENT: Record<CanonicalHandle, PdpContent> = {
     tagline:
       "A larger, sturdier storage system designed for discreet bedroom integration.",
     keyBenefits: [
-      { icon: "Package", label: "Discreet bedroom integration", copy: "A refined form designed to sit naturally within a modern bedroom." },
-      { icon: "ShieldCheck", label: "Larger storage presence", copy: "Built as a more substantial home for the Vellvii collection." },
-      { icon: "Lock", label: "Refined organization", copy: "Designed to keep the collection calm, private, and intentional." },
-      { icon: "Sparkles", label: "Premium experience", copy: "A fixed storage piece built around discretion and design." },
+      { icon: "Package", label: "Faux leather, velvet-lined", copy: "Faux leather exterior with rose gold accents, fully velvet-lined inside, plus a movable velvet-lined tray for smaller pieces." },
+      { icon: "Lock", label: "Biometric fingerprint lock", copy: "Stores up to 10 fingerprints for fast, private access." },
+      { icon: "ShieldCheck", label: "Charge while stored", copy: "USB-C input on the exterior powers 3 internal USB-A ports, so toys can charge securely inside the DOX." },
+      { icon: "Sparkles", label: "VDS and DDS mounts on top", copy: "The VDS and DDS sit atop the DOX as suction-base mounting stations, turning the DOX itself into a refined stand." },
+    ],
+    productDetails: [
+      { label: "Exterior", value: "Faux leather with rose gold accents" },
+      { label: "Interior", value: "Velvet-lined, with a movable velvet-lined tray for smaller items" },
+      { label: "Security", value: "Biometric fingerprint lock - up to 10 fingerprints" },
+      { label: "Power", value: "USB-C input on exterior (opposite the lock)" },
+      { label: "Internal Charging", value: "3 internal USB-A ports" },
+      { label: "Top Mounts", value: "VDS and DDS suction-base mounting stations" },
     ],
     docking: DOCKING_INFO,
   },
@@ -182,8 +190,12 @@ export const PDP_CONTENT: Record<CanonicalHandle, PdpContent> = {
       { icon: "Sparkles", label: "Easy to keep close", copy: "Designed to fit naturally into daily routines without drawing attention." },
     ],
     productDetails: [
-      { label: "Security", value: "Fingerprint lock" },
-      { label: "Format", value: "Portable storage case" },
+      { label: "Exterior", value: "Genuine leather" },
+      { label: "Interior", value: "Velvet-lined" },
+      { label: "Format", value: "Soft portable bag, sized like a refined toiletries bag" },
+      { label: "Security", value: "Biometric fingerprint lock" },
+      { label: "Power", value: "USB-C input on exterior" },
+      { label: "Internal Charging", value: "2 internal USB-A ports" },
       { label: "Use Case", value: "Travel-friendly and everyday personal storage" },
     ],
     relatedStorageNote: {
@@ -209,7 +221,7 @@ export const PDP_CONTENT: Record<CanonicalHandle, PdpContent> = {
     ],
     doxCompatible: true,
     productDetails: [
-      { label: "DOX Compatibility", value: "Fits the Vellvii DOX through the VDS insert" },
+      { label: "DOX Compatibility", value: "Compatible with the VDS suction mount that sits atop the Vellvii DOX" },
     ],
   },
   "vellvii-evolve": {
@@ -221,7 +233,7 @@ export const PDP_CONTENT: Record<CanonicalHandle, PdpContent> = {
     ],
     doxCompatible: true,
     productDetails: [
-      { label: "DOX Compatibility", value: "Fits the Vellvii DOX through the VDS insert" },
+      { label: "DOX Compatibility", value: "Compatible with the VDS suction mount that sits atop the Vellvii DOX" },
     ],
   },
   "vellvii-pulse": {
@@ -233,7 +245,7 @@ export const PDP_CONTENT: Record<CanonicalHandle, PdpContent> = {
     ],
     doxCompatible: true,
     productDetails: [
-      { label: "DOX Compatibility", value: "Fits the Vellvii DOX through the VDS insert" },
+      { label: "DOX Compatibility", value: "Compatible with the VDS suction mount that sits atop the Vellvii DOX" },
     ],
   },
 };

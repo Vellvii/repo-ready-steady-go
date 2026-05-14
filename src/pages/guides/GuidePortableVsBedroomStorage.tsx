@@ -62,7 +62,7 @@ const GuidePortableVsBedroomStorage = () => {
       <h2 className={H2}>When bedroom storage makes sense</h2>
       <ul className="list-disc pl-5 space-y-2">
         <li>You want a refined home for the Vellvii Pleasure Collection.</li>
-        <li>You prefer shaped docking inserts to a single open compartment.</li>
+        <li>You want a velvet-lined hub with a movable interior tray and top-mounted VDS / DDS suction stations.</li>
         <li>You want a piece that stays in place, not one that moves with you.</li>
       </ul>
       <p>
@@ -79,7 +79,7 @@ const GuidePortableVsBedroomStorage = () => {
         />
       </figure>
       <p>
-        Vellvii Lux is a portable fingerprint-lock storage case. It is the piece designed to travel with you - tucked into a day bag, a suitcase, or a bedside drawer. Lux is its own self-contained piece and is not part of the DOX docking system.{" "}
+        Vellvii Lux is a portable fingerprint-lock storage case - a soft bag the size of a refined toiletries bag, with a genuine leather exterior and velvet-lined interior. A USB-C input on the outside feeds 2 internal USB-A ports for charging personal pieces while stored. Lux is the piece designed to travel with you, and is its own self-contained piece - not part of the DOX docking system.{" "}
         <Link to="/products/vellvii-lux" className="text-primary hover:underline">Explore Vellvii Lux</Link>.
       </p>
 
@@ -93,7 +93,7 @@ const GuidePortableVsBedroomStorage = () => {
         />
       </figure>
       <p>
-        Vellvii DOX is the larger, sturdier bedroom storage and docking hub. Inside, shaped inserts hold compatible Vellvii pieces in place, giving the collection a refined, dedicated home.{" "}
+        Vellvii DOX is the larger, sturdier bedroom storage and docking hub. Faux leather outside with rose gold accents, velvet-lined inside, with a movable velvet-lined tray for smaller pieces. A biometric fingerprint lock stores up to 10 fingerprints, and a USB-C input on the exterior powers 3 internal USB-A ports for charging toys securely inside. On top, the VDS and DDS sit as suction-base mounting stations, turning the DOX itself into a refined stand.{" "}
         <Link to="/products/vellvii-dox" className="text-primary hover:underline">View Vellvii DOX</Link>.
       </p>
 

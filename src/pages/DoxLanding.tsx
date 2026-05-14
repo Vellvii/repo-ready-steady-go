@@ -20,7 +20,7 @@ const DoxLanding = () => {
         organizationData
         productData={{
           name: "Vellvii DOX",
-          description: "Luxury docking station for intimate wellness products featuring biometric fingerprint lock, USB-C charging dock, and premium vegan leather with velvet interior.",
+          description: "Luxury docking station for intimate wellness products featuring biometric fingerprint lock, USB-C charging dock, and faux leather with velvet-lined interior.",
           availability: "PreOrder",
           brand: "Vellvii",
           images: ["/uploads/Dox1.jpg", "/uploads/Dox2.jpg", "/uploads/Dox3.jpg"],

@@ -70,13 +70,13 @@ const GuideProductsForCouples = () => {
         />
       </figure>
       <p>
-        Vellvii DOX is the larger, sturdier bedroom storage and docking hub. For couples, it offers a refined shared home for the Vellvii Pleasure Collection - with shaped inserts that keep compatible pieces organized and in place.{" "}
+        Vellvii DOX is the larger, sturdier bedroom storage and docking hub. For couples, it offers a refined shared home for the Vellvii Pleasure Collection - faux leather outside with rose gold accents, fully velvet-lined inside with a movable velvet-lined tray for smaller pieces like a bullet, rose, condoms, or lubricants. A biometric fingerprint lock stores up to 10 fingerprints, and a USB-C input on the exterior powers 3 internal USB-A ports so toys can charge securely inside. On top, the VDS and DDS sit as suction-base mounting stations, turning the DOX itself into a refined stand.{" "}
         <Link to="/products/vellvii-dox" className="text-primary hover:underline">View Vellvii DOX</Link>.
       </p>
 
       <h2 className={H2}>Where Lux fits for personal or travel-friendly storage</h2>
       <p>
-        Vellvii Lux is the portable fingerprint-lock storage case. For couples, Lux can sit alongside DOX as a personal or travel-friendly piece - useful for trips, secondary storage, or simply for moments away from home.{" "}
+        Vellvii Lux is the portable fingerprint-lock storage case - a soft bag roughly the size of a refined toiletries bag, with a genuine leather exterior and velvet-lined interior. It uses the same biometric lock system, with a USB-C input on the exterior feeding 2 internal USB-A ports so personal pieces can charge while stored. For couples, Lux sits alongside DOX as a personal or travel-friendly piece - useful for trips, secondary storage, or simply for moments away from home.{" "}
         <Link to="/products/vellvii-lux" className="text-primary hover:underline">Explore Vellvii Lux</Link>.
       </p>
 
@@ -91,7 +91,7 @@ const GuideProductsForCouples = () => {
       </ul>
       <p>
         These three are part of the{" "}
-        <Link to="/collections/pleasure-collection" className="text-primary hover:underline">Vellvii Pleasure Collection</Link> and are DOX-compatible through the VDS insert.
+        <Link to="/collections/pleasure-collection" className="text-primary hover:underline">Vellvii Pleasure Collection</Link> and are compatible with the VDS suction mount that sits atop the DOX.
       </p>
 
       <h2 className={H2}>Final Recommendation</h2>

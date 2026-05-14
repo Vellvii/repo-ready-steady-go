@@ -43,7 +43,7 @@ export const PRODUCTS: Record<string, Product> = {
     price: 899,
     description: 'Luxury Storage Box',
     images: ['/uploads/Dox1.jpg', '/uploads/Dox2.jpg', '/uploads/Dox3.jpg', '/uploads/Dox4.jpg', '/uploads/Dox5.jpg'],
-    features: ['Vegan Leather', 'Charging Dock', 'Fingerprint Lock'],
+    features: ['Faux Leather', 'Charging Dock', 'Fingerprint Lock'],
     route: '/dox'
   }
 };

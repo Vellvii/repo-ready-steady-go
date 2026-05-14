@@ -15,7 +15,7 @@ const trustItems = [
   {
     icon: Shield,
     title: "Premium Materials",
-    description: "Vegan leather exterior with velvet-lined interior",
+    description: "Faux leather exterior with velvet-lined interior",
   },
   {
     icon: Package,
