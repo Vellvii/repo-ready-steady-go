@@ -3,19 +3,24 @@ import { GuideLayout } from "@/components/guides/GuideLayout";
 
 const FAQ = [
   {
-    question: "Why does discreet storage matter?",
+    question: "What is the best way to store sex toys discreetly?",
     answer:
-      "Discreet storage helps keep personal products private, organized, and easy to manage in a way that fits your lifestyle.",
+      "Discreet sex toy storage works best with a piece designed for privacy by silhouette and access - a refined case or storage system that lives quietly in a bedroom or bag, with an access method like a biometric lock that does not rely on visible keys.",
   },
   {
-    question: "Which Vellvii product is best for travel-friendly storage?",
+    question: "Where should you keep sex toys at home?",
     answer:
-      "Vellvii Lux is the portable fingerprint-lock storage case designed for everyday personal use and travel-friendly privacy.",
+      "Most people prefer a clean, dry, low-traffic spot - a drawer, shelf, or wardrobe - inside a dedicated storage piece that keeps the collection organized and private.",
   },
   {
-    question: "Which Vellvii product is best for bedroom storage?",
+    question: "Which Vellvii product is best for travel-friendly sex toy storage?",
     answer:
-      "Vellvii DOX is the larger, sturdier storage system designed for discreet bedroom organization.",
+      "Vellvii Lux is the portable fingerprint-lock storage case, designed as a refined sex toy bag for everyday personal use and travel-friendly privacy.",
+  },
+  {
+    question: "Which Vellvii product is best for bedroom sex toy storage?",
+    answer:
+      "Vellvii DOX is the larger, sturdier biometric lock box and bedroom storage hub, designed as a refined home for the Vellvii Pleasure Collection.",
   },
 ];
 
@@ -24,22 +29,22 @@ const H2 = "font-baskerville text-2xl sm:text-3xl text-light-primary mt-12 mb-4"
 const GuideDiscreetStorage = () => {
   return (
     <GuideLayout
-      seoTitle="Discreet Storage for Intimate Wellness Products | Vellvii"
-      seoDescription="Discreet storage for intimate wellness products: privacy at home and on the move with Vellvii Lux portable case and Vellvii DOX bedroom hub."
+      seoTitle="Discreet Sex Toy Storage: How to Store Sex Toys with Privacy | Vellvii"
+      seoDescription="A guide to discreet sex toy storage at home and on the move. Compare a portable sex toy bag with a refined biometric lock box for the bedroom."
       canonical="/guides/discreet-storage-for-intimate-wellness-products"
       category="Storage & Privacy"
-      title="Discreet Storage for Intimate Wellness Products"
-      intro="Discreet storage is about more than hiding things away. It is about privacy, organization, and the everyday care that keeps a refined collection feeling considered."
+      title="Discreet Sex Toy Storage: How to Store Sex Toys with Privacy"
+      intro="Discreet sex toy storage is about more than hiding things away. It is about privacy, organization, and the everyday care that keeps a refined collection feeling considered."
       heroImage="/uploads/lux-philosophy-lifestyle-v4.png"
-      heroImageAlt="Vellvii Lux on a refined surface, illustrating discreet everyday storage for intimate wellness products"
+      heroImageAlt="Vellvii Lux portable sex toy storage case on a refined surface, illustrating discreet sex toy storage"
       faq={FAQ}
     >
       <h2 className={H2}>Introduction</h2>
       <p>
-        Intimate wellness products deserve the same thoughtfulness as the rest of your home. Discreet storage gives them a place that respects privacy, supports organization, and fits seamlessly into the way you actually live.
+        Personal items deserve the same thoughtfulness as the rest of your home. Discreet sex toy storage gives them a place that respects privacy, supports organization, and fits seamlessly into the way you actually live.
       </p>
 
-      <h2 className={H2}>Why discreet storage matters</h2>
+      <h2 className={H2}>Why discreet sex toy storage matters</h2>
       <p>
         A considered storage piece keeps personal items private and easy to find. It also supports daily habits - returning each piece to its place, keeping things tidy, and letting your collection feel intentional rather than improvised.{" "}
         <Link to="/collections/discreet-storage" className="text-primary hover:underline">Explore Discreet Storage</Link>.
@@ -47,16 +52,16 @@ const GuideDiscreetStorage = () => {
 
       <h2 className={H2}>Privacy at home and on the move</h2>
       <p>
-        Privacy is not only a question of locks. It is about designs that do not announce themselves - pieces that feel at home on a shelf, in a drawer, or inside a travel bag. Vellvii storage is built to look at home in refined interiors and to travel without drawing attention.
+        Privacy is not only a question of locks. It is about designs that do not announce themselves - pieces that feel at home on a shelf, in a drawer, or inside a travel bag. A portable sex toy storage case can move with you, while a biometric lock box can anchor a more permanent home for the collection.
       </p>
 
-      <h2 className={H2}>Portable storage vs bedroom storage</h2>
+      <h2 className={H2}>Portable sex toy storage vs bedroom sex toy storage</h2>
       <p>
-        Portable storage suits the everyday - travel, day bags, or simply moving between rooms.{" "}
+        A portable sex toy storage case suits the everyday - travel, day bags, or simply moving between rooms.{" "}
         <Link to="/collections/portable-storage" className="text-primary hover:underline">Explore Portable Storage</Link>.
       </p>
       <p>
-        Bedroom storage is built to stay in place - a dedicated, refined home for a growing collection.{" "}
+        A bedroom sex toy storage system is built to stay in place - a dedicated, refined home for a growing collection.{" "}
         <Link to="/collections/bedroom-storage" className="text-primary hover:underline">Explore Bedroom Storage</Link>.
       </p>
 
@@ -64,13 +69,13 @@ const GuideDiscreetStorage = () => {
       <figure className="my-6 overflow-hidden rounded-lg border border-white/10">
         <img
           src="/uploads/lux-bag-lifestyle-2.jpg"
-          alt="Vellvii Lux portable fingerprint-lock storage case styled in an everyday travel setting"
+          alt="Vellvii Lux portable sex toy bag styled in an everyday travel setting"
           loading="lazy"
           className="w-full h-auto object-cover"
         />
       </figure>
       <p>
-        Vellvii Lux is a portable fingerprint-lock storage case designed for personal, everyday privacy. It is the piece that travels with you, lives in a drawer, or moves with your routine.{" "}
+        Vellvii Lux is a portable fingerprint-lock storage case designed for personal, everyday discreet sex toy storage. It is the piece that travels with you, lives in a drawer, or moves with your routine.{" "}
         <Link to="/products/vellvii-lux" className="text-primary hover:underline">Explore Vellvii Lux</Link>.
       </p>
 
@@ -78,13 +83,13 @@ const GuideDiscreetStorage = () => {
       <figure className="my-6 overflow-hidden rounded-lg border border-white/10">
         <img
           src="/uploads/dox_with_toys_1.jpg"
-          alt="Vellvii DOX bedroom storage and docking hub holding the Vellvii Pleasure Collection"
+          alt="Vellvii DOX biometric sex toy lock box and bedroom storage hub holding the Vellvii Pleasure Collection"
           loading="lazy"
           className="w-full h-auto object-cover"
         />
       </figure>
       <p>
-        Vellvii DOX is a larger, sturdier bedroom storage and docking hub. Faux leather outside with rose gold accents, velvet-lined inside, with a movable velvet-lined tray for smaller items. Charging works through a USB-C input on the exterior that powers 3 internal USB-A ports, and the VDS and DDS sit atop the DOX as suction-base mounting stations for compatible pieces.{" "}
+        Vellvii DOX is a refined biometric lock box and bedroom storage hub. It pairs a velvet-lined interior with a movable velvet-lined tray for smaller items, and the VDS and DDS sit atop the DOX as suction-base mounting stations for compatible pieces.{" "}
         <Link to="/products/vellvii-dox" className="text-primary hover:underline">View Vellvii DOX</Link>.
       </p>
 
@@ -93,8 +98,12 @@ const GuideDiscreetStorage = () => {
         <li>Return each piece to its dedicated place after use.</li>
         <li>Keep storage pieces in a cool, dry, low-traffic spot.</li>
         <li>Wipe down surfaces gently to keep finishes looking refined.</li>
-        <li>Charge connected products well before they are needed, then return them to storage.</li>
+        <li>Follow the care instructions included with each product.</li>
       </ul>
+      <p>
+        For more on caring for your collection, see our{" "}
+        <Link to="/guides/how-to-clean-and-store-sex-toys" className="text-primary hover:underline">how to clean and store sex toys guide</Link>.
+      </p>
 
       <h2 className={H2}>Final Recommendation</h2>
       <p>

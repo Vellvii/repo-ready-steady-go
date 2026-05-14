@@ -5,12 +5,17 @@ const FAQ = [
   {
     question: "How should I care for my Vellvii product?",
     answer:
-      "Follow the care instructions included with your product, store it in a clean, dry place, and avoid extreme heat, direct sunlight, or unnecessary exposure.",
+      "Always follow the care instructions included with your product, store it in a clean, dry place, and avoid extreme heat, direct sunlight, and unnecessary exposure. If you are unsure, contact Vellvii support.",
+  },
+  {
+    question: "Where can I learn how to clean and store sex toys?",
+    answer:
+      "Our general guide to how to clean and store sex toys covers safe everyday care habits and the right storage options for your collection.",
   },
   {
     question: "Where should I store my Vellvii products?",
     answer:
-      "Use the storage option that fits your routine. Vellvii Lux is designed for portable personal storage, while Vellvii DOX is designed for larger bedroom organization.",
+      "Use the storage option that fits your routine. Vellvii Lux is designed for portable personal storage, while Vellvii DOX is designed as a biometric lock box for refined bedroom storage.",
   },
   {
     question: "Where can I get warranty support?",
@@ -24,12 +29,12 @@ const H2 = "font-baskerville text-2xl sm:text-3xl text-light-primary mt-12 mb-4"
 const GuideProductCare = () => {
   return (
     <GuideLayout
-      seoTitle="How to Care for Your Vellvii Products | Storage & Support Guide"
-      seoDescription="Learn simple care and storage habits for Vellvii products, including discreet storage, warranty support, and product registration."
+      seoTitle="How to Care for Your Vellvii Products | Ownership & Support Guide"
+      seoDescription="Vellvii ownership and support guide covering general care habits, sex toy storage options, warranty registration, and how to contact support."
       canonical="/guides/how-to-care-for-your-vellvii-products"
-      category="Care Guide"
+      category="Ownership & Support"
       title="How to Care for Your Vellvii Products"
-      intro="A few simple habits help keep Vellvii pieces feeling considered over time. This guide covers general care, storage, and how to access warranty support when you need it."
+      intro="A few simple habits help keep Vellvii pieces feeling considered over time. This Vellvii ownership guide covers general care, storage, and how to access warranty support when you need it."
       heroImage="/uploads/lux-philosophy-lifestyle-v4.png"
       heroImageAlt="Vellvii Lux on a refined surface, illustrating considered everyday product care"
       faq={FAQ}
@@ -39,21 +44,22 @@ const GuideProductCare = () => {
         Caring for refined pieces is mostly about consistency. A handful of small, considered habits - returning each piece to its place, keeping it clean and dry, avoiding harsh conditions - quietly extends the life and feel of your Vellvii collection.
       </p>
 
-      <h2 className={H2}>Start with the included care instructions</h2>
+      <h2 className={H2}>Always start with the included care instructions</h2>
       <p>
         Each Vellvii product ships with its own care instructions. Those instructions are the most accurate guidance for that specific piece - always begin there, and treat the points below as general companion habits rather than replacements.
       </p>
 
-      <h2 className={H2}>Keep products clean, dry, and stored properly</h2>
+      <h2 className={H2}>General care habits</h2>
       <ul className="list-disc pl-5 space-y-2">
-        <li>Store each piece in a clean, dry place.</li>
-        <li>Return products to their dedicated storage after use.</li>
-        <li>Wipe down outer surfaces gently to keep finishes looking refined.</li>
+        <li>Follow the care instructions included with your product.</li>
+        <li>Clean according to the specific product's instructions.</li>
+        <li>Store products in a clean, dry place after care.</li>
+        <li>Avoid extreme heat, direct sunlight, and unnecessary exposure.</li>
+        <li>Contact Vellvii support if you are unsure.</li>
       </ul>
-
-      <h2 className={H2}>Avoid heat, direct sunlight, and unnecessary exposure</h2>
       <p>
-        Avoid storing Vellvii products in direct sunlight, near heat sources, or in environments that swing between extremes of temperature or humidity. A cool, dry, low-traffic spot is ideal.
+        For a wider, general guide on cleaning and storage habits, see our{" "}
+        <Link to="/guides/how-to-clean-and-store-sex-toys" className="text-primary hover:underline">how to clean and store sex toys guide</Link>.
       </p>
 
       <h2 className={H2}>Use the right storage option</h2>
@@ -72,7 +78,7 @@ const GuideProductCare = () => {
 
       <h2 className={H2}>When to use DOX</h2>
       <p>
-        Vellvii DOX is the larger bedroom storage and docking hub. Use DOX when you want a refined, dedicated home for the Vellvii Pleasure Collection inside the bedroom.{" "}
+        Vellvii DOX is the larger biometric lock box and bedroom storage hub. Use DOX when you want a refined, dedicated home for the Vellvii Pleasure Collection inside the bedroom.{" "}
         <Link to="/products/vellvii-dox" className="text-primary hover:underline">View Vellvii DOX</Link>{" "}
         or{" "}
         <Link to="/collections/bedroom-storage" className="text-primary hover:underline">browse Bedroom Storage</Link>.

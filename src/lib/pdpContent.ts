@@ -73,7 +73,7 @@ export interface PdpContent {
 export const DOCKING_INFO: DockingInfo = {
   heading: "Designed Around the Vellvii Docking System",
   intro:
-    "The VDS and DDS are external mounting stations that sit atop the Vellvii DOX, turning the DOX into a discreet stand for suction-base pieces. Inside, the DOX stays open and velvet-lined, with a movable velvet-lined tray for smaller items.",
+    "The VDS and DDS are external suction-base mounting stations that sit atop the Vellvii DOX, turning the DOX itself into a refined stand for compatible suction-base pieces. Inside, the DOX stays open and velvet-lined, with a movable velvet-lined tray for smaller items.",
   vds: {
     title: "VDS",
     subtitle: "Vellvii Docking Station",
@@ -165,20 +165,25 @@ export const PDP_CONTENT: Record<CanonicalHandle, PdpContent> = {
     tagline:
       "A larger, sturdier storage system designed for discreet bedroom integration.",
     keyBenefits: [
-      { icon: "Package", label: "Faux leather, velvet-lined", copy: "Faux leather exterior with rose gold accents, fully velvet-lined inside, plus a movable velvet-lined tray for smaller pieces." },
-      { icon: "Lock", label: "Biometric fingerprint lock", copy: "Stores up to 10 fingerprints for fast, private access." },
-      { icon: "ShieldCheck", label: "Charge while stored", copy: "USB-C input on the exterior powers 3 internal USB-A ports, so toys can charge securely inside the DOX." },
+      { icon: "Package", label: "Velvet-lined interior", copy: "Fully velvet-lined inside, with a movable velvet-lined tray that helps keep smaller pieces organized and in place." },
+      { icon: "Lock", label: "Biometric fingerprint lock", copy: "Biometric access for fast, private entry, with no keys or codes to keep track of." },
       { icon: "Sparkles", label: "VDS and DDS mounts on top", copy: "The VDS and DDS sit atop the DOX as suction-base mounting stations, turning the DOX itself into a refined stand." },
+      { icon: "Gem", label: "A refined sex toy lock box", copy: "Designed as a discreet, design-led biometric storage system - a quiet anchor for the Vellvii Pleasure Collection." },
     ],
     productDetails: [
       { label: "Exterior", value: "Faux leather with rose gold accents" },
       { label: "Interior", value: "Velvet-lined, with a movable velvet-lined tray for smaller items" },
-      { label: "Security", value: "Biometric fingerprint lock - up to 10 fingerprints" },
-      { label: "Power", value: "USB-C input on exterior (opposite the lock)" },
-      { label: "Internal Charging", value: "3 internal USB-A ports" },
+      { label: "Security", value: "Biometric fingerprint lock" },
       { label: "Top Mounts", value: "VDS and DDS suction-base mounting stations" },
     ],
     docking: DOCKING_INFO,
+    faqs: [
+      { question: "Is Vellvii DOX a sex toy lock box?", answer: "Yes. Vellvii DOX is a refined biometric lock box designed as discreet sex toy storage and a quiet bedroom anchor for the Vellvii Pleasure Collection." },
+      { question: "Is Vellvii DOX a biometric lock box?", answer: "Yes. The DOX uses biometric fingerprint access, designed for fast, private entry without keys or codes." },
+      { question: "What makes DOX different from a standard sex toy storage box?", answer: "DOX is designed as a storage and docking system rather than a basic box. It pairs a velvet-lined interior with a movable tray and the top-mounted VDS and DDS suction stations - so the DOX itself becomes a refined stand for compatible Vellvii pieces." },
+      { question: "How does biometric access support private storage?", answer: "Biometric access keeps the DOX private by tying entry to a registered fingerprint, so personal storage stays discreet without relying on keys, codes, or visible locks." },
+      { question: "Where can I find warranty information?", answer: "Full warranty terms and registration details are available at /warranty." },
+    ],
   },
   "vellvii-lux": {
     tagline:
@@ -190,12 +195,9 @@ export const PDP_CONTENT: Record<CanonicalHandle, PdpContent> = {
       { icon: "Sparkles", label: "Easy to keep close", copy: "Designed to fit naturally into daily routines without drawing attention." },
     ],
     productDetails: [
-      { label: "Exterior", value: "Genuine leather" },
       { label: "Interior", value: "Velvet-lined" },
-      { label: "Format", value: "Soft portable bag, sized like a refined toiletries bag" },
+      { label: "Format", value: "Soft portable case, sized like a refined toiletries bag" },
       { label: "Security", value: "Biometric fingerprint lock" },
-      { label: "Power", value: "USB-C input on exterior" },
-      { label: "Internal Charging", value: "2 internal USB-A ports" },
       { label: "Use Case", value: "Travel-friendly and everyday personal storage" },
     ],
     relatedStorageNote: {
@@ -204,8 +206,11 @@ export const PDP_CONTENT: Record<CanonicalHandle, PdpContent> = {
       label: "Explore Vellvii DOX",
     },
     faqs: [
-      { question: "What is the Vellvii Lux?", answer: "Vellvii Lux is a portable fingerprint-lock storage case - a compact, discreet companion designed with the feel of a refined toiletries-style case for travel and everyday personal storage." },
+      { question: "Is Vellvii Lux a portable sex toy bag?", answer: "Yes. Vellvii Lux is a portable fingerprint-lock storage case designed for discreet sex toy storage at home and on the move - a refined alternative to a standard sex toy bag." },
+      { question: "Does Lux work as a travel-friendly sex toy storage case?", answer: "Yes. Lux is designed as a travel-friendly sex toy storage case, sized like a refined toiletries-style bag and secured with biometric access." },
+      { question: "Is Vellvii Lux a portable biometric storage case?", answer: "Yes. Lux is a portable biometric storage case - a compact, fingerprint-lock companion built for everyday personal storage and travel." },
       { question: "How is the Lux different from the Vellvii DOX?", answer: "Vellvii Lux is the more portable storage companion, designed with the feel of a refined toiletries-style case and secured with fingerprint access. Vellvii DOX is the larger, sturdier storage system, designed as a more substantial piece for the bedroom." },
+      { question: "How should I care for Vellvii Lux?", answer: "Follow the care instructions included with your product, store the case in a clean, dry place, and avoid extreme heat, direct sunlight, and unnecessary exposure. If you are unsure, contact Vellvii support." },
       { question: "When does the Vellvii Lux ship?", answer: "Pre-orders ship the first week of June 2026. Reserve now to secure your unit from the current first-run offer." },
       { question: "Is the Vellvii Nova included with Lux?", answer: "The complimentary Vellvii Nova is included with the current Lux first-run offer. Future Lux runs are planned, but the Nova gift will not be included after this first run." },
       { question: "What is the Vellvii Lux warranty?", answer: "All Vellvii products are covered by our authorized retailer warranty when registered within 7 days of receipt. Repair or replacement only - no refunds on final sales." },
