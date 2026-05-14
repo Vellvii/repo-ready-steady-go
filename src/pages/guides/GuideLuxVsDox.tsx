@@ -72,7 +72,7 @@ const GuideLuxVsDox = () => {
         />
       </figure>
       <p>
-        Vellvii Lux is a portable fingerprint-lock storage case - sized like a refined toiletries-style bag and secured with biometric access. It is designed as a discreet sex toy bag for the moments when privacy needs to travel with you, and is its own self-contained piece - not part of the DOX docking system.{" "}
+        Vellvii Lux is a portable fingerprint-lock storage case - sized like a refined toiletries-style bag, with a genuine leather exterior, velvet interior, and 2 internal USB-A charging ports powered through an external USB-C input. It is designed as a discreet sex toy bag for the moments when privacy needs to travel with you, and is its own self-contained piece - not part of the DOX docking system.{" "}
         <Link to="/products/vellvii-lux" className="text-primary hover:underline">Explore Vellvii Lux</Link>.
       </p>
 
