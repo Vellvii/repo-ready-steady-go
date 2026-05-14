@@ -38,12 +38,12 @@ const CollectionBedroomStorage = () => (
       {
         question: "What is the difference between VDS and DDS?",
         answer:
-          "VDS is the Vellvii Docking Station, shaped specifically for current Vellvii products. DDS is the Dildo Docking Station, designed for compatible suction-base products up to 90mm (approximately 3.5 inches) in diameter.",
+          "VDS is the Vellvii Docking Station, a suction-base mounting station that sits atop the DOX for current Vellvii products. DDS is the Dildo Docking Station, a round suction-base mounting station for compatible pieces up to 90mm (approximately 3.5 inches) in diameter.",
       },
       {
         question: "Which Vellvii products are DOX-compatible?",
         answer:
-          "Vellvii G-Vibe, Evolve, and Pulse are DOX-compatible through the VDS insert.",
+          "Vellvii G-Vibe, Evolve, and Pulse are compatible with the VDS suction mount that sits atop the DOX.",
       },
       {
         question: "Is Vellvii Lux part of the DOX docking system?",

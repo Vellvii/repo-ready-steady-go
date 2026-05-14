@@ -44,7 +44,7 @@ const CollectionPleasureCollection = () => (
       {
         question: "Which products work with the Vellvii DOX?",
         answer:
-          "Vellvii G-Vibe, Evolve, and Pulse are DOX-compatible through the VDS docking insert. The DDS insert supports compatible suction-base products up to 90mm (approximately 3.5 inches) in diameter.",
+          "Vellvii G-Vibe, Evolve, and Pulse are compatible with the VDS suction-base mounting station that sits atop the Vellvii DOX. The DDS station supports compatible suction-base products up to 90mm (approximately 3.5 inches) in diameter.",
       },
       {
         question: "Is Vellvii Lux part of the DOX docking system?",

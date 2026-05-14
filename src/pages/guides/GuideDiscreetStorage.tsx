@@ -84,7 +84,7 @@ const GuideDiscreetStorage = () => {
         />
       </figure>
       <p>
-        Vellvii DOX is a larger, sturdier bedroom storage and docking hub. It gives a refined home to the Vellvii Pleasure Collection, with shaped inserts that keep compatible pieces organized and in place.{" "}
+        Vellvii DOX is a larger, sturdier bedroom storage and docking hub. Faux leather outside with rose gold accents, velvet-lined inside, with a movable velvet-lined tray for smaller items. Charging works through a USB-C input on the exterior that powers 3 internal USB-A ports, and the VDS and DDS sit atop the DOX as suction-base mounting stations for compatible pieces.{" "}
         <Link to="/products/vellvii-dox" className="text-primary hover:underline">View Vellvii DOX</Link>.
       </p>
 

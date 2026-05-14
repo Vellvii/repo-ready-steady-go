@@ -5,17 +5,17 @@ const FAQ = [
   {
     question: "What does DOX-compatible mean?",
     answer:
-      "DOX-compatible products are designed to fit within the Vellvii DOX ecosystem, either through the VDS insert for Vellvii products or through the DDS insert for compatible suction-base products.",
+      "DOX-compatible products work with the suction-base mounting stations that sit atop the Vellvii DOX - the VDS for current Vellvii products, and the DDS for compatible suction-base pieces up to 90mm in diameter.",
   },
   {
     question: "What is the VDS?",
     answer:
-      "VDS stands for Vellvii Docking Station. It is the shaped insert on the Vellvii DOX designed specifically for current Vellvii products.",
+      "VDS stands for Vellvii Docking Station. It is a suction-base mounting station that sits atop the Vellvii DOX and is shaped for current Vellvii products with suction bases.",
   },
   {
     question: "What is the DDS?",
     answer:
-      "DDS stands for Dildo Docking Station. It is the round insert on the Vellvii DOX designed for compatible suction-base products up to 90mm, approximately 3.5 inches, in diameter.",
+      "DDS stands for Dildo Docking Station. It is a round suction-base mounting station that sits atop the Vellvii DOX, supporting compatible suction-base products up to 90mm, approximately 3.5 inches, in diameter.",
   },
 ];
 
@@ -29,14 +29,14 @@ const GuideDoxDockingSystem = () => {
       canonical="/guides/how-the-vellvii-dox-docking-system-works"
       category="DOX Compatibility"
       title="How the Vellvii DOX Docking System Works"
-      intro="The Vellvii DOX uses two distinct docking inserts - the VDS and the DDS - to keep the Pleasure Collection organized and refined. Here is how each one works."
+      intro="The Vellvii DOX uses two distinct top-mounted suction stations - the VDS and the DDS - turning the DOX itself into a refined stand for compatible suction-base pieces. Here is how each one works."
       heroImage="/uploads/dox-interior-labeled.jpg"
-      heroImageAlt="Vellvii DOX interior showing the VDS and DDS docking inserts"
+      heroImageAlt="Vellvii DOX shown with the VDS and DDS suction-base mounting stations on top"
       faq={FAQ}
     >
       <h2 className={H2}>Introduction</h2>
       <p>
-        The Vellvii DOX is more than a storage box. Inside, two shaped docking inserts hold compatible products in place: the VDS for Vellvii products, and the DDS for compatible suction-base products. Together they make the DOX a refined home for an evolving collection.
+        The Vellvii DOX is more than a storage box. On top of the DOX, two suction-base mounting stations - the VDS for current Vellvii products and the DDS for compatible suction-base pieces - turn the DOX itself into a refined stand. Inside, the DOX is velvet-lined with a movable velvet-lined tray for smaller items, and a USB-C input on the exterior powers 3 internal USB-A ports for charging while stored.
       </p>
 
       <h2 className={H2}>What is the Vellvii DOX?</h2>
@@ -49,13 +49,13 @@ const GuideDoxDockingSystem = () => {
       <figure className="my-6 overflow-hidden rounded-lg border border-white/10">
         <img
           src="/uploads/BeigeVDS.png"
-          alt="Vellvii VDS docking insert shaped for Vellvii G-Vibe, Evolve and Pulse"
+          alt="Vellvii VDS suction-base mounting station for compatible Vellvii pieces"
           loading="lazy"
           className="w-full h-auto object-cover"
         />
       </figure>
       <p>
-        VDS stands for Vellvii Docking Station. It is the shaped insert built into the DOX for current Vellvii products. The VDS is sculpted to hold each compatible Vellvii piece securely in its intended position.
+        VDS stands for Vellvii Docking Station. It is a suction-base mounting station that sits atop the DOX, designed to hold compatible Vellvii products with suction bases. With the VDS in place, the DOX itself becomes the mount.
       </p>
 
       <h2 className={H2}>Which Vellvii products fit the VDS?</h2>
@@ -70,12 +70,12 @@ const GuideDoxDockingSystem = () => {
 
       <h2 className={H2}>What is the DDS?</h2>
       <p>
-        DDS stands for Dildo Docking Station. It is the round insert on the Vellvii DOX, designed for compatible suction-base products up to 90mm, approximately 3.5 inches, in diameter. The DDS gives owners flexibility to dock pieces from their wider collection inside the same refined storage hub.
+        DDS stands for Dildo Docking Station. It is a round suction-base mounting station that sits atop the DOX, supporting compatible suction-base products up to 90mm, approximately 3.5 inches, in diameter. The DDS lets owners mount pieces from their wider collection on the same refined storage hub.
       </p>
 
       <h2 className={H2}>How to understand the 90mm / 3.5 inch DDS size</h2>
       <p>
-        The DDS is a round dock with a fixed diameter. Compatible suction-base products up to 90mm, approximately 3.5 inches, in diameter will sit inside the DDS. Anything larger than that diameter will not fit. The DDS is not a universal mount, and not every third-party product will be compatible.
+        The DDS is a round suction mount with a fixed diameter. Compatible suction-base products up to 90mm, approximately 3.5 inches, in diameter will fit on the DDS. Anything larger than that diameter will not. The DDS is not a universal mount, and not every third-party product will be compatible.
       </p>
 
       <h2 className={H2}>DOX-compatible products</h2>

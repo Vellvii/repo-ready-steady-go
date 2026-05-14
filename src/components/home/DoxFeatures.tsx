@@ -28,9 +28,9 @@ const features: FeaturePanel[] = [
     reverse: true,
   },
   {
-    title: "VEGAN",
-    subtitle: "LEATHER",
-    description: "Crafted with intention. Premium materials wrapped in velvet-lined luxury.",
+    title: "FAUX LEATHER",
+    subtitle: "VELVET-LINED",
+    description: "Faux leather exterior with rose gold accents, fully velvet-lined inside, with a movable velvet-lined tray for smaller pieces.",
     media: "/uploads/dox-interior-labeled.jpg",
     isVideo: false,
     reverse: false,

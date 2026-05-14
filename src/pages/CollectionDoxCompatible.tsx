@@ -18,17 +18,17 @@ const COLLECTION_FAQS: FaqItem[] = [
   {
     question: "What does DOX-compatible mean?",
     answer:
-      "DOX-compatible products are designed to fit within the Vellvii DOX ecosystem, either through the VDS insert for Vellvii products or through the DDS insert for compatible round-base products.",
+      "DOX-compatible products work with the suction-base mounting stations that sit atop the Vellvii DOX - the VDS for current Vellvii products, and the DDS for compatible suction-base pieces up to 90mm (approximately 3.5 inches) in diameter.",
   },
   {
     question: "What is the VDS?",
     answer:
-      "VDS stands for Vellvii Docking Station. It is the shaped insert on the Vellvii DOX designed specifically for current Vellvii products.",
+      "VDS stands for Vellvii Docking Station. It is a suction-base mounting station that sits atop the Vellvii DOX and is designed for current Vellvii products with suction bases.",
   },
   {
     question: "What is the DDS?",
     answer:
-      "DDS stands for Dildo Docking Station. It is the round insert on the Vellvii DOX designed for compatible suction-base products up to 90mm (approximately 3.5 inches) in diameter.",
+      "DDS stands for Dildo Docking Station. It is a round suction-base mounting station that sits atop the Vellvii DOX, supporting compatible suction-base products up to 90mm (approximately 3.5 inches) in diameter.",
   },
   {
     question: "Does Vellvii Lux fit into the DOX?",
@@ -147,7 +147,7 @@ const CollectionDoxCompatible = () => {
     <>
       <SEO
         title="DOX-Compatible Products | Vellvii Pleasure Collection"
-        description="Explore DOX-compatible products in the Vellvii Pleasure Collection, designed to fit the Vellvii DOX through dedicated VDS and DDS docking inserts."
+        description="Explore DOX-compatible products in the Vellvii Pleasure Collection, designed to work with the VDS and DDS suction-base mounting stations that sit atop the Vellvii DOX."
         canonical="/collections/dox-compatible-products"
         keywords="DOX-compatible products, Vellvii Docking Station, VDS, DDS, Vellvii Pleasure Collection, discreet storage"
         organizationData
@@ -173,8 +173,8 @@ const CollectionDoxCompatible = () => {
             </h1>
             <p className="text-light-secondary text-sm sm:text-base max-w-2xl mx-auto font-montserrat leading-relaxed">
               The Vellvii DOX is designed as the central storage system for the Vellvii Pleasure
-              Collection. Explore products that fit into the DOX ecosystem through the VDS insert,
-              along with compatible round-base products supported by the DDS.
+              Collection. Explore products built to work with the VDS and DDS - suction-base
+              mounting stations that sit atop the DOX, turning the DOX itself into a refined stand.
             </p>
           </div>
         </section>
