@@ -381,15 +381,15 @@ const Shop = () => {
           />
         </div>
 
-        {/* Vellvii Collection Strip - navigation to dedicated collection landing pages */}
+        {/* Vellvii Collection Strip - quiet text links to collection landing pages */}
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 mb-8 sm:mb-10">
-          <p className="font-baskerville italic text-xs sm:text-sm text-primary/70 mb-2 sm:mb-3 tracking-wide">
-            Explore by collection
-          </p>
           <nav
             aria-label="Vellvii collections"
-            className="flex gap-2 sm:gap-3 overflow-x-auto pb-2 scrollbar-luxury -mx-3 px-3 sm:mx-0 sm:px-0"
+            className="flex items-center gap-x-5 sm:gap-x-6 gap-y-2 flex-wrap text-light-secondary/70"
           >
+            <span className="font-baskerville italic text-[0.7rem] sm:text-xs uppercase tracking-[0.22em] text-light-secondary/55 mr-1">
+              Explore
+            </span>
             {[
               { label: "Pleasure Collection", href: "/collections/pleasure-collection" },
               { label: "DOX-Compatible", href: "/collections/dox-compatible-products" },
@@ -401,10 +401,9 @@ const Shop = () => {
               <Link
                 key={c.href}
                 to={c.href}
-                className="flex-shrink-0 inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-primary/25 bg-primary/5 text-primary hover:bg-primary/10 hover:border-primary/50 transition-colors font-montserrat text-xs sm:text-sm whitespace-nowrap"
+                className="font-montserrat text-[0.72rem] sm:text-xs tracking-wide text-light-secondary/75 hover:text-primary transition-colors whitespace-nowrap"
               >
-                <span>{c.label}</span>
-                <span aria-hidden className="text-primary/70">→</span>
+                {c.label}
               </Link>
             ))}
           </nav>
