@@ -4,13 +4,13 @@ const Video6 = () => {
   return (
     <>
       <SEO
-        title="Vellvii | Pleasure Collection"
-        description="Vellvii pleasure collection - luxury intimate wellness."
+        title="Vellvii Lux | Portable Fingerprint-Lock Case"
+        description="The Vellvii Lux - a portable fingerprint-lock storage case with a genuine leather exterior and velvet interior, refined for travel."
         noindex
       />
-      <div className="min-h-screen flex items-center justify-center bg-black">
+      <main className="min-h-screen flex items-center justify-center bg-black">
         <p className="text-white text-xl">Video coming soon</p>
-      </div>
+      </main>
     </>
   );
 };

@@ -4,13 +4,13 @@ const Video4 = () => {
   return (
     <>
       <SEO
-        title="Vellvii | Pleasure Collection"
-        description="Vellvii pleasure collection - luxury intimate wellness."
+        title="Vellvii DOX | VDS Docking Station in Use"
+        description="The Vellvii Docking Station (VDS) in action - a top-mounted suction station that turns the DOX into a refined stand for compatible Vellvii pieces."
         noindex
       />
-      <div className="min-h-screen flex items-center justify-center bg-black">
+      <main className="min-h-screen flex items-center justify-center bg-black">
         <p className="text-white text-xl">Video coming soon</p>
-      </div>
+      </main>
     </>
   );
 };

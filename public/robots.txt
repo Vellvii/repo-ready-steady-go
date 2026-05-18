@@ -20,7 +20,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://vellvii.com/sitemap.xml
+Sitemap: https://vellvii-site.lovable.app/sitemap.xml
 
 # Disallow admin and dev paths
 Disallow: /*?dev=true

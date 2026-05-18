@@ -172,10 +172,15 @@ const DoxVideoLanding = () => {
           <img
             src="/uploads/Vellvii-full-logo-transparent.png"
             alt="Vellvii"
+            width={320}
+            height={96}
+            fetchPriority="high"
             className="h-12 sm:h-16 md:h-20 w-auto justify-self-start sm:justify-self-center pl-1 sm:pl-0 drop-shadow-[0_0_24px_rgba(212,175,55,0.35)]"
           />
           <div className="w-20 sm:w-24" aria-hidden />
         </header>
+
+        <main>
 
         {/* [1b] Hero Video */}
         <section className="px-4 mb-10 sm:mb-14">
@@ -560,6 +565,7 @@ const DoxVideoLanding = () => {
 
         {/* FAQ */}
         <HomeFAQ />
+        </main>
 
         {/* Footer */}
         <PrelaunchFooter />

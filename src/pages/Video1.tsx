@@ -4,13 +4,13 @@ const Video1 = () => {
   return (
     <>
       <SEO
-        title="Vellvii | Pleasure Collection"
-        description="Vellvii pleasure collection - luxury intimate wellness."
+        title="Vellvii DOX | Biometric Lock Box Overview"
+        description="Watch the Vellvii DOX in motion - a biometric sex toy lock box and bedroom storage hub for the Vellvii Pleasure Collection."
         noindex
       />
-      <div className="min-h-screen flex items-center justify-center bg-black">
+      <main className="min-h-screen flex items-center justify-center bg-black">
         <p className="text-white text-xl">Video coming soon</p>
-      </div>
+      </main>
     </>
   );
 };
