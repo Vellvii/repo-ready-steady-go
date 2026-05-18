@@ -565,6 +565,7 @@ const DoxVideoLanding = () => {
 
         {/* FAQ */}
         <HomeFAQ />
+        </main>
 
         {/* Footer */}
         <PrelaunchFooter />
