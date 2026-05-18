@@ -29,11 +29,11 @@ const H2 = "font-baskerville text-2xl sm:text-3xl text-light-primary mt-12 mb-4"
 const GuideBiometricLockBoxForSexToys = () => {
   return (
     <GuideLayout
-      seoTitle="Biometric Lock Box for Sex Toys: A Guide to Sex Toy Lock Boxes | Vellvii"
-      seoDescription="A guide to biometric lock boxes for sex toys. How biometric access supports private storage, and where Vellvii DOX and Vellvii Lux fit."
+      seoTitle="Biometric Lock Box for Sex Toy Storage | Vellvii"
+      seoDescription="A guide to the biometric lock box for sex toy storage. How fingerprint access supports a private sex toy lock box, with Vellvii DOX and Lux."
       canonical="/guides/biometric-lock-box-for-sex-toys"
       category="Privacy & Access"
-      title="Biometric Lock Box for Sex Toys: How a Sex Toy Lock Box Works"
+      title="Biometric Lock Box for Sex Toy Storage"
       intro="A biometric lock box for sex toys is a refined way to keep personal items private. This guide covers how biometric access supports discreet sex toy storage, and where Vellvii DOX and Vellvii Lux fit."
       heroImage="/uploads/Dox_black_shelf_close_up.png"
       heroImageAlt="Vellvii DOX biometric sex toy lock box on a refined shelf"

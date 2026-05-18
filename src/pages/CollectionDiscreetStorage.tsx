@@ -5,10 +5,10 @@ const CollectionDiscreetStorage = () => (
     eyebrow="Discreet By Design"
     h1="Discreet Storage"
     intro="Vellvii storage is designed for privacy without compromise. From portable fingerprint-lock storage to larger bedroom-focused organization, each piece is created to feel refined, intentional, and discreet."
-    seoTitle="Discreet Sex Toy Storage | Vellvii Pleasure Collection"
-    seoDescription="Discreet sex toy storage by Vellvii - portable fingerprint-lock cases and refined bedroom storage designed for privacy, organization, and everyday use."
+    seoTitle="Discreet Sex Toy Storage | Vellvii Storage Collection"
+    seoDescription="Discreet sex toy storage by Vellvii - the Lux portable fingerprint-lock case and the DOX bedroom storage hub, designed for privacy and refined organization."
     canonical="/collections/discreet-storage"
-    seoParagraph="Vellvii approaches discreet sex toy storage as a design problem first. Each piece is created to live quietly in a refined home, supporting privacy, organization, and everyday use without drawing attention to itself."
+    seoParagraph="Vellvii approaches discreet sex toy storage as a design problem first. Each piece - from the portable Lux sex toy storage box to the larger DOX adult toy storage hub - is created to live quietly in a refined home, supporting privacy, organization, and everyday use without drawing attention to itself."
     productHandles={["vellvii-dox", "vellvii-lux"]}
     whyHeading="Storage that disappears into your space"
     whyItems={[
