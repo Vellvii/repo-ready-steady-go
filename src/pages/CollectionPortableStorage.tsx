@@ -5,7 +5,7 @@ const CollectionPortableStorage = () => (
     eyebrow="Designed To Travel With You"
     h1="Portable Storage"
     intro="Portable storage should feel discreet, refined, and easy to keep close. Vellvii Lux is designed as a fingerprint-lock storage case for everyday personal use and travel-friendly privacy."
-    seoTitle="Portable Sex Toy Storage | Vellvii Lux Sex Toy Bag"
+    seoTitle="Portable Sex Toy Storage | Vellvii Lux"
     seoDescription="Portable sex toy storage by Vellvii Lux - a refined fingerprint-lock case that doubles as a discreet sex toy bag for travel and everyday privacy."
     canonical="/collections/portable-storage"
     seoParagraph="For anyone looking for portable sex toy storage or a refined sex toy bag, Vellvii Lux offers a fingerprint-lock case designed to feel as considered as the rest of your essentials."

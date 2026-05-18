@@ -29,11 +29,11 @@ const H2 = "font-baskerville text-2xl sm:text-3xl text-light-primary mt-12 mb-4"
 const GuideBestSexToyStorageBox = () => {
   return (
     <GuideLayout
-      seoTitle="Best Sex Toy Storage Box: A Buyer's Guide to Adult Toy Boxes | Vellvii"
-      seoDescription="A buyer's guide to choosing the best sex toy storage box. Compare adult toy boxes by privacy, lockable design, size, organization, and portable vs bedroom storage."
+      seoTitle="Best Sex Toy Storage Box | Vellvii Buyer's Guide"
+      seoDescription="What to look for in the best sex toy storage box: privacy, lockable design, size, organization, and portable vs bedroom storage. A Vellvii buyer's guide."
       canonical="/guides/best-sex-toy-storage-box"
       category="Buyer's Guide"
-      title="Best Sex Toy Storage Box: A Buyer's Guide"
+      title="Best Sex Toy Storage Box: What to Look For"
       intro="Choosing the best sex toy storage box is less about finding the largest one and more about finding the one that fits how you live. This buyer's guide covers what to look for in a refined adult toy box."
       heroImage="/uploads/Dox_white_lifestyle1.jpg"
       heroImageAlt="Vellvii DOX refined sex toy storage box and biometric lock box in a bedroom interior"

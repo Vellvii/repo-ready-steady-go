@@ -29,11 +29,11 @@ const H2 = "font-baskerville text-2xl sm:text-3xl text-light-primary mt-12 mb-4"
 const GuideDiscreetStorage = () => {
   return (
     <GuideLayout
-      seoTitle="Discreet Sex Toy Storage: How to Store Sex Toys with Privacy | Vellvii"
+      seoTitle="Sex Toy Storage Guide | Discreet Storage by Vellvii"
       seoDescription="A guide to discreet sex toy storage at home and on the move. Compare a portable sex toy bag with a refined biometric lock box for the bedroom."
       canonical="/guides/discreet-storage-for-intimate-wellness-products"
       category="Storage & Privacy"
-      title="Discreet Sex Toy Storage: How to Store Sex Toys with Privacy"
+      title="Discreet Sex Toy Storage for Intimate Wellness Products"
       intro="Discreet sex toy storage is about more than hiding things away. It is about privacy, organization, and the everyday care that keeps a refined collection feeling considered."
       heroImage="/uploads/lux-philosophy-lifestyle-v4.png"
       heroImageAlt="Vellvii Lux portable sex toy storage case on a refined surface, illustrating discreet sex toy storage"

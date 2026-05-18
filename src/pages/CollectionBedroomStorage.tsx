@@ -5,10 +5,10 @@ const CollectionBedroomStorage = () => (
     eyebrow="The Vellvii Bedroom System"
     h1="Bedroom Storage"
     intro="Vellvii DOX is the larger, sturdier storage system designed for discreet bedroom integration. Built around the VDS and DDS docking system, DOX becomes the central storage hub for the Vellvii Pleasure Collection."
-    seoTitle="Sex Toy Storage for the Bedroom | Vellvii DOX Adult Toy Box"
-    seoDescription="Refined sex toy storage and adult toy box by Vellvii DOX - a discreet bedroom storage hub built around the VDS and DDS docking system."
+    seoTitle="Bedroom Sex Toy Storage | Vellvii DOX"
+    seoDescription="Bedroom sex toy storage by Vellvii DOX - a refined sex toy storage box and adult toy storage hub built around the VDS and DDS docking system."
     canonical="/collections/bedroom-storage"
-    seoParagraph="Vellvii DOX is designed as a refined sex toy storage system and adult toy box for the bedroom, with quiet exteriors, considered interiors, and the VDS and DDS docking stations on top."
+    seoParagraph="Vellvii DOX is designed as a refined sex toy storage box and adult toy storage hub for the bedroom, with quiet exteriors, considered interiors, and the VDS and DDS docking stations on top."
     productHandles={[
       "vellvii-dox",
       "vellvii-g-vibe",
