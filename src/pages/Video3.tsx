@@ -4,13 +4,13 @@ const Video3 = () => {
   return (
     <>
       <SEO
-        title="Vellvii | Pleasure Collection"
-        description="Vellvii pleasure collection - luxury intimate wellness."
+        title="Vellvii DOX | Internal USB-A Charging"
+        description="See how the Vellvii DOX organizes 3 internal USB-A charging ports powered by an external USB-C input for everyday care."
         noindex
       />
-      <div className="min-h-screen flex items-center justify-center bg-black">
+      <main className="min-h-screen flex items-center justify-center bg-black">
         <p className="text-white text-xl">Video coming soon</p>
-      </div>
+      </main>
     </>
   );
 };

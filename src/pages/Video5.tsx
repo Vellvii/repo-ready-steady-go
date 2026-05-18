@@ -4,13 +4,13 @@ const Video5 = () => {
   return (
     <>
       <SEO
-        title="Vellvii | Pleasure Collection"
-        description="Vellvii pleasure collection - luxury intimate wellness."
+        title="Vellvii DOX | DDS Dildo Docking Station"
+        description="Inside the Dildo Docking Station (DDS) - a round top-mounted suction station that supports compatible suction-base pieces up to 90mm."
         noindex
       />
-      <div className="min-h-screen flex items-center justify-center bg-black">
+      <main className="min-h-screen flex items-center justify-center bg-black">
         <p className="text-white text-xl">Video coming soon</p>
-      </div>
+      </main>
     </>
   );
 };
