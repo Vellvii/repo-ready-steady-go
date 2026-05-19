@@ -47,8 +47,8 @@ const GUIDES = [
     title: "How to Choose Premium Products for Couples",
     excerpt:
       "A refined guide for couples choosing products around privacy, connection, storage, and shared intention.",
-    image: "/uploads/dox-white-lifestyle-2.jpg",
-    imageAlt: "Vellvii DOX styled in a refined shared bedroom interior for couples",
+    image: "/uploads/Lifestyle_img8.jpg",
+    imageAlt: "Vellvii DOX on a bookshelf beside a shared bed, styled for couples",
   },
   {
     to: "/guides/how-to-care-for-your-vellvii-products",
