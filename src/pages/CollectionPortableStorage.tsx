@@ -43,7 +43,7 @@ const CollectionPortableStorage = () => (
       {
         question: "When does the Vellvii Lux ship?",
         answer:
-          "Pre-orders ship the first week of June 2026. Reserve now to secure your unit from the current first-run offer.",
+          "Pre-orders ship by the end of June 2026. Reserve now to secure your unit from the current first-run offer.",
       },
       {
         question: "Where can I find warranty information?",

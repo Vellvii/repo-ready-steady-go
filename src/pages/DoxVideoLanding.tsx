@@ -269,7 +269,7 @@ const DoxVideoLanding = () => {
                 The Vellvii Lux is here.
               </h1>
               <p className="text-base sm:text-lg md:text-xl text-light-secondary font-montserrat max-w-2xl mx-auto leading-relaxed">
-                Ships first week of June. The current Lux first-run offer includes a complimentary
+                Ships end of June. The current Lux first-run offer includes a complimentary
                 Vellvii Nova - our handheld suction piece. Future Lux runs are planned, but the
                 Nova gift will not be included after this first run.
               </p>
@@ -320,7 +320,7 @@ const DoxVideoLanding = () => {
                 </div>
               </Link>
               <p className="mt-4 text-xs sm:text-sm text-light-muted font-montserrat">
-                Ships first week of June
+                Ships end of June
               </p>
             </motion.div>
           </div>

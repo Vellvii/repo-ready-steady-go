@@ -29,7 +29,7 @@ export const LuxPreOrderBanner = () => (
       Pre-Order Now
     </p>
     <p className="font-montserrat text-[11px] sm:text-sm text-light-secondary mt-1 leading-snug">
-      Ships first week of June
+      Ships end of June
     </p>
   </div>
 );
@@ -48,8 +48,8 @@ export const LuxFreeGiftBadge = () => (
   </div>
 );
 
-// Midnight Pacific Time (Los Angeles) — June 1, 2026 is during PDT (UTC-7)
-export const LuxCountdown = ({ endDate = "2026-06-01T00:00:00-07:00" }: { endDate?: string }) => {
+// Midnight Pacific Time (Los Angeles) — June 30, 2026 is during PDT (UTC-7)
+export const LuxCountdown = ({ endDate = "2026-06-30T00:00:00-07:00" }: { endDate?: string }) => {
   const [time, setTime] = useState<TimeLeft>(() => calc(endDate));
   useEffect(() => {
     const t = setInterval(() => setTime(calc(endDate)), 1000 * 30);
