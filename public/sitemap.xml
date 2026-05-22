@@ -107,6 +107,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://vellvii.com/socials</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  <url>
     <loc>https://vellvii.com/guides</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
