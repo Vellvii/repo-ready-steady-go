@@ -40,6 +40,7 @@ import CollectionPortableStorage from "./pages/CollectionPortableStorage";
 import CollectionBedroomStorage from "./pages/CollectionBedroomStorage";
 import CollectionProductsForCouples from "./pages/CollectionProductsForCouples";
 import Contact from "./pages/Contact";
+import Socials from "./pages/Socials";
 import Guides from "./pages/Guides";
 import GuideLuxVsDox from "./pages/guides/GuideLuxVsDox";
 import GuideDoxDockingSystem from "./pages/guides/GuideDoxDockingSystem";
@@ -109,6 +110,7 @@ const InnerApp = () => {
             <Route path="/warranty" element={<Warranty />} />
             <Route path="/warranty/register" element={<WarrantyRegister />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/socials" element={<Socials />} />
 
             {/* Guides */}
             <Route path="/guides" element={<Guides />} />
