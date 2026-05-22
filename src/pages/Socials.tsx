@@ -4,6 +4,12 @@ import { motion } from "framer-motion";
 import { z } from "zod";
 import { CheckCircle2, Loader2, ArrowRight, ExternalLink } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
 import { ScrollHeader } from "@/components/ScrollHeader";
 import { socialChannels, RedditIcon } from "@/data/socials";
@@ -13,6 +19,39 @@ import { pixelLead, pixelSubscribe } from "@/lib/metaPixel";
 
 const REDDIT_URL = "https://www.reddit.com/r/Vellvii/s/ukaPOmsKiP";
 const PAGE_URL = "https://vellvii.com/socials";
+
+const socialsFAQs: { question: string; answer: string }[] = [
+  {
+    question: "Where is Vellvii on social media?",
+    answer:
+      "Vellvii is on Instagram, TikTok, YouTube, X (Twitter), Pinterest, LinkedIn and Reddit. The full list with handles and direct links lives on vellvii.com/socials - the single source of truth for every official Vellvii channel.",
+  },
+  {
+    question: "What is r/Vellvii?",
+    answer:
+      "r/Vellvii is the official Vellvii subreddit - a community for behind-the-design previews, founder AMAs, early-access drops and direct conversation with the team. Join at reddit.com/r/Vellvii.",
+  },
+  {
+    question: "How can I tell if a Vellvii account is real?",
+    answer:
+      "Every official Vellvii account is listed on vellvii.com/socials. If a profile, handle or link is not on that page, it is not an official Vellvii channel. We never DM unsolicited discount codes or payment requests.",
+  },
+  {
+    question: "Where can I read about the Vellvii DOX outside the website?",
+    answer:
+      "The Vellvii DOX is documented on Prelaunch.com, Kickstarter and Gadget Flow. Direct links to each are in the Elsewhere section of vellvii.com/socials.",
+  },
+  {
+    question: "How do I contact Vellvii?",
+    answer:
+      "For press, partnerships and customer questions, use the Contact page at vellvii.com/contact or DM the official Instagram. Community questions are welcomed on r/Vellvii.",
+  },
+  {
+    question: "Does Vellvii have a newsletter?",
+    answer:
+      "Yes. The Vellvii waitlist sends restock and launch alerts for DOX, Lux and the Pleasure Collection. You can join from the form on vellvii.com/socials or any product page.",
+  },
+];
 
 const emailSchema = z
   .string()
