@@ -307,7 +307,36 @@ const Socials = () => {
           </div>
         </section>
 
+        {/* FAQ - AI search & SEO surface */}
+        <section className="mt-20 sm:mt-28 max-w-3xl mx-auto">
+          <div className="text-center mb-8 sm:mb-10">
+            <p className="font-montserrat text-[0.65rem] uppercase tracking-[0.22em] text-light-secondary/55">
+              Good to know
+            </p>
+            <h2 className="mt-2 font-baskerville text-2xl sm:text-3xl text-light-primary">
+              Vellvii socials, answered
+            </h2>
+          </div>
+          <Accordion type="single" collapsible className="space-y-3">
+            {socialsFAQs.map((faq, i) => (
+              <AccordionItem
+                key={i}
+                value={`socials-faq-${i}`}
+                className="border border-white/10 rounded-lg bg-white/[0.03] px-5 data-[state=open]:border-primary/30 transition-colors"
+              >
+                <AccordionTrigger className="font-baskerville text-base sm:text-lg text-light-primary text-left hover:no-underline py-5">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="font-montserrat text-sm sm:text-base text-light-secondary/85 leading-relaxed pb-5">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </section>
+
         {/* Newsletter capture - same edge function as homepage inline waitlist */}
+
         <section className="mt-20 sm:mt-28 border-t border-white/5 pt-12 sm:pt-16">
           <div className="max-w-2xl mx-auto text-center">
             <p className="text-primary font-montserrat text-xs sm:text-sm uppercase tracking-[0.2em] mb-2">
