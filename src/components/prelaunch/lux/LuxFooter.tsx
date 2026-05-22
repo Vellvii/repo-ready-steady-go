@@ -32,51 +32,18 @@ export const LuxFooter = () => {
 
           {/* Social Links */}
           <div className="flex gap-4">
-            <a
-              href="https://instagram.com/vellvii.official"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full border border-border bg-card/70 backdrop-blur flex items-center justify-center hover:border-primary/40 transition-colors group"
-              aria-label="Instagram"
-            >
-              <Instagram className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-            </a>
-            <a
-              href="https://x.com/OfficialVellvii"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full border border-border bg-card/70 backdrop-blur flex items-center justify-center hover:border-primary/40 transition-colors group"
-              aria-label="X (Twitter)"
-            >
-              <Twitter className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-            </a>
-            <a
-              href="https://tiktok.com/@vellvii.official"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full border border-border bg-card/70 backdrop-blur flex items-center justify-center hover:border-primary/40 transition-colors group"
-              aria-label="TikTok"
-            >
-              <TikTokIcon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-            </a>
-            <a
-              href="https://www.facebook.com/profile.php?id=61580639793053"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full border border-border bg-card/70 backdrop-blur flex items-center justify-center hover:border-primary/40 transition-colors group"
-              aria-label="Facebook"
-            >
-              <Facebook className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-            </a>
-            <a
-              href="https://www.reddit.com/r/Vellvii/s/ukaPOmsKiP"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full border border-border bg-card/70 backdrop-blur flex items-center justify-center hover:border-primary/40 transition-colors group"
-              aria-label="Reddit"
-            >
-              <RedditIcon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-            </a>
+            {footerSocials.map(({ id, label, href, Icon }) => (
+              <a
+                key={id}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full border border-border bg-card/70 backdrop-blur flex items-center justify-center hover:border-primary/40 transition-colors group"
+                aria-label={label}
+              >
+                <Icon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+              </a>
+            ))}
           </div>
 
           {/* Email */}
