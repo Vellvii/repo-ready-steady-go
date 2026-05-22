@@ -55,6 +55,7 @@ const routes: RouteSeo[] = [
   { path: "/warranty", title: "Lifetime Warranty | Vellvii", description: "Vellvii offers a lifetime warranty on DOX and LUX luxury storage products. All sales are final with no refunds. Coverage includes manufacturing defects." },
   { path: "/warranty/register", title: "Register Your Warranty | Vellvii", description: "Register your Vellvii DOX or LUX product warranty. Required for warranty service." },
   { path: "/contact", title: "Contact Vellvii | Support & Retail Enquiries", description: "Contact Vellvii for customer support, warranty questions, general enquiries, or retail partnership opportunities." },
+  { path: "/socials", title: "Follow Vellvii - Socials & Community", description: "Follow Vellvii across Instagram, TikTok, YouTube, Reddit and more. Behind the design, launch updates and the r/Vellvii community." },
 
   // Guides
   { path: "/guides", title: "Vellvii Guides | Discreet Storage, DOX Docking System & Pleasure Collection", description: "Vellvii Guides on discreet storage, the DOX docking system, Lux vs DOX, and choosing refined intimate wellness products for modern couples." },
