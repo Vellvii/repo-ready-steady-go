@@ -155,13 +155,22 @@ const Socials = () => {
     sameAs,
   };
 
+  const faqPlainTexts = [
+    "Vellvii is on Instagram, TikTok, YouTube, X (Twitter), Pinterest, LinkedIn and Reddit. The full list with handles and direct links lives on vellvii.com/socials - the single source of truth for every official Vellvii channel.",
+    "r/Vellvii is the official Vellvii subreddit - a community for behind-the-design previews, founder AMAs, early-access drops and direct conversation with the team. Join at reddit.com/r/Vellvii.",
+    "Every official Vellvii account is listed on vellvii.com/socials. If a profile, handle or link is not on that page, it is not an official Vellvii channel. We never DM unsolicited discount codes or payment requests.",
+    "The Vellvii DOX is documented on Prelaunch.com, Kickstarter and Gadget Flow. Direct links to each are in the Elsewhere section of vellvii.com/socials.",
+    "For press, partnerships and customer questions, use the Contact page at vellvii.com/contact or DM the official Instagram. Community questions are welcomed on r/Vellvii.",
+    "Yes. The Vellvii waitlist sends restock and launch alerts for DOX, Lux and the Pleasure Collection. You can join from the form on vellvii.com/socials or any product page.",
+  ];
+
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: socialsFAQs.map((f) => ({
+    mainEntity: socialsFAQs.map((f, i) => ({
       "@type": "Question",
       name: f.question,
-      acceptedAnswer: { "@type": "Answer", text: f.answer },
+      acceptedAnswer: { "@type": "Answer", text: faqPlainTexts[i] },
     })),
   };
 
