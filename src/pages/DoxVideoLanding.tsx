@@ -565,7 +565,36 @@ const DoxVideoLanding = () => {
 
         {/* FAQ */}
         <HomeFAQ />
-        </main>
+
+        {/* [7] Socials CTA */}
+        <section className="px-4 mb-12 sm:mb-16 border-t border-white/5 pt-12 sm:pt-16">
+          <div className="max-w-2xl mx-auto text-center">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <span className="block w-12 h-px bg-gradient-to-r from-transparent to-primary/40" />
+              <span className="font-baskerville italic text-[0.78rem] sm:text-sm tracking-[0.32em] uppercase text-primary/70">
+                Connect
+              </span>
+              <span className="block w-12 h-px bg-gradient-to-l from-transparent to-primary/40" />
+            </div>
+
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-baskerville font-bold text-light-primary mb-3">
+              Follow Vellvii
+            </h2>
+            <p className="text-sm sm:text-base text-light-secondary font-montserrat mb-6 sm:mb-8 leading-relaxed max-w-lg mx-auto">
+              Behind-the-design previews, launch updates and the r/Vellvii community - one place for every channel.
+            </p>
+
+            <Link
+              to="/socials"
+              className="inline-flex items-center gap-2 h-11 px-6 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] text-black rounded-md font-montserrat font-bold text-sm shadow-elegant hover:shadow-glow transition-all duration-500 hover:bg-right"
+            >
+              <Users className="w-4 h-4" />
+              View All Channels
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </section>
+      </main>
 
         {/* Footer */}
         <PrelaunchFooter />
