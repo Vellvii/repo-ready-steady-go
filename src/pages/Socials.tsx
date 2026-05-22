@@ -96,6 +96,8 @@ const Socials = () => {
         <script type="application/ld+json">{JSON.stringify(organizationJsonLd)}</script>
       </Helmet>
 
+      <ScrollHeader />
+
       <main className="container mx-auto px-4 sm:px-6 pt-20 sm:pt-28 pb-16">
         {/* Header */}
         <motion.div
