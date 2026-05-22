@@ -116,24 +116,36 @@ const Socials = () => {
     sameAs,
   };
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: socialsFAQs.map((f) => ({
+      "@type": "Question",
+      name: f.question,
+      acceptedAnswer: { "@type": "Answer", text: f.answer },
+    })),
+  };
+
   return (
     <div className="min-h-screen surface-dark text-light-primary">
       <Helmet>
-        <title>Follow Vellvii - Socials & Community</title>
+        <title>Follow Vellvii - Official Socials, Reddit & Community</title>
         <meta
           name="description"
-          content="Follow Vellvii across Instagram, TikTok, YouTube, Reddit and more. Behind the design, launch updates and the r/Vellvii community."
+          content="Official Vellvii social channels - Instagram, TikTok, YouTube, X, Pinterest, LinkedIn and r/Vellvii on Reddit. The verified directory of every Vellvii account."
         />
         <link rel="canonical" href={PAGE_URL} />
-        <meta property="og:title" content="Follow Vellvii - Socials & Community" />
+        <meta property="og:title" content="Follow Vellvii - Official Socials & Community" />
         <meta
           property="og:description"
-          content="Behind the design, launch updates and the r/Vellvii community."
+          content="The verified directory of every official Vellvii channel - Instagram, TikTok, YouTube, Reddit and more."
         />
         <meta property="og:url" content={PAGE_URL} />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify(organizationJsonLd)}</script>
+        <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
       </Helmet>
+
 
       <ScrollHeader />
 
