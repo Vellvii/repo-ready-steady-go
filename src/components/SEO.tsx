@@ -64,7 +64,7 @@ export const SEO = ({
   breadcrumbs,
   keywords,
   videoData,
-  hreflang = 'en-us',
+  hreflang = 'en',
   noindex = false,
 }: SEOProps) => {
   const fullTitle = title.includes('Vellvii') ? title : `${title} | Vellvii`;
@@ -211,6 +211,7 @@ export const SEO = ({
       {/* Canonical URL */}
       {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
       {canonicalUrl && <link rel="alternate" hrefLang={hreflang} href={canonicalUrl} />}
+      {canonicalUrl && <link rel="alternate" hrefLang="x-default" href={canonicalUrl} />}
 
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
