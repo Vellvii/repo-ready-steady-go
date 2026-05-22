@@ -5,6 +5,7 @@ import { z } from "zod";
 import { CheckCircle2, Loader2, ArrowRight, ExternalLink } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
+import { ScrollHeader } from "@/components/ScrollHeader";
 import { socialChannels, RedditIcon } from "@/data/socials";
 import { presenceSurfaces } from "@/data/presence";
 import { supabase } from "@/integrations/supabase/client";
@@ -94,6 +95,8 @@ const Socials = () => {
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify(organizationJsonLd)}</script>
       </Helmet>
+
+      <ScrollHeader />
 
       <main className="container mx-auto px-4 sm:px-6 pt-20 sm:pt-28 pb-16">
         {/* Header */}
