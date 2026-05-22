@@ -224,48 +224,73 @@ const Socials = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="mt-14 sm:mt-20 max-w-3xl mx-auto"
+          className="mt-14 sm:mt-20 max-w-3xl mx-auto relative"
         >
-          <div className="relative overflow-hidden rounded-2xl border border-primary/25 bg-gradient-to-br from-primary/10 via-background/0 to-background/0 p-6 sm:p-10">
-            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl border border-primary/30 bg-background/60 flex items-center justify-center shrink-0">
-                <RedditIcon className="w-9 h-9 sm:w-11 sm:h-11 text-primary" />
+          {/* Ambient glow blobs */}
+          <div className="pointer-events-none absolute inset-0 -z-10">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] max-w-[120vw] max-h-[120vw] bg-primary/20 rounded-full blur-[180px]" />
+            <div className="absolute -top-20 -right-20 w-[500px] h-[500px] max-w-[80vw] max-h-[80vw] bg-accent/15 rounded-full blur-[140px]" />
+          </div>
+
+          <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-2xl p-8 sm:p-14 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.8)] transition-all duration-1000 ease-in-out hover:bg-white/[0.07] hover:border-white/25 hover:shadow-[0_80px_160px_-30px_rgba(0,0,0,1)] hover:-translate-y-1">
+            {/* Glass reflection */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.08] pointer-events-none opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
+
+            <div className="relative z-10 flex flex-col md:flex-row gap-8 md:gap-12 items-center md:items-start text-center md:text-left">
+              {/* Icon */}
+              <div className="shrink-0">
+                <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center rounded-2xl border border-white/20 bg-white/[0.08] backdrop-blur-3xl shadow-2xl transition-all duration-700 group-hover:scale-110 group-hover:border-primary/50">
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-white/10 to-transparent" />
+                  <RedditIcon className="w-10 h-10 sm:w-12 sm:h-12 text-accent relative z-10 drop-shadow-[0_0_15px_rgba(247,231,206,0.4)] transition-transform duration-700 group-hover:rotate-12" />
+                </div>
               </div>
-              <div className="flex-1 text-center sm:text-left">
-                <p className="font-montserrat text-[0.65rem] uppercase tracking-[0.22em] text-primary/80">
-                  New - join the community
+
+              {/* Content */}
+              <div className="flex-1 space-y-6 sm:space-y-8 min-w-0">
+                <div className="space-y-4">
+                  <span className="inline-block px-4 py-1.5 bg-white/5 border border-white/10 rounded-full font-montserrat text-[0.6rem] tracking-[0.32em] font-semibold text-primary uppercase transition-colors duration-500 group-hover:border-primary/30 group-hover:bg-primary/5">
+                    Community Access
+                  </span>
+                  <h2 className="font-baskerville text-4xl sm:text-5xl md:text-6xl text-light-primary leading-[1.1]">
+                    r/Vellvii <span className="italic font-light text-accent/60">on</span> <span className="text-light-primary/80">Reddit</span>
+                  </h2>
+                </div>
+
+                <p className="font-montserrat text-sm sm:text-base md:text-lg text-light-secondary/80 leading-relaxed font-light max-w-md mx-auto md:mx-0 transition-colors duration-700 group-hover:text-light-primary/85">
+                  Behind-the-design previews, founder AMAs and early-access drops. The most direct line to the team.
                 </p>
-                <h2 className="mt-2 font-baskerville text-2xl sm:text-3xl text-light-primary">
-                  r/Vellvii on Reddit
-                </h2>
-                <p className="mt-3 font-montserrat text-sm sm:text-base text-light-secondary/85 leading-relaxed">
-                  Behind-the-design previews, founder AMAs and early-access drops.
-                  The most direct line to the team.
-                </p>
-                <ul className="mt-4 grid sm:grid-cols-3 gap-2 sm:gap-3 font-montserrat text-xs sm:text-[0.78rem] text-light-secondary/80">
-                  <li className="rounded-lg border border-white/10 bg-white/5 px-3 py-2">
-                    Behind-the-design previews
-                  </li>
-                  <li className="rounded-lg border border-white/10 bg-white/5 px-3 py-2">
-                    Founder AMAs
-                  </li>
-                  <li className="rounded-lg border border-white/10 bg-white/5 px-3 py-2">
-                    Early-access drops
-                  </li>
-                </ul>
-                <a
-                  href={REDDIT_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-6 inline-flex items-center gap-2 h-11 px-6 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] text-black rounded-md font-montserrat font-bold text-sm shadow-elegant hover:shadow-glow transition-all duration-500 hover:bg-right"
-                >
-                  Join r/Vellvii
-                  <ArrowRight className="w-4 h-4" />
-                </a>
+
+                <div className="flex flex-wrap gap-2 sm:gap-3 justify-center md:justify-start">
+                  {["Behind-the-design", "Founder AMAs", "Early-access"].map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-4 sm:px-5 py-2 rounded-full border border-white/10 bg-white/[0.04] font-montserrat text-[0.6rem] sm:text-[0.65rem] text-accent uppercase tracking-widest backdrop-blur-md transition-all duration-500 hover:bg-primary/20 hover:border-primary/40 hover:text-light-primary"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="pt-2">
+                  <a
+                    href={REDDIT_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group/btn inline-flex items-center gap-6 sm:gap-8 px-8 sm:px-12 py-4 sm:py-5 rounded-full bg-light-primary text-background font-montserrat font-bold text-[0.65rem] sm:text-[0.7rem] uppercase tracking-[0.3em] transition-all duration-700 hover:bg-accent hover:shadow-[0_25px_60px_-10px_rgba(247,231,206,0.4)] active:scale-95 shadow-[0_4px_24px_rgba(255,255,255,0.1)]"
+                  >
+                    Join r/Vellvii
+                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-700 group-hover/btn:translate-x-2" />
+                  </a>
+                </div>
               </div>
             </div>
+
+            {/* Corner glow accents */}
+            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-primary/20 blur-3xl rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-1000 pointer-events-none" />
+            <div className="absolute -top-10 -left-10 w-40 h-40 bg-accent/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-1000 pointer-events-none" />
           </div>
         </motion.section>
+
 
         {/* Channels grid */}
         <section className="mt-16 sm:mt-24 max-w-5xl mx-auto">
