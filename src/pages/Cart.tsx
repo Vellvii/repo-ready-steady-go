@@ -70,6 +70,14 @@ const CartPage = () => {
 
       <main className="min-h-screen surface-dark-rich pt-24 pb-24">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <Breadcrumbs
+            items={[
+              { name: "Home", url: "/" },
+              { name: "Shop", url: "/shop" },
+              { name: "Cart" },
+            ]}
+            className="mb-4"
+          />
           <header className="mb-8 sm:mb-12">
             <h1 className="font-baskerville text-3xl sm:text-4xl text-light-primary gradient-text">
               Your Collection
