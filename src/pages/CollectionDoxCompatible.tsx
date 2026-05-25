@@ -11,6 +11,7 @@ import { useCartStore } from "@/stores/cartStore";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import { useState, useMemo } from "react";
+import { Breadcrumbs } from "@/components/navigation/Breadcrumbs";
 import { DOCKING_INFO, DOX_COMPATIBLE_HANDLES, type FaqItem } from "@/lib/pdpContent";
 import type { ShopifyProduct } from "@/lib/shopify";
 
