@@ -14,6 +14,7 @@ import { LuxuryNavDrawer } from "./components/navigation/LuxuryNavDrawer";
 import { useCartSync } from "./hooks/useCartSync";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import AgeGateLanding from "./pages/Landing";
+import EntryGate from "./pages/EntryGate";
 import NotFound from "./pages/NotFound";
 import PrelaunchDOX from "./pages/PrelaunchDOX";
 import PrelaunchLux from "./pages/PrelaunchLux";
@@ -78,7 +79,8 @@ const InnerApp = () => {
         <PageTransition>
           <Routes>
             {/* Live pages */}
-            <Route path="/" element={<DoxVideoLanding />} />
+            <Route path="/" element={<EntryGate />} />
+            <Route path="/home" element={<DoxVideoLanding />} />
             <Route path="/showcase" element={<DoxLanding />} />
             <Route path="/landing" element={<AgeGateLanding />} />
             <Route path="/shop" element={<Shop />} />
@@ -138,15 +140,13 @@ const InnerApp = () => {
             <Route path="/products/vellvii-vibe" element={<Navigate to="/products/vellvii-evolve" replace />} />
 
             {/* Legacy redirects: deleted Kickstarter & nav pages → home (preserve ad traffic) */}
-            <Route path="/home" element={<Navigate to="/" replace />} />
-            <Route path="/about" element={<Navigate to="/" replace />} />
-            <Route path="/contact" element={<Navigate to="/" replace />} />
+            <Route path="/about" element={<Navigate to="/home" replace />} />
             <Route path="/sex-saddle" element={<Navigate to="/shop" replace />} />
-            <Route path="/kickstarter" element={<Navigate to="/" replace />} />
-            <Route path="/kickstarterV2" element={<Navigate to="/" replace />} />
-            <Route path="/Vellvii-Kickstarter" element={<Navigate to="/" replace />} />
-            <Route path="/Vellvii-Kickstarter2" element={<Navigate to="/" replace />} />
-            <Route path="/Vellvii-Prototype" element={<Navigate to="/" replace />} />
+            <Route path="/kickstarter" element={<Navigate to="/home" replace />} />
+            <Route path="/kickstarterV2" element={<Navigate to="/home" replace />} />
+            <Route path="/Vellvii-Kickstarter" element={<Navigate to="/home" replace />} />
+            <Route path="/Vellvii-Kickstarter2" element={<Navigate to="/home" replace />} />
+            <Route path="/Vellvii-Prototype" element={<Navigate to="/home" replace />} />
 
             <Route path="*" element={<NotFound />} />
           </Routes>

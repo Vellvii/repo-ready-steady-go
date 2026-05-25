@@ -37,7 +37,7 @@ export const ScrollHeader = () => {
           <NavMenuButton className="-ml-2" />
 
           {/* Center: Logo */}
-          <Link to="/" className="flex items-center justify-self-center">
+          <Link to="/home" className="flex items-center justify-self-center">
             <img
               src="/uploads/Vellvii-full-logo-transparent.png"
               alt="Vellvii"

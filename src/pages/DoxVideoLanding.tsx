@@ -159,7 +159,7 @@ const DoxVideoLanding = () => {
       <SEO
         title="Vellvii | Luxury Intimate Wellness Products"
         description="Discover Vellvii's luxury intimate wellness collection, designed for modern couples who value elegance, discretion, and premium design."
-        canonical="/"
+        canonical="/home"
         keywords="Vellvii, luxury intimate wellness, pleasure collection, premium wellness, design-led intimate wellness, Vellvii DOX, Vellvii Lux, Vellvii G-Vibe, Vellvii Evolve, Vellvii Pulse"
         organizationData
         faqData={homeFAQs.map(f => ({ question: f.question, answer: f.answerText }))}
