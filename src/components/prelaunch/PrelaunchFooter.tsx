@@ -15,8 +15,12 @@ const linkColumns: { heading: string; items: { href: string; label: string }[] }
   {
     heading: "Support",
     items: [
+      { href: "/cart", label: "Cart" },
       { href: "/warranty", label: "Warranty" },
       { href: "/warranty/register", label: "Register Warranty" },
+      { href: "/guides/discreet-storage-for-intimate-wellness-products", label: "Discreet Shipping" },
+      { href: "/guides/how-to-care-for-your-vellvii-products", label: "Care Guide" },
+      { href: "/guides", label: "FAQs" },
       { href: "/contact", label: "Contact" },
     ],
   },
