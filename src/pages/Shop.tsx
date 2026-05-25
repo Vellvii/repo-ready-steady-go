@@ -598,7 +598,17 @@ const Shop = () => {
                     type="button"
                     role="switch"
                     aria-checked={inStockOnly}
-                    onClick={() => setInStockOnly((v) => !v)}
+                    onClick={() => {
+                      setSearchParams((prev) => {
+                        const next = new URLSearchParams(prev);
+                        if (next.get("filter") === "in-stock") {
+                          next.delete("filter");
+                        } else {
+                          next.set("filter", "in-stock");
+                        }
+                        return next;
+                      }, { replace: true });
+                    }}
                     className="group flex items-center justify-between gap-3 w-full px-3 py-2.5 rounded-lg hover:bg-white/[0.04] transition-colors"
                   >
                     <span className="font-montserrat text-sm text-light-secondary group-hover:text-light-primary transition-colors">
