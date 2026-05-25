@@ -226,11 +226,14 @@ export const CartDrawer = () => {
                         <Loader2 className="w-4 h-4 animate-spin" />
                       ) : (
                         <>
-                          <ExternalLink className="w-4 h-4 mr-2" />
+                          <Lock className="w-4 h-4 mr-2" />
                           Checkout
                         </>
                       )}
                     </Button>
+                    <p className="text-center text-[11px] sm:text-xs font-montserrat text-light-muted leading-relaxed">
+                      Secure Shopify checkout. Discreet packaging.
+                    </p>
                     <Button 
                       className="w-full h-9 sm:h-10 text-sm font-montserrat bg-transparent border border-white/20 text-light-secondary hover:bg-white/10 hover:text-light-primary hover:border-white/30" 
                       variant="ghost" 
@@ -240,6 +243,17 @@ export const CartDrawer = () => {
                       Clear Collection
                     </Button>
                   </div>
+                </div>
+              </>
+            )}
+          </div>
+        </SheetContent>
+      </Sheet>
+      <CheckoutTransition
+        open={checkoutTarget !== null}
+        url={checkoutTarget}
+        onDone={() => setCheckoutTarget(null)}
+      />
                 </div>
               </>
             )}
