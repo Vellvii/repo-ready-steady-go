@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -10,6 +11,7 @@ import { CheckoutTransition } from "@/components/checkout/CheckoutTransition";
 
 
 export const CartDrawer = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [checkoutTarget, setCheckoutTarget] = useState<string | null>(null);
@@ -234,10 +236,21 @@ export const CartDrawer = () => {
                     <p className="text-center text-[11px] sm:text-xs font-montserrat text-light-muted leading-relaxed">
                       Secure Shopify checkout. Discreet packaging.
                     </p>
-                    <Button 
-                      className="w-full h-9 sm:h-10 text-sm font-montserrat bg-transparent border border-white/20 text-light-secondary hover:bg-white/10 hover:text-light-primary hover:border-white/30" 
-                      variant="ghost" 
-                      onClick={clearCart} 
+                    <Button
+                      className="w-full h-10 sm:h-11 text-sm sm:text-base font-montserrat bg-transparent border border-primary/40 text-primary hover:bg-primary/10 hover:border-primary/60 hover:text-primary"
+                      variant="ghost"
+                      onClick={() => {
+                        setIsOpen(false);
+                        navigate('/cart');
+                      }}
+                      disabled={items.length === 0}
+                    >
+                      View Cart
+                    </Button>
+                    <Button
+                      className="w-full h-9 sm:h-10 text-sm font-montserrat bg-transparent border border-white/20 text-light-secondary hover:bg-white/10 hover:text-light-primary hover:border-white/30"
+                      variant="ghost"
+                      onClick={clearCart}
                       disabled={items.length === 0 || isLoading}
                     >
                       Clear Collection

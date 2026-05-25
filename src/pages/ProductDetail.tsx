@@ -1,11 +1,11 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useShopifyProduct } from "@/hooks/useShopifyProducts";
 import { parseReviewMetafields } from "@/lib/shopify";
 import { ProductReviews } from "@/components/products/ProductReviews";
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ShoppingCart, Loader2, ArrowLeft, Expand } from "lucide-react";
+import { ShoppingCart, Loader2, ArrowLeft, Expand, Check } from "lucide-react";
 import { toast } from "sonner";
 import { SEO } from "@/components/SEO";
 import { useState, useMemo, useEffect } from "react";
@@ -45,9 +45,18 @@ import { pixelViewContent, pixelAddToCart } from "@/lib/metaPixel";
 
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
+  const navigate = useNavigate();
   const { data: product, isLoading, error } = useShopifyProduct(handle || "");
   const addItem = useCartStore((state) => state.addItem);
+  const totalItems = useCartStore((state) => state.getTotalItems());
+  const [justAdded, setJustAdded] = useState(false);
   const cartLoading = useCartStore((state) => state.isLoading);
+
+  useEffect(() => {
+    if (!justAdded) return;
+    const t = setTimeout(() => setJustAdded(false), 6000);
+    return () => clearTimeout(t);
+  }, [justAdded]);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({});
@@ -257,6 +266,7 @@ const ProductDetail = () => {
     toast.success(`${product.node.title} added to cart`, {
       position: "top-center",
     });
+    setJustAdded(true);
   };
 
   const openLightbox = (index: number) => {
@@ -596,6 +606,34 @@ const ProductDetail = () => {
                     </>
                   )}
                 </Button>
+
+                {(justAdded || totalItems > 0) && (
+                  <div className="border-t border-white/10 pt-3 mt-3">
+                    <div className="flex items-center gap-2">
+                      <Check className="w-4 h-4 text-primary" />
+                      <p className="text-sm font-montserrat text-light-secondary">
+                        Added to your cart.
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-3 mt-1.5 text-sm font-montserrat">
+                      <button
+                        type="button"
+                        onClick={() => navigate('/cart')}
+                        className="text-primary font-medium underline underline-offset-4 decoration-primary/40 hover:decoration-primary transition-colors"
+                      >
+                        View Cart
+                      </button>
+                      <span className="text-light-muted/40" aria-hidden="true">·</span>
+                      <button
+                        type="button"
+                        onClick={() => navigate('/shop')}
+                        className="text-light-muted hover:text-light-secondary transition-colors"
+                      >
+                        Continue Shopping
+                      </button>
+                    </div>
+                  </div>
+                )}
 
                 {/* Trust Strip - hairline icons under add-to-cart */}
                 <TrustStrip productHandle={handle} />
