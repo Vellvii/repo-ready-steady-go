@@ -218,7 +218,10 @@ export const useCartStore = create<CartStore>()(
 
       clearCart: () => set({ items: [], cartId: null, checkoutUrl: null }),
       
-      getCheckoutUrl: () => get().checkoutUrl,
+      getCheckoutUrl: () => {
+        const url = get().checkoutUrl;
+        return url ? formatCheckoutUrl(url) : null;
+      },
       
       getTotalItems: () => get().items.reduce((sum, item) => sum + item.quantity, 0),
       
