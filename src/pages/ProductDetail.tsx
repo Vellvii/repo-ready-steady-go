@@ -39,6 +39,7 @@ import {
 } from "@/components/lux/LuxPreOrderPanel";
 import { ScrollHeader } from "@/components/ScrollHeader";
 import { Breadcrumbs } from "@/components/navigation/Breadcrumbs";
+import { getLastCollection } from "@/lib/collectionContext";
 import { trackViewItem, trackAddToCart } from "@/lib/analytics";
 import { pixelViewContent, pixelAddToCart } from "@/lib/metaPixel";
 
