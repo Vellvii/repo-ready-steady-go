@@ -419,6 +419,48 @@ const Shop = () => {
           </div>
         </div>
 
+        {/* Editorial category cards */}
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 mb-8 sm:mb-10">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            {[
+              {
+                label: "Available Now",
+                tag: "Shop in-stock",
+                href: "/collections/pleasure-collection",
+              },
+              {
+                label: "Vellvii Lux",
+                tag: "Limited drop",
+                href: "/products/vellvii-lux",
+              },
+              {
+                label: "Storage Solutions",
+                tag: "Discreet by design",
+                href: "/collections/discreet-storage",
+              },
+              {
+                label: "DOX-Compatible",
+                tag: "Built for the system",
+                href: "/collections/dox-compatible-products",
+              },
+            ].map((c) => (
+              <Link
+                key={c.href}
+                to={c.href}
+                className="group relative card-dark rounded-xl sm:rounded-2xl overflow-hidden p-4 sm:p-5 min-h-[110px] sm:min-h-[130px] flex flex-col justify-end ring-1 ring-white/5 hover:ring-primary/40 transition-all duration-500"
+              >
+                <span className="font-montserrat text-[0.62rem] sm:text-[0.65rem] uppercase tracking-[0.22em] text-primary/70 mb-1.5">
+                  {c.tag}
+                </span>
+                <span className="font-baskerville text-light-primary text-base sm:text-lg leading-tight group-hover:text-primary transition-colors">
+                  {c.label}
+                </span>
+                <span className="absolute inset-0 bg-gradient-to-tr from-primary/[0.06] to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+              </Link>
+            ))}
+          </div>
+        </div>
+
         {/* Collection Filter Bar */}
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 mb-4 sm:mb-5">
           <CollectionFilterBar
