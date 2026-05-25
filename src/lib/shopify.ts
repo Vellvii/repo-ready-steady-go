@@ -346,6 +346,14 @@ export const CART_LINES_REMOVE_MUTATION = `
 export function formatCheckoutUrl(checkoutUrl: string): string {
   try {
     const url = new URL(checkoutUrl);
+    // Shopify returns the URL on the store's primary domain (vellvii.com),
+    // but that domain serves the Lovable SPA - not Shopify's checkout. Force
+    // the host to the Shopify permanent domain so checkout actually loads.
+    if (url.hostname !== SHOPIFY_STORE_PERMANENT_DOMAIN) {
+      url.hostname = SHOPIFY_STORE_PERMANENT_DOMAIN;
+      url.protocol = 'https:';
+      url.port = '';
+    }
     url.searchParams.set('channel', 'online_store');
     return url.toString();
   } catch {
