@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2, Heart } from "lucide-react";
+import { ShoppingCart, Minus, Plus, Trash2, Lock, Loader2, Heart } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { trackBeginCheckout, appendCheckoutAttribution } from "@/lib/analytics";
 import { pixelInitiateCheckout } from "@/lib/metaPixel";
+import { CheckoutTransition } from "@/components/checkout/CheckoutTransition";
 
 
 export const CartDrawer = () => {
