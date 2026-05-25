@@ -210,6 +210,14 @@ export const CollectionLayout = ({
         {/* Hero */}
         <section className="pt-20 sm:pt-24 pb-8 sm:pb-12 px-4 sm:px-6">
           <div className="max-w-4xl mx-auto text-center">
+            <Breadcrumbs
+              items={[
+                { name: "Home", url: "/" },
+                { name: "Shop", url: "/shop" },
+                { name: h1 },
+              ]}
+              className="mb-4 justify-center inline-flex"
+            />
             <p className="text-primary font-montserrat text-[10px] sm:text-xs uppercase tracking-[0.3em] mb-2">
               {eyebrow}
             </p>
