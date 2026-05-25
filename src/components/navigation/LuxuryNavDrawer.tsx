@@ -290,23 +290,39 @@ export const LuxuryNavDrawer = () => {
                     }
 
                     const isOpen = !!q || !!expanded[item.label];
+                    const parentClass =
+                      "flex-1 text-left py-3 font-baskerville italic text-sm uppercase tracking-[0.18em] text-light-primary hover:text-primary transition-colors";
                     return (
                       <li key={item.label} className="border-b border-white/5 last:border-b-0">
-                        <button
-                          type="button"
-                          onClick={() => toggle(item.label)}
-                          aria-expanded={isOpen}
-                          className="w-full flex items-center justify-between py-3 font-baskerville italic text-sm uppercase tracking-[0.18em] text-light-primary hover:text-primary transition-colors"
-                        >
-                          <span>{item.label}</span>
-                          <motion.span
-                            animate={{ rotate: isOpen ? 180 : 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="text-primary/70"
+                        <div className="flex items-center gap-1">
+                          {item.href ? (
+                            <Link to={item.href} onClick={close} className={parentClass}>
+                              {item.label}
+                            </Link>
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={() => toggle(item.label)}
+                              className={parentClass}
+                            >
+                              {item.label}
+                            </button>
+                          )}
+                          <button
+                            type="button"
+                            onClick={() => toggle(item.label)}
+                            aria-expanded={isOpen}
+                            aria-label={`${isOpen ? "Collapse" : "Expand"} ${item.label}`}
+                            className="h-9 w-9 inline-flex items-center justify-center rounded-md text-primary/70 hover:text-primary hover:bg-white/5 transition-colors"
                           >
-                            <ChevronDown className="h-4 w-4" strokeWidth={1.5} />
-                          </motion.span>
-                        </button>
+                            <motion.span
+                              animate={{ rotate: isOpen ? 180 : 0 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <ChevronDown className="h-4 w-4" strokeWidth={1.5} />
+                            </motion.span>
+                          </button>
+                        </div>
                         <AnimatePresence initial={false}>
                           {isOpen && (
                             <motion.div
