@@ -12,6 +12,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import { useState, useMemo } from "react";
 import { Breadcrumbs } from "@/components/navigation/Breadcrumbs";
+import { setLastCollection } from "@/lib/collectionContext";
 import { DOCKING_INFO, DOX_COMPATIBLE_HANDLES, type FaqItem } from "@/lib/pdpContent";
 import type { ShopifyProduct } from "@/lib/shopify";
 
@@ -83,6 +84,12 @@ const CollectionCard = ({ product }: { product: ShopifyProduct }) => {
   return (
     <Link
       to={`/products/${node.handle}`}
+      onClick={() =>
+        setLastCollection({
+          href: "/collections/dox-compatible-products",
+          label: "DOX-Compatible Products",
+        })
+      }
       className="group block rounded-xl sm:rounded-2xl overflow-hidden border border-white/10 bg-card/50 hover:border-primary/40 transition-all duration-500 hover:shadow-elegant"
     >
       <div className="relative aspect-[4/5] overflow-hidden bg-black/30">

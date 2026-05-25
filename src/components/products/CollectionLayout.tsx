@@ -11,6 +11,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useShopifyProducts } from "@/hooks/useShopifyProducts";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
+import { Breadcrumbs } from "@/components/navigation/Breadcrumbs";
+import { setLastCollection } from "@/lib/collectionContext";
 import type { ShopifyProduct } from "@/lib/shopify";
 import type { FaqItem } from "@/lib/pdpContent";
 
@@ -45,7 +47,15 @@ interface CollectionLayoutProps {
   seoParagraph?: string;
 }
 
-const CollectionCard = ({ product }: { product: ShopifyProduct }) => {
+const CollectionCard = ({
+  product,
+  collectionHref,
+  collectionLabel,
+}: {
+  product: ShopifyProduct;
+  collectionHref: string;
+  collectionLabel: string;
+}) => {
   const node = product.node;
   const image = node.images.edges[0]?.node;
   const variant = node.variants.edges[0]?.node;
@@ -85,6 +95,7 @@ const CollectionCard = ({ product }: { product: ShopifyProduct }) => {
   return (
     <Link
       to={`/products/${node.handle}`}
+      onClick={() => setLastCollection({ href: collectionHref, label: collectionLabel })}
       className="group block rounded-xl sm:rounded-2xl overflow-hidden border border-white/10 bg-card/50 hover:border-primary/40 transition-all duration-500 hover:shadow-elegant"
     >
       <div className="relative aspect-[4/5] overflow-hidden bg-black/30">
@@ -199,6 +210,14 @@ export const CollectionLayout = ({
         {/* Hero */}
         <section className="pt-20 sm:pt-24 pb-8 sm:pb-12 px-4 sm:px-6">
           <div className="max-w-4xl mx-auto text-center">
+            <Breadcrumbs
+              items={[
+                { name: "Home", url: "/" },
+                { name: "Shop", url: "/shop" },
+                { name: h1 },
+              ]}
+              className="mb-4 justify-center inline-flex"
+            />
             <p className="text-primary font-montserrat text-[10px] sm:text-xs uppercase tracking-[0.3em] mb-2">
               {eyebrow}
             </p>
@@ -235,7 +254,12 @@ export const CollectionLayout = ({
                 }
               >
                 {collectionProducts.map((p) => (
-                  <CollectionCard key={p.node.id} product={p} />
+                  <CollectionCard
+                    key={p.node.id}
+                    product={p}
+                    collectionHref={canonical}
+                    collectionLabel={h1}
+                  />
                 ))}
               </div>
             ) : (

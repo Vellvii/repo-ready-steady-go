@@ -39,6 +39,7 @@ import {
 } from "@/components/lux/LuxPreOrderPanel";
 import { ScrollHeader } from "@/components/ScrollHeader";
 import { Breadcrumbs } from "@/components/navigation/Breadcrumbs";
+import { getLastCollection } from "@/lib/collectionContext";
 import { trackViewItem, trackAddToCart } from "@/lib/analytics";
 import { pixelViewContent, pixelAddToCart } from "@/lib/metaPixel";
 
@@ -374,21 +375,35 @@ const ProductDetail = () => {
         {/* Back Navigation + Breadcrumbs */}
         <div className="pt-20 sm:pt-24 px-3 sm:px-4 lg:px-8">
           <div className="max-w-7xl mx-auto flex flex-wrap items-center gap-x-4 gap-y-2">
-            <Link
-              to="/shop"
-              className="inline-flex items-center text-light-secondary hover:text-primary transition-colors font-montserrat text-xs sm:text-sm"
-            >
-              <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-              Back to Collection
-            </Link>
-            <Breadcrumbs
-              items={[
-                { name: "Home", url: "/" },
-                { name: "Shop", url: "/shop" },
-                { name: product.node.title },
-              ]}
-              className="hidden sm:block"
-            />
+            {(() => {
+              const last = getLastCollection();
+              const backHref = last?.href || "/shop";
+              const backLabel = last ? `Back to ${last.label}` : "Back to Collection";
+              const crumbs = last
+                ? [
+                    { name: "Home", url: "/" },
+                    { name: "Shop", url: "/shop" },
+                    { name: last.label, url: last.href },
+                    { name: product.node.title },
+                  ]
+                : [
+                    { name: "Home", url: "/" },
+                    { name: "Shop", url: "/shop" },
+                    { name: product.node.title },
+                  ];
+              return (
+                <>
+                  <Link
+                    to={backHref}
+                    className="inline-flex items-center text-light-secondary hover:text-primary transition-colors font-montserrat text-xs sm:text-sm"
+                  >
+                    <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                    {backLabel}
+                  </Link>
+                  <Breadcrumbs items={crumbs} className="hidden sm:block" />
+                </>
+              );
+            })()}
           </div>
         </div>
 
