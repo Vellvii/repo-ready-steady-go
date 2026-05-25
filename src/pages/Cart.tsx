@@ -8,6 +8,7 @@ import { pixelInitiateCheckout } from "@/lib/metaPixel";
 import { CheckoutTransition } from "@/components/checkout/CheckoutTransition";
 import { SEO } from "@/components/SEO";
 import { ScrollHeader } from "@/components/ScrollHeader";
+import { Breadcrumbs } from "@/components/navigation/Breadcrumbs";
 
 const CartPage = () => {
   const {
