@@ -688,35 +688,6 @@ const Shop = () => {
           )}
         </div>
 
-        {/* Coming Soon row - only renders if any pre-order products exist */}
-        {(() => {
-          const comingSoon = (allProducts || []).filter((p) => {
-            const available = p.node.variants.edges.some((v) => v.node.availableForSale);
-            return getProductStatus(p.node.handle, available) === "pre-order";
-          });
-          if (comingSoon.length === 0) return null;
-          return (
-            <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pb-12 sm:pb-16">
-              <div className="pt-8 sm:pt-10 border-t border-white/10">
-                <div className="flex items-end justify-between mb-4 sm:mb-5">
-                  <div>
-                    <p className="font-montserrat text-[0.62rem] sm:text-[0.65rem] uppercase tracking-[0.22em] text-primary/70 mb-1">
-                      Coming Soon
-                    </p>
-                    <h2 className="font-baskerville text-xl sm:text-2xl text-light-primary">
-                      On the horizon
-                    </h2>
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                  {comingSoon.slice(0, 3).map((product) => (
-                    <ProductCard key={product.node.id} product={product} />
-                  ))}
-                </div>
-              </div>
-            </div>
-          );
-        })()}
 
 
         {/* Explore by collection - quiet footer-style strip */}
