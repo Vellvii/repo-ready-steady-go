@@ -253,13 +253,6 @@ export const CartDrawer = () => {
         open={checkoutTarget !== null}
         url={checkoutTarget}
         onDone={() => setCheckoutTarget(null)}
-      />
-                </div>
-              </>
-            )}
-          </div>
-        </SheetContent>
-      </Sheet>
     </>
   );
 };
