@@ -35,35 +35,35 @@ export const CartDrawer = () => {
 
   const handleCheckout = () => {
     const checkoutUrl = getCheckoutUrl();
-    if (checkoutUrl) {
-      const currency = items[0]?.price.currencyCode || "USD";
-      trackBeginCheckout(
-        items.map((i) => ({
-          item_id: i.variantId,
-          item_name: i.product.node.title,
-          item_brand: "Vellvii",
-          item_variant: i.variantTitle,
-          price: parseFloat(i.price.amount),
-          quantity: i.quantity,
-          currency: i.price.currencyCode,
-        })),
-        totalPrice,
-        currency
-      );
-      pixelInitiateCheckout({
-        content_ids: items.map((i) => i.variantId),
-        contents: items.map((i) => ({
-          id: i.variantId,
-          quantity: i.quantity,
-          item_price: parseFloat(i.price.amount),
-        })),
-        num_items: totalItems,
-        value: totalPrice,
-        currency,
-      });
-      window.open(appendCheckoutAttribution(checkoutUrl), "_blank");
-      setIsOpen(false);
-    }
+    if (!checkoutUrl) return;
+    const currency = items[0]?.price.currencyCode || "USD";
+    trackBeginCheckout(
+      items.map((i) => ({
+        item_id: i.variantId,
+        item_name: i.product.node.title,
+        item_brand: "Vellvii",
+        item_variant: i.variantTitle,
+        price: parseFloat(i.price.amount),
+        quantity: i.quantity,
+        currency: i.price.currencyCode,
+      })),
+      totalPrice,
+      currency
+    );
+    pixelInitiateCheckout({
+      content_ids: items.map((i) => i.variantId),
+      contents: items.map((i) => ({
+        id: i.variantId,
+        quantity: i.quantity,
+        item_price: parseFloat(i.price.amount),
+      })),
+      num_items: totalItems,
+      value: totalPrice,
+      currency,
+    });
+    // Same-tab handoff via branded transition (~600ms)
+    setCheckoutTarget(appendCheckoutAttribution(checkoutUrl));
+    setIsOpen(false);
   };
 
   return (
