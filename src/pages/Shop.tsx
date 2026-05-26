@@ -335,15 +335,24 @@ const Shop = () => {
     20
   );
 
-  // Filter products by search query with fuzzy matching
+  // Multi-token fuzzy match with synonym expansion.
+  const synonymMatch = (raw: string, title: string) => {
+    const tokens = expandQuery(raw);
+    if (tokens.length === 0) return { match: false, score: 0 };
+    let best = { match: false, score: 0 };
+    for (const t of tokens) {
+      const r = fuzzyMatch(t, title);
+      if (r.match && r.score > best.score) best = r;
+    }
+    return best;
+  };
+
+  // Filter products by search query with fuzzy matching + synonyms
   const filteredProducts = useMemo(() => {
     if (!products || !searchQuery.trim()) return products;
 
     return products
-      .map((product) => ({
-        product,
-        ...fuzzyMatch(searchQuery, product.node.title),
-      }))
+      .map((product) => ({ product, ...synonymMatch(searchQuery, product.node.title) }))
       .filter((item) => item.match)
       .sort((a, b) => b.score - a.score)
       .map((item) => item.product);
@@ -354,12 +363,15 @@ const Shop = () => {
     if (!allProducts || !searchQuery.trim() || searchQuery.length < 2) return [];
 
     return allProducts
-      .map((product) => ({
-        product,
-        ...fuzzyMatch(searchQuery, product.node.title),
-      }))
+      .map((product) => ({ product, ...synonymMatch(searchQuery, product.node.title) }))
       .filter((item) => item.match)
-      .sort((a, b) => b.score - a.score)
+      // In-stock first within suggestions
+      .sort((a, b) => {
+        const aAvail = a.product.node.variants.edges.some((v) => v.node.availableForSale) ? 1 : 0;
+        const bAvail = b.product.node.variants.edges.some((v) => v.node.availableForSale) ? 1 : 0;
+        if (aAvail !== bAvail) return bAvail - aAvail;
+        return b.score - a.score;
+      })
       .map((item) => item.product);
   }, [allProducts, searchQuery]);
 
@@ -387,8 +399,15 @@ const Shop = () => {
       return true;
     });
 
+    // Always sort sold-out items to the end (even under non-availability sorts)
+    const availabilityRank = (p: ShopifyProduct) =>
+      p.node.variants.edges.some((v) => v.node.availableForSale) ? 0 : 1;
+
     if (sortBy !== "featured") {
       list = [...list].sort((a, b) => {
+        const availDiff = availabilityRank(a) - availabilityRank(b);
+        if (sortBy === "availability") return availDiff;
+        if (availDiff !== 0) return availDiff;
         const ap = parseFloat(a.node.priceRange.minVariantPrice.amount);
         const bp = parseFloat(b.node.priceRange.minVariantPrice.amount);
         if (sortBy === "price-asc") return ap - bp;
@@ -400,9 +419,23 @@ const Shop = () => {
         }
         return 0;
       });
+    } else {
+      list = [...list].sort((a, b) => availabilityRank(a) - availabilityRank(b));
     }
     return list;
   }, [baseProducts, priceMin, priceMax, inStockOnly, sortBy]);
+
+  // Counts for clarity (in-stock vs sold-out within the current filter scope)
+  const stockCounts = useMemo(() => {
+    if (!displayProducts) return { inStock: 0, soldOut: 0 };
+    let inS = 0;
+    let so = 0;
+    for (const p of displayProducts) {
+      if (p.node.variants.edges.some((v) => v.node.availableForSale)) inS++;
+      else so++;
+    }
+    return { inStock: inS, soldOut: so };
+  }, [displayProducts]);
 
   const activeFilterCount =
     (priceMin ? 1 : 0) + (priceMax ? 1 : 0) + (inStockOnly ? 1 : 0) + (sortBy !== "featured" ? 1 : 0);
