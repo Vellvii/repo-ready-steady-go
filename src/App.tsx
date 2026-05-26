@@ -53,6 +53,7 @@ import GuideProductCare from "./pages/guides/GuideProductCare";
 import GuideHowToCleanAndStoreSexToys from "./pages/guides/GuideHowToCleanAndStoreSexToys";
 import GuideBestSexToyStorageBox from "./pages/guides/GuideBestSexToyStorageBox";
 import GuideBiometricLockBoxForSexToys from "./pages/guides/GuideBiometricLockBoxForSexToys";
+import GuideWhatIsARoseToy from "./pages/guides/GuideWhatIsARoseToy";
 
 const queryClient = new QueryClient();
 
