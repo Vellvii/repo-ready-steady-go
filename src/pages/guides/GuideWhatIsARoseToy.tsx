@@ -162,8 +162,8 @@ const GuideWhatIsARoseToy = () => {
       category="Buyer's Guide"
       title="What Is a Rose Toy? A Premium Guide to Design, Storage, and Discretion"
       intro="The rose toy has become one of the most searched intimate wellness categories of the modern era - recognizable by its compact, rose-shaped silhouette and the discretion it invites. This refined buyer's guide explains what a rose toy is, what to look for in a premium one, and how Vellvii is approaching the category with a storage-first design philosophy."
-      heroImage="/uploads/Dox_white_lifestyle1.jpg"
-      heroImageAlt="A refined Vellvii storage piece styled in a modern bedroom - the kind of considered home a premium rose toy deserves"
+      heroImage="/uploads/vellvii-rose-toy-lux-case.png"
+      heroImageAlt="A rose-shaped intimate wellness product paired with a soft pink Vellvii leather case - a tasteful look at how a premium rose toy can be stored and presented"
       faq={FAQ}
     >
       <h2 className={H2}>What is a rose toy?</h2>
