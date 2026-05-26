@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { NavMenuButton } from "@/components/navigation/LuxuryNavDrawer";
-import { ShippingBar } from "@/components/marketing/ShippingBar";
 
 export const ScrollHeader = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -32,7 +31,6 @@ export const ScrollHeader = () => {
           : "bg-transparent border-b border-transparent"
       }`}
     >
-      <ShippingBar />
       <div className="container mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-[auto_1fr_auto] items-center gap-2 sm:gap-3 h-16 sm:h-20">
           {/* Left: menu trigger */}
