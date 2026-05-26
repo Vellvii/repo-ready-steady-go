@@ -31,7 +31,7 @@ type NavItem =
   | { kind: "group"; label: string; href?: string; links: NavLink[] };
 
 const NAV_ITEMS: NavItem[] = [
-  { kind: "link", label: "Home", href: "/home" },
+  { kind: "link", label: "Home", href: "/" },
   {
     kind: "group",
     label: "Shop",

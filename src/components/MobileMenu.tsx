@@ -10,7 +10,7 @@ export const MobileMenu = () => {
   const { getTotalItems } = useCart();
 
   const menuItems = [
-    { icon: Home, label: "Home", href: "/home" },
+    { icon: Home, label: "Home", href: "/" },
     { icon: Package, label: "Products", href: "/products" },
     { icon: Info, label: "About", href: "/about" },
     { icon: Phone, label: "Contact", href: "/contact" },

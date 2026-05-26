@@ -4,7 +4,7 @@ const linkColumns: { heading: string; items: { href: string; label: string }[] }
   {
     heading: "Explore",
     items: [
-      { href: "/home", label: "Home" },
+      { href: "/", label: "Home" },
       { href: "/shop", label: "Shop" },
       { href: "/collections/pleasure-collection", label: "Pleasure Collection" },
       { href: "/collections/dox-compatible-products", label: "DOX-Compatible" },
