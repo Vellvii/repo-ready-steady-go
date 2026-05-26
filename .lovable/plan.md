@@ -1,74 +1,75 @@
 # Goal
 
-Make Vellvii eligible for the rich SERP treatment on the right of your screenshot - brand block with logo, sitelinks, FAQ accordion, and (eventually) review stars - by closing gaps in our structured data.
+Address what the audit screenshots actually flag, separating "we can fix in code" from "this isn't a code problem."
 
-Important: the **review stars (4.7 / 234 reviews)** in your screenshot only appear once real Judge.me reviews exist. Per the Judge.me memory we intentionally suppress `aggregateRating` until then, so that pixel will stay off until reviews come in. Everything else in the mockup is achievable now.
+# The three critical scores - honest read
 
-# What we'll change
+**Schema 0/100** - Fixable now, mostly already done last turn. Need to verify and add a couple more on-page schemas.
 
-## 1. Bake sitewide JSON-LD into `index.html`
+**SEO visibility 11/100** - Not a code bug. The site is young (Authority Score is likely under 20), the keyword space is competitive ("intimate wellness", "biometric storage"), and most of the catalog is still pre-launch. No technical change moves this in a week. What moves it: published guides (already 7+ live), real backlinks, real reviews, time.
 
-Today `Organization` only fires on ~7 routes via Helmet, and non-JS crawlers (LinkedIn, Bing previews, some AI assistants) see nothing. Move it into `index.html` so every URL ships it server-side, alongside a new `WebSite` schema.
+**AI visibility 0/3** - Not a code bug. ChatGPT doesn't crawl your site directly for recommendations - it pulls from listicles, Reddit, news, Wikipedia, Amazon reviews. The fix is third-party presence, not on-site code. We *can* make our content more AI-friendly so when LLMs do encounter the site they parse it correctly.
 
-- **Organization**
-  - `name`, `legalName`, `url`, `logo`
-  - `description` (premium wellness one-liner)
-  - `email`, `address` (PostalAddress from the Contact memory)
-  - `sameAs`: Instagram, TikTok, YouTube, X/Twitter pulled from `src/data/socials.tsx`
-  - `contactPoint` (customer service email)
-- **WebSite** with `potentialAction` SearchAction pointing at `/shop?q={search_term_string}` - this is what enables the Google sitelinks search box.
+# What we'll do in code
 
-## 2. Sitelinks (the Services / About / Contact / Reviews block)
+## 1. Verify schema coverage after last turn's work
 
-Google chooses sitelinks automatically from your nav and internal-link structure - they're not declared in schema. To earn them we ensure:
-- Clear, stable top-level routes already present (`/shop`, `/guides`, `/contact`, `/warranty`, `/collections/...`)
-- A `BreadcrumbList` on every category and PDP (already done)
-- Add a small **SiteNavigationElement** JSON-LD listing primary nav links - this nudges Google toward the right candidates.
+Run our own audit: fetch the deployed HTML for `/`, `/products/vellvii-dox`, and `/guides/lux-vs-dox` and confirm:
+- Organization + WebSite present in raw HTML (from index.html)
+- Product, FAQ, Article, Breadcrumb present after JS executes
+- No duplicate canonicals
+- No JSON-LD syntax errors
 
-## 3. Per-route schema cleanup
+Run Google's Rich Results test via curl on the same URLs. Report what passes.
 
-- Remove `organizationData` from the 7 pages currently passing it (Landing, DoxLanding, DoxVideoLanding, Contact, Guides, CollectionDoxCompatible, ProductDetail) since Organization is now sitewide. Avoids duplicate emission.
-- In `SEO.tsx`, default `Product.offers.url` to the canonical PDP URL when caller doesn't pass one (fixes Merchant validation).
-- Add `Product.gtin`/`mpn` slots in the `productData` interface (optional, populated when Shopify returns them) - Google prefers products with identifiers.
+## 2. Add the on-page schemas still missing
 
-## 4. FAQ accordion in SERP (the expandable Q&A)
+- **CollectionPage** schema on `/shop`, `/collections/*`, and `/guides`. The audit tools weight this for category pages.
+- **ItemList** schema on collection pages listing the products in display order.
+- **HowTo** schema on the care/cleaning guide.
+- **Person** author block on guides (currently `Organization` - Google E-E-A-T prefers a named person, even if it's "Vellvii Editorial").
+- **Speakable** schema on the homepage FAQ - this is the one LLMs and voice assistants do look at.
 
-`FAQPage` schema already fires on guides and HomeFAQ. To increase the odds Google surfaces it on the **brand SERP** (right card), add a small `FAQPage` block to the homepage covering the 3-4 most-asked brand questions ("What is Vellvii?", "Where does Vellvii ship?", "Is Vellvii discreet?", "What's the warranty?"). Source answers from existing memory + Warranty/Terms pages.
+## 3. Improve AI-readability of the site (the small lever we have on the AI score)
 
-## 5. Brand entity strengthening (for the Knowledge Panel)
+- **Expand `public/llms.txt`** - currently exists but is minimal. Add the full route map with one-line descriptions for every public page so ChatGPT/Perplexity/Claude can ingest the site without parsing the JS shell.
+- **Add `public/llms-full.txt`** - a long-form markdown dump of the homepage, About, all guides, and product descriptions. This is the spec extension AI crawlers explicitly look for.
+- **Prerender critical routes** to static HTML so non-JS crawlers (which includes most AI tooling) see real copy, not an empty `<div id="root">`. There's already a `scripts/prerender-seo.ts` in the repo - audit whether it's wired into the build and which routes it covers.
 
-The right card in your screenshot is essentially a Knowledge Panel preview. To help Google build the entity:
-- `Organization.foundingDate`, `founders` (if known)
-- `Organization.slogan` - "The Art of 'O'" (from brand mantra memory)
-- `Organization.brand` array listing product lines (DOX, Lux, G-Vibe, Evolve, Pulse)
+## 4. Sitemap audit
 
-## 6. Validation
+The audit's "1 of 7 searches" hints crawlers may not see all pages. Verify `public/sitemap.xml` includes every public route the app currently has (Shop, collections, every product, every guide, contact, warranty, terms, privacy). I'll diff against `src/App.tsx` and report missing entries.
 
-After the changes, run a Rich Results test on:
-- `https://vellvii.com/` (Organization, WebSite, FAQ)
-- `https://vellvii.com/products/vellvii-dox` (Product, Breadcrumb)
-- `https://vellvii.com/guides/lux-vs-dox` (Article, FAQ, Breadcrumb)
+## 5. Run a real SEO snapshot via Semrush
 
-I'll do this via the Google Search Console connector + a manual `curl` against the Rich Results endpoint and report what passes.
+Before guessing what to optimize, pull the actual numbers from Semrush for `vellvii.com`:
+- Domain Authority Score + current organic keywords
+- Top-ranking pages (if any)
+- The actual keywords we rank for vs. the ones we *want* to rank for
+
+This grounds any further content/SEO work in real data instead of audit theater.
+
+# What we will NOT do
+
+- **Promise to "fix" the AI mention rate.** That's earned-media work (press, Reddit, listicles, podcast mentions). No JSON-LD change makes ChatGPT recommend you.
+- **Add a third-party "AI SEO" tool integration.** Most are snake oil. The fundamentals (clean schema, crawlable HTML, llms.txt, real content) cover the same ground.
+- **Chase the score on that specific dashboard.** It's a sales funnel for whoever made the report. We'll fix the underlying issues; the score will move when their next scan runs.
 
 # Files touched
 
-- `index.html` - add Organization + WebSite + SiteNavigation JSON-LD blocks
-- `src/components/SEO.tsx` - default Offer URL, add gtin/mpn slots, drop the always-on Organization branch (still keep the prop available for safety but stop using it)
-- `src/pages/Landing.tsx`, `DoxLanding.tsx`, `DoxVideoLanding.tsx`, `Contact.tsx`, `Guides.tsx`, `CollectionDoxCompatible.tsx`, `ProductDetail.tsx` - remove `organizationData` prop
-- `src/components/home/HomeFAQ.tsx` (or homepage SEO call) - ensure brand-level FAQ JSON-LD is emitted on `/`
-- `src/data/socials.tsx` - read for sameAs URLs (no change)
+- `public/llms.txt` (expand), `public/llms-full.txt` (new)
+- `src/pages/Shop.tsx`, `src/pages/Collection*.tsx`, `src/pages/Guides.tsx` (add CollectionPage + ItemList JSON-LD)
+- `src/components/guides/GuideLayout.tsx` (Person author + Speakable)
+- `src/components/SEO.tsx` (add CollectionPage / ItemList / HowTo / Speakable slots)
+- `scripts/generate-sitemap.ts` or `public/sitemap.xml` (audit + fill gaps)
+- `scripts/prerender-seo.ts` and `package.json` (verify wiring)
 
-# Out of scope
+# Expected outcome
 
-- Review stars: blocked until Judge.me has real reviews. Memory rule stays.
-- LocalBusiness/Store schema: skipping unless you want a physical-location signal (you don't operate a storefront).
-- SSR: the static `index.html` block is enough for non-JS crawlers; we're not adding SSR.
+Within one re-crawl cycle (~1-3 weeks):
+- Schema score on that audit moves from 0 to high (most checks pass)
+- Technical health stays at 94+
+- SEO visibility moves only when real content keeps shipping and backlinks accumulate - no overnight change
+- AI visibility unchanged from on-site work alone - that requires off-site presence
 
-# What you'll actually see
-
-Within 1-3 weeks of Google re-crawling:
-- Brand subtitle ("luxury intimate wellness products") richer and pulled from our description, not improvised
-- Sitelinks row (Shop / Guides / Contact / Warranty)
-- Expandable FAQ rows directly under the brand result
-- Eventually stars, once Judge.me has reviews
+I'll be upfront about which numbers moved and which didn't.
