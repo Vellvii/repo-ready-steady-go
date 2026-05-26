@@ -33,7 +33,7 @@ const GuideProductsForCouples = () => {
       seoDescription="A refined guide for couples choosing premium products and discreet sex toy storage built around privacy, connection, and shared intention."
       canonical="/guides/how-to-choose-premium-products-for-couples"
       category="Couples Guide"
-      title="Sex Toy Storage for Couples: How to Choose Premium Products"
+      title="Premium Storage for Couples: How to Choose"
       intro="Choosing well as a couple is less about novelty and more about intention. This guide outlines how to think about privacy, sex toy storage, and shared lifestyle when selecting your first Vellvii piece."
       heroImage="/uploads/Dox_white_lifestyle1.jpg"
       heroImageAlt="Vellvii DOX biometric sex toy lock box styled in a refined shared bedroom interior"

@@ -17,9 +17,9 @@ const EntryGate = () => {
   return (
     <>
       <SEO
-        title="Vellvii"
-        description="Vellvii - the art of 'O'. Please confirm you are of legal age to enter."
-        canonical="/home"
+        title="Vellvii - The Art of O | Age-Restricted Entry"
+        description="Vellvii - the art of 'O'. Please confirm you are of legal age to enter this intimate wellness experience."
+        canonical="/"
         noindex
       />
 

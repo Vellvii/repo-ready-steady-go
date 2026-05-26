@@ -92,7 +92,7 @@ const Guides = () => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <SEO
-        title="Vellvii Guides | Discreet Storage, DOX Docking System & Pleasure Collection"
+        title="Vellvii Guides | Storage & Pleasure Collection"
         description="Vellvii Guides on discreet storage, the DOX docking system, Lux vs DOX, and choosing refined intimate wellness products for modern couples."
         canonical="/guides"
         organizationData
