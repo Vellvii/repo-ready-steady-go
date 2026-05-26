@@ -570,8 +570,13 @@ const Shop = () => {
               />
             </button>
             {displayProducts && (
-              <span className="font-montserrat text-[0.7rem] sm:text-xs text-light-secondary/60">
+              <span className="font-montserrat text-[0.7rem] sm:text-xs text-light-secondary/60 text-right">
                 {displayProducts.length} {displayProducts.length === 1 ? "product" : "products"}
+                {!inStockOnly && stockCounts.soldOut > 0 && (
+                  <span className="block text-[0.65rem] sm:text-[0.7rem] text-light-secondary/45">
+                    {stockCounts.inStock} in stock - {stockCounts.soldOut} sold out
+                  </span>
+                )}
               </span>
             )}
           </div>
@@ -586,6 +591,7 @@ const Shop = () => {
                   </p>
                   <div className="flex flex-col gap-1.5">
                     {[
+                      { value: "availability", label: "Available first" },
                       { value: "featured", label: "Featured" },
                       { value: "price-asc", label: "Price - low to high" },
                       { value: "price-desc", label: "Price - high to low" },
