@@ -14,6 +14,8 @@ interface SEOProps {
     availability?: 'InStock' | 'OutOfStock' | 'PreOrder';
     brand?: string;
     sku?: string;
+    gtin?: string;
+    mpn?: string;
     images?: string[];
     priceValidUntil?: string;
     itemCondition?: string;
