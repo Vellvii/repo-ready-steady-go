@@ -6,6 +6,15 @@ import { GuideCard } from "@/components/guides/GuideCard";
 
 const GUIDES = [
   {
+    to: "/guides/what-is-a-rose-toy",
+    category: "Buyer's Guide",
+    title: "What Is a Rose Toy? A Premium Guide to Design, Storage, and Discretion",
+    excerpt:
+      "Learn what a rose toy is, why design and discretion matter, and how Vellvii is developing a rose-inspired product designed for the DOX ecosystem.",
+    image: "/uploads/Dox_white_lifestyle1.jpg",
+    imageAlt: "Refined Vellvii storage piece styled in a modern bedroom, illustrating premium intimate wellness storage",
+  },
+  {
     to: "/guides/lux-vs-dox",
     category: "Storage Guide",
     title: "Lux vs DOX: Which Storage Piece Fits Your Lifestyle?",
