@@ -28,7 +28,7 @@ const GuidePortableVsBedroomStorage = () => {
       seoDescription="Compare portable sex toy storage with bedroom-focused biometric lock box options to choose the right Vellvii piece for privacy and everyday use."
       canonical="/guides/portable-vs-bedroom-storage"
       category="Storage Guide"
-      title="Portable Sex Toy Storage vs Bedroom Sex Toy Storage"
+      title="Portable vs Bedroom Storage Compared"
       intro="Portable and bedroom sex toy storage solve different problems. This guide explains where each one fits, and how Vellvii Lux and Vellvii DOX support both approaches."
       heroImage="/uploads/lux-lifestyle-final-v5.jpg"
       heroImageAlt="Vellvii Lux portable sex toy storage case beside a refined bedroom setting"
