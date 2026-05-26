@@ -158,7 +158,6 @@ const CollectionDoxCompatible = () => {
         description="DOX-compatible storage system - explore Vellvii products designed to work with the VDS and DDS suction-base mounting stations atop the Vellvii DOX."
         canonical="/collections/dox-compatible-products"
         keywords="DOX-compatible storage system, DOX-compatible products, Vellvii Docking Station, VDS, DDS, biometric sex toy lock box, discreet sex toy storage"
-        organizationData
         breadcrumbs={[
           { name: "Home", url: "/" },
           { name: "Shop", url: "/shop" },

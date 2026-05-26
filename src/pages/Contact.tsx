@@ -63,7 +63,6 @@ const Contact = () => {
         title="Contact Vellvii | Support & Retail Enquiries"
         description="Contact Vellvii for customer support, warranty questions, general enquiries, or retail partnership opportunities."
         canonical="/contact"
-        organizationData
       />
 
       <ScrollHeader />

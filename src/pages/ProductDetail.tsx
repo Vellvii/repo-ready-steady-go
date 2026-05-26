@@ -364,7 +364,6 @@ const ProductDetail = () => {
             type="product"
             image={heroImage}
             keywords={seoOverride?.keywords ?? (isLuxProduct ? luxKeywords : undefined)}
-            organizationData
             breadcrumbs={[
               { name: "Home", url: "/" },
               { name: "Shop", url: "/shop" },
