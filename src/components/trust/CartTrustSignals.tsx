@@ -21,7 +21,7 @@ export const CartTrustSignals = () => {
     },
     {
       icon: PackageCheck,
-      label: "Discreet worldwide shipping",
+      label: "Discreet shipping",
       sub: "Unbranded packaging",
       to: "/terms-of-service#shipping-delivery",
     },
