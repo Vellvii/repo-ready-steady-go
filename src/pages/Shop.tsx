@@ -443,9 +443,9 @@ const Shop = () => {
     return { inStock: inS, soldOut: so };
   }, [displayProducts]);
 
-  // inStockOnly is the default; only flag it as an "active" filter when overridden
+  // Default is show-all; in-stock-only counts as an active filter when on
   const activeFilterCount =
-    (priceMin ? 1 : 0) + (priceMax ? 1 : 0) + (!inStockOnly ? 1 : 0) + (sortBy !== "availability" ? 1 : 0);
+    (priceMin ? 1 : 0) + (priceMax ? 1 : 0) + (inStockOnly ? 1 : 0) + (sortBy !== "availability" ? 1 : 0);
 
   const clearFilters = () => {
     setPriceMin("");
