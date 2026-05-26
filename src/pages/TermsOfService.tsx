@@ -60,10 +60,21 @@ const TermsOfService = () => {
               </ul>
             </section>
 
-            <section>
+            <section id="shipping-delivery" className="scroll-mt-28">
               <h2 className="font-baskerville text-2xl text-primary mb-4">5. Shipping and Delivery</h2>
-              <p className="text-white/80 leading-relaxed">
-                Shipping times and costs vary by location. All orders are shipped in discreet packaging with no external branding indicating the nature of the contents. Risk of loss and title pass to you upon delivery to the carrier.
+              <p className="text-white/80 leading-relaxed mb-4">
+                Vellvii offers complimentary worldwide shipping on every order. All shipments are prepared in plain, unbranded packaging with no external reference to the contents or to Vellvii. Risk of loss and title pass to you upon delivery to the carrier.
+              </p>
+              <ul className="list-disc list-inside text-white/80 space-y-2 mb-4">
+                <li><span className="text-white/90">Complimentary worldwide shipping</span> - included on every order, no minimum.</li>
+                <li><span className="text-white/90">Discreet packaging</span> - unbranded outer carton, no product imagery, no Vellvii markings on labels.</li>
+                <li><span className="text-white/90">Tracked delivery</span> - tracking number issued by email once your order is dispatched.</li>
+                <li><span className="text-white/90">In-stock items</span> - dispatched within 1 - 3 business days.</li>
+                <li><span className="text-white/90">Pre-order items</span> - dispatched per the estimated ship window shown on each product page.</li>
+              </ul>
+              <p className="text-white/70 text-sm leading-relaxed">
+                For warranty coverage and the registration window, see our{" "}
+                <a href="/warranty" className="text-primary hover:underline">warranty policy</a>.
               </p>
             </section>
 
