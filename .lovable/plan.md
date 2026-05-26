@@ -1,52 +1,83 @@
-# Three UX/A11y feedback items
+# Inventory-aware shop and cross-link upgrades
 
-## 1. Product cards: fully clickable + distinct Quick View
+Implements the four feedback items as a coordinated upgrade to the Shop, header, homepage, cross-link surfaces, and search. Frontend / presentation only — no Shopify schema changes.
 
-Today `Shop.tsx` already wraps the whole card in `<Link>`, but the quick-add `<button>` is nested inside the anchor (invalid HTML) and the affordance is labelled "Add" rather than a true Quick View.
+## 1. In-stock filtering and clearer card badges
 
-Changes in `src/pages/Shop.tsx` (`ProductCard`):
-- Replace outer `<Link>` with `<article>` + an absolutely positioned overlay `<Link aria-label="View {title}">` that covers image + title area, so the entire card navigates while leaving room for action buttons that sit at a higher z-index (no nested interactive elements, valid HTML, no `e.stopPropagation` hacks).
-- Add a small **Quick View** icon button (Eye icon) in the top-right of the image, `aria-label="Quick view {title}"`, that opens a lightweight dialog (reuse shadcn `Dialog`) showing hero image, title, price, short description, "Add to cart" (or "Select options" → routes to PDP), and "View details" link. New component `src/components/products/QuickViewDialog.tsx`.
-- Keep the existing Add / Select options button in the card footer but raise its z-index above the overlay link, increase tap target to `min-h-11` on mobile.
-- Make the entire card pointer-friendly: cursor-pointer on hover state already exists via `group-hover` ring; nothing else needed.
+Goal: reduce dead-end clicks on Shop and collection grids.
 
-Apply the same pattern to `RelatedProducts.tsx`, `SimilarProducts.tsx`, and `ProductCard.tsx` (legacy) if they share the nested-link issue — verify and update.
+- `src/pages/Shop.tsx`
+  - Default `inStockOnly` to **on** when no `?filter` param is present (still off when a user explicitly clears, persisted via URL `?show=all`).
+  - Sort sold-out items to the end of the grid even when shown; visually de-emphasize them (reduced opacity, muted price, no Add button).
+  - Always show result counts (already partly there) and add a second line: "X in stock - Y sold out" when relevant.
+  - Add an availability sort option ("Available first") alongside existing sort.
+- `src/components/products/StatusPill.tsx`
+  - Add `"pre-order-eta"` variant accepting an ETA string (e.g. "Ships Aug 2026") rendered as a second line / tooltip.
+  - Strengthen Sold Out styling so it reads at a glance on the grid.
+- `src/components/products/CollectionLayout.tsx` (collection pages e.g. `/collections/discreet-storage`)
+  - Mirror Shop behaviour: same in-stock toggle, same sold-out de-emphasis, same counts.
 
-## 2. Age gate: lower friction + accessibility
+## 2. True "Available Now" collection, exposed prominently
 
-Changes in `src/components/AgeGateModal.tsx`:
-- **Session memory by default**: keep the 30-day localStorage TTL, but also write to `sessionStorage` immediately so subsequent navigations within the same tab never re-prompt even if localStorage is blocked (Safari ITP / private mode).
-- **Explicit copy**: change the primary CTA from "Enter" to **"I am 18+ — Enter"** and the secondary from "Leave site" to **"I am under 18 — Leave"**.
-- **Larger tap targets**: bump both buttons to `min-h-12 px-12` (mobile-first), ensure ≥44×44.
-- **Keyboard focus management**: focus the primary "I am 18+" button on open; trap focus between the two buttons; handle `Escape` → trigger "Leave"; handle `Enter` key → confirm. Use a small `useFocusTrap` hook inline (querySelectorAll of focusable, loop on Tab/Shift+Tab).
-- **A11y polish**: add `aria-describedby` pointing to the disclaimer paragraph, give the dialog a real `<h2>` (visually present via the tagline) referenced by `aria-labelledby`, and add `role="document"` to the inner content.
-- **Don't block links**: confirm modal is rendered only at site root (`App.tsx`) once — already true. Add a query-string escape hatch: `?agegate=skip` (used by privacy/terms/warranty pages linked from external/legal contexts) so deep-link traffic isn't gated when arriving from compliance pages. Skip-list: `/privacy-policy`, `/terms-of-service`, `/warranty*`, `/contact`. Implementation: read `window.location.pathname` in `useEffect` and `return` early if path matches the allowlist regex.
+Goal: a single trustworthy entry point for what users can buy today.
 
-## 3. 404 / empty-state: keep header + add recovery paths
+- New route `/available-now` -> new page `src/pages/AvailableNow.tsx`
+  - Reuses `useShopifyProducts`, filters client-side to variants with `availableForSale === true` and excludes known pre-order handles (reuse `PRE_ORDER_HANDLES` from `StatusPill`).
+  - Editorial header ("Available Now - Ships from our atelier"), product grid, and an empty-state block when fewer than 3 items match: shows pre-order alternatives + link to Guides.
+- `src/components/ScrollHeader.tsx`
+  - Add a top-level "Available Now" link (desktop nav + mobile menu), with a small pulse dot when at least one product is in stock.
+- `src/pages/Index.tsx` (homepage)
+  - Insert an "Available Now" strip above the existing milestones / FAQ region with up to 4 in-stock products and a "See all" link to `/available-now`.
+- `src/pages/Shop.tsx`
+  - Change the existing "Available Now" editorial card to link to `/available-now` instead of `/shop?filter=in-stock`.
 
-Changes in `src/pages/NotFound.tsx`:
-- Render `ScrollHeader` at the top so site navigation/search remain accessible (currently the page has no header).
-- Add a **discovery strip** below the existing CTAs with three link tiles:
-  - **Devices** → `/shop?category=devices` (or current Shop filter for devices)
-  - **Storage** → `/collections/discreet-storage`
-  - **Available now** → `/shop?available=true` (or current "in stock" filter)
-- Add a **Featured in-stock items** row beneath the strip: pull 3 products via `useShopifyProducts({ first: 12 })`, filter to `availableForSale`, and render compact cards (reuse the same `ProductCard` from Shop or a slim variant). Loading skeleton fallback.
-- Keep current premium "Out of Reach" styling and tokens.
-- Add inline messaging clarifying the page is gone but the collection isn't.
+## 3. Inventory-aware cross-links
 
-Confirm Shop filter query params (`?category=`, `?available=`) — if Shop doesn't currently read them, add minimal URL→state sync in `Shop.tsx` so the 404 links land in a meaningfully filtered view.
+Goal: when one product links to another (Lux -> DOX, DOX-compatible grids, related products), surface live status and alternatives instead of dead links.
+
+- New helper `src/lib/productAvailability.ts`
+  - `useProductAvailability(handle)` -> `{ status, etaLabel, alternatives }` using existing `useShopifyProducts` cache. Status uses `getProductStatus`; alternatives are top in-stock products from the same collection (Storage, Pleasure, DOX-Compatible).
+- New component `src/components/products/CrossLinkCard.tsx`
+  - Small inline card showing target product's image, name, `StatusPill`, and, if sold-out/pre-order, an "Also available now" row with 2-3 alternative thumbnails.
+- Update existing cross-link sites to use it:
+  - `src/components/RelatedProducts.tsx`
+  - `src/pages/ProductDetail.tsx` (the Lux -> DOX promo block and any "Pair with" sections)
+  - `src/pages/CollectionDoxCompatible.tsx`
+  - `src/pages/DoxVideoLanding.tsx` (only the inline product references, not hero copy)
+
+## 4. Search with availability + synonyms
+
+Goal: predictive search that respects stock and matches everyday words.
+
+- `src/pages/Shop.tsx` `SearchBar` + `fuzzyMatch`
+  - Add a synonym map: `storage -> [dox, lux, case, tray]`, `wellness -> [vellvii, collection]`, `case -> [dox, lux]`, `discreet -> [storage, lock, biometric]`, `couples -> [pulse, evolve]`, `vibrator -> [g-vibe, pulse, evolve]` (kept as a small client-side map in `src/lib/searchSynonyms.ts`).
+  - When matching, expand the query through the synonym map and merge results (highest score wins).
+  - Show a `StatusPill` next to each suggestion (In Stock / Pre-Order / Sold Out) and sort in-stock first.
+  - Zero-results state inside the dropdown and below the grid: "No matches for X. Popular in-stock:" with 3 chips linking to top in-stock products + a link to `/available-now`.
 
 ## Files touched
 
-- `src/pages/Shop.tsx` — restructure ProductCard, wire Quick View
-- `src/components/products/QuickViewDialog.tsx` — new
-- `src/components/RelatedProducts.tsx`, `src/components/SimilarProducts.tsx`, `src/components/ProductCard.tsx` — apply overlay-link pattern if needed
-- `src/components/AgeGateModal.tsx` — copy, focus trap, session memory, path allowlist
-- `src/pages/NotFound.tsx` — header, recovery tiles, featured products
-- `src/pages/Shop.tsx` — minimal URL param sync for `category` / `available` (if not present)
+```text
+new:    src/pages/AvailableNow.tsx
+new:    src/lib/productAvailability.ts
+new:    src/lib/searchSynonyms.ts
+new:    src/components/products/CrossLinkCard.tsx
+edit:   src/pages/Shop.tsx
+edit:   src/pages/Index.tsx
+edit:   src/pages/ProductDetail.tsx
+edit:   src/pages/CollectionDoxCompatible.tsx
+edit:   src/pages/DoxVideoLanding.tsx
+edit:   src/components/ScrollHeader.tsx
+edit:   src/components/RelatedProducts.tsx
+edit:   src/components/products/StatusPill.tsx
+edit:   src/components/products/CollectionLayout.tsx
+edit:   src/App.tsx        (register /available-now route)
+```
 
-## Out of scope
+## Technical notes
 
-- No changes to Shopify catalog data or cart flow.
-- No copy changes to PDPs or homepage.
-- No new dependencies — reuse shadcn Dialog, lucide icons, existing tokens.
+- All inventory checks go through `availableForSale` on variants (already used). No new Shopify queries needed.
+- Pre-order ETAs use the existing `PRE_ORDER_HANDLES` set with an `ETA_LABELS` map (e.g. `"vellvii-lux": "Ships Aug 2026"`) so copy stays in one file.
+- `useShopifyProducts(50)` is already called on Shop and reused across hooks via React Query cache, so the new helpers and homepage strip incur no extra network cost.
+- No business logic changes to cart, checkout, or Shopify mutations.
+- Copy follows brand memory: hyphens only (no em dashes), "Pleasure Collection" naming, no fabricated review/social proof.
