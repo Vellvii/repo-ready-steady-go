@@ -31,7 +31,6 @@ export const ScrollHeader = () => {
           : "bg-transparent border-b border-transparent"
       }`}
     >
-      <ShippingBar />
       <div className="container mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-[auto_1fr_auto] items-center gap-2 sm:gap-3 h-16 sm:h-20">
           {/* Left: menu trigger */}
