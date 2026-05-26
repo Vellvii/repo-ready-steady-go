@@ -128,6 +128,7 @@ const InnerApp = () => {
             <Route path="/guides/how-to-clean-and-store-sex-toys" element={<GuideHowToCleanAndStoreSexToys />} />
             <Route path="/guides/best-sex-toy-storage-box" element={<GuideBestSexToyStorageBox />} />
             <Route path="/guides/biometric-lock-box-for-sex-toys" element={<GuideBiometricLockBoxForSexToys />} />
+            <Route path="/guides/what-is-a-rose-toy" element={<GuideWhatIsARoseToy />} />
 
             {/* Legacy redirects: pre-Shopify product pages → Shopify PDPs */}
             <Route path="/dox" element={<Navigate to="/products/vellvii-dox" replace />} />
