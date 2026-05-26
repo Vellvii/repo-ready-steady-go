@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Minus, Plus, Trash2, Lock, Loader2, ShoppingBag, ShieldCheck, Package } from "lucide-react";
+import { Minus, Plus, Trash2, Lock, Loader2, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/stores/cartStore";
 import { trackBeginCheckout, appendCheckoutAttribution } from "@/lib/analytics";
