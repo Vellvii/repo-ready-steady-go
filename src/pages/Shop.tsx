@@ -500,8 +500,8 @@ const Shop = () => {
             {[
               {
                 label: "Available Now",
-                tag: "Shop In Stock",
-                href: "/shop?filter=in-stock",
+                tag: "Ships Today",
+                href: "/available-now",
               },
               {
                 label: "Vellvii Lux",
