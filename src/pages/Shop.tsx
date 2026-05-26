@@ -461,13 +461,38 @@ const Shop = () => {
     }, { replace: true });
   };
 
+  // CollectionPage + ItemList JSON-LD for the full shop index
+  const shopHandles = ["vellvii-dox", "vellvii-lux", "vellvii-g-vibe", "vellvii-evolve", "vellvii-pulse"];
+  const shopSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Shop Vellvii - Luxury Intimate Wellness Collection",
+    description: "Explore the Vellvii collection, including DOX, Lux, G-Vibe, Evolve, and Pulse.",
+    url: "https://vellvii.com/shop",
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: shopHandles.map((handle, idx) => ({
+        "@type": "ListItem",
+        position: idx + 1,
+        url: `https://vellvii.com/products/${handle}`,
+      })),
+    },
+  };
+
   return (
     <>
       <SEO
         title="Shop Vellvii | Luxury Intimate Wellness Collection"
         description="Explore the Vellvii collection, including DOX, Lux, G-Vibe, Evolve, and Pulse. Premium intimate wellness products designed with elegance and discretion."
         canonical="/shop"
+        breadcrumbs={[
+          { name: "Home", url: "/" },
+          { name: "Shop", url: "/shop" },
+        ]}
       />
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(shopSchema)}</script>
+      </Helmet>
       <div className="min-h-screen surface-dark-rich">
         {/* Scroll-aware Navigation Header */}
         <ScrollHeader />

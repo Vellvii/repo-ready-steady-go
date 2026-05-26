@@ -192,7 +192,6 @@ export const CollectionLayout = ({
         title={seoTitle}
         description={seoDescription}
         canonical={canonical}
-        organizationData
         breadcrumbs={[
           { name: "Home", url: "/" },
           { name: "Shop", url: "/shop" },
