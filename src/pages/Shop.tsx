@@ -4,6 +4,7 @@ import { useShopifyProducts, useShopifyCollections, useShopifyProductsByCollecti
 import { Skeleton } from "@/components/ui/skeleton";
 import { ShopifyProduct } from "@/lib/shopify";
 import { SEO } from "@/components/SEO";
+import { Helmet } from "react-helmet-async";
 import { ScrollHeader } from "@/components/ScrollHeader";
 import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
 import { cn } from "@/lib/utils";
