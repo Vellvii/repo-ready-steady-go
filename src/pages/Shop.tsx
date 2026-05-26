@@ -317,9 +317,9 @@ type SortOption = "featured" | "price-asc" | "price-desc" | "title-asc" | "avail
 
 const Shop = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  // Default to in-stock-only unless user explicitly opted in to seeing everything via ?show=all
-  const showAll = searchParams.get("show") === "all";
-  const initialInStock = !showAll;
+  // Show full catalog by default. Sold-out items remain visible but grayed
+  // and pushed to the end of the grid. Users can opt in to in-stock-only.
+  const initialInStock = searchParams.get("stock") === "in";
   const [selectedCollection, setSelectedCollection] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -329,9 +329,9 @@ const Shop = () => {
   const [priceMax, setPriceMax] = useState("");
   const [inStockOnly, setInStockOnly] = useState(initialInStock);
 
-  // Keep in-stock toggle in sync with ?show URL param (back/forward nav).
+  // Keep in-stock toggle in sync with ?stock URL param (back/forward nav).
   useEffect(() => {
-    setInStockOnly(searchParams.get("show") !== "all");
+    setInStockOnly(searchParams.get("stock") === "in");
   }, [searchParams]);
 
   const { data: allProducts } = useShopifyProducts(50);
