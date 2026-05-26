@@ -451,10 +451,11 @@ const Shop = () => {
     setPriceMin("");
     setPriceMax("");
     setSortBy("availability");
-    setInStockOnly(true);
+    setInStockOnly(false);
     setSearchParams((prev) => {
       const next = new URLSearchParams(prev);
       next.delete("show");
+      next.delete("stock");
       next.delete("filter");
       return next;
     }, { replace: true });
@@ -672,14 +673,15 @@ const Shop = () => {
                     role="switch"
                     aria-checked={inStockOnly}
                     onClick={() => {
-                      // Toggle inverts: when in-stock-only is OFF, URL gets ?show=all
+                      // Default is show-all. Toggle ON adds ?stock=in.
                       setSearchParams((prev) => {
                         const next = new URLSearchParams(prev);
                         if (inStockOnly) {
-                          next.set("show", "all");
+                          next.delete("stock");
                         } else {
-                          next.delete("show");
+                          next.set("stock", "in");
                         }
+                        next.delete("show");
                         next.delete("filter");
                         return next;
                       }, { replace: true });
