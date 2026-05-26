@@ -68,6 +68,8 @@ const routes: RouteSeo[] = [
   { path: "/guides/how-to-clean-and-store-sex-toys", title: "How to Clean and Store Sex Toys: A General Care Guide | Vellvii", description: "A general guide to how to clean and store sex toys: follow the included care instructions, keep things in a clean dry place, and use a refined sex toy storage option that fits your routine." },
   { path: "/guides/best-sex-toy-storage-box", title: "Best Sex Toy Storage Box | Vellvii Buyer's Guide", description: "What to look for in the best sex toy storage box: privacy, lockable design, size, organization, and portable vs bedroom storage. A Vellvii buyer's guide." },
   { path: "/guides/biometric-lock-box-for-sex-toys", title: "Biometric Lock Box for Sex Toy Storage | Vellvii", description: "A guide to the biometric lock box for sex toy storage. How fingerprint access supports a private sex toy lock box, with Vellvii DOX and Lux." },
+  { path: "/guides/what-is-a-rose-toy", title: "What Is a Rose Toy? | Vellvii Guide", description: "A clear, refined guide to what a rose toy is, how it differs from traditional pleasure pieces, and how it fits alongside the Vellvii Pleasure Collection." },
+  { path: "/available-now", title: "Available Now | Vellvii", description: "Vellvii products available to order today. Refined intimate wellness pieces ready for dispatch." },
 
   // Static product pages (mirrors Helmet titles so non-JS crawlers see them)
   { path: "/products/vellvii-dox", title: "Vellvii DOX | Biometric Sex Toy Lock Box & Bedroom Storage", description: "Vellvii DOX - a biometric sex toy lock box and bedroom storage hub built around the VDS and DDS docking system for the Vellvii Pleasure Collection." },
