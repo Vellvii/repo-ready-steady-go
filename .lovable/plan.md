@@ -1,48 +1,52 @@
-# Confirm add-to-cart success with clear feedback
+# Three UX/A11y feedback items
 
-Implement the two feedback items from the screenshot, fitting Vellvii's premium tokens.
+## 1. Product cards: fully clickable + distinct Quick View
 
-## 1. Open cart drawer + toast with actions on add-to-cart
+Today `Shop.tsx` already wraps the whole card in `<Link>`, but the quick-add `<button>` is nested inside the anchor (invalid HTML) and the affordance is labelled "Add" rather than a true Quick View.
 
-Today, adding to cart fires a sonner toast but the drawer does not open and the toast has no actions. The floating Cart trigger already updates the header count reactively via `getTotalItems()`, so that part is already correct.
+Changes in `src/pages/Shop.tsx` (`ProductCard`):
+- Replace outer `<Link>` with `<article>` + an absolutely positioned overlay `<Link aria-label="View {title}">` that covers image + title area, so the entire card navigates while leaving room for action buttons that sit at a higher z-index (no nested interactive elements, valid HTML, no `e.stopPropagation` hacks).
+- Add a small **Quick View** icon button (Eye icon) in the top-right of the image, `aria-label="Quick view {title}"`, that opens a lightweight dialog (reuse shadcn `Dialog`) showing hero image, title, price, short description, "Add to cart" (or "Select options" → routes to PDP), and "View details" link. New component `src/components/products/QuickViewDialog.tsx`.
+- Keep the existing Add / Select options button in the card footer but raise its z-index above the overlay link, increase tap target to `min-h-11` on mobile.
+- Make the entire card pointer-friendly: cursor-pointer on hover state already exists via `group-hover` ring; nothing else needed.
 
-Changes:
+Apply the same pattern to `RelatedProducts.tsx`, `SimilarProducts.tsx`, and `ProductCard.tsx` (legacy) if they share the nested-link issue — verify and update.
 
-- `src/stores/cartStore.ts`: add UI state `isDrawerOpen: boolean` plus `openDrawer()` / `closeDrawer()` / `setDrawerOpen(open)` actions. Exclude from `partialize` (UI state, not persisted).
-- `src/components/CartDrawer.tsx`: replace local `useState(isOpen)` with the store's `isDrawerOpen` / `setDrawerOpen`. The existing floating trigger keeps working (calls `openDrawer()` when items exist, routes to `/shop` when empty).
-- `src/pages/ProductDetail.tsx` (`handleAddToCart`): after `await addItem(...)`, call `useCartStore.getState().openDrawer()` and replace the bare `toast.success` with an actionable sonner toast positioned `top-center`:
-  - title: `"{product title} added to your collection"`
-  - action: **Checkout** → triggers same checkout flow as drawer button (extract a small `startCheckout()` helper in `cartStore` that returns the attribution-appended URL, or reuse via dispatching an event; cleaner: keep checkout logic in drawer but the toast's primary action just calls `openDrawer()` since drawer already shows Checkout prominently)
-  - cancel/secondary: **View cart** → `navigate('/cart')` via a small wrapper that uses `window.location` is acceptable here, but preferred is moving the toast trigger into a tiny hook `useAddToCartFeedback()` that has access to `useNavigate`.
+## 2. Age gate: lower friction + accessibility
 
-Final toast contract (kept tasteful, single line of actions):
-- Primary action: **View cart drawer** (closes toast, drawer is already open — redundant, so drop)
-- Two actions only: **Checkout** and **View cart**. Both close the toast. Drawer remains open behind so the user sees their item land.
+Changes in `src/components/AgeGateModal.tsx`:
+- **Session memory by default**: keep the 30-day localStorage TTL, but also write to `sessionStorage` immediately so subsequent navigations within the same tab never re-prompt even if localStorage is blocked (Safari ITP / private mode).
+- **Explicit copy**: change the primary CTA from "Enter" to **"I am 18+ — Enter"** and the secondary from "Leave site" to **"I am under 18 — Leave"**.
+- **Larger tap targets**: bump both buttons to `min-h-12 px-12` (mobile-first), ensure ≥44×44.
+- **Keyboard focus management**: focus the primary "I am 18+" button on open; trap focus between the two buttons; handle `Escape` → trigger "Leave"; handle `Enter` key → confirm. Use a small `useFocusTrap` hook inline (querySelectorAll of focusable, loop on Tab/Shift+Tab).
+- **A11y polish**: add `aria-describedby` pointing to the disclaimer paragraph, give the dialog a real `<h2>` (visually present via the tagline) referenced by `aria-labelledby`, and add `role="document"` to the inner content.
+- **Don't block links**: confirm modal is rendered only at site root (`App.tsx`) once — already true. Add a query-string escape hatch: `?agegate=skip` (used by privacy/terms/warranty pages linked from external/legal contexts) so deep-link traffic isn't gated when arriving from compliance pages. Skip-list: `/privacy-policy`, `/terms-of-service`, `/warranty*`, `/contact`. Implementation: read `window.location.pathname` in `useEffect` and `return` early if path matches the allowlist regex.
 
-Wire the same feedback in any other add-to-cart entry points if they exist (currently only `ProductDetail.tsx` calls `addItem`).
+## 3. 404 / empty-state: keep header + add recovery paths
 
-## 2. Empty-cart inline notice + disabled checkout
+Changes in `src/pages/NotFound.tsx`:
+- Render `ScrollHeader` at the top so site navigation/search remain accessible (currently the page has no header).
+- Add a **discovery strip** below the existing CTAs with three link tiles:
+  - **Devices** → `/shop?category=devices` (or current Shop filter for devices)
+  - **Storage** → `/collections/discreet-storage`
+  - **Available now** → `/shop?available=true` (or current "in stock" filter)
+- Add a **Featured in-stock items** row beneath the strip: pull 3 products via `useShopifyProducts({ first: 12 })`, filter to `availableForSale`, and render compact cards (reuse the same `ProductCard` from Shop or a slim variant). Loading skeleton fallback.
+- Keep current premium "Out of Reach" styling and tokens.
+- Add inline messaging clarifying the page is gone but the collection isn't.
 
-- `CartDrawer` already shows an empty state with "Browse Products" and hides the Checkout button entirely — keep as is.
-- `src/pages/Cart.tsx`: already shows an empty state card with "Browse the Collection" and does not render the Checkout button. Add a subtle inline notice line ("Add an item from the collection to enable checkout.") and, when we later render the summary panel for empty carts (we don't today), the Checkout button would be `disabled`. No code change strictly required, but I'll add the one-line inline notice for clarity.
-- Floating trigger in `CartDrawer` already swaps to "Shop Now" → `/shop` when `totalItems === 0`. Keep.
-
-## Technical notes
-
-- New store shape:
-  ```ts
-  isDrawerOpen: boolean;
-  openDrawer: () => void;
-  closeDrawer: () => void;
-  setDrawerOpen: (open: boolean) => void;
-  ```
-  `partialize` continues to persist only `items`, `cartId`, `checkoutUrl`.
-- Toast uses sonner's `action` + `cancel` props; styling inherits from existing sonner Toaster (premium tokens already applied globally).
-- No changes to Shopify cart API calls, analytics, or pixel events.
+Confirm Shop filter query params (`?category=`, `?available=`) — if Shop doesn't currently read them, add minimal URL→state sync in `Shop.tsx` so the 404 links land in a meaningfully filtered view.
 
 ## Files touched
 
-- `src/stores/cartStore.ts` — add drawer UI state + actions
-- `src/components/CartDrawer.tsx` — read drawer open state from store
-- `src/pages/ProductDetail.tsx` — open drawer + actionable toast after add
-- `src/pages/Cart.tsx` — one-line inline notice in empty state (minor)
+- `src/pages/Shop.tsx` — restructure ProductCard, wire Quick View
+- `src/components/products/QuickViewDialog.tsx` — new
+- `src/components/RelatedProducts.tsx`, `src/components/SimilarProducts.tsx`, `src/components/ProductCard.tsx` — apply overlay-link pattern if needed
+- `src/components/AgeGateModal.tsx` — copy, focus trap, session memory, path allowlist
+- `src/pages/NotFound.tsx` — header, recovery tiles, featured products
+- `src/pages/Shop.tsx` — minimal URL param sync for `category` / `available` (if not present)
+
+## Out of scope
+
+- No changes to Shopify catalog data or cart flow.
+- No copy changes to PDPs or homepage.
+- No new dependencies — reuse shadcn Dialog, lucide icons, existing tokens.

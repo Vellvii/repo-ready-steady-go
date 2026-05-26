@@ -7,10 +7,11 @@ import { SEO } from "@/components/SEO";
 import { ScrollHeader } from "@/components/ScrollHeader";
 import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
 import { cn } from "@/lib/utils";
-import { Search, X, ShoppingCart, Loader2, SlidersHorizontal, ChevronDown } from "lucide-react";
+import { Search, X, ShoppingCart, Loader2, SlidersHorizontal, ChevronDown, Eye } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { StatusPill, getProductStatus } from "@/components/products/StatusPill";
+import { QuickViewDialog } from "@/components/products/QuickViewDialog";
 
 // Simple fuzzy match - checks if query letters appear in order within the target
 const fuzzyMatch = (query: string, target: string): { match: boolean; score: number } => {
@@ -48,9 +49,10 @@ const ProductCard = ({ product }: { product: ShopifyProduct }) => {
   const addItem = useCartStore((state) => state.addItem);
   const cartLoading = useCartStore((state) => state.isLoading);
   const [isAdding, setIsAdding] = useState(false);
+  const [quickViewOpen, setQuickViewOpen] = useState(false);
+  const openDrawer = useCartStore((state) => state.openDrawer);
 
   const variants = product.node.variants.edges;
-  // Detect if product has meaningful variant choices (e.g. Color, Size)
   const hasOptions =
     product.node.options &&
     product.node.options.some(
@@ -58,15 +60,10 @@ const ProductCard = ({ product }: { product: ShopifyProduct }) => {
         !(opt.name === "Title" && opt.values.length === 1 && opt.values[0] === "Default Title") &&
         opt.values.length > 1
     );
-  // If any variant is available, product is purchasable.
-  // Shopify's availableForSale already respects "continue selling when out of stock".
   const isAvailable = variants.some((v) => v.node.availableForSale);
-  // Pick the first available variant for quick-add
   const quickAddVariant = variants.find((v) => v.node.availableForSale)?.node;
 
-  const handleQuickAdd = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleQuickAdd = async () => {
     if (!quickAddVariant || !isAvailable) return;
     setIsAdding(true);
     try {
@@ -78,8 +75,9 @@ const ProductCard = ({ product }: { product: ShopifyProduct }) => {
         quantity: 1,
         selectedOptions: quickAddVariant.selectedOptions || [],
       });
-      toast.success(`${product.node.title} added to cart`, { position: "top-center" });
-    } catch (err) {
+      openDrawer();
+      toast.success(`${product.node.title} added to your collection`, { position: "top-center" });
+    } catch {
       toast.error("Could not add to cart", { position: "top-center" });
     } finally {
       setIsAdding(false);
@@ -87,62 +85,89 @@ const ProductCard = ({ product }: { product: ShopifyProduct }) => {
   };
 
   return (
-    <Link to={`/products/${product.node.handle}`} className="group block">
-      <div className="card-dark rounded-xl sm:rounded-2xl overflow-hidden relative ring-1 ring-primary/0 group-hover:ring-primary/30 transition-all duration-500">
-        <div className="product-image-container aspect-[3/4] sm:aspect-[4/5] relative">
-          {image ? (
-            <img
-              src={image.url}
-              alt={image.altText || product.node.title}
-              className="w-full h-full object-cover"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-light-muted">
-              No Image
-            </div>
-          )}
-          <StatusPill
-            status={getProductStatus(product.node.handle, isAvailable)}
-            className="absolute top-2 left-2 sm:top-3 sm:left-3"
-          />
-        </div>
-        <div className="p-4 sm:p-5">
-          <h3 className="text-light-primary font-baskerville font-semibold text-base sm:text-lg mb-1 sm:mb-2 group-hover:text-primary transition-colors line-clamp-2">
-            {product.node.title}
-          </h3>
-          <div className="flex items-center justify-between gap-2">
-            <p className="text-primary font-montserrat font-bold text-lg sm:text-xl">
-              ${parseFloat(price.amount).toFixed(0)}
-            </p>
-            {!isAvailable ? (
-              <span className="font-montserrat text-[10px] sm:text-xs text-light-muted uppercase tracking-[0.2em]">
-                —
-              </span>
-            ) : hasOptions ? (
-              <span className="font-montserrat text-xs text-light-secondary group-hover:text-primary transition-colors">
-                Select options →
-              </span>
+    <>
+      <article className="group relative">
+        <div className="card-dark rounded-xl sm:rounded-2xl overflow-hidden relative ring-1 ring-primary/0 group-hover:ring-primary/30 transition-all duration-500">
+          <div className="product-image-container aspect-[3/4] sm:aspect-[4/5] relative">
+            {image ? (
+              <img
+                src={image.url}
+                alt={image.altText || product.node.title}
+                className="w-full h-full object-cover"
+              />
             ) : (
-              <button
-                onClick={handleQuickAdd}
-                disabled={isAdding || cartLoading}
-                aria-label={`Add ${product.node.title} to cart`}
-                className="flex-shrink-0 inline-flex items-center justify-center gap-1.5 h-9 px-3 rounded-full bg-primary text-primary-foreground font-montserrat text-xs font-medium hover:shadow-glow transition-all disabled:opacity-60 disabled:cursor-not-allowed"
-              >
-                {isAdding ? (
-                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                ) : (
-                  <>
-                    <ShoppingCart className="w-3.5 h-3.5" />
-                    <span>Add</span>
-                  </>
-                )}
-              </button>
+              <div className="w-full h-full flex items-center justify-center text-light-muted">
+                No Image
+              </div>
             )}
+            <StatusPill
+              status={getProductStatus(product.node.handle, isAvailable)}
+              className="absolute top-2 left-2 sm:top-3 sm:left-3 z-20"
+            />
+            {/* Quick View icon button */}
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setQuickViewOpen(true);
+              }}
+              aria-label={`Quick view ${product.node.title}`}
+              className="absolute top-2 right-2 sm:top-3 sm:right-3 z-20 inline-flex items-center justify-center w-11 h-11 rounded-full bg-background/80 backdrop-blur-md text-light-primary hover:bg-primary hover:text-primary-foreground transition-all opacity-0 group-hover:opacity-100 focus-visible:opacity-100"
+            >
+              <Eye className="w-4 h-4" />
+            </button>
+          </div>
+          <div className="p-4 sm:p-5">
+            <h3 className="text-light-primary font-baskerville font-semibold text-base sm:text-lg mb-1 sm:mb-2 group-hover:text-primary transition-colors line-clamp-2">
+              {product.node.title}
+            </h3>
+            <div className="flex items-center justify-between gap-2">
+              <p className="text-primary font-montserrat font-bold text-lg sm:text-xl">
+                ${parseFloat(price.amount).toFixed(0)}
+              </p>
+              {!isAvailable ? (
+                <span className="font-montserrat text-[10px] sm:text-xs text-light-muted uppercase tracking-[0.2em]">
+                  —
+                </span>
+              ) : hasOptions ? (
+                <span className="font-montserrat text-xs text-light-secondary group-hover:text-primary transition-colors">
+                  Select options →
+                </span>
+              ) : (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleQuickAdd();
+                  }}
+                  disabled={isAdding || cartLoading}
+                  aria-label={`Add ${product.node.title} to cart`}
+                  className="relative z-20 flex-shrink-0 inline-flex items-center justify-center gap-1.5 min-h-11 px-4 rounded-full bg-primary text-primary-foreground font-montserrat text-xs font-medium hover:shadow-glow transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {isAdding ? (
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                  ) : (
+                    <>
+                      <ShoppingCart className="w-3.5 h-3.5" />
+                      <span>Add</span>
+                    </>
+                  )}
+                </button>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </Link>
+        {/* Overlay link covers the card except interactive controls (z-20) */}
+        <Link
+          to={`/products/${product.node.handle}`}
+          aria-label={`View ${product.node.title}`}
+          className="absolute inset-0 z-10 rounded-xl sm:rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        />
+      </article>
+      <QuickViewDialog product={product} open={quickViewOpen} onOpenChange={setQuickViewOpen} />
+    </>
   );
 };
 
