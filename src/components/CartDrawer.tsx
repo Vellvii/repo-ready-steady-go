@@ -12,27 +12,30 @@ import { CheckoutTransition } from "@/components/checkout/CheckoutTransition";
 
 export const CartDrawer = () => {
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [checkoutTarget, setCheckoutTarget] = useState<string | null>(null);
-  const { 
-    items, 
-    isLoading, 
-    isSyncing, 
-    updateQuantity, 
-    removeItem, 
-    getCheckoutUrl, 
+  const {
+    items,
+    isLoading,
+    isSyncing,
+    isDrawerOpen: isOpen,
+    setDrawerOpen,
+    openDrawer,
+    updateQuantity,
+    removeItem,
+    getCheckoutUrl,
     syncCart,
     getTotalItems,
     getTotalPrice,
     clearCart
   } = useCartStore();
-  
+
+  const setIsOpen = setDrawerOpen;
   const totalItems = getTotalItems();
   const totalPrice = getTotalPrice();
 
-  useEffect(() => { 
-    if (isOpen) syncCart(); 
+  useEffect(() => {
+    if (isOpen) syncCart();
   }, [isOpen, syncCart]);
 
   const handleCheckout = () => {

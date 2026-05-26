@@ -97,6 +97,9 @@ const CartPage = () => {
               <p className="font-montserrat text-light-secondary max-w-sm mx-auto">
                 Discover the Vellvii Pleasure Collection and add something to your cart.
               </p>
+              <p className="font-montserrat text-xs text-light-muted max-w-sm mx-auto">
+                Add an item from the collection to enable checkout.
+              </p>
               <Link to="/shop">
                 <Button className="btn-premium px-8 h-11 font-montserrat">Browse the Collection</Button>
               </Link>

@@ -1,68 +1,48 @@
+# Confirm add-to-cart success with clear feedback
 
-# Unblock Vellvii SEO indexing
+Implement the two feedback items from the screenshot, fitting Vellvii's premium tokens.
 
-Two blockers are stopping Google from indexing the site:
+## 1. Open cart drawer + toast with actions on add-to-cart
 
-1. `/` returns `noindex` (the EntryGate) — so the root URL, which carries the strongest ranking signals, is invisible to Google.
-2. Even though `vellvii.com` is the only host you use, the homepage Google would try to index there is the noindex gate.
+Today, adding to cart fires a sonner toast but the drawer does not open and the toast has no actions. The floating Cart trigger already updates the header count reactively via `getTotalItems()`, so that part is already correct.
 
-This plan fixes both without weakening the 18+ confirmation.
+Changes:
 
-## 1. Make `/` the real homepage; age gate becomes a modal overlay
+- `src/stores/cartStore.ts`: add UI state `isDrawerOpen: boolean` plus `openDrawer()` / `closeDrawer()` / `setDrawerOpen(open)` actions. Exclude from `partialize` (UI state, not persisted).
+- `src/components/CartDrawer.tsx`: replace local `useState(isOpen)` with the store's `isDrawerOpen` / `setDrawerOpen`. The existing floating trigger keeps working (calls `openDrawer()` when items exist, routes to `/shop` when empty).
+- `src/pages/ProductDetail.tsx` (`handleAddToCart`): after `await addItem(...)`, call `useCartStore.getState().openDrawer()` and replace the bare `toast.success` with an actionable sonner toast positioned `top-center`:
+  - title: `"{product title} added to your collection"`
+  - action: **Checkout** → triggers same checkout flow as drawer button (extract a small `startCheckout()` helper in `cartStore` that returns the attribution-appended URL, or reuse via dispatching an event; cleaner: keep checkout logic in drawer but the toast's primary action just calls `openDrawer()` since drawer already shows Checkout prominently)
+  - cancel/secondary: **View cart** → `navigate('/cart')` via a small wrapper that uses `window.location` is acceptable here, but preferred is moving the toast trigger into a tiny hook `useAddToCartFeedback()` that has access to `useNavigate`.
 
-- Move `DoxVideoLanding` back to `/`.
-- Delete the dedicated `/home` route; redirect `/home` → `/` (301) so any external link already pointing to `/home` still works.
-- Build a new `<AgeGateModal />` component mounted once at app root:
-  - On first visit, blocks the page with the same visual treatment as today's EntryGate (Vellvii wordmark, italic slogan, Enter button, Leave site button, 18+ disclaimer).
-  - Stores confirmation in `localStorage` (`vellvii_age_confirmed`, 30-day TTL). Confirmed visitors never see it again until the flag expires.
-  - "Leave site" → `window.history.back()` with `https://www.google.com` fallback (same as today).
-  - Modal is rendered *after* the page content in the DOM and shown via CSS overlay — crawlers (which do not run localStorage logic) still see the full indexable homepage HTML.
-- Remove `noindex` from `/`. The page becomes `index, follow` with canonical `https://vellvii.com/`.
+Final toast contract (kept tasteful, single line of actions):
+- Primary action: **View cart drawer** (closes toast, drawer is already open — redundant, so drop)
+- Two actions only: **Checkout** and **View cart**. Both close the toast. Drawer remains open behind so the user sees their item land.
 
-Industry precedent: Lelo, Maude, Dame, Hims, and every major wine brand use exactly this modal pattern. It is the accepted standard for age-restricted commerce.
+Wire the same feedback in any other add-to-cart entry points if they exist (currently only `ProductDetail.tsx` calls `addItem`).
 
-## 2. Lock canonical host to vellvii.com
+## 2. Empty-cart inline notice + disabled checkout
 
-- Update every internal link from `/home` back to `/`:
-  `ScrollHeader`, `LuxuryNavDrawer`, `PrelaunchFooter`, `NotFound`, `PrivacyPolicy`, `TermsOfService`, `DoxVideoLanding` SEO canonical, EntryGate post-confirm CTA.
-- `public/sitemap.xml`: change `https://vellvii.com/home` → `https://vellvii.com/`.
-- `index.html`: `og:url` → `https://vellvii.com/` (already correct, verify).
-- Confirm in Lovable Project Settings → Domains that `vellvii.com` is set as **Primary** so `vellvii.lovable.app` 301-redirects to it. No code change needed for that — it is a settings toggle.
+- `CartDrawer` already shows an empty state with "Browse Products" and hides the Checkout button entirely — keep as is.
+- `src/pages/Cart.tsx`: already shows an empty state card with "Browse the Collection" and does not render the Checkout button. Add a subtle inline notice line ("Add an item from the collection to enable checkout.") and, when we later render the summary panel for empty carts (we don't today), the Checkout button would be `disabled`. No code change strictly required, but I'll add the one-line inline notice for clarity.
+- Floating trigger in `CartDrawer` already swaps to "Shop Now" → `/shop` when `totalItems === 0`. Keep.
 
-## 3. Resubmit and accelerate indexing (after deploy)
+## Technical notes
 
-- In Google Search Console: resubmit `https://vellvii.com/sitemap.xml`, then "Request indexing" for `/`, `/shop`, `/products/vellvii-dox`, `/products/vellvii-lux`, `/guides/best-sex-toy-storage-box`, `/guides/biometric-lock-box-for-sex-toys`.
-- Same in Bing Webmaster Tools (IndexNow is much faster than Google).
+- New store shape:
+  ```ts
+  isDrawerOpen: boolean;
+  openDrawer: () => void;
+  closeDrawer: () => void;
+  setDrawerOpen: (open: boolean) => void;
+  ```
+  `partialize` continues to persist only `items`, `cartId`, `checkoutUrl`.
+- Toast uses sonner's `action` + `cancel` props; styling inherits from existing sonner Toaster (premium tokens already applied globally).
+- No changes to Shopify cart API calls, analytics, or pixel events.
 
-## 4. Push the page that already ranks
+## Files touched
 
-`/guides/best-sex-toy-storage-box` is at position 48 for "sex toy box" (1,300/mo). The realistic target is "sex toy storage box" (260/mo, KDI 21 — easy). Once indexing is unblocked:
-
-- Update H1, `<title>`, and intro paragraph to lead with the exact phrase "sex toy storage box".
-- Add internal links to this guide from `/` and `/shop`.
-- Fastest path from #48 to page 1 in 30 to 60 days.
-
-## Files to change
-
-- `src/App.tsx` — `/` → DoxVideoLanding; `/home` → `<Navigate to="/" replace />`.
-- `src/pages/EntryGate.tsx` — delete.
-- `src/components/AgeGateModal.tsx` — new.
-- `src/App.tsx` or `src/main.tsx` — mount `<AgeGateModal />` once at app root.
-- `src/pages/DoxVideoLanding.tsx` — `SEO canonical="/"`.
-- `src/components/ScrollHeader.tsx`, `LuxuryNavDrawer.tsx`, `PrelaunchFooter.tsx`, `pages/NotFound.tsx`, `pages/PrivacyPolicy.tsx`, `pages/TermsOfService.tsx` — internal `/home` links → `/`.
-- `public/sitemap.xml` — `/home` → `/`.
-- `mem://routing/homepage-and-parked-routes` — update.
-
-## What this plan does NOT do
-
-- Does not change product copy, branding, legal pages, or backlinks.
-- Does not weaken the 18+ gate — every real visitor still confirms before seeing the content.
-- Does not touch `vellvii.lovable.app` — it stays inactive as a redirect target only.
-
-## Expected outcome
-
-- Within 1–2 weeks: Google begins indexing `/`, `/shop`, product pages, and guides.
-- Within 30–60 days: the storage-box guide moves from #48 toward page 1.
-- Authority Score (currently 2/100) will grow only with real backlink outreach — flag separately.
-
-Ready to build on approval.
+- `src/stores/cartStore.ts` — add drawer UI state + actions
+- `src/components/CartDrawer.tsx` — read drawer open state from store
+- `src/pages/ProductDetail.tsx` — open drawer + actionable toast after add
+- `src/pages/Cart.tsx` — one-line inline notice in empty state (minor)
