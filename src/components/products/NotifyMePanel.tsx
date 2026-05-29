@@ -94,7 +94,7 @@ export const NotifyMePanel = ({ productTitle }: NotifyMePanelProps) => {
                   Saving
                 </>
               ) : (
-                "Notify me"
+                "Join the Waitlist"
               )}
             </Button>
           </form>
