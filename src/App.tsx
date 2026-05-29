@@ -55,6 +55,7 @@ import GuideHowToCleanAndStoreSexToys from "./pages/guides/GuideHowToCleanAndSto
 import GuideBestSexToyStorageBox from "./pages/guides/GuideBestSexToyStorageBox";
 import GuideBiometricLockBoxForSexToys from "./pages/guides/GuideBiometricLockBoxForSexToys";
 import GuideWhatIsARoseToy from "./pages/guides/GuideWhatIsARoseToy";
+import TheLuxLanding from "./pages/TheLuxLanding";
 
 const queryClient = new QueryClient();
 
@@ -100,6 +101,7 @@ const InnerApp = () => {
             <Route path="/prelaunch-dox" element={<Navigate to="/prelaunch" replace />} />
             <Route path="/Vellvii-Lux" element={<PrelaunchLux />} />
             <Route path="/vellvii-lux" element={<Navigate to="/Vellvii-Lux" replace />} />
+            <Route path="/pages/the-lux" element={<TheLuxLanding />} />
 
             {/* QR-code video landings (packaging) */}
             <Route path="/v/1" element={<Video1 />} />

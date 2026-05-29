@@ -254,7 +254,11 @@ const DoxVideoLanding = () => {
               transition={{ duration: 0.7 }}
               className="space-y-3"
             >
-              <h1
+              <h1 className="sr-only">
+                Luxury Biometric Sex Toy Storage - The Art of Intentional Pleasure
+              </h1>
+              <p
+                aria-hidden="true"
                 className="block text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-baskerville font-bold leading-[0.95] tracking-tight"
                 style={{
                   background:
@@ -267,7 +271,7 @@ const DoxVideoLanding = () => {
                 }}
               >
                 The Vellvii Lux is here.
-              </h1>
+              </p>
               <p className="text-base sm:text-lg md:text-xl text-light-secondary font-montserrat max-w-2xl mx-auto leading-relaxed">
                 Ships end of June. The current Lux first-run offer includes a complimentary
                 Vellvii Nova - our handheld suction piece. Future Lux runs are planned, but the

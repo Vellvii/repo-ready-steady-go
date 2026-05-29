@@ -44,13 +44,20 @@ export const StickyProductBar = ({
         <Button
           size="default"
           className="btn-premium h-10 sm:h-11 max-w-[52vw] flex-shrink-0 whitespace-normal px-3 sm:px-6 text-center text-xs sm:text-base leading-tight"
-          onClick={onAddToCart}
-          disabled={isLoading || !isAvailable}
+          onClick={() => {
+            if (!isAvailable) {
+              const el = document.getElementById("join-waitlist");
+              if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+              return;
+            }
+            onAddToCart();
+          }}
+          disabled={isLoading}
         >
           {isLoading ? (
             <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin" />
           ) : !isAvailable ? (
-            <span className="text-xs sm:text-base">Sold Out</span>
+            <span className="text-xs sm:text-base">Join the Waitlist</span>
           ) : ctaLabel ? (
             <span className="font-semibold leading-tight">{ctaLabel}</span>
           ) : (

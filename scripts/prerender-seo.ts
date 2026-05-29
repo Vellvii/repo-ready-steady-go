@@ -22,15 +22,15 @@ interface RouteSeo {
 
 const routes: RouteSeo[] = [
   // Home and primary
-  { path: "/", title: "Vellvii | Luxury Intimate Wellness Products", description: "Discover Vellvii's luxury intimate wellness collection, designed for modern couples who value elegance, discretion, and premium design." },
+  { path: "/", title: "Vellvii | Luxury Biometric Sex Toy Storage & Intimate Wellness", description: "Vellvii designs luxury biometric sex toy storage with fingerprint-lock security, genuine leather, and velvet-lined interiors. Discreet. Refined. Built for those who know the difference." },
   { path: "/showcase", title: "Vellvii | Luxury Wellness & Intimate Storage", description: "Discover Vellvii - luxury wellness products and the DOX docking station featuring biometric security, integrated charging, and premium design. The Art of 'O'." },
   { path: "/landing", title: "Vellvii | Luxury Intimate Wellness Products", description: "Vellvii - luxury intimate wellness, designed for modern couples who value elegance, discretion, and premium design." },
   { path: "/shop", title: "Shop Vellvii | Luxury Intimate Wellness Collection", description: "Explore the Vellvii collection, including DOX, Lux, G-Vibe, Evolve, and Pulse. Premium intimate wellness products designed with elegance and discretion." },
 
   // Collections
   { path: "/collections/dox-compatible-products", title: "DOX-Compatible Products | Vellvii", description: "DOX-compatible storage system - explore Vellvii products designed to work with the VDS and DDS suction-base mounting stations atop the Vellvii DOX." },
-  { path: "/collections/pleasure-collection", title: "Vellvii Pleasure Collection | Luxury Intimate Wellness", description: "The Vellvii Pleasure Collection - refined products and discreet sex toy storage designed for modern couples and a premium private experience." },
-  { path: "/collections/discreet-storage", title: "Discreet Sex Toy Storage | Vellvii Storage Collection", description: "Discreet sex toy storage by Vellvii - the Lux portable fingerprint-lock case and the DOX bedroom storage hub, designed for privacy and refined organization." },
+  { path: "/collections/pleasure-collection", title: "Luxury Intimate Wellness Collection - Vibrators & Storage | Vellvii", description: "The Vellvii Pleasure Collection - refined products and discreet sex toy storage designed for modern couples and a premium private experience." },
+  { path: "/collections/discreet-storage", title: "Discreet Sex Toy Storage | Biometric Intimate Storage Cases - Vellvii", description: "Explore Vellvii's range of discreet biometric sex toy storage - leather cases, fingerprint-lock vaults, and portable intimate storage designed for refined living." },
   { path: "/collections/portable-storage", title: "Portable Sex Toy Storage | Vellvii Lux", description: "Portable sex toy storage by Vellvii Lux - a refined fingerprint-lock case that doubles as a discreet sex toy bag for travel and everyday privacy." },
   { path: "/collections/bedroom-storage", title: "Bedroom Sex Toy Storage | Vellvii DOX", description: "Bedroom sex toy storage by Vellvii DOX - a refined sex toy storage box and adult toy storage hub built around the VDS and DDS docking system." },
   { path: "/collections/products-for-couples", title: "Sex Toy Storage for Couples | Vellvii Pleasure Collection", description: "Refined sex toy storage for couples - the Vellvii Pleasure Collection brings together DOX, Lux, and DOX-compatible products designed for shared discretion." },
@@ -72,11 +72,12 @@ const routes: RouteSeo[] = [
   { path: "/available-now", title: "Available Now | Vellvii", description: "Vellvii products available to order today. Refined intimate wellness pieces ready for dispatch." },
 
   // Static product pages (mirrors Helmet titles so non-JS crawlers see them)
-  { path: "/products/vellvii-dox", title: "Vellvii DOX | Biometric Sex Toy Lock Box & Bedroom Storage", description: "Vellvii DOX - a biometric sex toy lock box and bedroom storage hub built around the VDS and DDS docking system for the Vellvii Pleasure Collection." },
-  { path: "/products/vellvii-lux", title: "Vellvii Lux | Portable Fingerprint-Lock Sex Toy Storage Case", description: "Vellvii Lux - a portable fingerprint-lock sex toy storage case with genuine leather exterior and velvet interior, refined for travel and everyday privacy." },
-  { path: "/products/vellvii-g-vibe", title: "Vellvii G-Vibe | DOX-Compatible Pleasure Piece", description: "Vellvii G-Vibe - a refined pleasure piece designed to dock atop the Vellvii DOX through the VDS suction mount." },
-  { path: "/products/vellvii-evolve", title: "Vellvii Evolve | DOX-Compatible Pleasure Piece", description: "Vellvii Evolve - part of the Vellvii Pleasure Collection, designed to dock atop the Vellvii DOX through the VDS suction mount." },
-  { path: "/products/vellvii-pulse", title: "Vellvii Pulse | DOX-Compatible Pleasure Piece", description: "Vellvii Pulse - part of the Vellvii Pleasure Collection, designed to dock atop the Vellvii DOX through the VDS suction mount." },
+  { path: "/products/vellvii-dox", title: "Vellvii DOX | Biometric Sex Toy Storage Vault with Docking Stations", description: "The Vellvii DOX is a luxury biometric sex toy storage vault with integrated docking stations, fingerprint-lock security, and velvet-lined compartments. Join the waitlist for the next release." },
+  { path: "/products/vellvii-lux", title: "Vellvii Lux | Biometric Sex Toy Storage Bag - Leather, Fingerprint Lock", description: "A genuine leather biometric sex toy storage bag with fingerprint lock and USB charging. Portable, discreet, and designed for those who refuse to compromise. Ships end of June." },
+  { path: "/products/vellvii-g-vibe", title: "Vellvii G-Vibe | Luxury G-Spot Vibrator", description: "Vellvii G-Vibe - a luxury G-spot vibrator designed for the Vellvii ecosystem. Pairs with the Vellvii DOX biometric storage vault. Join the waitlist for availability." },
+  { path: "/products/vellvii-evolve", title: "Vellvii Evolve | Luxury Wearable Vibrator", description: "Vellvii Evolve - a luxury wearable vibrator designed for the Vellvii ecosystem. Pairs with the Vellvii DOX biometric storage vault. Join the waitlist for availability." },
+  { path: "/products/vellvii-pulse", title: "Vellvii Pulse | Luxury Couples Vibrator", description: "Vellvii Pulse - a luxury couples vibrator designed for the Vellvii ecosystem. Pairs with the Vellvii DOX biometric storage vault. Join the waitlist for availability." },
+  { path: "/pages/the-lux", title: "Vellvii Lux | Biometric Leather Travel Case - Fingerprint Locked", description: "A genuine leather biometric travel case with fingerprint-lock security and USB charging. Discreet. Considered. Designed for those who value what they protect." },
 ];
 
 function esc(s: string): string {
