@@ -5,7 +5,7 @@ const CollectionPleasureCollection = () => (
     eyebrow="The Vellvii Pleasure Collection"
     h1="Vellvii Pleasure Collection"
     intro="The Vellvii Pleasure Collection brings together refined storage, discreet design, and premium products created for modern couples. Explore the full collection, from the DOX ecosystem to portable personal storage."
-    seoTitle="Vellvii Pleasure Collection | Luxury Intimate Wellness"
+    seoTitle="Luxury Intimate Wellness Collection - Vibrators & Storage | Vellvii"
     seoDescription="The Vellvii Pleasure Collection - refined products and discreet sex toy storage designed for modern couples and a premium private experience."
     canonical="/collections/pleasure-collection"
     productHandles={[
