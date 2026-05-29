@@ -48,18 +48,18 @@ export const NotifyMePanel = ({ productTitle }: NotifyMePanelProps) => {
   };
 
   return (
-    <section className="py-12 sm:py-16 px-3 sm:px-4 lg:px-8 border-t border-white/10">
+    <section id="join-waitlist" className="py-12 sm:py-16 px-3 sm:px-4 lg:px-8 border-t border-white/10">
       <div className="max-w-2xl mx-auto card-dark rounded-2xl border border-primary/20 p-6 sm:p-8 lg:p-10 text-center">
         <Bell className="w-6 h-6 text-primary mx-auto mb-4" strokeWidth={1.4} />
         <p className="text-primary font-montserrat text-xs sm:text-sm uppercase tracking-[0.2em] mb-2">
           Currently Unavailable
         </p>
         <h2 className="text-2xl sm:text-3xl font-baskerville font-bold text-light-primary mb-3">
-          Notify me when available
+          Join the Waitlist
         </h2>
         <p className="font-montserrat text-sm sm:text-base text-light-secondary leading-relaxed mb-6 max-w-md mx-auto">
           Leave your email and we will let you know the moment {productTitle} is
-          back in the Pleasure Collection.
+          available again.
         </p>
 
         {submitted ? (
