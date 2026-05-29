@@ -204,20 +204,31 @@ const TheLuxLanding = () => {
           </div>
         </section>
 
-        {/* Minimal footer */}
-        <footer className="border-t border-white/10 px-4 sm:px-6 py-6 sm:py-8 text-center">
-          <p className="font-montserrat text-xs text-light-muted">
-            (c) 2026 Vellvii. The Art of 'O'.
-            {" "}
-            <Link to="/privacy-policy" className="hover:text-primary">Privacy</Link>
-            {" - "}
-            <Link to="/terms-of-service" className="hover:text-primary">Terms</Link>
-            {" - "}
-            <Link to="/warranty" className="hover:text-primary">Warranty</Link>
-          </p>
-        </footer>
+        {/* FAQ for SEO */}
+        <section className="px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="font-baskerville text-light-primary text-2xl sm:text-4xl text-center mb-8 sm:mb-10">
+              Questions, Answered
+            </h2>
+            <Accordion type="single" collapsible className="w-full">
+              {faqs.map((f, i) => (
+                <AccordionItem key={i} value={`item-${i}`} className="border-white/10">
+                  <AccordionTrigger className="font-montserrat text-light-primary text-left text-sm sm:text-base hover:text-primary">
+                    {f.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="font-montserrat text-light-secondary text-sm sm:text-base leading-relaxed">
+                    {f.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </section>
+
+        <PrelaunchFooter />
       </div>
     </>
+
   );
 };
 
