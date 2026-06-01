@@ -6,7 +6,7 @@ const SESSION_KEY = "vellvii_age_confirmed_session";
 const TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
 
 // Paths that should NOT be gated (legal / support / deep-link compliance pages)
-const SKIP_PATH_RE = /^\/(privacy-policy|terms-of-service|warranty|contact)(\/|$)/i;
+const SKIP_PATH_RE = /^\/(privacy-policy|terms-of-service|warranty|contact|pages\/the-lux)(\/|$)/i;
 
 const isBot = () => {
   if (typeof navigator === "undefined") return false;
