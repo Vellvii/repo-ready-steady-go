@@ -378,7 +378,7 @@ const ProductDetail = () => {
         const PDP_SEO_OVERRIDES: Record<string, { title: string; description: string; keywords?: string }> = {
           "vellvii-dox": {
             title: "Vellvii DOX | Biometric Sex Toy Storage Vault with Docking Stations",
-            description: "The Vellvii DOX is a luxury biometric sex toy storage vault with integrated docking stations, fingerprint-lock security, and velvet-lined compartments. Join the waitlist for the next release.",
+            description: "The Vellvii DOX is a luxury biometric sex toy vault with integrated docking stations, fingerprint-lock security, and velvet-lined compartments. Join the waitlist.",
             keywords: "sex toy storage, sex toy storage vault, sex toy storage box, sex toy lock box, biometric lock box, adult toy storage, discreet sex toy storage, vellvii dox",
           },
           "vellvii-lux": {

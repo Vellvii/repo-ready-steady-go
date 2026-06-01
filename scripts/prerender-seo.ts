@@ -54,11 +54,11 @@ const routes: RouteSeo[] = [
   { path: "/terms-of-service", title: "Terms of Service | Vellvii", description: "Read Vellvii's terms of service governing the use of our website and products." },
   { path: "/warranty", title: "Lifetime Warranty | Vellvii", description: "Vellvii offers a lifetime warranty on DOX and LUX luxury storage products. All sales are final with no refunds. Coverage includes manufacturing defects." },
   { path: "/warranty/register", title: "Register Your Warranty | Vellvii", description: "Register your Vellvii DOX or LUX product warranty. Required for warranty service." },
-  { path: "/contact", title: "Contact Vellvii | Support & Retail Enquiries", description: "Contact Vellvii for customer support, warranty questions, general enquiries, or retail partnership opportunities." },
+  { path: "/contact", title: "Contact Vellvii | Luxury Intimate Wellness", description: "Get in touch with the Vellvii team. Questions about orders, pre-orders, or the Vellvii DOX waitlist - we are here." },
   { path: "/socials", title: "Follow Vellvii - Socials & Community", description: "Follow Vellvii across Instagram, TikTok, YouTube, Reddit and more. Behind the design, launch updates and the r/Vellvii community." },
 
   // Guides
-  { path: "/guides", title: "Vellvii Guides | Discreet Storage, DOX Docking System & Pleasure Collection", description: "Vellvii Guides on discreet storage, the DOX docking system, Lux vs DOX, and choosing refined intimate wellness products for modern couples." },
+  { path: "/guides", title: "Intimate Wellness Guides | Vellvii", description: "Guides on discreet storage, sex toy care, travel with personal items, and luxury intimate wellness - from the team at Vellvii." },
   { path: "/guides/lux-vs-dox", title: "Vellvii Lux vs DOX | Sex Toy Bag vs Biometric Lock Box", description: "Compare Vellvii Lux portable sex toy storage with the Vellvii DOX biometric sex toy lock box. See which refined storage piece fits your lifestyle." },
   { path: "/guides/how-the-vellvii-dox-docking-system-works", title: "How the Vellvii DOX Docking System Works | Sex Toy Storage with VDS & DDS", description: "How the Vellvii DOX storage and docking system works, including VDS for Vellvii G-Vibe, Evolve and Pulse, and DDS for compatible suction-base products up to 90mm." },
   { path: "/guides/discreet-storage-for-intimate-wellness-products", title: "Sex Toy Storage Guide | Discreet Storage by Vellvii", description: "A guide to discreet sex toy storage at home and on the move. Compare a portable sex toy bag with a refined biometric lock box for the bedroom." },
@@ -72,12 +72,12 @@ const routes: RouteSeo[] = [
   { path: "/available-now", title: "Available Now | Vellvii", description: "Vellvii products available to order today. Refined intimate wellness pieces ready for dispatch." },
 
   // Static product pages (mirrors Helmet titles so non-JS crawlers see them)
-  { path: "/products/vellvii-dox", title: "Vellvii DOX | Biometric Sex Toy Storage Vault with Docking Stations", description: "The Vellvii DOX is a luxury biometric sex toy storage vault with integrated docking stations, fingerprint-lock security, and velvet-lined compartments. Join the waitlist for the next release." },
+  { path: "/products/vellvii-dox", title: "Vellvii DOX | Biometric Sex Toy Storage Vault with Docking Stations", description: "The Vellvii DOX is a luxury biometric sex toy vault with integrated docking stations, fingerprint-lock security, and velvet-lined compartments. Join the waitlist." },
   { path: "/products/vellvii-lux", title: "Vellvii Lux | Biometric Sex Toy Storage Bag - Leather, Fingerprint Lock", description: "A genuine leather biometric sex toy storage bag with fingerprint lock and USB charging. Portable, discreet, and designed for those who refuse to compromise. Ships end of June." },
   { path: "/products/vellvii-g-vibe", title: "Vellvii G-Vibe | Luxury G-Spot Vibrator", description: "Vellvii G-Vibe - a luxury G-spot vibrator designed for the Vellvii ecosystem. Pairs with the Vellvii DOX biometric storage vault. Join the waitlist for availability." },
   { path: "/products/vellvii-evolve", title: "Vellvii Evolve | Luxury Wearable Vibrator", description: "Vellvii Evolve - a luxury wearable vibrator designed for the Vellvii ecosystem. Pairs with the Vellvii DOX biometric storage vault. Join the waitlist for availability." },
   { path: "/products/vellvii-pulse", title: "Vellvii Pulse | Luxury Couples Vibrator", description: "Vellvii Pulse - a luxury couples vibrator designed for the Vellvii ecosystem. Pairs with the Vellvii DOX biometric storage vault. Join the waitlist for availability." },
-  { path: "/pages/the-lux", title: "Vellvii Lux | Biometric Leather Travel Case - Fingerprint Locked", description: "A genuine leather biometric travel case with fingerprint-lock security and USB charging. Discreet. Considered. Designed for those who value what they protect." },
+  { path: "/pages/the-lux", title: "Vellvii Lux | Biometric Leather Travel Case - Fingerprint Locked", description: "A genuine leather biometric travel case with fingerprint-lock security and USB charging. Discreet. Designed for those who value what they protect." },
 ];
 
 function esc(s: string): string {
@@ -100,6 +100,9 @@ function rewriteHead(template: string, r: RouteSeo): string {
   html = html.replace(/<meta\s+name="twitter:title"[^>]*>/, `<meta name="twitter:title" content="${title}">`);
   html = html.replace(/<meta\s+name="twitter:description"[^>]*>/, `<meta name="twitter:description" content="${desc}">`);
   html = html.replace(/<meta\s+name="twitter:image"[^>]*>/, `<meta name="twitter:image" content="${og}">`);
+  // Strip any existing canonical/hreflang from the template, then inject the per-route ones.
+  html = html.replace(/\s*<link\s+rel="canonical"[^>]*>/gi, "");
+  html = html.replace(/\s*<link\s+rel="alternate"\s+hreflang="[^"]*"[^>]*>/gi, "");
   const linkTags = `    <link rel="canonical" href="${url}">\n    <link rel="alternate" hreflang="en" href="${url}">\n    <link rel="alternate" hreflang="x-default" href="${url}">\n`;
   html = html.replace(/<\/head>/, `${linkTags}</head>`);
   return html;

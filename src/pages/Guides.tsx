@@ -101,8 +101,8 @@ const Guides = () => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <SEO
-        title="Vellvii Guides | Storage & Pleasure Collection"
-        description="Vellvii Guides on discreet storage, the DOX docking system, Lux vs DOX, and choosing refined intimate wellness products for modern couples."
+        title="Intimate Wellness Guides | Vellvii"
+        description="Guides on discreet storage, sex toy care, travel with personal items, and luxury intimate wellness - from the team at Vellvii."
         canonical="/guides"
       />
 

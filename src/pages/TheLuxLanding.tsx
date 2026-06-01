@@ -75,7 +75,7 @@ const TheLuxLanding = () => {
     <>
       <SEO
         title="Vellvii Lux | Biometric Leather Travel Case - Fingerprint Locked"
-        description="A genuine leather biometric travel case with fingerprint-lock security and USB charging. Discreet. Considered. Designed for those who value what they protect."
+        description="A genuine leather biometric travel case with fingerprint-lock security and USB charging. Discreet. Designed for those who value what they protect."
         canonical="/pages/the-lux"
         type="website"
         image={images[0]?.url}

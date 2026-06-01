@@ -60,8 +60,8 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <SEO
-        title="Contact Vellvii | Support & Retail Enquiries"
-        description="Contact Vellvii for customer support, warranty questions, general enquiries, or retail partnership opportunities."
+        title="Contact Vellvii | Luxury Intimate Wellness"
+        description="Get in touch with the Vellvii team. Questions about orders, pre-orders, or the Vellvii DOX waitlist - we are here."
         canonical="/contact"
       />
 
