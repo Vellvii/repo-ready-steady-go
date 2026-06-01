@@ -191,7 +191,6 @@ const DoxVideoLanding = () => {
                 muted
                 loop
                 playsInline
-                poster="/uploads/Dox1.jpg"
                 className="w-full h-full object-cover"
               >
                 <source src="/uploads/HEROPAGE.webm" type="video/webm" />
