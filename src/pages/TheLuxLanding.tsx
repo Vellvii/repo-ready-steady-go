@@ -132,14 +132,14 @@ const TheLuxLanding = () => {
         {/* Primary CTA */}
         <section className="px-4 sm:px-6 lg:px-8 mb-14 sm:mb-20">
           <div className="max-w-md mx-auto">
-            <Link to="/products/vellvii-lux">
+            <a href="https://www.vellvii.com/cart/43225533972516:1" rel="noopener noreferrer">
               <Button
                 size="lg"
                 className="btn-premium w-full h-14 sm:h-16 text-base sm:text-lg font-bold tracking-wide whitespace-normal text-center leading-tight"
               >
                 Pre-Order Now - Ships End of June
               </Button>
-            </Link>
+            </a>
           </div>
         </section>
 
@@ -185,7 +185,7 @@ const TheLuxLanding = () => {
         {/* Secondary CTA */}
         <section className="px-4 sm:px-6 lg:px-8 pb-20 sm:pb-28">
           <div className="max-w-md mx-auto text-center">
-            <Link to="/products/vellvii-lux">
+            <a href="https://www.vellvii.com/cart/43225533972516:1" rel="noopener noreferrer">
               <Button
                 size="lg"
                 variant="outline"
@@ -193,7 +193,7 @@ const TheLuxLanding = () => {
               >
                 Reserve Your Lux
               </Button>
-            </Link>
+            </a>
           </div>
         </section>
 
