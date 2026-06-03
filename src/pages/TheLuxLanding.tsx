@@ -140,7 +140,10 @@ const TheLuxLanding = () => {
 
         {/* Primary CTA */}
         <section className="px-4 sm:px-6 lg:px-8 mb-14 sm:mb-20">
-          <div className="max-w-md mx-auto">
+          <div className="max-w-md mx-auto text-center">
+            <p className="font-montserrat text-light-secondary/60 text-xs sm:text-sm tracking-[0.12em] mb-4">
+              $199 — Discreet shipping included
+            </p>
             <a href="https://www.vellvii.com/cart/43225533972516:1" rel="noopener noreferrer">
               <Button
                 size="lg"
@@ -197,6 +200,9 @@ const TheLuxLanding = () => {
         {/* Secondary CTA */}
         <section className="px-4 sm:px-6 lg:px-8 pb-20 sm:pb-28">
           <div className="max-w-md mx-auto text-center">
+            <p className="font-montserrat text-light-secondary/60 text-xs sm:text-sm tracking-[0.12em] mb-4">
+              $199 — Discreet shipping included
+            </p>
             <a href="https://www.vellvii.com/cart/43225533972516:1" rel="noopener noreferrer">
               <Button
                 size="lg"
