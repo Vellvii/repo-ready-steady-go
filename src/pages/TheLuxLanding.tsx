@@ -203,9 +203,12 @@ const TheLuxLanding = () => {
                 variant="outline"
                 className="w-full h-12 sm:h-14 border-primary/40 text-primary hover:bg-primary/10 font-montserrat tracking-wide"
               >
-                Reserve Your Lux
+                Reserve Your Lux - $199
               </Button>
             </a>
+            <p className="font-montserrat text-light-secondary/70 text-xs sm:text-sm mt-3 tracking-wide">
+              $199 + $14.20 shipping · Ships end of June
+            </p>
           </div>
         </section>
 
