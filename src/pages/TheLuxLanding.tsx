@@ -98,9 +98,15 @@ const TheLuxLanding = () => {
             <p className="font-baskerville italic text-primary/90 text-lg sm:text-2xl">
               Fingerprint-locked. Velvet-lined. Quietly extraordinary.
             </p>
-            <p className="font-montserrat text-primary/80 text-sm sm:text-base tracking-wide">
-              $199 · Free shipping · Ships end of June
-            </p>
+            <div className="flex flex-col items-center gap-1 pt-1">
+              <div className="h-px w-12 bg-primary/30" />
+              <p className="font-baskerville text-primary text-3xl sm:text-4xl tracking-wide">
+                $199
+              </p>
+              <p className="font-montserrat text-light-secondary/80 text-xs sm:text-sm tracking-[0.15em] uppercase">
+                + $14.20 shipping · Ships end of June
+              </p>
+            </div>
           </div>
         </section>
 
