@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/SEO";
 import { useShopifyProduct } from "@/hooks/useShopifyProducts";
 import { Truck, Package, Shield, Sparkles, Gift } from "lucide-react";
-import novaAsset from "@/assets/nova.avif.asset.json";
+import { NovaCarousel } from "@/components/lux/NovaGiftBlock";
 import { ScrollHeader } from "@/components/ScrollHeader";
 import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
 import {
@@ -237,12 +237,7 @@ const TheLuxLanding = () => {
             <div className="rounded-2xl border border-primary/20 bg-primary/[0.03] overflow-hidden">
               <div className="grid md:grid-cols-2 gap-0 items-center">
                 <div className="bg-card/40 aspect-square md:aspect-auto md:h-full flex items-center justify-center p-6 sm:p-10">
-                  <img
-                    src={novaAsset.url}
-                    alt="Vellvii Nova - complimentary handheld pleasure piece included free with every Lux"
-                    className="w-full h-full max-h-[480px] object-contain"
-                    loading="lazy"
-                  />
+                  <NovaCarousel heightClass="max-h-[420px]" />
                 </div>
                 <div className="p-6 sm:p-10 text-center md:text-left">
                   <div className="inline-flex items-center gap-2 mb-4">

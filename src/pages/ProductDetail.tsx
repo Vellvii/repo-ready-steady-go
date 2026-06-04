@@ -25,6 +25,7 @@ import { NotifyMePanel } from "@/components/products/NotifyMePanel";
 import { BackToShopCTA } from "@/components/products/BackToShopCTA";
 import { WarrantyLink } from "@/components/products/WarrantyLink";
 import { DockingSystemSection } from "@/components/products/DockingSystemSection";
+import { NovaGiftBlockCompact } from "@/components/lux/NovaGiftBlock";
 import { DoxCompatibleSection } from "@/components/products/DoxCompatibleSection";
 import { RelatedStorageNote } from "@/components/products/RelatedStorageNote";
 import { RelatedCollections } from "@/components/products/RelatedCollections";
@@ -731,6 +732,9 @@ const ProductDetail = () => {
         {pdpContent.keyBenefits && (
           <KeyBenefits benefits={pdpContent.keyBenefits} tagline={pdpContent.tagline} />
         )}
+
+        {/* Lux: complimentary Nova gift block */}
+        {isLuxProduct && <NovaGiftBlockCompact />}
 
         {/* DOX-only: Vellvii Docking System (VDS / DDS) */}
         {pdpContent.docking && <DockingSystemSection info={pdpContent.docking} />}
