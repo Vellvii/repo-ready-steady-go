@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/SEO";
 import { useShopifyProduct } from "@/hooks/useShopifyProducts";
 import { Truck, Package, Shield, Sparkles, Gift } from "lucide-react";
+import novaAsset from "@/assets/nova.avif.asset.json";
 import { ScrollHeader } from "@/components/ScrollHeader";
 import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
 import {
@@ -233,6 +234,58 @@ const TheLuxLanding = () => {
             <p className="font-montserrat text-light-secondary/70 text-xs sm:text-sm mt-3 tracking-wide">
               $199 + $14.20 shipping · Ships end of June
             </p>
+          </div>
+        </section>
+
+        {/* Free Bonus - Nova */}
+        <section className="px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24">
+          <div className="max-w-5xl mx-auto">
+            <div className="rounded-2xl border border-primary/20 bg-primary/[0.03] overflow-hidden">
+              <div className="grid md:grid-cols-2 gap-0 items-center">
+                <div className="bg-card/40 aspect-square md:aspect-auto md:h-full flex items-center justify-center p-6 sm:p-10">
+                  <img
+                    src={novaAsset.url}
+                    alt="Vellvii Nova - complimentary handheld pleasure piece included free with every Lux"
+                    className="w-full h-full max-h-[480px] object-contain"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-6 sm:p-10 text-center md:text-left">
+                  <div className="inline-flex items-center gap-2 mb-4">
+                    <Gift className="w-4 h-4 text-primary" />
+                    <p className="font-montserrat text-primary uppercase tracking-[0.25em] text-[10px] sm:text-xs">
+                      Free Bonus - $50 Value
+                    </p>
+                  </div>
+                  <h2 className="font-baskerville font-bold text-light-primary text-3xl sm:text-4xl md:text-5xl leading-tight mb-4">
+                    Meet the Nova.
+                  </h2>
+                  <p className="font-baskerville italic text-primary/90 text-lg sm:text-xl mb-5">
+                    A $50 gift, included free with every Lux.
+                  </p>
+                  <p className="font-montserrat text-light-secondary leading-relaxed text-sm sm:text-base mb-6">
+                    The Vellvii Nova is a sculpted handheld piece designed as a
+                    quiet companion to the Lux - whisper-quiet, rechargeable,
+                    and finished to the same premium standard. Slipped inside
+                    your Lux, it travels as discreetly as everything else you
+                    keep there.
+                  </p>
+                  <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-2 mb-2">
+                    <p className="font-montserrat text-light-primary text-sm sm:text-base">
+                      <span className="line-through text-light-secondary/60 mr-2">$50</span>
+                      <span className="text-primary font-semibold tracking-wide">FREE</span>
+                    </p>
+                    <span className="hidden sm:inline text-light-secondary/30">·</span>
+                    <p className="font-montserrat text-light-secondary/80 text-xs sm:text-sm tracking-[0.12em] uppercase">
+                      Auto-added with every Lux
+                    </p>
+                  </div>
+                  <p className="font-montserrat text-light-secondary/60 text-xs tracking-wide">
+                    First-run offer. Future Lux releases will not include the Nova gift.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
