@@ -40,21 +40,19 @@ export const NovaCarousel = ({
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center gap-4">
-      <div className="relative w-full flex-1 flex items-center justify-center">
+    <div className="w-full flex flex-col items-center gap-4">
+      <div className={`relative w-full ${heightClass} h-[260px] sm:h-[320px] md:h-[400px]`}>
         {NOVA_IMAGES.map((img, i) => (
           <img
             key={img.src}
             src={img.src}
             alt={img.alt}
             loading="lazy"
-            className={`absolute inset-0 m-auto w-full h-full ${heightClass} object-contain transition-opacity duration-700 ${
+            className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-700 ${
               i === active ? "opacity-100" : "opacity-0"
             }`}
           />
         ))}
-        {/* spacer to give the absolute layer height */}
-        <div className={`w-full ${heightClass} invisible`} aria-hidden />
       </div>
       <div className="flex items-center gap-2">
         {NOVA_IMAGES.map((_, i) => (
