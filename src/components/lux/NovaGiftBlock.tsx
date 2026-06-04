@@ -87,7 +87,7 @@ export const NovaGiftBlockCompact = () => {
               <div className="inline-flex items-center gap-2 mb-3">
                 <Gift className="w-4 h-4 text-primary" />
                 <p className="font-montserrat text-primary uppercase tracking-[0.25em] text-[10px] sm:text-xs">
-                  Free Bonus - $50 Value
+                  Free Bonus - $49 Value
                 </p>
               </div>
               <h2 className="font-baskerville font-bold text-light-primary text-2xl sm:text-3xl md:text-4xl leading-tight mb-3">
@@ -99,7 +99,7 @@ export const NovaGiftBlockCompact = () => {
                 it travels as discreetly as everything else you keep there.
               </p>
               <p className="font-montserrat text-light-primary text-sm sm:text-base">
-                <span className="line-through text-light-secondary/60 mr-2">$50</span>
+                <span className="line-through text-light-secondary/60 mr-2">$49</span>
                 <span className="text-primary font-semibold tracking-wide">FREE</span>
                 <span className="text-light-secondary/40 mx-2">·</span>
                 <span className="text-light-secondary/80 text-xs sm:text-sm tracking-[0.12em] uppercase">
