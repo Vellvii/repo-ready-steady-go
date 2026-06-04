@@ -123,6 +123,24 @@ const TheLuxLanding = () => {
           </section>
         )}
 
+        {/* Free Nova Banner */}
+        <section className="px-4 sm:px-6 lg:px-8 mb-10 sm:mb-14">
+          <div className="max-w-3xl mx-auto">
+            <div className="rounded-2xl border border-primary/20 bg-primary/[0.03] px-6 py-6 sm:px-10 sm:py-8 text-center">
+              <div className="flex items-center justify-center gap-2 mb-3">
+                <Gift className="w-4 h-4 text-primary" />
+                <p className="font-montserrat text-primary uppercase tracking-[0.2em] text-[10px] sm:text-xs">
+                  Complimentary Gift
+                </p>
+                <Gift className="w-4 h-4 text-primary" />
+              </div>
+              <p className="font-baskerville italic text-light-primary text-lg sm:text-2xl leading-snug">
+                Every Lux comes with a complimentary <span className="text-primary not-italic font-semibold">Nova</span> — a $50 gift, yours free.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Body copy */}
         <section className="px-4 sm:px-6 lg:px-8 mb-12 sm:mb-16">
           <div className="max-w-2xl mx-auto">
