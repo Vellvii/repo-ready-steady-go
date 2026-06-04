@@ -1,18 +1,15 @@
-## Goal
-Skip the age verification modal on `/pages/the-lux` only. All other routes (including `/`) keep the gate.
+## Problem
+On /pages/the-lux, the $199 price appears three times in quick succession around the primary CTA button:
+1. "\$199 — Discreet shipping included" (small text above the button)
+2. "Pre-Order Now - \$199 - Ships End of June" (the CTA button itself)
+3. "\$199 + \$14.20 shipping · Ships end of June" (small text below the button)
+
+This repetition looks cluttered and undermines the premium feel.
 
 ## Change
-**File:** `src/components/AgeGateModal.tsx`
+In `src/pages/TheLuxLanding.tsx`, edit the **Primary CTA** section only:
+- Remove the `<p>` line immediately above the CTA button that reads: "$199 — Discreet shipping included"
+- Remove the `<p>` line immediately below the CTA button that reads: "$199 + $14.20 shipping · Ships end of June"
+- Leave the CTA button label, link, and styling completely untouched.
 
-Update the `SKIP_PATH_RE` constant to also match `/pages/the-lux`:
-
-```ts
-const SKIP_PATH_RE = /^\/(privacy-policy|terms-of-service|warranty|contact|pages\/the-lux)(\/|$)/i;
-```
-
-That's the only change. The existing bypass logic already short-circuits before `setOpen(true)`, so no other code needs to move.
-
-## Out of scope
-- No changes to the gate on any other route
-- No changes to storage keys, TTL, or styling
-- No routing changes
+No other elements, sections, or styles on the page will be changed.

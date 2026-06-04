@@ -160,9 +160,6 @@ const TheLuxLanding = () => {
         {/* Primary CTA */}
         <section className="px-4 sm:px-6 lg:px-8 mb-14 sm:mb-20">
           <div className="max-w-md mx-auto text-center">
-            <p className="font-montserrat text-light-secondary/60 text-xs sm:text-sm tracking-[0.12em] mb-4">
-              $199 — Discreet shipping included
-            </p>
             <a href="https://www.vellvii.com/cart/43225533972516:1" rel="noopener noreferrer">
               <Button
                 size="lg"
@@ -171,9 +168,6 @@ const TheLuxLanding = () => {
                 Pre-Order Now - $199 - Ships End of June
               </Button>
             </a>
-            <p className="font-montserrat text-light-secondary/70 text-xs sm:text-sm text-center mt-3 tracking-wide">
-              $199 + $14.20 shipping · Ships end of June
-            </p>
           </div>
         </section>
 
