@@ -74,8 +74,8 @@ const TheLuxLanding = () => {
   return (
     <>
       <SEO
-        title="Vellvii Lux | Biometric Leather Travel Case - Fingerprint Locked"
-        description="A genuine leather biometric travel case with fingerprint-lock security and USB charging. Discreet. Designed for those who value what they protect."
+        title="The Lux - Biometric Leather Case + Free Nova ($50 Value)"
+        description="Pre-order the Vellvii Lux biometric leather case and receive a free Nova ($50 value). Fingerprint-locked, velvet-lined, with USB charging. Ships end of June."
         canonical="/pages/the-lux"
         type="website"
         image={images[0]?.url}
