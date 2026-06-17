@@ -1,11 +1,11 @@
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Play, CheckCircle2, Loader2, Sparkles, Heart, ArrowRight, Users } from "lucide-react";
+import { Play, CheckCircle2, Loader2, Heart, ArrowRight, Users } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SEO } from "@/components/SEO";
 import { NavMenuButton } from "@/components/navigation/LuxuryNavDrawer";
 import { PrelaunchFooter } from "@/components/prelaunch/PrelaunchFooter";
-import { LuxCountdown } from "@/components/lux/LuxPreOrderPanel";
+
 import { Milestones } from "@/components/home/Milestones";
 import { HomeFAQ, homeFAQs } from "@/components/home/HomeFAQ";
 import { FounderNote } from "@/components/home/FounderNote";
@@ -237,13 +237,13 @@ const DoxVideoLanding = () => {
           </motion.div>
         </section>
 
-        {/* [3] Lux Pre-Order Hero */}
+        {/* [3] Lux Hero - Available Now */}
         <section className="px-4 mb-12 sm:mb-16">
           <div className="max-w-4xl mx-auto text-center space-y-6 sm:space-y-8">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/40 bg-primary/10">
-              <Sparkles className="w-3.5 h-3.5 text-primary" />
-              <span className="font-montserrat text-[10px] sm:text-xs uppercase tracking-[0.25em] text-primary">
-                First-Run Offer
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/40 bg-primary/[0.06] backdrop-blur-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              <span className="font-montserrat text-[10px] sm:text-xs uppercase tracking-[0.3em] text-primary">
+                Available Now
               </span>
             </div>
 
@@ -251,10 +251,10 @@ const DoxVideoLanding = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
-              className="space-y-3"
+              className="space-y-4"
             >
               <h1 className="sr-only">
-                Luxury Biometric Sex Toy Storage - The Art of Intentional Pleasure
+                Vellvii Lux - Luxury Biometric Leather Case, Available Now
               </h1>
               <p
                 aria-hidden="true"
@@ -266,15 +266,13 @@ const DoxVideoLanding = () => {
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
-                  animation: "shimmer-text 3s ease-in-out infinite",
+                  animation: "shimmer-text 4s ease-in-out infinite",
                 }}
               >
-                The Vellvii Lux is here.
+                The Vellvii Lux.
               </p>
               <p className="text-base sm:text-lg md:text-xl text-light-secondary font-montserrat max-w-2xl mx-auto leading-relaxed">
-                Ships end of June. The current Lux first-run offer includes a complimentary
-                Vellvii Nova - our handheld suction piece. Future Lux runs are planned, but the
-                Nova gift will not be included after this first run.
+                The biometric leather case, in your hands. Every Lux ordered today includes a complimentary Vellvii Nova - our handheld suction piece - while the first-run gift lasts.
               </p>
             </motion.div>
 
@@ -285,33 +283,24 @@ const DoxVideoLanding = () => {
               }
             `}</style>
 
-            {/* Countdown */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3 }}
-              className="max-w-md mx-auto"
-            >
-              <LuxCountdown />
-            </motion.div>
-
             {/* CTA */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: 0.3 }}
+              className="pt-2"
             >
               <Link
                 to="/products/vellvii-lux"
                 className="inline-block relative group"
               >
                 <motion.div
-                  className="absolute -inset-1 rounded-2xl opacity-75 blur-lg"
+                  className="absolute -inset-1 rounded-2xl opacity-60 blur-lg"
                   style={{
                     background: "linear-gradient(135deg, hsl(40 70% 75%), hsl(350 50% 60%))",
                   }}
-                  animate={{ opacity: [0.5, 0.9, 0.5] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  animate={{ opacity: [0.4, 0.75, 0.4] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 />
                 <div
                   className="relative px-10 sm:px-14 py-4 sm:py-6 rounded-2xl font-bold text-base sm:text-xl text-black tracking-wide"
@@ -319,15 +308,16 @@ const DoxVideoLanding = () => {
                     background: "linear-gradient(135deg, hsl(40 70% 75%), hsl(40 65% 60%))",
                   }}
                 >
-                  View Vellvii Lux
+                  Shop the Lux
                 </div>
               </Link>
-              <p className="mt-4 text-xs sm:text-sm text-light-muted font-montserrat">
-                Ships end of June
+              <p className="mt-4 text-[11px] sm:text-xs text-light-muted font-montserrat uppercase tracking-[0.25em]">
+                In stock - ships worldwide
               </p>
             </motion.div>
           </div>
         </section>
+
 
         {/* [4] DOX Video Section */}
         <section className="px-4 mb-12 sm:mb-16 border-t border-white/5 pt-12 sm:pt-16">
