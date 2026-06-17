@@ -107,7 +107,7 @@ export const SEO = ({
             '@type': 'Offer',
             price: productData.price,
             priceCurrency: productData.currency || 'USD',
-            availability: `https://schema.org/${productData.availability || 'PreOrder'}`,
+            availability: `https://schema.org/${productData.availability || 'InStock'}`,
             itemCondition: `https://schema.org/${productData.itemCondition || 'NewCondition'}`,
             ...(productData.priceValidUntil && { priceValidUntil: productData.priceValidUntil }),
             url: productData.url
