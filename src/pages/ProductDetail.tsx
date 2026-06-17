@@ -30,14 +30,7 @@ import { DoxCompatibleSection } from "@/components/products/DoxCompatibleSection
 import { RelatedStorageNote } from "@/components/products/RelatedStorageNote";
 import { RelatedCollections } from "@/components/products/RelatedCollections";
 import { getPdpContent, getRelatedCollections, FALLBACK_FAQS, FALLBACK_CARE } from "@/lib/pdpContent";
-import {
-  LuxPreOrderBanner,
-  LuxFreeGiftBadge,
-  LuxCountdown,
-  LuxStockCounter,
-  LuxUrgencyBlock,
-  LuxShippingClarity,
-} from "@/components/lux/LuxPreOrderPanel";
+import { LuxFreeGiftBadge } from "@/components/lux/LuxPreOrderPanel";
 import { ScrollHeader } from "@/components/ScrollHeader";
 import { Breadcrumbs } from "@/components/navigation/Breadcrumbs";
 import { getLastCollection } from "@/lib/collectionContext";
@@ -348,9 +341,7 @@ const ProductDetail = () => {
         const reviewAggregate = parseReviewMetafields(product);
         const priceAmount = variant ? parseFloat(variant.price.amount) : parseFloat(product.node.priceRange.minVariantPrice.amount);
         const currency = variant?.price.currencyCode || product.node.priceRange.minVariantPrice.currencyCode || "USD";
-        const availability: "InStock" | "OutOfStock" | "PreOrder" = isLuxProduct
-          ? "PreOrder"
-          : variant?.availableForSale
+        const availability: "InStock" | "OutOfStock" | "PreOrder" = variant?.availableForSale
           ? "InStock"
           : "OutOfStock";
         const skuTail = variant?.id ? variant.id.split("/").pop() : undefined;
@@ -367,8 +358,8 @@ const ProductDetail = () => {
           { question: "Is Vellvii Lux a portable biometric storage case?", answer: "Yes. Lux is a portable biometric storage case - a compact, fingerprint-lock companion built for everyday personal storage and travel." },
           { question: "How is the Lux different from the Vellvii DOX?", answer: "Vellvii Lux is the more portable storage companion, designed with the feel of a refined toiletries-style case and secured with fingerprint access. Vellvii DOX is the larger, sturdier storage system, designed as a more substantial piece for the bedroom." },
           { question: "How should I care for Vellvii Lux?", answer: "Follow the care instructions included with your product, store the case in a clean, dry place, and avoid extreme heat, direct sunlight, and unnecessary exposure. If you are unsure, contact Vellvii support." },
-          { question: "When does the Vellvii Lux ship?", answer: "Pre-orders ship by the end of June 2026. Reserve now to secure your unit from the current first-run offer." },
-          { question: "Is the Vellvii Nova included with Lux?", answer: "The complimentary Vellvii Nova is included with the current Lux first-run offer. Future Lux runs are planned, but the Nova gift will not be included after this first run." },
+          { question: "When does the Vellvii Lux ship?", answer: "The Vellvii Lux is available now and ships within standard processing times in plain, unbranded packaging." },
+          { question: "Is the Vellvii Nova included with Lux?", answer: "The complimentary Vellvii Nova is included as part of the current Lux offer. Promotional inclusions may change without notice." },
           { question: "What is the Vellvii Lux warranty?", answer: "All Vellvii products are covered by our authorized retailer warranty when registered within 7 days of receipt. Repair or replacement only - no refunds on final sales." },
           { question: "Can I return the Vellvii Lux?", answer: "All sales are final. Warranty covers manufacturing defects with repair or replacement only. Register your warranty within 7 days of delivery." },
           { question: "Is checkout discreet?", answer: "Yes - Vellvii ships in unbranded packaging with discreet billing descriptors. Privacy is core to the product and the experience." },
@@ -384,7 +375,7 @@ const ProductDetail = () => {
           },
           "vellvii-lux": {
             title: "Vellvii Lux | Biometric Sex Toy Storage Bag - Leather, Fingerprint Lock",
-            description: "A genuine leather biometric sex toy storage bag with fingerprint lock and USB charging. Portable, discreet, and designed for those who refuse to compromise. Ships end of June.",
+            description: "A genuine leather biometric sex toy storage bag with fingerprint lock and USB charging. Portable, discreet, and available now.",
             keywords: "sex toy bag, portable sex toy storage, sex toy storage case, sex toy lock box, biometric lock box, fingerprint lock box, discreet sex toy storage, vellvii lux",
           },
           "vellvii-g-vibe": {
@@ -429,7 +420,7 @@ const ProductDetail = () => {
               brand: "Vellvii",
               sku: skuTail,
               images: allImageUrls,
-              priceValidUntil: isLuxProduct ? "2026-06-30" : undefined,
+              priceValidUntil: undefined,
               itemCondition: "NewCondition",
               url: `/products/${handle}`,
               aggregateRating: reviewAggregate ?? undefined,
@@ -549,11 +540,6 @@ const ProductDetail = () => {
                   <h1 className={`font-baskerville font-bold text-light-primary leading-tight break-words ${isLuxProduct ? "text-xl sm:text-3xl md:text-4xl lg:text-5xl mb-2 sm:mb-4" : "text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-3 sm:mb-4"}`}>
                     {h1Title}
                   </h1>
-                  {isLuxProduct && (
-                    <div className="mb-3 sm:mb-4">
-                      <LuxPreOrderBanner />
-                    </div>
-                  )}
                   <p className={`font-bold gradient-text font-montserrat ${isLuxProduct ? "text-2xl sm:text-4xl" : "text-3xl sm:text-4xl"}`}>
                     ${price.toFixed(0)}
                   </p>
@@ -564,7 +550,7 @@ const ProductDetail = () => {
                   )}
                 </div>
 
-                {isLuxProduct && <LuxCountdown />}
+
 
                 {!isLuxProduct && (
                     <div className="prose max-w-none min-w-0 overflow-hidden">
@@ -663,7 +649,10 @@ const ProductDetail = () => {
                   ) : !variant?.availableForSale && !isLuxProduct ? (
                     "Join the Waitlist"
                   ) : isLuxProduct ? (
-                    "Secure My Pre-Order"
+                    <>
+                      <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                      Add to Cart
+                    </>
                   ) : (
                     <>
                       <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
@@ -709,10 +698,6 @@ const ProductDetail = () => {
 
                 {isLuxProduct && (
                   <>
-                    {/* Live inventory requires `unauthenticated_read_product_inventory` Storefront scope; falls back to total units. */}
-                    <LuxStockCounter quantityAvailable={undefined} />
-                    <LuxUrgencyBlock />
-                    <LuxShippingClarity />
                     <div className="prose max-w-none min-w-0 overflow-hidden pt-2">
                       <p className="text-light-secondary leading-relaxed whitespace-pre-line break-words font-montserrat text-sm sm:text-base lg:text-lg">
                         {bodyDescription}
@@ -786,7 +771,7 @@ const ProductDetail = () => {
           onAddToCart={handleAddToCart}
           isLoading={cartLoading}
           isAvailable={variant?.availableForSale}
-          ctaLabel={isLuxProduct ? "Secure My Pre-Order" : undefined}
+          ctaLabel={undefined}
         />
 
         {/* Image Lightbox */}
