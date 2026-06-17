@@ -46,11 +46,11 @@ const TheLuxLanding = () => {
   const faqs = [
     {
       q: "Is the Nova really free?",
-      a: "Yes. Every Lux ordered through this page automatically includes a Vellvii Nova - a $49 gift - added to your shipment at no extra cost. Limited to the first production run.",
+      a: "Yes. Every Lux ordered through this page automatically includes a Vellvii Nova - a $49 gift - added to your shipment at no extra cost while the offer is live.",
     },
     {
       q: "When does the Vellvii Lux ship?",
-      a: "Pre-orders ship at the end of June. Reserve yours now to secure a place in the first production run.",
+      a: "The Vellvii Lux is available now and ships within standard processing times in plain, unbranded packaging.",
     },
     {
       q: "How does the biometric lock work?",
@@ -78,7 +78,7 @@ const TheLuxLanding = () => {
     <>
       <SEO
         title="The Lux + Free $49 Nova - Biometric Leather Case"
-        description="Reserve the Vellvii Lux biometric leather case and receive a free Nova - a $49 gift - with every order on this page. Fingerprint-locked, velvet-lined, USB charging. Ships end of June."
+        description="The Vellvii Lux biometric leather case - available now with a free Nova ($49 gift) included with every order on this page. Fingerprint-locked, velvet-lined, USB charging."
         canonical="/pages/the-lux"
         type="website"
         image={images[0]?.url}
@@ -107,7 +107,7 @@ const TheLuxLanding = () => {
         <section className="px-4 sm:px-6 lg:px-8 pt-6 sm:pt-10 pb-10 sm:pb-14">
           <div className="max-w-3xl mx-auto text-center space-y-5 sm:space-y-7">
             <p className="font-montserrat text-primary uppercase tracking-[0.25em] text-[10px] sm:text-xs">
-              Reserve Now - Ships End of June
+              Available Now - Ships in Plain Packaging
             </p>
             <h1 className="font-baskerville font-bold text-light-primary text-3xl sm:text-5xl md:text-6xl leading-tight">
               The Lux. Plus a $49 Nova, on us.
@@ -121,7 +121,7 @@ const TheLuxLanding = () => {
                 $199
               </p>
               <p className="font-montserrat text-light-secondary/80 text-xs sm:text-sm tracking-[0.12em] uppercase">
-                Includes free Nova - a $49 gift · + $14.20 shipping · Ships end of June
+                Includes free Nova - a $49 gift · + $14.20 shipping · Available now
               </p>
             </div>
           </div>
@@ -169,11 +169,11 @@ const TheLuxLanding = () => {
                 size="lg"
                 className="btn-premium w-full h-14 sm:h-16 text-base sm:text-lg font-bold tracking-wide whitespace-normal text-center leading-tight"
               >
-                Reserve the Lux + Free Nova - $199
+                Buy the Lux + Free Nova - $199
               </Button>
             </a>
             <p className="font-montserrat text-light-secondary/70 text-xs sm:text-sm mt-3 tracking-wide">
-              $49 Nova included free · $14.20 shipping · Ships end of June
+              $49 Nova included free · $14.20 shipping · Available now
             </p>
           </div>
         </section>
@@ -237,7 +237,7 @@ const TheLuxLanding = () => {
                     </p>
                   </div>
                   <p className="font-montserrat text-light-secondary/60 text-xs tracking-wide">
-                    First-run offer. Only included with Lux orders placed on this page.
+                    Limited-time offer. Only included with Lux orders placed on this page.
                   </p>
                 </div>
               </div>
@@ -277,7 +277,7 @@ const TheLuxLanding = () => {
                 variant="outline"
                 className="w-full h-12 sm:h-14 border-primary/40 text-primary hover:bg-primary/10 font-montserrat tracking-wide"
               >
-                Reserve Your Lux + Free Nova
+                Buy Your Lux + Free Nova
               </Button>
             </a>
             <p className="font-montserrat text-light-secondary/70 text-xs sm:text-sm mt-3 tracking-[0.12em] uppercase">
