@@ -47,7 +47,7 @@ export const LuxStickyOfferBar = ({ href }: LuxStickyOfferBarProps) => {
               size="default"
               className="btn-premium h-11 px-4 sm:px-6 text-xs sm:text-sm font-semibold whitespace-nowrap"
             >
-              Pre-Order
+              Buy Now
             </Button>
           </a>
         </div>

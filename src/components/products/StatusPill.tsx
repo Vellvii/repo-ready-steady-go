@@ -56,7 +56,7 @@ const STATUS_STYLES: Record<ProductStatus, { label: string; classes: string }> =
  * is genuinely ready - when in doubt, fall back to "Available Now"
  * (per brand guidance, avoid "Ready to Ship" unless certain).
  */
-const PRE_ORDER_HANDLES = new Set(["vellvii-lux"]);
+const PRE_ORDER_HANDLES = new Set<string>();
 
 export const getProductStatus = (
   handle: string | undefined,

@@ -3,12 +3,10 @@ import { useShopifyProducts } from "@/hooks/useShopifyProducts";
 import type { ShopifyProduct } from "@/lib/shopify";
 
 /** Handles that are launch / pre-order regardless of variant availability. */
-export const PRE_ORDER_HANDLES = new Set<string>(["vellvii-lux"]);
+export const PRE_ORDER_HANDLES = new Set<string>();
 
 /** Optional ETA copy shown next to a Pre-Order badge. */
-export const ETA_LABELS: Record<string, string> = {
-  "vellvii-lux": "Ships Aug 2026",
-};
+export const ETA_LABELS: Record<string, string> = {};
 
 export type AvailabilityStatus = "in-stock" | "pre-order" | "sold-out";
 
