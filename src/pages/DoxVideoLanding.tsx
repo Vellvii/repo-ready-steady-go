@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Play, CheckCircle2, Loader2, Sparkles, Heart, ArrowRight, Users } from "lucide-react";
+import { Play, CheckCircle2, Loader2, Heart, ArrowRight, Users } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SEO } from "@/components/SEO";
 import { NavMenuButton } from "@/components/navigation/LuxuryNavDrawer";
