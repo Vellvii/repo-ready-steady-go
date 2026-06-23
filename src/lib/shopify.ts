@@ -225,10 +225,15 @@ const PRODUCT_FIELDS = `
           currencyCode
         }
         availableForSale
+        image {
+          url
+          altText
+        }
         selectedOptions {
           name
           value
         }
+
       }
     }
   }
