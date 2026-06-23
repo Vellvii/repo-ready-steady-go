@@ -512,10 +512,14 @@ const ProductDetail = () => {
                   >
                     {selectedImage ? (
                       <>
+                        {/* Layered cross-fade: previous image fades out as new one fades in.
+                            Re-keyed on URL so each swap (color change or thumbnail click) animates. */}
                         <img
+                          key={selectedImage.url}
                           src={selectedImage.url}
                           alt={altFor(selectedImageIndex, selectedImage.altText)}
-                          className="h-auto max-h-[70vh] w-full max-w-full object-contain sm:h-full sm:max-h-none"
+                          className="h-auto max-h-[70vh] w-full max-w-full object-contain sm:h-full sm:max-h-none animate-[fade-in_0.35s_ease-out]"
+                          style={{ transform: "scale(1)", transformOrigin: "center" }}
                         />
                         <StatusPill
                           status={getProductStatus(handle, !!variant?.availableForSale)}

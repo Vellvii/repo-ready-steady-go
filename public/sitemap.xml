@@ -3,37 +3,37 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://vellvii.com/</loc>
-    <lastmod>2026-05-18</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://vellvii.com/showcase</loc>
-    <lastmod>2026-05-18</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://vellvii.com/prelaunch</loc>
-    <lastmod>2026-05-18</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://vellvii.com/shop</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://vellvii.com/products/vellvii-dox</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://vellvii.com/products/vellvii-lux</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -54,55 +54,55 @@
   </url>
   <url>
     <loc>https://vellvii.com/products/vellvii-g-vibe</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://vellvii.com/products/vellvii-evolve</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://vellvii.com/products/vellvii-pulse</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://vellvii.com/collections/dox-compatible-products</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://vellvii.com/collections/pleasure-collection</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://vellvii.com/collections/discreet-storage</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://vellvii.com/collections/portable-storage</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://vellvii.com/collections/bedroom-storage</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://vellvii.com/collections/products-for-couples</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -186,25 +186,25 @@
   </url>
   <url>
     <loc>https://vellvii.com/warranty</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://vellvii.com/warranty/register</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://vellvii.com/privacy-policy</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://vellvii.com/terms-of-service</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

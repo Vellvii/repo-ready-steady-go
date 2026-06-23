@@ -51,7 +51,29 @@ const GuideBestSexToyStorageBox = () => {
         <li><strong>Right-sized for your collection.</strong> Too small feels cramped, too large feels excessive. The best size leaves a little room to grow.</li>
         <li><strong>Considered interior organization.</strong> A movable tray or considered lining helps each piece live in its own place.</li>
         <li><strong>Portable or bedroom-focused.</strong> A portable sex toy bag travels with you, a bedroom storage hub stays put.</li>
+        <li><strong>Material quality.</strong> Genuine leather or faux leather over plastic. Velvet-lined interiors over foam. The box should feel as considered as what it holds.</li>
+        <li><strong>Charging integration.</strong> If the collection needs charging, an internal USB hub keeps cables off the bedside table.</li>
       </ul>
+
+      <h2 className={H2}>Quick comparison: portable vs bedroom storage</h2>
+      <div className="my-6 overflow-x-auto">
+        <table className="w-full text-sm border border-white/10 rounded-lg overflow-hidden">
+          <thead className="bg-white/5">
+            <tr>
+              <th className="text-left p-3 font-baskerville text-light-primary">Feature</th>
+              <th className="text-left p-3 font-baskerville text-light-primary">Portable sex toy bag</th>
+              <th className="text-left p-3 font-baskerville text-light-primary">Bedroom sex toy storage box</th>
+            </tr>
+          </thead>
+          <tbody className="text-light-secondary">
+            <tr className="border-t border-white/10"><td className="p-3">Best for</td><td className="p-3">Travel, hotels, everyday personal use</td><td className="p-3">A permanent, considered home for the collection</td></tr>
+            <tr className="border-t border-white/10"><td className="p-3">Format</td><td className="p-3">Soft case, fingerprint-lock</td><td className="p-3">Sturdy box, biometric lock, optional docking on top</td></tr>
+            <tr className="border-t border-white/10"><td className="p-3">Capacity</td><td className="p-3">A few pieces</td><td className="p-3">A full collection with room to grow</td></tr>
+            <tr className="border-t border-white/10"><td className="p-3">Charging</td><td className="p-3">Internal USB-A ports</td><td className="p-3">Internal USB-A ports plus surface docking</td></tr>
+            <tr className="border-t border-white/10"><td className="p-3">Vellvii option</td><td className="p-3"><Link to="/products/vellvii-lux" className="text-primary hover:underline">Vellvii Lux</Link></td><td className="p-3"><Link to="/products/vellvii-dox" className="text-primary hover:underline">Vellvii DOX</Link></td></tr>
+          </tbody>
+        </table>
+      </div>
 
       <h2 className={H2}>Privacy and discretion</h2>
       <p>
