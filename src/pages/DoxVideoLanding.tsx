@@ -320,6 +320,19 @@ const DoxVideoLanding = () => {
         </section>
 
 
+        {/* [3.5] DOX Scroll Story - Apple-style pinned reveal */}
+        <section className="mb-12 sm:mb-16 border-t border-white/5 pt-12 sm:pt-16 px-4 md:px-0">
+          <div className="text-center mb-8 sm:mb-12 px-4">
+            <p className="text-primary font-montserrat text-xs sm:text-sm uppercase tracking-[0.2em] mb-2">
+              The DOX, in detail
+            </p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-baskerville font-bold text-light-primary">
+              Four reasons it earns the <span className="gradient-text">nightstand</span>
+            </h2>
+          </div>
+          <DoxScrollStory />
+        </section>
+
         {/* [4] DOX Video Section */}
         <section className="px-4 mb-12 sm:mb-16 border-t border-white/5 pt-12 sm:pt-16">
           <div className="max-w-4xl mx-auto">
