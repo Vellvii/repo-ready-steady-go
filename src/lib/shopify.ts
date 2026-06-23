@@ -78,11 +78,15 @@ export interface ShopifyProduct {
             currencyCode: string;
           };
           availableForSale: boolean;
-          
+          image?: {
+            url: string;
+            altText: string | null;
+          } | null;
           selectedOptions: Array<{
             name: string;
             value: string;
           }>;
+
         };
       }>;
     };
