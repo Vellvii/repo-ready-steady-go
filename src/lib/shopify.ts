@@ -78,11 +78,15 @@ export interface ShopifyProduct {
             currencyCode: string;
           };
           availableForSale: boolean;
-          
+          image?: {
+            url: string;
+            altText: string | null;
+          } | null;
           selectedOptions: Array<{
             name: string;
             value: string;
           }>;
+
         };
       }>;
     };
@@ -221,10 +225,15 @@ const PRODUCT_FIELDS = `
           currencyCode
         }
         availableForSale
+        image {
+          url
+          altText
+        }
         selectedOptions {
           name
           value
         }
+
       }
     }
   }
