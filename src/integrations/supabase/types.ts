@@ -461,6 +461,39 @@ export type Database = {
         }
         Relationships: []
       }
+      user_products: {
+        Row: {
+          added_at: string | null
+          barcode: string
+          id: string
+          image_url: string | null
+          product_handle: string
+          product_title: string
+          user_id: string
+          variant_title: string | null
+        }
+        Insert: {
+          added_at?: string | null
+          barcode?: string
+          id?: string
+          image_url?: string | null
+          product_handle?: string
+          product_title?: string
+          user_id: string
+          variant_title?: string | null
+        }
+        Update: {
+          added_at?: string | null
+          barcode?: string
+          id?: string
+          image_url?: string | null
+          product_handle?: string
+          product_title?: string
+          user_id?: string
+          variant_title?: string | null
+        }
+        Relationships: []
+      }
       vivian_chats: {
         Row: {
           created_at: string
