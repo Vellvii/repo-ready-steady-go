@@ -147,14 +147,7 @@ const ProductDetail = () => {
         .filter((u): u is string => !!u && !selectedColorImageUrls.has(u))
     );
 
-    if (selectedColorImageUrls.size > 0) {
-      // Strict: only show images explicitly assigned to the selected color variant.
-      return allImages.filter((img) =>
-        selectedColorImageUrls.has(img.node.url)
-      );
-    }
-
-    // --- 2. Heuristic fallback (alt text / filename) ---
+    // --- 2. Heuristic alt text / filename matching ---
     const imageMatchesColor = (img: typeof allImages[0], color: string) => {
       const altText = img.node.altText?.toLowerCase() || '';
       const url = img.node.url?.toLowerCase() || '';
@@ -177,11 +170,18 @@ const ProductDetail = () => {
       );
     };
 
-    const colorMatchedImages = allImages.filter((img) =>
-      imageMatchesColor(img, selectedColor)
-    );
-    if (colorMatchedImages.length > 0) return colorMatchedImages;
+    // Combine: variant-assigned image(s) for this color + any gallery images
+    // whose alt text / filename matches this color. Exclude images explicitly
+    // assigned to OTHER color variants.
+    const matched = allImages.filter((img) => {
+      if (selectedColorImageUrls.has(img.node.url)) return true;
+      if (otherColorImageUrls.has(img.node.url)) return false;
+      return imageMatchesColor(img, selectedColor);
+    });
 
+    if (matched.length > 0) return matched;
+
+    // Final fallback: neutral images that don't reference any other color.
     const otherColors = (product.node.options
       ?.find((opt) => opt.name.toLowerCase() === 'color')
       ?.values || [])
