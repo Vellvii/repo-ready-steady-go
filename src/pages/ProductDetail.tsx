@@ -148,16 +148,10 @@ const ProductDetail = () => {
     );
 
     if (selectedColorImageUrls.size > 0) {
-      const primary = allImages.filter((img) =>
+      // Strict: only show images explicitly assigned to the selected color variant.
+      return allImages.filter((img) =>
         selectedColorImageUrls.has(img.node.url)
       );
-      const extras = allImages.filter(
-        (img) =>
-          !selectedColorImageUrls.has(img.node.url) &&
-          !otherColorImageUrls.has(img.node.url)
-      );
-      // Preserve order: variant-assigned first, then any unassigned shared gallery images.
-      return [...primary, ...extras];
     }
 
     // --- 2. Heuristic fallback (alt text / filename) ---
