@@ -37,7 +37,7 @@ const HomeCinematicLab = () => {
           headline="Discreet by Nature"
           body="Biometric locking, fully lined storage, and a docking system built for two types of intimacy: the one you share, and the one you keep to yourself."
           mainImage="/uploads/Dox_white_open_plugged_in_content2.png"
-          sideImages={["/uploads/Red_Dox_charge_inside.png", "/uploads/dox_with_toys_2.jpg"]}
+          sideImages={["/uploads/dox_with_toys_2.jpg", "/uploads/Dox4.jpg"]}
           reverse
         />
 

@@ -1,20 +1,33 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useShopifyProduct } from "@/hooks/useShopifyProducts";
 
 // Placeholder header video — swap for the real cinematic footage when ready.
 const HERO_VIDEO = "/uploads/HEROPAGE.webm";
 
-const models = [
-  { name: "DOX", image: "/uploads/Dox1.jpg" },
-  { name: "LUX", image: "/uploads/lux-bag-final-v4.jpg" },
+const modelHandles = [
+  { name: "DOX", handle: "vellvii-dox", fallbackImage: "/uploads/Dox1.jpg" },
+  { name: "LUX", handle: "vellvii-lux", fallbackImage: "/uploads/lux-bag-final-v4.jpg" },
 ];
+
+const ModelCard = ({ handle, name, fallbackImage }: { handle: string; name: string; fallbackImage: string }) => {
+  const { data: product } = useShopifyProduct(handle);
+  const image = product?.node.images.edges[0]?.node.url ?? fallbackImage;
+
+  return (
+    <div className="text-center">
+      <img src={image} alt={name} className="h-16 w-28 object-cover" />
+      <span className="font-baskerville text-lg text-white">{name}</span>
+    </div>
+  );
+};
 
 export const CinematicHero = () => {
   const [index, setIndex] = useState(0);
-  const model = models[index];
+  const model = modelHandles[index];
 
   const cycle = (dir: 1 | -1) => {
-    setIndex((prev) => (prev + dir + models.length) % models.length);
+    setIndex((prev) => (prev + dir + modelHandles.length) % modelHandles.length);
   };
 
   return (
@@ -33,10 +46,7 @@ export const CinematicHero = () => {
         >
           <ChevronLeft className="h-6 w-6" />
         </button>
-        <div className="text-center">
-          <img src={model.image} alt={model.name} className="h-16 w-28 object-cover" />
-          <span className="font-baskerville text-lg text-white">{model.name}</span>
-        </div>
+        <ModelCard handle={model.handle} name={model.name} fallbackImage={model.fallbackImage} />
         <button
           onClick={() => cycle(1)}
           aria-label="Next model"
