@@ -57,6 +57,7 @@ import GuideBiometricLockBoxForSexToys from "./pages/guides/GuideBiometricLockBo
 import GuideWhatIsARoseToy from "./pages/guides/GuideWhatIsARoseToy";
 import TheLuxLanding from "./pages/TheLuxLanding";
 import DoxAnimationLab from "./pages/lab/DoxAnimationLab";
+import HomeCinematicLab from "./pages/lab/HomeCinematicLab";
 
 const queryClient = new QueryClient();
 
@@ -106,6 +107,7 @@ const InnerApp = () => {
 
             {/* Internal lab/testing pages */}
             <Route path="/lab/dox-animation" element={<DoxAnimationLab />} />
+            <Route path="/lab/home-cinematic" element={<HomeCinematicLab />} />
 
             {/* QR-code video landings (packaging) */}
             <Route path="/v/1" element={<Video1 />} />
