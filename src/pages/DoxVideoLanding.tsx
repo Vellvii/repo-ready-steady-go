@@ -176,7 +176,7 @@ const DoxVideoLanding = () => {
             width={320}
             height={96}
             fetchPriority="high"
-            className="h-12 sm:h-16 md:h-20 w-auto justify-self-start sm:justify-self-center pl-1 sm:pl-0 drop-shadow-[0_0_24px_rgba(212,175,55,0.35)]"
+            className="h-12 sm:h-16 md:h-20 w-auto justify-self-start sm:justify-self-center pl-1 sm:pl-0"
           />
           <div className="w-20 sm:w-24" aria-hidden />
         </header>
@@ -259,30 +259,14 @@ const DoxVideoLanding = () => {
               </h1>
               <p
                 aria-hidden="true"
-                className="block text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-baskerville font-bold leading-[0.95] tracking-tight"
-                style={{
-                  background:
-                    "linear-gradient(135deg, hsl(40 70% 75%), hsl(350 50% 60%), hsl(40 70% 75%))",
-                  backgroundSize: "200% 100%",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                  animation: "shimmer-text 4s ease-in-out infinite",
-                }}
+                className="gradient-text block text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-baskerville font-bold leading-[0.95] tracking-tight"
               >
                 The Vellvii Lux.
               </p>
-              <p className="text-base sm:text-lg md:text-xl text-light-secondary font-montserrat max-w-2xl mx-auto leading-relaxed">
-                The biometric leather case, in your hands. Every Lux ordered today includes a complimentary Vellvii Nova - our handheld suction piece - while the first-run gift lasts.
+              <p className="text-base sm:text-lg md:text-xl text-light-secondary font-montserrat font-light max-w-2xl mx-auto leading-relaxed">
+                The biometric leather case, in your hands. Every Lux ordered today includes a complimentary Vellvii Nova — our handheld suction piece — while the first-run gift lasts.
               </p>
             </motion.div>
-
-            <style>{`
-              @keyframes shimmer-text {
-                0%, 100% { background-position: 0% 50%; }
-                50% { background-position: 100% 50%; }
-              }
-            `}</style>
 
             {/* CTA */}
             <motion.div
@@ -293,27 +277,13 @@ const DoxVideoLanding = () => {
             >
               <Link
                 to="/products/vellvii-lux"
-                className="inline-block relative group"
+                className="group inline-flex items-center gap-3 px-10 sm:px-14 py-4 sm:py-5 rounded-full bg-primary text-primary-foreground font-montserrat font-semibold text-xs sm:text-sm uppercase tracking-[0.18em] shadow-elegant transition-all duration-500 hover:-translate-y-0.5 hover:bg-primary/90"
               >
-                <motion.div
-                  className="absolute -inset-1 rounded-2xl opacity-60 blur-lg"
-                  style={{
-                    background: "linear-gradient(135deg, hsl(40 70% 75%), hsl(350 50% 60%))",
-                  }}
-                  animate={{ opacity: [0.4, 0.75, 0.4] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                />
-                <div
-                  className="relative px-10 sm:px-14 py-4 sm:py-6 rounded-2xl font-bold text-base sm:text-xl text-black tracking-wide"
-                  style={{
-                    background: "linear-gradient(135deg, hsl(40 70% 75%), hsl(40 65% 60%))",
-                  }}
-                >
-                  Shop the Lux
-                </div>
+                Shop the Lux
+                <ArrowRight className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1" />
               </Link>
-              <p className="mt-4 text-[11px] sm:text-xs text-light-muted font-montserrat uppercase tracking-[0.25em]">
-                In stock - ships worldwide
+              <p className="mt-5 text-[11px] sm:text-xs text-light-muted font-montserrat uppercase tracking-[0.25em]">
+                In stock — ships worldwide
               </p>
             </motion.div>
           </div>
@@ -548,7 +518,7 @@ const DoxVideoLanding = () => {
                 <button
                   type="submit"
                   disabled={inlineSubmitting}
-                  className="h-12 px-6 sm:px-8 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] text-black rounded-md font-montserrat font-bold text-sm shadow-elegant hover:shadow-glow transition-all duration-500 hover:bg-right disabled:opacity-50 flex items-center justify-center gap-2 whitespace-nowrap"
+                  className="h-12 px-6 sm:px-8 bg-primary text-primary-foreground rounded-md font-montserrat font-semibold text-xs uppercase tracking-[0.14em] transition-all duration-500 hover:bg-primary/90 disabled:opacity-50 flex items-center justify-center gap-2 whitespace-nowrap"
                 >
                   {inlineSubmitting ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
@@ -596,7 +566,7 @@ const DoxVideoLanding = () => {
 
             <Link
               to="/socials"
-              className="inline-flex items-center gap-2 h-11 px-6 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] text-black rounded-md font-montserrat font-bold text-sm shadow-elegant hover:shadow-glow transition-all duration-500 hover:bg-right"
+              className="inline-flex items-center gap-2 h-11 px-6 bg-primary text-primary-foreground rounded-md font-montserrat font-semibold text-xs uppercase tracking-[0.14em] transition-all duration-500 hover:bg-primary/90"
             >
               <Users className="w-4 h-4" />
               View All Channels
@@ -651,7 +621,7 @@ const DoxVideoLanding = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full px-6 py-3 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] text-black rounded-xl font-bold shadow-elegant hover:shadow-glow transition-all duration-500 hover:bg-right disabled:opacity-50 flex items-center justify-center gap-2"
+                    className="w-full px-6 py-3 bg-primary text-primary-foreground rounded-xl font-montserrat font-semibold text-sm uppercase tracking-[0.14em] transition-all duration-500 hover:bg-primary/90 disabled:opacity-50 flex items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
                       <>

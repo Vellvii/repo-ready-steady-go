@@ -13,24 +13,6 @@ export const LuxHeroSection = () => {
 
       <div className="w-full relative z-10 pt-24 lg:pt-32">
         <div className="max-w-7xl mx-auto text-center space-y-8 sm:space-y-12 lg:space-y-16">
-          {/* Logo Video */}
-          <ScrollReveal>
-            <div className="flex justify-center mb-8">
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="h-[12rem] sm:h-[18rem] lg:h-[28rem] xl:h-[34rem] w-auto"
-                style={{
-                  filter: 'drop-shadow(0 0 60px rgba(178, 145, 108, 0.6)) drop-shadow(0 0 100px rgba(178, 145, 108, 0.3))'
-                }}
-              >
-                <source src="/uploads/vellvii-logo-video.mp4" type="video/mp4" />
-              </video>
-            </div>
-          </ScrollReveal>
-
           <div className="px-4 sm:px-8 lg:px-12">
             {/* Introducing with shimmer */}
             <ScrollReveal delay={0.1}>
