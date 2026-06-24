@@ -1,14 +1,18 @@
 import { SEO } from "@/components/SEO";
 import { CinematicHero } from "@/components/lab/CinematicHero";
+import { ModelPicks } from "@/components/lab/ModelPicks";
+import { SplitBanner } from "@/components/lab/SplitBanner";
+import { DesignFeature } from "@/components/lab/DesignFeature";
 import { VideoTextReveal } from "@/components/lab/VideoTextReveal";
-import { PosterMoment } from "@/components/lab/PosterMoment";
+import { SocialAndNews } from "@/components/lab/SocialAndNews";
+import { LifestyleBanner } from "@/components/lab/LifestyleBanner";
 
 const HomeCinematicLab = () => {
   return (
     <>
       <SEO
         title="Lab | Cinematic Home Preview"
-        description="Internal preview of a cinematic, scroll-driven home page treatment for Vellvii."
+        description="Internal preview of a cinematic, scroll-driven home page treatment for Vellvii, modeled on the iCaur layout."
         canonical="/lab/home-cinematic"
         noindex
       />
@@ -19,25 +23,31 @@ const HomeCinematicLab = () => {
         </div>
 
         <CinematicHero />
+        <ModelPicks />
+        <SplitBanner />
 
-        <VideoTextReveal />
-
-        <PosterMoment
-          eyebrow="BIOMETRIC SECURITY"
-          headline="Touch is the only key."
-          body="Advanced fingerprint technology ensures only you have access, every time, instantly."
-          image="/uploads/Dox_black_shelf_close_up.png"
+        <DesignFeature
+          headline="Quiet by Design"
+          body="Vellvii shapes aren't accidents, they're decisions. Faux leather, velvet-lined, and built for the bedside table — discretion in service of pleasure."
+          mainImage="/uploads/Dox3.jpg"
+          sideImages={["/uploads/Dox4.jpg", "/uploads/dox_with_toys_1.jpg"]}
         />
 
-        <PosterMoment
-          eyebrow="FAUX LEATHER, VELVET-LINED"
-          headline="Crafted for the bedside table."
-          body="Faux leather exterior with rose gold accents, fully velvet-lined within."
-          image="/uploads/Dox_white_lifestyle1.jpg"
+        <DesignFeature
+          headline="Discreet by Nature"
+          body="Biometric locking, fully lined storage, and a docking system built for two types of intimacy: the one you share, and the one you keep to yourself."
+          mainImage="/uploads/Dox_white_open_plugged_in_content2.png"
+          sideImages={["/uploads/Red_Dox_charge_inside.png", "/uploads/dox_with_toys_2.jpg"]}
           reverse
         />
 
-        <div className="flex min-h-[60vh] items-center justify-center bg-black px-6">
+        <VideoTextReveal />
+
+        <SocialAndNews />
+
+        <LifestyleBanner />
+
+        <div className="flex min-h-[40vh] items-center justify-center bg-black px-6">
           <p className="max-w-md text-center font-montserrat text-white/60">
             End of cinematic home test. Placeholder footage and images — send real assets to swap in.
           </p>
