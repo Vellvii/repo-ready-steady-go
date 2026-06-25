@@ -1,5 +1,10 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
+
+// CGI turntable render: DOX closed -> lid opening -> branded top-down shot,
+// all on the same plain studio background, so we can scrub its playback
+// position directly off scroll instead of cross-fading mismatched stills.
+const REVEAL_VIDEO = "/uploads/dox-open-animation.mp4";
 
 // Filmstrip of varied Dox imagery showing through the cutout letters —
 // mirrors the iCaur "BORN TO PLAY" treatment where each letter carries a
@@ -15,9 +20,22 @@ const TEXTURE_IMAGES = [
 
 export const ArtOfOReveal = () => {
   const ref = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.85, 1], [0, 1, 1, 0]);
-  const productY = useTransform(scrollYProgress, [0, 1], ["6%", "-6%"]);
+  const productX = useTransform(scrollYProgress, [0, 1], ["0%", "160%"]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.pause();
+  }, []);
+
+  useMotionValueEvent(scrollYProgress, "change", (progress) => {
+    const video = videoRef.current;
+    if (!video || !video.duration) return;
+    video.currentTime = progress * video.duration;
+  });
 
   return (
     <section ref={ref} className="relative w-full overflow-hidden bg-white py-20 sm:py-28">
@@ -63,12 +81,21 @@ export const ArtOfOReveal = () => {
           </foreignObject>
         </svg>
 
-        <motion.img
-          src="/uploads/Dox_white_lifestyle1.jpg"
-          alt="Vellvii DOX"
-          style={{ y: productY }}
-          className="pointer-events-none absolute left-[6%] top-[18%] h-[64%] w-[34%] -rotate-[8deg] rounded-sm object-cover shadow-2xl sm:w-[30%]"
-        />
+        <motion.div
+          style={{ x: productX }}
+          className="pointer-events-none absolute left-[6%] top-[18%] h-[64%] w-[34%] overflow-hidden rounded-sm shadow-2xl sm:w-[30%]"
+        >
+          <video
+            ref={videoRef}
+            muted
+            playsInline
+            preload="auto"
+            className="h-full w-full object-cover"
+            style={{ transform: "scale(1.35)" }}
+          >
+            <source src={REVEAL_VIDEO} type="video/mp4" />
+          </video>
+        </motion.div>
       </motion.div>
     </section>
   );
