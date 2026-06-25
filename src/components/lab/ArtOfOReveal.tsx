@@ -1,68 +1,75 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-// Placeholder reveal video — swap for real campaign motion footage when ready.
-const REVEAL_VIDEO = "/uploads/dox-open-animation.mp4";
-
-// Feathers the product photos' hard rectangular edges into the white background,
-// approximating a cutout rather than a literal rectangle floating on the page.
-const FEATHER_MASK = "radial-gradient(ellipse 65% 65% at 50% 50%, black 55%, transparent 100%)";
+// Filmstrip of varied Dox imagery showing through the cutout letters —
+// mirrors the iCaur "BORN TO PLAY" treatment where each letter carries a
+// different photo crop rather than one uniform video.
+const TEXTURE_IMAGES = [
+  "/uploads/Dox_white_lifestyle1.jpg",
+  "/uploads/White_charge_outside.png",
+  "/uploads/dox-black-bookshelf.png",
+  "/uploads/RedDoxEvolveFrontRightClose.png",
+  "/uploads/Dox_white_open_plugged_in_content2.png",
+  "/uploads/BeigeDoxGVibeFrontRightClose.png",
+];
 
 export const ArtOfOReveal = () => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const textOpacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0, 1, 1, 0]);
-  const closedX = useTransform(scrollYProgress, [0, 0.5], ["-14%", "0%"]);
-  const openX = useTransform(scrollYProgress, [0, 0.5], ["14%", "0%"]);
-  const imageOpacity = useTransform(scrollYProgress, [0, 0.35], [0, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.85, 1], [0, 1, 1, 0]);
+  const productY = useTransform(scrollYProgress, [0, 1], ["6%", "-6%"]);
 
   return (
-    <section ref={ref} className="relative w-full overflow-hidden bg-white py-24 sm:py-32">
-      <motion.svg
-        viewBox="0 0 1600 700"
-        preserveAspectRatio="xMidYMid meet"
-        className="mx-auto block w-full max-w-6xl"
-        style={{ opacity: textOpacity }}
-      >
-        <defs>
-          <mask id="art-of-o-mask">
-            <rect width="100%" height="100%" fill="black" />
-            <text x="50%" y="32%" textAnchor="middle" dominantBaseline="middle" className="font-baskerville" fontSize="190" fontWeight="700" fill="white">
-              THE ART
-            </text>
-            <text x="50%" y="68%" textAnchor="middle" dominantBaseline="middle" className="font-baskerville" fontSize="190" fontWeight="700" fill="white">
-              OF &ldquo;O&rdquo;
-            </text>
-          </mask>
-        </defs>
-        <foreignObject width="100%" height="100%" mask="url(#art-of-o-mask)">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="h-full w-full object-cover"
-            style={{ filter: "blur(1.5px) saturate(1.2)" }}
-          >
-            <source src={REVEAL_VIDEO} type="video/mp4" />
-          </video>
-        </foreignObject>
-      </motion.svg>
+    <section ref={ref} className="relative w-full overflow-hidden bg-white py-20 sm:py-28">
+      <motion.div style={{ opacity }} className="relative mx-auto aspect-[2/1] w-full max-w-6xl px-4">
+        <svg viewBox="0 0 1600 800" preserveAspectRatio="xMidYMid meet" className="block h-full w-full">
+          <defs>
+            <mask id="art-of-o-mask">
+              <rect width="100%" height="100%" fill="black" />
+              <text
+                x="50%"
+                y="34%"
+                textAnchor="middle"
+                dominantBaseline="middle"
+                className="font-montserrat"
+                fontSize="240"
+                fontWeight="800"
+                letterSpacing="-6"
+                fill="white"
+              >
+                THE ART
+              </text>
+              <text
+                x="50%"
+                y="74%"
+                textAnchor="middle"
+                dominantBaseline="middle"
+                className="font-montserrat"
+                fontSize="240"
+                fontWeight="800"
+                letterSpacing="-6"
+                fill="white"
+              >
+                OF &ldquo;O&rdquo;
+              </text>
+            </mask>
+          </defs>
+          <foreignObject width="100%" height="100%" mask="url(#art-of-o-mask)">
+            <div className="flex h-full w-full">
+              {TEXTURE_IMAGES.map((src) => (
+                <img key={src} src={src} alt="" className="h-full flex-1 object-cover" style={{ filter: "saturate(1.15) contrast(1.05)" }} />
+              ))}
+            </div>
+          </foreignObject>
+        </svg>
 
-      <div className="pointer-events-none absolute inset-0 flex items-center justify-center gap-3 sm:gap-8">
         <motion.img
           src="/uploads/Dox_white_lifestyle1.jpg"
-          alt="Vellvii DOX, closed"
-          style={{ x: closedX, opacity: imageOpacity, maskImage: FEATHER_MASK, WebkitMaskImage: FEATHER_MASK }}
-          className="h-40 w-32 -rotate-3 rounded-sm object-cover shadow-2xl sm:h-64 sm:w-48 md:h-80 md:w-60"
+          alt="Vellvii DOX"
+          style={{ y: productY }}
+          className="pointer-events-none absolute left-[6%] top-[18%] h-[64%] w-[34%] -rotate-[8deg] rounded-sm object-cover shadow-2xl sm:w-[30%]"
         />
-        <motion.img
-          src="/uploads/White_charge_outside.png"
-          alt="Vellvii DOX, open"
-          style={{ x: openX, opacity: imageOpacity, maskImage: FEATHER_MASK, WebkitMaskImage: FEATHER_MASK }}
-          className="h-40 w-32 rotate-3 rounded-sm object-cover shadow-2xl sm:h-64 sm:w-48 md:h-80 md:w-60"
-        />
-      </div>
+      </motion.div>
     </section>
   );
 };

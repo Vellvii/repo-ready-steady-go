@@ -24,7 +24,6 @@ const HomeCinematicLab = () => {
         </div>
 
         <CinematicHero />
-        <ArtOfOReveal />
         <ModelPicks />
         <SplitBanner />
 
@@ -44,6 +43,8 @@ const HomeCinematicLab = () => {
         />
 
         <VideoTextReveal />
+
+        <ArtOfOReveal />
 
         <SocialAndNews />
 
