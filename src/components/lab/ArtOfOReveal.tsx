@@ -1,10 +1,15 @@
-import { useEffect, useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 
-// CGI turntable render: DOX closed -> lid opening -> branded top-down shot,
-// all on the same plain studio background, so we can scrub its playback
-// position directly off scroll instead of cross-fading mismatched stills.
-const REVEAL_VIDEO = "/uploads/dox-open-animation.mp4";
+// Pre-extracted frames from the DOX closed->open CGI render (same plain
+// studio background throughout), swapped by scroll position instead of
+// scrubbing a <video> — avoids autoplay/seek restrictions in sandboxed
+// preview environments while still reading as a single continuous motion.
+const FRAME_COUNT = 20;
+const FRAMES = Array.from(
+  { length: FRAME_COUNT },
+  (_, i) => `/uploads/dox-open-frames/frame-${String(i).padStart(2, "0")}.jpg`,
+);
 
 // Filmstrip of varied Dox imagery showing through the cutout letters —
 // mirrors the iCaur "BORN TO PLAY" treatment where each letter carries a
@@ -20,37 +25,13 @@ const TEXTURE_IMAGES = [
 
 export const ArtOfOReveal = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.85, 1], [0, 1, 1, 0]);
   const productX = useTransform(scrollYProgress, [0, 1], ["0%", "160%"]);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    // Seeking a <video> that has never played silently fails to paint a
-    // frame in some browsers — priming the decoder with a play/pause
-    // makes subsequent scroll-driven currentTime seeks actually render.
-    const prime = () => {
-      video
-        .play()
-        .then(() => {
-          video.pause();
-          video.currentTime = scrollYProgress.get() * video.duration;
-        })
-        .catch(() => {
-          video.currentTime = scrollYProgress.get() * video.duration;
-        });
-    };
-    if (video.readyState >= 1) prime();
-    else video.addEventListener("loadedmetadata", prime, { once: true });
-    return () => video.removeEventListener("loadedmetadata", prime);
-  }, [scrollYProgress]);
+  const [frameIndex, setFrameIndex] = useState(0);
 
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
-    const video = videoRef.current;
-    if (!video || !video.duration) return;
-    video.currentTime = progress * video.duration;
+    setFrameIndex(Math.min(FRAME_COUNT - 1, Math.max(0, Math.round(progress * (FRAME_COUNT - 1)))));
   });
 
   return (
@@ -101,16 +82,16 @@ export const ArtOfOReveal = () => {
           style={{ x: productX }}
           className="pointer-events-none absolute left-[6%] top-[18%] h-[64%] w-[34%] overflow-hidden rounded-sm bg-neutral-200 shadow-2xl sm:w-[30%]"
         >
-          <video
-            ref={videoRef}
-            muted
-            playsInline
-            preload="auto"
-            className="h-full w-full object-cover"
-            style={{ transform: "scale(1.35)" }}
-          >
-            <source src={REVEAL_VIDEO} type="video/mp4" />
-          </video>
+          {FRAMES.map((src, i) => (
+            <img
+              key={src}
+              src={src}
+              alt={i === FRAME_COUNT - 1 ? "Vellvii DOX, branded" : "Vellvii DOX opening"}
+              className="absolute inset-0 h-full w-full object-cover"
+              style={{ opacity: i === frameIndex ? 1 : 0 }}
+              loading="eager"
+            />
+          ))}
         </motion.div>
       </motion.div>
     </section>
