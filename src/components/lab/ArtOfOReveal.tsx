@@ -1,97 +1,54 @@
-import { useEffect, useRef, useState } from "react";
-import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
-// Pre-extracted, color-keyed frames from the DOX closed->open CGI render —
-// the flat gray studio backdrop is keyed to real alpha transparency, swapped
-// by scroll position instead of scrubbing a <video> (avoids autoplay/seek
-// restrictions in sandboxed preview environments).
-const FRAME_COUNT = 20;
-const FRAMES = Array.from(
-  { length: FRAME_COUNT },
-  (_, i) => `/uploads/dox-open-frames-alpha/frame-${String(i).padStart(2, "0")}.png`,
-);
-
-// Looping motion texture showing through the cutout letters — mirrors the
-// iCaur "BORN TO PLAY" treatment where the letters carry moving footage
-// rather than a static image. Rendered as a cycling frame sequence (same
-// reasoning as the product flipbook above) rather than a <video>, and the
-// cutout itself is a CSS mask-image rather than an SVG foreignObject mask —
-// both are far more reliably supported across sandboxed preview iframes.
-const TEXTURE_FRAME_COUNT = 24;
-const TEXTURE_FRAMES = Array.from(
-  { length: TEXTURE_FRAME_COUNT },
-  (_, i) => `/uploads/dox-texture-frames/frame-${String(i).padStart(2, "0")}.jpg`,
-);
-
-const TEXT_MASK = `url("data:image/svg+xml,${encodeURIComponent(
-  `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 800'>
-    <rect width='100%' height='100%' fill='black'/>
-    <text x='50%' y='34%' text-anchor='middle' dominant-baseline='middle' font-family='Montserrat, sans-serif' font-size='240' font-weight='800' letter-spacing='-6' fill='white'>THE ART</text>
-    <text x='50%' y='74%' text-anchor='middle' dominant-baseline='middle' font-family='Montserrat, sans-serif' font-size='240' font-weight='800' letter-spacing='-6' fill='white'>OF &quot;O&quot;</text>
-  </svg>`,
-)}")`;
+// Matches the iCAUR "BORN TO PLAY" treatment: one large two-line headline
+// filled with a single photo via background-clip:text (not a video — a
+// static image is what iCAUR actually uses, and it's far more reliable
+// than scrubbing/decoding video inside a text mask), with the product
+// floating on top, entering off-angle from the left and settling flat and
+// centered as the section scrolls into view.
+const TEXT_FILL_IMAGE = "/uploads/RedLockClose.png";
+const PRODUCT_IMAGE = "/uploads/dox-open-frames-alpha/frame-00.png";
 
 export const ArtOfOReveal = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.85, 1], [0, 1, 1, 0]);
-  const productX = useTransform(scrollYProgress, [0, 1], ["0%", "160%"]);
-  const [frameIndex, setFrameIndex] = useState(0);
-  const [textureFrame, setTextureFrame] = useState(0);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.85", "start 0.3"] });
 
-  useMotionValueEvent(scrollYProgress, "change", (progress) => {
-    setFrameIndex(Math.min(FRAME_COUNT - 1, Math.max(0, Math.round(progress * (FRAME_COUNT - 1)))));
-  });
-
-  useEffect(() => {
-    const id = window.setInterval(() => {
-      setTextureFrame((i) => (i + 1) % TEXTURE_FRAME_COUNT);
-    }, 110);
-    return () => window.clearInterval(id);
-  }, []);
+  const productX = useTransform(scrollYProgress, [0, 1], ["-150%", "-50%"]);
+  const productRotate = useTransform(scrollYProgress, [0, 1], [-28, 0]);
+  const productScale = useTransform(scrollYProgress, [0, 1], [0.78, 1]);
+  const productOpacity = useTransform(scrollYProgress, [0, 0.15], [0, 1]);
 
   return (
-    <section ref={ref} className="relative w-full overflow-hidden bg-white py-20 sm:py-28">
-      <motion.div style={{ opacity }} className="relative mx-auto aspect-[2/1] w-full max-w-6xl px-4">
-        <div
-          className="absolute inset-0"
+    <section ref={ref} className="relative w-full overflow-hidden bg-white py-24 sm:py-32">
+      <div className="relative mx-auto flex max-w-5xl items-center justify-center px-4">
+        <h2
+          className="bg-clip-text text-center font-montserrat text-[5.5rem] font-extrabold uppercase leading-[0.88] tracking-tight text-transparent sm:text-[8rem] md:text-[10rem]"
           style={{
-            WebkitMaskImage: TEXT_MASK,
-            maskImage: TEXT_MASK,
-            WebkitMaskSize: "100% 100%",
-            maskSize: "100% 100%",
-            WebkitMaskRepeat: "no-repeat",
-            maskRepeat: "no-repeat",
+            backgroundImage: `url(${TEXT_FILL_IMAGE})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            WebkitBackgroundClip: "text",
           }}
         >
-          {TEXTURE_FRAMES.map((src, i) => (
-            <img
-              key={src}
-              src={src}
-              alt=""
-              className="absolute inset-0 h-full w-full object-cover"
-              style={{ opacity: i === textureFrame ? 1 : 0, filter: "saturate(1.15) contrast(1.05)" }}
-              loading="eager"
-            />
-          ))}
-        </div>
+          THE ART
+          <br />
+          OF &ldquo;O&rdquo;
+        </h2>
 
-        <motion.div
-          style={{ x: productX }}
-          className="pointer-events-none absolute left-[6%] top-[18%] h-[64%] w-[34%] sm:w-[30%]"
-        >
-          {FRAMES.map((src, i) => (
-            <img
-              key={src}
-              src={src}
-              alt={i === FRAME_COUNT - 1 ? "Vellvii DOX, branded" : "Vellvii DOX opening"}
-              className="absolute inset-0 h-full w-full object-contain"
-              style={{ opacity: i === frameIndex ? 1 : 0 }}
-              loading="eager"
-            />
-          ))}
-        </motion.div>
-      </motion.div>
+        <motion.img
+          src={PRODUCT_IMAGE}
+          alt="Vellvii DOX"
+          className="pointer-events-none absolute left-1/2 top-1/2 w-[55%] max-w-md sm:w-[42%]"
+          style={{
+            x: productX,
+            y: "-50%",
+            rotate: productRotate,
+            scale: productScale,
+            opacity: productOpacity,
+          }}
+        />
+      </div>
     </section>
   );
 };
