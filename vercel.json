@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    { "source": "/cart/c/:token", "destination": "https://vellvii-site-2h1iu.myshopify.com/cart/c/:token", "permanent": false },
+    { "source": "/checkout", "destination": "https://vellvii-site-2h1iu.myshopify.com/checkout", "permanent": false },
+    { "source": "/checkout/:path*", "destination": "https://vellvii-site-2h1iu.myshopify.com/checkout/:path*", "permanent": false }
+  ],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
