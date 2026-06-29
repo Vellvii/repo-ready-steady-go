@@ -14,9 +14,9 @@ const HEADLINE_MASK_SVG = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 
 const HEADLINE_MASK_URL = `url("data:image/svg+xml,${encodeURIComponent(HEADLINE_MASK_SVG)}")`;
 
 const PRODUCTS = [
-  { src: "/uploads/dox-open-frames-alpha/frame-00.png", alt: "Vellvii DOX", width: "w-[36%] max-w-sm", from: "-130%", to: "130%" },
-  { src: "/uploads/RedGVibeSide-alpha.png", alt: "Vellvii G-Vibe", width: "w-[24%] max-w-xs", from: "-160%", to: "160%" },
-  { src: "/uploads/PinkPulseBack-alpha.png", alt: "Vellvii Pulse", width: "w-[24%] max-w-xs", from: "-190%", to: "190%" },
+  { src: "/uploads/dox-open-frames-alpha/frame-00.png", alt: "Vellvii DOX", width: "w-[36%] max-w-sm", from: "-150%", to: "230%", y: "-85%" },
+  { src: "/uploads/RedGVibeSide-alpha.png", alt: "Vellvii G-Vibe", width: "w-[24%] max-w-xs", from: "-260%", to: "120%", y: "10%" },
+  { src: "/uploads/PinkPulseBack-alpha.png", alt: "Vellvii Pulse", width: "w-[24%] max-w-xs", from: "-200%", to: "320%", y: "75%" },
 ];
 
 export const ArtOfOReveal = () => {
@@ -60,7 +60,7 @@ export const ArtOfOReveal = () => {
             className={`absolute left-1/2 top-1/2 ${product.width}`}
             style={{
               x: productXs[i],
-              y: "-50%",
+              y: product.y,
               opacity,
             }}
           />
