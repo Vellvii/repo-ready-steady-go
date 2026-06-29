@@ -6,6 +6,10 @@ export const SHOPIFY_STORE_PERMANENT_DOMAIN = 'vellvii-site-2h1iu.myshopify.com'
 export const SHOPIFY_STOREFRONT_URL = `https://${SHOPIFY_STORE_PERMANENT_DOMAIN}/api/${SHOPIFY_API_VERSION}/graphql.json`;
 export const SHOPIFY_STOREFRONT_TOKEN = 'ccac5d8a630596d8084334c5ca58fd93';
 
+// Custom domain Shopify checkout is served from - separate from the
+// permanent domain above, which the Storefront API itself must stay on.
+export const SHOPIFY_CHECKOUT_DOMAIN = 'checkout.vellvii.com';
+
 // Media Types for 3D models, videos, and images
 export interface ShopifyMediaSource {
   url: string;
@@ -355,11 +359,11 @@ export const CART_LINES_REMOVE_MUTATION = `
 export function formatCheckoutUrl(checkoutUrl: string): string {
   try {
     const url = new URL(checkoutUrl);
-    // Shopify returns the URL on the store's primary domain (vellvii.com),
-    // but that domain serves the Lovable SPA - not Shopify's checkout. Force
-    // the host to the Shopify permanent domain so checkout actually loads.
-    if (url.hostname !== SHOPIFY_STORE_PERMANENT_DOMAIN) {
-      url.hostname = SHOPIFY_STORE_PERMANENT_DOMAIN;
+    // checkout.vellvii.com is the connected, primary domain for Shopify
+    // checkout - force the host there as a safety net in case Shopify ever
+    // hands back a different one (e.g. the .myshopify.com domain).
+    if (url.hostname !== SHOPIFY_CHECKOUT_DOMAIN) {
+      url.hostname = SHOPIFY_CHECKOUT_DOMAIN;
       url.protocol = 'https:';
       url.port = '';
     }

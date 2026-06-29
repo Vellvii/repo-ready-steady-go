@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    { "source": "/cart/c/:token", "destination": "https://checkout.vellvii.com/cart/c/:token", "permanent": false },
+    { "source": "/checkout", "destination": "https://checkout.vellvii.com/checkout", "permanent": false },
+    { "source": "/checkout/:path*", "destination": "https://checkout.vellvii.com/checkout/:path*", "permanent": false }
+  ],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
